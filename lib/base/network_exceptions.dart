@@ -10,7 +10,7 @@ import 'package:sixam_mart_user/base/error.dart';
 part '../generated/base/network_exceptions.freezed.dart';
 
 @freezed
-abstract class NetworkExceptions with _$NetworkExceptions {
+sealed class NetworkExceptions with _$NetworkExceptions {
   const factory NetworkExceptions.requestCancelled() = RequestCancelled;
 
   const factory NetworkExceptions.unauthorizedRequest(String reason) = UnauthorizedRequest;
@@ -133,42 +133,24 @@ abstract class NetworkExceptions with _$NetworkExceptions {
   }
 
   static String getErrorMessage(NetworkExceptions networkExceptions) {
-    var errorMessage = '';
-    networkExceptions.when(notImplemented: () {
-      errorMessage = tr(LocaleKeys.base_error_default);
-    }, requestCancelled: () {
-      errorMessage = tr(LocaleKeys.base_error_default);
-    }, internalServerError: () {
-      errorMessage = tr(LocaleKeys.base_error_default);
-    }, notFound: (String reason) {
-      errorMessage = reason;
-    }, serviceUnavailable: () {
-      errorMessage = tr(LocaleKeys.base_error_default);
-    }, methodNotAllowed: () {
-      errorMessage = tr(LocaleKeys.base_error_default);
-    }, badRequest: () {
-      errorMessage = tr(LocaleKeys.base_error_default);
-    }, unauthorizedRequest: (String error) {
-      errorMessage = error;
-    }, unexpectedError: () {
-      errorMessage = tr(LocaleKeys.base_error_default);
-    }, requestTimeout: () {
-      errorMessage = tr(LocaleKeys.base_error_timeout);
-    }, noInternetConnection: () {
-      errorMessage = tr(LocaleKeys.base_error_noInternet);
-    }, conflict: () {
-      errorMessage = tr(LocaleKeys.base_error_default);
-    }, sendTimeout: () {
-      errorMessage = tr(LocaleKeys.base_error_default);
-    }, unableToProcess: () {
-      errorMessage = tr(LocaleKeys.base_error_default);
-    }, defaultError: (String error) {
-      errorMessage = error;
-    }, formatException: () {
-      errorMessage = tr(LocaleKeys.base_error_default);
-    }, notAcceptable: () {
-      errorMessage = tr(LocaleKeys.base_error_default);
-    });
-    return errorMessage;
+    return switch (networkExceptions) {
+      NotImplemented() => tr(LocaleKeys.base_error_default),
+      RequestCancelled() => tr(LocaleKeys.base_error_default),
+      InternalServerError() => tr(LocaleKeys.base_error_default),
+      NotFound(:final String reason) => reason,
+      ServiceUnavailable() => tr(LocaleKeys.base_error_default),
+      MethodNotAllowed() => tr(LocaleKeys.base_error_default),
+      BadRequest() => tr(LocaleKeys.base_error_default),
+      UnauthorizedRequest() => tr(LocaleKeys.base_error_default),
+      UnexpectedError() => tr(LocaleKeys.base_error_default),
+      RequestTimeout() => tr(LocaleKeys.base_error_timeout),
+      NoInternetConnection() => tr(LocaleKeys.base_error_noInternet),
+      Conflict() => tr(LocaleKeys.base_error_default),
+      SendTimeout() => tr(LocaleKeys.base_error_default),
+      UnableToProcess() => tr(LocaleKeys.base_error_default),
+      DefaultError(:final String error) => error,
+      FormatException() => tr(LocaleKeys.base_error_default),
+      NotAcceptable() => tr(LocaleKeys.base_error_default),
+    };
   }
 }
