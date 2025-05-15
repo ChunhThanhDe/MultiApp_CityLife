@@ -13,8 +13,7 @@ part '../generated/base/network_exceptions.freezed.dart';
 abstract class NetworkExceptions with _$NetworkExceptions {
   const factory NetworkExceptions.requestCancelled() = RequestCancelled;
 
-  const factory NetworkExceptions.unauthorizedRequest(String reason) =
-      UnauthorizedRequest;
+  const factory NetworkExceptions.unauthorizedRequest(String reason) = UnauthorizedRequest;
 
   const factory NetworkExceptions.badRequest() = BadRequest;
 
@@ -66,8 +65,7 @@ abstract class NetworkExceptions with _$NetworkExceptions {
         return const NetworkExceptions.badRequest();
       // return Logout.logout(true);
       case 404:
-        return NetworkExceptions.notFound(
-            errorModel?.message ?? tr(LocaleKeys.base_error_default));
+        return NetworkExceptions.notFound(errorModel?.message ?? tr(LocaleKeys.base_error_default));
       case 409:
         return const NetworkExceptions.conflict();
       case 408:
@@ -96,15 +94,13 @@ abstract class NetworkExceptions with _$NetworkExceptions {
               networkExceptions = const NetworkExceptions.requestTimeout();
               break;
             case DioExceptionType.connectionError:
-              networkExceptions =
-                  const NetworkExceptions.noInternetConnection();
+              networkExceptions = const NetworkExceptions.noInternetConnection();
               break;
             case DioExceptionType.receiveTimeout:
               networkExceptions = const NetworkExceptions.sendTimeout();
               break;
             case DioExceptionType.badResponse:
-              networkExceptions =
-                  NetworkExceptions.handleResponse(error.response);
+              networkExceptions = NetworkExceptions.handleResponse(error.response);
               break;
             case DioExceptionType.sendTimeout:
               networkExceptions = const NetworkExceptions.requestTimeout();
@@ -113,8 +109,7 @@ abstract class NetworkExceptions with _$NetworkExceptions {
               networkExceptions = const NetworkExceptions.badRequest();
               break;
             case DioExceptionType.unknown:
-              networkExceptions =
-                  NetworkExceptions.handleResponse(error.response);
+              networkExceptions = NetworkExceptions.handleResponse(error.response);
               break;
           }
         } else if (error is SocketException) {

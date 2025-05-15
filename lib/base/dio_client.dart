@@ -12,8 +12,7 @@ class DioClient {
 
   final String baseUrl;
   final String? token;
-  final String? id;
-
+  final Map<String, dynamic>? headers;
   final List<Interceptor>? interceptors;
 
   DioClient(
@@ -21,7 +20,7 @@ class DioClient {
     required this.baseUrl,
     this.interceptors,
     this.token,
-    this.id,
+    this.headers,
   }) {
     _dio = dio;
 
@@ -54,17 +53,15 @@ class DioClient {
 
     _dio.httpClientAdapter = IOHttpClientAdapter(
       createHttpClient: () {
-        final HttpClient client =
-            HttpClient(context: SecurityContext(withTrustedRoots: false));
-        client.badCertificateCallback =
-            ((X509Certificate cert, String host, int port) => true);
+        final HttpClient client = HttpClient(context: SecurityContext(withTrustedRoots: false));
+        client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
         return client;
       },
     );
   }
 
   Map<String, dynamic> getHeader() {
-    return {};
+    return headers ?? {};
   }
 
   Future<dynamic> get(

@@ -2,22 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-showLoadingOverlay(
-    {required Future<dynamic> api,
-    BuildContext? context,
-    Widget? child,
-    bool isShowLoading = true}) {
-  _AppLoadingOverlay.show(
-      api: api, context: context, child: child, isShowLoading: isShowLoading);
+showLoadingOverlay({required Future<dynamic> api, BuildContext? context, Widget? child, bool isShowLoading = true}) {
+  _AppLoadingOverlay.show(api: api, context: context, child: child, isShowLoading: isShowLoading);
 }
 
 class _AppLoadingOverlay {
   static OverlayEntry? overlayEntry;
-  static Future<dynamic> show(
-      {required Future<dynamic> api,
-      BuildContext? context,
-      Widget? child,
-      bool isShowLoading = true}) async {
+  static Future<dynamic> show({required Future<dynamic> api, BuildContext? context, Widget? child, bool isShowLoading = true}) async {
     if (isShowLoading) {
       createHighlightOverlay(context: context ?? Get.context!, child: child);
     }
@@ -61,9 +52,7 @@ class _AppLoadingOverlay {
                     Container(
                       width: 64,
                       height: 64,
-                      decoration: BoxDecoration(
-                          color: Colors.black54,
-                          borderRadius: BorderRadius.circular(12)),
+                      decoration: BoxDecoration(color: Colors.black54, borderRadius: BorderRadius.circular(12)),
                       child: const CupertinoActivityIndicator(
                         color: Colors.white,
                       ),
