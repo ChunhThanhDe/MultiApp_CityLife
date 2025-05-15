@@ -8,6 +8,9 @@ class RootScreen extends BaseScreen<RootController> {
   const RootScreen({super.key});
 
   @override
+  bool get wrapWithSafeArea => true;
+
+  @override
   Widget buildScreen(BuildContext context) {
     return Center(
       child: Text(tr(LocaleKeys.root_title)),

@@ -6,9 +6,10 @@ import 'sign_in_controller.dart';
 class SignInScreen extends BaseScreen<SignInController> {
   const SignInScreen({super.key});
 
-
   @override
   Widget buildScreen(BuildContext context) {
-    throw UnimplementedError();
+    return Center(
+      child: Text('Sign In'),
+    );
   }
 }
