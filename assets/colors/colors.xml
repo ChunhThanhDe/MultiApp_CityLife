@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Neutral Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="grey_900">#161A1D</color>
+    <color name="grey_950">#101214</color>
+    <color name="grey_700">#4A5763</color>
+    <color name="grey_500">#798A9A</color>
+    <color name="grey_300">#B0BAC4</color>
+    <color name="grey_200">#BEC4CB</color>
+    <color name="grey_400">#8894A0</color>
+    <color name="grey_600">#5B6671</color>
+    <color name="grey_lowest">#F7F8F9</color>
+    <!-- Brand Colors -->
+    <color name="brand_700">#004A99</color>
+    <color name="brand_500">#007AFF</color>
+    <color name="brand_300">#66B0FF</color>
+    <color name="brand_400">#3396FF</color>
+    <!-- Success Colors -->
+    <color name="success_700">#187C27</color>
+    <color name="success_500">#27CD41</color>
+    <color name="success_300">#7AE68A</color>
+    <color name="success_400">#4BDD61</color>
+    <!-- Warning Colors -->
+    <color name="warning_700">#995900</color>
+    <color name="warning_500">#FF9500</color>
+    <color name="warning_300">#FFBF66</color>
+    <color name="warning_400">#FFAA33</color>
+    <!-- Danger Colors -->
+    <color name="danger_700">#B80900</color>
+    <color name="danger_500">#FF3B30</color>
+    <color name="danger_300">#FF8B85</color>
+    <color name="danger_400">#FF645C</color>
+    <!-- Discovery Colors -->
+    <color name="discovery_700">#711D9A</color>
+    <color name="discovery_500">#AF52DE</color>
+    <color name="discovery_300">#D098EB</color>
+    <color name="discovery_400">#C076E5</color>
+    <!-- Information Colors -->
+    <color name="information_700">#004A99</color>
+    <color name="information_500">#007AFF</color>
+    <color name="information_300">#66B0FF</color>
+    <color name="information_400">#3396FF</color>
+    <!-- Quiet Colors -->
+    <color name="quiet_700">#185B72</color>
+    <color name="quiet_500">#2898BD</color>
+    <color name="quiet_300">#74C6E2</color>
+    <color name="quiet_400">#46B3D8</color>
+</resources>
