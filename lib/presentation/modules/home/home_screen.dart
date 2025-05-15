@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 
 import 'home_controller.dart';
 
@@ -8,6 +9,6 @@ class HomeScreen extends BaseScreen<HomeController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    throw UnimplementedError();
+    return Image.asset(Assets.images.imgNew.path);
   }
 }

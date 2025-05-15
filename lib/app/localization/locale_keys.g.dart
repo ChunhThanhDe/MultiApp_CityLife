@@ -2,7 +2,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const root_title = 'root.title';
   static const root = 'root';
   static const base_error_default = 'base.error.default';
@@ -10,4 +10,5 @@ abstract class LocaleKeys {
   static const base_error_timeout = 'base.error.timeout';
   static const base_error = 'base.error';
   static const base = 'base';
+
 }
