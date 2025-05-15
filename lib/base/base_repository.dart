@@ -17,10 +17,10 @@ class BaseRepository {
     try {
       final res = await request();
       BaseResponse response = BaseResponse.fromJson(res);
-      return ApiResult.apiSuccess(response);
+      return ApiResult.success(response);
     } catch (e) {
       final error = NetworkExceptions.getDioException(e);
-      return ApiResult.apiFailure(error);
+      return ApiResult.failure(error);
     }
   }
 }
