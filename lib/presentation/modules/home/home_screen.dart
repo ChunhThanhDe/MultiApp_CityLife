@@ -9,6 +9,11 @@ class HomeScreen extends BaseScreen<HomeController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    return Image.asset(Assets.images.imgNew.path);
+    return Column(
+      children: [
+        Assets.icons.icBell.svg(width: 24, height: 24),
+        Assets.images.imgNew.image(width: 24, height: 24),
+      ],
+    );
   }
 }
