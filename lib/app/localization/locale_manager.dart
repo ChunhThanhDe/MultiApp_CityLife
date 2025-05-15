@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/data/local/app_storage.dart';
+import 'package:sixam_mart_user/app/local/app_storage.dart';
 
 class LanguageOption {
   final Locale locale;

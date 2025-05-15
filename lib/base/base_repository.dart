@@ -7,10 +7,10 @@ import 'package:sixam_mart_user/base/network_exceptions.dart';
 class BaseRepository {
   late DioClient dioClient;
   final String baseUrl;
+  final BaseOptions? options;
 
-  BaseRepository({required this.baseUrl}) {
-    var dio = Dio();
-    dioClient = DioClient(dio, baseUrl: baseUrl);
+  BaseRepository({required this.baseUrl, this.options}) {
+    dioClient = DioClient(Dio(options), baseUrl: baseUrl);
   }
 
   Future<ApiResult> handleApiRequest(Future<dynamic> Function() request) async {
