@@ -1,4 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:sixam_mart_user/base/api_result.dart';
+import 'package:sixam_mart_user/base/base_response.dart';
+import 'package:sixam_mart_user/base/dio_client.dart';
+import 'package:sixam_mart_user/base/network_exceptions.dart';
 
 class BaseRepository {
   late DioClient dioClient;

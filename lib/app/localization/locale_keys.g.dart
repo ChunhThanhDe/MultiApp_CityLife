@@ -5,5 +5,10 @@
 abstract class  LocaleKeys {
   static const root_title = 'root.title';
   static const root = 'root';
+  static const base_error_default = 'base.error.default';
+  static const base_error_noInternet = 'base.error.noInternet';
+  static const base_error_timeout = 'base.error.timeout';
+  static const base_error = 'base.error';
+  static const base = 'base';
 
 }

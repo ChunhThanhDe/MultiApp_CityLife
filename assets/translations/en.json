@@ -1,5 +1,13 @@
 {
     "root": {
         "title": "Six Mart Hello"
+    },
+    "base": {
+        "error": {
+            "default": "Something went wrong",
+            "noInternet": "No internet connection",
+            "timeout": "Request timeout"
+        }
     }
+    
 }
