@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Neutral Colors -->
+    <color name="white_0">#FFFFFF</color>
+    <color name="grey_950">#161A1D</color>
+    <color name="grey_900">#4A5763</color>
+    <color name="grey_700">#798A9A</color>
+    <color name="grey_500">#B0BAC4</color>
+    <color name="grey_300">#BEC4CB</color>
+    <!-- Brand Colors -->
+    <color name="brand_700">#004A99</color>
+    <color name="brand_500">#007AFF</color>
+    <color name="brand_300">#66B0FF</color>
+    <!-- Success Colors -->
+    <color name="success_700">#187C27</color>
+    <color name="success_500">#27CD41</color>
+    <color name="success_300">#7AE68A</color>
+    <!-- Warning Colors -->
+    <color name="warning_700">#995900</color>
+    <color name="warning_500">#FF9500</color>
+    <color name="warning_300">#FFBF66</color>
+    <!-- Danger Colors -->
+    <color name="danger_700">#B80900</color>
+    <color name="danger_500">#FF3B30</color>
+    <color name="danger_300">#FF8B85</color>
+    <!-- Information Colors -->
+    <color name="information_700">#711D9A</color>
+    <color name="information_500">#AF52DE</color>
+    <color name="information_300">#D098EB</color>
+    <!-- Quiet Colors -->
+    <color name="quiet_700">#185B72</color>
+    <color name="quiet_500">#2898BD</color>
+    <color name="quiet_300">#74C6E2</color>
+    <!-- Discovery Colors -->
+    <color name="discovery_700">#711D9A</color>
+    <color name="discovery_500">#AF52DE</color>
+    <color name="discovery_300">#D098EB</color>
+</resources>
