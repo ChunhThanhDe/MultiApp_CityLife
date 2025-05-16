@@ -8,6 +8,7 @@ import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_header.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/components/term_of_service.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
@@ -24,7 +25,10 @@ class SignInScreen extends BaseScreen<SignInController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 16.h),
-          _buildHeader(),
+          AuthHeader(
+            title: 'Log in to your account',
+            subtitle: 'Welcome back! Kindly log in with your credentials',
+          ),
           SizedBox(height: 24.h),
           _buildInputField(),
           SizedBox(height: 24.h),
@@ -275,24 +279,6 @@ class SignInScreen extends BaseScreen<SignInController> {
               ),
             ),
           ],
-        ),
-      ],
-    );
-  }
-
-  Column _buildHeader() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AutoSizeText(
-          'Log in to your account',
-          style: AppTextStyle.s28w600,
-          maxLines: 1,
-        ),
-        Text(
-          'Welcome back! Kindly log in with your credentials',
-          style: AppTextStyle.s16w400,
-          maxLines: 2,
         ),
       ],
     );

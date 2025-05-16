@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 
 import 'app_overlay_navigator.dart';
 
-showLoadingOverlay({required Future<dynamic> api, Widget? child, bool isShowLoading = true}) {
-  _AppLoadingOverlay.show(api: api, child: child, isShowLoading: isShowLoading);
+Future<dynamic> showLoadingOverlay({required Future<dynamic> api, Widget? child, bool isShowLoading = true}) {
+  return _AppLoadingOverlay.show(api: api, child: child, isShowLoading: isShowLoading);
 }
 
 class _AppLoadingOverlay {

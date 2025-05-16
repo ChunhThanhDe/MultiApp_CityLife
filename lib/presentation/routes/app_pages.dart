@@ -3,6 +3,8 @@ import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/sign
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/sign_in_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign_up_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign_up_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/authentication/verification/verification_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/authentication/verification/verification_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_bindings.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_screen.dart';
 
@@ -26,6 +28,11 @@ class AppPages {
       name: AppRoutes.signUp,
       page: () => const SignUpScreen(),
       binding: SignUpBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.verification,
+      page: () => const VerificationScreen(),
+      binding: VerificationBinding(),
     ),
   ];
 }

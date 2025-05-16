@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
+import 'package:sixam_mart_user/domain/models/page_param/verification_page_param.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_overlay.dart';
 
 enum LoginMethod {
@@ -37,5 +39,7 @@ class SignInController extends BaseController {
     //     print(error);
     // }
     isLoading.value = false;
+    Get.toNamed(AppRoutes.verification,
+        arguments: VerificationPageParam(type: loginMethod.value == LoginMethod.email ? VerificationType.email : VerificationType.phoneNumber, verificationId: inputController.text));
   }
 }
