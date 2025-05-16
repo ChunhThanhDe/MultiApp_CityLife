@@ -1,3 +1,4 @@
+import 'package:country_code_picker/src/country_code.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
@@ -47,5 +48,9 @@ class SignInController extends BaseController {
         type: VerificationType.signIn,
       ),
     );
+  }
+
+  onCountryCodeChanged(CountryCode countryCode) {
+    countryDialCode.value = countryCode.dialCode ?? '+1';
   }
 }

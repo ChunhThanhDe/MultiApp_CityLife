@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,7 +8,9 @@ import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_header.dart';
+import 'package:sixam_mart_user/presentation/modules/authentication/components/phone_picker.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/components/term_of_service.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
 
@@ -51,7 +52,9 @@ class SignInScreen extends BaseScreen<SignInController> {
 
   GestureDetector _buildGotoSignUp() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(AppRoutes.signUp);
+      },
       child: Center(
         child: AutoSizeText.rich(
           maxLines: 1,
@@ -172,7 +175,9 @@ class SignInScreen extends BaseScreen<SignInController> {
     return Form(
       key: vm.formKey,
       child: Obx(
-        () => vm.loginMethod.value == LoginMethod.email ? _buildEmailInput() : _buildPhoneInput(),
+        () => vm.loginMethod.value == LoginMethod.email
+            ? _buildEmailInput()
+            : PhonePicker(inputController: vm.inputController, onChanged: vm.onCountryCodeChanged, countryDialCode: vm.countryDialCode.value),
       ),
     );
   }
@@ -194,93 +199,6 @@ class SignInScreen extends BaseScreen<SignInController> {
         }
         return null;
       },
-    );
-  }
-
-  _buildPhoneInput() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text.rich(
-          TextSpan(
-            children: [
-              const TextSpan(text: 'Phone'),
-              TextSpan(text: ' *', style: AppTextStyle.s14w400.copyWith(color: const Color(0xFFFF3B30))),
-            ],
-          ),
-        ),
-        const SizedBox(height: 8),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              height: 50.h,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: const Color(0xFFE8EBEE)),
-              ),
-              child: CountryCodePicker(
-                onChanged: (CountryCode countryCode) {
-                  vm.countryDialCode.value = countryCode.dialCode ?? '+1';
-                },
-                textStyle: AppTextStyle.s14w400.copyWith(color: const Color(0xFF161A1D)),
-                initialSelection: vm.countryDialCode.value,
-                favorite: const ['+1', '+91'],
-                showDropDownButton: true,
-                showFlagMain: false,
-                builder: (CountryCode? countryCode) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          countryCode?.dialCode ?? '+1',
-                          style: AppTextStyle.s14w400.copyWith(color: const Color(0xFF161A1D)),
-                        ),
-                        SizedBox(width: 8.w),
-                        SvgPicture.asset(
-                          Assets.icons.icDropdownArrow.path,
-                          width: 8.w,
-                          height: 8.w,
-                          colorFilter: const ColorFilter.mode(
-                            Color(0xFF161A1D),
-                            BlendMode.srcIn,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: SizedBox(
-                height: 75.h,
-                child: AppTextField(
-                  keyboardType: TextInputType.phone,
-                  controller: vm.inputController,
-                  hint: 'Enter phone number',
-                  svgPath: Assets.icons.icPhoneIcon.path,
-                  isRequired: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Phone number is required';
-                    }
-                    if (!GetUtils.isPhoneNumber(value)) {
-                      return 'Please enter a valid phone number';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }
