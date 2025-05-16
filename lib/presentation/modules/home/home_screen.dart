@@ -16,19 +16,14 @@ class HomeScreen extends BaseScreen<HomeController> {
   Widget buildScreen(BuildContext context) {
     return Center(
       child: AppButton(
+        color: AppColors.brand500,
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
         onTap: () {
           Get.toNamed(AppRoutes.signIn);
         },
-        child: Container(
-          decoration: BoxDecoration(
-            color: AppColors.brand500,
-            borderRadius: BorderRadius.circular(24),
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-          child: Text(
-            'Sign In',
-            style: AppTextStyle.s16w500.copyWith(color: Colors.white),
-          ),
+        child: Text(
+          'Sign In',
+          style: AppTextStyle.s16w500.copyWith(color: Colors.white),
         ),
       ),
     );
