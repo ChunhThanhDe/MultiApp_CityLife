@@ -16,13 +16,25 @@ class RootScreen extends BaseScreen<RootController> {
   Widget? buildBottomNavigationBar(BuildContext context) {
     return Obx(() => BottomNavigationBar(
           elevation: 0,
+          enableFeedback: false,
+          selectedItemColor: AppColors.brand500,
+          unselectedItemColor: AppColors.grey950,
           selectedLabelStyle: AppTextStyle.s12w400.copyWith(color: AppColors.brand500),
           unselectedLabelStyle: AppTextStyle.s12w400.copyWith(color: AppColors.grey950),
+          backgroundColor: AppColors.white0,
           type: BottomNavigationBarType.fixed,
           items: vm.tabs
               .map((e) => BottomNavigationBarItem(
-                    icon: SvgPicture.asset(e.iconUnselected),
-                    activeIcon: SvgPicture.asset(e.iconSelected),
+                    icon: SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: SvgPicture.asset(e.iconUnselected),
+                    ),
+                    activeIcon: SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: SvgPicture.asset(e.iconSelected),
+                    ),
                     label: e.label,
                   ))
               .toList(),
