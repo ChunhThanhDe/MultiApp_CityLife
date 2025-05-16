@@ -13,7 +13,7 @@ class AppTextField extends StatelessWidget {
   final TextEditingController? controller;
 
   /// The hint text displayed inside the text field.
-  final String? hint;
+  final String? hintText;
 
   /// The SVG path for a custom icon (not used directly, use [prefixIcon] for widgets).
   final String? svgPath;
@@ -44,7 +44,7 @@ class AppTextField extends StatelessWidget {
     this.label,
     this.isRequired = true,
     this.controller,
-    this.hint,
+    this.hintText,
     this.svgPath,
     this.keyboardType,
     this.onChanged,
@@ -99,7 +99,7 @@ class AppTextField extends StatelessWidget {
             ),
             validator: validator,
             decoration: InputDecoration(
-              hintText: hint,
+              hintText: hintText,
               helperText: '',
               hintStyle: AppTextStyle.s14w400.copyWith(
                 color: const Color(0xFF798A9A),

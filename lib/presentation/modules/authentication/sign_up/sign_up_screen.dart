@@ -70,7 +70,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       label: 'Your name',
       isRequired: true,
       controller: vm.nameController,
-      hint: 'Enter your name',
+      hintText: 'Enter your name',
       svgPath: Assets.icons.icPersonIcon.path,
       validator: _validateName,
     );
@@ -98,7 +98,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       label: 'Email address',
       isRequired: true,
       controller: vm.emailController,
-      hint: 'name@example.com',
+      hintText: 'name@example.com',
       svgPath: Assets.icons.icEmailIcon.path,
       keyboardType: TextInputType.emailAddress,
       validator: _validateEmail,

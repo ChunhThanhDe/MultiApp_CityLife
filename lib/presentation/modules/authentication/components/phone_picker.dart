@@ -86,7 +86,7 @@ class PhonePicker extends StatelessWidget {
                 child: AppTextField(
                   keyboardType: TextInputType.phone,
                   controller: inputController,
-                  hint: 'Enter phone number',
+                  hintText: 'Enter phone number',
                   svgPath: Assets.icons.icPhoneIcon.path,
                   isRequired: true,
                   validator: (value) {

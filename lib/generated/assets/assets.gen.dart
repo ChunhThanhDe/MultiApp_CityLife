@@ -25,6 +25,9 @@ class $AssetsColorsGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/ic_apartment.svg
+  SvgGenImage get icApartment => const SvgGenImage('assets/icons/ic_apartment.svg');
+
   /// File path: assets/icons/ic_back_arrow.svg
   SvgGenImage get icBackArrow => const SvgGenImage('assets/icons/ic_back_arrow.svg');
 
@@ -34,11 +37,20 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_cart_outlined.svg
   SvgGenImage get icCartOutlined => const SvgGenImage('assets/icons/ic_cart_outlined.svg');
 
+  /// File path: assets/icons/ic_checkmark.svg
+  SvgGenImage get icCheckmark => const SvgGenImage('assets/icons/ic_checkmark.svg');
+
   /// File path: assets/icons/ic_clock.svg
   SvgGenImage get icClock => const SvgGenImage('assets/icons/ic_clock.svg');
 
   /// File path: assets/icons/ic_close.svg
   SvgGenImage get icClose => const SvgGenImage('assets/icons/ic_close.svg');
+
+  /// File path: assets/icons/ic_courier_hands.svg
+  SvgGenImage get icCourierHands => const SvgGenImage('assets/icons/ic_courier_hands.svg');
+
+  /// File path: assets/icons/ic_door.svg
+  SvgGenImage get icDoor => const SvgGenImage('assets/icons/ic_door.svg');
 
   /// File path: assets/icons/ic_dropdown_arrow.svg
   SvgGenImage get icDropdownArrow => const SvgGenImage('assets/icons/ic_dropdown_arrow.svg');
@@ -52,11 +64,26 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_home_outlined.svg
   SvgGenImage get icHomeOutlined => const SvgGenImage('assets/icons/ic_home_outlined.svg');
 
+  /// File path: assets/icons/ic_hopital.svg
+  SvgGenImage get icHopital => const SvgGenImage('assets/icons/ic_hopital.svg');
+
+  /// File path: assets/icons/ic_hotel.svg
+  SvgGenImage get icHotel => const SvgGenImage('assets/icons/ic_hotel.svg');
+
+  /// File path: assets/icons/ic_house.svg
+  SvgGenImage get icHouse => const SvgGenImage('assets/icons/ic_house.svg');
+
+  /// File path: assets/icons/ic_information.svg
+  SvgGenImage get icInformation => const SvgGenImage('assets/icons/ic_information.svg');
+
   /// File path: assets/icons/ic_location.svg
   SvgGenImage get icLocation => const SvgGenImage('assets/icons/ic_location.svg');
 
   /// File path: assets/icons/ic_mouse.svg
   SvgGenImage get icMouse => const SvgGenImage('assets/icons/ic_mouse.svg');
+
+  /// File path: assets/icons/ic_pencil.svg
+  SvgGenImage get icPencil => const SvgGenImage('assets/icons/ic_pencil.svg');
 
   /// File path: assets/icons/ic_person_filled.svg
   SvgGenImage get icPersonFilled => const SvgGenImage('assets/icons/ic_person_filled.svg');
@@ -69,6 +96,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_phone_icon.svg
   SvgGenImage get icPhoneIcon => const SvgGenImage('assets/icons/ic_phone_icon.svg');
+
+  /// File path: assets/icons/ic_reception.svg
+  SvgGenImage get icReception => const SvgGenImage('assets/icons/ic_reception.svg');
 
   /// File path: assets/icons/ic_right_arrow.svg
   SvgGenImage get icRightArrow => const SvgGenImage('assets/icons/ic_right_arrow.svg');
@@ -85,6 +115,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_service_outlined.svg
   SvgGenImage get icServiceOutlined => const SvgGenImage('assets/icons/ic_service_outlined.svg');
 
+  /// File path: assets/icons/ic_threedot.svg
+  SvgGenImage get icThreedot => const SvgGenImage('assets/icons/ic_threedot.svg');
+
   /// File path: assets/icons/ic_wallet_filled.svg
   SvgGenImage get icWalletFilled => const SvgGenImage('assets/icons/ic_wallet_filled.svg');
 
@@ -93,26 +126,37 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
+    icApartment,
     icBackArrow,
     icCartFilled,
     icCartOutlined,
+    icCheckmark,
     icClock,
     icClose,
+    icCourierHands,
+    icDoor,
     icDropdownArrow,
     icEmailIcon,
     icHomeFilled,
     icHomeOutlined,
+    icHopital,
+    icHotel,
+    icHouse,
+    icInformation,
     icLocation,
     icMouse,
+    icPencil,
     icPersonFilled,
     icPersonIcon,
     icPersonOutlined,
     icPhoneIcon,
+    icReception,
     icRightArrow,
     icRightArrowChevron,
     icSearch,
     icServiceFilled,
     icServiceOutlined,
+    icThreedot,
     icWalletFilled,
     icWalletOutlined,
   ];

@@ -9,18 +9,7 @@ import 'package:sixam_mart_user/presentation/modules/address/address_controller.
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
 
-enum SearchItemType {
-  history,
-  address,
-  nearby,
-}
-
-class SearchItem {
-  final String title;
-  final String address;
-  final SearchItemType type;
-  SearchItem({required this.title, required this.address, required this.type});
-}
+import 'address_details.dart';
 
 class SearchAddressScreen extends BaseScreen<AddressController> {
   const SearchAddressScreen({super.key});
@@ -77,7 +66,7 @@ class SearchAddressScreen extends BaseScreen<AddressController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppTextField(
-            hint: 'Search for an address',
+            hintText: 'Search for an address',
             prefixIcon: Padding(
               padding: const EdgeInsets.all(12),
               child: Assets.icons.icSearch.svg(),
@@ -116,28 +105,31 @@ class SearchAddressScreen extends BaseScreen<AddressController> {
   }
 
   _buildSearchItem(SearchItem item) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Row(
-        children: [
-          SvgPicture.asset(
-            item.type == SearchItemType.history
-                ? Assets.icons.icClock.path
-                : item.type == SearchItemType.address
-                    ? Assets.icons.icLocation.path
-                    : Assets.icons.icMouse.path,
-          ),
-          const SizedBox(width: 12),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(item.title, style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950)),
-              Text(item.address, style: AppTextStyle.s12w400.copyWith(color: AppColors.textGreyHigh700)),
-            ],
-          ),
-          const Spacer(),
-          Assets.icons.icRightArrowChevron.svg(),
-        ],
+    return GestureDetector(
+      onTap: () => Get.to(() => AddressDetailsScreen(searchItem: item)),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 6),
+        child: Row(
+          children: [
+            SvgPicture.asset(
+              item.type == SearchItemType.history
+                  ? Assets.icons.icClock.path
+                  : item.type == SearchItemType.address
+                      ? Assets.icons.icLocation.path
+                      : Assets.icons.icMouse.path,
+            ),
+            const SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(item.title, style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950)),
+                Text(item.address, style: AppTextStyle.s12w400.copyWith(color: AppColors.textGreyHigh700)),
+              ],
+            ),
+            const Spacer(),
+            Assets.icons.icRightArrowChevron.svg(),
+          ],
+        ),
       ),
     );
   }
