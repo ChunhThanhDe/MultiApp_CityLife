@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,9 +7,10 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
-import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/components/auth_text_field.dart';
+import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/components/term_of_service.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
+import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
 
 import 'sign_in_controller.dart';
 
@@ -26,13 +28,13 @@ class SignInScreen extends BaseScreen<SignInController> {
           SizedBox(height: 24.h),
           _buildInputField(),
           SizedBox(height: 24.h),
-          _buildLoginButton(context),
+          _buildLoginButton(),
           SizedBox(height: 16.h),
           _buildOrDivider(),
           SizedBox(height: 16.h),
           _buildSwitchLoginMethodButton(),
           const Spacer(),
-          const TermOfService(),
+          Center(child: const TermOfService()),
           SizedBox(height: 16.h),
           const Divider(color: Color(0xFFE8EBEE), thickness: 1),
           SizedBox(height: 16.h),
@@ -47,7 +49,8 @@ class SignInScreen extends BaseScreen<SignInController> {
     return GestureDetector(
       onTap: () {},
       child: Center(
-        child: Text.rich(
+        child: AutoSizeText.rich(
+          maxLines: 1,
           TextSpan(
             children: [
               TextSpan(
@@ -73,34 +76,30 @@ class SignInScreen extends BaseScreen<SignInController> {
   _buildSwitchLoginMethodButton() {
     return AppButton(
       onTap: vm.toggleLoginMethod,
-      child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
-        decoration: BoxDecoration(
-          color: const Color(0xFFF7F8F9),
-          borderRadius: BorderRadius.circular(32.r),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SvgPicture.asset(
-              vm.loginMethod.value == LoginMethod.email ? Assets.icons.icPhoneIcon.path : Assets.icons.icEmailIcon.path,
-              width: 20.w,
-              height: 20.w,
-              colorFilter: const ColorFilter.mode(
-                Color(0xFF161A1D),
-                BlendMode.srcIn,
-              ),
-            ),
-            Obx(() => Text(
-                  vm.loginMethod.value == LoginMethod.email ? 'Log in with phone' : 'Log in with email',
-                  textAlign: TextAlign.center,
-                  style: AppTextStyle.s16w500,
-                )),
-          ],
-        ),
+      width: double.infinity,
+      color: const Color(0xFFF7F8F9),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Obx(() => SvgPicture.asset(
+                vm.loginMethod.value == LoginMethod.email ? Assets.icons.icPhoneIcon.path : Assets.icons.icEmailIcon.path,
+                width: 20.w,
+                height: 20.w,
+                colorFilter: const ColorFilter.mode(
+                  Color(0xFF161A1D),
+                  BlendMode.srcIn,
+                ),
+              )),
+          SizedBox(width: 8.w),
+          Obx(() => Text(
+                vm.loginMethod.value == LoginMethod.email ? 'Log in with phone' : 'Log in with email',
+                textAlign: TextAlign.center,
+                style: AppTextStyle.s16w500,
+              )),
+        ],
       ),
     );
   }
@@ -133,39 +132,36 @@ class SignInScreen extends BaseScreen<SignInController> {
     );
   }
 
-  _buildLoginButton(BuildContext context) {
-    return AppButton(
-      onTap: () => vm.onSubmit(context),
-      child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 24.w),
-        decoration: BoxDecoration(
-          color: const Color(0xFF5856D7),
-          borderRadius: BorderRadius.circular(32.r),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const SizedBox(),
-            Text(
-              'Log in',
-              style: AppTextStyle.s16w500.copyWith(
-                color: Colors.white,
+  _buildLoginButton() {
+    return Obx(() => AppButton(
+          onTap: vm.onSubmit,
+          enabled: !vm.isLoading.value,
+          width: double.infinity,
+          color: AppColors.brand500,
+          disabledColor: AppColors.brand500.withValues(alpha: 0.5),
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const SizedBox(),
+              Text(
+                'Log in',
+                style: AppTextStyle.s16w500.copyWith(
+                  color: Colors.white,
+                ),
               ),
-            ),
-            SvgPicture.asset(
-              Assets.icons.icRightArrow.path,
-              width: 12.w,
-              height: 12.w,
-              colorFilter: const ColorFilter.mode(
-                Colors.white,
-                BlendMode.srcIn,
+              SvgPicture.asset(
+                Assets.icons.icRightArrow.path,
+                width: 12.w,
+                height: 12.w,
+                colorFilter: const ColorFilter.mode(
+                  Colors.white,
+                  BlendMode.srcIn,
+                ),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
+            ],
+          ),
+        ));
   }
 
   _buildInputField() {
@@ -178,12 +174,13 @@ class SignInScreen extends BaseScreen<SignInController> {
   }
 
   _buildEmailInput() {
-    return AuthTextField(
+    return AppTextField(
       label: 'Email address',
       isRequired: true,
       controller: vm.inputController,
       hint: 'name@example.com',
       svgPath: Assets.icons.icEmailIcon.path,
+      keyboardType: TextInputType.emailAddress,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Email is required';
@@ -214,6 +211,7 @@ class SignInScreen extends BaseScreen<SignInController> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
+              height: 50.h,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(6),
@@ -227,26 +225,53 @@ class SignInScreen extends BaseScreen<SignInController> {
                 initialSelection: vm.countryDialCode.value,
                 favorite: const ['+1', '+91'],
                 showDropDownButton: true,
-                padding: EdgeInsets.zero,
                 showFlagMain: false,
+                builder: (CountryCode? countryCode) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          countryCode?.dialCode ?? '+1',
+                          style: AppTextStyle.s14w400.copyWith(color: const Color(0xFF161A1D)),
+                        ),
+                        SizedBox(width: 8.w),
+                        SvgPicture.asset(
+                          Assets.icons.icDropdownArrow.path,
+                          width: 8.w,
+                          height: 8.w,
+                          colorFilter: const ColorFilter.mode(
+                            Color(0xFF161A1D),
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
             ),
             const SizedBox(width: 16),
             Expanded(
-              child: AuthTextField(
-                controller: vm.inputController,
-                hint: 'Enter phone number',
-                svgPath: Assets.icons.icPhoneIcon.path,
-                isRequired: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Phone number is required';
-                  }
-                  if (GetUtils.isPhoneNumber(value)) {
-                    return 'Please enter a valid phone number';
-                  }
-                  return null;
-                },
+              child: SizedBox(
+                height: 75.h,
+                child: AppTextField(
+                  keyboardType: TextInputType.phone,
+                  controller: vm.inputController,
+                  hint: 'Enter phone number',
+                  svgPath: Assets.icons.icPhoneIcon.path,
+                  isRequired: true,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Phone number is required';
+                    }
+                    if (!GetUtils.isPhoneNumber(value)) {
+                      return 'Please enter a valid phone number';
+                    }
+                    return null;
+                  },
+                ),
               ),
             ),
           ],
@@ -259,13 +284,15 @@ class SignInScreen extends BaseScreen<SignInController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        AutoSizeText(
           'Log in to your account',
           style: AppTextStyle.s28w600,
+          maxLines: 1,
         ),
         Text(
           'Welcome back! Kindly log in with your credentials',
           style: AppTextStyle.s16w400,
+          maxLines: 2,
         ),
       ],
     );

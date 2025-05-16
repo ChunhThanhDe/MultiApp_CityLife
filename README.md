@@ -157,6 +157,3 @@ Coding convention: https://dart.dev/effective-dart/style
 13. **Chạy fix all trước khi commit**
 
 - Phải chạy `dart fix --apply` và `dart format lib/ --line-length 200` sau đó test lại app trước khi commit.\
-
-14. **Build release app**
-- Xem [How to build?](build_script/how_to_build.md)

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 
-class AuthTextField extends StatelessWidget {
+class AppTextField extends StatelessWidget {
   final String? label;
   final bool isRequired;
   final TextEditingController controller;
@@ -12,7 +12,7 @@ class AuthTextField extends StatelessWidget {
   final Function(String)? onChanged;
   final String? Function(String?)? validator;
   final FocusNode? focusNode;
-  const AuthTextField({
+  const AppTextField({
     super.key,
     this.label,
     this.isRequired = true,

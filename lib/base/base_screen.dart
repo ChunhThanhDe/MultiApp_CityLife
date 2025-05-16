@@ -81,7 +81,7 @@ abstract class BaseScreen<T extends GetxController> extends GetView<T> {
   bool get setTopSafeArea => true;
 
   @protected
-  VoidCallback? get opTapScreen => null;
+  VoidCallback? get opTapScreen => FocusScope.of(Get.context!).unfocus;
 
   @protected
   Key? get keyScaffold => null;
