@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
@@ -26,13 +27,13 @@ class RootScreen extends BaseScreen<RootController> {
           items: vm.tabs
               .map((e) => BottomNavigationBarItem(
                     icon: SizedBox(
-                      width: 20,
-                      height: 20,
+                      width: 20.w,
+                      height: 20.w,
                       child: SvgPicture.asset(e.iconUnselected),
                     ),
                     activeIcon: SizedBox(
-                      width: 20,
-                      height: 20,
+                      width: 20.w,
+                      height: 20.w,
                       child: SvgPicture.asset(e.iconSelected),
                     ),
                     label: e.label,

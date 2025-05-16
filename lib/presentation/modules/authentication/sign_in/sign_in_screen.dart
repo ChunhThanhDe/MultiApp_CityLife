@@ -1,5 +1,6 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
@@ -16,27 +17,27 @@ class SignInScreen extends BaseScreen<SignInController> {
   @override
   Widget buildScreen(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           _buildHeader(),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.h),
           _buildInputField(),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.h),
           _buildLoginButton(context),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           _buildOrDivider(),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           _buildSwitchLoginMethodButton(),
           const Spacer(),
           const TermOfService(),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           const Divider(color: Color(0xFFE8EBEE), thickness: 1),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           _buildGotoSignUp(),
-          const SizedBox(height: 56),
+          SizedBox(height: 56.h),
         ],
       ),
     );
@@ -74,21 +75,20 @@ class SignInScreen extends BaseScreen<SignInController> {
       onTap: vm.toggleLoginMethod,
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
         decoration: BoxDecoration(
           color: const Color(0xFFF7F8F9),
-          borderRadius: BorderRadius.circular(32),
+          borderRadius: BorderRadius.circular(32.r),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: 8,
           children: [
             SvgPicture.asset(
               vm.loginMethod.value == LoginMethod.email ? Assets.icons.icPhoneIcon.path : Assets.icons.icEmailIcon.path,
-              width: 20,
-              height: 20,
+              width: 20.w,
+              height: 20.w,
               colorFilter: const ColorFilter.mode(
                 Color(0xFF161A1D),
                 BlendMode.srcIn,
@@ -138,10 +138,10 @@ class SignInScreen extends BaseScreen<SignInController> {
       onTap: () => vm.onSubmit(context),
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+        padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 24.w),
         decoration: BoxDecoration(
           color: const Color(0xFF5856D7),
-          borderRadius: BorderRadius.circular(32),
+          borderRadius: BorderRadius.circular(32.r),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -155,8 +155,8 @@ class SignInScreen extends BaseScreen<SignInController> {
             ),
             SvgPicture.asset(
               Assets.icons.icRightArrow.path,
-              width: 12,
-              height: 12,
+              width: 12.w,
+              height: 12.w,
               colorFilter: const ColorFilter.mode(
                 Colors.white,
                 BlendMode.srcIn,
