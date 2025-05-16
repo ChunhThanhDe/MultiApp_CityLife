@@ -24,6 +24,8 @@ class SignInController extends BaseController {
     if (!formKey.currentState!.validate()) {
       return;
     }
+    isLoading.value = true;
+    await Future.delayed(const Duration(seconds: 2));
     // final ApiResult result = await showLoadingOverlay(api: _authRepository.login(LoginRequest(email: 'test@test.com', password: '123456')));
     // switch (result) {
     //   case Success(:final data):
@@ -31,5 +33,6 @@ class SignInController extends BaseController {
     //   case Failure(:final error):
     //     print(error);
     // }
+    isLoading.value = false;
   }
 }

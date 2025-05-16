@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/components/term_of_service.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
@@ -32,7 +33,7 @@ class SignInScreen extends BaseScreen<SignInController> {
           SizedBox(height: 16.h),
           _buildSwitchLoginMethodButton(),
           const Spacer(),
-          const TermOfService(),
+          Center(child: const TermOfService()),
           SizedBox(height: 16.h),
           const Divider(color: Color(0xFFE8EBEE), thickness: 1),
           SizedBox(height: 16.h),
@@ -130,32 +131,34 @@ class SignInScreen extends BaseScreen<SignInController> {
   }
 
   _buildLoginButton() {
-    return AppButton(
-      onTap: vm.onSubmit,
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const SizedBox(),
-          Text(
-            'Log in',
-            style: AppTextStyle.s16w500.copyWith(
-              color: Colors.white,
-            ),
+    return Obx(() => AppButton(
+          onTap: vm.onSubmit,
+          loading: vm.isLoading.value,
+          width: double.infinity,
+          disabledColor: AppColors.brand500.withValues(alpha: 0.5),
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const SizedBox(),
+              Text(
+                'Log in',
+                style: AppTextStyle.s16w500.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+              SvgPicture.asset(
+                Assets.icons.icRightArrow.path,
+                width: 12.w,
+                height: 12.w,
+                colorFilter: const ColorFilter.mode(
+                  Colors.white,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ],
           ),
-          SvgPicture.asset(
-            Assets.icons.icRightArrow.path,
-            width: 12.w,
-            height: 12.w,
-            colorFilter: const ColorFilter.mode(
-              Colors.white,
-              BlendMode.srcIn,
-            ),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 
   _buildInputField() {
