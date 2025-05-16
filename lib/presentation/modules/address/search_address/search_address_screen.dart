@@ -5,13 +5,13 @@ import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
-import 'package:sixam_mart_user/presentation/modules/address/address_controller.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
 
-import 'address_details.dart';
+import 'search_address_controller.dart';
 
-class SearchAddressScreen extends BaseScreen<AddressController> {
+class SearchAddressScreen extends BaseScreen<SearchAddressController> {
   const SearchAddressScreen({super.key});
 
   // Mock search results (replace with real data from controller)
@@ -106,7 +106,7 @@ class SearchAddressScreen extends BaseScreen<AddressController> {
 
   _buildSearchItem(SearchItem item) {
     return GestureDetector(
-      onTap: () => Get.to(() => AddressDetailsScreen(searchItem: item)),
+      onTap: () => Get.toNamed('${AppRoutes.address}/${AppRoutes.addressDetails}', arguments: item),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 6),
         child: Row(

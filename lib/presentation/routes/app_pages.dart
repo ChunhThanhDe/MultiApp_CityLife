@@ -1,6 +1,11 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:sixam_mart_user/presentation/modules/address/address_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/address/address_details/address_details_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/address/address_details/address_details_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/address/address_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/address/confirm_address/confirm_address_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/address/confirm_address/confirm_address_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/address/search_address/search_address_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/address/search_address/search_address_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/sign_in_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/sign_in_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign_up_binding.dart';
@@ -39,7 +44,23 @@ class AppPages {
     GetPage(
       name: AppRoutes.address,
       page: () => const AddressScreen(),
-      binding: AddressBinding(),
+      children: [
+        GetPage(
+          name: AppRoutes.searchAddress,
+          page: () => const SearchAddressScreen(),
+          binding: SearchAddressBinding(),
+        ),
+        GetPage(
+          name: AppRoutes.addressDetails,
+          page: () => const AddressDetailsScreen(),
+          binding: AddressDetailsBinding(),
+        ),
+        GetPage(
+          name: AppRoutes.confirmAddress,
+          page: () => const ConfirmAddressScreen(),
+          binding: ConfirmAddressBinding(),
+        ),
+      ],
     ),
   ];
 }

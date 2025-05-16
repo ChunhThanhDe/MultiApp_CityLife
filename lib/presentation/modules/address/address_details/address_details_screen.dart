@@ -4,13 +4,16 @@ import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
-import 'package:sixam_mart_user/presentation/modules/address/address_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/address/address_details/address_details_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
 
-class AddressDetailsScreen extends BaseScreen<AddressController> {
-  final SearchItem searchItem;
-  const AddressDetailsScreen({super.key, required this.searchItem});
+class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
+  const AddressDetailsScreen({super.key});
+
+  @override
+  bool get resizeToAvoidBottomInset => true;
+
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return AppBar(
@@ -62,7 +65,9 @@ class AddressDetailsScreen extends BaseScreen<AddressController> {
               decoration: BoxDecoration(
                 color: AppColors.stateGreyLowest50,
               ),
-            )
+            ),
+            const SizedBox(height: 16),
+            _buildDeliveryInstructions(),
           ],
         ),
       ),
@@ -78,11 +83,11 @@ class AddressDetailsScreen extends BaseScreen<AddressController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              searchItem.address,
+              vm.searchItem.address,
               style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950),
             ),
             Text(
-              searchItem.address,
+              vm.searchItem.address,
               style: AppTextStyle.s12w400.copyWith(color: AppColors.textGreyHigh700),
             ),
           ],
@@ -174,6 +179,42 @@ class AddressDetailsScreen extends BaseScreen<AddressController> {
           // controller: controller.addressController,
           hintText: 'Add a label (ex. my home)',
           isRequired: false,
+        ),
+      ],
+    );
+  }
+
+  _buildDeliveryInstructions() {
+    final items = [
+      (title: 'Hand it to me', icon: Assets.icons.icCourierHands.svg()),
+      (title: 'Leave it at my door', icon: Assets.icons.icDoor.svg()),
+      (title: 'Leave at reception', icon: Assets.icons.icReception.svg()),
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Delivery instructions',
+          style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950),
+        ),
+        const SizedBox(height: 8),
+        ListView.separated(
+          shrinkWrap: true,
+          itemBuilder: (context, index) => Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Row(
+              children: [
+                items[index].icon,
+                const SizedBox(width: 12),
+                Text(items[index].title),
+                const Spacer(),
+                Assets.icons.icCheckmark.svg(),
+              ],
+            ),
+          ),
+          separatorBuilder: (context, index) => const SizedBox(height: 8),
+          itemCount: items.length,
         ),
       ],
     );

@@ -15,7 +15,7 @@ class SearchItem {
   SearchItem({required this.title, required this.address, required this.type});
 }
 
-class AddressController extends BaseController {
+class SearchAddressController extends BaseController {
   final TextEditingController searchAddressController = TextEditingController();
   var isShowClearButton = false.obs;
   onSearchChanged(String value) {
