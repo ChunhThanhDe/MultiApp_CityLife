@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -328,10 +329,23 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         Get.back();
       },
       child: Center(
-        child: Text(
-          'Already have an account? Log in',
-          style: AppTextStyle.s16w500.copyWith(
-            color: const Color(0xFF161A1D),
+        child: AutoSizeText.rich(
+          maxLines: 1,
+          TextSpan(
+            children: [
+              TextSpan(
+                text: 'Already have an account? ',
+                style: AppTextStyle.s16w500.copyWith(
+                  color: const Color(0xFF161A1D),
+                ),
+              ),
+              TextSpan(
+                text: 'Log in',
+                style: AppTextStyle.s16w500.copyWith(
+                  color: const Color(0xFF5856D7),
+                ),
+              ),
+            ],
           ),
           textAlign: TextAlign.center,
         ),
