@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,7 +49,8 @@ class SignInScreen extends BaseScreen<SignInController> {
     return GestureDetector(
       onTap: () {},
       child: Center(
-        child: Text.rich(
+        child: AutoSizeText.rich(
+          maxLines: 1,
           TextSpan(
             children: [
               TextSpan(
@@ -133,8 +135,9 @@ class SignInScreen extends BaseScreen<SignInController> {
   _buildLoginButton() {
     return Obx(() => AppButton(
           onTap: vm.onSubmit,
-          loading: vm.isLoading.value,
+          enabled: !vm.isLoading.value,
           width: double.infinity,
+          color: AppColors.brand500,
           disabledColor: AppColors.brand500.withValues(alpha: 0.5),
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
           child: Row(
@@ -281,13 +284,15 @@ class SignInScreen extends BaseScreen<SignInController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        AutoSizeText(
           'Log in to your account',
           style: AppTextStyle.s28w600,
+          maxLines: 1,
         ),
         Text(
           'Welcome back! Kindly log in with your credentials',
           style: AppTextStyle.s16w400,
+          maxLines: 2,
         ),
       ],
     );

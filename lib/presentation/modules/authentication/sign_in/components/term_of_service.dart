@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
@@ -9,7 +10,8 @@ class TermOfService extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text.rich(
+    return AutoSizeText.rich(
+      maxLines: 2,
       TextSpan(
         children: [
           TextSpan(

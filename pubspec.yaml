@@ -48,6 +48,7 @@ dependencies:
   flutter_svg: ^2.1.0
   google_fonts: ^6.2.1
   country_code_picker: ^3.3.0
+  auto_size_text: ^3.0.0
 
 
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
+import 'package:sixam_mart_user/presentation/shared/app_overlay.dart';
 
 enum LoginMethod {
   email,
@@ -21,11 +22,13 @@ class SignInController extends BaseController {
   }
 
   Future<void> onSubmit() async {
+    closeKeyboard();
     if (!formKey.currentState!.validate()) {
       return;
     }
     isLoading.value = true;
-    await Future.delayed(const Duration(seconds: 2));
+    await showLoadingOverlay(api: Future.delayed(const Duration(seconds: 2)));
+
     // final ApiResult result = await showLoadingOverlay(api: _authRepository.login(LoginRequest(email: 'test@test.com', password: '123456')));
     // switch (result) {
     //   case Success(:final data):
