@@ -104,7 +104,7 @@ class SearchAddressScreen extends BaseScreen<AddressController> {
           Expanded(
             child: ListView.separated(
               itemCount: results.length,
-              separatorBuilder: (context, index) => const Divider(height: 1),
+              separatorBuilder: (context, index) => const Divider(height: 1, color: AppColors.stateGreyLowestHover100),
               itemBuilder: (context, index) {
                 return _buildSearchItem(results[index]);
               },
@@ -116,26 +116,29 @@ class SearchAddressScreen extends BaseScreen<AddressController> {
   }
 
   _buildSearchItem(SearchItem item) {
-    return Row(
-      children: [
-        SvgPicture.asset(
-          item.type == SearchItemType.history
-              ? Assets.icons.icClock.path
-              : item.type == SearchItemType.address
-                  ? Assets.icons.icLocation.path
-                  : Assets.icons.icMouse.path,
-        ),
-        const SizedBox(width: 12),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(item.title, style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950)),
-            Text(item.address, style: AppTextStyle.s12w400.copyWith(color: AppColors.textGreyHigh700)),
-          ],
-        ),
-        const Spacer(),
-        Assets.icons.icRightArrowChevron.svg(),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            item.type == SearchItemType.history
+                ? Assets.icons.icClock.path
+                : item.type == SearchItemType.address
+                    ? Assets.icons.icLocation.path
+                    : Assets.icons.icMouse.path,
+          ),
+          const SizedBox(width: 12),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(item.title, style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950)),
+              Text(item.address, style: AppTextStyle.s12w400.copyWith(color: AppColors.textGreyHigh700)),
+            ],
+          ),
+          const Spacer(),
+          Assets.icons.icRightArrowChevron.svg(),
+        ],
+      ),
     );
   }
 }

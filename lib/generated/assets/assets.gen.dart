@@ -73,8 +73,8 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_right_arrow.svg
   SvgGenImage get icRightArrow => const SvgGenImage('assets/icons/ic_right_arrow.svg');
 
-  /// File path: assets/icons/ic_right_arrow_chevrolet.svg
-  SvgGenImage get icRightArrowChevrolet => const SvgGenImage('assets/icons/ic_right_arrow_chevrolet.svg');
+  /// File path: assets/icons/ic_right_arrow_chevron.svg
+  SvgGenImage get icRightArrowChevron => const SvgGenImage('assets/icons/ic_right_arrow_chevron.svg');
 
   /// File path: assets/icons/ic_search.svg
   SvgGenImage get icSearch => const SvgGenImage('assets/icons/ic_search.svg');
@@ -109,7 +109,7 @@ class $AssetsIconsGen {
     icPersonOutlined,
     icPhoneIcon,
     icRightArrow,
-    icRightArrowChevrolet,
+    icRightArrowChevron,
     icSearch,
     icServiceFilled,
     icServiceOutlined,
