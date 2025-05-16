@@ -7,6 +7,7 @@ import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/address/address_details/address_details_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
+import 'package:smooth_sheets/smooth_sheets.dart';
 
 class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
   const AddressDetailsScreen({super.key});
@@ -58,7 +59,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
             const SizedBox(height: 16),
             _buildAddressMap(),
             const SizedBox(height: 24),
-            _buildAddressDetailsInput(),
+            _buildAddressDetailsInput(context),
             Container(
               width: double.infinity,
               height: 6,
@@ -109,7 +110,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
     );
   }
 
-  _buildAddressDetailsInput() {
+  _buildAddressDetailsInput(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -128,40 +129,54 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
           ],
         ),
         const SizedBox(height: 8),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(12),
-          decoration: ShapeDecoration(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                width: 1,
-                color: AppColors.stateGreyLowestHover100,
+        GestureDetector(
+          onTap: () {
+            final modalRoute = ModalSheetRoute(
+              swipeDismissible: true,
+              swipeDismissSensitivity: const SwipeDismissSensitivity(
+                minFlingVelocityRatio: 1,
+                minDragDistance: 100,
               ),
-              borderRadius: BorderRadius.circular(6),
+              builder: (context) => const _BuildingTypeModelSheet(),
+            );
+
+            Navigator.push(context, modalRoute);
+          },
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(12),
+            decoration: ShapeDecoration(
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                  width: 1,
+                  color: AppColors.stateGreyLowestHover100,
+                ),
+                borderRadius: BorderRadius.circular(6),
+              ),
             ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            spacing: 8,
-            children: [
-              Text(
-                'Select building type',
-                style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyDefault500),
-              ),
-              Assets.icons.icDropdownArrow.svg(),
-            ],
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              spacing: 8,
+              children: [
+                Text(
+                  'Select building type',
+                  style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyDefault500),
+                ),
+                Assets.icons.icDropdownArrow.svg(),
+              ],
+            ),
           ),
         ),
         const SizedBox(height: 16),
         AppTextField(
-          // controller: controller.addressController,
+          controller: controller.buildingNumberController,
           hintText: 'E.g. 2030',
           label: 'Apt, Unit or Floor',
           isRequired: true,
         ),
         AppTextField(
-          // controller: controller.addressController,
+          controller: controller.buildingNameController,
           hintText: 'E.g. Center Villa',
           label: 'Building name',
           isRequired: true,
@@ -176,7 +191,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
         ),
         const SizedBox(height: 8),
         AppTextField(
-          // controller: controller.addressController,
+          controller: controller.addressLabelController,
           hintText: 'Add a label (ex. my home)',
           isRequired: false,
         ),
@@ -191,32 +206,61 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
       (title: 'Leave at reception', icon: Assets.icons.icReception.svg()),
     ];
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Delivery instructions',
-          style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950),
-        ),
-        const SizedBox(height: 8),
-        ListView.separated(
-          shrinkWrap: true,
-          itemBuilder: (context, index) => Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Row(
-              children: [
-                items[index].icon,
-                const SizedBox(width: 12),
-                Text(items[index].title),
-                const Spacer(),
-                Assets.icons.icCheckmark.svg(),
-              ],
-            ),
+    return Obx(() {
+      final selected = controller.selectedDeliveryInstruction.value;
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Delivery instructions',
+            style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950),
           ),
-          separatorBuilder: (context, index) => const SizedBox(height: 8),
-          itemCount: items.length,
-        ),
-      ],
+          const SizedBox(height: 8),
+          ListView.separated(
+            shrinkWrap: true,
+            itemBuilder: (context, index) => GestureDetector(
+              onTap: () => controller.setSelectedDeliveryInstruction(index),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Row(
+                  children: [
+                    items[index].icon,
+                    const SizedBox(width: 12),
+                    Text(items[index].title),
+                    const Spacer(),
+                    if (selected == index) Assets.icons.icCheckmark.svg(),
+                  ],
+                ),
+              ),
+            ),
+            separatorBuilder: (context, index) => const SizedBox(height: 5, child: Divider(height: 1, color: AppColors.stateGreyLowestHover100)),
+            itemCount: items.length,
+          ),
+        ],
+      );
+    });
+  }
+}
+
+class _BuildingTypeModelSheet extends StatelessWidget {
+  const _BuildingTypeModelSheet();
+
+  @override
+  Widget build(BuildContext context) {
+    return Sheet(
+      snapGrid: const SheetSnapGrid(
+        snaps: [SheetOffset(0.5), SheetOffset(1)],
+      ),
+      decoration: MaterialSheetDecoration(
+        size: SheetSize.fit,
+        borderRadius: BorderRadius.circular(20),
+        clipBehavior: Clip.antiAlias,
+      ),
+      child: Container(
+        height: 700,
+        width: double.infinity,
+        color: Theme.of(context).colorScheme.surface,
+      ),
     );
   }
 }
