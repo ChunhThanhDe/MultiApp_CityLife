@@ -2,6 +2,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/components/auth_text_field.dart';
@@ -269,17 +270,4 @@ class SignInScreen extends BaseScreen<SignInController> {
       ],
     );
   }
-}
-
-class AppTextStyle {
-  static const TextStyle s28w600 = TextStyle(fontSize: 28, fontWeight: FontWeight.w600);
-  static const TextStyle s16w400 = TextStyle(fontSize: 16, fontWeight: FontWeight.w400);
-  static const TextStyle s16w500 = TextStyle(fontSize: 16, fontWeight: FontWeight.w500);
-  static const TextStyle s14w400 = TextStyle(fontSize: 14, fontWeight: FontWeight.w400);
-  static const TextStyle s14w500 = TextStyle(fontSize: 14, fontWeight: FontWeight.w500);
-  static const TextStyle s12w400 = TextStyle(fontSize: 12, fontWeight: FontWeight.w400);
-  static const TextStyle s12w500 = TextStyle(fontSize: 12, fontWeight: FontWeight.w500);
-  static const TextStyle s10w400 = TextStyle(fontSize: 10, fontWeight: FontWeight.w400);
-
-  static const TextStyle s16w600 = TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
 }

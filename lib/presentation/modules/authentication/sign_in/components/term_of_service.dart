@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/sign_in_screen.dart';
+import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 
 class TermOfService extends StatelessWidget {
   const TermOfService({
