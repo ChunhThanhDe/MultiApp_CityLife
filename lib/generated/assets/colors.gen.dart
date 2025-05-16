@@ -3,12 +3,12 @@
 ///  FlutterGen
 /// *****************************************************
 
-import 'package:flutter/material.dart';
 // coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/painting.dart';
+import 'package:flutter/material.dart';
 
 class AppColors {
   AppColors._();
@@ -47,7 +47,7 @@ class AppColors {
   static const Color alphaGrey90 = Color(0x101214E6);
 
   /// Color: #FFFFFF1A
-  static const Color alphaWhite10 = Color(0xFFFFFFff);
+  static const Color alphaWhite10 = Color(0xFFFFFF1A);
 
   /// Color: #ffffff
   static const Color alphaWhite100 = Color(0xFFFFFFFF);

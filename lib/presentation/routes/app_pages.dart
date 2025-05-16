@@ -1,4 +1,6 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:sixam_mart_user/presentation/modules/address/address_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/address/address_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/sign_in_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/sign_in_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign_up_binding.dart';
@@ -33,6 +35,11 @@ class AppPages {
       name: AppRoutes.verification,
       page: () => const VerificationScreen(),
       binding: VerificationBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.address,
+      page: () => const AddressScreen(),
+      binding: AddressBinding(),
     ),
   ];
 }

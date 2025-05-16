@@ -34,6 +34,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_cart_outlined.svg
   SvgGenImage get icCartOutlined => const SvgGenImage('assets/icons/ic_cart_outlined.svg');
 
+  /// File path: assets/icons/ic_clock.svg
+  SvgGenImage get icClock => const SvgGenImage('assets/icons/ic_clock.svg');
+
+  /// File path: assets/icons/ic_close.svg
+  SvgGenImage get icClose => const SvgGenImage('assets/icons/ic_close.svg');
+
   /// File path: assets/icons/ic_dropdown_arrow.svg
   SvgGenImage get icDropdownArrow => const SvgGenImage('assets/icons/ic_dropdown_arrow.svg');
 
@@ -45,6 +51,12 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_home_outlined.svg
   SvgGenImage get icHomeOutlined => const SvgGenImage('assets/icons/ic_home_outlined.svg');
+
+  /// File path: assets/icons/ic_location.svg
+  SvgGenImage get icLocation => const SvgGenImage('assets/icons/ic_location.svg');
+
+  /// File path: assets/icons/ic_mouse.svg
+  SvgGenImage get icMouse => const SvgGenImage('assets/icons/ic_mouse.svg');
 
   /// File path: assets/icons/ic_person_filled.svg
   SvgGenImage get icPersonFilled => const SvgGenImage('assets/icons/ic_person_filled.svg');
@@ -60,6 +72,12 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_right_arrow.svg
   SvgGenImage get icRightArrow => const SvgGenImage('assets/icons/ic_right_arrow.svg');
+
+  /// File path: assets/icons/ic_right_arrow_chevrolet.svg
+  SvgGenImage get icRightArrowChevrolet => const SvgGenImage('assets/icons/ic_right_arrow_chevrolet.svg');
+
+  /// File path: assets/icons/ic_search.svg
+  SvgGenImage get icSearch => const SvgGenImage('assets/icons/ic_search.svg');
 
   /// File path: assets/icons/ic_service_filled.svg
   SvgGenImage get icServiceFilled => const SvgGenImage('assets/icons/ic_service_filled.svg');
@@ -78,15 +96,21 @@ class $AssetsIconsGen {
     icBackArrow,
     icCartFilled,
     icCartOutlined,
+    icClock,
+    icClose,
     icDropdownArrow,
     icEmailIcon,
     icHomeFilled,
     icHomeOutlined,
+    icLocation,
+    icMouse,
     icPersonFilled,
     icPersonIcon,
     icPersonOutlined,
     icPhoneIcon,
     icRightArrow,
+    icRightArrowChevrolet,
+    icSearch,
     icServiceFilled,
     icServiceOutlined,
     icWalletFilled,
@@ -97,11 +121,14 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/img_address.png
+  AssetGenImage get imgAddress => const AssetGenImage('assets/images/img_address.png');
+
   /// File path: assets/images/img_new.png
   AssetGenImage get imgNew => const AssetGenImage('assets/images/img_new.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [imgNew];
+  List<AssetGenImage> get values => [imgAddress, imgNew];
 }
 
 class $AssetsTranslationsGen {

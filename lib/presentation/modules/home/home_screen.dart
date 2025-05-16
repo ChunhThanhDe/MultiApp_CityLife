@@ -41,6 +41,17 @@ class HomeScreen extends BaseScreen<HomeController> {
               style: AppTextStyle.s16w500.copyWith(color: Colors.white),
             ),
           ),
+          SizedBox(height: 16.h),
+          AppButton(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+            onTap: () {
+              Get.toNamed(AppRoutes.address);
+            },
+            child: Text(
+              'Address',
+              style: AppTextStyle.s16w500.copyWith(color: Colors.white),
+            ),
+          ),
         ],
       ),
     );
