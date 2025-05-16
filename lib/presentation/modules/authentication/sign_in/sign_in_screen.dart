@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,11 +5,9 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
-import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_bottom_section.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_header.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/phone_picker.dart';
-import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/components/term_of_service.dart';
-import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
 
@@ -39,43 +36,8 @@ class SignInScreen extends BaseScreen<SignInController> {
           SizedBox(height: 16.h),
           _buildSwitchLoginMethodButton(),
           const Spacer(),
-          Center(child: const TermOfService()),
-          SizedBox(height: 16.h),
-          const Divider(color: Color(0xFFE8EBEE), thickness: 1),
-          SizedBox(height: 16.h),
-          _buildGotoSignUp(),
-          SizedBox(height: 56.h),
+          AuthBottomSection(isSignIn: true),
         ],
-      ),
-    );
-  }
-
-  GestureDetector _buildGotoSignUp() {
-    return GestureDetector(
-      onTap: () {
-        Get.toNamed(AppRoutes.signUp);
-      },
-      child: Center(
-        child: AutoSizeText.rich(
-          maxLines: 1,
-          TextSpan(
-            children: [
-              TextSpan(
-                text: 'Don\'t have an account? ',
-                style: AppTextStyle.s16w500.copyWith(
-                  color: const Color(0xFF161A1D),
-                ),
-              ),
-              TextSpan(
-                text: 'Create one now!',
-                style: AppTextStyle.s16w500.copyWith(
-                  color: const Color(0xFF5856D7),
-                ),
-              ),
-            ],
-          ),
-          textAlign: TextAlign.center,
-        ),
       ),
     );
   }
@@ -144,8 +106,6 @@ class SignInScreen extends BaseScreen<SignInController> {
           onTap: vm.onSubmit,
           enabled: !vm.isLoading.value,
           width: double.infinity,
-          color: AppColors.stateBrandDefault500,
-          disabledColor: AppColors.stateBrandDefault500.withValues(alpha: 0.5),
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,14 +1,12 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_bottom_section.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_header.dart';
-import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/components/term_of_service.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 
 import 'sign_up_controller.dart';
@@ -34,51 +32,8 @@ class AcceptTos extends BaseScreen<SignUpController> {
           SizedBox(height: 24),
           _buildResendVerificationLink(),
           Spacer(),
-          _buildBottomSection(),
+          AuthBottomSection(isSignIn: false),
         ],
-      ),
-    );
-  }
-
-  Widget _buildBottomSection() {
-    return Column(
-      children: [
-        const Center(child: TermOfService()),
-        SizedBox(height: 16.h),
-        const Divider(color: Color(0xFFE8EBEE), thickness: 1),
-        SizedBox(height: 16.h),
-        _buildGotoSignIn(),
-        SizedBox(height: 56.h),
-      ],
-    );
-  }
-
-  GestureDetector _buildGotoSignIn() {
-    return GestureDetector(
-      onTap: () {
-        Get.back();
-      },
-      child: Center(
-        child: AutoSizeText.rich(
-          maxLines: 1,
-          TextSpan(
-            children: [
-              TextSpan(
-                text: 'Already have an account? ',
-                style: AppTextStyle.s16w500.copyWith(
-                  color: const Color(0xFF161A1D),
-                ),
-              ),
-              TextSpan(
-                text: 'Log in',
-                style: AppTextStyle.s16w500.copyWith(
-                  color: const Color(0xFF5856D7),
-                ),
-              ),
-            ],
-          ),
-          textAlign: TextAlign.center,
-        ),
       ),
     );
   }
@@ -87,8 +42,6 @@ class AcceptTos extends BaseScreen<SignUpController> {
     return AppButton(
       onTap: () {},
       width: double.infinity,
-      color: const Color(0xFF5856D7),
-      disabledColor: const Color(0xFF5856D7).withValues(alpha: 0.5),
       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

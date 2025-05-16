@@ -1,4 +1,4 @@
-import 'package:country_code_picker/src/country_code.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';

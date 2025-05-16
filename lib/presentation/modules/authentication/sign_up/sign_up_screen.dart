@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,9 +5,10 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_bottom_section.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_header.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/phone_picker.dart';
-import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/components/term_of_service.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
 
@@ -19,7 +19,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
 
   @override
   Widget? buildBottomNavigationBar(BuildContext context) {
-    return _buildBottomSection();
+    return AuthBottomSection(isSignIn: false);
   }
 
   @override
@@ -137,7 +137,13 @@ class SignUpScreen extends BaseScreen<SignUpController> {
                 decoration: InputDecoration(
                   hintText: 'Month',
                   helperText: 'MM',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(6.r)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(
+                      color: AppColors.stateGreyLowestHover100,
+                      width: 1,
+                    ),
+                  ),
                   contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
                 ),
               ),
@@ -153,7 +159,13 @@ class SignUpScreen extends BaseScreen<SignUpController> {
                 decoration: InputDecoration(
                   hintText: 'Day',
                   helperText: 'DD',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(6.r)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(
+                      color: AppColors.stateGreyLowestHover100,
+                      width: 1,
+                    ),
+                  ),
                   contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
                 ),
               ),
@@ -169,7 +181,13 @@ class SignUpScreen extends BaseScreen<SignUpController> {
                 decoration: InputDecoration(
                   hintText: 'Year',
                   helperText: 'YYYY',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(6.r)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: const BorderSide(
+                      color: AppColors.stateGreyLowestHover100,
+                      width: 1,
+                    ),
+                  ),
                   contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
                 ),
               ),
@@ -185,8 +203,6 @@ class SignUpScreen extends BaseScreen<SignUpController> {
           onTap: vm.onSubmit,
           enabled: !vm.isLoading.value,
           width: double.infinity,
-          color: const Color(0xFF5856D7),
-          disabledColor: const Color(0xFF5856D7).withValues(alpha: 0.5),
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -217,7 +233,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       children: [
         const Expanded(
           child: Divider(
-            color: Color(0xFFE8EBEE),
+            color: Colors.white,
             thickness: 1,
           ),
         ),
@@ -232,7 +248,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         ),
         const Expanded(
           child: Divider(
-            color: Color(0xFFE8EBEE),
+            color: Colors.white,
             thickness: 1,
           ),
         ),
@@ -244,7 +260,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
     return AppButton(
       onTap: vm.toggleMethod,
       width: double.infinity,
-      color: const Color(0xFFF7F8F9),
+      color: Colors.white,
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
       child: Obx(() => Row(
             mainAxisSize: MainAxisSize.min,
@@ -256,7 +272,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
                 width: 20.w,
                 height: 20.w,
                 colorFilter: const ColorFilter.mode(
-                  Color(0xFF161A1D),
+                  AppColors.textGreyHighest950,
                   BlendMode.srcIn,
                 ),
               ),
@@ -264,56 +280,10 @@ class SignUpScreen extends BaseScreen<SignUpController> {
               Text(
                 vm.currentMethod.value == SignUpMethod.email ? 'Sign up with phone' : 'Sign up with email',
                 textAlign: TextAlign.center,
-                style: AppTextStyle.s16w500.copyWith(
-                  color: const Color(0xFF161A1D),
-                ),
+                style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950),
               ),
             ],
           )),
-    );
-  }
-
-  Widget _buildBottomSection() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Center(child: TermOfService()),
-        SizedBox(height: 16.h),
-        const Divider(color: Color(0xFFE8EBEE), thickness: 1),
-        SizedBox(height: 16.h),
-        _buildGotoSignIn(),
-        SizedBox(height: 56.h),
-      ],
-    );
-  }
-
-  GestureDetector _buildGotoSignIn() {
-    return GestureDetector(
-      onTap: () {
-        Get.back();
-      },
-      child: Center(
-        child: AutoSizeText.rich(
-          maxLines: 1,
-          TextSpan(
-            children: [
-              TextSpan(
-                text: 'Already have an account? ',
-                style: AppTextStyle.s16w500.copyWith(
-                  color: const Color(0xFF161A1D),
-                ),
-              ),
-              TextSpan(
-                text: 'Log in',
-                style: AppTextStyle.s16w500.copyWith(
-                  color: const Color(0xFF5856D7),
-                ),
-              ),
-            ],
-          ),
-          textAlign: TextAlign.center,
-        ),
-      ),
     );
   }
 }
