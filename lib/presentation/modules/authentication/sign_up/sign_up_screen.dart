@@ -105,6 +105,11 @@ class SignUpScreen extends BaseScreen<SignUpController> {
   }
 
   Widget _buildBirthdayInput() {
+    final months = List.generate(12, (i) => (i + 1).toString().padLeft(2, '0'));
+    final days = List.generate(31, (i) => (i + 1).toString().padLeft(2, '0'));
+    final currentYear = DateTime.now().year;
+    final years = List.generate(100, (i) => (currentYear - i).toString());
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -124,92 +129,53 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         Row(
           children: [
             Expanded(
-              child: _buildDropdownField(
-                hint: 'Month',
-                helperText: 'MM',
-                onTap: () => vm.selectMonth(Get.context!),
-                controller: vm.monthController,
-              ),
-            ),
-            SizedBox(width: 10.w),
-            Expanded(
-              child: _buildDropdownField(
-                hint: 'Day',
-                helperText: 'DD',
-                onTap: () => vm.selectDay(Get.context!),
-                controller: vm.dayController,
-              ),
-            ),
-            SizedBox(width: 10.w),
-            Expanded(
-              child: _buildDropdownField(
-                hint: 'Year',
-                helperText: 'YYYY',
-                onTap: () => vm.selectYear(Get.context!),
-                controller: vm.yearController,
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildDropdownField({
-    required String hint,
-    required String helperText,
-    required VoidCallback onTap,
-    required TextEditingController controller,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          height: 48.h,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(6.r),
-            border: Border.all(color: const Color(0xFFE8EBEE)),
-          ),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: onTap,
-              borderRadius: BorderRadius.circular(6.r),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        controller.text.isEmpty ? hint : controller.text,
-                        style: AppTextStyle.s14w400.copyWith(
-                          color: controller.text.isEmpty ? const Color(0xFF798A9A) : const Color(0xFF161A1D),
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    SvgPicture.asset(
-                      Assets.icons.icDropdownArrow.path,
-                      width: 12.w,
-                      height: 12.w,
-                      colorFilter: const ColorFilter.mode(
-                        Color(0xFFB0BAC4),
-                        BlendMode.srcIn,
-                      ),
-                    ),
-                  ],
+              child: DropdownButtonFormField<String>(
+                value: vm.monthController.text.isNotEmpty ? vm.monthController.text : null,
+                items: months.map((m) => DropdownMenuItem(value: m, child: Text(m))).toList(),
+                onChanged: (val) {
+                  vm.monthController.text = val ?? '';
+                },
+                decoration: InputDecoration(
+                  hintText: 'Month',
+                  helperText: 'MM',
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(6.r)),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
                 ),
               ),
             ),
-          ),
-        ),
-        SizedBox(height: 4.h),
-        Text(
-          helperText,
-          style: AppTextStyle.s12w400.copyWith(color: const Color(0xFF798A9A)),
+            SizedBox(width: 10.w),
+            Expanded(
+              child: DropdownButtonFormField<String>(
+                value: vm.dayController.text.isNotEmpty ? vm.dayController.text : null,
+                items: days.map((d) => DropdownMenuItem(value: d, child: Text(d))).toList(),
+                onChanged: (val) {
+                  vm.dayController.text = val ?? '';
+                },
+                decoration: InputDecoration(
+                  hintText: 'Day',
+                  helperText: 'DD',
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(6.r)),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+                ),
+              ),
+            ),
+            SizedBox(width: 10.w),
+            Expanded(
+              child: DropdownButtonFormField<String>(
+                value: vm.yearController.text.isNotEmpty ? vm.yearController.text : null,
+                items: years.map((y) => DropdownMenuItem(value: y, child: Text(y))).toList(),
+                onChanged: (val) {
+                  vm.yearController.text = val ?? '';
+                },
+                decoration: InputDecoration(
+                  hintText: 'Year',
+                  helperText: 'YYYY',
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(6.r)),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );
