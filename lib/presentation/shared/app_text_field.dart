@@ -5,9 +5,9 @@ import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 class AppTextField extends StatelessWidget {
   final String? label;
   final bool isRequired;
-  final TextEditingController controller;
-  final String hint;
-  final String svgPath;
+  final TextEditingController? controller;
+  final String? hint;
+  final String? svgPath;
   final TextInputType? keyboardType;
   final Function(String)? onChanged;
   final String? Function(String?)? validator;
@@ -16,9 +16,9 @@ class AppTextField extends StatelessWidget {
     super.key,
     this.label,
     this.isRequired = true,
-    required this.controller,
-    required this.hint,
-    required this.svgPath,
+    this.controller,
+    this.hint,
+    this.svgPath,
     this.keyboardType,
     this.onChanged,
     this.validator,
@@ -72,10 +72,12 @@ class AppTextField extends StatelessWidget {
               hintStyle: AppTextStyle.s14w400.copyWith(
                 color: const Color(0xFF798A9A),
               ),
-              suffixIcon: Padding(
-                padding: const EdgeInsets.all(15),
-                child: SvgPicture.asset(svgPath, colorFilter: const ColorFilter.mode(Color(0xFF798A9A), BlendMode.srcIn)),
-              ),
+              suffixIcon: svgPath != null
+                  ? Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: SvgPicture.asset(svgPath!, colorFilter: const ColorFilter.mode(Color(0xFF798A9A), BlendMode.srcIn)),
+                    )
+                  : null,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
                 borderSide: const BorderSide(

@@ -15,14 +15,11 @@ import 'package:vector_graphics/vector_graphics.dart' as _vg;
 class $AssetsColorsGen {
   const $AssetsColorsGen();
 
-  /// File path: assets/colors/state.xml
-  String get state => 'assets/colors/state.xml';
-
-  /// File path: assets/colors/text.xml
-  String get text => 'assets/colors/text.xml';
+  /// File path: assets/colors/light_mode.xml
+  String get lightMode => 'assets/colors/light_mode.xml';
 
   /// List of all assets
-  List<String> get values => [state, text];
+  List<String> get values => [lightMode];
 }
 
 class $AssetsIconsGen {

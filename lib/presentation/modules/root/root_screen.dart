@@ -18,11 +18,11 @@ class RootScreen extends BaseScreen<RootController> {
     return Obx(() => BottomNavigationBar(
           elevation: 0,
           enableFeedback: false,
-          selectedItemColor: AppColors.brand500,
-          unselectedItemColor: AppColors.grey950,
-          selectedLabelStyle: AppTextStyle.s12w400.copyWith(color: AppColors.brand500),
-          unselectedLabelStyle: AppTextStyle.s12w400.copyWith(color: AppColors.grey950),
-          backgroundColor: AppColors.white0,
+          selectedItemColor: AppColors.stateBrandDefault500,
+          unselectedItemColor: AppColors.textGreyHighest950,
+          selectedLabelStyle: AppTextStyle.s12w400.copyWith(color: AppColors.stateBrandDefault500),
+          unselectedLabelStyle: AppTextStyle.s12w400.copyWith(color: AppColors.textGreyHighest950),
+          backgroundColor: AppColors.textGreyLowestWhite,
           type: BottomNavigationBarType.fixed,
           items: vm.tabs
               .map((e) => BottomNavigationBarItem(

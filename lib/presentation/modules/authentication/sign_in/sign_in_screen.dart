@@ -144,8 +144,8 @@ class SignInScreen extends BaseScreen<SignInController> {
           onTap: vm.onSubmit,
           enabled: !vm.isLoading.value,
           width: double.infinity,
-          color: AppColors.brand500,
-          disabledColor: AppColors.brand500.withValues(alpha: 0.5),
+          color: AppColors.stateBrandDefault500,
+          disabledColor: AppColors.stateBrandDefault500.withValues(alpha: 0.5),
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

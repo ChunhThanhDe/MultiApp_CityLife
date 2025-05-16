@@ -17,19 +17,19 @@ class TermOfService extends StatelessWidget {
           children: [
             TextSpan(
               text: 'By continuing, you agree to Diyaar ',
-              style: AppTextStyle.s14w400.copyWith(color: AppColors.grey700),
+              style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHigh700),
             ),
             TextSpan(
               text: 'Terms of Service',
-              style: AppTextStyle.s16w600.copyWith(color: AppColors.grey950),
+              style: AppTextStyle.s16w600.copyWith(color: AppColors.textGreyHighest950),
             ),
             TextSpan(
               text: '\nand confirm that you have read Diyaar  ',
-              style: AppTextStyle.s14w400.copyWith(color: AppColors.grey700),
+              style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHigh700),
             ),
             TextSpan(
               text: 'Privacy Policy',
-              style: AppTextStyle.s16w600.copyWith(color: AppColors.grey950),
+              style: AppTextStyle.s16w600.copyWith(color: AppColors.textGreyHighest950),
             ),
           ],
         ),
