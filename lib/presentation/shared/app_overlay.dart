@@ -2,15 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-showLoadingOverlay({required Future<dynamic> api, BuildContext? context, Widget? child, bool isShowLoading = true}) {
-  _AppLoadingOverlay.show(api: api, context: context, child: child, isShowLoading: isShowLoading);
+import 'app_overlay_navigator.dart';
+
+showLoadingOverlay({required Future<dynamic> api, Widget? child, bool isShowLoading = true}) {
+  _AppLoadingOverlay.show(api: api, child: child, isShowLoading: isShowLoading);
 }
 
 class _AppLoadingOverlay {
   static OverlayEntry? overlayEntry;
-  static Future<dynamic> show({required Future<dynamic> api, BuildContext? context, Widget? child, bool isShowLoading = true}) async {
+  static Future<dynamic> show({required Future<dynamic> api, Widget? child, bool isShowLoading = true}) async {
     if (isShowLoading) {
-      createHighlightOverlay(context: context ?? Get.context!, child: child);
+      createHighlightOverlay(child: child);
     }
     Stopwatch stopwatch = Stopwatch()..start();
     final result = await api;
@@ -31,12 +33,12 @@ class _AppLoadingOverlay {
   }
 
   static createHighlightOverlay({
-    required BuildContext context,
     Widget? child,
   }) {
     removeHighlightOverlay();
-    OverlayState overlayState = Overlay.of(context);
+    final overlayState = AppOverlayNavigator.navigatorKey.currentState?.overlay;
     assert(overlayEntry == null);
+    if (overlayState == null) return;
 
     overlayEntry = OverlayEntry(
       builder: (BuildContext context) {

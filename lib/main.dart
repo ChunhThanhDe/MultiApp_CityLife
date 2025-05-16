@@ -8,8 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sixam_mart_user/di.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
-
-import 'app/constants/api_const.dart';
+import 'package:sixam_mart_user/presentation/shared/app_overlay_navigator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,7 +53,7 @@ class MyApp extends StatelessWidget {
           supportedLocales: context.supportedLocales,
           locale: context.locale,
           themeMode: ThemeMode.light,
-          navigatorKey: ApiConstant.alice.getNavigatorKey(),
+          navigatorKey: AppOverlayNavigator.navigatorKey,
           initialRoute: AppPages.initial,
           getPages: AppPages.appRoutes,
           defaultTransition: Transition.cupertino,

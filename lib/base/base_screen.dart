@@ -55,28 +55,28 @@ abstract class BaseScreen<T extends GetxController> extends GetView<T> {
   PreferredSizeWidget? buildAppBar(BuildContext context) => null;
 
   @protected
-  Color? get unSafeAreaColor => Colors.black;
+  Color? get unSafeAreaColor => Colors.white;
 
   @protected
   Color? get screenBackgroundColor => Colors.white;
 
-  //Ngăn body tự động điều chỉnh khi bàn phím xuất hiện
+  //Prevent body from automatically adjusting when the keyboard appears
   @protected
   bool get resizeToAvoidBottomInset => false;
 
-  // Bật tắt mở rộng phần body ra phía sau các phần khác
+  // Enable/disable extending the body behind other parts
   @protected
   bool get extendBodyBehindAppBar => false;
 
-  // Chuyển đổi layout safe area
+  // Enable/disable wrapping the body with safe area
   @protected
-  bool get wrapWithSafeArea => false;
+  bool get wrapWithSafeArea => true;
 
-  // Bật tắt vùng bottom safe area
+  // Enable/disable bottom safe area
   @protected
   bool get setBottomSafeArea => true;
 
-  // Bật tắt vùng top safe area
+  // Enable/disable top safe area
   @protected
   bool get setTopSafeArea => true;
 

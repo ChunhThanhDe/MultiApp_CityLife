@@ -14,7 +14,7 @@ class HomeScreen extends BaseScreen<HomeController> {
       children: [
         Assets.images.imgNew.image(width: 24, height: 24),
         Container(
-          color: ColorName.brand300,
+          color: AppColors.brand300,
         )
       ],
     );

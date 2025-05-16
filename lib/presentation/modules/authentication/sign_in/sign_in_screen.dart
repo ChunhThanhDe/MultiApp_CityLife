@@ -24,7 +24,7 @@ class SignInScreen extends BaseScreen<SignInController> {
           const SizedBox(height: 24),
           _buildInputField(),
           const SizedBox(height: 24),
-          _buildLoginButton(),
+          _buildLoginButton(context),
           const SizedBox(height: 16),
           _buildOrDivider(),
           const SizedBox(height: 16),
@@ -132,9 +132,9 @@ class SignInScreen extends BaseScreen<SignInController> {
     );
   }
 
-  _buildLoginButton() {
+  _buildLoginButton(BuildContext context) {
     return AppButton(
-      onTap: vm.onSubmit,
+      onTap: () => vm.onSubmit(context),
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),

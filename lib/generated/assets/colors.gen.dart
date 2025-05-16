@@ -10,8 +10,8 @@
 import 'package:flutter/painting.dart';
 import 'package:flutter/material.dart';
 
-class ColorName {
-  ColorName._();
+class AppColors {
+  AppColors._();
 
   /// Color: #66B0FF
   static const Color brand300 = Color(0xFF66B0FF);
