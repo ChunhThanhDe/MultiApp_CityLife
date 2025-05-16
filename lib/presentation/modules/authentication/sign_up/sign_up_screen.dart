@@ -282,6 +282,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         const Divider(color: Color(0xFFE8EBEE), thickness: 1),
         SizedBox(height: 16.h),
         _buildGotoSignIn(),
+        SizedBox(height: 56.h),
       ],
     );
   }
