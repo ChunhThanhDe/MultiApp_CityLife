@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ScaleButton extends StatefulWidget {
+class AppButton extends StatefulWidget {
   final Widget child;
   final Function() onTap;
   final Duration duration;
-  const ScaleButton({super.key, required this.onTap, required this.child, this.duration = const Duration(milliseconds: 100)});
+  const AppButton(
+      {super.key,
+      required this.onTap,
+      required this.child,
+      this.duration = const Duration(milliseconds: 100)});
 
   @override
-  State<ScaleButton> createState() {
-    return _ScaleButtonState();
+  State<AppButton> createState() {
+    return _AppButtonState();
   }
 }
 
-class _ScaleButtonState extends State<ScaleButton> with SingleTickerProviderStateMixin {
+class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   OverlayEntry? overlayEntry;
+  bool _isAnimating = false;
 
   @override
   void initState() {
@@ -40,6 +45,7 @@ class _ScaleButtonState extends State<ScaleButton> with SingleTickerProviderStat
           (value) {
             widget.onTap.call();
             removeHighlightOverlay();
+            _isAnimating = false;
           },
         );
       }
@@ -86,6 +92,8 @@ class _ScaleButtonState extends State<ScaleButton> with SingleTickerProviderStat
   }
 
   void _onTap() {
+    if (_isAnimating) return;
+    _isAnimating = true;
     _controller.forward();
     createHighlightOverlay(context: context);
   }

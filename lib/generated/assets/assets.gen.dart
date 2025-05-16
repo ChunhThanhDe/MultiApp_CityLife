@@ -25,11 +25,73 @@ class $AssetsColorsGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
-  /// File path: assets/icons/ic_bell.svg
-  SvgGenImage get icBell => const SvgGenImage('assets/icons/ic_bell.svg');
+  /// File path: assets/icons/ic_back_arrow.svg
+  SvgGenImage get icBackArrow => const SvgGenImage('assets/icons/ic_back_arrow.svg');
+
+  /// File path: assets/icons/ic_cart_filled.svg
+  SvgGenImage get icCartFilled => const SvgGenImage('assets/icons/ic_cart_filled.svg');
+
+  /// File path: assets/icons/ic_cart_outlined.svg
+  SvgGenImage get icCartOutlined => const SvgGenImage('assets/icons/ic_cart_outlined.svg');
+
+  /// File path: assets/icons/ic_dropdown_arrow.svg
+  SvgGenImage get icDropdownArrow => const SvgGenImage('assets/icons/ic_dropdown_arrow.svg');
+
+  /// File path: assets/icons/ic_email_icon.svg
+  SvgGenImage get icEmailIcon => const SvgGenImage('assets/icons/ic_email_icon.svg');
+
+  /// File path: assets/icons/ic_home_filled.svg
+  SvgGenImage get icHomeFilled => const SvgGenImage('assets/icons/ic_home_filled.svg');
+
+  /// File path: assets/icons/ic_home_outlined.svg
+  SvgGenImage get icHomeOutlined => const SvgGenImage('assets/icons/ic_home_outlined.svg');
+
+  /// File path: assets/icons/ic_person_filled.svg
+  SvgGenImage get icPersonFilled => const SvgGenImage('assets/icons/ic_person_filled.svg');
+
+  /// File path: assets/icons/ic_person_icon.svg
+  SvgGenImage get icPersonIcon => const SvgGenImage('assets/icons/ic_person_icon.svg');
+
+  /// File path: assets/icons/ic_person_outlined.svg
+  SvgGenImage get icPersonOutlined => const SvgGenImage('assets/icons/ic_person_outlined.svg');
+
+  /// File path: assets/icons/ic_phone_icon.svg
+  SvgGenImage get icPhoneIcon => const SvgGenImage('assets/icons/ic_phone_icon.svg');
+
+  /// File path: assets/icons/ic_right_arrow.svg
+  SvgGenImage get icRightArrow => const SvgGenImage('assets/icons/ic_right_arrow.svg');
+
+  /// File path: assets/icons/ic_service_filled.svg
+  SvgGenImage get icServiceFilled => const SvgGenImage('assets/icons/ic_service_filled.svg');
+
+  /// File path: assets/icons/ic_service_outlined.svg
+  SvgGenImage get icServiceOutlined => const SvgGenImage('assets/icons/ic_service_outlined.svg');
+
+  /// File path: assets/icons/ic_wallet_filled.svg
+  SvgGenImage get icWalletFilled => const SvgGenImage('assets/icons/ic_wallet_filled.svg');
+
+  /// File path: assets/icons/ic_wallet_outlined.svg
+  SvgGenImage get icWalletOutlined => const SvgGenImage('assets/icons/ic_wallet_outlined.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [icBell];
+  List<SvgGenImage> get values => [
+    icBackArrow,
+    icCartFilled,
+    icCartOutlined,
+    icDropdownArrow,
+    icEmailIcon,
+    icHomeFilled,
+    icHomeOutlined,
+    icPersonFilled,
+    icPersonIcon,
+    icPersonOutlined,
+    icPhoneIcon,
+    icRightArrow,
+    icServiceFilled,
+    icServiceOutlined,
+    icWalletFilled,
+    icWalletOutlined,
+  ];
 }
 
 class $AssetsImagesGen {

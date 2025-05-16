@@ -12,7 +12,6 @@ class HomeScreen extends BaseScreen<HomeController> {
   Widget buildScreen(BuildContext context) {
     return Column(
       children: [
-        Assets.icons.icBell.svg(width: 24, height: 24),
         Assets.images.imgNew.image(width: 24, height: 24),
         Container(
           color: ColorName.brand300,

@@ -1,0 +1,12 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="shopping-bag" clip-path="url(#clip0_296_3329)">
+<path id="Vector" d="M21 18.9999V7H3V18.9999C3 19.5303 3.21071 20.039 3.58579 20.4141C3.96086 20.7892 4.46957 20.9999 5 20.9999H19C19.5304 20.9999 20.0391 20.7892 20.4142 20.4141C20.7893 20.039 21 19.5303 21 18.9999Z" fill="#007AFF" stroke="#007AFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M3.10263 5.6921C3.03466 5.89604 3 6.10959 3 6.32456V7H21V6.32456C21 6.1096 20.9654 5.89604 20.8974 5.6921L20.4559 4.36754C20.3231 3.96932 20.0685 3.62295 19.7279 3.37751C19.3874 3.13207 18.9783 3 18.5585 3H5.44152C5.02176 3 4.61263 3.13207 4.2721 3.37751C3.93157 3.62295 3.67689 3.96932 3.54415 4.36754L3.10263 5.6921Z" stroke="#007AFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M8.5 10.5C8.5 11.4283 8.86875 12.3185 9.52513 12.9749C10.1815 13.6313 11.0717 14 12 14C12.9283 14 13.8185 13.6313 14.4749 12.9749C15.1313 12.3185 15.5 11.4283 15.5 10.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_296_3329">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg>

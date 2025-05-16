@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sixam_mart_user/di.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
           initialRoute: AppPages.initial,
           getPages: AppPages.appRoutes,
           defaultTransition: Transition.cupertino,
+          theme: ThemeData(textTheme: GoogleFonts.interTextTheme(Theme.of(context).textTheme)),
         );
       },
     );

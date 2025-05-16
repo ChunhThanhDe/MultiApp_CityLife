@@ -46,6 +46,8 @@ dependencies:
   pretty_dio_logger: ^1.4.0
   flutter_gen: ^5.10.0
   flutter_svg: ^2.1.0
+  google_fonts: ^6.2.1
+  country_code_picker: ^3.3.0
 
 
 
