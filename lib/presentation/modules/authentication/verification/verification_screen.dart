@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
@@ -25,8 +26,8 @@ class VerificationScreen extends BaseScreen<VerificationController> {
         children: [
           SizedBox(height: 24.h),
           AuthHeader(
-            title: vm.param.type == VerificationType.email ? 'Check your email' : 'Verify your phone number',
-            subtitle: vm.param.type == VerificationType.email
+            title: vm.param.method == VerificationMethod.email ? 'Check your email' : 'Verify your phone number',
+            subtitle: vm.param.method == VerificationMethod.email
                 ? 'Please enter the verification code you received in your email to proceed.'
                 : 'Please enter the 5-digit code we sent to ${vm.param.verificationId}',
           ),
@@ -44,7 +45,7 @@ class VerificationScreen extends BaseScreen<VerificationController> {
           ),
           SizedBox(height: 24.h),
           AppButton(
-            onTap: () {},
+            onTap: Get.back,
             width: double.infinity,
             color: Colors.white,
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
@@ -53,13 +54,17 @@ class VerificationScreen extends BaseScreen<VerificationController> {
               children: [
                 Assets.icons.icBackArrow.svg(width: 16.w, height: 16.w, colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn)),
                 SizedBox(width: 8.w),
-                Text('Back to log in', style: AppTextStyle.s16w500.copyWith(color: Colors.black)),
+                Text(vm.param.type == VerificationType.signIn ? 'Back to log in' : 'Back to sign up', style: AppTextStyle.s16w500.copyWith(color: Colors.black)),
               ],
             ),
           ),
           Spacer(),
-          TermOfService(),
+          Center(child: const TermOfService()),
+          SizedBox(height: 16.h),
+          const Divider(color: Color(0xFFE8EBEE), thickness: 1),
+          SizedBox(height: 16.h),
           _buildGotoSignUp(),
+          SizedBox(height: 56.h),
         ],
       ),
     );
@@ -113,6 +118,7 @@ class VerificationScreen extends BaseScreen<VerificationController> {
   _buildInput(BuildContext context) {
     return PinCodeTextField(
       length: 5,
+      autoFocus: false,
       appContext: context,
       keyboardType: TextInputType.number,
       animationType: AnimationType.fade,

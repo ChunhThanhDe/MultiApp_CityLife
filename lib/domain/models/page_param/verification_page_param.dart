@@ -1,11 +1,17 @@
-enum VerificationType {
-  phoneNumber,
+enum VerificationMethod {
   email,
+  phoneNumber,
+}
+
+enum VerificationType {
+  signIn,
+  signUp,
 }
 
 class VerificationPageParam {
-  final VerificationType type;
+  final VerificationMethod method;
   final String verificationId;
+  final VerificationType type;
 
-  VerificationPageParam({required this.type, required this.verificationId});
+  VerificationPageParam({required this.method, required this.verificationId, required this.type});
 }

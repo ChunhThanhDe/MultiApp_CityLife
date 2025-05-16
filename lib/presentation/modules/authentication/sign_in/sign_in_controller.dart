@@ -39,7 +39,13 @@ class SignInController extends BaseController {
     //     print(error);
     // }
     isLoading.value = false;
-    Get.toNamed(AppRoutes.verification,
-        arguments: VerificationPageParam(type: loginMethod.value == LoginMethod.email ? VerificationType.email : VerificationType.phoneNumber, verificationId: inputController.text));
+    Get.toNamed(
+      AppRoutes.verification,
+      arguments: VerificationPageParam(
+        method: loginMethod.value == LoginMethod.email ? VerificationMethod.email : VerificationMethod.phoneNumber,
+        verificationId: inputController.text,
+        type: VerificationType.signIn,
+      ),
+    );
   }
 }
