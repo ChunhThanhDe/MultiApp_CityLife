@@ -5,10 +5,18 @@ import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 class AuthHeader extends StatelessWidget {
   final String title;
   final String subtitle;
+  final int titleMaxLines;
+  final int subtitleMaxLines;
+  final TextStyle? titleStyle;
+  final TextStyle? subtitleStyle;
   const AuthHeader({
     super.key,
     required this.title,
     required this.subtitle,
+    this.titleMaxLines = 1,
+    this.subtitleMaxLines = 2,
+    this.titleStyle,
+    this.subtitleStyle,
   });
 
   @override
@@ -18,13 +26,13 @@ class AuthHeader extends StatelessWidget {
       children: [
         AutoSizeText(
           title,
-          style: AppTextStyle.s28w600,
-          maxLines: 1,
+          style: titleStyle ?? AppTextStyle.s28w600,
+          maxLines: titleMaxLines,
         ),
         Text(
           subtitle,
-          style: AppTextStyle.s16w400,
-          maxLines: 2,
+          style: subtitleStyle ?? AppTextStyle.s16w400,
+          maxLines: subtitleMaxLines,
         ),
       ],
     );

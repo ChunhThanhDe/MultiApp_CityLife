@@ -18,35 +18,34 @@ class SignUpScreen extends BaseScreen<SignUpController> {
   const SignUpScreen({super.key});
 
   @override
+  Widget? buildBottomNavigationBar(BuildContext context) {
+    return _buildBottomSection();
+  }
+
+  @override
   Widget buildScreen(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 16.h),
-                AuthHeader(
-                  title: 'Create an account',
-                  subtitle: 'Enter Your Account Details',
-                ),
-                SizedBox(height: 24.h),
-                _buildForm(),
-                SizedBox(height: 24.h),
-                _buildNextButton(),
-                SizedBox(height: 16.h),
-                _buildOrDivider(),
-                SizedBox(height: 16.h),
-                _buildToggleSignUpMethodButton(),
-                SizedBox(height: 24.h),
-              ],
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 16.h),
+            AuthHeader(
+              title: 'Create an account',
+              subtitle: 'Enter Your Account Details',
             ),
-          ),
-          _buildBottomSection(),
-        ],
+            SizedBox(height: 24.h),
+            _buildForm(),
+            SizedBox(height: 24.h),
+            _buildNextButton(),
+            SizedBox(height: 16.h),
+            _buildOrDivider(),
+            SizedBox(height: 16.h),
+            _buildToggleSignUpMethodButton(),
+            SizedBox(height: 24.h),
+          ],
+        ),
       ),
     );
   }
@@ -275,17 +274,15 @@ class SignUpScreen extends BaseScreen<SignUpController> {
   }
 
   Widget _buildBottomSection() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
-      child: Column(
-        children: [
-          const Center(child: TermOfService()),
-          SizedBox(height: 16.h),
-          const Divider(color: Color(0xFFE8EBEE), thickness: 1),
-          SizedBox(height: 16.h),
-          _buildGotoSignIn(),
-        ],
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Center(child: TermOfService()),
+        SizedBox(height: 16.h),
+        const Divider(color: Color(0xFFE8EBEE), thickness: 1),
+        SizedBox(height: 16.h),
+        _buildGotoSignIn(),
+      ],
     );
   }
 

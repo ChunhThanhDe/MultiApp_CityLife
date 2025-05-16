@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/domain/models/page_param/verification_page_param.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
+import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/accept_tos.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_overlay.dart';
 
@@ -85,6 +86,8 @@ class SignUpController extends BaseController {
   }
 
   Future<void> onSubmit() async {
+    Get.to(() => const AcceptTos());
+
     closeKeyboard();
     if (!formKey.currentState!.validate()) {
       return;
@@ -95,13 +98,10 @@ class SignUpController extends BaseController {
       return;
     }
 
-    // Start loading
     isLoading.value = true;
 
-    // Simulate API call with delay
     await showLoadingOverlay(api: Future.delayed(const Duration(seconds: 2)));
 
-    // In a real app, you would make an API call to register the user
     // final birthday = _getBirthdayFromInputs();
     // final ApiResult result = await showLoadingOverlay(
     //   api: _authRepository.register(RegisterRequest(

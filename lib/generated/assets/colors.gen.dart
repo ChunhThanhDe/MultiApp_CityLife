@@ -373,8 +373,8 @@ class AppColors {
   /// Color: #ffffff
   static const Color textBaseWhite = Color(0xFFFFFFFF);
 
-  /// Color: #007aff
-  static const Color textBrandDefault500 = Color(0xFF007AFF);
+  /// Color: #5856D7
+  static const Color textBrandDefault500 = Color(0xFF5856D7);
 
   /// Color: #004a99
   static const Color textBrandHigh700 = Color(0xFF004A99);
