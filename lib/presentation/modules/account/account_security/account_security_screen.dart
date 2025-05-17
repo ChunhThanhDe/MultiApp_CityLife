@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/account/components/status_appbar.dart';
+import 'package:sixam_mart_user/presentation/modules/account/components/account_app_bar.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
 import 'account_security_controller.dart';
 
@@ -16,7 +17,15 @@ class AccountSecurityScreen extends BaseScreen<AccountSecurityController> {
       body: Column(
         children: [
           // Custom Status Bar & AppBar
-          StatusBarAppBar(title: "Security"),
+          AccountAppBar(
+            title: "Security",
+            onBack: () => Get.back(),
+          ),
+
+          Container(
+            height: 1,
+            color: Color(0xFFE8EBEE),
+          ),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
@@ -29,7 +38,9 @@ class AccountSecurityScreen extends BaseScreen<AccountSecurityController> {
                         subtitle: 'Last changed May 28, 2023',
                         trailing: Icon(Icons.arrow_forward_ios, size: 18, color: Color(0xFF4A5763)),
                         obfuscated: true,
-                        onTap: () {}, // Add your handler here
+                        onTap: () {
+                          Get.toNamed(AppRoutes.accountPassword);
+                        }, // Add your handler here
                       ),
                       _DividerLine(),
                       _SecurityCell(
@@ -48,33 +59,10 @@ class AccountSecurityScreen extends BaseScreen<AccountSecurityController> {
                     ],
                   ),
                   const SizedBox(height: 10),
-                  // Connected social apps
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Connected social apps',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF161A1D),
-                        ),
-                      ),
-                    ),
+                  Container(
+                    height: 5,
+                    color: Color(0xFFE8EBEE),
                   ),
-                  _SocialConnectCell(
-                    icon: _GoogleIcon(),
-                    label: "Google",
-                    onDisconnect: () {},
-                  ),
-                  _SocialConnectCell(
-                    icon: _AppleIcon(),
-                    label: "Apple",
-                    onDisconnect: () {},
-                  ),
-                  const SizedBox(height: 32),
-                  _HomeIndicator(),
                 ],
               ),
             ),
@@ -123,7 +111,7 @@ class _SecurityCell extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Container(
-          height: subtitle == null ? 50 : (title == "2-Step Verification" ? 68 : 50),
+          height: subtitle == null ? 50 : 68,
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 4),
           child: Row(
             children: [
@@ -142,6 +130,7 @@ class _SecurityCell extends StatelessWidget {
                             color: Color(0xFF161A1D),
                           ),
                         ),
+                        Spacer(),
                         if (obfuscated) ...[
                           SizedBox(width: 8),
                           Text("••••••••", style: TextStyle(letterSpacing: 2, fontSize: 18, color: Color(0xFF4A5763))),
@@ -229,46 +218,6 @@ class _SocialConnectCell extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-// Google Icon (SVG)
-class _GoogleIcon extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      "assets/icons/ic_google_icon.svg",
-      width: 24,
-      height: 24,
-    );
-  }
-}
-
-// Apple Icon (SVG)
-class _AppleIcon extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      "assets/icons/ic_apple_icon.svg",
-      width: 24,
-      height: 24,
-    );
-  }
-}
-
-// Home Indicator at bottom
-class _HomeIndicator extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 134,
-      height: 5,
-      margin: EdgeInsets.only(top: 24, bottom: 8),
-      decoration: BoxDecoration(
-        color: Color(0xFF161A1D),
-        borderRadius: BorderRadius.circular(100),
       ),
     );
   }

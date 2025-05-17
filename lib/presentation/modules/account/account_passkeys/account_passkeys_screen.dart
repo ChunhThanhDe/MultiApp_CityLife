@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/account/components/status_appbar.dart';
+import 'package:sixam_mart_user/presentation/modules/account/components/account_app_bar.dart';
 
 import 'account_passkeys_controller.dart';
 
@@ -11,23 +12,26 @@ class PasskeyItem {
 }
 
 class AccountPasskeysScreen extends BaseScreen<AccountPasskeysController> {
-  AccountPasskeysScreen({super.key});
-
-  final List<PasskeyItem> passkeys = [
-    PasskeyItem("iPhone 15 Pro Max", "Last used: May 10, 2024, San Francisco, CA, USA"),
-    PasskeyItem("iCloud Keychain", "Last used: May 26, 2024, San Francisco, CA, USA"),
-    PasskeyItem("iPhone 14 Pro", "Last used: May 10, 2023, San Francisco, CA, USA"),
-    PasskeyItem("iPhone 11", "Last used: May 10, 2020, New York, CA, USA"),
-  ];
+  const AccountPasskeysScreen({super.key});
 
   @override
   Widget buildScreen(BuildContext context) {
+    final List<PasskeyItem> passkeys = [
+      PasskeyItem("iPhone 15 Pro Max", "Last used: May 10, 2024, San Francisco, CA, USA"),
+      PasskeyItem("iCloud Keychain", "Last used: May 26, 2024, San Francisco, CA, USA"),
+      PasskeyItem("iPhone 14 Pro", "Last used: May 10, 2023, San Francisco, CA, USA"),
+      PasskeyItem("iPhone 11", "Last used: May 10, 2020, New York, CA, USA"),
+    ];
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: [
           // Status bar & app bar
-          StatusBarAppBar(title: "Passkeys"),
+          AccountAppBar(
+            title: "Passkeys",
+            onBack: () => Get.back(),
+          ),
+
           // Passkey list
           Expanded(
             child: ListView.separated(
@@ -160,7 +164,6 @@ class _BottomSection extends StatelessWidget {
             ),
           ),
           SizedBox(height: 8),
-          HomeIndicator(),
         ],
       ),
     );

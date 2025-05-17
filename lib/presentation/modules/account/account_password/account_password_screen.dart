@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/account/components/account_app_bar.dart';
 import 'package:sixam_mart_user/presentation/modules/account/components/password_input.dart';
-import 'package:sixam_mart_user/presentation/modules/account/components/status_appbar.dart';
 
 import 'account_password_controller.dart';
 
@@ -15,7 +15,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          StatusBarAppBar(title: "Password"),
+          AccountAppBar(title: "Password", onBack: () => Get.back()),
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -43,26 +43,34 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
                       ),
                     ),
                     const SizedBox(height: 24),
-                    // Old password
+
+                    // Old Password
                     Obx(() => PasswordInput(
                           label: "Old Password",
                           controller: controller.oldController,
                           isObscure: !controller.showOldPassword.value,
                           onToggle: controller.toggleOld,
+                          validator: controller.validateOldPassword,
                         )),
                     const SizedBox(height: 16),
+
+                    // New Password
                     Obx(() => PasswordInput(
                           label: "New password",
                           controller: controller.newController,
                           isObscure: !controller.showNewPassword.value,
                           onToggle: controller.toggleNew,
+                          validator: controller.validateNewPassword,
                         )),
                     const SizedBox(height: 16),
+
+                    // Confirm New Password
                     Obx(() => PasswordInput(
                           label: "Confirm new password",
                           controller: controller.confirmController,
                           isObscure: !controller.showConfirmPassword.value,
                           onToggle: controller.toggleConfirm,
+                          validator: controller.validateConfirmPassword,
                         )),
                     const SizedBox(height: 24),
                     Text(
@@ -81,11 +89,11 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
               ),
             ),
           ),
-          // Bottom sticky actions & info
+          // Bottom actions
           Container(
             width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+            decoration: const BoxDecoration(
               color: Colors.white,
               border: Border(top: BorderSide(color: Color(0x10101214))),
             ),
@@ -104,7 +112,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
                       padding: EdgeInsets.symmetric(vertical: 12),
                       elevation: 0,
                     ),
-                    child: Text(
+                    child: const Text(
                       "Change password",
                       style: TextStyle(
                         fontSize: 16,
@@ -123,7 +131,6 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                HomeIndicator(),
               ],
             ),
           ),
@@ -132,6 +139,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
     );
   }
 
+  // Recommendations widget
   Widget _recommendationText() {
     return Text.rich(
       TextSpan(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/account/components/account_app_bar.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
 import 'account_controller.dart';
 
@@ -8,7 +10,14 @@ class _AccountMenuItem {
   final IconData icon;
   final String title;
   final Widget? trailing;
-  _AccountMenuItem({required this.icon, required this.title, this.trailing});
+  final VoidCallback? onClick;
+
+  _AccountMenuItem({
+    required this.icon,
+    required this.title,
+    this.trailing,
+    this.onClick,
+  });
 }
 
 class AccountScreen extends BaseScreen<AccountController> {
@@ -16,29 +25,119 @@ class AccountScreen extends BaseScreen<AccountController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    // Replace these icons with your custom icons as needed
     final List<_AccountMenuItem> menuItems = [
-      _AccountMenuItem(icon: Icons.person_outline, title: 'Manage account'),
-      _AccountMenuItem(icon: Icons.favorite_border, title: 'Favorites'),
-      _AccountMenuItem(icon: Icons.lock_outline, title: 'Security'),
-      _AccountMenuItem(icon: Icons.payment_outlined, title: 'Payment methods'),
-      _AccountMenuItem(icon: Icons.location_on_outlined, title: 'Address'),
-      _AccountMenuItem(icon: Icons.card_giftcard_outlined, title: 'Gift Cards'),
-      _AccountMenuItem(icon: Icons.group_outlined, title: 'Invite friends'),
-      _AccountMenuItem(icon: Icons.local_offer_outlined, title: 'Promotions'),
-      _AccountMenuItem(icon: Icons.notifications_none, title: 'Notification'),
-      _AccountMenuItem(icon: Icons.headphones_outlined, title: 'Help Center'),
+      // Navigate to the Manage Account screen
+      _AccountMenuItem(
+        icon: Icons.person_outline,
+        title: 'Manage account',
+        onClick: () => Get.toNamed(AppRoutes.accountManage),
+      ),
+      // Navigate to Favorites (update route when available)
+      _AccountMenuItem(
+        icon: Icons.favorite_border,
+        title: 'Favorites',
+        onClick: () {
+          // TODO: Add Favorites screen navigation
+          // Get.toNamed(AppRoutes.favorites);
+        },
+      ),
+      // Navigate to Security settings
+      _AccountMenuItem(
+        icon: Icons.lock_outline,
+        title: 'Security',
+        onClick: () => Get.toNamed(AppRoutes.accountSecurity),
+      ),
+      // Navigate to Payment Methods (update route when available)
+      _AccountMenuItem(
+        icon: Icons.payment_outlined,
+        title: 'Payment methods',
+        onClick: () {
+          // TODO: Add Payment Methods screen navigation
+          // Get.toNamed(AppRoutes.paymentMethods);
+        },
+      ),
+      // Navigate to Address management (update route when available)
+      _AccountMenuItem(
+        icon: Icons.location_on_outlined,
+        title: 'Address',
+        onClick: () {
+          // TODO: Add Address screen navigation
+          // Get.toNamed(AppRoutes.address);
+        },
+      ),
+      // Navigate to Gift Cards (update route when available)
+      _AccountMenuItem(
+        icon: Icons.card_giftcard_outlined,
+        title: 'Gift Cards',
+        onClick: () {
+          // TODO: Add Gift Cards screen navigation
+          // Get.toNamed(AppRoutes.giftCards);
+        },
+      ),
+      // Navigate to Invite Friends (update route when available)
+      _AccountMenuItem(
+        icon: Icons.group_outlined,
+        title: 'Invite friends',
+        onClick: () {
+          // TODO: Add Invite Friends screen navigation
+          // Get.toNamed(AppRoutes.inviteFriends);
+        },
+      ),
+      // Navigate to Promotions (update route when available)
+      _AccountMenuItem(
+        icon: Icons.local_offer_outlined,
+        title: 'Promotions',
+        onClick: () {
+          // TODO: Add Promotions screen navigation
+          // Get.toNamed(AppRoutes.promotions);
+        },
+      ),
+      // Navigate to Notifications (update route when available)
+      _AccountMenuItem(
+        icon: Icons.notifications_none,
+        title: 'Notification',
+        onClick: () {
+          // TODO: Add Notifications screen navigation
+          // Get.toNamed(AppRoutes.notification);
+        },
+      ),
+      // Navigate to Help Center (update route when available)
+      _AccountMenuItem(
+        icon: Icons.headphones_outlined,
+        title: 'Help Center',
+        onClick: () {
+          // TODO: Add Help Center screen navigation
+          // Get.toNamed(AppRoutes.helpCenter);
+        },
+      ),
+      // Toggle dark mode (handle theme switching here)
       _AccountMenuItem(
         icon: Icons.nightlight_round_outlined,
         title: 'Dark Mode',
         trailing: Text('Auto', style: TextStyle(color: Color(0xFF4A5763))),
+        onClick: () {
+          // TODO: Handle dark mode toggle here
+        },
       ),
+      // Change language (update route when available)
       _AccountMenuItem(
         icon: Icons.language_outlined,
         title: 'Language',
         trailing: Text('English (US)', style: TextStyle(color: Color(0xFF4A5763))),
+        onClick: () {
+          // TODO: Add Language selection screen navigation
+          // Get.toNamed(AppRoutes.language);
+        },
       ),
-      _AccountMenuItem(icon: Icons.info_outline, title: 'About App'),
+      // Navigate to About App (update route when available)
+      _AccountMenuItem(
+        icon: Icons.info_outline,
+        title: 'About App',
+        onClick: () {
+          // TODO: Add About App screen navigation
+          // Get.toNamed(AppRoutes.aboutApp);
+        },
+      ),
     ];
 
     return Scaffold(
@@ -47,23 +146,9 @@ class AccountScreen extends BaseScreen<AccountController> {
         child: Column(
           children: [
             // AppBar
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 18),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      "Account",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF161A1D),
-                      ),
-                    ),
-                  ),
-                  // Add more widgets if you want actions/icons
-                ],
-              ),
+            AccountAppBar(
+              title: "Account",
+              onBack: () => Get.back(),
             ),
             // Profile Card
             Padding(
@@ -75,9 +160,7 @@ class AccountScreen extends BaseScreen<AccountController> {
                   children: [
                     CircleAvatar(
                       radius: 24,
-                      backgroundImage: NetworkImage(
-                        'https://randomuser.me/api/portraits/men/32.jpg',
-                      ),
+                      backgroundImage: AssetImage('assets/images/img_avatar_default.png'),
                       backgroundColor: Color(0xFF5856D7),
                     ),
                     SizedBox(width: 12),
@@ -106,7 +189,7 @@ class AccountScreen extends BaseScreen<AccountController> {
                     ),
                     IconButton(
                       onPressed: () {
-                        Get.toNamed('/account/manage');
+                        Get.toNamed(AppRoutes.accountManage);
                       },
                       icon: Icon(Icons.edit, color: Color(0xFF4A5763)),
                     ),
@@ -139,7 +222,7 @@ class AccountScreen extends BaseScreen<AccountController> {
                       ),
                     ),
                     trailing: item.trailing ?? Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
-                    onTap: () {},
+                    onTap: item.onClick,
                   );
                 },
               ),

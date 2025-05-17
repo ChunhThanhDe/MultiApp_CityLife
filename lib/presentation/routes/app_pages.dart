@@ -1,8 +1,16 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account/account_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account/account_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account_2_step_verification/account_2_step_verification_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account_2_step_verification/account_2_step_verification_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account_manage/account_manage_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account_manage/account_manage_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account_passkeys/account_passkeys_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account_passkeys/account_passkeys_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account_password/account_password_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account_password/account_password_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account_security/account_security_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account_security/account_security_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/sign_in_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/sign_in_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign_up_binding.dart';
@@ -43,23 +51,23 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.account2StepVerification,
-      page: () => const AccountManageScreen(),
-      binding: AccountManageBinding(),
+      page: () => const Account2StepVerificationScreen(),
+      binding: Account2StepVerificationBinding(),
     ),
     GetPage(
       name: AppRoutes.accountPassword,
-      page: () => const AccountManageScreen(),
-      binding: AccountManageBinding(),
+      page: () => const AccountPasswordScreen(),
+      binding: AccountPasswordBinding(),
     ),
     GetPage(
       name: AppRoutes.accountSecurity,
-      page: () => const AccountManageScreen(),
-      binding: AccountManageBinding(),
+      page: () => const AccountSecurityScreen(),
+      binding: AccountSecurityBinding(),
     ),
     GetPage(
       name: AppRoutes.accountPasskey,
-      page: () => const AccountManageScreen(),
-      binding: AccountManageBinding(),
+      page: () => const AccountPasskeysScreen(),
+      binding: AccountPasskeysBinding(),
     ),
   ];
 }

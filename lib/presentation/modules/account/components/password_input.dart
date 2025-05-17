@@ -6,12 +6,14 @@ class PasswordInput extends StatelessWidget {
   final TextEditingController controller;
   final bool isObscure;
   final VoidCallback onToggle;
+  final String? Function(String?)? validator;
 
   const PasswordInput({
     required this.label,
     required this.controller,
     required this.isObscure,
     required this.onToggle,
+    this.validator,
   });
 
   @override
@@ -30,9 +32,10 @@ class PasswordInput extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: TextField(
+                child: TextFormField(
                   controller: controller,
                   obscureText: isObscure,
+                  validator: validator,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: "Enter $label".replaceFirst("password", "password"),

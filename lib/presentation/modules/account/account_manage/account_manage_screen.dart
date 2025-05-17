@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/account/components/account_app_bar.dart';
 
 import 'account_manage_controller.dart';
 
@@ -24,98 +25,58 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
         child: Column(
           children: [
             // Custom AppBar (Status bar + back + title)
-            Container(
-              padding: const EdgeInsets.only(top: 8, bottom: 8),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.9),
-                border: Border(
-                  bottom: BorderSide(color: Color(0xFFE8EBEE)),
-                ),
-              ),
-              child: Column(
-                children: [
-                  // Mock status bar
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            AccountAppBar(
+              title: "Manage account",
+              onBack: () => Get.back(),
+            ),
+            // Avatar with edit
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24),
+                  child: SizedBox(
+                    height: 143,
+                    width: 143,
+                    child: Stack(
                       children: [
-                        Text('9:41', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: Color(0xFF161A1D))),
-                        Row(
-                          children: [
-                            Icon(Icons.signal_cellular_4_bar, size: 18, color: Color(0xFF161A1D)),
-                            SizedBox(width: 4),
-                            Icon(Icons.wifi, size: 17, color: Color(0xFF161A1D)),
-                            SizedBox(width: 4),
-                            Icon(Icons.battery_full, size: 20, color: Color(0xFF161A1D)),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: CircleAvatar(
+                            radius: 71.5,
+                            backgroundColor: Color(0xFF5856D7),
+                            backgroundImage: AssetImage('assets/images/img_avatar_default.png'),
+                          ),
                         ),
-                      ],
-                    ),
-                  ),
-                  // Title + back
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                    child: Row(
-                      children: [
-                        IconButton(
-                          onPressed: () => Navigator.pop(context),
-                          icon: Icon(Icons.arrow_back_ios_new, color: Color(0xFF161A1D)),
-                        ),
-                        Text(
-                          "Manage account",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 18,
-                            color: Color(0xFF161A1D),
+                        Positioned(
+                          right: 8,
+                          bottom: 8,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color(0xFFF7F8F9),
+                              borderRadius: BorderRadius.circular(100),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color(0xFF101214).withOpacity(0.1),
+                                  blurRadius: 16,
+                                  offset: Offset(0, 6),
+                                ),
+                                BoxShadow(
+                                  color: Color(0xFF101214).withOpacity(0.05),
+                                  blurRadius: 4,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            padding: EdgeInsets.all(6),
+                            child: Icon(Icons.edit, size: 24, color: Color(0xFF161A1D)),
                           ),
                         ),
                       ],
                     ),
                   ),
-                ],
-              ),
-            ),
-            // Avatar with edit
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: SizedBox(
-                height: 143,
-                width: 143,
-                child: Stack(
-                  children: [
-                    CircleAvatar(
-                      radius: 71.5,
-                      backgroundColor: Color(0xFF5856D7),
-                      backgroundImage: NetworkImage('https://randomuser.me/api/portraits/men/32.jpg'),
-                    ),
-                    Positioned(
-                      right: 8,
-                      bottom: 8,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xFFF7F8F9),
-                          borderRadius: BorderRadius.circular(100),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0xFF101214).withOpacity(0.1),
-                              blurRadius: 16,
-                              offset: Offset(0, 6),
-                            ),
-                            BoxShadow(
-                              color: Color(0xFF101214).withOpacity(0.05),
-                              blurRadius: 4,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        padding: EdgeInsets.all(6),
-                        child: Icon(Icons.edit, size: 24, color: Color(0xFF161A1D)),
-                      ),
-                    ),
-                  ],
                 ),
-              ),
+              ],
             ),
             // Form
             Expanded(
@@ -201,13 +162,13 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                       ),
                       const SizedBox(height: 24),
                       // Update button (disabled for UI only, enable for logic)
-                      SizedBox(
+                      Container(
                         width: double.infinity,
                         height: 48,
                         child: ElevatedButton(
                           onPressed: null, // Disabled, set to (){} if enabled
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF5856D7).withOpacity(0.5),
+                            backgroundColor: Color(0xFF5856D7),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(32),
                             ),
@@ -225,20 +186,6 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                       ),
                       SizedBox(height: 24),
                     ],
-                  ),
-                ),
-              ),
-            ),
-            // Home indicator
-            SizedBox(
-              height: 32,
-              child: Center(
-                child: Container(
-                  height: 5,
-                  width: 134,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF161A1D),
-                    borderRadius: BorderRadius.circular(100),
                   ),
                 ),
               ),

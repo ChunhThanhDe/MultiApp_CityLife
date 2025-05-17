@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/account/components/status_appbar.dart';
+import 'package:sixam_mart_user/presentation/modules/account/components/account_app_bar.dart';
 
 import 'account_2_step_verification_controller.dart';
 
@@ -14,7 +15,11 @@ class Account2StepVerificationScreen extends BaseScreen<Account2StepVerification
       body: Column(
         children: [
           // Custom status bar + app bar
-          StatusBarAppBar(title: "2-Step Verification"),
+          AccountAppBar(
+            title: "Security",
+            onBack: () => Get.back(),
+          ),
+
           Expanded(
             child: ListView(
               padding: EdgeInsets.zero,
@@ -72,7 +77,6 @@ class Account2StepVerificationScreen extends BaseScreen<Account2StepVerification
                   onTap: () {},
                 ),
                 const SizedBox(height: 24),
-                HomeIndicator(),
               ],
             ),
           ),
