@@ -123,10 +123,7 @@ class WalletScreen extends BaseScreen<WalletController> {
         ),
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 32,
         children: [
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -145,16 +142,21 @@ class WalletScreen extends BaseScreen<WalletController> {
                       'Diyaar Cash',
                       style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHighest950),
                     ),
-                    Text(
-                      '\$843.25',
-                      style: AppTextStyle.s28w600.copyWith(color: AppColors.textGreyHighest950),
-                    ),
+                    Obx(() => Text(
+                          vm.showBalance.value ? '\$843.25' : '****',
+                          style: AppTextStyle.s28w600.copyWith(color: AppColors.textGreyHighest950),
+                        )),
                   ],
                 ),
               ),
-              Assets.icons.icEyeVisible.svg(),
+              Obx(() => GestureDetector(
+                    onTap: vm.toggleBalanceVisibility,
+                    behavior: HitTestBehavior.opaque,
+                    child: vm.showBalance.value ? Assets.icons.icEyeVisible.svg() : Assets.icons.icEyeHidden.svg(),
+                  )),
             ],
           ),
+          const SizedBox(height: 32),
           AppButton(
             onTap: () => Get.toNamed(AppRoutes.addFund),
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),

@@ -25,7 +25,7 @@ class AddFundController extends BaseController {
   final RxBool isAmountFocused = false.obs;
   final RxString amountText = ''.obs;
 
-  final recommendedAmounts = [15, 30, 50, 100, 200, 500];
+  final recommendedAmounts = [15, 50, 200, 500];
 
   final RxList<PaymentMethod> paymentMethods = <PaymentMethod>[
     PaymentMethod(name: 'Apple', last4: '5290', type: PaymentMethodType.applePay, iconAsset: Assets.icons.icApplePay.path),

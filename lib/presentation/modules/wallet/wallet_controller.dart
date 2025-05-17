@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 
 class Transaction {
@@ -24,4 +25,9 @@ class WalletController extends BaseController {
     Transaction(title: 'Welgreen', date: 'Jan 18, 2025  7:30 AM', amount: '\$128.95'),
     Transaction(title: 'McDonald\'s', date: 'Jan 18, 2025  7:30 AM', amount: '\$20.50'),
   ];
+  final showBalance = true.obs;
+
+  toggleBalanceVisibility() {
+    showBalance.value = !showBalance.value;
+  }
 }

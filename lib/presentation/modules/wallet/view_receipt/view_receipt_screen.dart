@@ -19,10 +19,15 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
       centerTitle: false,
       surfaceTintColor: AppColors.stateBaseWhite,
       backgroundColor: AppColors.stateBaseWhite,
+      leadingWidth: 48,
       title: Text('Receipt ', style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950)),
       leading: IconButton(
         onPressed: () => Get.back(),
-        icon: Assets.icons.icLeftArrowChervon.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
+        icon: Assets.icons.icLeftArrowChervon.svg(
+          colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn),
+          width: 28,
+          height: 28,
+        ),
       ),
       actions: [
         Row(
