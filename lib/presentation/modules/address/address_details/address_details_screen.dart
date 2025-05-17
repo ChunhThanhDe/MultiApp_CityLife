@@ -20,6 +20,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return AppBar(
+      surfaceTintColor: Colors.white,
       backgroundColor: Colors.white,
       title: Text(
         'Address details',

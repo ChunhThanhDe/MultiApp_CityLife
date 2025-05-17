@@ -26,6 +26,7 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return AppBar(
+      surfaceTintColor: Colors.white,
       backgroundColor: Colors.white,
       title: Text(
         'Address',
