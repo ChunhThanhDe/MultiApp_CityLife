@@ -104,8 +104,37 @@ class AddFundScreen extends BaseScreen<AddFundController> {
         Text(
           'Enter an amount between \$15 and \$900',
           style: AppTextStyle.s12w400.copyWith(color: AppColors.textGreyDefault500),
-        )
+        ),
+        const SizedBox(height: 16),
+        _buildRecommendedAmounts(),
       ],
+    );
+  }
+
+  _buildRecommendedAmounts() {
+    return Wrap(
+      children: controller.recommendedAmounts
+          .map(
+            (amount) => GestureDetector(
+              onTap: () => controller.onSelectRecommendedAmount(amount),
+              child: Obx(() => Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    margin: const EdgeInsets.only(right: 12, bottom: 12),
+                    decoration: BoxDecoration(
+                      color: controller.selectedRecommendedAmount.value == amount ? AppColors.stateBaseGrey950 : AppColors.stateGreyLowest50,
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: Text(
+                      amount.toString(),
+                      textAlign: TextAlign.center,
+                      style: AppTextStyle.s14w400.copyWith(
+                        color: controller.selectedRecommendedAmount.value == amount ? AppColors.textGreyLowestWhite : AppColors.textGreyHighest950,
+                      ),
+                    ),
+                  )),
+            ),
+          )
+          .toList(),
     );
   }
 }
