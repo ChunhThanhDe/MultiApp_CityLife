@@ -64,8 +64,8 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_home_outlined.svg
   SvgGenImage get icHomeOutlined => const SvgGenImage('assets/icons/ic_home_outlined.svg');
 
-  /// File path: assets/icons/ic_hopital.svg
-  SvgGenImage get icHopital => const SvgGenImage('assets/icons/ic_hopital.svg');
+  /// File path: assets/icons/ic_hospital.svg
+  SvgGenImage get icHospital => const SvgGenImage('assets/icons/ic_hospital.svg');
 
   /// File path: assets/icons/ic_hotel.svg
   SvgGenImage get icHotel => const SvgGenImage('assets/icons/ic_hotel.svg');
@@ -139,7 +139,7 @@ class $AssetsIconsGen {
     icEmailIcon,
     icHomeFilled,
     icHomeOutlined,
-    icHopital,
+    icHospital,
     icHotel,
     icHouse,
     icInformation,

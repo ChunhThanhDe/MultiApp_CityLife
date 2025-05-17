@@ -36,7 +36,7 @@ class _AppLoadingOverlay {
     Widget? child,
   }) {
     removeHighlightOverlay();
-    final overlayState = AppOverlayNavigator.navigatorKey.currentState?.overlay;
+    final overlayState = AppNavigator.navigatorKey.currentState?.overlay;
     assert(overlayEntry == null);
     if (overlayState == null) return;
 

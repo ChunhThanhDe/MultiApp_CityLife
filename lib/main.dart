@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
           supportedLocales: context.supportedLocales,
           locale: context.locale,
           themeMode: ThemeMode.light,
-          navigatorKey: AppOverlayNavigator.navigatorKey,
+          navigatorKey: AppNavigator.navigatorKey,
           initialRoute: AppPages.initial,
           getPages: AppPages.appRoutes,
           defaultTransition: Transition.cupertino,

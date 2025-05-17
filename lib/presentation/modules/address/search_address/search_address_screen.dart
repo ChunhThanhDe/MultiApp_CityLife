@@ -106,6 +106,7 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
 
   _buildSearchItem(SearchItem item) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () => Get.toNamed('${AppRoutes.address}/${AppRoutes.addressDetails}', arguments: item),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 6),

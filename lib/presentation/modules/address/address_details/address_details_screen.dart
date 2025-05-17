@@ -5,9 +5,9 @@ import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/address/address_details/address_details_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/app_bottom_sheet.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
-import 'package:smooth_sheets/smooth_sheets.dart';
 
 class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
   const AddressDetailsScreen({super.key});
@@ -130,18 +130,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
         ),
         const SizedBox(height: 8),
         GestureDetector(
-          onTap: () {
-            final modalRoute = ModalSheetRoute(
-              swipeDismissible: true,
-              swipeDismissSensitivity: const SwipeDismissSensitivity(
-                minFlingVelocityRatio: 1,
-                minDragDistance: 100,
-              ),
-              builder: (context) => const _BuildingTypeModelSheet(),
-            );
-
-            Navigator.push(context, modalRoute);
-          },
+          onTap: () => showAppBottomSheet(child: _buildBuildingTypeSheet()),
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.all(12),
@@ -200,12 +189,6 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
   }
 
   _buildDeliveryInstructions() {
-    final items = [
-      (title: 'Hand it to me', icon: Assets.icons.icCourierHands.svg()),
-      (title: 'Leave it at my door', icon: Assets.icons.icDoor.svg()),
-      (title: 'Leave at reception', icon: Assets.icons.icReception.svg()),
-    ];
-
     return Obx(() {
       final selected = controller.selectedDeliveryInstruction.value;
       return Column(
@@ -224,9 +207,9 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Row(
                   children: [
-                    items[index].icon,
+                    vm.deliveryOptions[index].icon,
                     const SizedBox(width: 12),
-                    Text(items[index].title),
+                    Text(vm.deliveryOptions[index].title),
                     const Spacer(),
                     if (selected == index) Assets.icons.icCheckmark.svg(),
                   ],
@@ -234,33 +217,57 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
               ),
             ),
             separatorBuilder: (context, index) => const SizedBox(height: 5, child: Divider(height: 1, color: AppColors.stateGreyLowestHover100)),
-            itemCount: items.length,
+            itemCount: vm.deliveryOptions.length,
           ),
         ],
       );
     });
   }
-}
 
-class _BuildingTypeModelSheet extends StatelessWidget {
-  const _BuildingTypeModelSheet();
-
-  @override
-  Widget build(BuildContext context) {
-    return Sheet(
-      snapGrid: const SheetSnapGrid(
-        snaps: [SheetOffset(0.5), SheetOffset(1)],
-      ),
-      decoration: MaterialSheetDecoration(
-        size: SheetSize.fit,
-        borderRadius: BorderRadius.circular(20),
-        clipBehavior: Clip.antiAlias,
-      ),
-      child: Container(
-        height: 700,
-        width: double.infinity,
-        color: Theme.of(context).colorScheme.surface,
-      ),
+  _buildBuildingTypeSheet() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 16),
+        Text(
+          'Select building type',
+          style: AppTextStyle.s20w600.copyWith(color: AppColors.textGreyHighest950),
+        ),
+        Text(
+          'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+          style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHigh700),
+        ),
+        const SizedBox(height: 16),
+        Divider(
+          height: 1,
+          color: AppColors.stateGreyLowestHover100,
+        ),
+        const SizedBox(height: 16),
+        ...vm.buildingTypes.asMap().entries.map((entry) => Column(
+              children: [
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => vm.selectedBuildingType.value = entry.key,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        entry.value.icon,
+                        const SizedBox(width: 12),
+                        Text(entry.value.title),
+                        const Spacer(),
+                        Obx(() {
+                          return vm.selectedBuildingType.value == entry.key ? Assets.icons.icCheckmark.svg() : const SizedBox.shrink();
+                        }),
+                      ],
+                    ),
+                  ),
+                ),
+                if (entry.key != vm.buildingTypes.length - 1) const SizedBox(height: 16, child: Divider(height: 1, color: AppColors.stateGreyLowestHover100)),
+              ],
+            )),
+        const SizedBox(height: 40),
+      ],
     );
   }
 }
