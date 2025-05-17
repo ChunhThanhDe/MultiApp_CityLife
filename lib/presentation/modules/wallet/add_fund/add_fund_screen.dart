@@ -1,14 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
+import 'package:sixam_mart_user/presentation/shared/app_bottom_sheet.dart';
+import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 
 import 'add_fund_controller.dart';
 
+enum PaymentMethodType { applePay, visa, mastercard, evc }
+
+class PaymentMethod {
+  final String name;
+  final String last4;
+  final PaymentMethodType type;
+  final String iconAsset;
+
+  PaymentMethod({
+    required this.name,
+    required this.last4,
+    required this.type,
+    required this.iconAsset,
+  });
+}
+
 class AddFundScreen extends BaseScreen<AddFundController> {
   const AddFundScreen({super.key});
+
+  @override
+  Widget? buildBottomNavigationBar(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(24),
+      child: AppButton(
+        onTap: () {},
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        child: Text('Add Funds', style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyLowestWhite)),
+      ),
+    );
+  }
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
@@ -28,86 +59,96 @@ class AddFundScreen extends BaseScreen<AddFundController> {
 
   @override
   Widget buildScreen(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildTextHeader(),
+        const SizedBox(height: 24),
+        _buildInputAmount(),
+        Container(
+          width: double.infinity,
+          height: 6,
+          color: AppColors.stateGreyLowest50,
+        ),
+        const SizedBox(height: 24),
+        _buildPaymentMethod(context),
+      ],
+    );
+  }
+
+  _buildTextHeader() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildTextHeader(),
-          const SizedBox(height: 24),
-          _buildInputAmount(),
+          Text(
+            'Load this amount',
+            style: AppTextStyle.s28w600.copyWith(color: AppColors.textGreyHighest950),
+          ),
+          Text(
+            'How mach do you want to add to your balance?',
+            style: AppTextStyle.s16w400.copyWith(color: AppColors.textGreyHigh700),
+          ),
         ],
       ),
     );
   }
 
-  Column _buildTextHeader() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Load this amount',
-          style: AppTextStyle.s28w600.copyWith(color: AppColors.textGreyHighest950),
-        ),
-        Text(
-          'How mach do you want to add to your balance?',
-          style: AppTextStyle.s16w400.copyWith(color: AppColors.textGreyHigh700),
-        ),
-      ],
-    );
-  }
-
   Widget _buildInputAmount() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TextField(
-          controller: controller.amountController,
-          style: AppTextStyle.s24w600.copyWith(color: AppColors.textGreyHighest950),
-          keyboardType: TextInputType.number,
-          onChanged: controller.onAmountChanged,
-          decoration: InputDecoration(
-            hintText: '0.00',
-            hintStyle: AppTextStyle.s24w600.copyWith(color: AppColors.textGreyDefault500),
-            suffixIcon: Obx(
-              () => Padding(
-                padding: const EdgeInsets.all(8),
-                child: controller.isShowClearButton.value
-                    ? GestureDetector(
-                        onTap: controller.onClearAmount,
-                        child: Assets.icons.icClose.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
-                      )
-                    : const SizedBox.shrink(),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextField(
+            controller: controller.amountController,
+            style: AppTextStyle.s24w600.copyWith(color: AppColors.textGreyHighest950),
+            keyboardType: TextInputType.number,
+            onChanged: controller.onAmountChanged,
+            decoration: InputDecoration(
+              hintText: '0.00',
+              hintStyle: AppTextStyle.s24w600.copyWith(color: AppColors.textGreyDefault500),
+              suffixIcon: Obx(
+                () => Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: controller.isShowClearButton.value
+                      ? GestureDetector(
+                          onTap: controller.onClearAmount,
+                          child: Assets.icons.icClose.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
+                        )
+                      : const SizedBox.shrink(),
+                ),
+              ),
+              contentPadding: EdgeInsets.zero,
+              prefixIcon: Padding(
+                padding: const EdgeInsets.only(left: 12, right: 4),
+                child: Obx(() => Text('\$', style: AppTextStyle.s24w600.copyWith(color: vm.isShowClearButton.value ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500))),
+              ),
+              prefixIconConstraints: BoxConstraints(minWidth: 16),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.textGreyLow300),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.textGreyLow300),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.textGreyLow300),
+                borderRadius: BorderRadius.circular(12),
               ),
             ),
-            contentPadding: EdgeInsets.zero,
-            prefixIcon: Padding(
-              padding: const EdgeInsets.only(left: 12, right: 4),
-              child: Obx(() => Text('\$', style: AppTextStyle.s24w600.copyWith(color: vm.isShowClearButton.value ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500))),
-            ),
-            prefixIconConstraints: BoxConstraints(minWidth: 16),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.textGreyLow300),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.textGreyLow300),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.textGreyLow300),
-              borderRadius: BorderRadius.circular(12),
-            ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'Enter an amount between \$15 and \$900',
-          style: AppTextStyle.s12w400.copyWith(color: AppColors.textGreyDefault500),
-        ),
-        const SizedBox(height: 16),
-        _buildRecommendedAmounts(),
-      ],
+          const SizedBox(height: 8),
+          Text(
+            'Enter an amount between \$15 and \$900',
+            style: AppTextStyle.s12w400.copyWith(color: AppColors.textGreyDefault500),
+          ),
+          const SizedBox(height: 16),
+          _buildRecommendedAmounts(),
+        ],
+      ),
     );
   }
 
@@ -135,6 +176,90 @@ class AddFundScreen extends BaseScreen<AddFundController> {
             ),
           )
           .toList(),
+    );
+  }
+
+  Widget _buildPaymentMethod(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Payment method', style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950)),
+          const SizedBox(height: 12),
+          Obx(() {
+            final method = controller.selectedPaymentMethod.value ?? controller.paymentMethods.first;
+            return GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () => _showPaymentMethodSheet(context),
+              child: Row(
+                children: [
+                  SvgPicture.asset(method.iconAsset, width: 32, height: 32),
+                  const SizedBox(width: 12),
+                  Text('${method.name} ****${method.last4}', style: AppTextStyle.s16w500),
+                  const Spacer(),
+                  Assets.icons.icRightArrowChevron.svg(colorFilter: ColorFilter.mode(AppColors.textGreyDefault500, BlendMode.srcIn)),
+                ],
+              ),
+            );
+          }),
+        ],
+      ),
+    );
+  }
+
+  void _showPaymentMethodSheet(BuildContext context) {
+    final Rx<PaymentMethod?> tempSelected = controller.selectedPaymentMethod.value.obs;
+    showAppBottomSheet(
+      child: Obx(() => Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Row(
+                  children: [
+                    Text('Payment method', style: AppTextStyle.s18w500),
+                    const Spacer(),
+                    IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ],
+                ),
+              ),
+              ...controller.paymentMethods.asMap().entries.map((entry) => GestureDetector(
+                    onTap: () => tempSelected.value = entry.value,
+                    behavior: HitTestBehavior.opaque,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(entry.value.iconAsset),
+                          const SizedBox(width: 12),
+                          Text('${entry.value.name} ****${entry.value.last4}', style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950)),
+                          const Spacer(),
+                          tempSelected.value == entry.value ? Assets.icons.icCheckmark.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)) : const SizedBox.shrink(),
+                        ],
+                      ),
+                    ),
+                  )),
+              const SizedBox(height: 16),
+              Divider(height: 1, color: AppColors.stateGreyLowest50),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                child: AppButton(
+                  onTap: () {
+                    controller.onSelectPaymentMethod(tempSelected.value!);
+                    Navigator.pop(context);
+                  },
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  child: Text('Add Payment methods', style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyLowestWhite)),
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
+          )),
     );
   }
 }
