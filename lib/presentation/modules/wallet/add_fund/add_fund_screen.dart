@@ -17,11 +17,15 @@ class AddFundScreen extends BaseScreen<AddFundController> {
   Widget? buildBottomNavigationBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(24),
-      child: AppButton(
-        onTap: () {},
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-        child: Text('Add Funds', style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyLowestWhite)),
-      ),
+      child: Obx(() {
+        final isEnabled = controller.amountText.value.isNotEmpty && controller.selectedPaymentMethod.value != null;
+        return AppButton(
+          onTap: () {},
+          enabled: isEnabled,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          child: Text('Add Funds', style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyLowestWhite)),
+        );
+      }),
     );
   }
 
