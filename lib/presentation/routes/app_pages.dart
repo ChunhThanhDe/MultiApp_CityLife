@@ -14,6 +14,8 @@ import 'package:sixam_mart_user/presentation/modules/authentication/verification
 import 'package:sixam_mart_user/presentation/modules/authentication/verification/verification_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_bindings.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/wallet/add_fund/add_fund_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/wallet/add_fund/add_fund_screen.dart';
 
 part 'app_routes.dart';
 
@@ -40,6 +42,11 @@ class AppPages {
       name: AppRoutes.verification,
       page: () => const VerificationScreen(),
       binding: VerificationBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.addFund,
+      page: () => const AddFundScreen(),
+      binding: AddFundBinding(),
     ),
     GetPage(
       name: AppRoutes.address,

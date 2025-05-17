@@ -15,4 +15,6 @@ class AppTextStyle {
   static final TextStyle s28w600 = GoogleFonts.inter(fontSize: 28, fontWeight: FontWeight.w600);
   static final TextStyle s20w600 = GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w600);
   static final TextStyle s18w500 = GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w500);
+
+  static final TextStyle s24w600 = GoogleFonts.inter(fontSize: 24, fontWeight: FontWeight.w600);
 }
