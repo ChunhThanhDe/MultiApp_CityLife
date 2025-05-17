@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
@@ -31,197 +32,267 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
     );
   }
 
-  @override
-  Widget? buildBottomNavigationBar(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(24),
-      child: AppButton(
-        onTap: () {},
-        width: double.infinity,
-        color: AppColors.stateGreyLowest50,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: Text(
-          'Add new address',
-          style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950),
-        ),
-      ),
-    );
-  }
+  // @override
+  // Widget? buildBottomNavigationBar(BuildContext context) {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(24),
+  //     child: AppButton(
+  //       onTap: () {},
+  //       width: double.infinity,
+  //       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+  //       child: Text(
+  //         'Save address',
+  //         style: AppTextStyle.s16w500.copyWith(color: Colors.white),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget buildScreen(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildAddressInfo(),
-            const SizedBox(height: 16),
-            _buildAddressMap(),
-            const SizedBox(height: 24),
-            _buildAddressDetailsInput(context),
-            Container(
-              width: double.infinity,
-              height: 6,
-              decoration: BoxDecoration(
-                color: AppColors.stateGreyLowest50,
-              ),
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(child: _buildAddressInfo()),
+        const SliverToBoxAdapter(child: SizedBox(height: 16)),
+        SliverToBoxAdapter(child: _buildAddressMap(context)),
+        const SliverToBoxAdapter(child: SizedBox(height: 24)),
+        SliverToBoxAdapter(child: _buildAddressDetailsInput(context)),
+        SliverToBoxAdapter(
+          child: Container(
+            width: double.infinity,
+            height: 6,
+            decoration: BoxDecoration(
+              color: AppColors.stateGreyLowest50,
             ),
-            const SizedBox(height: 16),
-            _buildDeliveryInstructions(),
-          ],
+          ),
         ),
-      ),
-    );
-  }
-
-  Row _buildAddressInfo() {
-    return Row(
-      children: [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              vm.searchItem.address,
-              style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950),
-            ),
-            Text(
-              vm.searchItem.address,
-              style: AppTextStyle.s12w400.copyWith(color: AppColors.textGreyHigh700),
-            ),
-          ],
-        ),
-        Spacer(),
-        Assets.icons.icPencil.svg(),
+        const SliverToBoxAdapter(child: SizedBox(height: 16)),
+        SliverToBoxAdapter(child: _buildDeliveryInstructions()),
+        const SliverToBoxAdapter(child: SizedBox(height: 12, child: Divider(height: 1, color: AppColors.stateGreyLowestHover100))),
+        const SliverToBoxAdapter(child: SizedBox(height: 16)),
+        SliverToBoxAdapter(child: _buildSaveButton()),
       ],
     );
   }
 
-  _buildAddressMap() {
-    // use google map api to get the map
+  _buildAddressInfo() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Row(
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                vm.searchItem.address,
+                style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950),
+              ),
+              Text(
+                vm.searchItem.address,
+                style: AppTextStyle.s12w400.copyWith(color: AppColors.textGreyHigh700),
+              ),
+            ],
+          ),
+          Spacer(),
+          Assets.icons.icPencil.svg(),
+        ],
+      ),
+    );
+  }
+
+  _buildAddressMap(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       width: double.infinity,
       height: 200,
-      decoration: BoxDecoration(
-        color: AppColors.stateGreyLowest50,
-      ),
+      child: Obx(() {
+        final mapStyle = controller.mapStyle.value;
+        return Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: GoogleMap(
+                myLocationButtonEnabled: false,
+                mapType: MapType.normal,
+                initialCameraPosition: vm.googlePlex,
+                style: mapStyle,
+                onMapCreated: (GoogleMapController mapController) {
+                  vm.mapController.complete(mapController);
+                },
+              ),
+            ),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 16,
+              child: Center(
+                child: Material(
+                  borderRadius: BorderRadius.circular(24),
+                  elevation: 4,
+                  color: Colors.white,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(24),
+                    onTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      child: Text(
+                        'Edit pin',
+                        style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      }),
     );
   }
 
   _buildAddressDetailsInput(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          spacing: 4,
-          children: [
-            Text(
-              'Building type',
-              style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHighest950),
-            ),
-            Text(
-              '*',
-              style: AppTextStyle.s14w400.copyWith(color: AppColors.textDangerDefault500),
-            ),
-            Assets.icons.icInformation.svg(),
-          ],
-        ),
-        const SizedBox(height: 8),
-        GestureDetector(
-          onTap: () => showAppBottomSheet(child: _buildBuildingTypeSheet()),
-          child: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(12),
-            decoration: ShapeDecoration(
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  width: 1,
-                  color: AppColors.stateGreyLowestHover100,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            spacing: 4,
+            children: [
+              Text(
+                'Building type',
+                style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHighest950),
+              ),
+              Text(
+                '*',
+                style: AppTextStyle.s14w400.copyWith(color: AppColors.textDangerDefault500),
+              ),
+              Assets.icons.icInformation.svg(),
+            ],
+          ),
+          const SizedBox(height: 8),
+          GestureDetector(
+            onTap: () => showAppBottomSheet(child: _buildBuildingTypeSheet()),
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: ShapeDecoration(
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    width: 1,
+                    color: AppColors.stateGreyLowestHover100,
+                  ),
+                  borderRadius: BorderRadius.circular(6),
                 ),
-                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                spacing: 8,
+                children: [
+                  Text(
+                    'Select building type',
+                    style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyDefault500),
+                  ),
+                  Assets.icons.icDropdownArrow.svg(),
+                ],
               ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              spacing: 8,
+          ),
+          const SizedBox(height: 16),
+          AppTextField(
+            controller: controller.buildingNumberController,
+            hintText: 'E.g. 2030',
+            label: 'Apt, Unit or Floor',
+            isRequired: true,
+          ),
+          AppTextField(
+            controller: controller.buildingNameController,
+            hintText: 'E.g. Center Villa',
+            label: 'Building name',
+            isRequired: true,
+          ),
+          RichText(
+            text: TextSpan(
               children: [
-                Text(
-                  'Select building type',
-                  style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyDefault500),
-                ),
-                Assets.icons.icDropdownArrow.svg(),
+                TextSpan(text: 'Address label', style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHighest950)),
+                TextSpan(text: ' (optional)', style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyDefault500)),
               ],
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-        AppTextField(
-          controller: controller.buildingNumberController,
-          hintText: 'E.g. 2030',
-          label: 'Apt, Unit or Floor',
-          isRequired: true,
-        ),
-        AppTextField(
-          controller: controller.buildingNameController,
-          hintText: 'E.g. Center Villa',
-          label: 'Building name',
-          isRequired: true,
-        ),
-        RichText(
-          text: TextSpan(
-            children: [
-              TextSpan(text: 'Address label', style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHighest950)),
-              TextSpan(text: ' (optional)', style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyDefault500)),
-            ],
+          const SizedBox(height: 8),
+          AppTextField(
+            controller: controller.addressLabelController,
+            hintText: 'Add a label (ex. my home)',
+            isRequired: false,
           ),
-        ),
-        const SizedBox(height: 8),
-        AppTextField(
-          controller: controller.addressLabelController,
-          hintText: 'Add a label (ex. my home)',
-          isRequired: false,
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   _buildDeliveryInstructions() {
-    return Obx(() {
-      final selected = controller.selectedDeliveryInstruction.value;
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Delivery instructions',
-            style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950),
-          ),
-          const SizedBox(height: 8),
-          ListView.separated(
-            shrinkWrap: true,
-            itemBuilder: (context, index) => GestureDetector(
-              onTap: () => controller.setSelectedDeliveryInstruction(index),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Row(
-                  children: [
-                    vm.deliveryOptions[index].icon,
-                    const SizedBox(width: 12),
-                    Text(vm.deliveryOptions[index].title),
-                    const Spacer(),
-                    if (selected == index) Assets.icons.icCheckmark.svg(),
-                  ],
-                ),
-              ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Obx(() {
+        final selected = controller.selectedDeliveryInstruction.value;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Delivery instructions',
+              style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950),
             ),
-            separatorBuilder: (context, index) => const SizedBox(height: 5, child: Divider(height: 1, color: AppColors.stateGreyLowestHover100)),
-            itemCount: vm.deliveryOptions.length,
-          ),
-        ],
-      );
-    });
+            const SizedBox(height: 8),
+            ...vm.deliveryOptions.asMap().entries.map(
+                  (entry) => Column(
+                    children: [
+                      GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () => controller.setSelectedDeliveryInstruction(entry.key),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Row(
+                            children: [
+                              entry.value.icon,
+                              const SizedBox(width: 12),
+                              Text(entry.value.title),
+                              const Spacer(),
+                              if (selected == entry.key) Assets.icons.icCheckmark.svg(),
+                            ],
+                          ),
+                        ),
+                      ),
+                      if (entry.key != vm.deliveryOptions.length - 1) const SizedBox(height: 12, child: Divider(height: 1, color: AppColors.stateGreyLowestHover100)),
+                    ],
+                  ),
+                ),
+            // ListView.separated(
+            //   shrinkWrap: true,
+            // itemBuilder: (context, index) => GestureDetector(
+            //   onTap: () => controller.setSelectedDeliveryInstruction(index),
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(vertical: 8),
+            //     child: Row(
+            //       children: [
+            //         vm.deliveryOptions[index].icon,
+            //         const SizedBox(width: 12),
+            //         Text(vm.deliveryOptions[index].title),
+            //         const Spacer(),
+            //         if (selected == index) Assets.icons.icCheckmark.svg(),
+            //       ],
+            //     ),
+            //   ),
+            // ),
+            //   separatorBuilder: (context, index) => const SizedBox(height: 5, child: Divider(height: 1, color: AppColors.stateGreyLowestHover100)),
+            //   itemCount: vm.deliveryOptions.length,
+            // ),
+          ],
+        );
+      }),
+    );
   }
 
   _buildBuildingTypeSheet() {
@@ -268,6 +339,21 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
             )),
         const SizedBox(height: 40),
       ],
+    );
+  }
+
+  _buildSaveButton() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: AppButton(
+        onTap: () {},
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Text(
+          'Save address',
+          style: AppTextStyle.s16w500.copyWith(color: Colors.white),
+        ),
+      ),
     );
   }
 }

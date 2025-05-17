@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 
@@ -16,6 +20,13 @@ class AddressDetailsController extends BaseController {
   var selectedDeliveryInstruction = 0.obs;
   var selectedBuildingType = 0.obs;
 
+  final Completer<GoogleMapController> mapController = Completer<GoogleMapController>();
+
+  final CameraPosition googlePlex = CameraPosition(
+    target: LatLng(21.028511, 105.804817),
+    zoom: 14.4746,
+  );
+
   final deliveryOptions = [
     (title: 'Hand it to me', icon: Assets.icons.icCourierHands.svg()),
     (title: 'Leave it at my door', icon: Assets.icons.icDoor.svg()),
@@ -29,6 +40,19 @@ class AddressDetailsController extends BaseController {
     (title: 'Office', icon: Assets.icons.icReception.svg()),
     (title: 'Other', icon: Assets.icons.icThreedot.svg()),
   ];
+
+  final mapStyle = RxnString();
+
+  @override
+  void onInit() {
+    super.onInit();
+    _loadMapStyle();
+  }
+
+  Future<void> _loadMapStyle() async {
+    final style = await rootBundle.loadString('assets/map_style.json');
+    mapStyle.value = style;
+  }
 
   void setSelectedDeliveryInstruction(int index) {
     selectedDeliveryInstruction.value = index;
