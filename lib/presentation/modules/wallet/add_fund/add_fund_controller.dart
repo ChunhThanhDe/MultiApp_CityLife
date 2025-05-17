@@ -7,10 +7,11 @@ import 'add_fund_screen.dart';
 
 class AddFundController extends BaseController {
   final TextEditingController amountController = TextEditingController();
-  var isShowClearButton = false.obs;
+  final FocusNode amountFocusNode = FocusNode();
+  final RxBool isAmountFocused = false.obs;
+  final RxString amountText = ''.obs;
 
   final recommendedAmounts = [15, 30, 50, 100, 200, 500];
-  var selectedRecommendedAmount = 0.obs;
 
   final RxList<PaymentMethod> paymentMethods = <PaymentMethod>[
     PaymentMethod(name: 'Apple', last4: '5290', type: PaymentMethodType.applePay, iconAsset: Assets.icons.icApplePay.path),
@@ -21,9 +22,6 @@ class AddFundController extends BaseController {
 
   late final Rx<PaymentMethod?> selectedPaymentMethod;
 
-  final FocusNode amountFocusNode = FocusNode();
-  final RxBool isAmountFocused = false.obs;
-
   @override
   void onInit() {
     super.onInit();
@@ -31,28 +29,25 @@ class AddFundController extends BaseController {
     amountFocusNode.addListener(() {
       isAmountFocused.value = amountFocusNode.hasFocus;
     });
+    amountController.addListener(() {
+      amountText.value = amountController.text;
+    });
   }
 
-  onAmountChanged(String value) {
-    isShowClearButton.value = value.isNotEmpty;
-    final amount = int.tryParse(value);
-    if (amount != null && recommendedAmounts.contains(amount)) {
-      selectedRecommendedAmount.value = amount;
-    }
+  void onAmountChanged(String value) {
+    amountText.value = value;
   }
 
-  onClearAmount() {
+  void onClearAmount() {
     amountController.clear();
-    isShowClearButton.value = false;
-    selectedRecommendedAmount.value = 0;
     isAmountFocused.refresh();
+    amountText.value = '';
   }
 
-  onSelectRecommendedAmount(int amount) {
+  void onSelectRecommendedAmount(int amount) {
     amountController.text = amount.toString();
-    selectedRecommendedAmount.value = amount;
-    isShowClearButton.value = true;
     isAmountFocused.refresh();
+    amountText.value = amount.toString();
   }
 
   void onSelectPaymentMethod(PaymentMethod value) {

@@ -102,7 +102,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Obx(() {
-            final hasValue = controller.amountController.text.isNotEmpty;
+            final hasValue = controller.amountText.value.isNotEmpty;
             final isFocused = controller.isAmountFocused.value;
             final isFilled = hasValue && !isFocused;
             return Container(
@@ -121,21 +121,21 @@ class AddFundScreen extends BaseScreen<AddFundController> {
                 decoration: InputDecoration(
                   hintText: '0.00',
                   hintStyle: AppTextStyle.s24w600.copyWith(color: AppColors.textGreyDefault500),
-                  suffixIcon: Obx(
-                    () => Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: controller.isShowClearButton.value
-                          ? GestureDetector(
-                              onTap: controller.onClearAmount,
-                              child: Assets.icons.icClose.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
-                            )
-                          : const SizedBox.shrink(),
-                    ),
-                  ),
+                  suffixIcon: hasValue
+                      ? GestureDetector(
+                          onTap: controller.onClearAmount,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Assets.icons.icClose.svg(
+                              colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn),
+                            ),
+                          ),
+                        )
+                      : null,
                   contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                   prefixIcon: Padding(
                     padding: const EdgeInsets.only(left: 12, right: 4),
-                    child: Obx(() => Text('\$', style: AppTextStyle.s24w600.copyWith(color: vm.isShowClearButton.value ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500))),
+                    child: Text('\$', style: AppTextStyle.s24w600.copyWith(color: hasValue ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500)),
                   ),
                   prefixIconConstraints: BoxConstraints(minWidth: 16),
                   filled: !isFilled,
@@ -180,21 +180,21 @@ class AddFundScreen extends BaseScreen<AddFundController> {
           .map(
             (amount) => GestureDetector(
               onTap: () => controller.onSelectRecommendedAmount(amount),
-              child: Obx(() => Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                    margin: const EdgeInsets.only(right: 12, bottom: 12),
-                    decoration: BoxDecoration(
-                      color: controller.selectedRecommendedAmount.value == amount ? AppColors.stateBaseGrey950 : AppColors.stateGreyLowest50,
-                      borderRadius: BorderRadius.circular(32),
-                    ),
-                    child: Text(
-                      amount.toString(),
-                      textAlign: TextAlign.center,
-                      style: AppTextStyle.s14w400.copyWith(
-                        color: controller.selectedRecommendedAmount.value == amount ? AppColors.textGreyLowestWhite : AppColors.textGreyHighest950,
-                      ),
-                    ),
-                  )),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                margin: const EdgeInsets.only(right: 12, bottom: 12),
+                decoration: BoxDecoration(
+                  color: controller.amountText.value == amount.toString() ? AppColors.stateBaseGrey950 : AppColors.stateGreyLowest50,
+                  borderRadius: BorderRadius.circular(32),
+                ),
+                child: Text(
+                  amount.toString(),
+                  textAlign: TextAlign.center,
+                  style: AppTextStyle.s14w400.copyWith(
+                    color: controller.amountText.value == amount.toString() ? AppColors.textGreyLowestWhite : AppColors.textGreyHighest950,
+                  ),
+                ),
+              ),
             ),
           )
           .toList(),

@@ -15,6 +15,7 @@ class WalletScreen extends BaseScreen<WalletController> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return AppBar(
+      surfaceTintColor: AppColors.stateBaseWhite,
       centerTitle: false,
       backgroundColor: AppColors.stateBaseWhite,
       title: Text('Wallet', style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950)),
