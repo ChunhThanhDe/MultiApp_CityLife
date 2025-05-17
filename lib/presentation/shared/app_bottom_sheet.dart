@@ -5,6 +5,8 @@ import 'package:smooth_sheets/smooth_sheets.dart';
 import 'app_overlay_navigator.dart';
 
 showAppBottomSheet({required Widget child}) {
+  // Close keyboard if it's open
+  FocusScope.of(AppNavigator.navigatorKey.currentContext!).unfocus();
   final modalRoute = ModalSheetRoute(
     swipeDismissible: true,
     swipeDismissSensitivity: const SwipeDismissSensitivity(
@@ -14,7 +16,12 @@ showAppBottomSheet({required Widget child}) {
     builder: (context) => AppBottomSheet(child: child),
   );
 
-  Navigator.push(AppNavigator.navigatorKey.currentContext!, modalRoute);
+  Navigator.push(AppNavigator.navigatorKey.currentContext!, modalRoute).then((value) {
+    // When the bottom sheet is closed in a page that has input field,
+    // the keyboard will automatically open.
+    // So need to close the keyboard when the bottom sheet is closed.
+    FocusScope.of(AppNavigator.navigatorKey.currentContext!).unfocus();
+  });
 }
 
 class AppBottomSheet extends StatelessWidget {
