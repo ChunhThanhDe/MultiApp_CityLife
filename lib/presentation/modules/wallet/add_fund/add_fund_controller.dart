@@ -3,7 +3,21 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 
-import 'add_fund_screen.dart';
+enum PaymentMethodType { applePay, visa, mastercard, evc }
+
+class PaymentMethod {
+  final String name;
+  final String last4;
+  final PaymentMethodType type;
+  final String iconAsset;
+
+  PaymentMethod({
+    required this.name,
+    required this.last4,
+    required this.type,
+    required this.iconAsset,
+  });
+}
 
 class AddFundController extends BaseController {
   final TextEditingController amountController = TextEditingController();

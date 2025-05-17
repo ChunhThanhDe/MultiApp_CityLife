@@ -10,22 +10,6 @@ import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 
 import 'add_fund_controller.dart';
 
-enum PaymentMethodType { applePay, visa, mastercard, evc }
-
-class PaymentMethod {
-  final String name;
-  final String last4;
-  final PaymentMethodType type;
-  final String iconAsset;
-
-  PaymentMethod({
-    required this.name,
-    required this.last4,
-    required this.type,
-    required this.iconAsset,
-  });
-}
-
 class AddFundScreen extends BaseScreen<AddFundController> {
   const AddFundScreen({super.key});
 
@@ -45,6 +29,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return AppBar(
       centerTitle: false,
+      surfaceTintColor: AppColors.stateBaseWhite,
       backgroundColor: AppColors.stateBaseWhite,
       title: Text('Add Funds', style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950)),
       leading: IconButton(
@@ -230,9 +215,15 @@ class AddFundScreen extends BaseScreen<AddFundController> {
     );
   }
 
-  void _showPaymentMethodSheet(BuildContext context) {
+  Future<void> _showPaymentMethodSheet(BuildContext context) async {
     final Rx<PaymentMethod?> tempSelected = controller.selectedPaymentMethod.value.obs;
-    showAppBottomSheet(
+    await showAppBottomSheet<PaymentMethod?>(
+      onClosed: (result) {
+        final selected = result ?? tempSelected.value;
+        if (selected != null) {
+          controller.onSelectPaymentMethod(selected);
+        }
+      },
       child: Obx(() => Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -270,13 +261,22 @@ class AddFundScreen extends BaseScreen<AddFundController> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
                 child: AppButton(
-                  onTap: () {
-                    controller.onSelectPaymentMethod(tempSelected.value!);
-                    Navigator.pop(context);
-                  },
+                  onTap: () {},
                   width: double.infinity,
+                  color: AppColors.stateGreyLowest50,
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  child: Text('Add Payment methods', style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyLowestWhite)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Assets.icons.icPlusAdd.svg(
+                        width: 24,
+                        height: 24,
+                        colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn),
+                      ),
+                      const SizedBox(width: 8),
+                      Text('Add Payment methods', style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950)),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 16),

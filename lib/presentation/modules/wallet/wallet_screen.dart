@@ -155,17 +155,9 @@ class WalletScreen extends BaseScreen<WalletController> {
             onTap: () => Get.toNamed(AppRoutes.addFund),
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
             child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              spacing: 4,
               children: [
                 Assets.icons.icPlusAdd.svg(),
-                Text(
-                  'Add Funds',
-                  textAlign: TextAlign.center,
-                  style: AppTextStyle.s14w400.copyWith(color: AppColors.textBaseWhite),
-                ),
+                Text('Add Funds', style: AppTextStyle.s14w400.copyWith(color: AppColors.textBaseWhite)),
               ],
             ),
           ),
