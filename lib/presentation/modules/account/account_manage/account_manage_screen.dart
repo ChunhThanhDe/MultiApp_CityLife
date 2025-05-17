@@ -57,12 +57,12 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                               borderRadius: BorderRadius.circular(100),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Color(0xFF101214).withOpacity(0.1),
+                                  color: Color(0xFF101214).withValues(alpha: 26),
                                   blurRadius: 16,
                                   offset: Offset(0, 6),
                                 ),
                                 BoxShadow(
-                                  color: Color(0xFF101214).withOpacity(0.05),
+                                  color: Color(0xFF101214).withValues(alpha: 13),
                                   blurRadius: 4,
                                   offset: Offset(0, 2),
                                 ),
@@ -162,13 +162,13 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                       ),
                       const SizedBox(height: 24),
                       // Update button (disabled for UI only, enable for logic)
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         height: 48,
                         child: ElevatedButton(
                           onPressed: null, // Disabled, set to (){} if enabled
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF5856D7),
+                            backgroundColor: Color(0xFF5856D7).withValues(alpha: 26),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(32),
                             ),

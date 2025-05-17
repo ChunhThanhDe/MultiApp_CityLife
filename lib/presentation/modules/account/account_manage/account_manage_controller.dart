@@ -11,23 +11,4 @@ class AccountManageController extends BaseController {
   var year = "1992".obs;
 
   // If you want to change value, just do: firstName.value = "New Value";
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }

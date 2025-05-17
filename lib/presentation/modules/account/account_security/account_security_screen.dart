@@ -176,12 +176,13 @@ class _DividerLine extends StatelessWidget {
 }
 
 /// Social app connect/disconnect cell
-class _SocialConnectCell extends StatelessWidget {
+class SocialConnectCell extends StatelessWidget {
   final Widget icon;
   final String label;
   final VoidCallback? onDisconnect;
 
-  const _SocialConnectCell({
+  const SocialConnectCell({
+    super.key,
     required this.icon,
     required this.label,
     this.onDisconnect,

@@ -17,8 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$ApiResult {
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is ApiResult);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is ApiResult);
   }
 
   @override
@@ -46,15 +45,11 @@ class Success implements ApiResult {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $SuccessCopyWith<Success> get copyWith =>
-      _$SuccessCopyWithImpl<Success>(this, _$identity);
+  $SuccessCopyWith<Success> get copyWith => _$SuccessCopyWithImpl<Success>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is Success &&
-            (identical(other.data, data) || other.data == data));
+    return identical(this, other) || (other.runtimeType == runtimeType && other is Success && (identical(other.data, data) || other.data == data));
   }
 
   @override
@@ -67,10 +62,8 @@ class Success implements ApiResult {
 }
 
 /// @nodoc
-abstract mixin class $SuccessCopyWith<$Res>
-    implements $ApiResultCopyWith<$Res> {
-  factory $SuccessCopyWith(Success value, $Res Function(Success) _then) =
-      _$SuccessCopyWithImpl;
+abstract mixin class $SuccessCopyWith<$Res> implements $ApiResultCopyWith<$Res> {
+  factory $SuccessCopyWith(Success value, $Res Function(Success) _then) = _$SuccessCopyWithImpl;
   @useResult
   $Res call({BaseResponse data});
 }
@@ -108,15 +101,11 @@ class Failure implements ApiResult {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $FailureCopyWith<Failure> get copyWith =>
-      _$FailureCopyWithImpl<Failure>(this, _$identity);
+  $FailureCopyWith<Failure> get copyWith => _$FailureCopyWithImpl<Failure>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is Failure &&
-            (identical(other.error, error) || other.error == error));
+    return identical(this, other) || (other.runtimeType == runtimeType && other is Failure && (identical(other.error, error) || other.error == error));
   }
 
   @override
@@ -129,10 +118,8 @@ class Failure implements ApiResult {
 }
 
 /// @nodoc
-abstract mixin class $FailureCopyWith<$Res>
-    implements $ApiResultCopyWith<$Res> {
-  factory $FailureCopyWith(Failure value, $Res Function(Failure) _then) =
-      _$FailureCopyWithImpl;
+abstract mixin class $FailureCopyWith<$Res> implements $ApiResultCopyWith<$Res> {
+  factory $FailureCopyWith(Failure value, $Res Function(Failure) _then) = _$FailureCopyWithImpl;
   @useResult
   $Res call({NetworkExceptions error});
 

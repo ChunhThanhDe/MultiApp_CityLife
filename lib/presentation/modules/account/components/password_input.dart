@@ -9,6 +9,7 @@ class PasswordInput extends StatelessWidget {
   final String? Function(String?)? validator;
 
   const PasswordInput({
+    super.key,
     required this.label,
     required this.controller,
     required this.isObscure,

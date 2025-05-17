@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/account/components/account_app_bar.dart';
+import 'package:sixam_mart_user/presentation/modules/account/components/account_divider.dart';
 
 import 'account_2_step_verification_controller.dart';
 
@@ -59,7 +60,7 @@ class Account2StepVerificationScreen extends BaseScreen<Account2StepVerification
                   checked: true,
                   onTap: () {},
                 ),
-                _CustomDivider(),
+                CustomDivider(),
                 _CellItem(
                   icon: Icons.email_outlined,
                   title: "Email",
@@ -67,7 +68,7 @@ class Account2StepVerificationScreen extends BaseScreen<Account2StepVerification
                   checked: true,
                   onTap: () {},
                 ),
-                _CustomDivider(),
+                CustomDivider(),
                 _CellItem(
                   icon: Icons.qr_code_2,
                   title: "Authenticator",
@@ -141,20 +142,6 @@ class _CellItem extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _CustomDivider extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 60),
-      child: Divider(
-        color: Color(0xFFE8EBEE),
-        height: 0,
-        thickness: 1,
       ),
     );
   }

@@ -17,8 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$NetworkExceptions {
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is NetworkExceptions);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is NetworkExceptions);
   }
 
   @override
@@ -32,8 +31,7 @@ mixin _$NetworkExceptions {
 
 /// @nodoc
 class $NetworkExceptionsCopyWith<$Res> {
-  $NetworkExceptionsCopyWith(
-      NetworkExceptions _, $Res Function(NetworkExceptions) __);
+  $NetworkExceptionsCopyWith(NetworkExceptions _, $Res Function(NetworkExceptions) __);
 }
 
 /// @nodoc
@@ -43,8 +41,7 @@ class RequestCancelled implements NetworkExceptions {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is RequestCancelled);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is RequestCancelled);
   }
 
   @override
@@ -67,15 +64,11 @@ class UnauthorizedRequest implements NetworkExceptions {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $UnauthorizedRequestCopyWith<UnauthorizedRequest> get copyWith =>
-      _$UnauthorizedRequestCopyWithImpl<UnauthorizedRequest>(this, _$identity);
+  $UnauthorizedRequestCopyWith<UnauthorizedRequest> get copyWith => _$UnauthorizedRequestCopyWithImpl<UnauthorizedRequest>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is UnauthorizedRequest &&
-            (identical(other.reason, reason) || other.reason == reason));
+    return identical(this, other) || (other.runtimeType == runtimeType && other is UnauthorizedRequest && (identical(other.reason, reason) || other.reason == reason));
   }
 
   @override
@@ -88,18 +81,14 @@ class UnauthorizedRequest implements NetworkExceptions {
 }
 
 /// @nodoc
-abstract mixin class $UnauthorizedRequestCopyWith<$Res>
-    implements $NetworkExceptionsCopyWith<$Res> {
-  factory $UnauthorizedRequestCopyWith(
-          UnauthorizedRequest value, $Res Function(UnauthorizedRequest) _then) =
-      _$UnauthorizedRequestCopyWithImpl;
+abstract mixin class $UnauthorizedRequestCopyWith<$Res> implements $NetworkExceptionsCopyWith<$Res> {
+  factory $UnauthorizedRequestCopyWith(UnauthorizedRequest value, $Res Function(UnauthorizedRequest) _then) = _$UnauthorizedRequestCopyWithImpl;
   @useResult
   $Res call({String reason});
 }
 
 /// @nodoc
-class _$UnauthorizedRequestCopyWithImpl<$Res>
-    implements $UnauthorizedRequestCopyWith<$Res> {
+class _$UnauthorizedRequestCopyWithImpl<$Res> implements $UnauthorizedRequestCopyWith<$Res> {
   _$UnauthorizedRequestCopyWithImpl(this._self, this._then);
 
   final UnauthorizedRequest _self;
@@ -127,8 +116,7 @@ class BadRequest implements NetworkExceptions {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is BadRequest);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is BadRequest);
   }
 
   @override
@@ -151,15 +139,11 @@ class NotFound implements NetworkExceptions {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $NotFoundCopyWith<NotFound> get copyWith =>
-      _$NotFoundCopyWithImpl<NotFound>(this, _$identity);
+  $NotFoundCopyWith<NotFound> get copyWith => _$NotFoundCopyWithImpl<NotFound>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is NotFound &&
-            (identical(other.reason, reason) || other.reason == reason));
+    return identical(this, other) || (other.runtimeType == runtimeType && other is NotFound && (identical(other.reason, reason) || other.reason == reason));
   }
 
   @override
@@ -172,10 +156,8 @@ class NotFound implements NetworkExceptions {
 }
 
 /// @nodoc
-abstract mixin class $NotFoundCopyWith<$Res>
-    implements $NetworkExceptionsCopyWith<$Res> {
-  factory $NotFoundCopyWith(NotFound value, $Res Function(NotFound) _then) =
-      _$NotFoundCopyWithImpl;
+abstract mixin class $NotFoundCopyWith<$Res> implements $NetworkExceptionsCopyWith<$Res> {
+  factory $NotFoundCopyWith(NotFound value, $Res Function(NotFound) _then) = _$NotFoundCopyWithImpl;
   @useResult
   $Res call({String reason});
 }
@@ -209,8 +191,7 @@ class MethodNotAllowed implements NetworkExceptions {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is MethodNotAllowed);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is MethodNotAllowed);
   }
 
   @override
@@ -229,8 +210,7 @@ class NotAcceptable implements NetworkExceptions {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is NotAcceptable);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is NotAcceptable);
   }
 
   @override
@@ -249,8 +229,7 @@ class RequestTimeout implements NetworkExceptions {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is RequestTimeout);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is RequestTimeout);
   }
 
   @override
@@ -269,8 +248,7 @@ class SendTimeout implements NetworkExceptions {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is SendTimeout);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is SendTimeout);
   }
 
   @override
@@ -289,8 +267,7 @@ class Conflict implements NetworkExceptions {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is Conflict);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is Conflict);
   }
 
   @override
@@ -309,8 +286,7 @@ class InternalServerError implements NetworkExceptions {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is InternalServerError);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is InternalServerError);
   }
 
   @override
@@ -329,8 +305,7 @@ class NotImplemented implements NetworkExceptions {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is NotImplemented);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is NotImplemented);
   }
 
   @override
@@ -349,8 +324,7 @@ class ServiceUnavailable implements NetworkExceptions {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is ServiceUnavailable);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is ServiceUnavailable);
   }
 
   @override
@@ -369,8 +343,7 @@ class NoInternetConnection implements NetworkExceptions {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is NoInternetConnection);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is NoInternetConnection);
   }
 
   @override
@@ -389,8 +362,7 @@ class FormatException implements NetworkExceptions {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is FormatException);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is FormatException);
   }
 
   @override
@@ -409,8 +381,7 @@ class UnableToProcess implements NetworkExceptions {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is UnableToProcess);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is UnableToProcess);
   }
 
   @override
@@ -433,15 +404,11 @@ class DefaultError implements NetworkExceptions {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $DefaultErrorCopyWith<DefaultError> get copyWith =>
-      _$DefaultErrorCopyWithImpl<DefaultError>(this, _$identity);
+  $DefaultErrorCopyWith<DefaultError> get copyWith => _$DefaultErrorCopyWithImpl<DefaultError>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is DefaultError &&
-            (identical(other.error, error) || other.error == error));
+    return identical(this, other) || (other.runtimeType == runtimeType && other is DefaultError && (identical(other.error, error) || other.error == error));
   }
 
   @override
@@ -454,11 +421,8 @@ class DefaultError implements NetworkExceptions {
 }
 
 /// @nodoc
-abstract mixin class $DefaultErrorCopyWith<$Res>
-    implements $NetworkExceptionsCopyWith<$Res> {
-  factory $DefaultErrorCopyWith(
-          DefaultError value, $Res Function(DefaultError) _then) =
-      _$DefaultErrorCopyWithImpl;
+abstract mixin class $DefaultErrorCopyWith<$Res> implements $NetworkExceptionsCopyWith<$Res> {
+  factory $DefaultErrorCopyWith(DefaultError value, $Res Function(DefaultError) _then) = _$DefaultErrorCopyWithImpl;
   @useResult
   $Res call({String error});
 }
@@ -492,8 +456,7 @@ class UnexpectedError implements NetworkExceptions {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is UnexpectedError);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is UnexpectedError);
   }
 
   @override

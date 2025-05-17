@@ -21,7 +21,7 @@ import 'package:sixam_mart_user/presentation/modules/root/root_screen.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static String initial = AppRoutes.account;
+  static String initial = AppRoutes.root;
 
   static final appRoutes = [
     GetPage(

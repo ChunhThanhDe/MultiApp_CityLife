@@ -78,23 +78,23 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
-    icBackArrow,
-    icCartFilled,
-    icCartOutlined,
-    icDropdownArrow,
-    icEmailIcon,
-    icHomeFilled,
-    icHomeOutlined,
-    icPersonFilled,
-    icPersonIcon,
-    icPersonOutlined,
-    icPhoneIcon,
-    icRightArrow,
-    icServiceFilled,
-    icServiceOutlined,
-    icWalletFilled,
-    icWalletOutlined,
-  ];
+        icBackArrow,
+        icCartFilled,
+        icCartOutlined,
+        icDropdownArrow,
+        icEmailIcon,
+        icHomeFilled,
+        icHomeOutlined,
+        icPersonFilled,
+        icPersonIcon,
+        icPersonOutlined,
+        icPhoneIcon,
+        icRightArrow,
+        icServiceFilled,
+        icServiceOutlined,
+        icWalletFilled,
+        icWalletOutlined,
+      ];
 }
 
 class $AssetsImagesGen {

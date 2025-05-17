@@ -6,7 +6,6 @@ import 'sign_up_controller.dart';
 class SignUpScreen extends BaseScreen<SignUpController> {
   const SignUpScreen({super.key});
 
-
   @override
   Widget buildScreen(BuildContext context) {
     throw UnimplementedError();
