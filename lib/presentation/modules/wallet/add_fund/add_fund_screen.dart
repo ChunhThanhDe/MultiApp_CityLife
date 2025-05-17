@@ -101,45 +101,67 @@ class AddFundScreen extends BaseScreen<AddFundController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextField(
-            controller: controller.amountController,
-            style: AppTextStyle.s24w600.copyWith(color: AppColors.textGreyHighest950),
-            keyboardType: TextInputType.number,
-            onChanged: controller.onAmountChanged,
-            decoration: InputDecoration(
-              hintText: '0.00',
-              hintStyle: AppTextStyle.s24w600.copyWith(color: AppColors.textGreyDefault500),
-              suffixIcon: Obx(
-                () => Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: controller.isShowClearButton.value
-                      ? GestureDetector(
-                          onTap: controller.onClearAmount,
-                          child: Assets.icons.icClose.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
-                        )
-                      : const SizedBox.shrink(),
+          Obx(() {
+            final hasValue = controller.amountController.text.isNotEmpty;
+            final isFocused = controller.isAmountFocused.value;
+            final isFilled = hasValue && !isFocused;
+            return Container(
+              decoration: isFilled
+                  ? BoxDecoration(
+                      color: AppColors.stateGreyLowest50,
+                      borderRadius: BorderRadius.circular(6),
+                    )
+                  : null,
+              child: TextField(
+                controller: controller.amountController,
+                focusNode: controller.amountFocusNode,
+                style: AppTextStyle.s24w600.copyWith(color: AppColors.textGreyHighest950),
+                keyboardType: TextInputType.number,
+                onChanged: controller.onAmountChanged,
+                decoration: InputDecoration(
+                  hintText: '0.00',
+                  hintStyle: AppTextStyle.s24w600.copyWith(color: AppColors.textGreyDefault500),
+                  suffixIcon: Obx(
+                    () => Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: controller.isShowClearButton.value
+                          ? GestureDetector(
+                              onTap: controller.onClearAmount,
+                              child: Assets.icons.icClose.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
+                            )
+                          : const SizedBox.shrink(),
+                    ),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.only(left: 12, right: 4),
+                    child: Obx(() => Text('\$', style: AppTextStyle.s24w600.copyWith(color: vm.isShowClearButton.value ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500))),
+                  ),
+                  prefixIconConstraints: BoxConstraints(minWidth: 16),
+                  filled: !isFilled,
+                  fillColor: !isFilled ? Colors.transparent : null,
+                  border: isFilled
+                      ? InputBorder.none
+                      : OutlineInputBorder(
+                          borderSide: BorderSide(color: AppColors.textGreyLow300),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                  enabledBorder: isFilled
+                      ? InputBorder.none
+                      : OutlineInputBorder(
+                          borderSide: BorderSide(color: AppColors.textGreyLow300),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                  focusedBorder: isFilled
+                      ? InputBorder.none
+                      : OutlineInputBorder(
+                          borderSide: BorderSide(color: AppColors.textGreyLow300),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
                 ),
               ),
-              contentPadding: EdgeInsets.zero,
-              prefixIcon: Padding(
-                padding: const EdgeInsets.only(left: 12, right: 4),
-                child: Obx(() => Text('\$', style: AppTextStyle.s24w600.copyWith(color: vm.isShowClearButton.value ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500))),
-              ),
-              prefixIconConstraints: BoxConstraints(minWidth: 16),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(color: AppColors.textGreyLow300),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: AppColors.textGreyLow300),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: AppColors.textGreyLow300),
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),
+            );
+          }),
           const SizedBox(height: 8),
           Text(
             'Enter an amount between \$15 and \$900',

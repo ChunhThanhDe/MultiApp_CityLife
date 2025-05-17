@@ -21,10 +21,16 @@ class AddFundController extends BaseController {
 
   late final Rx<PaymentMethod?> selectedPaymentMethod;
 
+  final FocusNode amountFocusNode = FocusNode();
+  final RxBool isAmountFocused = false.obs;
+
   @override
   void onInit() {
     super.onInit();
     selectedPaymentMethod = Rx<PaymentMethod?>(paymentMethods.first);
+    amountFocusNode.addListener(() {
+      isAmountFocused.value = amountFocusNode.hasFocus;
+    });
   }
 
   onAmountChanged(String value) {
@@ -39,12 +45,14 @@ class AddFundController extends BaseController {
     amountController.clear();
     isShowClearButton.value = false;
     selectedRecommendedAmount.value = 0;
+    isAmountFocused.refresh();
   }
 
   onSelectRecommendedAmount(int amount) {
     amountController.text = amount.toString();
     selectedRecommendedAmount.value = amount;
     isShowClearButton.value = true;
+    isAmountFocused.refresh();
   }
 
   void onSelectPaymentMethod(PaymentMethod value) {
