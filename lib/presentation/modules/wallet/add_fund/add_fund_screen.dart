@@ -83,7 +83,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
             contentPadding: EdgeInsets.zero,
             prefixIcon: Padding(
               padding: const EdgeInsets.only(left: 12, right: 4),
-              child: Text('\$', style: AppTextStyle.s24w600.copyWith(color: AppColors.textGreyDefault500)),
+              child: Obx(() => Text('\$', style: AppTextStyle.s24w600.copyWith(color: vm.isShowClearButton.value ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500))),
             ),
             prefixIconConstraints: BoxConstraints(minWidth: 16),
             border: OutlineInputBorder(

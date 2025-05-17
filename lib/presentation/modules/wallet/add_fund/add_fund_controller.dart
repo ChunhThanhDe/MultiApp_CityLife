@@ -11,8 +11,9 @@ class AddFundController extends BaseController {
 
   onAmountChanged(String value) {
     isShowClearButton.value = value.isNotEmpty;
-    if (recommendedAmounts.contains(int.parse(value))) {
-      selectedRecommendedAmount.value = int.parse(value);
+    final amount = int.tryParse(value);
+    if (amount != null && recommendedAmounts.contains(amount)) {
+      selectedRecommendedAmount.value = amount;
     }
   }
 
