@@ -30,27 +30,24 @@ class AppBottomSheet extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
       ),
       child: IntrinsicHeight(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 12),
-                  width: 48,
-                  height: 4,
-                  decoration: ShapeDecoration(
-                    color: AppColors.stateGreyLowestHover100,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(99),
-                    ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Container(
+                margin: const EdgeInsets.only(top: 12),
+                width: 48,
+                height: 4,
+                decoration: ShapeDecoration(
+                  color: AppColors.stateGreyLowestHover100,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(99),
                   ),
                 ),
               ),
-              child,
-            ],
-          ),
+            ),
+            child,
+          ],
         ),
       ),
     );

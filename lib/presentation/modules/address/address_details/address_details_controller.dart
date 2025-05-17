@@ -18,7 +18,7 @@ class AddressDetailsController extends BaseController {
   final TextEditingController addressLabelController = TextEditingController();
 
   var selectedDeliveryInstruction = 0.obs;
-  var selectedBuildingType = 0.obs;
+  var selectedBuildingType = (-1).obs;
 
   final Completer<GoogleMapController> mapController = Completer<GoogleMapController>();
 
@@ -38,6 +38,7 @@ class AddressDetailsController extends BaseController {
     (title: 'Apartment', icon: Assets.icons.icApartment.svg()),
     (title: 'Hospital', icon: Assets.icons.icHospital.svg()),
     (title: 'Office', icon: Assets.icons.icReception.svg()),
+    (title: 'Hotel', icon: Assets.icons.icHotel.svg()),
     (title: 'Other', icon: Assets.icons.icThreedot.svg()),
   ];
 
