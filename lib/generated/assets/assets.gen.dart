@@ -115,6 +115,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_phone_icon.svg
   SvgGenImage get icPhoneIcon => const SvgGenImage('assets/icons/ic_phone_icon.svg');
 
+  /// File path: assets/icons/ic_plus_add.svg
+  SvgGenImage get icPlusAdd => const SvgGenImage('assets/icons/ic_plus_add.svg');
+
   /// File path: assets/icons/ic_reception.svg
   SvgGenImage get icReception => const SvgGenImage('assets/icons/ic_reception.svg');
 
@@ -180,6 +183,7 @@ class $AssetsIconsGen {
     icPersonIcon,
     icPersonOutlined,
     icPhoneIcon,
+    icPlusAdd,
     icReception,
     icRightArrow,
     icRightArrowChevron,
@@ -203,8 +207,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/img_new.png
   AssetGenImage get imgNew => const AssetGenImage('assets/images/img_new.png');
 
+  /// File path: assets/images/img_wallet_bg.png
+  AssetGenImage get imgWalletBg => const AssetGenImage('assets/images/img_wallet_bg.png');
+
+  /// File path: assets/images/img_wallet_card.png
+  AssetGenImage get imgWalletCard => const AssetGenImage('assets/images/img_wallet_card.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [imgAddress, imgNew];
+  List<AssetGenImage> get values => [imgAddress, imgNew, imgWalletBg, imgWalletCard];
 }
 
 class $AssetsTranslationsGen {
