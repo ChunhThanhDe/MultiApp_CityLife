@@ -79,19 +79,23 @@ class WalletScreen extends BaseScreen<WalletController> {
   Widget _buildTransactionItem(Transaction transaction) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(transaction.title, style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950)),
-              const SizedBox(height: 2),
-              Text(transaction.date, style: AppTextStyle.s12w400.copyWith(color: AppColors.textGreyDefault500)),
-            ],
-          ),
-          Text(transaction.amount, style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHigh700)),
-        ],
+      child: GestureDetector(
+        onTap: () => Get.toNamed(AppRoutes.viewReceipt, arguments: transaction),
+        behavior: HitTestBehavior.opaque,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(transaction.title, style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950)),
+                const SizedBox(height: 2),
+                Text(transaction.date, style: AppTextStyle.s12w400.copyWith(color: AppColors.textGreyDefault500)),
+              ],
+            ),
+            Text(transaction.amount, style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHigh700)),
+          ],
+        ),
       ),
     );
   }

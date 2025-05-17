@@ -91,6 +91,18 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_information.svg
   SvgGenImage get icInformation => const SvgGenImage('assets/icons/ic_information.svg');
 
+  /// File path: assets/icons/ic_invoice.svg
+  SvgGenImage get icInvoice => const SvgGenImage('assets/icons/ic_invoice.svg');
+
+  /// File path: assets/icons/ic_left_arrow_chervon.svg
+  SvgGenImage get icLeftArrowChervon => const SvgGenImage('assets/icons/ic_left_arrow_chervon.svg');
+
+  /// File path: assets/icons/ic_like_filled.svg
+  SvgGenImage get icLikeFilled => const SvgGenImage('assets/icons/ic_like_filled.svg');
+
+  /// File path: assets/icons/ic_like_outlined.svg
+  SvgGenImage get icLikeOutlined => const SvgGenImage('assets/icons/ic_like_outlined.svg');
+
   /// File path: assets/icons/ic_location.svg
   SvgGenImage get icLocation => const SvgGenImage('assets/icons/ic_location.svg');
 
@@ -139,6 +151,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_settings_filter.svg
   SvgGenImage get icSettingsFilter => const SvgGenImage('assets/icons/ic_settings_filter.svg');
 
+  /// File path: assets/icons/ic_share.svg
+  SvgGenImage get icShare => const SvgGenImage('assets/icons/ic_share.svg');
+
   /// File path: assets/icons/ic_threedot.svg
   SvgGenImage get icThreedot => const SvgGenImage('assets/icons/ic_threedot.svg');
 
@@ -175,6 +190,10 @@ class $AssetsIconsGen {
     icHotel,
     icHouse,
     icInformation,
+    icInvoice,
+    icLeftArrowChervon,
+    icLikeFilled,
+    icLikeOutlined,
     icLocation,
     icMastercard,
     icMouse,
@@ -191,6 +210,7 @@ class $AssetsIconsGen {
     icServiceFilled,
     icServiceOutlined,
     icSettingsFilter,
+    icShare,
     icThreedot,
     icVisa,
     icWalletFilled,
