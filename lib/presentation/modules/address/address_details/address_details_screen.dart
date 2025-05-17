@@ -6,6 +6,7 @@ import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/address/address_details/address_details_controller.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_bottom_sheet.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
@@ -31,22 +32,6 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
       ),
     );
   }
-
-  // @override
-  // Widget? buildBottomNavigationBar(BuildContext context) {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(24),
-  //     child: AppButton(
-  //       onTap: () {},
-  //       width: double.infinity,
-  //       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-  //       child: Text(
-  //         'Save address',
-  //         style: AppTextStyle.s16w500.copyWith(color: Colors.white),
-  //       ),
-  //     ),
-  //   );
-  // }
 
   @override
   Widget buildScreen(BuildContext context) {
@@ -269,26 +254,6 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
                     ],
                   ),
                 ),
-            // ListView.separated(
-            //   shrinkWrap: true,
-            // itemBuilder: (context, index) => GestureDetector(
-            //   onTap: () => controller.setSelectedDeliveryInstruction(index),
-            //   child: Padding(
-            //     padding: const EdgeInsets.symmetric(vertical: 8),
-            //     child: Row(
-            //       children: [
-            //         vm.deliveryOptions[index].icon,
-            //         const SizedBox(width: 12),
-            //         Text(vm.deliveryOptions[index].title),
-            //         const Spacer(),
-            //         if (selected == index) Assets.icons.icCheckmark.svg(),
-            //       ],
-            //     ),
-            //   ),
-            // ),
-            //   separatorBuilder: (context, index) => const SizedBox(height: 5, child: Divider(height: 1, color: AppColors.stateGreyLowestHover100)),
-            //   itemCount: vm.deliveryOptions.length,
-            // ),
           ],
         );
       }),
@@ -346,7 +311,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: AppButton(
-        onTap: () {},
+        onTap: () => Get.toNamed('${AppRoutes.address}/${AppRoutes.confirmAddress}', arguments: vm.googlePlex.target),
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Text(
