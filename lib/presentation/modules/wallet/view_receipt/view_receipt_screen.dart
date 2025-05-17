@@ -8,6 +8,8 @@ import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
 
 import 'view_receipt_controller.dart';
 
+typedef ReceiptAction = ({SvgGenImage icon, String label, VoidCallback onTap});
+
 class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
   const ViewReceiptScreen({super.key});
 
@@ -40,16 +42,29 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildBrandInfo(),
-        const SizedBox(height: 16),
-        _buildDeliveryPersonInfo(),
-        SectionBreakDivider(),
-        const SizedBox(height: 16),
-        _buildItemsInfo(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildBrandInfo(),
+          const SizedBox(height: 16),
+          _buildDeliveryPersonInfo(),
+          _dividerSection(),
+          _buildItemsInfo(),
+          _dividerSection(),
+          _buildTransactionInfo(),
+          _dividerSection(),
+          _buildReceiptActions(),
+          const SizedBox(height: 16),
+        ],
+      ),
+    );
+  }
+
+  Padding _dividerSection() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      child: const SectionBreakDivider(),
     );
   }
 
@@ -224,6 +239,162 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
               );
             },
           ),
+        ],
+      ),
+    );
+  }
+
+  _buildTransactionInfo() {
+    const date = 'Sep 18, 2023  7:30 AM';
+    const subtotal = 35.87;
+    const deliveryFee = 3.99;
+    const taxes = 2.00;
+    const discontent = 6.00;
+    const tip = 8.50;
+    const total = 35.87;
+    const cardType = 'Visa';
+    const cardNumber = '5290';
+    const cardAmount = 35.87;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Row(
+              children: [
+                Text('Payment', style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950)),
+                const Spacer(),
+                Text(date, style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHigh700)),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          Container(
+            width: double.infinity,
+            color: AppColors.stateBaseWhite,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              child: Column(
+                children: [
+                  _buildTransactionRow('Subtotal:', subtotal),
+                  _buildTransactionRow('Delivery Fee:', deliveryFee),
+                  _buildTransactionRow('Taxes & Estimated Fees:', taxes),
+                  _buildTransactionRow('Discontent:', discontent),
+                  _buildTransactionRow('Delivery  Tip:', tip),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Text('Total:', style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHigh700)),
+                      const Spacer(),
+                      Text('\$${total.toStringAsFixed(2)}', style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHighest950)),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 8),
+            decoration: BoxDecoration(
+              color: AppColors.stateBaseWhite,
+              border: Border(top: BorderSide(color: AppColors.stateGreyLowestHover100)),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              child: Row(
+                children: [
+                  Assets.icons.icVisa.svg(),
+                  const SizedBox(width: 12),
+                  Text('$cardType ••••$cardNumber', style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950)),
+                  const Spacer(),
+                  Text('\$${cardAmount.toStringAsFixed(2)}', style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHigh700)),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTransactionRow(String label, double value) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        children: [
+          Text(label, style: AppTextStyle.s16w400.copyWith(color: AppColors.textGreyHigh700)),
+          const Spacer(),
+          Text('\$${value.toStringAsFixed(2)}', style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHigh700)),
+        ],
+      ),
+    );
+  }
+
+  _buildReceiptActions() {
+    const fileSize = '12 KB';
+    final List<ReceiptAction> actions = [
+      (
+        icon: Assets.icons.icInvoice,
+        label: 'Download PDF',
+        onTap: () {},
+      ),
+      (
+        icon: Assets.icons.icEmailIcon,
+        label: 'Resend Email',
+        onTap: () {},
+      ),
+      (
+        icon: Assets.icons.icShare,
+        label: 'Share',
+        onTap: () {},
+      ),
+    ];
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Receipt', style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950)),
+          const SizedBox(height: 16),
+          ...List.generate(actions.length, (index) {
+            final action = actions[index];
+            return Column(
+              children: [
+                InkWell(
+                  onTap: action.onTap,
+                  borderRadius: BorderRadius.circular(8),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: Row(
+                      children: [
+                        action.icon.svg(
+                          width: 28,
+                          height: 28,
+                          colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Text(
+                            action.label,
+                            style: AppTextStyle.s16w400.copyWith(color: AppColors.textGreyHighest950),
+                          ),
+                        ),
+                        Text(
+                          fileSize,
+                          style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHigh700),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                if (index != actions.length - 1) const Divider(height: 1, color: AppColors.stateGreyLowestHover100),
+              ],
+            );
+          }),
         ],
       ),
     );
