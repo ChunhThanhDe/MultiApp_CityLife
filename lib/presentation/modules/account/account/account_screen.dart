@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/account/components/account_app_bar.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
+import 'package:sixam_mart_user/presentation/shared/app_bar_basic.dart';
 
 import 'account_controller.dart';
 
@@ -98,7 +98,7 @@ class AccountScreen extends BaseScreen<AccountController> {
     return Scaffold(
       body: Column(
         children: [
-          AccountAppBar(
+          BasicAppBar(
             title: "Account",
             onBack: () => Get.back(),
           ),

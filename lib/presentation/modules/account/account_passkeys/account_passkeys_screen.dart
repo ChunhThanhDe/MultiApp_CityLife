@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/account/components/account_app_bar.dart';
+import 'package:sixam_mart_user/presentation/shared/app_bar_basic.dart';
 
 import 'account_passkeys_controller.dart';
 
@@ -27,7 +27,7 @@ class AccountPasskeysScreen extends BaseScreen<AccountPasskeysController> {
       body: Column(
         children: [
           // Status bar & app bar
-          AccountAppBar(
+          BasicAppBar(
             title: "Passkeys",
             onBack: () => Get.back(),
           ),

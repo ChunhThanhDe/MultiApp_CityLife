@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/account/components/account_app_bar.dart';
 import 'package:sixam_mart_user/presentation/modules/account/components/password_input.dart';
+import 'package:sixam_mart_user/presentation/shared/app_bar_basic.dart';
 
 import 'account_password_controller.dart';
 
@@ -15,7 +15,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          AccountAppBar(title: "Password", onBack: () => Get.back()),
+          BasicAppBar(title: "Password", onBack: () => Get.back()),
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 24),

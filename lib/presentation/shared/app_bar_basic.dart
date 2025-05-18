@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class AccountAppBar extends StatelessWidget {
+class BasicAppBar extends StatelessWidget {
   final String title;
   final VoidCallback? onBack;
 
-  const AccountAppBar({
+  const BasicAppBar({
     super.key,
     required this.title,
     this.onBack,

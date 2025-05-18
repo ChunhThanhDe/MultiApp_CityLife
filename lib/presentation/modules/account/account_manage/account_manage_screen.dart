@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/account/components/account_app_bar.dart';
+import 'package:sixam_mart_user/presentation/shared/app_bar_basic.dart';
 
 import 'account_manage_controller.dart';
 
@@ -25,7 +25,7 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
         child: Column(
           children: [
             // Custom AppBar (Status bar + back + title)
-            AccountAppBar(
+            BasicAppBar(
               title: "Manage account",
               onBack: () => Get.back(),
             ),
@@ -57,12 +57,12 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                               borderRadius: BorderRadius.circular(100),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Color(0xFF101214).withValues(alpha: 26),
+                                  color: Color(0xFF101214).withOpacity(0.1),
                                   blurRadius: 16,
                                   offset: Offset(0, 6),
                                 ),
                                 BoxShadow(
-                                  color: Color(0xFF101214).withValues(alpha: 13),
+                                  color: Color(0xFF101214).withOpacity(0.05),
                                   blurRadius: 4,
                                   offset: Offset(0, 2),
                                 ),

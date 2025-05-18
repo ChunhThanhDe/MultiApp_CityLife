@@ -4,6 +4,7 @@ import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/components/favorite_item_card.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/components/favorite_product_card.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/components/favorites_tab_bar.dart';
+import 'package:sixam_mart_user/presentation/shared/app_bar_basic.dart';
 
 import 'favorites_controller.dart';
 
@@ -16,7 +17,9 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          _buildHeader(),
+          BasicAppBar(
+            title: 'Your Favorites',
+          ),
           _buildTabBar(),
           Expanded(
             child: Obx(() {
@@ -71,30 +74,6 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
               isFavorited: controller.isItemFavorited(items[i].title),
               onFavoriteTap: () => controller.toggleFavoriteItem(items[i].title),
             )),
-      ),
-    );
-  }
-
-  Widget _buildHeader() {
-    return SafeArea(
-      child: Column(
-        children: [
-          const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Your Favorites",
-                style: const TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF161A1D),
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

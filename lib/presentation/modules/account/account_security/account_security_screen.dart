@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/account/components/account_app_bar.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
+import 'package:sixam_mart_user/presentation/shared/app_bar_basic.dart';
 
 import 'account_security_controller.dart';
 
@@ -17,7 +17,7 @@ class AccountSecurityScreen extends BaseScreen<AccountSecurityController> {
       body: Column(
         children: [
           // Custom Status Bar & AppBar
-          AccountAppBar(
+          BasicAppBar(
             title: "Security",
             onBack: () => Get.back(),
           ),
