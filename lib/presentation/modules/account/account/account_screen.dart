@@ -34,7 +34,7 @@ class AccountScreen extends BaseScreen<AccountController> {
       AccountMenuItem(
         icon: Icons.favorite_border,
         title: 'Favorites',
-        onClick: () {},
+        onClick: () => Get.toNamed(AppRoutes.favorites),
       ),
       AccountMenuItem(
         icon: Icons.lock_outline,

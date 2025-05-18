@@ -15,13 +15,15 @@ import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/sign
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/sign_in_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign_up_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign_up_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/favorites/favorites_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/favorites/favorities_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_bindings.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_screen.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
-  static String initial = AppRoutes.root;
+  static String initial = AppRoutes.account;
 
   static final appRoutes = [
     GetPage(
@@ -68,6 +70,11 @@ class AppPages {
       name: AppRoutes.accountPasskey,
       page: () => const AccountPasskeysScreen(),
       binding: AccountPasskeysBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.favorites,
+      page: () => const FavoritesScreen(),
+      binding: FavoritesBinding(),
     ),
   ];
 }

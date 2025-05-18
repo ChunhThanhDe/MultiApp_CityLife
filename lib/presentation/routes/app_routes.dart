@@ -10,4 +10,5 @@ class AppRoutes {
   static const String accountPassword = '/account/password';
   static const String accountSecurity = '/account/security';
   static const String accountPasskey = '/account/passkey';
+  static const String favorites = '/favorites';
 }
