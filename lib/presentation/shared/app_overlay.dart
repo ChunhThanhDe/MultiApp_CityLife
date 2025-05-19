@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'app_overlay_navigator.dart';
+import 'app_navigator.dart';
 
 Future<dynamic> showLoadingOverlay({required Future<dynamic> api, Widget? child, bool isShowLoading = true}) {
   return _AppLoadingOverlay.show(api: api, child: child, isShowLoading: isShowLoading);

@@ -200,21 +200,21 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         hintStyle: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyDefault500),
         helperText: helper,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(Figma.corner.radius6),
+          borderRadius: BorderRadius.circular(AppCorner.radius6),
           borderSide: BorderSide(
             color: AppColors.tokenColorsStateGreyLowestHover100,
             width: 1,
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(Figma.corner.radius6),
+          borderRadius: BorderRadius.circular(AppCorner.radius6),
           borderSide: BorderSide(
             color: AppColors.tokenColorsStateGreyLowestHover100,
             width: 1,
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(Figma.corner.radius6),
+          borderRadius: BorderRadius.circular(AppCorner.radius6),
           borderSide: BorderSide(
             color: AppColors.tokenColorsStateGreyLowestHover100,
             width: 1,

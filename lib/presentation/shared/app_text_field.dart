@@ -65,7 +65,7 @@ class AppTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double effectiveRadius = borderRadius ?? Figma.corner.radius6;
+    final double effectiveRadius = borderRadius ?? AppCorner.radius6;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
