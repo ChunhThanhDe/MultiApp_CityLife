@@ -9,11 +9,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sixam_mart_user/di.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_overlay_navigator.dart';
+import 'package:sixam_mart_user/theme.dart';
+
+_preloadFonts() {
+  GoogleFonts.pendingFonts([GoogleFonts.inter()]);
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await DependencyInjection.init();
+  _preloadFonts();
   HttpOverrides.global = MyHttpOverrides();
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: Platform.isAndroid ? Brightness.dark : null),
@@ -41,23 +47,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FigmaTheme.modifyBrandColor(BrandColorTypes.purple);
+    FigmaTheme.modifyTheme(ThemeTypes.light);
+    FigmaTheme.modifySpacing(SpacingTypes.mode1);
+    FigmaTheme.modifyFontFamily(FontFamilyTypes.inter);
     return ScreenUtilInit(
       designSize: const Size(430, 932),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return GetMaterialApp(
-          title: 'Six Mart',
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          themeMode: ThemeMode.light,
-          navigatorKey: AppNavigator.navigatorKey,
-          initialRoute: AppPages.initial,
-          getPages: AppPages.appRoutes,
-          defaultTransition: Transition.cupertino,
-          theme: ThemeData(textTheme: GoogleFonts.interTextTheme(Theme.of(context).textTheme)),
+        return FigmaTheme(
+          child: GetMaterialApp(
+            title: 'Six Mart',
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            themeMode: ThemeMode.light,
+            navigatorKey: AppOverlayNavigator.navigatorKey,
+            initialRoute: AppPages.initial,
+            getPages: AppPages.appRoutes,
+            defaultTransition: Transition.cupertino,
+          ),
         );
       },
     );

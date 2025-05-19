@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 /// A customizable text field with optional label, prefix/suffix icons, and validation.
 class AppTextField extends StatelessWidget {
@@ -61,25 +62,20 @@ class AppTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (label != null) ...[
-          Row(
-            children: [
+        Row(
+          children: [
+            label != null
+                ? Text(
+                    label!,
+                    style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+                  )
+                : const SizedBox.shrink(),
+            if (isRequired && label != null) ...[
+              const SizedBox(width: 4),
               Text(
-                label!,
-                style: AppTextStyle.s14w400.copyWith(
-                  color: const Color(0xFF161A1D),
-                ),
+                '*',
+                style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextDangerDefault500),
               ),
-              if (isRequired) const SizedBox(width: 4),
-              if (isRequired)
-                const Text(
-                  '*',
-                  style: TextStyle(
-                    color: Color(0xFFFF3B30),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
             ],
           ),
           const SizedBox(height: 8),
@@ -94,46 +90,44 @@ class AppTextField extends StatelessWidget {
             keyboardType: keyboardType,
             focusNode: focusNode,
             onChanged: onChanged,
-            style: AppTextStyle.s14w400.copyWith(
-              color: const Color(0xFF161A1D),
-            ),
+            style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
             validator: validator,
             decoration: InputDecoration(
               hintText: hintText,
               helperText: '',
-              hintStyle: AppTextStyle.s14w400.copyWith(
-                color: const Color(0xFF798A9A),
-              ),
-              prefixIcon: prefixIcon,
-              suffixIcon: suffixIcon,
+              hintStyle: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyDefault500),
+              suffixIcon: svgPath != null
+                  ? Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: SvgPicture.asset(svgPath!, colorFilter: const ColorFilter.mode(Color(0xFF798A9A), BlendMode.srcIn)),
+                    )
+                  : null,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(effectiveRadius),
-                borderSide: const BorderSide(
-                  color: Color(0xFFE8EBEE),
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(
+                  color: Figma.theme.tokenColorsStateGreyLowestHover100,
                   width: 1,
                 ),
               ),
-              errorStyle: AppTextStyle.s12w400.copyWith(
-                color: const Color(0xFFFF3B30),
-              ),
+              errorStyle: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextDangerDefault500),
               errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(effectiveRadius),
-                borderSide: const BorderSide(
-                  color: Color(0xFFFF3B30),
+                borderRadius: BorderRadius.circular(Figma.corner.radius6),
+                borderSide: BorderSide(
+                  color: Figma.theme.tokenColorsStateDangerDefault500,
                   width: 1,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(effectiveRadius),
-                borderSide: const BorderSide(
-                  color: Color(0xFFE8EBEE),
+                borderRadius: BorderRadius.circular(Figma.corner.radius6),
+                borderSide: BorderSide(
+                  color: Figma.theme.tokenColorsStateGreyLowestHover100,
                   width: 1,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(effectiveRadius),
-                borderSide: const BorderSide(
-                  color: Color(0xFF5856D7),
+                borderRadius: BorderRadius.circular(Figma.corner.radius6),
+                borderSide: BorderSide(
+                  color: Figma.theme.tokenColorsStateBrandDefault500,
                   width: 1,
                 ),
               ),

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 import 'home_controller.dart';
 
@@ -19,27 +18,21 @@ class HomeScreen extends BaseScreen<HomeController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AppButton(
-            color: AppColors.stateBrandDefault500,
+            color: Figma.theme.tokenColorsStateBrandDefault500,
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
             onTap: () {
               Get.toNamed(AppRoutes.signIn);
             },
-            child: Text(
-              'Sign In',
-              style: AppTextStyle.s16w500.copyWith(color: Colors.white),
-            ),
+            child: Text('Sign In', style: AppTextStyles.typographyH10Bold.copyWith(color: Colors.white)),
           ),
           SizedBox(height: 16.h),
           AppButton(
             onTap: () {
               Get.toNamed(AppRoutes.signUp);
             },
-            color: AppColors.stateBrandDefault500,
+            color: Figma.theme.tokenColorsStateBrandDefault500,
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-            child: Text(
-              'Sign Up',
-              style: AppTextStyle.s16w500.copyWith(color: Colors.white),
-            ),
+            child: Text('Sign Up', style: AppTextStyles.typographyH10Bold.copyWith(color: Colors.white)),
           ),
           SizedBox(height: 16.h),
           AppButton(

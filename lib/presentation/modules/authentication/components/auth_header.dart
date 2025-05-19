@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 class AuthHeader extends StatelessWidget {
   final String title;
@@ -26,12 +26,12 @@ class AuthHeader extends StatelessWidget {
       children: [
         AutoSizeText(
           title,
-          style: titleStyle ?? AppTextStyle.s28w600,
+          style: titleStyle ?? AppTextStyles.typographyH6SemiBold.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
           maxLines: titleMaxLines,
         ),
         Text(
           subtitle,
-          style: subtitleStyle ?? AppTextStyle.s16w400,
+          style: subtitleStyle ?? AppTextStyles.typographyH10Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
           maxLines: subtitleMaxLines,
         ),
       ],

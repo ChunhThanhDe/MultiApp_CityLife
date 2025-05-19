@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 class PhonePicker extends StatelessWidget {
   const PhonePicker({
@@ -27,8 +27,8 @@ class PhonePicker extends StatelessWidget {
         Text.rich(
           TextSpan(
             children: [
-              const TextSpan(text: 'Phone'),
-              TextSpan(text: ' *', style: AppTextStyle.s14w400.copyWith(color: const Color(0xFFFF3B30))),
+              TextSpan(text: 'Phone', style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950)),
+              TextSpan(text: ' *', style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextDangerDefault500)),
             ],
           ),
         ),
@@ -48,7 +48,7 @@ class PhonePicker extends StatelessWidget {
                 onChanged: (CountryCode countryCode) {
                   onChanged(countryCode);
                 },
-                textStyle: AppTextStyle.s14w400.copyWith(color: const Color(0xFF161A1D)),
+                textStyle: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
                 initialSelection: countryDialCode,
                 favorite: const ['+1', '+91'],
                 showDropDownButton: true,
@@ -61,15 +61,15 @@ class PhonePicker extends StatelessWidget {
                       children: [
                         Text(
                           countryCode?.dialCode ?? '+1',
-                          style: AppTextStyle.s14w400.copyWith(color: const Color(0xFF161A1D)),
+                          style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyDefault500),
                         ),
                         SizedBox(width: 8.w),
                         SvgPicture.asset(
                           Assets.icons.icDropdownArrow.path,
                           width: 8.w,
                           height: 8.w,
-                          colorFilter: const ColorFilter.mode(
-                            Color(0xFF161A1D),
+                          colorFilter: ColorFilter.mode(
+                            Figma.theme.tokenColorsTextGreyDefault500,
                             BlendMode.srcIn,
                           ),
                         ),

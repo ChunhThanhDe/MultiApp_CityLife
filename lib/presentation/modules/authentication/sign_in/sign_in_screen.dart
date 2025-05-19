@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_bottom_section.dart';
@@ -10,6 +9,7 @@ import 'package:sixam_mart_user/presentation/modules/authentication/components/a
 import 'package:sixam_mart_user/presentation/modules/authentication/components/phone_picker.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 import 'sign_in_controller.dart';
 
@@ -57,8 +57,8 @@ class SignInScreen extends BaseScreen<SignInController> {
                 vm.loginMethod.value == LoginMethod.email ? Assets.icons.icPhoneIcon.path : Assets.icons.icEmailIcon.path,
                 width: 20.w,
                 height: 20.w,
-                colorFilter: const ColorFilter.mode(
-                  Color(0xFF161A1D),
+                colorFilter: ColorFilter.mode(
+                  Figma.theme.tokenColorsTextGreyHighest950,
                   BlendMode.srcIn,
                 ),
               )),
@@ -66,7 +66,7 @@ class SignInScreen extends BaseScreen<SignInController> {
           Obx(() => Text(
                 vm.loginMethod.value == LoginMethod.email ? 'Log in with phone' : 'Log in with email',
                 textAlign: TextAlign.center,
-                style: AppTextStyle.s16w500,
+                style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
               )),
         ],
       ),
@@ -86,14 +86,12 @@ class SignInScreen extends BaseScreen<SignInController> {
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
             'OR',
-            style: AppTextStyle.s12w500.copyWith(
-              color: const Color(0xFF4A5763),
-            ),
+            style: AppTextStyles.typographyH12Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
           ),
         ),
-        const Expanded(
+        Expanded(
           child: Divider(
-            color: Color(0xFFE8EBEE),
+            color: Figma.theme.tokenColorsStateBrandLowestHover100,
             thickness: 1,
           ),
         ),
@@ -113,9 +111,7 @@ class SignInScreen extends BaseScreen<SignInController> {
               const SizedBox(),
               Text(
                 'Log in',
-                style: AppTextStyle.s16w500.copyWith(
-                  color: Colors.white,
-                ),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white),
               ),
               SvgPicture.asset(
                 Assets.icons.icRightArrow.path,
