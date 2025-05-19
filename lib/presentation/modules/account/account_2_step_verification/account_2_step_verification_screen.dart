@@ -15,12 +15,10 @@ class Account2StepVerificationScreen extends BaseScreen<Account2StepVerification
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          // Custom status bar + app bar
           BasicAppBar(
             title: "Security",
             onBack: () => Get.back(),
           ),
-
           Expanded(
             child: ListView(
               padding: EdgeInsets.zero,
