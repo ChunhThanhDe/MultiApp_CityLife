@@ -60,8 +60,8 @@ class AddFundController extends BaseController {
 
   void onSelectRecommendedAmount(int amount) {
     amountController.text = amount.toString();
-    isAmountFocused.refresh();
     amountText.value = amount.toString();
+    isAmountFocused.refresh();
   }
 
   void onSelectPaymentMethod(PaymentMethod value) {

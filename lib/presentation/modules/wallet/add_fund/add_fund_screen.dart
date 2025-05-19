@@ -22,7 +22,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
           onTap: () {},
           enabled: isEnabled,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          child: Text('Add Funds', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950)),
+          child: Text('Add Funds', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.tokenColorsStateBaseWhite)),
         );
       }),
     );
@@ -51,7 +51,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildTextHeader(),
-        // const SizedBox(height: 24),
+        const SizedBox(height: 16),
         _buildInputAmount(),
         Container(
           width: double.infinity,
