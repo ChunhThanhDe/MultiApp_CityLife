@@ -219,10 +219,9 @@ class AddFundScreen extends BaseScreen<AddFundController> {
   }
 
   Future<void> _showPaymentMethodSheet(BuildContext context) async {
-    final Rx<PaymentMethod?> tempSelected = controller.selectedPaymentMethod.value.obs;
     await showAppBottomSheet<PaymentMethod?>(
       onClosed: (result) {
-        final selected = result ?? tempSelected.value;
+        final selected = result;
         if (selected != null) {
           controller.onSelectPaymentMethod(selected);
         }
@@ -244,7 +243,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
                 ),
               ),
               ...controller.paymentMethods.asMap().entries.map((entry) => GestureDetector(
-                    onTap: () => tempSelected.value = entry.value,
+                    onTap: () => Navigator.pop(context, entry.value),
                     behavior: HitTestBehavior.opaque,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -254,7 +253,9 @@ class AddFundScreen extends BaseScreen<AddFundController> {
                           const SizedBox(width: 12),
                           Text('${entry.value.name} ****${entry.value.last4}', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                           const Spacer(),
-                          tempSelected.value == entry.value ? Assets.icons.icCheckmark.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)) : const SizedBox.shrink(),
+                          (controller.selectedPaymentMethod.value ?? controller.paymentMethods.first) == entry.value
+                              ? Assets.icons.icCheckmark.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn))
+                              : const SizedBox.shrink(),
                         ],
                       ),
                     ),
