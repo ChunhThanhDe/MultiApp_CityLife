@@ -264,49 +264,52 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
   _buildBuildingTypeSheet() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 16),
-          Text(
-            'Select building type',
-            style: AppTextStyles.typographyH8SemiBold.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
-          ),
-          Text(
-            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-            style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
-          ),
-          const SizedBox(height: 16),
-          Divider(
-            height: 1,
-            color: Figma.theme.tokenColorsStateGreyLowestHover100,
-          ),
-          const SizedBox(height: 16),
-          ...vm.buildingTypes.asMap().entries.map((entry) => Column(
-                children: [
-                  GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap: () => vm.selectedBuildingType.value = entry.key,
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: Obx(() => Row(
-                            children: [
-                              entry.value.icon,
-                              const SizedBox(width: 12),
-                              Text(entry.value.title,
-                                  style: AppTextStyles.typographyH11Regular
-                                      .copyWith(color: vm.selectedBuildingType.value == entry.key ? Figma.theme.tokenColorsTextGreyHighest950 : Figma.theme.tokenColorsTextGreyHigh700)),
-                              const Spacer(),
-                              vm.selectedBuildingType.value == entry.key ? Assets.icons.icCheckmark.svg() : const SizedBox.shrink(),
-                            ],
-                          )),
+      child: ColoredBox(
+        color: Colors.white,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 16),
+            Text(
+              'Select building type',
+              style: AppTextStyles.typographyH8SemiBold.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+            ),
+            Text(
+              'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+              style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
+            ),
+            const SizedBox(height: 16),
+            Divider(
+              height: 1,
+              color: Figma.theme.tokenColorsStateGreyLowestHover100,
+            ),
+            const SizedBox(height: 16),
+            ...vm.buildingTypes.asMap().entries.map((entry) => Column(
+                  children: [
+                    GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () => vm.selectedBuildingType.value = entry.key,
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Obx(() => Row(
+                              children: [
+                                entry.value.icon,
+                                const SizedBox(width: 12),
+                                Text(entry.value.title,
+                                    style: AppTextStyles.typographyH11Regular
+                                        .copyWith(color: vm.selectedBuildingType.value == entry.key ? Figma.theme.tokenColorsTextGreyHighest950 : Figma.theme.tokenColorsTextGreyHigh700)),
+                                const Spacer(),
+                                vm.selectedBuildingType.value == entry.key ? Assets.icons.icCheckmark.svg() : const SizedBox.shrink(),
+                              ],
+                            )),
+                      ),
                     ),
-                  ),
-                  if (entry.key != vm.buildingTypes.length - 1) SizedBox(height: 16, child: Divider(height: 1, color: Figma.theme.tokenColorsStateGreyLowestHover100)),
-                ],
-              )),
-          const SizedBox(height: 40),
-        ],
+                    if (entry.key != vm.buildingTypes.length - 1) SizedBox(height: 16, child: Divider(height: 1, color: Figma.theme.tokenColorsStateGreyLowestHover100)),
+                  ],
+                )),
+            const SizedBox(height: 40),
+          ],
+        ),
       ),
     );
   }
