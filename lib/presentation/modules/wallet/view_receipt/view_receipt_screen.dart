@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
-import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 import 'view_receipt_controller.dart';
 
@@ -17,14 +16,14 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return AppBar(
       centerTitle: false,
-      surfaceTintColor: AppColors.stateBaseWhite,
-      backgroundColor: AppColors.stateBaseWhite,
+      surfaceTintColor: Figma.theme.tokenColorsStateBaseWhite,
+      backgroundColor: Figma.theme.tokenColorsStateBaseWhite,
       leadingWidth: 48,
-      title: Text('Receipt ', style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950)),
+      title: Text('Receipt ', style: AppTextStyles.typographyH9Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950)),
       leading: IconButton(
         onPressed: () => Get.back(),
         icon: Assets.icons.icLeftArrowChervon.svg(
-          colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn),
+          colorFilter: ColorFilter.mode(Figma.theme.tokenColorsTextGreyHighest950, BlendMode.srcIn),
           width: 28,
           height: 28,
         ),
@@ -34,10 +33,10 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
           children: [
             Text(
               '#203358',
-              style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHighest950),
+              style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
             ),
             const SizedBox(width: 8),
-            Assets.icons.icInvoice.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
+            Assets.icons.icInvoice.svg(colorFilter: ColorFilter.mode(Figma.theme.tokenColorsTextGreyHighest950, BlendMode.srcIn)),
             const SizedBox(width: 24),
           ],
         )
@@ -99,32 +98,16 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
             children: [
               Text(
                 'Starbucks®',
-                style: AppTextStyle.s24w600.copyWith(color: AppColors.textBaseWhite),
+                style: AppTextStyles.typographyH7SemiBold.copyWith(color: Figma.theme.tokenColorsTextBaseWhite),
               ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                spacing: 8,
-                children: [
-                  Text(
-                    'Completed',
-                    style: AppTextStyle.s12w400.copyWith(color: AppColors.textBaseWhite),
-                  ),
-                  Text(
-                    '•',
-                    style: AppTextStyle.s12w400.copyWith(color: AppColors.textBaseWhite),
-                  ),
-                  Text(
-                    '7:25 PM',
-                    style: AppTextStyle.s12w400.copyWith(color: AppColors.textBaseWhite),
-                  ),
-                ],
+              Text(
+                'Completed • 7:25 PM',
+                style: AppTextStyles.typographyH12Regular.copyWith(color: Figma.theme.tokenColorsTextBaseWhite),
               ),
             ],
           ),
           const Spacer(),
-          Assets.icons.icRightArrowChevron.svg(colorFilter: ColorFilter.mode(AppColors.textBaseWhite, BlendMode.srcIn)),
+          Assets.icons.icRightArrowChevron.svg(colorFilter: ColorFilter.mode(Figma.theme.tokenColorsTextBaseWhite, BlendMode.srcIn)),
         ],
       ),
     );
@@ -158,20 +141,20 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
                   width: 261,
                   child: Text(
                     'Abdulkadir Ali',
-                    style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950),
+                    style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
                   ),
                 ),
                 SizedBox(
                   width: 261,
                   child: Text(
                     'Toyota Camry • 84D23B63',
-                    style: AppTextStyle.s12w400.copyWith(color: AppColors.textGreyHigh700),
+                    style: AppTextStyles.typographyH12Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
                   ),
                 ),
               ],
             ),
           ),
-          Text('84%', style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHigh700)),
+          Text('84%', style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700)),
           Assets.icons.icLikeFilled.svg(),
         ],
       ),
@@ -186,7 +169,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
         children: [
           Text(
             'Items',
-            style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950),
+            style: AppTextStyles.typographyH9Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
           ),
           const SizedBox(height: 16),
           ListView.separated(
@@ -194,9 +177,9 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: vm.items.length,
             separatorBuilder: (context, index) => Column(
-              children: const [
+              children: [
                 SizedBox(height: 16),
-                Divider(height: 1, color: AppColors.stateGreyLowestHover100),
+                Divider(height: 1, color: Figma.theme.tokenColorsStateGreyLowestHover100),
                 SizedBox(height: 16),
               ],
             ),
@@ -220,12 +203,12 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
                       children: [
                         Text(
                           item.name,
-                          style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950),
+                          style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           '\$${item.price}',
-                          style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHigh700),
+                          style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
                         ),
                       ],
                     ),
@@ -235,10 +218,10 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
                     height: 40,
                     padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
-                      color: AppColors.stateGreyLowest50,
+                      color: Figma.theme.tokenColorsStateGreyLowest50,
                       shape: BoxShape.circle,
                     ),
-                    child: Assets.icons.icPlusAdd.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
+                    child: Assets.icons.icPlusAdd.svg(colorFilter: ColorFilter.mode(Figma.theme.tokenColorsTextGreyHighest950, BlendMode.srcIn)),
                   ),
                 ],
               );
@@ -270,16 +253,16 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Row(
               children: [
-                Text('Payment', style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950)),
+                Text('Payment', style: AppTextStyles.typographyH9Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950)),
                 const Spacer(),
-                Text(date, style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHigh700)),
+                Text(date, style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950)),
               ],
             ),
           ),
           const SizedBox(height: 16),
           Container(
             width: double.infinity,
-            color: AppColors.stateBaseWhite,
+            color: Figma.theme.tokenColorsStateBaseWhite,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               child: Column(
@@ -292,9 +275,9 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      Text('Total:', style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHigh700)),
+                      Text('Total:', style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700)),
                       const Spacer(),
-                      Text('\$${total.toStringAsFixed(2)}', style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHighest950)),
+                      Text('\$${total.toStringAsFixed(2)}', style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950)),
                     ],
                   ),
                 ],
@@ -304,8 +287,8 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
           Container(
             margin: const EdgeInsets.only(top: 8),
             decoration: BoxDecoration(
-              color: AppColors.stateBaseWhite,
-              border: Border(top: BorderSide(color: AppColors.stateGreyLowestHover100)),
+              color: Figma.theme.tokenColorsStateBaseWhite,
+              border: Border(top: BorderSide(color: Figma.theme.tokenColorsStateGreyLowestHover100)),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
@@ -313,9 +296,9 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
                 children: [
                   Assets.icons.icVisa.svg(),
                   const SizedBox(width: 12),
-                  Text('$cardType ••••$cardNumber', style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950)),
+                  Text('$cardType ••••$cardNumber', style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950)),
                   const Spacer(),
-                  Text('\$${cardAmount.toStringAsFixed(2)}', style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHigh700)),
+                  Text('\$${cardAmount.toStringAsFixed(2)}', style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700)),
                 ],
               ),
             ),
@@ -330,9 +313,9 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
       padding: const EdgeInsets.only(bottom: 8),
       child: Row(
         children: [
-          Text(label, style: AppTextStyle.s16w400.copyWith(color: AppColors.textGreyHigh700)),
+          Text(label, style: AppTextStyles.typographyH10Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700)),
           const Spacer(),
-          Text('\$${value.toStringAsFixed(2)}', style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHigh700)),
+          Text('\$${value.toStringAsFixed(2)}', style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700)),
         ],
       ),
     );
@@ -363,7 +346,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Receipt', style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950)),
+          Text('Receipt', style: AppTextStyles.typographyH9Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950)),
           const SizedBox(height: 16),
           ...List.generate(actions.length, (index) {
             final action = actions[index];
@@ -379,24 +362,24 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
                         action.icon.svg(
                           width: 28,
                           height: 28,
-                          colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn),
+                          colorFilter: ColorFilter.mode(Figma.theme.tokenColorsTextGreyHigh700, BlendMode.srcIn),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
                           child: Text(
                             action.label,
-                            style: AppTextStyle.s16w400.copyWith(color: AppColors.textGreyHighest950),
+                            style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
                           ),
                         ),
                         Text(
                           fileSize,
-                          style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHigh700),
+                          style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
                         ),
                       ],
                     ),
                   ),
                 ),
-                if (index != actions.length - 1) const Divider(height: 1, color: AppColors.stateGreyLowestHover100),
+                if (index != actions.length - 1) Divider(height: 1, color: Figma.theme.tokenColorsStateGreyLowestHover100),
               ],
             );
           }),

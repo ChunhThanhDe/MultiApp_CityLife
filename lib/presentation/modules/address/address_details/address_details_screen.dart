@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
-import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/address/address_details/address_details_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_bottom_sheet.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
   const AddressDetailsScreen({super.key});
@@ -24,7 +23,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
       backgroundColor: Colors.white,
       title: Text(
         'Address details',
-        style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950),
+        style: AppTextStyles.typographyH9Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
       ),
       centerTitle: false,
       leading: IconButton(
@@ -48,13 +47,13 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
             width: double.infinity,
             height: 6,
             decoration: BoxDecoration(
-              color: AppColors.stateGreyLowest50,
+              color: Figma.theme.tokenColorsStateGreyLowest50,
             ),
           ),
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 16)),
         SliverToBoxAdapter(child: _buildDeliveryInstructions()),
-        const SliverToBoxAdapter(child: SizedBox(height: 12, child: Divider(height: 1, color: AppColors.stateGreyLowestHover100))),
+        SliverToBoxAdapter(child: SizedBox(height: 12, child: Divider(height: 1, color: Figma.theme.tokenColorsStateGreyLowestHover100))),
         const SliverToBoxAdapter(child: SizedBox(height: 16)),
         SliverToBoxAdapter(child: _buildSaveButton()),
       ],
@@ -73,11 +72,11 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
             children: [
               Text(
                 vm.searchItem.address,
-                style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
               ),
               Text(
                 vm.searchItem.address,
-                style: AppTextStyle.s12w400.copyWith(color: AppColors.textGreyHigh700),
+                style: AppTextStyles.typographyH12Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
               ),
             ],
           ),
@@ -125,7 +124,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
                       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                       child: Text(
                         'Edit pin',
-                        style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950),
+                        style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
                       ),
                     ),
                   ),
@@ -149,11 +148,11 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
             children: [
               Text(
                 'Building type',
-                style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHighest950),
+                style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
               ),
               Text(
                 '*',
-                style: AppTextStyle.s14w400.copyWith(color: AppColors.textDangerDefault500),
+                style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextDangerDefault500),
               ),
               Assets.icons.icInformation.svg(),
             ],
@@ -169,7 +168,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
                 shape: RoundedRectangleBorder(
                   side: BorderSide(
                     width: 1,
-                    color: AppColors.stateGreyLowestHover100,
+                    color: Figma.theme.tokenColorsStateGreyLowestHover100,
                   ),
                   borderRadius: BorderRadius.circular(6),
                 ),
@@ -180,7 +179,8 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
                 children: [
                   Obx(() => Text(
                         vm.selectedBuildingType.value == -1 ? 'Select building type' : vm.buildingTypes[vm.selectedBuildingType.value].title,
-                        style: AppTextStyle.s14w400.copyWith(color: vm.selectedBuildingType.value == -1 ? AppColors.textGreyDefault500 : AppColors.textGreyHighest950),
+                        style: AppTextStyles.typographyH11Regular
+                            .copyWith(color: vm.selectedBuildingType.value == -1 ? Figma.theme.tokenColorsTextGreyDefault500 : Figma.theme.tokenColorsTextGreyHighest950),
                       )),
                   Assets.icons.icDropdownArrow.svg(),
                 ],
@@ -203,8 +203,8 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
           RichText(
             text: TextSpan(
               children: [
-                TextSpan(text: 'Address label', style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHighest950)),
-                TextSpan(text: ' (optional)', style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyDefault500)),
+                TextSpan(text: 'Address label', style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950)),
+                TextSpan(text: ' (optional)', style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyDefault500)),
               ],
             ),
           ),
@@ -229,7 +229,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
           children: [
             Text(
               'Delivery instructions',
-              style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950),
+              style: AppTextStyles.typographyH9Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
             ),
             const SizedBox(height: 8),
             ...vm.deliveryOptions.asMap().entries.map(
@@ -251,7 +251,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
                           ),
                         ),
                       ),
-                      if (entry.key != vm.deliveryOptions.length - 1) const SizedBox(height: 12, child: Divider(height: 1, color: AppColors.stateGreyLowestHover100)),
+                      if (entry.key != vm.deliveryOptions.length - 1) SizedBox(height: 12, child: Divider(height: 1, color: Figma.theme.tokenColorsStateGreyLowestHover100)),
                     ],
                   ),
                 ),
@@ -270,16 +270,16 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
           const SizedBox(height: 16),
           Text(
             'Select building type',
-            style: AppTextStyle.s20w600.copyWith(color: AppColors.textGreyHighest950),
+            style: AppTextStyles.typographyH8SemiBold.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
           ),
           Text(
             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-            style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHigh700),
+            style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
           ),
           const SizedBox(height: 16),
           Divider(
             height: 1,
-            color: AppColors.stateGreyLowestHover100,
+            color: Figma.theme.tokenColorsStateGreyLowestHover100,
           ),
           const SizedBox(height: 16),
           ...vm.buildingTypes.asMap().entries.map((entry) => Column(
@@ -294,14 +294,15 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
                               entry.value.icon,
                               const SizedBox(width: 12),
                               Text(entry.value.title,
-                                  style: AppTextStyle.s16w500.copyWith(color: vm.selectedBuildingType.value == entry.key ? AppColors.textGreyHighest950 : AppColors.textGreyHigh700)),
+                                  style: AppTextStyles.typographyH11Regular
+                                      .copyWith(color: vm.selectedBuildingType.value == entry.key ? Figma.theme.tokenColorsTextGreyHighest950 : Figma.theme.tokenColorsTextGreyHigh700)),
                               const Spacer(),
                               vm.selectedBuildingType.value == entry.key ? Assets.icons.icCheckmark.svg() : const SizedBox.shrink(),
                             ],
                           )),
                     ),
                   ),
-                  if (entry.key != vm.buildingTypes.length - 1) const SizedBox(height: 16, child: Divider(height: 1, color: AppColors.stateGreyLowestHover100)),
+                  if (entry.key != vm.buildingTypes.length - 1) SizedBox(height: 16, child: Divider(height: 1, color: Figma.theme.tokenColorsStateGreyLowestHover100)),
                 ],
               )),
           const SizedBox(height: 40),
@@ -319,7 +320,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Text(
           'Save address',
-          style: AppTextStyle.s16w500.copyWith(color: Colors.white),
+          style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white),
         ),
       ),
     );

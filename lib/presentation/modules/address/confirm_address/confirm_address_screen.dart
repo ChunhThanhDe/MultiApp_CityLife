@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
-import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 import 'confirm_address_controller.dart';
 
@@ -28,11 +27,11 @@ class ConfirmAddressScreen extends BaseScreen<ConfirmAddressController> {
           children: [
             Text(
               'Confirm delivery address',
-              style: AppTextStyle.s28w600.copyWith(color: AppColors.textGreyHighest950),
+              style: AppTextStyles.typographyH6SemiBold.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
             ),
             Text(
               'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-              style: AppTextStyle.s16w400.copyWith(color: AppColors.textGreyHigh700),
+              style: AppTextStyles.typographyH10Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
             ),
             AppButton(
               onTap: () {},
@@ -40,7 +39,7 @@ class ConfirmAddressScreen extends BaseScreen<ConfirmAddressController> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Text(
                 'Confirm location',
-                style: AppTextStyle.s16w500.copyWith(color: Colors.white),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextBaseWhite),
               ),
             ),
           ],
@@ -96,7 +95,7 @@ class ConfirmAddressScreen extends BaseScreen<ConfirmAddressController> {
           height: 36,
           padding: const EdgeInsets.all(6),
           decoration: ShapeDecoration(
-            color: AppColors.stateBaseWhite,
+            color: Figma.theme.tokenColorsStateBaseWhite,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(32),
             ),

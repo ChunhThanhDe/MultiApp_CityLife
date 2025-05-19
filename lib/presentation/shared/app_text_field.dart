@@ -77,9 +77,9 @@ class AppTextField extends StatelessWidget {
                 style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextDangerDefault500),
               ),
             ],
-          ),
-          const SizedBox(height: 8),
-        ],
+          ],
+        ),
+        const SizedBox(height: 8),
         Container(
           decoration: BoxDecoration(
             color: Colors.white,

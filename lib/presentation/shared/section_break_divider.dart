@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 class SectionBreakDivider extends StatelessWidget {
   const SectionBreakDivider({
@@ -12,7 +12,7 @@ class SectionBreakDivider extends StatelessWidget {
       width: double.infinity,
       height: 6,
       decoration: BoxDecoration(
-        color: AppColors.stateGreyLowest50,
+        color: Figma.theme.tokenColorsStateGreyLowest50,
       ),
     );
   }

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
-import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 import 'search_address_controller.dart';
 
@@ -30,7 +29,7 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
       backgroundColor: Colors.white,
       title: Text(
         'Address',
-        style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950),
+        style: AppTextStyles.typographyH9Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
       ),
       centerTitle: false,
       leading: IconButton(
@@ -47,11 +46,11 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
       child: AppButton(
         onTap: () {},
         width: double.infinity,
-        color: AppColors.stateGreyLowest50,
+        color: Figma.theme.tokenColorsStateGreyLowest50,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Text(
           'Add new address',
-          style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950),
+          style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
         ),
       ),
     );
@@ -89,12 +88,12 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
           ),
           Text(
             'Explore nearby',
-            style: AppTextStyle.s18w500.copyWith(color: AppColors.textGreyHighest950),
+            style: AppTextStyles.typographyH9Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
           ),
           Expanded(
             child: ListView.separated(
               itemCount: results.length,
-              separatorBuilder: (context, index) => const Divider(height: 1, color: AppColors.stateGreyLowestHover100),
+              separatorBuilder: (context, index) => Divider(height: 1, color: Figma.theme.tokenColorsStateGreyLowestHover100),
               itemBuilder: (context, index) {
                 return _buildSearchItem(results[index]);
               },
@@ -124,8 +123,8 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(item.title, style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950)),
-                Text(item.address, style: AppTextStyle.s12w400.copyWith(color: AppColors.textGreyHigh700)),
+                Text(item.title, style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950)),
+                Text(item.address, style: AppTextStyles.typographyH12Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700)),
               ],
             ),
             const Spacer(),

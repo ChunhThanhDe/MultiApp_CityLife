@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
+import 'package:sixam_mart_user/theme.dart';
 import 'package:smooth_sheets/smooth_sheets.dart';
 
 import 'app_overlay_navigator.dart';
@@ -54,7 +54,7 @@ class AppBottomSheet extends StatelessWidget {
                   width: 48,
                   height: 4,
                   decoration: ShapeDecoration(
-                    color: AppColors.stateGreyLowestHover100,
+                    color: Figma.theme.tokenColorsStateGreyLowestHover100,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(99),
                     ),

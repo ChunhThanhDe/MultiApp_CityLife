@@ -42,7 +42,7 @@ class HomeScreen extends BaseScreen<HomeController> {
             },
             child: Text(
               'Address',
-              style: AppTextStyle.s16w500.copyWith(color: Colors.white),
+              style: AppTextStyles.typographyH10Bold.copyWith(color: Colors.white),
             ),
           ),
         ],
