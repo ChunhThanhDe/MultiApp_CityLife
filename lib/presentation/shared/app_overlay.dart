@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'app_overlay_navigator.dart';
+import 'app_navigator.dart';
 
 Future<dynamic> showLoadingOverlay({required Future<dynamic> api, Widget? child, bool isShowLoading = true}) {
   return _AppLoadingOverlay.show(api: api, child: child, isShowLoading: isShowLoading);
@@ -36,7 +36,7 @@ class _AppLoadingOverlay {
     Widget? child,
   }) {
     removeHighlightOverlay();
-    final overlayState = AppOverlayNavigator.navigatorKey.currentState?.overlay;
+    final overlayState = AppNavigator.navigatorKey.currentState?.overlay;
     assert(overlayEntry == null);
     if (overlayState == null) return;
 

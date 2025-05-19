@@ -17,7 +17,7 @@ class AuthBottomSection extends StatelessWidget {
       children: [
         const Center(child: TermOfService()),
         SizedBox(height: 16.h),
-        Divider(color: Figma.theme.tokenColorsStateGreyLowestHover100, thickness: 1),
+        Divider(color: AppColors.tokenColorsStateGreyLowestHover100, thickness: 1),
         SizedBox(height: 16.h),
         _buildGotoPage(),
         SizedBox(height: 56.h),
@@ -35,11 +35,11 @@ class AuthBottomSection extends StatelessWidget {
             children: [
               TextSpan(
                 text: isSignIn ? 'Don\'t have an account? ' : 'Already have an account? ',
-                style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
               ),
               TextSpan(
                 text: isSignIn ? 'Sign up' : 'Log in',
-                style: AppTextStyles.typographyH10SemiBold.copyWith(color: Figma.theme.tokenColorsTextBrandDefault500),
+                style: AppTextStyles.typographyH10SemiBold.copyWith(color: AppColors.tokenColorsTextBrandDefault500),
               ),
             ],
           ),

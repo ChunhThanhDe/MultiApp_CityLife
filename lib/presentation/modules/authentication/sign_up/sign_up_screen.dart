@@ -64,8 +64,8 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       label: 'Your name',
       isRequired: true,
       controller: vm.nameController,
-      hint: 'Enter your name',
-      svgPath: Assets.icons.icPersonIcon.path,
+      hintText: 'Enter your name',
+      prefixIcon: Assets.icons.icPersonIcon.svg(),
       validator: _validateName,
     );
   }
@@ -92,8 +92,8 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       label: 'Email address',
       isRequired: true,
       controller: vm.emailController,
-      hint: 'name@example.com',
-      svgPath: Assets.icons.icEmailIcon.path,
+      hintText: 'name@example.com',
+      prefixIcon: Assets.icons.icEmailIcon.svg(),
       keyboardType: TextInputType.emailAddress,
       validator: _validateEmail,
     );
@@ -125,11 +125,11 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       children: [
         Text(
           "When's your birthday?",
-          style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+          style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
         ),
         Text(
           " (optional)",
-          style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyDefault500),
+          style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyDefault500),
         ),
       ],
     );
@@ -186,30 +186,32 @@ class SignUpScreen extends BaseScreen<SignUpController> {
   }) {
     return DropdownButtonFormField<String>(
       value: controller.text.isNotEmpty ? controller.text : null,
-      items: items.map((item) => DropdownMenuItem(value: item, child: Text(item))).toList(),
+      style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
+      items: items.map((item) => DropdownMenuItem(value: item, child: Text(item, style: AppTextStyles.typographyH11Regular))).toList(),
       onChanged: (val) => controller.text = val ?? '',
       icon: Assets.icons.icDropdownArrow.svg(),
       decoration: InputDecoration(
         hintText: hint,
+        hintStyle: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyDefault500),
         helperText: helper,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(Figma.corner.radius6),
+          borderRadius: BorderRadius.circular(AppCorner.radius6),
           borderSide: BorderSide(
-            color: Figma.theme.tokenColorsStateGreyLowestHover100,
+            color: AppColors.tokenColorsStateGreyLowestHover100,
             width: 1,
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(Figma.corner.radius6),
+          borderRadius: BorderRadius.circular(AppCorner.radius6),
           borderSide: BorderSide(
-            color: Figma.theme.tokenColorsStateGreyLowestHover100,
+            color: AppColors.tokenColorsStateGreyLowestHover100,
             width: 1,
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(Figma.corner.radius6),
+          borderRadius: BorderRadius.circular(AppCorner.radius6),
           borderSide: BorderSide(
-            color: Figma.theme.tokenColorsStateGreyLowestHover100,
+            color: AppColors.tokenColorsStateGreyLowestHover100,
             width: 1,
           ),
         ),
@@ -250,15 +252,15 @@ class SignUpScreen extends BaseScreen<SignUpController> {
   Widget _buildOrDivider() {
     return Row(
       children: [
-        Expanded(child: Divider(color: Figma.theme.tokenColorsStateGreyLowestHover100, thickness: 1)),
+        Expanded(child: Divider(color: AppColors.tokenColorsStateGreyLowestHover100, thickness: 1)),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
             'OR',
-            style: AppTextStyles.typographyH12Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
+            style: AppTextStyles.typographyH12Medium.copyWith(color: AppColors.tokenColorsTextGreyHigh700),
           ),
         ),
-        Expanded(child: Divider(color: Figma.theme.tokenColorsStateGreyLowestHover100, thickness: 1)),
+        Expanded(child: Divider(color: AppColors.tokenColorsStateGreyLowestHover100, thickness: 1)),
       ],
     );
   }
@@ -285,7 +287,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
           width: 20.w,
           height: 20.w,
           colorFilter: ColorFilter.mode(
-            Figma.theme.tokenColorsTextGreyHighest950,
+            AppColors.tokenColorsTextGreyHighest950,
             BlendMode.srcIn,
           ),
         ),
@@ -293,7 +295,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         Text(
           isEmail ? 'Sign up with phone' : 'Sign up with email',
           textAlign: TextAlign.center,
-          style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+          style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
         ),
       ],
     );

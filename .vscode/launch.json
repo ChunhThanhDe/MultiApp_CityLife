@@ -7,19 +7,28 @@
         {
             "name": "flutter_sixam",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "args": [
+                "--no-enable-impeller"
+            ]
         },
         {
             "name": "flutter_sixam (profile mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "profile",
+            "args": [
+                "--no-enable-impeller"
+            ]
         },
         {
             "name": "flutter_sixam (release mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "release",
+            "args": [
+                "--no-enable-impeller"
+            ]
         }
     ]
 }

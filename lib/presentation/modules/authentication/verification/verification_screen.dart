@@ -37,8 +37,8 @@ class VerificationScreen extends BaseScreen<VerificationController> {
           AppButton(
             onTap: () {},
             width: double.infinity,
-            color: Figma.theme.tokenColorsStateBrandDefault500,
-            disabledColor: Figma.theme.tokenColorsStateBrandDefault500.withValues(alpha: 0.5),
+            color: AppColors.tokenColorsStateBrandDefault500,
+            disabledColor: AppColors.tokenColorsStateBrandDefault500.withValues(alpha: 0.5),
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
             child: Text('Verify code', style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white)),
           ),
@@ -79,11 +79,11 @@ class VerificationScreen extends BaseScreen<VerificationController> {
             children: [
               TextSpan(
                 text: 'Don\'t have an account? ',
-                style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
               ),
               TextSpan(
                 text: 'Create one now!',
-                style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextBrandDefault500),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.tokenColorsTextBrandDefault500),
               ),
             ],
           ),
@@ -99,11 +99,11 @@ class VerificationScreen extends BaseScreen<VerificationController> {
         children: [
           TextSpan(
             text: 'This code expires in ',
-            style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
+            style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyHigh700),
           ),
           TextSpan(
             text: '30 mins.',
-            style: AppTextStyles.typographyH11SemiBold.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+            style: AppTextStyles.typographyH11SemiBold.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
           ),
         ],
       ),
@@ -123,13 +123,13 @@ class VerificationScreen extends BaseScreen<VerificationController> {
         fieldWidth: 56,
         borderWidth: 1,
         borderRadius: BorderRadius.circular(6),
-        selectedColor: Figma.theme.tokenColorsTextBrandDefault500,
-        selectedFillColor: Figma.theme.tokenColorsStateBrandLowestHover100,
+        selectedColor: AppColors.tokenColorsTextBrandDefault500,
+        selectedFillColor: AppColors.tokenColorsStateBrandLowestHover100,
         inactiveFillColor: Colors.white,
-        inactiveColor: Figma.theme.tokenColorsStateBrandDefault500,
-        activeColor: Figma.theme.tokenColorsStateBrandDefault500,
-        activeFillColor: Figma.theme.tokenColorsStateBrandLowestHover100,
-        errorBorderColor: Figma.theme.tokenColorsStateDangerDefault500,
+        inactiveColor: AppColors.tokenColorsStateBrandDefault500,
+        activeColor: AppColors.tokenColorsStateBrandDefault500,
+        activeFillColor: AppColors.tokenColorsStateBrandLowestHover100,
+        errorBorderColor: AppColors.tokenColorsStateDangerDefault500,
       ),
       animationDuration: const Duration(milliseconds: 300),
       backgroundColor: Colors.transparent,
@@ -137,7 +137,7 @@ class VerificationScreen extends BaseScreen<VerificationController> {
       onChanged: vm.updateVerificationCode,
       beforeTextPaste: (text) => true,
       textStyle: AppTextStyles.typographyH11Regular.copyWith(
-        color: Figma.theme.tokenColorsTextGreyHighest950,
+        color: AppColors.tokenColorsTextGreyHighest950,
       ),
     );
   }

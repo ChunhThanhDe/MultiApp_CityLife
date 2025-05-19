@@ -58,7 +58,7 @@ class SignInScreen extends BaseScreen<SignInController> {
                 width: 20.w,
                 height: 20.w,
                 colorFilter: ColorFilter.mode(
-                  Figma.theme.tokenColorsTextGreyHighest950,
+                  AppColors.tokenColorsTextGreyHighest950,
                   BlendMode.srcIn,
                 ),
               )),
@@ -66,7 +66,7 @@ class SignInScreen extends BaseScreen<SignInController> {
           Obx(() => Text(
                 vm.loginMethod.value == LoginMethod.email ? 'Log in with phone' : 'Log in with email',
                 textAlign: TextAlign.center,
-                style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
               )),
         ],
       ),
@@ -86,12 +86,12 @@ class SignInScreen extends BaseScreen<SignInController> {
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
             'OR',
-            style: AppTextStyles.typographyH12Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
+            style: AppTextStyles.typographyH12Medium.copyWith(color: AppColors.tokenColorsTextGreyHigh700),
           ),
         ),
         Expanded(
           child: Divider(
-            color: Figma.theme.tokenColorsStateBrandLowestHover100,
+            color: AppColors.tokenColorsStateBrandLowestHover100,
             thickness: 1,
           ),
         ),
@@ -143,8 +143,8 @@ class SignInScreen extends BaseScreen<SignInController> {
       label: 'Email address',
       isRequired: true,
       controller: vm.inputController,
-      hint: 'name@example.com',
-      svgPath: Assets.icons.icEmailIcon.path,
+      hintText: 'name@example.com',
+      prefixIcon: Assets.icons.icEmailIcon.svg(),
       keyboardType: TextInputType.emailAddress,
       validator: (value) {
         if (value == null || value.isEmpty) {

@@ -1,7 +1,7 @@
 // ignore_for_file: overridden_fields, unused_element, non_constant_identifier_names
 
 /// The all getter and classes with variables and functions statics:
-/// [AppTextStyles], [Shadows], [ColorStyle], [FigmaTheme], [Typography], [AllColors], [Theme], [BrandColor], [Spacing], [Corner], [FontFamily]
+/// [AppTextStyles], [Shadows], [ColorStyle], [SixMartTheme], [Typography], [AllColors], [Theme], [BrandColor], [Spacing], [Corner], [FontFamily]
 ///
 ///
 /// Text Style Documents:
@@ -23,7 +23,7 @@
 /// * To access all [Color] statically, you can just access them using the [ColorStyle}] class.
 /// * Colors may or may not have figma variables depending on the design in figma
 ///
-/// *IMPORTANT*: You need a [FigmaTheme] on top of your Material so that colors, sizes, strings, booleans are rebuilt when changed.
+/// *IMPORTANT*: You need a [SixMartTheme] on top of your Material so that colors, sizes, strings, booleans are rebuilt when changed.
 ///
 /// ```dart
 ///  class MyApp extends StatelessWidget {
@@ -43,21 +43,21 @@
 ///
 ///
 /// The variable [Typography] is a getter that fetches the style[TypographyDefault] based on the set `MODE`[TypographyTypes]
-/// To change the MODE of [Typography] just use the function [FigmaTheme.TypographyDefault] passing the enum [TypographyTypes]
+/// To change the MODE of [Typography] just use the function [SixMartTheme.TypographyDefault] passing the enum [TypographyTypes]
 ///
 /// [TypographyDefault] is a sealed class that contains all the variables of the collection Typography
 /// [_TypographyMode1] is a class that contains all the variables of the collection Typography in the mode Mode 1
 ///
 ///
 /// The variable [AllColors] is a getter that fetches the style[AllColorsDefault] based on the set `MODE`[AllColorsTypes]
-/// To change the MODE of [AllColors] just use the function [FigmaTheme.AllColorsDefault] passing the enum [AllColorsTypes]
+/// To change the MODE of [AllColors] just use the function [SixMartTheme.AllColorsDefault] passing the enum [AllColorsTypes]
 ///
 /// [AllColorsDefault] is a sealed class that contains all the variables of the collection All Colors
 /// [_AllColorsMode1] is a class that contains all the variables of the collection All Colors in the mode Mode 1
 ///
 ///
 /// The variable [Theme] is a getter that fetches the style[ThemeDefault] based on the set `MODE`[ThemeTypes]
-/// To change the MODE of [Theme] just use the function [FigmaTheme.ThemeDefault] passing the enum [ThemeTypes]
+/// To change the MODE of [Theme] just use the function [SixMartTheme.ThemeDefault] passing the enum [ThemeTypes]
 ///
 /// [ThemeDefault] is a sealed class that contains all the variables of the collection Theme
 /// [_ThemeLight] is a class that contains all the variables of the collection Theme in the mode Light
@@ -65,7 +65,7 @@
 ///
 ///
 /// The variable [BrandColor] is a getter that fetches the style[BrandColorDefault] based on the set `MODE`[BrandColorTypes]
-/// To change the MODE of [BrandColor] just use the function [FigmaTheme.BrandColorDefault] passing the enum [BrandColorTypes]
+/// To change the MODE of [BrandColor] just use the function [SixMartTheme.BrandColorDefault] passing the enum [BrandColorTypes]
 ///
 /// [BrandColorDefault] is a sealed class that contains all the variables of the collection Brand color
 /// [_BrandColorBlue] is a class that contains all the variables of the collection Brand color in the mode Blue
@@ -75,14 +75,14 @@
 ///
 ///
 /// The variable [Spacing] is a getter that fetches the style[SpacingDefault] based on the set `MODE`[SpacingTypes]
-/// To change the MODE of [Spacing] just use the function [FigmaTheme.SpacingDefault] passing the enum [SpacingTypes]
+/// To change the MODE of [Spacing] just use the function [SixMartTheme.SpacingDefault] passing the enum [SpacingTypes]
 ///
 /// [SpacingDefault] is a sealed class that contains all the variables of the collection Spacing
 /// [_SpacingMode1] is a class that contains all the variables of the collection Spacing in the mode Mode 1
 ///
 ///
 /// The variable [Corner] is a getter that fetches the style[CornerDefault] based on the set `MODE`[CornerTypes]
-/// To change the MODE of [Corner] just use the function [FigmaTheme.CornerDefault] passing the enum [CornerTypes]
+/// To change the MODE of [Corner] just use the function [SixMartTheme.CornerDefault] passing the enum [CornerTypes]
 ///
 /// [CornerDefault] is a sealed class that contains all the variables of the collection Corner
 /// [_CornerClassic] is a class that contains all the variables of the collection Corner in the mode Classic
@@ -90,7 +90,7 @@
 ///
 ///
 /// The variable [FontFamily] is a getter that fetches the style[FontFamilyDefault] based on the set `MODE`[FontFamilyTypes]
-/// To change the MODE of [FontFamily] just use the function [FigmaTheme.FontFamilyDefault] passing the enum [FontFamilyTypes]
+/// To change the MODE of [FontFamily] just use the function [SixMartTheme.FontFamilyDefault] passing the enum [FontFamilyTypes]
 ///
 /// [FontFamilyDefault] is a sealed class that contains all the variables of the collection Font Family
 /// [_FontFamilyInter] is a class that contains all the variables of the collection Font Family in the mode Inter
@@ -104,7 +104,6 @@ library;
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 AnimationController? _animationControllerTypographyDefault;
 AnimationController? _animationControllerAllColorsDefault;
@@ -114,10 +113,10 @@ AnimationController? _animationControllerSpacingDefault;
 AnimationController? _animationControllerCornerDefault;
 AnimationController? _animationControllerFontFamilyDefault;
 
-class FigmaTheme extends StatefulWidget {
+class SixMartTheme extends StatefulWidget {
   final Widget child;
   final Duration duration;
-  const FigmaTheme({
+  const SixMartTheme({
     super.key,
     required this.child,
     this.duration = const Duration(milliseconds: 300),
@@ -195,10 +194,10 @@ class FigmaTheme extends StatefulWidget {
   }
 
   @override
-  State<FigmaTheme> createState() => _FigmaThemeState();
+  State<SixMartTheme> createState() => _SixMartThemeState();
 }
 
-class _FigmaThemeState extends State<FigmaTheme> with TickerProviderStateMixin {
+class _SixMartThemeState extends State<SixMartTheme> with TickerProviderStateMixin {
   void _rebuildAllChildren(BuildContext context) {
     void rebuild(Element el) {
       el.markNeedsBuild();
@@ -2749,25 +2748,25 @@ class FontFamilyDefault {
 class _FontFamilyInter extends FontFamilyDefault {
   _FontFamilyInter._() : super._();
   @override
-  String get fonts => GoogleFonts.inter().fontFamily!;
+  String get fonts => 'Inter';
 }
 
 class _FontFamilyBarlow extends FontFamilyDefault {
   _FontFamilyBarlow._() : super._();
   @override
-  String get fonts => GoogleFonts.barlow().fontFamily!;
+  String get fonts => 'Barlow';
 }
 
 class _FontFamilyManrope extends FontFamilyDefault {
   _FontFamilyManrope._() : super._();
   @override
-  String get fonts => GoogleFonts.manrope().fontFamily!;
+  String get fonts => 'Manrope';
 }
 
 class _FontFamilyRobotoMono extends FontFamilyDefault {
   _FontFamilyRobotoMono._() : super._();
   @override
-  String get fonts => GoogleFonts.robotoMono().fontFamily!;
+  String get fonts => 'RobotoMono';
 }
 
 class ColorStyle {
@@ -2866,8 +2865,8 @@ class Style extends TextStyle {
   }
 }
 
-class AppTextStyles {
-  const AppTextStyles._();
+class Styles {
+  const Styles._();
 
   static const _parent = TextStyle(
     debugLabel: '',
@@ -2881,7 +2880,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH1 / Typography.fontSizeH1,
       letterSpacing: 0,
     ),
   );
@@ -2893,7 +2891,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH1 / Typography.fontSizeH1,
       letterSpacing: 0,
     ),
   );
@@ -2905,7 +2902,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH1 / Typography.fontSizeH1,
       letterSpacing: 0,
     ),
   );
@@ -2917,7 +2913,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH1 / Typography.fontSizeH1,
       letterSpacing: 0,
     ),
   );
@@ -2929,7 +2924,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH2 / Typography.fontSizeH2,
       letterSpacing: 0,
     ),
   );
@@ -2941,7 +2935,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH2 / Typography.fontSizeH2,
       letterSpacing: 0,
     ),
   );
@@ -2953,7 +2946,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH2 / Typography.fontSizeH2,
       letterSpacing: 0,
     ),
   );
@@ -2965,7 +2957,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH2 / Typography.fontSizeH2,
       letterSpacing: 0,
     ),
   );
@@ -2977,7 +2968,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH3 / Typography.fontSizeH3,
       letterSpacing: 0,
     ),
   );
@@ -2989,7 +2979,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH3 / Typography.fontSizeH3,
       letterSpacing: 0,
     ),
   );
@@ -3001,7 +2990,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH3 / Typography.fontSizeH3,
       letterSpacing: 0,
     ),
   );
@@ -3013,7 +3001,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH3 / Typography.fontSizeH3,
       letterSpacing: 0,
     ),
   );
@@ -3025,7 +3012,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH4 / Typography.fontSizeH4,
       letterSpacing: 0,
     ),
   );
@@ -3037,7 +3023,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH4 / Typography.fontSizeH4,
       letterSpacing: 0,
     ),
   );
@@ -3049,7 +3034,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH4 / Typography.fontSizeH4,
       letterSpacing: 0,
     ),
   );
@@ -3061,7 +3045,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH4 / Typography.fontSizeH4,
       letterSpacing: 0,
     ),
   );
@@ -3073,7 +3056,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH5 / Typography.fontSizeH5,
       letterSpacing: 0,
     ),
   );
@@ -3085,7 +3067,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH5 / Typography.fontSizeH5,
       letterSpacing: 0,
     ),
   );
@@ -3097,7 +3078,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH5 / Typography.fontSizeH5,
       letterSpacing: 0,
     ),
   );
@@ -3109,7 +3089,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH5 / Typography.fontSizeH5,
       letterSpacing: 0,
     ),
   );
@@ -3121,7 +3100,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH6 / Typography.fontSizeH6,
       letterSpacing: 0,
     ),
   );
@@ -3133,7 +3111,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH6 / Typography.fontSizeH6,
       letterSpacing: 0,
     ),
   );
@@ -3145,7 +3122,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH6 / Typography.fontSizeH6,
       letterSpacing: 0,
     ),
   );
@@ -3157,7 +3133,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH6 / Typography.fontSizeH6,
       letterSpacing: 0,
     ),
   );
@@ -3169,7 +3144,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH7 / Typography.fontSizeH7,
       letterSpacing: 0,
     ),
   );
@@ -3181,7 +3155,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH7 / Typography.fontSizeH7,
       letterSpacing: 0,
     ),
   );
@@ -3193,7 +3166,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH7 / Typography.fontSizeH7,
       letterSpacing: 0,
     ),
   );
@@ -3205,7 +3177,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH7 / Typography.fontSizeH7,
       letterSpacing: 0,
     ),
   );
@@ -3217,7 +3188,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH8 / Typography.fontSizeH8,
       letterSpacing: 0,
     ),
   );
@@ -3229,7 +3199,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH8 / Typography.fontSizeH8,
       letterSpacing: 0,
     ),
   );
@@ -3241,7 +3210,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH8 / Typography.fontSizeH8,
       letterSpacing: 0,
     ),
   );
@@ -3253,7 +3221,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH8 / Typography.fontSizeH8,
       letterSpacing: 0,
     ),
   );
@@ -3265,7 +3232,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH9 / Typography.fontSizeH9,
       letterSpacing: 0,
     ),
   );
@@ -3277,7 +3243,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH9 / Typography.fontSizeH9,
       letterSpacing: 0,
     ),
   );
@@ -3289,7 +3254,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH9 / Typography.fontSizeH9,
       letterSpacing: 0,
     ),
   );
@@ -3301,7 +3265,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH9 / Typography.fontSizeH9,
       letterSpacing: 0,
     ),
   );
@@ -3313,7 +3276,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH10 / Typography.fontSizeH10,
       letterSpacing: 0,
     ),
   );
@@ -3325,7 +3287,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH10 / Typography.fontSizeH10,
       letterSpacing: 0,
     ),
   );
@@ -3337,7 +3298,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH10 / Typography.fontSizeH10,
       letterSpacing: 0,
     ),
   );
@@ -3349,7 +3309,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH10 / Typography.fontSizeH10,
       letterSpacing: 0,
     ),
   );
@@ -3361,7 +3320,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH11 / Typography.fontSizeH11,
       letterSpacing: 0,
     ),
   );
@@ -3373,7 +3331,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH11 / Typography.fontSizeH11,
       letterSpacing: 0,
     ),
   );
@@ -3385,7 +3342,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH11 / Typography.fontSizeH11,
       letterSpacing: 0,
     ),
   );
@@ -3397,7 +3353,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH11 / Typography.fontSizeH11,
       letterSpacing: 0,
     ),
   );
@@ -3409,7 +3364,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH12 / Typography.fontSizeH12,
       letterSpacing: 0,
     ),
   );
@@ -3421,7 +3375,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH12 / Typography.fontSizeH12,
       letterSpacing: 0,
     ),
   );
@@ -3433,7 +3386,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH12 / Typography.fontSizeH12,
       letterSpacing: 0,
     ),
   );
@@ -3445,7 +3397,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH12 / Typography.fontSizeH12,
       letterSpacing: 0,
     ),
   );
@@ -3728,7 +3679,7 @@ extension _LerpBoolean on bool {
   }
 }
 
-final class Figma {
+final class AppTheme {
   static TypographyDefault get typography => Typography;
   static AllColorsDefault get allColors => AllColors;
   static ThemeDefault get theme => Theme;
@@ -3737,3 +3688,9 @@ final class Figma {
   static CornerDefault get corner => Corner;
   static FontFamilyDefault get fontFamily => FontFamily;
 }
+
+final AppColors = AppTheme.theme;
+final AppCorner = AppTheme.corner;
+final AppSpacing = AppTheme.spacing;
+typedef AppTextStyles = Styles;
+typedef AppShadows = Shadows;

@@ -25,7 +25,7 @@ typedef RootTabItem = ({
 });
 
 class RootController extends BaseController {
-  var currentTab = RootTab.home.obs;
+  var currentTab = RootTab.wallet.obs;
 
   final List<RootTabItem> tabs = [
     (iconSelected: Assets.icons.icHomeFilled.path, iconUnselected: Assets.icons.icHomeOutlined.path, label: 'Home', tab: RootTab.home, screen: HomeScreen()),
