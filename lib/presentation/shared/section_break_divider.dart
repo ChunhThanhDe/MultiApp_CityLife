@@ -12,7 +12,7 @@ class SectionBreakDivider extends StatelessWidget {
       width: double.infinity,
       height: 6,
       decoration: BoxDecoration(
-        color: Figma.theme.tokenColorsStateGreyLowest50,
+        color: AppColors.tokenColorsStateGreyLowest50,
       ),
     );
   }

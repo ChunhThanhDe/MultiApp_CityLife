@@ -14,17 +14,17 @@ class WalletScreen extends BaseScreen<WalletController> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return AppBar(
-      surfaceTintColor: Figma.theme.tokenColorsStateBaseWhite,
+      surfaceTintColor: AppColors.tokenColorsStateBaseWhite,
       centerTitle: false,
-      backgroundColor: Figma.theme.tokenColorsStateBaseWhite,
-      title: Text('Wallet', style: AppTextStyles.typographyH9Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950)),
+      backgroundColor: AppColors.tokenColorsStateBaseWhite,
+      title: Text('Wallet', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950)),
       actions: [
         GestureDetector(
           onTap: () {},
           behavior: HitTestBehavior.opaque,
           child: Row(
             children: [
-              Text('May Gift', style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950)),
+              Text('May Gift', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyHighest950)),
               const SizedBox(width: 8),
               Assets.icons.icGift.svg(),
             ],
@@ -57,7 +57,7 @@ class WalletScreen extends BaseScreen<WalletController> {
             children: [
               Text(
                 'Transaction',
-                style: AppTextStyles.typographyH9Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+                style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
               ),
               Assets.icons.icSettingsFilter.svg(),
             ],
@@ -67,7 +67,7 @@ class WalletScreen extends BaseScreen<WalletController> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: vm.transactions.length,
-            separatorBuilder: (_, __) => Divider(color: Figma.theme.tokenColorsTextGreyLow300, height: 1),
+            separatorBuilder: (_, __) => Divider(color: AppColors.tokenColorsTextGreyLow300, height: 1),
             itemBuilder: (context, index) => _buildTransactionItem(vm.transactions[index]),
           ),
         ],
@@ -87,12 +87,12 @@ class WalletScreen extends BaseScreen<WalletController> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(transaction.title, style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950)),
+                Text(transaction.title, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950)),
                 const SizedBox(height: 2),
-                Text(transaction.date, style: AppTextStyles.typographyH12Regular.copyWith(color: Figma.theme.tokenColorsTextGreyDefault500)),
+                Text(transaction.date, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.tokenColorsTextGreyDefault500)),
               ],
             ),
-            Text(transaction.amount, style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700)),
+            Text(transaction.amount, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyHigh700)),
           ],
         ),
       ),
@@ -117,9 +117,9 @@ class WalletScreen extends BaseScreen<WalletController> {
       margin: const EdgeInsets.all(24),
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: Figma.theme.tokenColorsStateBaseWhite,
+        color: AppColors.tokenColorsStateBaseWhite,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Figma.theme.tokenColorsStateBaseWhite, width: 0.5),
+        border: Border.all(color: AppColors.tokenColorsStateBaseWhite, width: 0.5),
         image: DecorationImage(
           image: Assets.images.imgWalletCard.provider(),
           fit: BoxFit.cover,
@@ -143,11 +143,11 @@ class WalletScreen extends BaseScreen<WalletController> {
                   children: [
                     Text(
                       'Diyaar Cash',
-                      style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+                      style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
                     ),
                     Obx(() => Text(
                           vm.showBalance.value ? '\$843.25' : '****',
-                          style: AppTextStyles.typographyH6SemiBold.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+                          style: AppTextStyles.typographyH6SemiBold.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
                         )),
                   ],
                 ),
@@ -166,7 +166,7 @@ class WalletScreen extends BaseScreen<WalletController> {
             child: Row(
               children: [
                 Assets.icons.icPlusAdd.svg(),
-                Text('Add Funds', style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextBaseWhite)),
+                Text('Add Funds', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextBaseWhite)),
               ],
             ),
           ),

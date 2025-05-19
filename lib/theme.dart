@@ -2865,8 +2865,8 @@ class Style extends TextStyle {
   }
 }
 
-class AppTextStyles {
-  const AppTextStyles._();
+class Styles {
+  const Styles._();
 
   static const _parent = TextStyle(
     debugLabel: '',
@@ -3688,3 +3688,12 @@ final class Figma {
   static CornerDefault get corner => Corner;
   static FontFamilyDefault get fontFamily => FontFamily;
 }
+
+final AppColors = Figma.theme;
+final AppCorner = Figma.corner;
+final AppFontFamily = Figma.fontFamily;
+final AppSpacing = Figma.spacing;
+final AppTypography = Figma.typography;
+
+typedef AppTextStyles = Styles;
+typedef AppShadows = Shadows;

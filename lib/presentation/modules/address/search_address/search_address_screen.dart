@@ -29,7 +29,7 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
       backgroundColor: Colors.white,
       title: Text(
         'Address',
-        style: AppTextStyles.typographyH9Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+        style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
       ),
       centerTitle: false,
       leading: IconButton(
@@ -46,11 +46,11 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
       child: AppButton(
         onTap: () {},
         width: double.infinity,
-        color: Figma.theme.tokenColorsStateGreyLowest50,
+        color: AppColors.tokenColorsStateGreyLowest50,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Text(
           'Add new address',
-          style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+          style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
         ),
       ),
     );
@@ -88,12 +88,12 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
           ),
           Text(
             'Explore nearby',
-            style: AppTextStyles.typographyH9Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+            style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
           ),
           Expanded(
             child: ListView.separated(
               itemCount: results.length,
-              separatorBuilder: (context, index) => Divider(height: 1, color: Figma.theme.tokenColorsStateGreyLowestHover100),
+              separatorBuilder: (context, index) => Divider(height: 1, color: AppColors.tokenColorsStateGreyLowestHover100),
               itemBuilder: (context, index) {
                 return _buildSearchItem(results[index]);
               },
@@ -123,8 +123,8 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(item.title, style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950)),
-                Text(item.address, style: AppTextStyles.typographyH12Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700)),
+                Text(item.title, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950)),
+                Text(item.address, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.tokenColorsTextGreyHigh700)),
               ],
             ),
             const Spacer(),

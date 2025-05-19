@@ -27,11 +27,11 @@ class ConfirmAddressScreen extends BaseScreen<ConfirmAddressController> {
           children: [
             Text(
               'Confirm delivery address',
-              style: AppTextStyles.typographyH6SemiBold.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+              style: AppTextStyles.typographyH6SemiBold.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
             ),
             Text(
               'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-              style: AppTextStyles.typographyH10Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
+              style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.tokenColorsTextGreyHigh700),
             ),
             AppButton(
               onTap: () {},
@@ -39,7 +39,7 @@ class ConfirmAddressScreen extends BaseScreen<ConfirmAddressController> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Text(
                 'Confirm location',
-                style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextBaseWhite),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.tokenColorsTextBaseWhite),
               ),
             ),
           ],
@@ -95,7 +95,7 @@ class ConfirmAddressScreen extends BaseScreen<ConfirmAddressController> {
           height: 36,
           padding: const EdgeInsets.all(6),
           decoration: ShapeDecoration(
-            color: Figma.theme.tokenColorsStateBaseWhite,
+            color: AppColors.tokenColorsStateBaseWhite,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(32),
             ),

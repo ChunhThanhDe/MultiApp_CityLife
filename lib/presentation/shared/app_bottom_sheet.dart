@@ -56,7 +56,7 @@ class AppBottomSheet extends StatelessWidget {
                     width: 48,
                     height: 4,
                     decoration: ShapeDecoration(
-                      color: Figma.theme.tokenColorsStateGreyLowestHover100,
+                      color: AppColors.tokenColorsStateGreyLowestHover100,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(99),
                       ),
