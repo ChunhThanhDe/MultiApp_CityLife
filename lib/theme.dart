@@ -3691,9 +3691,6 @@ final class AppTheme {
 
 final AppColors = AppTheme.theme;
 final AppCorner = AppTheme.corner;
-final AppFontFamily = AppTheme.fontFamily;
 final AppSpacing = AppTheme.spacing;
-final AppTypography = AppTheme.typography;
-
 typedef AppTextStyles = Styles;
 typedef AppShadows = Shadows;
