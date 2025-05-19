@@ -2,9 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
-import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/components/term_of_service.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 class AuthBottomSection extends StatelessWidget {
   final VoidCallback? onTapChange;
@@ -18,7 +17,7 @@ class AuthBottomSection extends StatelessWidget {
       children: [
         const Center(child: TermOfService()),
         SizedBox(height: 16.h),
-        const Divider(color: Color(0xFFE8EBEE), thickness: 1),
+        Divider(color: Figma.theme.tokenColorsStateGreyLowestHover100, thickness: 1),
         SizedBox(height: 16.h),
         _buildGotoPage(),
         SizedBox(height: 56.h),
@@ -36,11 +35,11 @@ class AuthBottomSection extends StatelessWidget {
             children: [
               TextSpan(
                 text: isSignIn ? 'Don\'t have an account? ' : 'Already have an account? ',
-                style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
               ),
               TextSpan(
                 text: isSignIn ? 'Sign up' : 'Log in',
-                style: AppTextStyle.s16w500.copyWith(color: AppColors.textBrandDefault500),
+                style: AppTextStyles.typographyH10SemiBold.copyWith(color: Figma.theme.tokenColorsTextBrandDefault500),
               ),
             ],
           ),

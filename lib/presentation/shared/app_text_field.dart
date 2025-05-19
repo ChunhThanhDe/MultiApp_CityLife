@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 class AppTextField extends StatelessWidget {
   final String? label;
@@ -35,18 +35,14 @@ class AppTextField extends StatelessWidget {
             label != null
                 ? Text(
                     label!,
-                    style: AppTextStyle.s14w400.copyWith(
-                      color: const Color(0xFF161A1D),
-                    ),
+                    style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
                   )
                 : const SizedBox.shrink(),
             if (isRequired && label != null) ...[
               const SizedBox(width: 4),
               Text(
                 '*',
-                style: AppTextStyle.s14w400.copyWith(
-                  color: const Color(0xFFFF3B30),
-                ),
+                style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextDangerDefault500),
               ),
             ],
           ],
@@ -62,16 +58,12 @@ class AppTextField extends StatelessWidget {
             keyboardType: keyboardType,
             focusNode: focusNode,
             onChanged: onChanged,
-            style: AppTextStyle.s14w400.copyWith(
-              color: const Color(0xFF161A1D),
-            ),
+            style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
             validator: validator,
             decoration: InputDecoration(
               hintText: hint,
               helperText: '',
-              hintStyle: AppTextStyle.s14w400.copyWith(
-                color: const Color(0xFF798A9A),
-              ),
+              hintStyle: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyDefault500),
               suffixIcon: svgPath != null
                   ? Padding(
                       padding: const EdgeInsets.all(15),
@@ -80,32 +72,30 @@ class AppTextField extends StatelessWidget {
                   : null,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
-                borderSide: const BorderSide(
-                  color: Color(0xFFE8EBEE),
+                borderSide: BorderSide(
+                  color: Figma.theme.tokenColorsStateGreyLowestHover100,
                   width: 1,
                 ),
               ),
-              errorStyle: AppTextStyle.s12w400.copyWith(
-                color: const Color(0xFFFF3B30),
-              ),
+              errorStyle: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextDangerDefault500),
               errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
-                borderSide: const BorderSide(
-                  color: Color(0xFFFF3B30),
+                borderRadius: BorderRadius.circular(Figma.corner.radius6),
+                borderSide: BorderSide(
+                  color: Figma.theme.tokenColorsStateDangerDefault500,
                   width: 1,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
-                borderSide: const BorderSide(
-                  color: Color(0xFFE8EBEE),
+                borderRadius: BorderRadius.circular(Figma.corner.radius6),
+                borderSide: BorderSide(
+                  color: Figma.theme.tokenColorsStateGreyLowestHover100,
                   width: 1,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
-                borderSide: const BorderSide(
-                  color: Color(0xFF5856D7),
+                borderRadius: BorderRadius.circular(Figma.corner.radius6),
+                borderSide: BorderSide(
+                  color: Figma.theme.tokenColorsStateBrandDefault500,
                   width: 1,
                 ),
               ),

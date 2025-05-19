@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/page_param/verification_page_param.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
-import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_header.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/components/term_of_service.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 import 'verification_controller.dart';
 
@@ -38,10 +37,10 @@ class VerificationScreen extends BaseScreen<VerificationController> {
           AppButton(
             onTap: () {},
             width: double.infinity,
-            color: AppColors.stateBrandDefault500,
-            disabledColor: AppColors.stateBrandDefault500.withValues(alpha: 0.5),
+            color: Figma.theme.tokenColorsStateBrandDefault500,
+            disabledColor: Figma.theme.tokenColorsStateBrandDefault500.withValues(alpha: 0.5),
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
-            child: Text('Verify code', style: AppTextStyle.s16w500.copyWith(color: Colors.white)),
+            child: Text('Verify code', style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white)),
           ),
           SizedBox(height: 24.h),
           AppButton(
@@ -54,7 +53,7 @@ class VerificationScreen extends BaseScreen<VerificationController> {
               children: [
                 Assets.icons.icBackArrow.svg(width: 16.w, height: 16.w, colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn)),
                 SizedBox(width: 8.w),
-                Text(vm.param.type == VerificationType.signIn ? 'Back to log in' : 'Back to sign up', style: AppTextStyle.s16w500.copyWith(color: Colors.black)),
+                Text(vm.param.type == VerificationType.signIn ? 'Back to log in' : 'Back to sign up', style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.black)),
               ],
             ),
           ),
@@ -80,15 +79,11 @@ class VerificationScreen extends BaseScreen<VerificationController> {
             children: [
               TextSpan(
                 text: 'Don\'t have an account? ',
-                style: AppTextStyle.s16w500.copyWith(
-                  color: const Color(0xFF161A1D),
-                ),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
               ),
               TextSpan(
                 text: 'Create one now!',
-                style: AppTextStyle.s16w500.copyWith(
-                  color: const Color(0xFF5856D7),
-                ),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextBrandDefault500),
               ),
             ],
           ),
@@ -104,11 +99,11 @@ class VerificationScreen extends BaseScreen<VerificationController> {
         children: [
           TextSpan(
             text: 'This code expires in ',
-            style: AppTextStyle.s14w400.copyWith(color: const Color(0xFF4A5763)),
+            style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
           ),
           TextSpan(
             text: '30 mins.',
-            style: AppTextStyle.s14w600.copyWith(color: const Color(0xFF161A1D)),
+            style: AppTextStyles.typographyH11SemiBold.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
           ),
         ],
       ),
@@ -128,21 +123,21 @@ class VerificationScreen extends BaseScreen<VerificationController> {
         fieldWidth: 56,
         borderWidth: 1,
         borderRadius: BorderRadius.circular(6),
-        selectedColor: const Color(0xFF5856D7),
-        selectedFillColor: const Color(0xFFEFEFFB),
+        selectedColor: Figma.theme.tokenColorsTextBrandDefault500,
+        selectedFillColor: Figma.theme.tokenColorsStateBrandLowestHover100,
         inactiveFillColor: Colors.white,
-        inactiveColor: const Color(0xFFE8EBEE),
-        activeColor: const Color(0xFFBEBDEF),
-        activeFillColor: const Color(0xFFEFEFFB),
-        errorBorderColor: const Color(0xFFFF3B30),
+        inactiveColor: Figma.theme.tokenColorsStateBrandDefault500,
+        activeColor: Figma.theme.tokenColorsStateBrandDefault500,
+        activeFillColor: Figma.theme.tokenColorsStateBrandLowestHover100,
+        errorBorderColor: Figma.theme.tokenColorsStateDangerDefault500,
       ),
       animationDuration: const Duration(milliseconds: 300),
       backgroundColor: Colors.transparent,
       enableActiveFill: true,
       onChanged: vm.updateVerificationCode,
       beforeTextPaste: (text) => true,
-      textStyle: AppTextStyle.s16w500.copyWith(
-        color: const Color(0xFF161A1D),
+      textStyle: AppTextStyles.typographyH11Regular.copyWith(
+        color: Figma.theme.tokenColorsTextGreyHighest950,
       ),
     );
   }
