@@ -1,7 +1,5 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
-import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 class TermOfService extends StatelessWidget {
   const TermOfService({
@@ -10,37 +8,31 @@ class TermOfService extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AutoSizeText.rich(
-      maxLines: 2,
-      TextSpan(
-        children: [
-          TextSpan(
-            text: 'By continuing, you agree to Diyaar ',
-            style: AppTextStyle.s14w400.copyWith(
-              color: AppColors.grey700,
+    return Container(
+      alignment: Alignment.center,
+      child: RichText(
+        textAlign: TextAlign.center,
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: 'By continuing, you agree to Diyaar ',
+              style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
             ),
-          ),
-          TextSpan(
-            text: 'Terms of Service',
-            style: AppTextStyle.s16w600.copyWith(
-              color: AppColors.grey950,
+            TextSpan(
+              text: 'Terms of Service',
+              style: AppTextStyles.typographyH10SemiBold.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
             ),
-          ),
-          TextSpan(
-            text: '\nand confirm that you have read Diyaar  ',
-            style: AppTextStyle.s14w400.copyWith(
-              color: AppColors.grey700,
+            TextSpan(
+              text: '\nand confirm that you have read Diyaar  ',
+              style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
             ),
-          ),
-          TextSpan(
-            text: 'Privacy Policy',
-            style: AppTextStyle.s16w600.copyWith(
-              color: AppColors.grey950,
+            TextSpan(
+              text: 'Privacy Policy',
+              style: AppTextStyles.typographyH10SemiBold.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-      textAlign: TextAlign.center,
     );
   }
 }

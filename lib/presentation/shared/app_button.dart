@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 class AppButton extends StatefulWidget {
   final Widget child;
@@ -88,9 +89,9 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final Color effectiveColor = widget.enabled ? (widget.color ?? theme.colorScheme.primary) : (widget.disabledColor ?? theme.disabledColor);
-    final BorderRadiusGeometry effectiveRadius = widget.borderRadius ?? BorderRadius.circular(32);
+    final Color effectiveColor =
+        widget.enabled ? (widget.color ?? Figma.theme.tokenColorsStateBrandDefault500) : (widget.disabledColor ?? Figma.theme.tokenColorsStateBrandDefault500.withValues(alpha: 0.5));
+    final BorderRadiusGeometry effectiveRadius = widget.borderRadius ?? BorderRadius.circular(Figma.corner.radius32);
     final ShapeBorder effectiveShape = widget.shape ?? RoundedRectangleBorder(borderRadius: effectiveRadius);
     final double effectiveElevation = widget.elevation ?? 0;
 

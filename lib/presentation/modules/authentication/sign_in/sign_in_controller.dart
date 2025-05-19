@@ -1,7 +1,10 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
+import 'package:sixam_mart_user/domain/models/page_param/verification_page_param.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_overlay.dart';
 
 enum LoginMethod {
@@ -37,5 +40,17 @@ class SignInController extends BaseController {
     //     print(error);
     // }
     isLoading.value = false;
+    Get.toNamed(
+      AppRoutes.verification,
+      arguments: VerificationPageParam(
+        method: loginMethod.value == LoginMethod.email ? VerificationMethod.email : VerificationMethod.phoneNumber,
+        verificationId: inputController.text,
+        type: VerificationType.signIn,
+      ),
+    );
+  }
+
+  onCountryCodeChanged(CountryCode countryCode) {
+    countryDialCode.value = countryCode.dialCode ?? '+1';
   }
 }
