@@ -12,7 +12,7 @@ import 'package:sixam_mart_user/presentation/shared/app_overlay_navigator.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 _preloadFonts() {
-  GoogleFonts.pendingFonts([GoogleFonts.inter(), GoogleFonts.barlow(), GoogleFonts.manrope(), GoogleFonts.robotoMono()]);
+  GoogleFonts.pendingFonts([GoogleFonts.inter()]);
 }
 
 void main() async {
