@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 import 'home_controller.dart';
 
@@ -26,7 +26,7 @@ class HomeScreen extends BaseScreen<HomeController> {
             },
             child: Text(
               'Sign In',
-              style: AppTextStyle.s16w500.copyWith(color: Colors.white),
+              style: AppTextStyles.typographyH11SemiBold.copyWith(color: Colors.white),
             ),
           ),
           SizedBox(height: 16.h),
@@ -36,10 +36,7 @@ class HomeScreen extends BaseScreen<HomeController> {
             },
             color: AppColors.stateBrandDefault500,
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-            child: Text(
-              'Sign Up',
-              style: AppTextStyle.s16w500.copyWith(color: Colors.white),
-            ),
+            child: Text('Sign Up', style: AppTextStyles.typographyH10Bold.copyWith(color: Colors.white)),
           ),
         ],
       ),

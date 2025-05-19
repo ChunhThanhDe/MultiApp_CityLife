@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_controller.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 class RootScreen extends BaseScreen<RootController> {
   const RootScreen({super.key});
@@ -20,8 +20,8 @@ class RootScreen extends BaseScreen<RootController> {
           enableFeedback: false,
           selectedItemColor: AppColors.stateBrandDefault500,
           unselectedItemColor: AppColors.textGreyHighest950,
-          selectedLabelStyle: AppTextStyle.s12w400.copyWith(color: AppColors.stateBrandDefault500),
-          unselectedLabelStyle: AppTextStyle.s12w400.copyWith(color: AppColors.textGreyHighest950),
+          selectedLabelStyle: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.stateBrandDefault500),
+          unselectedLabelStyle: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHighest950),
           backgroundColor: AppColors.textGreyLowestWhite,
           type: BottomNavigationBarType.fixed,
           items: vm.tabs

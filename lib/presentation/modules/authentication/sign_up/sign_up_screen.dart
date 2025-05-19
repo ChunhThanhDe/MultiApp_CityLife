@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
@@ -11,6 +10,7 @@ import 'package:sixam_mart_user/presentation/modules/authentication/components/a
 import 'package:sixam_mart_user/presentation/modules/authentication/components/phone_picker.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 import 'sign_up_controller.dart';
 
@@ -131,11 +131,11 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       children: [
         Text(
           "When's your birthday?",
-          style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHighest950),
+          style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
         ),
         Text(
           " (optional)",
-          style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyDefault500),
+          style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyDefault500),
         ),
       ],
     );
@@ -227,7 +227,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         const SizedBox(),
         Text(
           'Next',
-          style: AppTextStyle.s16w500.copyWith(color: Colors.white),
+          style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white),
         ),
         SvgPicture.asset(
           Assets.icons.icRightArrow.path,
@@ -247,7 +247,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
             'OR',
-            style: AppTextStyle.s12w500.copyWith(color: const Color(0xFF4A5763)),
+            style: AppTextStyles.typographyH12Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
           ),
         ),
         const Expanded(child: Divider(color: Colors.white, thickness: 1)),
@@ -285,7 +285,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         Text(
           isEmail ? 'Sign up with phone' : 'Sign up with email',
           textAlign: TextAlign.center,
-          style: AppTextStyle.s16w500.copyWith(color: AppColors.textGreyHighest950),
+          style: AppTextStyles.typographyH10Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
         ),
       ],
     );

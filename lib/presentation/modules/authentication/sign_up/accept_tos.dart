@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:sixam_mart_user/app/constants/app_text_styles.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
-import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_bottom_section.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_header.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
+import 'package:sixam_mart_user/theme.dart';
 
 import 'sign_up_controller.dart';
 
@@ -49,9 +48,7 @@ class AcceptTos extends BaseScreen<SignUpController> {
           const SizedBox(),
           Text(
             'Next',
-            style: AppTextStyle.s16w500.copyWith(
-              color: Colors.white,
-            ),
+            style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white),
           ),
           SvgPicture.asset(
             Assets.icons.icRightArrow.path,
@@ -73,11 +70,11 @@ class AcceptTos extends BaseScreen<SignUpController> {
         children: [
           TextSpan(
             text: 'Didn’t receive the email?  ',
-            style: AppTextStyle.s14w400.copyWith(color: AppColors.textGreyHighest950),
+            style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
           ),
           TextSpan(
             text: 'Click to resend',
-            style: AppTextStyle.s14w600.copyWith(color: AppColors.textBrandDefault500),
+            style: AppTextStyles.typographyH11SemiBold.copyWith(color: Figma.theme.tokenColorsTextBrandDefault500),
           ),
         ],
       ),
