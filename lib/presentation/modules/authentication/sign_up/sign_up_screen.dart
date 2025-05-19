@@ -17,11 +17,6 @@ class SignUpScreen extends BaseScreen<SignUpController> {
   const SignUpScreen({super.key});
 
   @override
-  Widget? buildBottomNavigationBar(BuildContext context) {
-    return const AuthBottomSection(isSignIn: false);
-  }
-
-  @override
   Widget buildScreen(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
