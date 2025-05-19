@@ -74,14 +74,14 @@ class AppTextField extends StatelessWidget {
             label != null
                 ? Text(
                     label!,
-                    style: labelStyle ?? AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
+                    style: labelStyle ?? AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
                   )
                 : const SizedBox.shrink(),
             if (isRequired && label != null) ...[
               const SizedBox(width: 4),
               Text(
                 '*',
-                style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextDangerDefault500),
+                style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textDangerDefault500),
               ),
             ],
             label != null ? const SizedBox(height: 8) : const SizedBox.shrink(),
@@ -97,40 +97,40 @@ class AppTextField extends StatelessWidget {
             keyboardType: keyboardType,
             focusNode: focusNode,
             onChanged: onChanged,
-            style: textStyle ?? AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
+            style: textStyle ?? AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
             validator: validator,
             decoration: InputDecoration(
               hintText: hintText,
               helperText: '',
-              hintStyle: hintStyle ?? AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyDefault500),
+              hintStyle: hintStyle ?? AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
               suffixIcon: suffixIcon,
               prefixIcon: prefixIcon,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(effectiveRadius),
                 borderSide: BorderSide(
-                  color: AppColors.tokenColorsStateGreyLowestHover100,
+                  color: AppColors.stateGreyLowestHover100,
                   width: 1,
                 ),
               ),
-              errorStyle: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.tokenColorsTextDangerDefault500),
+              errorStyle: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textDangerDefault500),
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(effectiveRadius),
                 borderSide: BorderSide(
-                  color: AppColors.tokenColorsStateDangerDefault500,
+                  color: AppColors.stateDangerDefault500,
                   width: 1,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(effectiveRadius),
                 borderSide: BorderSide(
-                  color: AppColors.tokenColorsStateGreyLowestHover100,
+                  color: AppColors.stateGreyLowestHover100,
                   width: 1,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(effectiveRadius),
                 borderSide: BorderSide(
-                  color: AppColors.tokenColorsStateBrandDefault500,
+                  color: AppColors.stateBrandDefault500,
                   width: 1,
                 ),
               ),

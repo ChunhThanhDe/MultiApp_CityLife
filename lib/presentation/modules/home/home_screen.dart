@@ -18,7 +18,7 @@ class HomeScreen extends BaseScreen<HomeController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AppButton(
-            color: AppColors.tokenColorsStateBrandDefault500,
+            color: AppColors.stateBrandDefault500,
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
             onTap: () {
               Get.toNamed(AppRoutes.signIn);
@@ -30,7 +30,7 @@ class HomeScreen extends BaseScreen<HomeController> {
             onTap: () {
               Get.toNamed(AppRoutes.signUp);
             },
-            color: AppColors.tokenColorsStateBrandDefault500,
+            color: AppColors.stateBrandDefault500,
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
             child: Text('Sign Up', style: AppTextStyles.typographyH10Bold.copyWith(color: Colors.white)),
           ),

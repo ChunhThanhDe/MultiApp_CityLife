@@ -26,12 +26,12 @@ class AuthHeader extends StatelessWidget {
       children: [
         AutoSizeText(
           title,
-          style: titleStyle ?? AppTextStyles.typographyH6SemiBold.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
+          style: titleStyle ?? AppTextStyles.typographyH6SemiBold.copyWith(color: AppColors.textGreyHighest950),
           maxLines: titleMaxLines,
         ),
         Text(
           subtitle,
-          style: subtitleStyle ?? AppTextStyles.typographyH10Regular.copyWith(color: AppColors.tokenColorsTextGreyHigh700),
+          style: subtitleStyle ?? AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHigh700),
           maxLines: subtitleMaxLines,
         ),
       ],

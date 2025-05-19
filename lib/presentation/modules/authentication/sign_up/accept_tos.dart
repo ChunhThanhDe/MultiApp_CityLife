@@ -70,11 +70,11 @@ class AcceptTos extends BaseScreen<SignUpController> {
         children: [
           TextSpan(
             text: 'Didn’t receive the email?  ',
-            style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
+            style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
           ),
           TextSpan(
             text: 'Click to resend',
-            style: AppTextStyles.typographyH11SemiBold.copyWith(color: AppColors.tokenColorsTextBrandDefault500),
+            style: AppTextStyles.typographyH11SemiBold.copyWith(color: AppColors.textBrandDefault500),
           ),
         ],
       ),

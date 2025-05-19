@@ -27,8 +27,8 @@ class PhonePicker extends StatelessWidget {
         Text.rich(
           TextSpan(
             children: [
-              TextSpan(text: 'Phone', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyHighest950)),
-              TextSpan(text: ' *', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextDangerDefault500)),
+              TextSpan(text: 'Phone', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+              TextSpan(text: ' *', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textDangerDefault500)),
             ],
           ),
         ),
@@ -49,7 +49,7 @@ class PhonePicker extends StatelessWidget {
                   onChanged: (CountryCode countryCode) {
                     onChanged(countryCode);
                   },
-                  textStyle: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
+                  textStyle: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
                   initialSelection: countryDialCode,
                   favorite: ['+1', '+91'],
                   showDropDownButton: true,
@@ -62,7 +62,7 @@ class PhonePicker extends StatelessWidget {
                         children: [
                           Text(
                             countryCode?.dialCode ?? '+1',
-                            style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyDefault500),
+                            style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
                           ),
                           SizedBox(width: 8.w),
                           SvgPicture.asset(
@@ -70,7 +70,7 @@ class PhonePicker extends StatelessWidget {
                             width: 8.w,
                             height: 8.w,
                             colorFilter: ColorFilter.mode(
-                              AppColors.tokenColorsTextGreyDefault500,
+                              AppColors.textGreyDefault500,
                               BlendMode.srcIn,
                             ),
                           ),

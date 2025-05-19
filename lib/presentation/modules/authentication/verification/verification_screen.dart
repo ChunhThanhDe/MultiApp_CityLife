@@ -37,8 +37,8 @@ class VerificationScreen extends BaseScreen<VerificationController> {
           AppButton(
             onTap: () {},
             width: double.infinity,
-            color: AppColors.tokenColorsStateBrandDefault500,
-            disabledColor: AppColors.tokenColorsStateBrandDefault500.withValues(alpha: 0.5),
+            color: AppColors.stateBrandDefault500,
+            disabledColor: AppColors.stateBrandDefault500.withValues(alpha: 0.5),
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
             child: Text('Verify code', style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white)),
           ),
@@ -79,11 +79,11 @@ class VerificationScreen extends BaseScreen<VerificationController> {
             children: [
               TextSpan(
                 text: 'Don\'t have an account? ',
-                style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
               ),
               TextSpan(
                 text: 'Create one now!',
-                style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.tokenColorsTextBrandDefault500),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBrandDefault500),
               ),
             ],
           ),
@@ -99,11 +99,11 @@ class VerificationScreen extends BaseScreen<VerificationController> {
         children: [
           TextSpan(
             text: 'This code expires in ',
-            style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyHigh700),
+            style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700),
           ),
           TextSpan(
             text: '30 mins.',
-            style: AppTextStyles.typographyH11SemiBold.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
+            style: AppTextStyles.typographyH11SemiBold.copyWith(color: AppColors.textGreyHighest950),
           ),
         ],
       ),
@@ -123,13 +123,13 @@ class VerificationScreen extends BaseScreen<VerificationController> {
         fieldWidth: 56,
         borderWidth: 1,
         borderRadius: BorderRadius.circular(6),
-        selectedColor: AppColors.tokenColorsTextBrandDefault500,
-        selectedFillColor: AppColors.tokenColorsStateBrandLowestHover100,
+        selectedColor: AppColors.textBrandDefault500,
+        selectedFillColor: AppColors.stateBrandLowestHover100,
         inactiveFillColor: Colors.white,
-        inactiveColor: AppColors.tokenColorsStateBrandDefault500,
-        activeColor: AppColors.tokenColorsStateBrandDefault500,
-        activeFillColor: AppColors.tokenColorsStateBrandLowestHover100,
-        errorBorderColor: AppColors.tokenColorsStateDangerDefault500,
+        inactiveColor: AppColors.stateBrandDefault500,
+        activeColor: AppColors.stateBrandDefault500,
+        activeFillColor: AppColors.stateBrandLowestHover100,
+        errorBorderColor: AppColors.stateDangerDefault500,
       ),
       animationDuration: const Duration(milliseconds: 300),
       backgroundColor: Colors.transparent,
@@ -137,7 +137,7 @@ class VerificationScreen extends BaseScreen<VerificationController> {
       onChanged: vm.updateVerificationCode,
       beforeTextPaste: (text) => true,
       textStyle: AppTextStyles.typographyH11Regular.copyWith(
-        color: AppColors.tokenColorsTextGreyHighest950,
+        color: AppColors.textGreyHighest950,
       ),
     );
   }

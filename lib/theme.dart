@@ -1294,79 +1294,79 @@ class _AllColorsMode1 extends AllColorsDefault {
 class ThemeDefault {
   ThemeDefault._();
   ThemeDefault._lerp({
-    required this.tokenColorsStateBaseWhite,
-    required this.tokenColorsStateBaseGrey950,
-    required this.tokenColorsStateGreyHighest900,
-    required this.tokenColorsStateGreyHighestHover800,
-    required this.tokenColorsStateGreyHigh700,
-    required this.tokenColorsStateGreyDefault500,
-    required this.tokenColorsStateGreyDefaultHover400,
-    required this.tokenColorsStateGreyLow300,
-    required this.tokenColorsStateGreyLowest50,
-    required this.tokenColorsStateGreyLowestHover100,
-    required this.tokenColorsStateBrandHighest950,
-    required this.tokenColorsStateBrandHigh700,
-    required this.tokenColorsStateBrandDefault500,
-    required this.tokenColorsStateBrandLow200,
-    required this.tokenColorsStateBrandLowest50,
-    required this.tokenColorsStateDangerHighest950,
-    required this.tokenColorsStateDangerHigh700,
-    required this.tokenColorsStateDangerDefault500,
-    required this.tokenColorsStateDangerLow200,
-    required this.tokenColorsStateDangerLowest50,
-    required this.tokenColorsStateWarningHighest950,
-    required this.tokenColorsStateWarningHigh700,
-    required this.tokenColorsStateWarningDefault500,
-    required this.tokenColorsStateWarningLow200,
-    required this.tokenColorsStateWarningLowest50,
-    required this.tokenColorsStateInformationHighest950,
-    required this.tokenColorsStateInformationHigh700,
-    required this.tokenColorsStateInformationDefault500,
-    required this.tokenColorsStateInformationLow200,
-    required this.tokenColorsStateInformationLowest50,
-    required this.tokenColorsStateSuccessHighest950,
-    required this.tokenColorsStateSuccessHigh700,
-    required this.tokenColorsStateSuccessDefault500,
-    required this.tokenColorsStateSuccessLow200,
-    required this.tokenColorsStateSuccessLowest50,
-    required this.tokenColorsStateDiscoveryHighest950,
-    required this.tokenColorsStateDiscoveryHigh700,
-    required this.tokenColorsStateDiscoveryDefault500,
-    required this.tokenColorsStateDiscoveryLow200,
-    required this.tokenColorsStateDiscoveryLowest50,
-    required this.tokenColorsStateQuietHighest950,
-    required this.tokenColorsStateQuietHigh700,
-    required this.tokenColorsStateQuietDefault500,
-    required this.tokenColorsStateQuietLow200,
-    required this.tokenColorsStateQuietLowest50,
-    required this.tokenColorsTextBaseWhite,
-    required this.tokenColorsTextBaseGrey950,
-    required this.tokenColorsTextGreyHighest950,
-    required this.tokenColorsTextGreyHigh700,
-    required this.tokenColorsTextGreyDefault500,
-    required this.tokenColorsTextGreyLow300,
-    required this.tokenColorsTextGreyLowestWhite,
-    required this.tokenColorsTextBrandHigh700,
-    required this.tokenColorsTextBrandDefault500,
-    required this.tokenColorsTextBrandLow300,
-    required this.tokenColorsTextDangerHigh700,
-    required this.tokenColorsTextDangerDefault500,
-    required this.tokenColorsTextDangerLow300,
-    required this.tokenColorsTextWarningHigh700,
-    required this.tokenColorsTextWarningDefault500,
-    required this.tokenColorsTextWarningLow300,
-    required this.tokenColorsTextInformationHigh700,
-    required this.tokenColorsTextInformationDefault500,
-    required this.tokenColorsTextInformationLow300,
-    required this.tokenColorsTextSuccessHigh700,
-    required this.tokenColorsTextSuccessDefault500,
-    required this.tokenColorsTextSuccessLow300,
-    required this.tokenColorsTextDiscoveryHigh700,
-    required this.tokenColorsTextDiscoveryDefault500,
-    required this.tokenColorsTextDiscoveryLow300,
-    required this.tokenColorsTextQuietHigh700,
-    required this.tokenColorsTextQuietDefault500,
-    required this.tokenColorsTextQuietLow300,
+    required this.stateBaseWhite,
+    required this.stateBaseGrey950,
+    required this.stateGreyHighest900,
+    required this.stateGreyHighestHover800,
+    required this.stateGreyHigh700,
+    required this.stateGreyDefault500,
+    required this.stateGreyDefaultHover400,
+    required this.stateGreyLow300,
+    required this.stateGreyLowest50,
+    required this.stateGreyLowestHover100,
+    required this.stateBrandHighest950,
+    required this.stateBrandHigh700,
+    required this.stateBrandDefault500,
+    required this.stateBrandLow200,
+    required this.stateBrandLowest50,
+    required this.stateDangerHighest950,
+    required this.stateDangerHigh700,
+    required this.stateDangerDefault500,
+    required this.stateDangerLow200,
+    required this.stateDangerLowest50,
+    required this.stateWarningHighest950,
+    required this.stateWarningHigh700,
+    required this.stateWarningDefault500,
+    required this.stateWarningLow200,
+    required this.stateWarningLowest50,
+    required this.stateInformationHighest950,
+    required this.stateInformationHigh700,
+    required this.stateInformationDefault500,
+    required this.stateInformationLow200,
+    required this.stateInformationLowest50,
+    required this.stateSuccessHighest950,
+    required this.stateSuccessHigh700,
+    required this.stateSuccessDefault500,
+    required this.stateSuccessLow200,
+    required this.stateSuccessLowest50,
+    required this.stateDiscoveryHighest950,
+    required this.stateDiscoveryHigh700,
+    required this.stateDiscoveryDefault500,
+    required this.stateDiscoveryLow200,
+    required this.stateDiscoveryLowest50,
+    required this.stateQuietHighest950,
+    required this.stateQuietHigh700,
+    required this.stateQuietDefault500,
+    required this.stateQuietLow200,
+    required this.stateQuietLowest50,
+    required this.textBaseWhite,
+    required this.textBaseGrey950,
+    required this.textGreyHighest950,
+    required this.textGreyHigh700,
+    required this.textGreyDefault500,
+    required this.textGreyLow300,
+    required this.textGreyLowestWhite,
+    required this.textBrandHigh700,
+    required this.textBrandDefault500,
+    required this.textBrandLow300,
+    required this.textDangerHigh700,
+    required this.textDangerDefault500,
+    required this.textDangerLow300,
+    required this.textWarningHigh700,
+    required this.textWarningDefault500,
+    required this.textWarningLow300,
+    required this.textInformationHigh700,
+    required this.textInformationDefault500,
+    required this.textInformationLow300,
+    required this.textSuccessHigh700,
+    required this.textSuccessDefault500,
+    required this.textSuccessLow300,
+    required this.textDiscoveryHigh700,
+    required this.textDiscoveryDefault500,
+    required this.textDiscoveryLow300,
+    required this.textQuietHigh700,
+    required this.textQuietDefault500,
+    required this.textQuietLow300,
     required this.shadowSm5,
     required this.shadowMd10,
     required this.shadowLg20,
@@ -1394,13 +1394,13 @@ class ThemeDefault {
     required this.alphaGrey20,
     required this.alphaGrey10,
     required this.alphaGrey5,
-    required this.tokenColorsStateBrandLowestHover100,
-    required this.tokenColorsStateSuccessLowestHover100,
-    required this.tokenColorsStateWarningLowestHover100,
-    required this.tokenColorsStateInformationLowestHover100,
-    required this.tokenColorsStateDangerLowestHover100,
-    required this.tokenColorsStateDiscoveryLowestHover100,
-    required this.tokenColorsStateQuietLowestHover100,
+    required this.stateBrandLowestHover100,
+    required this.stateSuccessLowestHover100,
+    required this.stateWarningLowestHover100,
+    required this.stateInformationLowestHover100,
+    required this.stateDangerLowestHover100,
+    required this.stateDiscoveryLowestHover100,
+    required this.stateQuietLowestHover100,
     required this.backgroundSurfacePrimaryWhite,
     required this.backgroundSurfacePrimaryHoverGrey100,
     required this.backgroundSurfacePrimaryPressedGrey200,
@@ -1412,108 +1412,108 @@ class ThemeDefault {
     required this.backgroundSurfaceTertiaryPressedGrey200,
     required this.backgroundBlanketPrimaryAlphaGrey50,
     required this.backgroundBlanketSecondaryAlphaGrey70,
-    required this.tokenColorsStrokeBaseWhite,
-    required this.tokenColorsStrokeBaseGrey950,
-    required this.tokenColorsStrokeGreyHighest950,
-    required this.tokenColorsStrokeGreyHigh700,
-    required this.tokenColorsStrokeGreyDefault500,
-    required this.tokenColorsStrokeGreyLow300,
-    required this.tokenColorsStrokeGreyLowestWhite,
-    required this.tokenColorsStrokeBrandHigh700,
-    required this.tokenColorsStrokeBrandDefault500,
-    required this.tokenColorsStrokeBrandLow300,
-    required this.tokenColorsStrokeSuccessHigh700,
-    required this.tokenColorsStrokeSuccessDefault500,
-    required this.tokenColorsStrokeSuccessLow300,
-    required this.tokenColorsStrokeWarningHigh700,
-    required this.tokenColorsStrokeWarningDefault500,
-    required this.tokenColorsStrokeWarningLow300,
-    required this.tokenColorsStrokeInformationHigh700,
-    required this.tokenColorsStrokeInformationDefault500,
-    required this.tokenColorsStrokeInformationLow300,
-    required this.tokenColorsStrokeDangerHigh700,
-    required this.tokenColorsStrokeDangerDefault500,
-    required this.tokenColorsStrokeDangerLow300,
-    required this.tokenColorsStrokeDiscoveryHigh700,
-    required this.tokenColorsStrokeDiscoveryDefault500,
-    required this.tokenColorsStrokeDiscoveryLow300,
-    required this.tokenColorsStrokeQuietHigh700,
-    required this.tokenColorsStrokeQuietDefault500,
-    required this.tokenColorsStrokeQuietLow300,
+    required this.strokeBaseWhite,
+    required this.strokeBaseGrey950,
+    required this.strokeGreyHighest950,
+    required this.strokeGreyHigh700,
+    required this.strokeGreyDefault500,
+    required this.strokeGreyLow300,
+    required this.strokeGreyLowestWhite,
+    required this.strokeBrandHigh700,
+    required this.strokeBrandDefault500,
+    required this.strokeBrandLow300,
+    required this.strokeSuccessHigh700,
+    required this.strokeSuccessDefault500,
+    required this.strokeSuccessLow300,
+    required this.strokeWarningHigh700,
+    required this.strokeWarningDefault500,
+    required this.strokeWarningLow300,
+    required this.strokeInformationHigh700,
+    required this.strokeInformationDefault500,
+    required this.strokeInformationLow300,
+    required this.strokeDangerHigh700,
+    required this.strokeDangerDefault500,
+    required this.strokeDangerLow300,
+    required this.strokeDiscoveryHigh700,
+    required this.strokeDiscoveryDefault500,
+    required this.strokeDiscoveryLow300,
+    required this.strokeQuietHigh700,
+    required this.strokeQuietDefault500,
+    required this.strokeQuietLow300,
   });
-  late final Color tokenColorsStateBaseWhite;
-  late final Color tokenColorsStateBaseGrey950;
-  late final Color tokenColorsStateGreyHighest900;
-  late final Color tokenColorsStateGreyHighestHover800;
-  late final Color tokenColorsStateGreyHigh700;
-  late final Color tokenColorsStateGreyDefault500;
-  late final Color tokenColorsStateGreyDefaultHover400;
-  late final Color tokenColorsStateGreyLow300;
-  late final Color tokenColorsStateGreyLowest50;
-  late final Color tokenColorsStateGreyLowestHover100;
-  late final Color tokenColorsStateBrandHighest950;
-  late final Color tokenColorsStateBrandHigh700;
-  late final Color tokenColorsStateBrandDefault500;
-  late final Color tokenColorsStateBrandLow200;
-  late final Color tokenColorsStateBrandLowest50;
-  late final Color tokenColorsStateDangerHighest950;
-  late final Color tokenColorsStateDangerHigh700;
-  late final Color tokenColorsStateDangerDefault500;
-  late final Color tokenColorsStateDangerLow200;
-  late final Color tokenColorsStateDangerLowest50;
-  late final Color tokenColorsStateWarningHighest950;
-  late final Color tokenColorsStateWarningHigh700;
-  late final Color tokenColorsStateWarningDefault500;
-  late final Color tokenColorsStateWarningLow200;
-  late final Color tokenColorsStateWarningLowest50;
-  late final Color tokenColorsStateInformationHighest950;
-  late final Color tokenColorsStateInformationHigh700;
-  late final Color tokenColorsStateInformationDefault500;
-  late final Color tokenColorsStateInformationLow200;
-  late final Color tokenColorsStateInformationLowest50;
-  late final Color tokenColorsStateSuccessHighest950;
-  late final Color tokenColorsStateSuccessHigh700;
-  late final Color tokenColorsStateSuccessDefault500;
-  late final Color tokenColorsStateSuccessLow200;
-  late final Color tokenColorsStateSuccessLowest50;
-  late final Color tokenColorsStateDiscoveryHighest950;
-  late final Color tokenColorsStateDiscoveryHigh700;
-  late final Color tokenColorsStateDiscoveryDefault500;
-  late final Color tokenColorsStateDiscoveryLow200;
-  late final Color tokenColorsStateDiscoveryLowest50;
-  late final Color tokenColorsStateQuietHighest950;
-  late final Color tokenColorsStateQuietHigh700;
-  late final Color tokenColorsStateQuietDefault500;
-  late final Color tokenColorsStateQuietLow200;
-  late final Color tokenColorsStateQuietLowest50;
-  late final Color tokenColorsTextBaseWhite;
-  late final Color tokenColorsTextBaseGrey950;
-  late final Color tokenColorsTextGreyHighest950;
-  late final Color tokenColorsTextGreyHigh700;
-  late final Color tokenColorsTextGreyDefault500;
-  late final Color tokenColorsTextGreyLow300;
-  late final Color tokenColorsTextGreyLowestWhite;
-  late final Color tokenColorsTextBrandHigh700;
-  late final Color tokenColorsTextBrandDefault500;
-  late final Color tokenColorsTextBrandLow300;
-  late final Color tokenColorsTextDangerHigh700;
-  late final Color tokenColorsTextDangerDefault500;
-  late final Color tokenColorsTextDangerLow300;
-  late final Color tokenColorsTextWarningHigh700;
-  late final Color tokenColorsTextWarningDefault500;
-  late final Color tokenColorsTextWarningLow300;
-  late final Color tokenColorsTextInformationHigh700;
-  late final Color tokenColorsTextInformationDefault500;
-  late final Color tokenColorsTextInformationLow300;
-  late final Color tokenColorsTextSuccessHigh700;
-  late final Color tokenColorsTextSuccessDefault500;
-  late final Color tokenColorsTextSuccessLow300;
-  late final Color tokenColorsTextDiscoveryHigh700;
-  late final Color tokenColorsTextDiscoveryDefault500;
-  late final Color tokenColorsTextDiscoveryLow300;
-  late final Color tokenColorsTextQuietHigh700;
-  late final Color tokenColorsTextQuietDefault500;
-  late final Color tokenColorsTextQuietLow300;
+  late final Color stateBaseWhite;
+  late final Color stateBaseGrey950;
+  late final Color stateGreyHighest900;
+  late final Color stateGreyHighestHover800;
+  late final Color stateGreyHigh700;
+  late final Color stateGreyDefault500;
+  late final Color stateGreyDefaultHover400;
+  late final Color stateGreyLow300;
+  late final Color stateGreyLowest50;
+  late final Color stateGreyLowestHover100;
+  late final Color stateBrandHighest950;
+  late final Color stateBrandHigh700;
+  late final Color stateBrandDefault500;
+  late final Color stateBrandLow200;
+  late final Color stateBrandLowest50;
+  late final Color stateDangerHighest950;
+  late final Color stateDangerHigh700;
+  late final Color stateDangerDefault500;
+  late final Color stateDangerLow200;
+  late final Color stateDangerLowest50;
+  late final Color stateWarningHighest950;
+  late final Color stateWarningHigh700;
+  late final Color stateWarningDefault500;
+  late final Color stateWarningLow200;
+  late final Color stateWarningLowest50;
+  late final Color stateInformationHighest950;
+  late final Color stateInformationHigh700;
+  late final Color stateInformationDefault500;
+  late final Color stateInformationLow200;
+  late final Color stateInformationLowest50;
+  late final Color stateSuccessHighest950;
+  late final Color stateSuccessHigh700;
+  late final Color stateSuccessDefault500;
+  late final Color stateSuccessLow200;
+  late final Color stateSuccessLowest50;
+  late final Color stateDiscoveryHighest950;
+  late final Color stateDiscoveryHigh700;
+  late final Color stateDiscoveryDefault500;
+  late final Color stateDiscoveryLow200;
+  late final Color stateDiscoveryLowest50;
+  late final Color stateQuietHighest950;
+  late final Color stateQuietHigh700;
+  late final Color stateQuietDefault500;
+  late final Color stateQuietLow200;
+  late final Color stateQuietLowest50;
+  late final Color textBaseWhite;
+  late final Color textBaseGrey950;
+  late final Color textGreyHighest950;
+  late final Color textGreyHigh700;
+  late final Color textGreyDefault500;
+  late final Color textGreyLow300;
+  late final Color textGreyLowestWhite;
+  late final Color textBrandHigh700;
+  late final Color textBrandDefault500;
+  late final Color textBrandLow300;
+  late final Color textDangerHigh700;
+  late final Color textDangerDefault500;
+  late final Color textDangerLow300;
+  late final Color textWarningHigh700;
+  late final Color textWarningDefault500;
+  late final Color textWarningLow300;
+  late final Color textInformationHigh700;
+  late final Color textInformationDefault500;
+  late final Color textInformationLow300;
+  late final Color textSuccessHigh700;
+  late final Color textSuccessDefault500;
+  late final Color textSuccessLow300;
+  late final Color textDiscoveryHigh700;
+  late final Color textDiscoveryDefault500;
+  late final Color textDiscoveryLow300;
+  late final Color textQuietHigh700;
+  late final Color textQuietDefault500;
+  late final Color textQuietLow300;
   late final Color shadowSm5;
   late final Color shadowMd10;
   late final Color shadowLg20;
@@ -1541,13 +1541,13 @@ class ThemeDefault {
   late final Color alphaGrey20;
   late final Color alphaGrey10;
   late final Color alphaGrey5;
-  late final Color tokenColorsStateBrandLowestHover100;
-  late final Color tokenColorsStateSuccessLowestHover100;
-  late final Color tokenColorsStateWarningLowestHover100;
-  late final Color tokenColorsStateInformationLowestHover100;
-  late final Color tokenColorsStateDangerLowestHover100;
-  late final Color tokenColorsStateDiscoveryLowestHover100;
-  late final Color tokenColorsStateQuietLowestHover100;
+  late final Color stateBrandLowestHover100;
+  late final Color stateSuccessLowestHover100;
+  late final Color stateWarningLowestHover100;
+  late final Color stateInformationLowestHover100;
+  late final Color stateDangerLowestHover100;
+  late final Color stateDiscoveryLowestHover100;
+  late final Color stateQuietLowestHover100;
   late final Color backgroundSurfacePrimaryWhite;
   late final Color backgroundSurfacePrimaryHoverGrey100;
   late final Color backgroundSurfacePrimaryPressedGrey200;
@@ -1559,109 +1559,109 @@ class ThemeDefault {
   late final Color backgroundSurfaceTertiaryPressedGrey200;
   late final Color backgroundBlanketPrimaryAlphaGrey50;
   late final Color backgroundBlanketSecondaryAlphaGrey70;
-  late final Color tokenColorsStrokeBaseWhite;
-  late final Color tokenColorsStrokeBaseGrey950;
-  late final Color tokenColorsStrokeGreyHighest950;
-  late final Color tokenColorsStrokeGreyHigh700;
-  late final Color tokenColorsStrokeGreyDefault500;
-  late final Color tokenColorsStrokeGreyLow300;
-  late final Color tokenColorsStrokeGreyLowestWhite;
-  late final Color tokenColorsStrokeBrandHigh700;
-  late final Color tokenColorsStrokeBrandDefault500;
-  late final Color tokenColorsStrokeBrandLow300;
-  late final Color tokenColorsStrokeSuccessHigh700;
-  late final Color tokenColorsStrokeSuccessDefault500;
-  late final Color tokenColorsStrokeSuccessLow300;
-  late final Color tokenColorsStrokeWarningHigh700;
-  late final Color tokenColorsStrokeWarningDefault500;
-  late final Color tokenColorsStrokeWarningLow300;
-  late final Color tokenColorsStrokeInformationHigh700;
-  late final Color tokenColorsStrokeInformationDefault500;
-  late final Color tokenColorsStrokeInformationLow300;
-  late final Color tokenColorsStrokeDangerHigh700;
-  late final Color tokenColorsStrokeDangerDefault500;
-  late final Color tokenColorsStrokeDangerLow300;
-  late final Color tokenColorsStrokeDiscoveryHigh700;
-  late final Color tokenColorsStrokeDiscoveryDefault500;
-  late final Color tokenColorsStrokeDiscoveryLow300;
-  late final Color tokenColorsStrokeQuietHigh700;
-  late final Color tokenColorsStrokeQuietDefault500;
-  late final Color tokenColorsStrokeQuietLow300;
+  late final Color strokeBaseWhite;
+  late final Color strokeBaseGrey950;
+  late final Color strokeGreyHighest950;
+  late final Color strokeGreyHigh700;
+  late final Color strokeGreyDefault500;
+  late final Color strokeGreyLow300;
+  late final Color strokeGreyLowestWhite;
+  late final Color strokeBrandHigh700;
+  late final Color strokeBrandDefault500;
+  late final Color strokeBrandLow300;
+  late final Color strokeSuccessHigh700;
+  late final Color strokeSuccessDefault500;
+  late final Color strokeSuccessLow300;
+  late final Color strokeWarningHigh700;
+  late final Color strokeWarningDefault500;
+  late final Color strokeWarningLow300;
+  late final Color strokeInformationHigh700;
+  late final Color strokeInformationDefault500;
+  late final Color strokeInformationLow300;
+  late final Color strokeDangerHigh700;
+  late final Color strokeDangerDefault500;
+  late final Color strokeDangerLow300;
+  late final Color strokeDiscoveryHigh700;
+  late final Color strokeDiscoveryDefault500;
+  late final Color strokeDiscoveryLow300;
+  late final Color strokeQuietHigh700;
+  late final Color strokeQuietDefault500;
+  late final Color strokeQuietLow300;
   static ThemeDefault _lerpResolve(ThemeDefault a, ThemeDefault b, double t) {
     return ThemeDefault._lerp(
-      tokenColorsStateBaseWhite: b.tokenColorsStateBaseWhite._lerp(a.tokenColorsStateBaseWhite, t),
-      tokenColorsStateBaseGrey950: b.tokenColorsStateBaseGrey950._lerp(a.tokenColorsStateBaseGrey950, t),
-      tokenColorsStateGreyHighest900: b.tokenColorsStateGreyHighest900._lerp(a.tokenColorsStateGreyHighest900, t),
-      tokenColorsStateGreyHighestHover800: b.tokenColorsStateGreyHighestHover800._lerp(a.tokenColorsStateGreyHighestHover800, t),
-      tokenColorsStateGreyHigh700: b.tokenColorsStateGreyHigh700._lerp(a.tokenColorsStateGreyHigh700, t),
-      tokenColorsStateGreyDefault500: b.tokenColorsStateGreyDefault500._lerp(a.tokenColorsStateGreyDefault500, t),
-      tokenColorsStateGreyDefaultHover400: b.tokenColorsStateGreyDefaultHover400._lerp(a.tokenColorsStateGreyDefaultHover400, t),
-      tokenColorsStateGreyLow300: b.tokenColorsStateGreyLow300._lerp(a.tokenColorsStateGreyLow300, t),
-      tokenColorsStateGreyLowest50: b.tokenColorsStateGreyLowest50._lerp(a.tokenColorsStateGreyLowest50, t),
-      tokenColorsStateGreyLowestHover100: b.tokenColorsStateGreyLowestHover100._lerp(a.tokenColorsStateGreyLowestHover100, t),
-      tokenColorsStateBrandHighest950: b.tokenColorsStateBrandHighest950._lerp(a.tokenColorsStateBrandHighest950, t),
-      tokenColorsStateBrandHigh700: b.tokenColorsStateBrandHigh700._lerp(a.tokenColorsStateBrandHigh700, t),
-      tokenColorsStateBrandDefault500: b.tokenColorsStateBrandDefault500._lerp(a.tokenColorsStateBrandDefault500, t),
-      tokenColorsStateBrandLow200: b.tokenColorsStateBrandLow200._lerp(a.tokenColorsStateBrandLow200, t),
-      tokenColorsStateBrandLowest50: b.tokenColorsStateBrandLowest50._lerp(a.tokenColorsStateBrandLowest50, t),
-      tokenColorsStateDangerHighest950: b.tokenColorsStateDangerHighest950._lerp(a.tokenColorsStateDangerHighest950, t),
-      tokenColorsStateDangerHigh700: b.tokenColorsStateDangerHigh700._lerp(a.tokenColorsStateDangerHigh700, t),
-      tokenColorsStateDangerDefault500: b.tokenColorsStateDangerDefault500._lerp(a.tokenColorsStateDangerDefault500, t),
-      tokenColorsStateDangerLow200: b.tokenColorsStateDangerLow200._lerp(a.tokenColorsStateDangerLow200, t),
-      tokenColorsStateDangerLowest50: b.tokenColorsStateDangerLowest50._lerp(a.tokenColorsStateDangerLowest50, t),
-      tokenColorsStateWarningHighest950: b.tokenColorsStateWarningHighest950._lerp(a.tokenColorsStateWarningHighest950, t),
-      tokenColorsStateWarningHigh700: b.tokenColorsStateWarningHigh700._lerp(a.tokenColorsStateWarningHigh700, t),
-      tokenColorsStateWarningDefault500: b.tokenColorsStateWarningDefault500._lerp(a.tokenColorsStateWarningDefault500, t),
-      tokenColorsStateWarningLow200: b.tokenColorsStateWarningLow200._lerp(a.tokenColorsStateWarningLow200, t),
-      tokenColorsStateWarningLowest50: b.tokenColorsStateWarningLowest50._lerp(a.tokenColorsStateWarningLowest50, t),
-      tokenColorsStateInformationHighest950: b.tokenColorsStateInformationHighest950._lerp(a.tokenColorsStateInformationHighest950, t),
-      tokenColorsStateInformationHigh700: b.tokenColorsStateInformationHigh700._lerp(a.tokenColorsStateInformationHigh700, t),
-      tokenColorsStateInformationDefault500: b.tokenColorsStateInformationDefault500._lerp(a.tokenColorsStateInformationDefault500, t),
-      tokenColorsStateInformationLow200: b.tokenColorsStateInformationLow200._lerp(a.tokenColorsStateInformationLow200, t),
-      tokenColorsStateInformationLowest50: b.tokenColorsStateInformationLowest50._lerp(a.tokenColorsStateInformationLowest50, t),
-      tokenColorsStateSuccessHighest950: b.tokenColorsStateSuccessHighest950._lerp(a.tokenColorsStateSuccessHighest950, t),
-      tokenColorsStateSuccessHigh700: b.tokenColorsStateSuccessHigh700._lerp(a.tokenColorsStateSuccessHigh700, t),
-      tokenColorsStateSuccessDefault500: b.tokenColorsStateSuccessDefault500._lerp(a.tokenColorsStateSuccessDefault500, t),
-      tokenColorsStateSuccessLow200: b.tokenColorsStateSuccessLow200._lerp(a.tokenColorsStateSuccessLow200, t),
-      tokenColorsStateSuccessLowest50: b.tokenColorsStateSuccessLowest50._lerp(a.tokenColorsStateSuccessLowest50, t),
-      tokenColorsStateDiscoveryHighest950: b.tokenColorsStateDiscoveryHighest950._lerp(a.tokenColorsStateDiscoveryHighest950, t),
-      tokenColorsStateDiscoveryHigh700: b.tokenColorsStateDiscoveryHigh700._lerp(a.tokenColorsStateDiscoveryHigh700, t),
-      tokenColorsStateDiscoveryDefault500: b.tokenColorsStateDiscoveryDefault500._lerp(a.tokenColorsStateDiscoveryDefault500, t),
-      tokenColorsStateDiscoveryLow200: b.tokenColorsStateDiscoveryLow200._lerp(a.tokenColorsStateDiscoveryLow200, t),
-      tokenColorsStateDiscoveryLowest50: b.tokenColorsStateDiscoveryLowest50._lerp(a.tokenColorsStateDiscoveryLowest50, t),
-      tokenColorsStateQuietHighest950: b.tokenColorsStateQuietHighest950._lerp(a.tokenColorsStateQuietHighest950, t),
-      tokenColorsStateQuietHigh700: b.tokenColorsStateQuietHigh700._lerp(a.tokenColorsStateQuietHigh700, t),
-      tokenColorsStateQuietDefault500: b.tokenColorsStateQuietDefault500._lerp(a.tokenColorsStateQuietDefault500, t),
-      tokenColorsStateQuietLow200: b.tokenColorsStateQuietLow200._lerp(a.tokenColorsStateQuietLow200, t),
-      tokenColorsStateQuietLowest50: b.tokenColorsStateQuietLowest50._lerp(a.tokenColorsStateQuietLowest50, t),
-      tokenColorsTextBaseWhite: b.tokenColorsTextBaseWhite._lerp(a.tokenColorsTextBaseWhite, t),
-      tokenColorsTextBaseGrey950: b.tokenColorsTextBaseGrey950._lerp(a.tokenColorsTextBaseGrey950, t),
-      tokenColorsTextGreyHighest950: b.tokenColorsTextGreyHighest950._lerp(a.tokenColorsTextGreyHighest950, t),
-      tokenColorsTextGreyHigh700: b.tokenColorsTextGreyHigh700._lerp(a.tokenColorsTextGreyHigh700, t),
-      tokenColorsTextGreyDefault500: b.tokenColorsTextGreyDefault500._lerp(a.tokenColorsTextGreyDefault500, t),
-      tokenColorsTextGreyLow300: b.tokenColorsTextGreyLow300._lerp(a.tokenColorsTextGreyLow300, t),
-      tokenColorsTextGreyLowestWhite: b.tokenColorsTextGreyLowestWhite._lerp(a.tokenColorsTextGreyLowestWhite, t),
-      tokenColorsTextBrandHigh700: b.tokenColorsTextBrandHigh700._lerp(a.tokenColorsTextBrandHigh700, t),
-      tokenColorsTextBrandDefault500: b.tokenColorsTextBrandDefault500._lerp(a.tokenColorsTextBrandDefault500, t),
-      tokenColorsTextBrandLow300: b.tokenColorsTextBrandLow300._lerp(a.tokenColorsTextBrandLow300, t),
-      tokenColorsTextDangerHigh700: b.tokenColorsTextDangerHigh700._lerp(a.tokenColorsTextDangerHigh700, t),
-      tokenColorsTextDangerDefault500: b.tokenColorsTextDangerDefault500._lerp(a.tokenColorsTextDangerDefault500, t),
-      tokenColorsTextDangerLow300: b.tokenColorsTextDangerLow300._lerp(a.tokenColorsTextDangerLow300, t),
-      tokenColorsTextWarningHigh700: b.tokenColorsTextWarningHigh700._lerp(a.tokenColorsTextWarningHigh700, t),
-      tokenColorsTextWarningDefault500: b.tokenColorsTextWarningDefault500._lerp(a.tokenColorsTextWarningDefault500, t),
-      tokenColorsTextWarningLow300: b.tokenColorsTextWarningLow300._lerp(a.tokenColorsTextWarningLow300, t),
-      tokenColorsTextInformationHigh700: b.tokenColorsTextInformationHigh700._lerp(a.tokenColorsTextInformationHigh700, t),
-      tokenColorsTextInformationDefault500: b.tokenColorsTextInformationDefault500._lerp(a.tokenColorsTextInformationDefault500, t),
-      tokenColorsTextInformationLow300: b.tokenColorsTextInformationLow300._lerp(a.tokenColorsTextInformationLow300, t),
-      tokenColorsTextSuccessHigh700: b.tokenColorsTextSuccessHigh700._lerp(a.tokenColorsTextSuccessHigh700, t),
-      tokenColorsTextSuccessDefault500: b.tokenColorsTextSuccessDefault500._lerp(a.tokenColorsTextSuccessDefault500, t),
-      tokenColorsTextSuccessLow300: b.tokenColorsTextSuccessLow300._lerp(a.tokenColorsTextSuccessLow300, t),
-      tokenColorsTextDiscoveryHigh700: b.tokenColorsTextDiscoveryHigh700._lerp(a.tokenColorsTextDiscoveryHigh700, t),
-      tokenColorsTextDiscoveryDefault500: b.tokenColorsTextDiscoveryDefault500._lerp(a.tokenColorsTextDiscoveryDefault500, t),
-      tokenColorsTextDiscoveryLow300: b.tokenColorsTextDiscoveryLow300._lerp(a.tokenColorsTextDiscoveryLow300, t),
-      tokenColorsTextQuietHigh700: b.tokenColorsTextQuietHigh700._lerp(a.tokenColorsTextQuietHigh700, t),
-      tokenColorsTextQuietDefault500: b.tokenColorsTextQuietDefault500._lerp(a.tokenColorsTextQuietDefault500, t),
-      tokenColorsTextQuietLow300: b.tokenColorsTextQuietLow300._lerp(a.tokenColorsTextQuietLow300, t),
+      stateBaseWhite: b.stateBaseWhite._lerp(a.stateBaseWhite, t),
+      stateBaseGrey950: b.stateBaseGrey950._lerp(a.stateBaseGrey950, t),
+      stateGreyHighest900: b.stateGreyHighest900._lerp(a.stateGreyHighest900, t),
+      stateGreyHighestHover800: b.stateGreyHighestHover800._lerp(a.stateGreyHighestHover800, t),
+      stateGreyHigh700: b.stateGreyHigh700._lerp(a.stateGreyHigh700, t),
+      stateGreyDefault500: b.stateGreyDefault500._lerp(a.stateGreyDefault500, t),
+      stateGreyDefaultHover400: b.stateGreyDefaultHover400._lerp(a.stateGreyDefaultHover400, t),
+      stateGreyLow300: b.stateGreyLow300._lerp(a.stateGreyLow300, t),
+      stateGreyLowest50: b.stateGreyLowest50._lerp(a.stateGreyLowest50, t),
+      stateGreyLowestHover100: b.stateGreyLowestHover100._lerp(a.stateGreyLowestHover100, t),
+      stateBrandHighest950: b.stateBrandHighest950._lerp(a.stateBrandHighest950, t),
+      stateBrandHigh700: b.stateBrandHigh700._lerp(a.stateBrandHigh700, t),
+      stateBrandDefault500: b.stateBrandDefault500._lerp(a.stateBrandDefault500, t),
+      stateBrandLow200: b.stateBrandLow200._lerp(a.stateBrandLow200, t),
+      stateBrandLowest50: b.stateBrandLowest50._lerp(a.stateBrandLowest50, t),
+      stateDangerHighest950: b.stateDangerHighest950._lerp(a.stateDangerHighest950, t),
+      stateDangerHigh700: b.stateDangerHigh700._lerp(a.stateDangerHigh700, t),
+      stateDangerDefault500: b.stateDangerDefault500._lerp(a.stateDangerDefault500, t),
+      stateDangerLow200: b.stateDangerLow200._lerp(a.stateDangerLow200, t),
+      stateDangerLowest50: b.stateDangerLowest50._lerp(a.stateDangerLowest50, t),
+      stateWarningHighest950: b.stateWarningHighest950._lerp(a.stateWarningHighest950, t),
+      stateWarningHigh700: b.stateWarningHigh700._lerp(a.stateWarningHigh700, t),
+      stateWarningDefault500: b.stateWarningDefault500._lerp(a.stateWarningDefault500, t),
+      stateWarningLow200: b.stateWarningLow200._lerp(a.stateWarningLow200, t),
+      stateWarningLowest50: b.stateWarningLowest50._lerp(a.stateWarningLowest50, t),
+      stateInformationHighest950: b.stateInformationHighest950._lerp(a.stateInformationHighest950, t),
+      stateInformationHigh700: b.stateInformationHigh700._lerp(a.stateInformationHigh700, t),
+      stateInformationDefault500: b.stateInformationDefault500._lerp(a.stateInformationDefault500, t),
+      stateInformationLow200: b.stateInformationLow200._lerp(a.stateInformationLow200, t),
+      stateInformationLowest50: b.stateInformationLowest50._lerp(a.stateInformationLowest50, t),
+      stateSuccessHighest950: b.stateSuccessHighest950._lerp(a.stateSuccessHighest950, t),
+      stateSuccessHigh700: b.stateSuccessHigh700._lerp(a.stateSuccessHigh700, t),
+      stateSuccessDefault500: b.stateSuccessDefault500._lerp(a.stateSuccessDefault500, t),
+      stateSuccessLow200: b.stateSuccessLow200._lerp(a.stateSuccessLow200, t),
+      stateSuccessLowest50: b.stateSuccessLowest50._lerp(a.stateSuccessLowest50, t),
+      stateDiscoveryHighest950: b.stateDiscoveryHighest950._lerp(a.stateDiscoveryHighest950, t),
+      stateDiscoveryHigh700: b.stateDiscoveryHigh700._lerp(a.stateDiscoveryHigh700, t),
+      stateDiscoveryDefault500: b.stateDiscoveryDefault500._lerp(a.stateDiscoveryDefault500, t),
+      stateDiscoveryLow200: b.stateDiscoveryLow200._lerp(a.stateDiscoveryLow200, t),
+      stateDiscoveryLowest50: b.stateDiscoveryLowest50._lerp(a.stateDiscoveryLowest50, t),
+      stateQuietHighest950: b.stateQuietHighest950._lerp(a.stateQuietHighest950, t),
+      stateQuietHigh700: b.stateQuietHigh700._lerp(a.stateQuietHigh700, t),
+      stateQuietDefault500: b.stateQuietDefault500._lerp(a.stateQuietDefault500, t),
+      stateQuietLow200: b.stateQuietLow200._lerp(a.stateQuietLow200, t),
+      stateQuietLowest50: b.stateQuietLowest50._lerp(a.stateQuietLowest50, t),
+      textBaseWhite: b.textBaseWhite._lerp(a.textBaseWhite, t),
+      textBaseGrey950: b.textBaseGrey950._lerp(a.textBaseGrey950, t),
+      textGreyHighest950: b.textGreyHighest950._lerp(a.textGreyHighest950, t),
+      textGreyHigh700: b.textGreyHigh700._lerp(a.textGreyHigh700, t),
+      textGreyDefault500: b.textGreyDefault500._lerp(a.textGreyDefault500, t),
+      textGreyLow300: b.textGreyLow300._lerp(a.textGreyLow300, t),
+      textGreyLowestWhite: b.textGreyLowestWhite._lerp(a.textGreyLowestWhite, t),
+      textBrandHigh700: b.textBrandHigh700._lerp(a.textBrandHigh700, t),
+      textBrandDefault500: b.textBrandDefault500._lerp(a.textBrandDefault500, t),
+      textBrandLow300: b.textBrandLow300._lerp(a.textBrandLow300, t),
+      textDangerHigh700: b.textDangerHigh700._lerp(a.textDangerHigh700, t),
+      textDangerDefault500: b.textDangerDefault500._lerp(a.textDangerDefault500, t),
+      textDangerLow300: b.textDangerLow300._lerp(a.textDangerLow300, t),
+      textWarningHigh700: b.textWarningHigh700._lerp(a.textWarningHigh700, t),
+      textWarningDefault500: b.textWarningDefault500._lerp(a.textWarningDefault500, t),
+      textWarningLow300: b.textWarningLow300._lerp(a.textWarningLow300, t),
+      textInformationHigh700: b.textInformationHigh700._lerp(a.textInformationHigh700, t),
+      textInformationDefault500: b.textInformationDefault500._lerp(a.textInformationDefault500, t),
+      textInformationLow300: b.textInformationLow300._lerp(a.textInformationLow300, t),
+      textSuccessHigh700: b.textSuccessHigh700._lerp(a.textSuccessHigh700, t),
+      textSuccessDefault500: b.textSuccessDefault500._lerp(a.textSuccessDefault500, t),
+      textSuccessLow300: b.textSuccessLow300._lerp(a.textSuccessLow300, t),
+      textDiscoveryHigh700: b.textDiscoveryHigh700._lerp(a.textDiscoveryHigh700, t),
+      textDiscoveryDefault500: b.textDiscoveryDefault500._lerp(a.textDiscoveryDefault500, t),
+      textDiscoveryLow300: b.textDiscoveryLow300._lerp(a.textDiscoveryLow300, t),
+      textQuietHigh700: b.textQuietHigh700._lerp(a.textQuietHigh700, t),
+      textQuietDefault500: b.textQuietDefault500._lerp(a.textQuietDefault500, t),
+      textQuietLow300: b.textQuietLow300._lerp(a.textQuietLow300, t),
       shadowSm5: b.shadowSm5._lerp(a.shadowSm5, t),
       shadowMd10: b.shadowMd10._lerp(a.shadowMd10, t),
       shadowLg20: b.shadowLg20._lerp(a.shadowLg20, t),
@@ -1689,13 +1689,13 @@ class ThemeDefault {
       alphaGrey20: b.alphaGrey20._lerp(a.alphaGrey20, t),
       alphaGrey10: b.alphaGrey10._lerp(a.alphaGrey10, t),
       alphaGrey5: b.alphaGrey5._lerp(a.alphaGrey5, t),
-      tokenColorsStateBrandLowestHover100: b.tokenColorsStateBrandLowestHover100._lerp(a.tokenColorsStateBrandLowestHover100, t),
-      tokenColorsStateSuccessLowestHover100: b.tokenColorsStateSuccessLowestHover100._lerp(a.tokenColorsStateSuccessLowestHover100, t),
-      tokenColorsStateWarningLowestHover100: b.tokenColorsStateWarningLowestHover100._lerp(a.tokenColorsStateWarningLowestHover100, t),
-      tokenColorsStateInformationLowestHover100: b.tokenColorsStateInformationLowestHover100._lerp(a.tokenColorsStateInformationLowestHover100, t),
-      tokenColorsStateDangerLowestHover100: b.tokenColorsStateDangerLowestHover100._lerp(a.tokenColorsStateDangerLowestHover100, t),
-      tokenColorsStateDiscoveryLowestHover100: b.tokenColorsStateDiscoveryLowestHover100._lerp(a.tokenColorsStateDiscoveryLowestHover100, t),
-      tokenColorsStateQuietLowestHover100: b.tokenColorsStateQuietLowestHover100._lerp(a.tokenColorsStateQuietLowestHover100, t),
+      stateBrandLowestHover100: b.stateBrandLowestHover100._lerp(a.stateBrandLowestHover100, t),
+      stateSuccessLowestHover100: b.stateSuccessLowestHover100._lerp(a.stateSuccessLowestHover100, t),
+      stateWarningLowestHover100: b.stateWarningLowestHover100._lerp(a.stateWarningLowestHover100, t),
+      stateInformationLowestHover100: b.stateInformationLowestHover100._lerp(a.stateInformationLowestHover100, t),
+      stateDangerLowestHover100: b.stateDangerLowestHover100._lerp(a.stateDangerLowestHover100, t),
+      stateDiscoveryLowestHover100: b.stateDiscoveryLowestHover100._lerp(a.stateDiscoveryLowestHover100, t),
+      stateQuietLowestHover100: b.stateQuietLowestHover100._lerp(a.stateQuietLowestHover100, t),
       backgroundSurfacePrimaryWhite: b.backgroundSurfacePrimaryWhite._lerp(a.backgroundSurfacePrimaryWhite, t),
       backgroundSurfacePrimaryHoverGrey100: b.backgroundSurfacePrimaryHoverGrey100._lerp(a.backgroundSurfacePrimaryHoverGrey100, t),
       backgroundSurfacePrimaryPressedGrey200: b.backgroundSurfacePrimaryPressedGrey200._lerp(a.backgroundSurfacePrimaryPressedGrey200, t),
@@ -1707,34 +1707,34 @@ class ThemeDefault {
       backgroundSurfaceTertiaryPressedGrey200: b.backgroundSurfaceTertiaryPressedGrey200._lerp(a.backgroundSurfaceTertiaryPressedGrey200, t),
       backgroundBlanketPrimaryAlphaGrey50: b.backgroundBlanketPrimaryAlphaGrey50._lerp(a.backgroundBlanketPrimaryAlphaGrey50, t),
       backgroundBlanketSecondaryAlphaGrey70: b.backgroundBlanketSecondaryAlphaGrey70._lerp(a.backgroundBlanketSecondaryAlphaGrey70, t),
-      tokenColorsStrokeBaseWhite: b.tokenColorsStrokeBaseWhite._lerp(a.tokenColorsStrokeBaseWhite, t),
-      tokenColorsStrokeBaseGrey950: b.tokenColorsStrokeBaseGrey950._lerp(a.tokenColorsStrokeBaseGrey950, t),
-      tokenColorsStrokeGreyHighest950: b.tokenColorsStrokeGreyHighest950._lerp(a.tokenColorsStrokeGreyHighest950, t),
-      tokenColorsStrokeGreyHigh700: b.tokenColorsStrokeGreyHigh700._lerp(a.tokenColorsStrokeGreyHigh700, t),
-      tokenColorsStrokeGreyDefault500: b.tokenColorsStrokeGreyDefault500._lerp(a.tokenColorsStrokeGreyDefault500, t),
-      tokenColorsStrokeGreyLow300: b.tokenColorsStrokeGreyLow300._lerp(a.tokenColorsStrokeGreyLow300, t),
-      tokenColorsStrokeGreyLowestWhite: b.tokenColorsStrokeGreyLowestWhite._lerp(a.tokenColorsStrokeGreyLowestWhite, t),
-      tokenColorsStrokeBrandHigh700: b.tokenColorsStrokeBrandHigh700._lerp(a.tokenColorsStrokeBrandHigh700, t),
-      tokenColorsStrokeBrandDefault500: b.tokenColorsStrokeBrandDefault500._lerp(a.tokenColorsStrokeBrandDefault500, t),
-      tokenColorsStrokeBrandLow300: b.tokenColorsStrokeBrandLow300._lerp(a.tokenColorsStrokeBrandLow300, t),
-      tokenColorsStrokeSuccessHigh700: b.tokenColorsStrokeSuccessHigh700._lerp(a.tokenColorsStrokeSuccessHigh700, t),
-      tokenColorsStrokeSuccessDefault500: b.tokenColorsStrokeSuccessDefault500._lerp(a.tokenColorsStrokeSuccessDefault500, t),
-      tokenColorsStrokeSuccessLow300: b.tokenColorsStrokeSuccessLow300._lerp(a.tokenColorsStrokeSuccessLow300, t),
-      tokenColorsStrokeWarningHigh700: b.tokenColorsStrokeWarningHigh700._lerp(a.tokenColorsStrokeWarningHigh700, t),
-      tokenColorsStrokeWarningDefault500: b.tokenColorsStrokeWarningDefault500._lerp(a.tokenColorsStrokeWarningDefault500, t),
-      tokenColorsStrokeWarningLow300: b.tokenColorsStrokeWarningLow300._lerp(a.tokenColorsStrokeWarningLow300, t),
-      tokenColorsStrokeInformationHigh700: b.tokenColorsStrokeInformationHigh700._lerp(a.tokenColorsStrokeInformationHigh700, t),
-      tokenColorsStrokeInformationDefault500: b.tokenColorsStrokeInformationDefault500._lerp(a.tokenColorsStrokeInformationDefault500, t),
-      tokenColorsStrokeInformationLow300: b.tokenColorsStrokeInformationLow300._lerp(a.tokenColorsStrokeInformationLow300, t),
-      tokenColorsStrokeDangerHigh700: b.tokenColorsStrokeDangerHigh700._lerp(a.tokenColorsStrokeDangerHigh700, t),
-      tokenColorsStrokeDangerDefault500: b.tokenColorsStrokeDangerDefault500._lerp(a.tokenColorsStrokeDangerDefault500, t),
-      tokenColorsStrokeDangerLow300: b.tokenColorsStrokeDangerLow300._lerp(a.tokenColorsStrokeDangerLow300, t),
-      tokenColorsStrokeDiscoveryHigh700: b.tokenColorsStrokeDiscoveryHigh700._lerp(a.tokenColorsStrokeDiscoveryHigh700, t),
-      tokenColorsStrokeDiscoveryDefault500: b.tokenColorsStrokeDiscoveryDefault500._lerp(a.tokenColorsStrokeDiscoveryDefault500, t),
-      tokenColorsStrokeDiscoveryLow300: b.tokenColorsStrokeDiscoveryLow300._lerp(a.tokenColorsStrokeDiscoveryLow300, t),
-      tokenColorsStrokeQuietHigh700: b.tokenColorsStrokeQuietHigh700._lerp(a.tokenColorsStrokeQuietHigh700, t),
-      tokenColorsStrokeQuietDefault500: b.tokenColorsStrokeQuietDefault500._lerp(a.tokenColorsStrokeQuietDefault500, t),
-      tokenColorsStrokeQuietLow300: b.tokenColorsStrokeQuietLow300._lerp(a.tokenColorsStrokeQuietLow300, t),
+      strokeBaseWhite: b.strokeBaseWhite._lerp(a.strokeBaseWhite, t),
+      strokeBaseGrey950: b.strokeBaseGrey950._lerp(a.strokeBaseGrey950, t),
+      strokeGreyHighest950: b.strokeGreyHighest950._lerp(a.strokeGreyHighest950, t),
+      strokeGreyHigh700: b.strokeGreyHigh700._lerp(a.strokeGreyHigh700, t),
+      strokeGreyDefault500: b.strokeGreyDefault500._lerp(a.strokeGreyDefault500, t),
+      strokeGreyLow300: b.strokeGreyLow300._lerp(a.strokeGreyLow300, t),
+      strokeGreyLowestWhite: b.strokeGreyLowestWhite._lerp(a.strokeGreyLowestWhite, t),
+      strokeBrandHigh700: b.strokeBrandHigh700._lerp(a.strokeBrandHigh700, t),
+      strokeBrandDefault500: b.strokeBrandDefault500._lerp(a.strokeBrandDefault500, t),
+      strokeBrandLow300: b.strokeBrandLow300._lerp(a.strokeBrandLow300, t),
+      strokeSuccessHigh700: b.strokeSuccessHigh700._lerp(a.strokeSuccessHigh700, t),
+      strokeSuccessDefault500: b.strokeSuccessDefault500._lerp(a.strokeSuccessDefault500, t),
+      strokeSuccessLow300: b.strokeSuccessLow300._lerp(a.strokeSuccessLow300, t),
+      strokeWarningHigh700: b.strokeWarningHigh700._lerp(a.strokeWarningHigh700, t),
+      strokeWarningDefault500: b.strokeWarningDefault500._lerp(a.strokeWarningDefault500, t),
+      strokeWarningLow300: b.strokeWarningLow300._lerp(a.strokeWarningLow300, t),
+      strokeInformationHigh700: b.strokeInformationHigh700._lerp(a.strokeInformationHigh700, t),
+      strokeInformationDefault500: b.strokeInformationDefault500._lerp(a.strokeInformationDefault500, t),
+      strokeInformationLow300: b.strokeInformationLow300._lerp(a.strokeInformationLow300, t),
+      strokeDangerHigh700: b.strokeDangerHigh700._lerp(a.strokeDangerHigh700, t),
+      strokeDangerDefault500: b.strokeDangerDefault500._lerp(a.strokeDangerDefault500, t),
+      strokeDangerLow300: b.strokeDangerLow300._lerp(a.strokeDangerLow300, t),
+      strokeDiscoveryHigh700: b.strokeDiscoveryHigh700._lerp(a.strokeDiscoveryHigh700, t),
+      strokeDiscoveryDefault500: b.strokeDiscoveryDefault500._lerp(a.strokeDiscoveryDefault500, t),
+      strokeDiscoveryLow300: b.strokeDiscoveryLow300._lerp(a.strokeDiscoveryLow300, t),
+      strokeQuietHigh700: b.strokeQuietHigh700._lerp(a.strokeQuietHigh700, t),
+      strokeQuietDefault500: b.strokeQuietDefault500._lerp(a.strokeQuietDefault500, t),
+      strokeQuietLow300: b.strokeQuietLow300._lerp(a.strokeQuietLow300, t),
     );
   }
 }
@@ -1742,151 +1742,151 @@ class ThemeDefault {
 class _ThemeLight extends ThemeDefault {
   _ThemeLight._() : super._();
   @override
-  Color get tokenColorsStateBaseWhite => AllColors.baseWhite;
+  Color get stateBaseWhite => AllColors.baseWhite;
   @override
-  Color get tokenColorsStateBaseGrey950 => AllColors.greyLight950;
+  Color get stateBaseGrey950 => AllColors.greyLight950;
   @override
-  Color get tokenColorsStateGreyHighest900 => AllColors.greyLight900;
+  Color get stateGreyHighest900 => AllColors.greyLight900;
   @override
-  Color get tokenColorsStateGreyHighestHover800 => AllColors.greyLight800;
+  Color get stateGreyHighestHover800 => AllColors.greyLight800;
   @override
-  Color get tokenColorsStateGreyHigh700 => AllColors.greyLight700;
+  Color get stateGreyHigh700 => AllColors.greyLight700;
   @override
-  Color get tokenColorsStateGreyDefault500 => AllColors.greyLight500;
+  Color get stateGreyDefault500 => AllColors.greyLight500;
   @override
-  Color get tokenColorsStateGreyDefaultHover400 => AllColors.greyLight400;
+  Color get stateGreyDefaultHover400 => AllColors.greyLight400;
   @override
-  Color get tokenColorsStateGreyLow300 => AllColors.greyLight300;
+  Color get stateGreyLow300 => AllColors.greyLight300;
   @override
-  Color get tokenColorsStateGreyLowest50 => AllColors.greyLight50;
+  Color get stateGreyLowest50 => AllColors.greyLight50;
   @override
-  Color get tokenColorsStateGreyLowestHover100 => AllColors.greyLight100;
+  Color get stateGreyLowestHover100 => AllColors.greyLight100;
   @override
-  Color get tokenColorsStateBrandHighest950 => BrandColor.brand900;
+  Color get stateBrandHighest950 => BrandColor.brand900;
   @override
-  Color get tokenColorsStateBrandHigh700 => BrandColor.brand700;
+  Color get stateBrandHigh700 => BrandColor.brand700;
   @override
-  Color get tokenColorsStateBrandDefault500 => BrandColor.brand500;
+  Color get stateBrandDefault500 => BrandColor.brand500;
   @override
-  Color get tokenColorsStateBrandLow200 => BrandColor.brand200;
+  Color get stateBrandLow200 => BrandColor.brand200;
   @override
-  Color get tokenColorsStateBrandLowest50 => BrandColor.brand50;
+  Color get stateBrandLowest50 => BrandColor.brand50;
   @override
-  Color get tokenColorsStateDangerHighest950 => AllColors.red900;
+  Color get stateDangerHighest950 => AllColors.red900;
   @override
-  Color get tokenColorsStateDangerHigh700 => AllColors.red700;
+  Color get stateDangerHigh700 => AllColors.red700;
   @override
-  Color get tokenColorsStateDangerDefault500 => AllColors.red500;
+  Color get stateDangerDefault500 => AllColors.red500;
   @override
-  Color get tokenColorsStateDangerLow200 => AllColors.red300;
+  Color get stateDangerLow200 => AllColors.red300;
   @override
-  Color get tokenColorsStateDangerLowest50 => AllColors.red50;
+  Color get stateDangerLowest50 => AllColors.red50;
   @override
-  Color get tokenColorsStateWarningHighest950 => AllColors.orange900;
+  Color get stateWarningHighest950 => AllColors.orange900;
   @override
-  Color get tokenColorsStateWarningHigh700 => AllColors.orange700;
+  Color get stateWarningHigh700 => AllColors.orange700;
   @override
-  Color get tokenColorsStateWarningDefault500 => AllColors.orange500;
+  Color get stateWarningDefault500 => AllColors.orange500;
   @override
-  Color get tokenColorsStateWarningLow200 => AllColors.orange200;
+  Color get stateWarningLow200 => AllColors.orange200;
   @override
-  Color get tokenColorsStateWarningLowest50 => AllColors.orange50;
+  Color get stateWarningLowest50 => AllColors.orange50;
   @override
-  Color get tokenColorsStateInformationHighest950 => AllColors.blue900;
+  Color get stateInformationHighest950 => AllColors.blue900;
   @override
-  Color get tokenColorsStateInformationHigh700 => AllColors.blue700;
+  Color get stateInformationHigh700 => AllColors.blue700;
   @override
-  Color get tokenColorsStateInformationDefault500 => AllColors.blue500;
+  Color get stateInformationDefault500 => AllColors.blue500;
   @override
-  Color get tokenColorsStateInformationLow200 => AllColors.blue200;
+  Color get stateInformationLow200 => AllColors.blue200;
   @override
-  Color get tokenColorsStateInformationLowest50 => AllColors.blue50;
+  Color get stateInformationLowest50 => AllColors.blue50;
   @override
-  Color get tokenColorsStateSuccessHighest950 => AllColors.green900;
+  Color get stateSuccessHighest950 => AllColors.green900;
   @override
-  Color get tokenColorsStateSuccessHigh700 => AllColors.green700;
+  Color get stateSuccessHigh700 => AllColors.green700;
   @override
-  Color get tokenColorsStateSuccessDefault500 => AllColors.green500;
+  Color get stateSuccessDefault500 => AllColors.green500;
   @override
-  Color get tokenColorsStateSuccessLow200 => AllColors.green200;
+  Color get stateSuccessLow200 => AllColors.green200;
   @override
-  Color get tokenColorsStateSuccessLowest50 => AllColors.green50;
+  Color get stateSuccessLowest50 => AllColors.green50;
   @override
-  Color get tokenColorsStateDiscoveryHighest950 => AllColors.violet900;
+  Color get stateDiscoveryHighest950 => AllColors.violet900;
   @override
-  Color get tokenColorsStateDiscoveryHigh700 => AllColors.violet700;
+  Color get stateDiscoveryHigh700 => AllColors.violet700;
   @override
-  Color get tokenColorsStateDiscoveryDefault500 => AllColors.violet500;
+  Color get stateDiscoveryDefault500 => AllColors.violet500;
   @override
-  Color get tokenColorsStateDiscoveryLow200 => AllColors.violet200;
+  Color get stateDiscoveryLow200 => AllColors.violet200;
   @override
-  Color get tokenColorsStateDiscoveryLowest50 => AllColors.violet50;
+  Color get stateDiscoveryLowest50 => AllColors.violet50;
   @override
-  Color get tokenColorsStateQuietHighest950 => AllColors.teal900;
+  Color get stateQuietHighest950 => AllColors.teal900;
   @override
-  Color get tokenColorsStateQuietHigh700 => AllColors.teal700;
+  Color get stateQuietHigh700 => AllColors.teal700;
   @override
-  Color get tokenColorsStateQuietDefault500 => AllColors.teal500;
+  Color get stateQuietDefault500 => AllColors.teal500;
   @override
-  Color get tokenColorsStateQuietLow200 => AllColors.teal200;
+  Color get stateQuietLow200 => AllColors.teal200;
   @override
-  Color get tokenColorsStateQuietLowest50 => AllColors.teal50;
+  Color get stateQuietLowest50 => AllColors.teal50;
   @override
-  Color get tokenColorsTextBaseWhite => AllColors.baseWhite;
+  Color get textBaseWhite => AllColors.baseWhite;
   @override
-  Color get tokenColorsTextBaseGrey950 => AllColors.greyLight950;
+  Color get textBaseGrey950 => AllColors.greyLight950;
   @override
-  Color get tokenColorsTextGreyHighest950 => AllColors.greyLight950;
+  Color get textGreyHighest950 => AllColors.greyLight950;
   @override
-  Color get tokenColorsTextGreyHigh700 => AllColors.greyLight700;
+  Color get textGreyHigh700 => AllColors.greyLight700;
   @override
-  Color get tokenColorsTextGreyDefault500 => AllColors.greyLight500;
+  Color get textGreyDefault500 => AllColors.greyLight500;
   @override
-  Color get tokenColorsTextGreyLow300 => AllColors.greyLight300;
+  Color get textGreyLow300 => AllColors.greyLight300;
   @override
-  Color get tokenColorsTextGreyLowestWhite => AllColors.baseWhite;
+  Color get textGreyLowestWhite => AllColors.baseWhite;
   @override
-  Color get tokenColorsTextBrandHigh700 => BrandColor.brand700;
+  Color get textBrandHigh700 => BrandColor.brand700;
   @override
-  Color get tokenColorsTextBrandDefault500 => BrandColor.brand500;
+  Color get textBrandDefault500 => BrandColor.brand500;
   @override
-  Color get tokenColorsTextBrandLow300 => BrandColor.brand300;
+  Color get textBrandLow300 => BrandColor.brand300;
   @override
-  Color get tokenColorsTextDangerHigh700 => AllColors.red700;
+  Color get textDangerHigh700 => AllColors.red700;
   @override
-  Color get tokenColorsTextDangerDefault500 => AllColors.red500;
+  Color get textDangerDefault500 => AllColors.red500;
   @override
-  Color get tokenColorsTextDangerLow300 => AllColors.red300;
+  Color get textDangerLow300 => AllColors.red300;
   @override
-  Color get tokenColorsTextWarningHigh700 => AllColors.orange700;
+  Color get textWarningHigh700 => AllColors.orange700;
   @override
-  Color get tokenColorsTextWarningDefault500 => AllColors.orange500;
+  Color get textWarningDefault500 => AllColors.orange500;
   @override
-  Color get tokenColorsTextWarningLow300 => AllColors.orange300;
+  Color get textWarningLow300 => AllColors.orange300;
   @override
-  Color get tokenColorsTextInformationHigh700 => AllColors.blue700;
+  Color get textInformationHigh700 => AllColors.blue700;
   @override
-  Color get tokenColorsTextInformationDefault500 => AllColors.blue500;
+  Color get textInformationDefault500 => AllColors.blue500;
   @override
-  Color get tokenColorsTextInformationLow300 => AllColors.blue300;
+  Color get textInformationLow300 => AllColors.blue300;
   @override
-  Color get tokenColorsTextSuccessHigh700 => AllColors.green700;
+  Color get textSuccessHigh700 => AllColors.green700;
   @override
-  Color get tokenColorsTextSuccessDefault500 => AllColors.green500;
+  Color get textSuccessDefault500 => AllColors.green500;
   @override
-  Color get tokenColorsTextSuccessLow300 => AllColors.green300;
+  Color get textSuccessLow300 => AllColors.green300;
   @override
-  Color get tokenColorsTextDiscoveryHigh700 => AllColors.violet700;
+  Color get textDiscoveryHigh700 => AllColors.violet700;
   @override
-  Color get tokenColorsTextDiscoveryDefault500 => AllColors.violet500;
+  Color get textDiscoveryDefault500 => AllColors.violet500;
   @override
-  Color get tokenColorsTextDiscoveryLow300 => AllColors.violet300;
+  Color get textDiscoveryLow300 => AllColors.violet300;
   @override
-  Color get tokenColorsTextQuietHigh700 => AllColors.teal700;
+  Color get textQuietHigh700 => AllColors.teal700;
   @override
-  Color get tokenColorsTextQuietDefault500 => AllColors.teal500;
+  Color get textQuietDefault500 => AllColors.teal500;
   @override
-  Color get tokenColorsTextQuietLow300 => AllColors.teal300;
+  Color get textQuietLow300 => AllColors.teal300;
   @override
   Color get shadowSm5 => AllColors.alphaGrey5;
   @override
@@ -1942,19 +1942,19 @@ class _ThemeLight extends ThemeDefault {
   @override
   Color get alphaGrey5 => AllColors.alphaGrey5;
   @override
-  Color get tokenColorsStateBrandLowestHover100 => BrandColor.brand100;
+  Color get stateBrandLowestHover100 => BrandColor.brand100;
   @override
-  Color get tokenColorsStateSuccessLowestHover100 => AllColors.green100;
+  Color get stateSuccessLowestHover100 => AllColors.green100;
   @override
-  Color get tokenColorsStateWarningLowestHover100 => AllColors.orange100;
+  Color get stateWarningLowestHover100 => AllColors.orange100;
   @override
-  Color get tokenColorsStateInformationLowestHover100 => AllColors.blue100;
+  Color get stateInformationLowestHover100 => AllColors.blue100;
   @override
-  Color get tokenColorsStateDangerLowestHover100 => AllColors.red100;
+  Color get stateDangerLowestHover100 => AllColors.red100;
   @override
-  Color get tokenColorsStateDiscoveryLowestHover100 => AllColors.violet100;
+  Color get stateDiscoveryLowestHover100 => AllColors.violet100;
   @override
-  Color get tokenColorsStateQuietLowestHover100 => AllColors.teal100;
+  Color get stateQuietLowestHover100 => AllColors.teal100;
   @override
   Color get backgroundSurfacePrimaryWhite => AllColors.baseWhite;
   @override
@@ -1978,211 +1978,211 @@ class _ThemeLight extends ThemeDefault {
   @override
   Color get backgroundBlanketSecondaryAlphaGrey70 => AllColors.alphaGrey70;
   @override
-  Color get tokenColorsStrokeBaseWhite => AllColors.baseWhite;
+  Color get strokeBaseWhite => AllColors.baseWhite;
   @override
-  Color get tokenColorsStrokeBaseGrey950 => AllColors.greyLight950;
+  Color get strokeBaseGrey950 => AllColors.greyLight950;
   @override
-  Color get tokenColorsStrokeGreyHighest950 => AllColors.greyLight950;
+  Color get strokeGreyHighest950 => AllColors.greyLight950;
   @override
-  Color get tokenColorsStrokeGreyHigh700 => AllColors.greyLight700;
+  Color get strokeGreyHigh700 => AllColors.greyLight700;
   @override
-  Color get tokenColorsStrokeGreyDefault500 => AllColors.greyLight500;
+  Color get strokeGreyDefault500 => AllColors.greyLight500;
   @override
-  Color get tokenColorsStrokeGreyLow300 => AllColors.greyLight300;
+  Color get strokeGreyLow300 => AllColors.greyLight300;
   @override
-  Color get tokenColorsStrokeGreyLowestWhite => AllColors.baseWhite;
+  Color get strokeGreyLowestWhite => AllColors.baseWhite;
   @override
-  Color get tokenColorsStrokeBrandHigh700 => BrandColor.brand700;
+  Color get strokeBrandHigh700 => BrandColor.brand700;
   @override
-  Color get tokenColorsStrokeBrandDefault500 => BrandColor.brand500;
+  Color get strokeBrandDefault500 => BrandColor.brand500;
   @override
-  Color get tokenColorsStrokeBrandLow300 => BrandColor.brand300;
+  Color get strokeBrandLow300 => BrandColor.brand300;
   @override
-  Color get tokenColorsStrokeSuccessHigh700 => AllColors.green700;
+  Color get strokeSuccessHigh700 => AllColors.green700;
   @override
-  Color get tokenColorsStrokeSuccessDefault500 => AllColors.green500;
+  Color get strokeSuccessDefault500 => AllColors.green500;
   @override
-  Color get tokenColorsStrokeSuccessLow300 => AllColors.green300;
+  Color get strokeSuccessLow300 => AllColors.green300;
   @override
-  Color get tokenColorsStrokeWarningHigh700 => AllColors.orange700;
+  Color get strokeWarningHigh700 => AllColors.orange700;
   @override
-  Color get tokenColorsStrokeWarningDefault500 => AllColors.orange500;
+  Color get strokeWarningDefault500 => AllColors.orange500;
   @override
-  Color get tokenColorsStrokeWarningLow300 => AllColors.orange300;
+  Color get strokeWarningLow300 => AllColors.orange300;
   @override
-  Color get tokenColorsStrokeInformationHigh700 => AllColors.blue700;
+  Color get strokeInformationHigh700 => AllColors.blue700;
   @override
-  Color get tokenColorsStrokeInformationDefault500 => AllColors.blue500;
+  Color get strokeInformationDefault500 => AllColors.blue500;
   @override
-  Color get tokenColorsStrokeInformationLow300 => AllColors.blue300;
+  Color get strokeInformationLow300 => AllColors.blue300;
   @override
-  Color get tokenColorsStrokeDangerHigh700 => AllColors.red700;
+  Color get strokeDangerHigh700 => AllColors.red700;
   @override
-  Color get tokenColorsStrokeDangerDefault500 => AllColors.red500;
+  Color get strokeDangerDefault500 => AllColors.red500;
   @override
-  Color get tokenColorsStrokeDangerLow300 => AllColors.red300;
+  Color get strokeDangerLow300 => AllColors.red300;
   @override
-  Color get tokenColorsStrokeDiscoveryHigh700 => AllColors.violet700;
+  Color get strokeDiscoveryHigh700 => AllColors.violet700;
   @override
-  Color get tokenColorsStrokeDiscoveryDefault500 => AllColors.violet500;
+  Color get strokeDiscoveryDefault500 => AllColors.violet500;
   @override
-  Color get tokenColorsStrokeDiscoveryLow300 => AllColors.violet300;
+  Color get strokeDiscoveryLow300 => AllColors.violet300;
   @override
-  Color get tokenColorsStrokeQuietHigh700 => AllColors.teal700;
+  Color get strokeQuietHigh700 => AllColors.teal700;
   @override
-  Color get tokenColorsStrokeQuietDefault500 => AllColors.teal500;
+  Color get strokeQuietDefault500 => AllColors.teal500;
   @override
-  Color get tokenColorsStrokeQuietLow300 => AllColors.teal300;
+  Color get strokeQuietLow300 => AllColors.teal300;
 }
 
 class _ThemeDark extends ThemeDefault {
   _ThemeDark._() : super._();
   @override
-  Color get tokenColorsStateBaseWhite => AllColors.greyDark950;
+  Color get stateBaseWhite => AllColors.greyDark950;
   @override
-  Color get tokenColorsStateBaseGrey950 => AllColors.baseWhite;
+  Color get stateBaseGrey950 => AllColors.baseWhite;
   @override
-  Color get tokenColorsStateGreyHighest900 => AllColors.greyLight50;
+  Color get stateGreyHighest900 => AllColors.greyLight50;
   @override
-  Color get tokenColorsStateGreyHighestHover800 => AllColors.greyDark100;
+  Color get stateGreyHighestHover800 => AllColors.greyDark100;
   @override
-  Color get tokenColorsStateGreyHigh700 => AllColors.greyDark200;
+  Color get stateGreyHigh700 => AllColors.greyDark200;
   @override
-  Color get tokenColorsStateGreyDefault500 => AllColors.greyDark400;
+  Color get stateGreyDefault500 => AllColors.greyDark400;
   @override
-  Color get tokenColorsStateGreyDefaultHover400 => AllColors.greyDark500;
+  Color get stateGreyDefaultHover400 => AllColors.greyDark500;
   @override
-  Color get tokenColorsStateGreyLow300 => AllColors.greyDark600;
+  Color get stateGreyLow300 => AllColors.greyDark600;
   @override
-  Color get tokenColorsStateGreyLowest50 => AllColors.greyDark900;
+  Color get stateGreyLowest50 => AllColors.greyDark900;
   @override
-  Color get tokenColorsStateGreyLowestHover100 => AllColors.greyDark800;
+  Color get stateGreyLowestHover100 => AllColors.greyDark800;
   @override
-  Color get tokenColorsStateBrandHighest950 => BrandColor.brand50;
+  Color get stateBrandHighest950 => BrandColor.brand50;
   @override
-  Color get tokenColorsStateBrandHigh700 => BrandColor.brand200;
+  Color get stateBrandHigh700 => BrandColor.brand200;
   @override
-  Color get tokenColorsStateBrandDefault500 => BrandColor.brand400;
+  Color get stateBrandDefault500 => BrandColor.brand400;
   @override
-  Color get tokenColorsStateBrandLow200 => BrandColor.brand700;
+  Color get stateBrandLow200 => BrandColor.brand700;
   @override
-  Color get tokenColorsStateBrandLowest50 => BrandColor.brand900;
+  Color get stateBrandLowest50 => BrandColor.brand900;
   @override
-  Color get tokenColorsStateDangerHighest950 => AllColors.red50;
+  Color get stateDangerHighest950 => AllColors.red50;
   @override
-  Color get tokenColorsStateDangerHigh700 => AllColors.red200;
+  Color get stateDangerHigh700 => AllColors.red200;
   @override
-  Color get tokenColorsStateDangerDefault500 => AllColors.red400;
+  Color get stateDangerDefault500 => AllColors.red400;
   @override
-  Color get tokenColorsStateDangerLow200 => AllColors.red700;
+  Color get stateDangerLow200 => AllColors.red700;
   @override
-  Color get tokenColorsStateDangerLowest50 => AllColors.red900;
+  Color get stateDangerLowest50 => AllColors.red900;
   @override
-  Color get tokenColorsStateWarningHighest950 => AllColors.orange50;
+  Color get stateWarningHighest950 => AllColors.orange50;
   @override
-  Color get tokenColorsStateWarningHigh700 => AllColors.orange200;
+  Color get stateWarningHigh700 => AllColors.orange200;
   @override
-  Color get tokenColorsStateWarningDefault500 => AllColors.orange400;
+  Color get stateWarningDefault500 => AllColors.orange400;
   @override
-  Color get tokenColorsStateWarningLow200 => AllColors.orange700;
+  Color get stateWarningLow200 => AllColors.orange700;
   @override
-  Color get tokenColorsStateWarningLowest50 => AllColors.orange900;
+  Color get stateWarningLowest50 => AllColors.orange900;
   @override
-  Color get tokenColorsStateInformationHighest950 => AllColors.blue50;
+  Color get stateInformationHighest950 => AllColors.blue50;
   @override
-  Color get tokenColorsStateInformationHigh700 => AllColors.blue200;
+  Color get stateInformationHigh700 => AllColors.blue200;
   @override
-  Color get tokenColorsStateInformationDefault500 => AllColors.blue400;
+  Color get stateInformationDefault500 => AllColors.blue400;
   @override
-  Color get tokenColorsStateInformationLow200 => AllColors.blue700;
+  Color get stateInformationLow200 => AllColors.blue700;
   @override
-  Color get tokenColorsStateInformationLowest50 => AllColors.blue900;
+  Color get stateInformationLowest50 => AllColors.blue900;
   @override
-  Color get tokenColorsStateSuccessHighest950 => AllColors.green50;
+  Color get stateSuccessHighest950 => AllColors.green50;
   @override
-  Color get tokenColorsStateSuccessHigh700 => AllColors.green200;
+  Color get stateSuccessHigh700 => AllColors.green200;
   @override
-  Color get tokenColorsStateSuccessDefault500 => AllColors.green400;
+  Color get stateSuccessDefault500 => AllColors.green400;
   @override
-  Color get tokenColorsStateSuccessLow200 => AllColors.green700;
+  Color get stateSuccessLow200 => AllColors.green700;
   @override
-  Color get tokenColorsStateSuccessLowest50 => AllColors.green900;
+  Color get stateSuccessLowest50 => AllColors.green900;
   @override
-  Color get tokenColorsStateDiscoveryHighest950 => AllColors.violet50;
+  Color get stateDiscoveryHighest950 => AllColors.violet50;
   @override
-  Color get tokenColorsStateDiscoveryHigh700 => AllColors.violet200;
+  Color get stateDiscoveryHigh700 => AllColors.violet200;
   @override
-  Color get tokenColorsStateDiscoveryDefault500 => AllColors.violet400;
+  Color get stateDiscoveryDefault500 => AllColors.violet400;
   @override
-  Color get tokenColorsStateDiscoveryLow200 => AllColors.violet700;
+  Color get stateDiscoveryLow200 => AllColors.violet700;
   @override
-  Color get tokenColorsStateDiscoveryLowest50 => AllColors.violet900;
+  Color get stateDiscoveryLowest50 => AllColors.violet900;
   @override
-  Color get tokenColorsStateQuietHighest950 => AllColors.teal50;
+  Color get stateQuietHighest950 => AllColors.teal50;
   @override
-  Color get tokenColorsStateQuietHigh700 => AllColors.teal200;
+  Color get stateQuietHigh700 => AllColors.teal200;
   @override
-  Color get tokenColorsStateQuietDefault500 => AllColors.teal400;
+  Color get stateQuietDefault500 => AllColors.teal400;
   @override
-  Color get tokenColorsStateQuietLow200 => AllColors.teal700;
+  Color get stateQuietLow200 => AllColors.teal700;
   @override
-  Color get tokenColorsStateQuietLowest50 => AllColors.teal900;
+  Color get stateQuietLowest50 => AllColors.teal900;
   @override
-  Color get tokenColorsTextBaseWhite => AllColors.baseWhite;
+  Color get textBaseWhite => AllColors.baseWhite;
   @override
-  Color get tokenColorsTextBaseGrey950 => AllColors.greyDark950;
+  Color get textBaseGrey950 => AllColors.greyDark950;
   @override
-  Color get tokenColorsTextGreyHighest950 => AllColors.baseWhite;
+  Color get textGreyHighest950 => AllColors.baseWhite;
   @override
-  Color get tokenColorsTextGreyHigh700 => AllColors.greyDark200;
+  Color get textGreyHigh700 => AllColors.greyDark200;
   @override
-  Color get tokenColorsTextGreyDefault500 => AllColors.greyDark500;
+  Color get textGreyDefault500 => AllColors.greyDark500;
   @override
-  Color get tokenColorsTextGreyLow300 => AllColors.greyDark300;
+  Color get textGreyLow300 => AllColors.greyDark300;
   @override
-  Color get tokenColorsTextGreyLowestWhite => AllColors.greyDark950;
+  Color get textGreyLowestWhite => AllColors.greyDark950;
   @override
-  Color get tokenColorsTextBrandHigh700 => BrandColor.brand300;
+  Color get textBrandHigh700 => BrandColor.brand300;
   @override
-  Color get tokenColorsTextBrandDefault500 => BrandColor.brand400;
+  Color get textBrandDefault500 => BrandColor.brand400;
   @override
-  Color get tokenColorsTextBrandLow300 => BrandColor.brand700;
+  Color get textBrandLow300 => BrandColor.brand700;
   @override
-  Color get tokenColorsTextDangerHigh700 => AllColors.red200;
+  Color get textDangerHigh700 => AllColors.red200;
   @override
-  Color get tokenColorsTextDangerDefault500 => AllColors.red400;
+  Color get textDangerDefault500 => AllColors.red400;
   @override
-  Color get tokenColorsTextDangerLow300 => AllColors.red700;
+  Color get textDangerLow300 => AllColors.red700;
   @override
-  Color get tokenColorsTextWarningHigh700 => AllColors.orange200;
+  Color get textWarningHigh700 => AllColors.orange200;
   @override
-  Color get tokenColorsTextWarningDefault500 => AllColors.orange400;
+  Color get textWarningDefault500 => AllColors.orange400;
   @override
-  Color get tokenColorsTextWarningLow300 => AllColors.orange700;
+  Color get textWarningLow300 => AllColors.orange700;
   @override
-  Color get tokenColorsTextInformationHigh700 => AllColors.blue200;
+  Color get textInformationHigh700 => AllColors.blue200;
   @override
-  Color get tokenColorsTextInformationDefault500 => AllColors.blue400;
+  Color get textInformationDefault500 => AllColors.blue400;
   @override
-  Color get tokenColorsTextInformationLow300 => AllColors.blue700;
+  Color get textInformationLow300 => AllColors.blue700;
   @override
-  Color get tokenColorsTextSuccessHigh700 => AllColors.green200;
+  Color get textSuccessHigh700 => AllColors.green200;
   @override
-  Color get tokenColorsTextSuccessDefault500 => AllColors.green400;
+  Color get textSuccessDefault500 => AllColors.green400;
   @override
-  Color get tokenColorsTextSuccessLow300 => AllColors.green700;
+  Color get textSuccessLow300 => AllColors.green700;
   @override
-  Color get tokenColorsTextDiscoveryHigh700 => AllColors.violet200;
+  Color get textDiscoveryHigh700 => AllColors.violet200;
   @override
-  Color get tokenColorsTextDiscoveryDefault500 => AllColors.violet400;
+  Color get textDiscoveryDefault500 => AllColors.violet400;
   @override
-  Color get tokenColorsTextDiscoveryLow300 => AllColors.violet700;
+  Color get textDiscoveryLow300 => AllColors.violet700;
   @override
-  Color get tokenColorsTextQuietHigh700 => AllColors.teal200;
+  Color get textQuietHigh700 => AllColors.teal200;
   @override
-  Color get tokenColorsTextQuietDefault500 => AllColors.teal400;
+  Color get textQuietDefault500 => AllColors.teal400;
   @override
-  Color get tokenColorsTextQuietLow300 => AllColors.teal700;
+  Color get textQuietLow300 => AllColors.teal700;
   @override
   Color get shadowSm5 => const Color.fromARGB(13, 27, 31, 34);
   @override
@@ -2238,19 +2238,19 @@ class _ThemeDark extends ThemeDefault {
   @override
   Color get alphaGrey5 => AllColors.alphaWhite5;
   @override
-  Color get tokenColorsStateBrandLowestHover100 => BrandColor.brand800;
+  Color get stateBrandLowestHover100 => BrandColor.brand800;
   @override
-  Color get tokenColorsStateSuccessLowestHover100 => AllColors.green800;
+  Color get stateSuccessLowestHover100 => AllColors.green800;
   @override
-  Color get tokenColorsStateWarningLowestHover100 => AllColors.orange800;
+  Color get stateWarningLowestHover100 => AllColors.orange800;
   @override
-  Color get tokenColorsStateInformationLowestHover100 => AllColors.blue800;
+  Color get stateInformationLowestHover100 => AllColors.blue800;
   @override
-  Color get tokenColorsStateDangerLowestHover100 => AllColors.red800;
+  Color get stateDangerLowestHover100 => AllColors.red800;
   @override
-  Color get tokenColorsStateDiscoveryLowestHover100 => AllColors.violet800;
+  Color get stateDiscoveryLowestHover100 => AllColors.violet800;
   @override
-  Color get tokenColorsStateQuietLowestHover100 => AllColors.teal800;
+  Color get stateQuietLowestHover100 => AllColors.teal800;
   @override
   Color get backgroundSurfacePrimaryWhite => AllColors.greyDark900;
   @override
@@ -2274,61 +2274,61 @@ class _ThemeDark extends ThemeDefault {
   @override
   Color get backgroundBlanketSecondaryAlphaGrey70 => AllColors.alphaGrey90;
   @override
-  Color get tokenColorsStrokeBaseWhite => AllColors.baseWhite;
+  Color get strokeBaseWhite => AllColors.baseWhite;
   @override
-  Color get tokenColorsStrokeBaseGrey950 => AllColors.greyDark950;
+  Color get strokeBaseGrey950 => AllColors.greyDark950;
   @override
-  Color get tokenColorsStrokeGreyHighest950 => AllColors.baseWhite;
+  Color get strokeGreyHighest950 => AllColors.baseWhite;
   @override
-  Color get tokenColorsStrokeGreyHigh700 => AllColors.greyDark200;
+  Color get strokeGreyHigh700 => AllColors.greyDark200;
   @override
-  Color get tokenColorsStrokeGreyDefault500 => AllColors.greyDark500;
+  Color get strokeGreyDefault500 => AllColors.greyDark500;
   @override
-  Color get tokenColorsStrokeGreyLow300 => AllColors.greyDark300;
+  Color get strokeGreyLow300 => AllColors.greyDark300;
   @override
-  Color get tokenColorsStrokeGreyLowestWhite => AllColors.greyDark950;
+  Color get strokeGreyLowestWhite => AllColors.greyDark950;
   @override
-  Color get tokenColorsStrokeBrandHigh700 => BrandColor.brand300;
+  Color get strokeBrandHigh700 => BrandColor.brand300;
   @override
-  Color get tokenColorsStrokeBrandDefault500 => BrandColor.brand400;
+  Color get strokeBrandDefault500 => BrandColor.brand400;
   @override
-  Color get tokenColorsStrokeBrandLow300 => BrandColor.brand700;
+  Color get strokeBrandLow300 => BrandColor.brand700;
   @override
-  Color get tokenColorsStrokeSuccessHigh700 => AllColors.green200;
+  Color get strokeSuccessHigh700 => AllColors.green200;
   @override
-  Color get tokenColorsStrokeSuccessDefault500 => AllColors.green400;
+  Color get strokeSuccessDefault500 => AllColors.green400;
   @override
-  Color get tokenColorsStrokeSuccessLow300 => AllColors.green700;
+  Color get strokeSuccessLow300 => AllColors.green700;
   @override
-  Color get tokenColorsStrokeWarningHigh700 => AllColors.orange200;
+  Color get strokeWarningHigh700 => AllColors.orange200;
   @override
-  Color get tokenColorsStrokeWarningDefault500 => AllColors.orange400;
+  Color get strokeWarningDefault500 => AllColors.orange400;
   @override
-  Color get tokenColorsStrokeWarningLow300 => AllColors.orange700;
+  Color get strokeWarningLow300 => AllColors.orange700;
   @override
-  Color get tokenColorsStrokeInformationHigh700 => AllColors.blue200;
+  Color get strokeInformationHigh700 => AllColors.blue200;
   @override
-  Color get tokenColorsStrokeInformationDefault500 => AllColors.blue400;
+  Color get strokeInformationDefault500 => AllColors.blue400;
   @override
-  Color get tokenColorsStrokeInformationLow300 => AllColors.blue700;
+  Color get strokeInformationLow300 => AllColors.blue700;
   @override
-  Color get tokenColorsStrokeDangerHigh700 => AllColors.red200;
+  Color get strokeDangerHigh700 => AllColors.red200;
   @override
-  Color get tokenColorsStrokeDangerDefault500 => AllColors.red400;
+  Color get strokeDangerDefault500 => AllColors.red400;
   @override
-  Color get tokenColorsStrokeDangerLow300 => AllColors.red700;
+  Color get strokeDangerLow300 => AllColors.red700;
   @override
-  Color get tokenColorsStrokeDiscoveryHigh700 => AllColors.violet200;
+  Color get strokeDiscoveryHigh700 => AllColors.violet200;
   @override
-  Color get tokenColorsStrokeDiscoveryDefault500 => AllColors.violet400;
+  Color get strokeDiscoveryDefault500 => AllColors.violet400;
   @override
-  Color get tokenColorsStrokeDiscoveryLow300 => AllColors.violet700;
+  Color get strokeDiscoveryLow300 => AllColors.violet700;
   @override
-  Color get tokenColorsStrokeQuietHigh700 => AllColors.teal200;
+  Color get strokeQuietHigh700 => AllColors.teal200;
   @override
-  Color get tokenColorsStrokeQuietDefault500 => AllColors.teal400;
+  Color get strokeQuietDefault500 => AllColors.teal400;
   @override
-  Color get tokenColorsStrokeQuietLow300 => AllColors.teal700;
+  Color get strokeQuietLow300 => AllColors.teal700;
 }
 
 class BrandColorDefault {
@@ -3512,7 +3512,7 @@ class Shadows {
 
   static final List<Shadow> focusBrand = [
     Shadow._(
-      color: Theme.tokenColorsStateBrandDefault500,
+      color: Theme.stateBrandDefault500,
       offset: Offset(0, 0),
       blurRadius: 0,
       spreadRadius: 4,
@@ -3536,7 +3536,7 @@ class Shadows {
 
   static final List<Shadow> focusGray = [
     Shadow._(
-      color: Theme.tokenColorsStateGreyHighest900,
+      color: Theme.stateGreyHighest900,
       offset: Offset(0, 0),
       blurRadius: 0,
       spreadRadius: 4,
@@ -3560,7 +3560,7 @@ class Shadows {
 
   static final List<Shadow> focusSuccess = [
     Shadow._(
-      color: Theme.tokenColorsStateSuccessDefault500,
+      color: Theme.stateSuccessDefault500,
       offset: Offset(0, 0),
       blurRadius: 0,
       spreadRadius: 4,
@@ -3584,7 +3584,7 @@ class Shadows {
 
   static final List<Shadow> focusWarning = [
     Shadow._(
-      color: Theme.tokenColorsStateWarningDefault500,
+      color: Theme.stateWarningDefault500,
       offset: Offset(0, 0),
       blurRadius: 0,
       spreadRadius: 4,
@@ -3608,7 +3608,7 @@ class Shadows {
 
   static final List<Shadow> focusInformation = [
     Shadow._(
-      color: Theme.tokenColorsStateInformationDefault500,
+      color: Theme.stateInformationDefault500,
       offset: Offset(0, 0),
       blurRadius: 0,
       spreadRadius: 4,
@@ -3632,7 +3632,7 @@ class Shadows {
 
   static final List<Shadow> focusDanger = [
     Shadow._(
-      color: Theme.tokenColorsStateDangerDefault500,
+      color: Theme.stateDangerDefault500,
       offset: Offset(0, 0),
       blurRadius: 0,
       spreadRadius: 4,

@@ -19,11 +19,11 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return AppBar(
-      surfaceTintColor: AppColors.tokenColorsStateBaseWhite,
-      backgroundColor: AppColors.tokenColorsStateBaseWhite,
+      surfaceTintColor: AppColors.stateBaseWhite,
+      backgroundColor: AppColors.stateBaseWhite,
       title: Text(
         'Address details',
-        style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
+        style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
       ),
       centerTitle: false,
       leading: IconButton(
@@ -47,13 +47,13 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
             width: double.infinity,
             height: 6,
             decoration: BoxDecoration(
-              color: AppColors.tokenColorsStateGreyLowest50,
+              color: AppColors.stateGreyLowest50,
             ),
           ),
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 16)),
         SliverToBoxAdapter(child: _buildDeliveryInstructions()),
-        SliverToBoxAdapter(child: SizedBox(height: 12, child: Divider(height: 1, color: AppColors.tokenColorsStateGreyLowestHover100))),
+        SliverToBoxAdapter(child: SizedBox(height: 12, child: Divider(height: 1, color: AppColors.stateGreyLowestHover100))),
         const SliverToBoxAdapter(child: SizedBox(height: 16)),
         SliverToBoxAdapter(child: _buildSaveButton()),
         const SliverToBoxAdapter(child: SizedBox(height: 16)),
@@ -73,11 +73,11 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
             children: [
               Text(
                 vm.searchItem.address,
-                style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
               ),
               Text(
                 vm.searchItem.address,
-                style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.tokenColorsTextGreyHigh700),
+                style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700),
               ),
             ],
           ),
@@ -126,7 +126,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
                       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                       child: Text(
                         'Edit pin',
-                        style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
+                        style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
                       ),
                     ),
                   ),
@@ -150,11 +150,11 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
             children: [
               Text(
                 'Building type',
-                style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
+                style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
               ),
               Text(
                 '*',
-                style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextDangerDefault500),
+                style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textDangerDefault500),
               ),
               Assets.icons.icInformation.svg(),
             ],
@@ -170,7 +170,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
                 shape: RoundedRectangleBorder(
                   side: BorderSide(
                     width: 1,
-                    color: AppColors.tokenColorsStateGreyLowestHover100,
+                    color: AppColors.stateGreyLowestHover100,
                   ),
                   borderRadius: BorderRadius.circular(6),
                 ),
@@ -181,8 +181,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
                 children: [
                   Obx(() => Text(
                         vm.selectedBuildingType.value == -1 ? 'Select building type' : vm.buildingTypes[vm.selectedBuildingType.value].title,
-                        style:
-                            AppTextStyles.typographyH11Regular.copyWith(color: vm.selectedBuildingType.value == -1 ? AppColors.tokenColorsTextGreyDefault500 : AppColors.tokenColorsTextGreyHighest950),
+                        style: AppTextStyles.typographyH11Regular.copyWith(color: vm.selectedBuildingType.value == -1 ? AppColors.textGreyDefault500 : AppColors.textGreyHighest950),
                       )),
                   Assets.icons.icDropdownArrow.svg(),
                 ],
@@ -205,8 +204,8 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
           RichText(
             text: TextSpan(
               children: [
-                TextSpan(text: 'Address label', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyHighest950)),
-                TextSpan(text: ' (optional)', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyDefault500)),
+                TextSpan(text: 'Address label', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+                TextSpan(text: ' (optional)', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
               ],
             ),
           ),
@@ -231,7 +230,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
           children: [
             Text(
               'Delivery instructions',
-              style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
+              style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
             ),
             const SizedBox(height: 8),
             ...vm.deliveryOptions.asMap().entries.map(
@@ -253,7 +252,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
                           ),
                         ),
                       ),
-                      if (entry.key != vm.deliveryOptions.length - 1) SizedBox(height: 12, child: Divider(height: 1, color: AppColors.tokenColorsStateGreyLowestHover100)),
+                      if (entry.key != vm.deliveryOptions.length - 1) SizedBox(height: 12, child: Divider(height: 1, color: AppColors.stateGreyLowestHover100)),
                     ],
                   ),
                 ),
@@ -274,20 +273,20 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Text(
               'Select building type',
-              style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
+              style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950),
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Text(
               'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-              style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyHigh700),
+              style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700),
             ),
           ),
           const SizedBox(height: 16),
           Divider(
             height: 1,
-            color: AppColors.tokenColorsStateGreyLowestHover100,
+            color: AppColors.stateGreyLowestHover100,
           ),
           const SizedBox(height: 16),
           ...vm.buildingTypes.asMap().entries.map((entry) => Padding(
@@ -304,8 +303,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
                                 entry.value.icon,
                                 const SizedBox(width: 12),
                                 Text(entry.value.title,
-                                    style: AppTextStyles.typographyH11Medium
-                                        .copyWith(color: vm.selectedBuildingType.value == entry.key ? AppColors.tokenColorsTextGreyHighest950 : AppColors.tokenColorsTextGreyHigh700)),
+                                    style: AppTextStyles.typographyH11Medium.copyWith(color: vm.selectedBuildingType.value == entry.key ? AppColors.textGreyHighest950 : AppColors.textGreyHigh700)),
                                 const Spacer(),
                                 vm.selectedBuildingType.value == entry.key ? Assets.icons.icCheckmark.svg() : const SizedBox.shrink(),
                                 const SizedBox(width: 24),
@@ -313,7 +311,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
                             )),
                       ),
                     ),
-                    if (entry.key != vm.buildingTypes.length - 1) SizedBox(height: 16, child: Divider(height: 1, color: AppColors.tokenColorsStateGreyLowestHover100)),
+                    if (entry.key != vm.buildingTypes.length - 1) SizedBox(height: 16, child: Divider(height: 1, color: AppColors.stateGreyLowestHover100)),
                   ],
                 ),
               )),

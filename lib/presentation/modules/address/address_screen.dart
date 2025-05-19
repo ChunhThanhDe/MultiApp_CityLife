@@ -24,11 +24,11 @@ class AddressScreen extends StatelessWidget {
                 Spacer(),
                 Text(
                   'Enter your address',
-                  style: AppTextStyles.typographyH8Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
+                  style: AppTextStyles.typographyH8Medium.copyWith(color: AppColors.textGreyHighest950),
                 ),
                 Text(
                   'We need your address to show Food, Groceries and more near you',
-                  style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.tokenColorsTextGreyHigh700),
+                  style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700),
                 ),
                 const SizedBox(height: 24),
                 AppButton(
@@ -37,18 +37,18 @@ class AddressScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   child: Text(
                     'Add your address',
-                    style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.tokenColorsTextBaseWhite),
+                    style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite),
                   ),
                 ),
                 SizedBox(height: 16),
                 AppButton(
                   onTap: () {},
                   width: double.infinity,
-                  color: AppColors.tokenColorsStateGreyLowest50,
+                  color: AppColors.stateGreyLowest50,
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   child: Text(
                     'Skip for now',
-                    style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.tokenColorsTextGreyHighest950),
+                    style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
                   ),
                 ),
                 SizedBox(height: 52),
