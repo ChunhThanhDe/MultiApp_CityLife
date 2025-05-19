@@ -51,7 +51,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildTextHeader(),
-        const SizedBox(height: 24),
+        // const SizedBox(height: 24),
         _buildInputAmount(),
         Container(
           width: double.infinity,

@@ -5,7 +5,7 @@ import 'package:smooth_sheets/smooth_sheets.dart';
 import 'app_overlay_navigator.dart';
 
 Future<T?> showAppBottomSheet<T>({required Widget child, Function(dynamic)? onClosed, bool isDismissible = true}) async {
-  FocusScope.of(AppNavigator.navigatorKey.currentContext!).unfocus();
+  // FocusScope.of(AppNavigator.navigatorKey.currentContext!).unfocus();
 
   final modalRoute = ModalSheetRoute<T>(
     swipeDismissible: true,
@@ -17,7 +17,7 @@ Future<T?> showAppBottomSheet<T>({required Widget child, Function(dynamic)? onCl
   );
 
   return Navigator.push<T>(AppNavigator.navigatorKey.currentContext!, modalRoute).then((value) {
-    FocusScope.of(AppNavigator.navigatorKey.currentContext!).unfocus();
+    // FocusScope.of(AppNavigator.navigatorKey.currentContext!).unfocus();
     return value;
   });
 }
@@ -45,24 +45,27 @@ class AppBottomSheet extends StatelessWidget {
           }
         },
         child: IntrinsicHeight(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 12),
-                  width: 48,
-                  height: 4,
-                  decoration: ShapeDecoration(
-                    color: Figma.theme.tokenColorsStateGreyLowestHover100,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(99),
+          child: ColoredBox(
+            color: Colors.white,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 12),
+                    width: 48,
+                    height: 4,
+                    decoration: ShapeDecoration(
+                      color: Figma.theme.tokenColorsStateGreyLowestHover100,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(99),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              child,
-            ],
+                child,
+              ],
+            ),
           ),
         ),
       ),

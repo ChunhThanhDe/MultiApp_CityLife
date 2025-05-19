@@ -144,7 +144,7 @@ class SignInScreen extends BaseScreen<SignInController> {
       isRequired: true,
       controller: vm.inputController,
       hintText: 'name@example.com',
-      svgPath: Assets.icons.icEmailIcon.path,
+      prefixIcon: Assets.icons.icEmailIcon.svg(),
       keyboardType: TextInputType.emailAddress,
       validator: (value) {
         if (value == null || value.isEmpty) {

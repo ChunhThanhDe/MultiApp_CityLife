@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/domain/models/page_param/verification_page_param.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
-import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/accept_tos.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_overlay.dart';
 
@@ -86,7 +85,7 @@ class SignUpController extends BaseController {
   }
 
   Future<void> onSubmit() async {
-    Get.to(() => const AcceptTos());
+    // Get.to(() => const AcceptTos());
 
     closeKeyboard();
     if (!formKey.currentState!.validate()) {

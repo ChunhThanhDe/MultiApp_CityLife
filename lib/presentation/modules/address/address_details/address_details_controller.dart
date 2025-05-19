@@ -51,7 +51,7 @@ class AddressDetailsController extends BaseController {
   }
 
   Future<void> _loadMapStyle() async {
-    final style = await rootBundle.loadString('assets/map_style.json');
+    final style = await rootBundle.loadString('assets/maps/map_style.json');
     mapStyle.value = style;
   }
 

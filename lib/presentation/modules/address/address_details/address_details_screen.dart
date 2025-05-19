@@ -19,8 +19,8 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return AppBar(
-      surfaceTintColor: Colors.white,
-      backgroundColor: Colors.white,
+      surfaceTintColor: Figma.theme.tokenColorsStateBaseWhite,
+      backgroundColor: Figma.theme.tokenColorsStateBaseWhite,
       title: Text(
         'Address details',
         style: AppTextStyles.typographyH9Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
@@ -56,6 +56,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
         SliverToBoxAdapter(child: SizedBox(height: 12, child: Divider(height: 1, color: Figma.theme.tokenColorsStateGreyLowestHover100))),
         const SliverToBoxAdapter(child: SizedBox(height: 16)),
         SliverToBoxAdapter(child: _buildSaveButton()),
+        const SliverToBoxAdapter(child: SizedBox(height: 16)),
       ],
     );
   }
@@ -100,6 +101,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
               borderRadius: BorderRadius.circular(12),
               child: GoogleMap(
                 myLocationButtonEnabled: false,
+                mapToolbarEnabled: false,
                 mapType: MapType.normal,
                 initialCameraPosition: vm.googlePlex,
                 style: mapStyle,

@@ -99,12 +99,16 @@ class WalletScreen extends BaseScreen<WalletController> {
     );
   }
 
-  Stack _buildWalletCardSection() {
-    return Stack(
-      children: [
-        Assets.images.imgWalletBg.image(),
-        _buildWalletCard(),
-      ],
+  _buildWalletCardSection() {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: Assets.images.imgWalletBg.provider(),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: _buildWalletCard(),
     );
   }
 

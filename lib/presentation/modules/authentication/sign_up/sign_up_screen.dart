@@ -70,7 +70,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       isRequired: true,
       controller: vm.nameController,
       hintText: 'Enter your name',
-      svgPath: Assets.icons.icPersonIcon.path,
+      prefixIcon: Assets.icons.icPersonIcon.svg(),
       validator: _validateName,
     );
   }
@@ -98,7 +98,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       isRequired: true,
       controller: vm.emailController,
       hintText: 'name@example.com',
-      svgPath: Assets.icons.icEmailIcon.path,
+      prefixIcon: Assets.icons.icEmailIcon.svg(),
       keyboardType: TextInputType.emailAddress,
       validator: _validateEmail,
     );
@@ -191,11 +191,13 @@ class SignUpScreen extends BaseScreen<SignUpController> {
   }) {
     return DropdownButtonFormField<String>(
       value: controller.text.isNotEmpty ? controller.text : null,
-      items: items.map((item) => DropdownMenuItem(value: item, child: Text(item))).toList(),
+      style: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+      items: items.map((item) => DropdownMenuItem(value: item, child: Text(item, style: AppTextStyles.typographyH11Regular))).toList(),
       onChanged: (val) => controller.text = val ?? '',
       icon: Assets.icons.icDropdownArrow.svg(),
       decoration: InputDecoration(
         hintText: hint,
+        hintStyle: AppTextStyles.typographyH11Regular.copyWith(color: Figma.theme.tokenColorsTextGreyDefault500),
         helperText: helper,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(Figma.corner.radius6),

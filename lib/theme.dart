@@ -104,7 +104,6 @@ library;
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 AnimationController? _animationControllerTypographyDefault;
 AnimationController? _animationControllerAllColorsDefault;
@@ -2749,25 +2748,25 @@ class FontFamilyDefault {
 class _FontFamilyInter extends FontFamilyDefault {
   _FontFamilyInter._() : super._();
   @override
-  String get fonts => GoogleFonts.inter().fontFamily!;
+  String get fonts => 'Inter';
 }
 
 class _FontFamilyBarlow extends FontFamilyDefault {
   _FontFamilyBarlow._() : super._();
   @override
-  String get fonts => GoogleFonts.barlow().fontFamily!;
+  String get fonts => 'Barlow';
 }
 
 class _FontFamilyManrope extends FontFamilyDefault {
   _FontFamilyManrope._() : super._();
   @override
-  String get fonts => GoogleFonts.manrope().fontFamily!;
+  String get fonts => 'Manrope';
 }
 
 class _FontFamilyRobotoMono extends FontFamilyDefault {
   _FontFamilyRobotoMono._() : super._();
   @override
-  String get fonts => GoogleFonts.robotoMono().fontFamily!;
+  String get fonts => 'RobotoMono';
 }
 
 class ColorStyle {
@@ -2881,7 +2880,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH1 / Typography.fontSizeH1,
       letterSpacing: 0,
     ),
   );
@@ -2893,7 +2891,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH1 / Typography.fontSizeH1,
       letterSpacing: 0,
     ),
   );
@@ -2905,7 +2902,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH1 / Typography.fontSizeH1,
       letterSpacing: 0,
     ),
   );
@@ -2917,7 +2913,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH1 / Typography.fontSizeH1,
       letterSpacing: 0,
     ),
   );
@@ -2929,7 +2924,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH2 / Typography.fontSizeH2,
       letterSpacing: 0,
     ),
   );
@@ -2941,7 +2935,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH2 / Typography.fontSizeH2,
       letterSpacing: 0,
     ),
   );
@@ -2953,7 +2946,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH2 / Typography.fontSizeH2,
       letterSpacing: 0,
     ),
   );
@@ -2965,7 +2957,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH2 / Typography.fontSizeH2,
       letterSpacing: 0,
     ),
   );
@@ -2977,7 +2968,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH3 / Typography.fontSizeH3,
       letterSpacing: 0,
     ),
   );
@@ -2989,7 +2979,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH3 / Typography.fontSizeH3,
       letterSpacing: 0,
     ),
   );
@@ -3001,7 +2990,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH3 / Typography.fontSizeH3,
       letterSpacing: 0,
     ),
   );
@@ -3013,7 +3001,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH3 / Typography.fontSizeH3,
       letterSpacing: 0,
     ),
   );
@@ -3025,7 +3012,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH4 / Typography.fontSizeH4,
       letterSpacing: 0,
     ),
   );
@@ -3037,7 +3023,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH4 / Typography.fontSizeH4,
       letterSpacing: 0,
     ),
   );
@@ -3049,7 +3034,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH4 / Typography.fontSizeH4,
       letterSpacing: 0,
     ),
   );
@@ -3061,7 +3045,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH4 / Typography.fontSizeH4,
       letterSpacing: 0,
     ),
   );
@@ -3073,7 +3056,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH5 / Typography.fontSizeH5,
       letterSpacing: 0,
     ),
   );
@@ -3085,7 +3067,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH5 / Typography.fontSizeH5,
       letterSpacing: 0,
     ),
   );
@@ -3097,7 +3078,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH5 / Typography.fontSizeH5,
       letterSpacing: 0,
     ),
   );
@@ -3109,7 +3089,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH5 / Typography.fontSizeH5,
       letterSpacing: 0,
     ),
   );
@@ -3121,7 +3100,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH6 / Typography.fontSizeH6,
       letterSpacing: 0,
     ),
   );
@@ -3133,7 +3111,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH6 / Typography.fontSizeH6,
       letterSpacing: 0,
     ),
   );
@@ -3145,7 +3122,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH6 / Typography.fontSizeH6,
       letterSpacing: 0,
     ),
   );
@@ -3157,7 +3133,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH6 / Typography.fontSizeH6,
       letterSpacing: 0,
     ),
   );
@@ -3169,7 +3144,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH7 / Typography.fontSizeH7,
       letterSpacing: 0,
     ),
   );
@@ -3181,7 +3155,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH7 / Typography.fontSizeH7,
       letterSpacing: 0,
     ),
   );
@@ -3193,7 +3166,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH7 / Typography.fontSizeH7,
       letterSpacing: 0,
     ),
   );
@@ -3205,7 +3177,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH7 / Typography.fontSizeH7,
       letterSpacing: 0,
     ),
   );
@@ -3217,7 +3188,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH8 / Typography.fontSizeH8,
       letterSpacing: 0,
     ),
   );
@@ -3229,7 +3199,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH8 / Typography.fontSizeH8,
       letterSpacing: 0,
     ),
   );
@@ -3241,7 +3210,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH8 / Typography.fontSizeH8,
       letterSpacing: 0,
     ),
   );
@@ -3253,7 +3221,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH8 / Typography.fontSizeH8,
       letterSpacing: 0,
     ),
   );
@@ -3265,7 +3232,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH9 / Typography.fontSizeH9,
       letterSpacing: 0,
     ),
   );
@@ -3277,7 +3243,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH9 / Typography.fontSizeH9,
       letterSpacing: 0,
     ),
   );
@@ -3289,7 +3254,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH9 / Typography.fontSizeH9,
       letterSpacing: 0,
     ),
   );
@@ -3301,7 +3265,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH9 / Typography.fontSizeH9,
       letterSpacing: 0,
     ),
   );
@@ -3313,7 +3276,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH10 / Typography.fontSizeH10,
       letterSpacing: 0,
     ),
   );
@@ -3325,7 +3287,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH10 / Typography.fontSizeH10,
       letterSpacing: 0,
     ),
   );
@@ -3337,7 +3298,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH10 / Typography.fontSizeH10,
       letterSpacing: 0,
     ),
   );
@@ -3349,7 +3309,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH10 / Typography.fontSizeH10,
       letterSpacing: 0,
     ),
   );
@@ -3361,7 +3320,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH11 / Typography.fontSizeH11,
       letterSpacing: 0,
     ),
   );
@@ -3373,7 +3331,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH11 / Typography.fontSizeH11,
       letterSpacing: 0,
     ),
   );
@@ -3385,7 +3342,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH11 / Typography.fontSizeH11,
       letterSpacing: 0,
     ),
   );
@@ -3397,7 +3353,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH11 / Typography.fontSizeH11,
       letterSpacing: 0,
     ),
   );
@@ -3409,7 +3364,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightRegular400),
       fontWeight: FontWeight.w400,
-      height: Typography.fontLineHeightH12 / Typography.fontSizeH12,
       letterSpacing: 0,
     ),
   );
@@ -3421,7 +3375,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightMedium500),
       fontWeight: FontWeight.w500,
-      height: Typography.fontLineHeightH12 / Typography.fontSizeH12,
       letterSpacing: 0,
     ),
   );
@@ -3433,7 +3386,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightSemiBold600),
       fontWeight: FontWeight.w600,
-      height: Typography.fontLineHeightH12 / Typography.fontSizeH12,
       letterSpacing: 0,
     ),
   );
@@ -3445,7 +3397,6 @@ class AppTextStyles {
       decoration: TextDecoration.none,
       fontStyle: Style._parseStringStyle(Typography.fontWeightBold700),
       fontWeight: FontWeight.w700,
-      height: Typography.fontLineHeightH12 / Typography.fontSizeH12,
       letterSpacing: 0,
     ),
   );

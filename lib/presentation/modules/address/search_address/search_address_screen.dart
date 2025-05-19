@@ -61,7 +61,7 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
     final results = _mockSearchResults;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
