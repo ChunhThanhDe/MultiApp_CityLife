@@ -19,15 +19,18 @@ class WalletScreen extends BaseScreen<WalletController> {
       backgroundColor: AppColors.stateBaseWhite,
       title: Text('Wallet', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
       actions: [
-        GestureDetector(
-          onTap: () {},
-          behavior: HitTestBehavior.opaque,
-          child: Row(
-            children: [
-              Text('May Gift', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
-              const SizedBox(width: 8),
-              Assets.icons.icGift.svg(),
-            ],
+        Padding(
+          padding: const EdgeInsets.only(right: 24),
+          child: GestureDetector(
+            onTap: () {},
+            behavior: HitTestBehavior.opaque,
+            child: Row(
+              children: [
+                Text('May Gift', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+                const SizedBox(width: 8),
+                Assets.icons.icGift.svg(),
+              ],
+            ),
           ),
         ),
       ],

@@ -36,7 +36,7 @@ import 'package:sixam_mart_user/presentation/modules/wallet/view_receipt/view_re
 part 'app_routes.dart';
 
 class AppPages {
-  static String initial = AppRoutes.account;
+  static String initial = AppRoutes.root;
 
   static final appRoutes = [
     GetPage(

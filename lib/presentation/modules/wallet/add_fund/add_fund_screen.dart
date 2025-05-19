@@ -168,21 +168,21 @@ class AddFundScreen extends BaseScreen<AddFundController> {
           .map(
             (amount) => GestureDetector(
               onTap: () => controller.onSelectRecommendedAmount(amount),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                margin: const EdgeInsets.only(right: 12, bottom: 12),
-                decoration: BoxDecoration(
-                  color: controller.amountText.value == amount.toString() ? AppColors.stateBaseGrey950 : AppColors.stateGreyLowest50,
-                  borderRadius: BorderRadius.circular(32),
-                ),
-                child: Text(
-                  amount.toString(),
-                  textAlign: TextAlign.center,
-                  style: AppTextStyles.typographyH11Regular.copyWith(
-                    color: controller.amountText.value == amount.toString() ? AppColors.textGreyLowestWhite : AppColors.textGreyHighest950,
-                  ),
-                ),
-              ),
+              child: Obx(() => Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    margin: const EdgeInsets.only(right: 12, bottom: 12),
+                    decoration: BoxDecoration(
+                      color: controller.amountText.value == amount.toString() ? AppColors.stateBaseGrey950 : AppColors.stateGreyLowest50,
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: Text(
+                      amount.toString(),
+                      textAlign: TextAlign.center,
+                      style: AppTextStyles.typographyH11Regular.copyWith(
+                        color: controller.amountText.value == amount.toString() ? AppColors.textGreyLowestWhite : AppColors.textGreyHighest950,
+                      ),
+                    ),
+                  )),
             ),
           )
           .toList(),
@@ -277,7 +277,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
                         colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn),
                       ),
                       const SizedBox(width: 8),
-                      Text('Add Payment methods', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
+                      Text('Add Payment card', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                     ],
                   ),
                 ),
