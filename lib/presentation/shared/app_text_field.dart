@@ -73,7 +73,7 @@ class AppTextField extends StatelessWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
                 borderSide: BorderSide(
-                  color: Figma.theme.tokenColorsStateBrandDefault500,
+                  color: Figma.theme.tokenColorsStateGreyLowestHover100,
                   width: 1,
                 ),
               ),
@@ -88,7 +88,7 @@ class AppTextField extends StatelessWidget {
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(Figma.corner.radius6),
                 borderSide: BorderSide(
-                  color: Figma.theme.tokenColorsStateBrandDefault500,
+                  color: Figma.theme.tokenColorsStateGreyLowestHover100,
                   width: 1,
                 ),
               ),

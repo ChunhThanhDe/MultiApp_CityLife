@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_controller.dart';
 import 'package:sixam_mart_user/theme.dart';
 
@@ -18,11 +17,11 @@ class RootScreen extends BaseScreen<RootController> {
     return Obx(() => BottomNavigationBar(
           elevation: 0,
           enableFeedback: false,
-          selectedItemColor: AppColors.stateBrandDefault500,
-          unselectedItemColor: AppColors.textGreyHighest950,
-          selectedLabelStyle: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.stateBrandDefault500),
-          unselectedLabelStyle: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHighest950),
-          backgroundColor: AppColors.textGreyLowestWhite,
+          selectedItemColor: Figma.theme.tokenColorsStateBrandDefault500,
+          unselectedItemColor: Figma.theme.tokenColorsTextGreyHighest950,
+          selectedLabelStyle: AppTextStyles.typographyH12Regular.copyWith(color: Figma.theme.tokenColorsStateBrandDefault500),
+          unselectedLabelStyle: AppTextStyles.typographyH12Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+          backgroundColor: Figma.theme.alphaWhite10,
           type: BottomNavigationBarType.fixed,
           items: vm.tabs
               .map((e) => BottomNavigationBarItem(

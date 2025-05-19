@@ -17,7 +17,7 @@ class AuthBottomSection extends StatelessWidget {
       children: [
         const Center(child: TermOfService()),
         SizedBox(height: 16.h),
-        Divider(color: Figma.theme.tokenColorsStateBrandDefault500, thickness: 1),
+        Divider(color: Figma.theme.tokenColorsStateGreyLowestHover100, thickness: 1),
         SizedBox(height: 16.h),
         _buildGotoPage(),
         SizedBox(height: 56.h),

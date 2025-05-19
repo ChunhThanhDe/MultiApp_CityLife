@@ -6,7 +6,6 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/page_param/verification_page_param.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
-import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_header.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/components/term_of_service.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
@@ -38,8 +37,8 @@ class VerificationScreen extends BaseScreen<VerificationController> {
           AppButton(
             onTap: () {},
             width: double.infinity,
-            color: AppColors.stateBrandDefault500,
-            disabledColor: AppColors.stateBrandDefault500.withValues(alpha: 0.5),
+            color: Figma.theme.tokenColorsStateBrandDefault500,
+            disabledColor: Figma.theme.tokenColorsStateBrandDefault500.withValues(alpha: 0.5),
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
             child: Text('Verify code', style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white)),
           ),

@@ -77,11 +77,6 @@ flutter_gen:
   integrations:
     image: true
     flutter_svg: true
-  colors:
-    inputs:
-      - assets/colors/light_mode.xml
-    outputs:
-      class_name: AppColors
     
 
 # For information on the generic Dart part of this file, see the
@@ -100,7 +95,6 @@ flutter:
     - assets/translations/
     - assets/images/
     - assets/icons/
-    - assets/colors/
 
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

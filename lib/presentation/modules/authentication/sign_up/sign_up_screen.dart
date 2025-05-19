@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
-import 'package:sixam_mart_user/generated/assets/colors.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_bottom_section.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_header.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/phone_picker.dart';
@@ -199,9 +198,23 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         hintText: hint,
         helperText: helper,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(6),
-          borderSide: const BorderSide(
-            color: AppColors.stateGreyLowestHover100,
+          borderRadius: BorderRadius.circular(Figma.corner.radius6),
+          borderSide: BorderSide(
+            color: Figma.theme.tokenColorsStateGreyLowestHover100,
+            width: 1,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(Figma.corner.radius6),
+          borderSide: BorderSide(
+            color: Figma.theme.tokenColorsStateGreyLowestHover100,
+            width: 1,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(Figma.corner.radius6),
+          borderSide: BorderSide(
+            color: Figma.theme.tokenColorsStateGreyLowestHover100,
             width: 1,
           ),
         ),
@@ -242,7 +255,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
   Widget _buildOrDivider() {
     return Row(
       children: [
-        const Expanded(child: Divider(color: Colors.white, thickness: 1)),
+        Expanded(child: Divider(color: Figma.theme.tokenColorsStateGreyLowestHover100, thickness: 1)),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
@@ -250,7 +263,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
             style: AppTextStyles.typographyH12Medium.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
           ),
         ),
-        const Expanded(child: Divider(color: Colors.white, thickness: 1)),
+        Expanded(child: Divider(color: Figma.theme.tokenColorsStateGreyLowestHover100, thickness: 1)),
       ],
     );
   }
@@ -276,8 +289,8 @@ class SignUpScreen extends BaseScreen<SignUpController> {
           isEmail ? Assets.icons.icPhoneIcon.path : Assets.icons.icEmailIcon.path,
           width: 20.w,
           height: 20.w,
-          colorFilter: const ColorFilter.mode(
-            AppColors.textGreyHighest950,
+          colorFilter: ColorFilter.mode(
+            Figma.theme.tokenColorsTextGreyHighest950,
             BlendMode.srcIn,
           ),
         ),
