@@ -9,4 +9,6 @@ class AppRoutes {
   static const String searchAddress = '/search_address';
   static const String addressDetails = '/address_details';
   static const String confirmAddress = '/confirm_address';
+  static const String addFund = '/add_fund';
+  static const String viewReceipt = '/view_receipt';
 }

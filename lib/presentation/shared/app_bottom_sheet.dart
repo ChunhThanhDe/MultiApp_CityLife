@@ -4,22 +4,29 @@ import 'package:smooth_sheets/smooth_sheets.dart';
 
 import 'app_overlay_navigator.dart';
 
-showAppBottomSheet({required Widget child}) {
-  final modalRoute = ModalSheetRoute(
+Future<T?> showAppBottomSheet<T>({required Widget child, Function(dynamic)? onClosed, bool isDismissible = true}) async {
+  FocusScope.of(AppNavigator.navigatorKey.currentContext!).unfocus();
+
+  final modalRoute = ModalSheetRoute<T>(
     swipeDismissible: true,
     swipeDismissSensitivity: const SwipeDismissSensitivity(
       minFlingVelocityRatio: 1,
       minDragDistance: 200,
     ),
-    builder: (context) => AppBottomSheet(child: child),
+    builder: (context) => AppBottomSheet(onClosed: onClosed, child: child),
   );
 
-  Navigator.push(AppNavigator.navigatorKey.currentContext!, modalRoute);
+  return Navigator.push<T>(AppNavigator.navigatorKey.currentContext!, modalRoute).then((value) {
+    FocusScope.of(AppNavigator.navigatorKey.currentContext!).unfocus();
+    return value;
+  });
 }
 
 class AppBottomSheet extends StatelessWidget {
   final Widget child;
-  const AppBottomSheet({super.key, required this.child});
+  final Function(dynamic)? onClosed;
+  final bool isDismissible;
+  const AppBottomSheet({super.key, required this.child, this.onClosed, this.isDismissible = true});
 
   @override
   Widget build(BuildContext context) {
@@ -29,25 +36,34 @@ class AppBottomSheet extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         clipBehavior: Clip.antiAlias,
       ),
-      child: IntrinsicHeight(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Container(
-                margin: const EdgeInsets.only(top: 12),
-                width: 48,
-                height: 4,
-                decoration: ShapeDecoration(
-                  color: AppColors.stateGreyLowestHover100,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(99),
+      child: PopScope(
+        canPop: isDismissible,
+        onPopInvokedWithResult: (didPop, result) {
+          if (didPop) {
+            FocusScope.of(AppNavigator.navigatorKey.currentContext!).unfocus();
+            onClosed?.call(result);
+          }
+        },
+        child: IntrinsicHeight(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 12),
+                  width: 48,
+                  height: 4,
+                  decoration: ShapeDecoration(
+                    color: AppColors.stateGreyLowestHover100,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(99),
+                    ),
                   ),
                 ),
               ),
-            ),
-            child,
-          ],
+              child,
+            ],
+          ),
         ),
       ),
     );
