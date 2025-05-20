@@ -10,7 +10,7 @@ class RootScreen extends BaseScreen<RootController> {
   const RootScreen({super.key});
 
   @override
-  bool get wrapWithSafeArea => true;
+  bool get wrapWithSafeArea => false;
 
   @override
   Widget? buildBottomNavigationBar(BuildContext context) {

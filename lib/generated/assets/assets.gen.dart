@@ -18,11 +18,17 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_apartment.svg
   SvgGenImage get icApartment => const SvgGenImage('assets/icons/ic_apartment.svg');
 
+  /// File path: assets/icons/ic_apple_icon.svg
+  SvgGenImage get icAppleIcon => const SvgGenImage('assets/icons/ic_apple_icon.svg');
+
   /// File path: assets/icons/ic_apple_pay.svg
   SvgGenImage get icApplePay => const SvgGenImage('assets/icons/ic_apple_pay.svg');
 
   /// File path: assets/icons/ic_back_arrow.svg
   SvgGenImage get icBackArrow => const SvgGenImage('assets/icons/ic_back_arrow.svg');
+
+  /// File path: assets/icons/ic_bell.svg
+  SvgGenImage get icBell => const SvgGenImage('assets/icons/ic_bell.svg');
 
   /// File path: assets/icons/ic_cart_filled.svg
   SvgGenImage get icCartFilled => const SvgGenImage('assets/icons/ic_cart_filled.svg');
@@ -62,6 +68,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_gift.svg
   SvgGenImage get icGift => const SvgGenImage('assets/icons/ic_gift.svg');
+
+  /// File path: assets/icons/ic_google_icon.svg
+  SvgGenImage get icGoogleIcon => const SvgGenImage('assets/icons/ic_google_icon.svg');
 
   /// File path: assets/icons/ic_home_filled.svg
   SvgGenImage get icHomeFilled => const SvgGenImage('assets/icons/ic_home_filled.svg');
@@ -158,54 +167,57 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
-        icApartment,
-        icApplePay,
-        icBackArrow,
-        icCartFilled,
-        icCartOutlined,
-        icCheckmark,
-        icClock,
-        icClose,
-        icCourierHands,
-        icDoor,
-        icDropdownArrow,
-        icEmailIcon,
-        icEvcPlus,
-        icEyeHidden,
-        icEyeVisible,
-        icGift,
-        icHomeFilled,
-        icHomeOutlined,
-        icHospital,
-        icHotel,
-        icHouse,
-        icInformation,
-        icInvoice,
-        icLeftArrowChervon,
-        icLikeFilled,
-        icLikeOutlined,
-        icLocation,
-        icMastercard,
-        icMouse,
-        icPencil,
-        icPersonFilled,
-        icPersonIcon,
-        icPersonOutlined,
-        icPhoneIcon,
-        icPlusAdd,
-        icReception,
-        icRightArrow,
-        icRightArrowChevron,
-        icSearch,
-        icServiceFilled,
-        icServiceOutlined,
-        icSettingsFilter,
-        icShare,
-        icThreedot,
-        icVisa,
-        icWalletFilled,
-        icWalletOutlined,
-      ];
+    icApartment,
+    icAppleIcon,
+    icApplePay,
+    icBackArrow,
+    icBell,
+    icCartFilled,
+    icCartOutlined,
+    icCheckmark,
+    icClock,
+    icClose,
+    icCourierHands,
+    icDoor,
+    icDropdownArrow,
+    icEmailIcon,
+    icEvcPlus,
+    icEyeHidden,
+    icEyeVisible,
+    icGift,
+    icGoogleIcon,
+    icHomeFilled,
+    icHomeOutlined,
+    icHospital,
+    icHotel,
+    icHouse,
+    icInformation,
+    icInvoice,
+    icLeftArrowChervon,
+    icLikeFilled,
+    icLikeOutlined,
+    icLocation,
+    icMastercard,
+    icMouse,
+    icPencil,
+    icPersonFilled,
+    icPersonIcon,
+    icPersonOutlined,
+    icPhoneIcon,
+    icPlusAdd,
+    icReception,
+    icRightArrow,
+    icRightArrowChevron,
+    icSearch,
+    icServiceFilled,
+    icServiceOutlined,
+    icSettingsFilter,
+    icShare,
+    icThreedot,
+    icVisa,
+    icWalletFilled,
+    icWalletOutlined,
+  ];
 }
 
 class $AssetsImagesGen {
@@ -214,8 +226,101 @@ class $AssetsImagesGen {
   /// File path: assets/images/img_address.png
   AssetGenImage get imgAddress => const AssetGenImage('assets/images/img_address.png');
 
+  /// File path: assets/images/img_arby.png
+  AssetGenImage get imgArby => const AssetGenImage('assets/images/img_arby.png');
+
+  /// File path: assets/images/img_avatar_default.png
+  AssetGenImage get imgAvatarDefault => const AssetGenImage('assets/images/img_avatar_default.png');
+
+  /// File path: assets/images/img_cleaning.png
+  AssetGenImage get imgCleaning => const AssetGenImage('assets/images/img_cleaning.png');
+
+  /// File path: assets/images/img_delivery.png
+  AssetGenImage get imgDelivery => const AssetGenImage('assets/images/img_delivery.png');
+
+  /// File path: assets/images/img_domino.png
+  AssetGenImage get imgDomino => const AssetGenImage('assets/images/img_domino.png');
+
+  /// File path: assets/images/img_food.png
+  AssetGenImage get imgFood => const AssetGenImage('assets/images/img_food.png');
+
+  /// File path: assets/images/img_grocery.png
+  AssetGenImage get imgGrocery => const AssetGenImage('assets/images/img_grocery.png');
+
+  /// File path: assets/images/img_item1.png
+  AssetGenImage get imgItem1 => const AssetGenImage('assets/images/img_item1.png');
+
+  /// File path: assets/images/img_item2.png
+  AssetGenImage get imgItem2 => const AssetGenImage('assets/images/img_item2.png');
+
+  /// File path: assets/images/img_item3.png
+  AssetGenImage get imgItem3 => const AssetGenImage('assets/images/img_item3.png');
+
+  /// File path: assets/images/img_item4.png
+  AssetGenImage get imgItem4 => const AssetGenImage('assets/images/img_item4.png');
+
+  /// File path: assets/images/img_item5.png
+  AssetGenImage get imgItem5 => const AssetGenImage('assets/images/img_item5.png');
+
+  /// File path: assets/images/img_item6.png
+  AssetGenImage get imgItem6 => const AssetGenImage('assets/images/img_item6.png');
+
+  /// File path: assets/images/img_item7.png
+  AssetGenImage get imgItem7 => const AssetGenImage('assets/images/img_item7.png');
+
+  /// File path: assets/images/img_item8.png
+  AssetGenImage get imgItem8 => const AssetGenImage('assets/images/img_item8.png');
+
+  /// File path: assets/images/img_kfc.jpg
+  AssetGenImage get imgKfc => const AssetGenImage('assets/images/img_kfc.jpg');
+
+  /// File path: assets/images/img_laundry.png
+  AssetGenImage get imgLaundry => const AssetGenImage('assets/images/img_laundry.png');
+
+  /// File path: assets/images/img_logo_arby.png
+  AssetGenImage get imgLogoArby => const AssetGenImage('assets/images/img_logo_arby.png');
+
+  /// File path: assets/images/img_logo_domino.png
+  AssetGenImage get imgLogoDomino => const AssetGenImage('assets/images/img_logo_domino.png');
+
+  /// File path: assets/images/img_logo_kfc.png
+  AssetGenImage get imgLogoKfc => const AssetGenImage('assets/images/img_logo_kfc.png');
+
+  /// File path: assets/images/img_logo_mc.png
+  AssetGenImage get imgLogoMc => const AssetGenImage('assets/images/img_logo_mc.png');
+
+  /// File path: assets/images/img_logo_starbucks.png
+  AssetGenImage get imgLogoStarbucks => const AssetGenImage('assets/images/img_logo_starbucks.png');
+
+  /// File path: assets/images/img_logo_target.png
+  AssetGenImage get imgLogoTarget => const AssetGenImage('assets/images/img_logo_target.png');
+
+  /// File path: assets/images/img_logo_walgreen.png
+  AssetGenImage get imgLogoWalgreen => const AssetGenImage('assets/images/img_logo_walgreen.png');
+
+  /// File path: assets/images/img_logo_walmart.png
+  AssetGenImage get imgLogoWalmart => const AssetGenImage('assets/images/img_logo_walmart.png');
+
+  /// File path: assets/images/img_mc.jpg
+  AssetGenImage get imgMc => const AssetGenImage('assets/images/img_mc.jpg');
+
   /// File path: assets/images/img_new.png
   AssetGenImage get imgNew => const AssetGenImage('assets/images/img_new.png');
+
+  /// File path: assets/images/img_see_more.png
+  AssetGenImage get imgSeeMore => const AssetGenImage('assets/images/img_see_more.png');
+
+  /// File path: assets/images/img_starbucks.png
+  AssetGenImage get imgStarbucks => const AssetGenImage('assets/images/img_starbucks.png');
+
+  /// File path: assets/images/img_target.jpg
+  AssetGenImage get imgTarget => const AssetGenImage('assets/images/img_target.jpg');
+
+  /// File path: assets/images/img_ticket_plane.png
+  AssetGenImage get imgTicketPlane => const AssetGenImage('assets/images/img_ticket_plane.png');
+
+  /// File path: assets/images/img_walgreen.jpg
+  AssetGenImage get imgWalgreen => const AssetGenImage('assets/images/img_walgreen.jpg');
 
   /// File path: assets/images/img_wallet_bg.png
   AssetGenImage get imgWalletBg => const AssetGenImage('assets/images/img_wallet_bg.png');
@@ -223,8 +328,58 @@ class $AssetsImagesGen {
   /// File path: assets/images/img_wallet_card.png
   AssetGenImage get imgWalletCard => const AssetGenImage('assets/images/img_wallet_card.png');
 
+  /// File path: assets/images/img_walmart.jpg
+  AssetGenImage get imgWalmart => const AssetGenImage('assets/images/img_walmart.jpg');
+
   /// List of all assets
-  List<AssetGenImage> get values => [imgAddress, imgNew, imgWalletBg, imgWalletCard];
+  List<AssetGenImage> get values => [
+    imgAddress,
+    imgArby,
+    imgAvatarDefault,
+    imgCleaning,
+    imgDelivery,
+    imgDomino,
+    imgFood,
+    imgGrocery,
+    imgItem1,
+    imgItem2,
+    imgItem3,
+    imgItem4,
+    imgItem5,
+    imgItem6,
+    imgItem7,
+    imgItem8,
+    imgKfc,
+    imgLaundry,
+    imgLogoArby,
+    imgLogoDomino,
+    imgLogoKfc,
+    imgLogoMc,
+    imgLogoStarbucks,
+    imgLogoTarget,
+    imgLogoWalgreen,
+    imgLogoWalmart,
+    imgMc,
+    imgNew,
+    imgSeeMore,
+    imgStarbucks,
+    imgTarget,
+    imgTicketPlane,
+    imgWalgreen,
+    imgWalletBg,
+    imgWalletCard,
+    imgWalmart,
+  ];
+}
+
+class $AssetsMapsGen {
+  const $AssetsMapsGen();
+
+  /// File path: assets/maps/map_style.json
+  String get mapStyle => 'assets/maps/map_style.json';
+
+  /// List of all assets
+  List<String> get values => [mapStyle];
 }
 
 class $AssetsTranslationsGen {
@@ -245,11 +400,8 @@ class Assets {
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
-  static const String mapStyle = 'assets/map_style.json';
+  static const $AssetsMapsGen maps = $AssetsMapsGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
-
-  /// List of all assets
-  static List<String> get values => [mapStyle];
 }
 
 class AssetGenImage {
