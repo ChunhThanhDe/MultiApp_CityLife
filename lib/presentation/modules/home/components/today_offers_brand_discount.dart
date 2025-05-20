@@ -25,7 +25,7 @@ class TodayOffersBrandDiscount extends GetView<HomeController> {
           ),
           SizedBox(height: 12),
           SizedBox(
-            height: 150,
+            height: 200,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: controller.todayOffersBrandDiscount.length,
@@ -38,13 +38,18 @@ class TodayOffersBrandDiscount extends GetView<HomeController> {
   }
 
   Widget _buildItem(int index) {
-    return Padding(
-      padding: EdgeInsets.only(right: index == controller.todayOffersBrandDiscount.length - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
+    return Container(
+      width: 223,
+      margin: EdgeInsets.only(right: index == controller.todayOffersBrandDiscount.length - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
             children: [
-              Image.network(controller.todayOffersBrandDiscount[index].bannerImageUrl, height: 120),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(controller.todayOffersBrandDiscount[index].bannerImageUrl),
+              ),
               Positioned(
                 top: 8,
                 right: 8,
@@ -98,8 +103,15 @@ class TodayOffersBrandDiscount extends GetView<HomeController> {
               ),
             ],
           ),
-          SizedBox(height: 4),
-          Text(controller.todayOffersBrandDiscount[index].brandName, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBrandDefault500)),
+          SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(controller.todayOffersBrandDiscount[index].brandName, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
+              Assets.icons.icVerified.svg(),
+            ],
+          ),
+          Text('\$6 Delivery fee', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
         ],
       ),
     );

@@ -61,5 +61,8 @@ class HomeController extends BaseController {
   final List<TodayOffer> todayOffersBrandDiscount = [
     TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}, discount: '10%', deliveryFee: 10),
     TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}, discount: '10%', deliveryFee: 10),
+    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}, discount: '10%', deliveryFee: 10),
+    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}, discount: '10%', deliveryFee: 10),
+    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}, discount: '10%', deliveryFee: 10),
   ];
 }
