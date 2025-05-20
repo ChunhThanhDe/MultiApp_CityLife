@@ -1,35 +1,30 @@
-import 'package:card_scanner/card_scanner.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/base/base_controller.dart';
 
-class ScanCardController extends BaseController {
+class ScanCardController extends GetxController {
+  // Lưu thông tin thẻ sau khi quét
   final cardNumber = ''.obs;
-  final expDate = ''.obs;
-  final scanError = ''.obs;
+  final cardHolder = ''.obs;
+  final expiryDate = ''.obs;
   final isScanning = false.obs;
+  final scanError = ''.obs;
 
-  Future<void> scanCard() async {
-    isScanning.value = true;
+  void onCardScanned(String number, String holder, String expiry) {
+    cardNumber.value = number;
+    cardHolder.value = holder;
+    expiryDate.value = expiry;
+    isScanning.value = false;
+  }
+
+  void onStartScanning() {
+    cardNumber.value = '';
+    cardHolder.value = '';
+    expiryDate.value = '';
     scanError.value = '';
-    try {
-      final CardScanOptions scanOptions = CardScanOptions(
-        scanCardHolderName: false,
-        scanExpiryDate: true,
-      );
+    isScanning.value = true;
+  }
 
-      final CardDetails? details = await CardScanner.scanCard(scanOptions: scanOptions);
-
-      if (details != null) {
-        cardNumber.value = details.cardNumber ?? '';
-        expDate.value = details.expiryDate;
-        scanError.value = '';
-      } else {
-        scanError.value = 'No card detected or scan cancelled.';
-      }
-    } catch (e) {
-      scanError.value = 'Scan failed: $e';
-    } finally {
-      isScanning.value = false;
-    }
+  void onError(String error) {
+    scanError.value = error;
+    isScanning.value = false;
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_credit_card_scanner/widget.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/shared/app_bar_basic.dart';
@@ -12,35 +13,53 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(
-      title: "Scan your card",
-    );
+    return BasicAppBar(title: "Scan your card");
   }
 
   @override
   Widget buildScreen(BuildContext context) {
     return Stack(
       children: [
+        // Nền tối & mờ
         _ScanOverlay(),
 
-        Center(
-          child: Obx(() => controller.isScanning.value
-              ? const CircularProgressIndicator()
-              : ElevatedButton.icon(
-                  onPressed: controller.scanCard,
+        // Widget scan thẻ thực
+        Obx(() => controller.isScanning.value
+            ? CameraScannerWidget(
+                onNoCamera: () {
+                  controller.onError("No camera found. Please enable camera.");
+                },
+                onScan: (_, card) {
+                  if (card != null) {
+                    controller.onCardScanned(
+                      card.number,
+                      card.holderName,
+                      card.expiryDate,
+                    );
+                  } else {
+                    controller.onError("Card not recognized, try again.");
+                  }
+                },
+                loadingHolder: const Center(child: CircularProgressIndicator()),
+                aspectRatio: 278 / 413, // Tuỳ chỉnh phù hợp vùng quét
+                // Các tuỳ chọn khác nếu muốn
+              )
+            : Center(
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    controller.onStartScanning();
+                  },
                   icon: const Icon(Icons.camera_alt, color: Colors.white),
-                  label: const Text("Scan card", style: TextStyle(color: Colors.white)),
+                  label: const Text("Start scan", style: TextStyle(color: Colors.white)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF5856D7),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
                     elevation: 2,
                   ),
-                )),
-        ),
+                ),
+              )),
 
-        // Bottom panel (hướng dẫn + kết quả quét)
+        // Kết quả scan và hướng dẫn
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
@@ -78,15 +97,16 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 8),
+                        // Kết quả sau khi scan
                         Obx(() {
-                          if (controller.cardNumber.value.isEmpty) {
-                            if (controller.scanError.value.isNotEmpty) {
-                              return Text(
-                                controller.scanError.value,
-                                style: const TextStyle(color: Colors.red),
-                              );
-                            }
+                          if (controller.cardNumber.value.isEmpty && controller.scanError.value.isEmpty) {
                             return const SizedBox();
+                          }
+                          if (controller.scanError.value.isNotEmpty) {
+                            return Text(
+                              controller.scanError.value,
+                              style: const TextStyle(color: Colors.red),
+                            );
                           }
                           return Column(
                             children: [
@@ -94,9 +114,14 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
                                 "Card: ${controller.cardNumber.value}",
                                 style: const TextStyle(fontWeight: FontWeight.w500),
                               ),
-                              if (controller.expDate.value.isNotEmpty)
+                              if (controller.expiryDate.value.isNotEmpty)
                                 Text(
-                                  "Exp: ${controller.expDate.value}",
+                                  "Exp: ${controller.expiryDate.value}",
+                                  style: const TextStyle(fontWeight: FontWeight.w500),
+                                ),
+                              if (controller.cardHolder.value.isNotEmpty)
+                                Text(
+                                  "Holder: ${controller.cardHolder.value}",
                                   style: const TextStyle(fontWeight: FontWeight.w500),
                                 ),
                             ],
@@ -106,6 +131,16 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
                     ),
                   ),
                   const Spacer(),
+                  // Home Indicator (iOS style)
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 8, top: 16),
+                    width: 134,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF161A1D),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -116,6 +151,7 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
   }
 }
 
+// Overlay để lại vùng scan bo góc giữa màn hình
 class _ScanOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -136,6 +172,7 @@ class _ScanOverlay extends StatelessWidget {
             ),
           ),
         ),
+        // Vùng scan để trống (border trắng bo góc)
         Positioned(
           left: centerX,
           top: centerY,
