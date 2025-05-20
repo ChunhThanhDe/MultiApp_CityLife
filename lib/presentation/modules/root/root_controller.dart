@@ -28,11 +28,41 @@ class RootController extends BaseController {
   var currentTab = RootTab.home.obs;
 
   final List<RootTabItem> tabs = [
-    (iconSelected: Assets.icons.icHomeFilled.path, iconUnselected: Assets.icons.icHomeOutlined.path, label: 'Home', tab: RootTab.home, screen: HomeScreen()),
-    (iconSelected: Assets.icons.icServiceFilled.path, iconUnselected: Assets.icons.icServiceOutlined.path, label: 'Service', tab: RootTab.service, screen: ServiceScreen()),
-    (iconSelected: Assets.icons.icCartFilled.path, iconUnselected: Assets.icons.icCartOutlined.path, label: 'Cart', tab: RootTab.cart, screen: CartScreen()),
-    (iconSelected: Assets.icons.icWalletFilled.path, iconUnselected: Assets.icons.icWalletOutlined.path, label: 'Wallet', tab: RootTab.wallet, screen: WalletScreen()),
-    (iconSelected: Assets.icons.icPersonFilled.path, iconUnselected: Assets.icons.icPersonOutlined.path, label: 'Account', tab: RootTab.account, screen: AccountScreen()),
+    (
+      iconSelected: Assets.icons.icHomeFilled.path,
+      iconUnselected: Assets.icons.icHomeOutlined.path,
+      label: 'Home',
+      tab: RootTab.home,
+      screen: HomeScreen(),
+    ),
+    (
+      iconSelected: Assets.icons.icServiceFilled.path,
+      iconUnselected: Assets.icons.icServiceOutlined.path,
+      label: 'Service',
+      tab: RootTab.service,
+      screen: ServiceScreen(),
+    ),
+    (
+      iconSelected: Assets.icons.icCartFilled.path,
+      iconUnselected: Assets.icons.icCartOutlined.path,
+      label: 'Cart',
+      tab: RootTab.cart,
+      screen: CartScreen(),
+    ),
+    (
+      iconSelected: Assets.icons.icWalletFilled.path,
+      iconUnselected: Assets.icons.icWalletOutlined.path,
+      label: 'Wallet',
+      tab: RootTab.wallet,
+      screen: WalletScreen(),
+    ),
+    (
+      iconSelected: Assets.icons.icPersonFilled.path,
+      iconUnselected: Assets.icons.icPersonOutlined.path,
+      label: 'Account',
+      tab: RootTab.account,
+      screen: AccountScreen(),
+    ),
   ];
 
   void changeTab(RootTab tab) {
