@@ -17,11 +17,11 @@ class RootScreen extends BaseScreen<RootController> {
     return Obx(() => BottomNavigationBar(
           elevation: 0,
           enableFeedback: false,
-          selectedItemColor: Figma.theme.tokenColorsStateBrandDefault500,
-          unselectedItemColor: Figma.theme.tokenColorsTextGreyHighest950,
-          selectedLabelStyle: AppTextStyles.typographyH12Regular.copyWith(color: Figma.theme.tokenColorsStateBrandDefault500),
-          unselectedLabelStyle: AppTextStyles.typographyH12Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
-          backgroundColor: Figma.theme.alphaWhite10,
+          selectedItemColor: AppColors.stateBrandDefault500,
+          unselectedItemColor: AppColors.textGreyHighest950,
+          selectedLabelStyle: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.stateBrandDefault500),
+          unselectedLabelStyle: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHighest950),
+          backgroundColor: AppColors.alphaWhite10,
           type: BottomNavigationBarType.fixed,
           items: vm.tabs
               .map((e) => BottomNavigationBarItem(

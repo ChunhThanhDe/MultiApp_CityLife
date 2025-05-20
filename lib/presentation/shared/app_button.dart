@@ -89,9 +89,8 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    final Color effectiveColor =
-        widget.enabled ? (widget.color ?? Figma.theme.tokenColorsStateBrandDefault500) : (widget.disabledColor ?? Figma.theme.tokenColorsStateBrandDefault500.withValues(alpha: 0.5));
-    final BorderRadiusGeometry effectiveRadius = widget.borderRadius ?? BorderRadius.circular(Figma.corner.radius32);
+    final Color effectiveColor = widget.enabled ? (widget.color ?? AppColors.stateBrandDefault500) : (widget.disabledColor ?? AppColors.stateBrandDefault500.withValues(alpha: 0.5));
+    final BorderRadiusGeometry effectiveRadius = widget.borderRadius ?? BorderRadius.circular(AppCorner.radius32);
     final ShapeBorder effectiveShape = widget.shape ?? RoundedRectangleBorder(borderRadius: effectiveRadius);
     final double effectiveElevation = widget.elevation ?? 0;
 

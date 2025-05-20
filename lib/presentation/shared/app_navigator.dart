@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/app/constants/api_const.dart';
 
-class AppOverlayNavigator {
+class AppNavigator {
   static GlobalKey<NavigatorState> get navigatorKey => ApiConstant.alice.getNavigatorKey()!;
 }

@@ -26,12 +26,12 @@ class AuthHeader extends StatelessWidget {
       children: [
         AutoSizeText(
           title,
-          style: titleStyle ?? AppTextStyles.typographyH6SemiBold.copyWith(color: Figma.theme.tokenColorsTextGreyHighest950),
+          style: titleStyle ?? AppTextStyles.typographyH6SemiBold.copyWith(color: AppColors.textGreyHighest950),
           maxLines: titleMaxLines,
         ),
         Text(
           subtitle,
-          style: subtitleStyle ?? AppTextStyles.typographyH10Regular.copyWith(color: Figma.theme.tokenColorsTextGreyHigh700),
+          style: subtitleStyle ?? AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHigh700),
           maxLines: subtitleMaxLines,
         ),
       ],
