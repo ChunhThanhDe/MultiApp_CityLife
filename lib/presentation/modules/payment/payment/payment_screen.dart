@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_bar_basic.dart';
 
 import 'payment_controller.dart';
@@ -306,7 +307,9 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                       borderRadius: BorderRadius.circular(32),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(AppRoutes.paymentScan);
+                  },
                 ),
               ),
             ],

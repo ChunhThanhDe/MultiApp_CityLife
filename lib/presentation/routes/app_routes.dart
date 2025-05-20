@@ -19,4 +19,5 @@ class AppRoutes {
   static const String addFund = '/add_fund';
   static const String viewReceipt = '/view_receipt';
   static const String payment = '/payment';
+  static const String paymentScan = '/payment/scan';
 }
