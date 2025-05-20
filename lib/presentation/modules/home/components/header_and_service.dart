@@ -77,7 +77,7 @@ class HeaderAndService extends GetView<HomeController> {
 
   Container _buildServiceItem(Service service, int index) {
     return Container(
-      margin: EdgeInsets.only(left: 16, right: index == controller.services.length - 1 ? 16 : 0),
+      margin: EdgeInsets.only(left: index == 0 ? 24 : 16, right: index == controller.services.length - 1 ? 24 : 0),
       decoration: BoxDecoration(
         color: AppColors.stateGreyLowest50,
         borderRadius: BorderRadius.circular(AppCorner.radius8),
