@@ -10,65 +10,63 @@ class AccountSecurityScreen extends BaseScreen<AccountSecurityController> {
   const AccountSecurityScreen({super.key});
 
   @override
-  Widget buildScreen(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      // Use SafeArea to prevent overlap with system status bar
-      body: Column(
-        children: [
-          // Custom Status Bar & AppBar
-          BasicAppBar(
-            title: "Security",
-            onBack: () => Get.back(),
-          ),
+  PreferredSizeWidget? buildAppBar(BuildContext context) {
+    return BasicAppBar(
+      title: "Security",
+      onBack: () => Get.back(),
+    );
+  }
 
-          Container(
-            height: 1,
-            color: Color(0xFFE8EBEE),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(height: 8),
-                  _SectionCard(
-                    children: [
-                      _SecurityCell(
-                        title: 'Password',
-                        subtitle: 'Last changed May 28, 2023',
-                        trailing: Icon(Icons.arrow_forward_ios, size: 18, color: Color(0xFF4A5763)),
-                        obfuscated: true,
-                        onTap: () {
-                          Get.toNamed(AppRoutes.accountPassword);
-                        }, // Add your handler here
-                      ),
-                      _DividerLine(),
-                      _SecurityCell(
-                        title: 'Passkeys',
-                        subtitle: '3 passkeys created',
-                        trailing: Icon(Icons.arrow_forward_ios, size: 18, color: Color(0xFF4A5763)),
-                        onTap: () {},
-                      ),
-                      _DividerLine(),
-                      _SecurityCell(
-                        title: '2-Step Verification',
-                        subtitle: 'Add additional security to your account with 2-step verification.',
-                        trailing: Icon(Icons.arrow_forward_ios, size: 18, color: Color(0xFF4A5763)),
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Container(
-                    height: 5,
-                    color: Color(0xFFE8EBEE),
-                  ),
-                ],
-              ),
+  @override
+  Widget buildScreen(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          height: 1,
+          color: Color(0xFFE8EBEE),
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(height: 8),
+                _SectionCard(
+                  children: [
+                    _SecurityCell(
+                      title: 'Password',
+                      subtitle: 'Last changed May 28, 2023',
+                      trailing: Icon(Icons.arrow_forward_ios, size: 18, color: Color(0xFF4A5763)),
+                      obfuscated: true,
+                      onTap: () {
+                        Get.toNamed(AppRoutes.accountPassword);
+                      }, // Add your handler here
+                    ),
+                    _DividerLine(),
+                    _SecurityCell(
+                      title: 'Passkeys',
+                      subtitle: '3 passkeys created',
+                      trailing: Icon(Icons.arrow_forward_ios, size: 18, color: Color(0xFF4A5763)),
+                      onTap: () {},
+                    ),
+                    _DividerLine(),
+                    _SecurityCell(
+                      title: '2-Step Verification',
+                      subtitle: 'Add additional security to your account with 2-step verification.',
+                      trailing: Icon(Icons.arrow_forward_ios, size: 18, color: Color(0xFF4A5763)),
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  height: 5,
+                  color: Color(0xFFE8EBEE),
+                ),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

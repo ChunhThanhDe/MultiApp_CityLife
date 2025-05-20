@@ -10,77 +10,78 @@ class Account2StepVerificationScreen extends BaseScreen<Account2StepVerification
   const Account2StepVerificationScreen({super.key});
 
   @override
+  PreferredSizeWidget? buildAppBar(BuildContext context) {
+    return BasicAppBar(
+      title: "Security",
+      onBack: () => Get.back(),
+    );
+  }
+
+  @override
   Widget buildScreen(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          BasicAppBar(
-            title: "Security",
-            onBack: () => Get.back(),
-          ),
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                const SizedBox(height: 24),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Second steps",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFF161A1D),
-                        ),
+    return Column(
+      children: [
+        Expanded(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              const SizedBox(height: 24),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Second steps",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF161A1D),
                       ),
-                      SizedBox(height: 8),
-                      Text(
-                        "Make sure you can access your SpeedEats Account by keeping this information up to date and adding more sign-in options",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF4A5763),
-                          height: 1.42,
-                        ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      "Make sure you can access your SpeedEats Account by keeping this information up to date and adding more sign-in options",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Color(0xFF4A5763),
+                        height: 1.42,
                       ),
-                      SizedBox(height: 24),
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: 24),
+                  ],
                 ),
-                // Cell items
-                _CellItem(
-                  icon: Icons.sms,
-                  title: "Text Message (SMS)",
-                  subtitle: "+1 (000) 000-0000",
-                  checked: true,
-                  onTap: () {},
-                ),
-                CustomDivider(),
-                _CellItem(
-                  icon: Icons.email_outlined,
-                  title: "Email",
-                  subtitle: "kadir@lukit.com",
-                  checked: true,
-                  onTap: () {},
-                ),
-                CustomDivider(),
-                _CellItem(
-                  icon: Icons.qr_code_2,
-                  title: "Authenticator",
-                  subtitle: "Add authenticator app",
-                  checked: false,
-                  showArrow: true,
-                  onTap: () {},
-                ),
-                const SizedBox(height: 24),
-              ],
-            ),
+              ),
+              // Cell items
+              _CellItem(
+                icon: Icons.sms,
+                title: "Text Message (SMS)",
+                subtitle: "+1 (000) 000-0000",
+                checked: true,
+                onTap: () {},
+              ),
+              CustomDivider(),
+              _CellItem(
+                icon: Icons.email_outlined,
+                title: "Email",
+                subtitle: "kadir@lukit.com",
+                checked: true,
+                onTap: () {},
+              ),
+              CustomDivider(),
+              _CellItem(
+                icon: Icons.qr_code_2,
+                title: "Authenticator",
+                subtitle: "Add authenticator app",
+                checked: false,
+                showArrow: true,
+                onTap: () {},
+              ),
+              const SizedBox(height: 24),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

@@ -9,187 +9,189 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
   const AccountManageScreen({super.key});
 
   @override
+  PreferredSizeWidget? buildAppBar(BuildContext context) {
+    return BasicAppBar(
+      title: "Manage account",
+      onBack: () => Get.back(),
+    );
+  }
+
+  @override
+  bool get wrapWithSafeArea => true;
+
+  @override
   Widget buildScreen(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
+    return Column(
+      children: [
+        // Avatar
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            BasicAppBar(
-              title: "Manage account",
-              onBack: () => Get.back(),
-            ),
-            // Avatar
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24),
-                  child: SizedBox(
-                    height: 143,
-                    width: 143,
-                    child: Stack(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: CircleAvatar(
-                            radius: 71.5,
-                            backgroundColor: Color(0xFF5856D7),
-                            backgroundImage: AssetImage('assets/images/img_avatar_default.png'),
-                          ),
-                        ),
-                        Positioned(
-                          right: 8,
-                          bottom: 8,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Color(0xFFF7F8F9),
-                              borderRadius: BorderRadius.circular(100),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color(0xFF101214).withOpacity(0.1),
-                                  blurRadius: 16,
-                                  offset: Offset(0, 6),
-                                ),
-                                BoxShadow(
-                                  color: Color(0xFF101214).withOpacity(0.05),
-                                  blurRadius: 4,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            padding: EdgeInsets.all(6),
-                            child: Icon(Icons.edit, size: 24, color: Color(0xFF161A1D)),
-                          ),
-                        ),
-                      ],
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24),
+              child: SizedBox(
+                height: 143,
+                width: 143,
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: CircleAvatar(
+                        radius: 71.5,
+                        backgroundColor: Color(0xFF5856D7),
+                        backgroundImage: AssetImage('assets/images/img_avatar_default.png'),
+                      ),
                     ),
-                  ),
-                ),
-              ],
-            ),
-            // Form
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  child: Form(
-                    key: controller.formKey,
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 8),
-                        // First name
-                        _InputTextField(
-                          label: "First name",
-                          controller: controller.firstNameController,
-                          required: true,
-                          validator: (v) => (v == null || v.isEmpty) ? "Please enter your first name" : null,
-                          suffix: Icon(Icons.check, color: Color(0xFF4A5763)),
-                        ),
-                        // Last name
-                        _InputTextField(
-                          label: "Last name",
-                          controller: controller.lastNameController,
-                          required: true,
-                          validator: (v) => (v == null || v.isEmpty) ? "Please enter your last name" : null,
-                          suffix: Icon(Icons.check, color: Color(0xFF4A5763)),
-                        ),
-                        // Birthday
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "When's your birthday?",
-                                style: TextStyle(fontSize: 14, color: Color(0xFF161A1D)),
-                              ),
-                              SizedBox(width: 4),
-                              Text(
-                                "(optional)",
-                                style: TextStyle(fontSize: 14, color: Color(0xFF798A9A)),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Obx(() => Row(
-                              children: [
-                                _BirthdayDropdown(
-                                  items: List.generate(12, (i) => (i + 1).toString().padLeft(2, '0')),
-                                  value: controller.month.value,
-                                  onChanged: (v) => controller.month.value = v!,
-                                  width: 100,
-                                  hint: "MM",
-                                ),
-                                SizedBox(width: 10),
-                                _BirthdayDropdown(
-                                  items: List.generate(31, (i) => (i + 1).toString().padLeft(2, '0')),
-                                  value: controller.day.value,
-                                  onChanged: (v) => controller.day.value = v!,
-                                  width: 100,
-                                  hint: "DD",
-                                ),
-                                SizedBox(width: 10),
-                                _BirthdayDropdown(
-                                  items: List.generate(100, (i) => (DateTime.now().year - i).toString()),
-                                  value: controller.year.value,
-                                  onChanged: (v) => controller.year.value = v!,
-                                  width: 120,
-                                  hint: "YYYY",
-                                ),
-                              ],
-                            )),
-                        const SizedBox(height: 16),
-                        // Email
-                        _InputTextField(
-                          label: "Email address",
-                          controller: controller.emailController,
-                          required: true,
-                          validator: (v) => (v == null || v.isEmpty) ? "Please enter your email" : null,
-                          suffix: Icon(Icons.check, color: Color(0xFF4A5763)),
-                        ),
-                        // Phone
-                        _InputTextField(
-                          label: "Phone number",
-                          controller: controller.phoneController,
-                          required: true,
-                          validator: (v) => (v == null || v.isEmpty) ? "Please enter your phone number" : null,
-                        ),
-                        const SizedBox(height: 24),
-                        // Update button
-                        SizedBox(
-                          width: double.infinity,
-                          height: 48,
-                          child: ElevatedButton(
-                            onPressed: controller.updateInfo,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF5856D7),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(32),
-                              ),
-                              elevation: 0,
+                    Positioned(
+                      right: 8,
+                      bottom: 8,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF7F8F9),
+                          borderRadius: BorderRadius.circular(100),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xFF101214).withOpacity(0.1),
+                              blurRadius: 16,
+                              offset: Offset(0, 6),
                             ),
-                            child: Text(
-                              "Update",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                              ),
+                            BoxShadow(
+                              color: Color(0xFF101214).withOpacity(0.05),
+                              blurRadius: 4,
+                              offset: Offset(0, 2),
                             ),
-                          ),
+                          ],
                         ),
-                        SizedBox(height: 24),
-                      ],
+                        padding: EdgeInsets.all(6),
+                        child: Icon(Icons.edit, size: 24, color: Color(0xFF161A1D)),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             ),
           ],
         ),
-      ),
+        // Form
+        Expanded(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Form(
+                key: controller.formKey,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 8),
+                    // First name
+                    _InputTextField(
+                      label: "First name",
+                      controller: controller.firstNameController,
+                      required: true,
+                      validator: (v) => (v == null || v.isEmpty) ? "Please enter your first name" : null,
+                      suffix: Icon(Icons.check, color: Color(0xFF4A5763)),
+                    ),
+                    // Last name
+                    _InputTextField(
+                      label: "Last name",
+                      controller: controller.lastNameController,
+                      required: true,
+                      validator: (v) => (v == null || v.isEmpty) ? "Please enter your last name" : null,
+                      suffix: Icon(Icons.check, color: Color(0xFF4A5763)),
+                    ),
+                    // Birthday
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "When's your birthday?",
+                            style: TextStyle(fontSize: 14, color: Color(0xFF161A1D)),
+                          ),
+                          SizedBox(width: 4),
+                          Text(
+                            "(optional)",
+                            style: TextStyle(fontSize: 14, color: Color(0xFF798A9A)),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Obx(() => Row(
+                          children: [
+                            _BirthdayDropdown(
+                              items: List.generate(12, (i) => (i + 1).toString().padLeft(2, '0')),
+                              value: controller.month.value,
+                              onChanged: (v) => controller.month.value = v!,
+                              width: 100,
+                              hint: "MM",
+                            ),
+                            SizedBox(width: 10),
+                            _BirthdayDropdown(
+                              items: List.generate(31, (i) => (i + 1).toString().padLeft(2, '0')),
+                              value: controller.day.value,
+                              onChanged: (v) => controller.day.value = v!,
+                              width: 100,
+                              hint: "DD",
+                            ),
+                            SizedBox(width: 10),
+                            _BirthdayDropdown(
+                              items: List.generate(100, (i) => (DateTime.now().year - i).toString()),
+                              value: controller.year.value,
+                              onChanged: (v) => controller.year.value = v!,
+                              width: 120,
+                              hint: "YYYY",
+                            ),
+                          ],
+                        )),
+                    const SizedBox(height: 16),
+                    // Email
+                    _InputTextField(
+                      label: "Email address",
+                      controller: controller.emailController,
+                      required: true,
+                      validator: (v) => (v == null || v.isEmpty) ? "Please enter your email" : null,
+                      suffix: Icon(Icons.check, color: Color(0xFF4A5763)),
+                    ),
+                    // Phone
+                    _InputTextField(
+                      label: "Phone number",
+                      controller: controller.phoneController,
+                      required: true,
+                      validator: (v) => (v == null || v.isEmpty) ? "Please enter your phone number" : null,
+                    ),
+                    const SizedBox(height: 24),
+                    // Update button
+                    SizedBox(
+                      width: double.infinity,
+                      height: 48,
+                      child: ElevatedButton(
+                        onPressed: controller.updateInfo,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF5856D7),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(32),
+                          ),
+                          elevation: 0,
+                        ),
+                        child: Text(
+                          "Update",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 24),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
