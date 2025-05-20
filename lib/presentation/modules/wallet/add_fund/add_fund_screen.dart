@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_bottom_sheet.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/theme.dart';
@@ -265,7 +266,9 @@ class AddFundScreen extends BaseScreen<AddFundController> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
                 child: AppButton(
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(AppRoutes.payment);
+                  },
                   width: double.infinity,
                   color: AppColors.stateGreyLowest50,
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),

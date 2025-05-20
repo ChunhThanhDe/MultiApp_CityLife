@@ -26,6 +26,8 @@ import 'package:sixam_mart_user/presentation/modules/authentication/verification
 import 'package:sixam_mart_user/presentation/modules/authentication/verification/verification_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorities_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/payment/payment_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/payment/payment_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_bindings.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/wallet/add_fund/add_fund_binding.dart';
@@ -124,6 +126,11 @@ class AppPages {
       name: AppRoutes.favorites,
       page: () => const FavoritesScreen(),
       binding: FavoritesBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.payment,
+      page: () => const PaymentScreen(),
+      binding: PaymentBinding(),
     ),
   ];
 }
