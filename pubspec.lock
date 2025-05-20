@@ -33,22 +33,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.4.5"
-  apple_vision_commons:
-    dependency: transitive
-    description:
-      name: apple_vision_commons
-      sha256: "494e26c50f43a14fcd242ff9708e17afd72b83df7fac1795dbcbde828be8ed8b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.3"
-  apple_vision_recognize_text:
-    dependency: transitive
-    description:
-      name: apple_vision_recognize_text
-      sha256: b14e7cf8d9c41b0215100097587b4626fb855ababaabbafb6db7c34408eca5c3
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.4"
   archive:
     dependency: transitive
     description:
@@ -157,18 +141,18 @@ packages:
     dependency: transitive
     description:
       name: camera
-      sha256: "413d2b34fe28496c35c69ede5b232fb9dd5ca2c3a4cb606b14efc1c7546cc8cb"
+      sha256: dfa8fc5a1adaeb95e7a54d86a5bd56f4bb0e035515354c8ac6d262e35cec2ec8
       url: "https://pub.dev"
     source: hosted
-    version: "0.11.1"
-  camera_android_camerax:
+    version: "0.10.6"
+  camera_android:
     dependency: transitive
     description:
-      name: camera_android_camerax
-      sha256: "9fb44e73e0fea3647a904dc26d38db24055e5b74fc68fd2b6d3abfa1bd20f536"
+      name: camera_android
+      sha256: "08808be7e26fc3c7426c81b3fa387564b8e9c22e6fe9cb5675ce3ab7017d8203"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.17"
+    version: "0.10.10+3"
   camera_avfoundation:
     dependency: transitive
     description:
@@ -257,22 +241,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0"
-  credit_card_type_detector:
-    dependency: transitive
-    description:
-      name: credit_card_type_detector
-      sha256: f2fb9c7b23fae331d4c5a0dc26437f4c0d4a2306a6c3a5cdb29401f69823070d
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
-  credit_card_validator:
-    dependency: transitive
-    description:
-      name: credit_card_validator
-      sha256: e8e6d7250319fd1898340d63c72b1a66817d8abfc6aedcaca76f3633bac515a3
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
   cross_file:
     dependency: transitive
     description:
@@ -414,14 +382,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_credit_card_scanner:
-    dependency: "direct main"
-    description:
-      name: flutter_credit_card_scanner
-      sha256: "55ef9a93b0673d57c2c58ace9677562e3e44df32ca1a24edae672b3d721bacfd"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.11.9"
   flutter_gen:
     dependency: "direct main"
     description:
@@ -609,18 +569,18 @@ packages:
     dependency: transitive
     description:
       name: google_mlkit_commons
-      sha256: "7e9a6d6e66b44aa8cfe944bda9bc3346c52486dd890ca49e5bc98845cda40d7f"
+      sha256: "9990a65f407a3ef6bae646bf10143faa93fec126683771465bc6c0b43fb0e6e9"
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.0"
+    version: "0.8.1"
   google_mlkit_text_recognition:
     dependency: transitive
     description:
       name: google_mlkit_text_recognition
-      sha256: e7609cec8de3022680a36ead8a8bafa9fd2360ea018a728feaad12dcb0e3c177
+      sha256: "179349417066fa2c275d7a6ed6cbceeb7fa265d73aacdb2d732f1a2991face0a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.14.0"
+    version: "0.13.1"
   graphs:
     dependency: transitive
     description:
@@ -669,6 +629,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
+  image:
+    dependency: transitive
+    description:
+      name: image
+      sha256: "4e973fcf4caae1a4be2fa0a13157aa38a8f9cb049db6529aa00b4d71abc4d928"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.5.4"
   image_size_getter:
     dependency: transitive
     description:
@@ -789,6 +757,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
+  ml_card_scanner:
+    dependency: "direct main"
+    description:
+      name: ml_card_scanner
+      sha256: d29553421d573ca175f68db462652acc27742177bcb15f13ba69c44c112dc1bd
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.3"
   navigator_resizable:
     dependency: transitive
     description:
