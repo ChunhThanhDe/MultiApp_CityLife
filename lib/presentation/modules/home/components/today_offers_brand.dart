@@ -23,6 +23,31 @@ class TodayOffersBrand extends GetView<HomeController> {
               ],
             ),
           ),
+          SizedBox(height: 12),
+          SizedBox(
+            height: 100,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: controller.todayOffersBrand.length,
+              itemBuilder: (context, index) => _buildItem(index),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildItem(int index) {
+    return Padding(
+      padding: EdgeInsets.only(
+        right: index == controller.todayOffersBrand.length - 1 ? 24 : 16,
+        left: index == 0 ? 24 : 0,
+      ),
+      child: Column(
+        children: [
+          Image.network(controller.todayOffersBrand[index].brandLogoUrl, width: 64, height: 64),
+          SizedBox(height: 4),
+          Text(controller.todayOffersBrand[index].brandName, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBrandDefault500)),
         ],
       ),
     );

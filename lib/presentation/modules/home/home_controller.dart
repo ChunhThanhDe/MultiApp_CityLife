@@ -71,6 +71,16 @@ class HomeController extends BaseController {
         brandLogoUrl: 'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png',
         bannerImageUrl: 'https://i.ytimg.com/vi/qrO5--Iuy60/maxresdefault.jpg',
         onTap: () {}),
+    TodayOffer(
+        brandName: 'Starbucks®',
+        brandLogoUrl: 'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png',
+        bannerImageUrl: 'https://i.ytimg.com/vi/qrO5--Iuy60/maxresdefault.jpg',
+        onTap: () {}),
+    TodayOffer(
+        brandName: 'Starbucks®',
+        brandLogoUrl: 'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png',
+        bannerImageUrl: 'https://i.ytimg.com/vi/qrO5--Iuy60/maxresdefault.jpg',
+        onTap: () {}),
   ];
 
   final List<TodayOffer> todayOffersBrandDiscount = [
