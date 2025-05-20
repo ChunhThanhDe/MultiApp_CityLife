@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
-import 'package:sixam_mart_user/presentation/modules/account/account_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account/account_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/cart_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/home/home_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/service_screen.dart';
