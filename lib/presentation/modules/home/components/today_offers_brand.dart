@@ -45,7 +45,7 @@ class TodayOffersBrand extends GetView<HomeController> {
       ),
       child: Column(
         children: [
-          Image.network(controller.todayOffersBrand[index].brandLogoUrl, width: 64, height: 64),
+          ClipOval(child: Image.network(controller.todayOffersBrand[index].brandLogoUrl, width: 64, height: 64)),
           SizedBox(height: 4),
           Text(controller.todayOffersBrand[index].brandName, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBrandDefault500)),
         ],

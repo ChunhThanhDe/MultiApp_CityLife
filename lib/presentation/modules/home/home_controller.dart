@@ -31,6 +31,9 @@ class TodayOffer {
   });
 }
 
+const bannerImageUrl = 'https://i.ytimg.com/vi/qrO5--Iuy60/maxresdefault.jpg';
+const brandLogoUrl = 'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png';
+
 class HomeController extends BaseController {
   final List<Service> services = [
     Service(title: 'Food', image: Assets.images.imgFood.path, onTap: () {}),
@@ -43,60 +46,20 @@ class HomeController extends BaseController {
   ];
 
   final List<TodayOffer> todayOffersBanner = [
-    TodayOffer(
-        brandName: 'Starbucks®',
-        brandLogoUrl: 'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png',
-        bannerImageUrl: 'https://i.ytimg.com/vi/qrO5--Iuy60/maxresdefault.jpg',
-        onTap: () {}),
-    TodayOffer(
-        brandName: 'Starbucks®',
-        brandLogoUrl: 'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png',
-        bannerImageUrl: 'https://i.ytimg.com/vi/qrO5--Iuy60/maxresdefault.jpg',
-        onTap: () {}),
-    TodayOffer(
-        brandName: 'Starbucks®',
-        brandLogoUrl: 'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png',
-        bannerImageUrl: 'https://i.ytimg.com/vi/qrO5--Iuy60/maxresdefault.jpg',
-        onTap: () {}),
+    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}),
+    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}),
+    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}),
   ];
 
   final List<TodayOffer> todayOffersBrand = [
-    TodayOffer(
-        brandName: 'Starbucks®',
-        brandLogoUrl: 'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png',
-        bannerImageUrl: 'https://i.ytimg.com/vi/qrO5--Iuy60/maxresdefault.jpg',
-        onTap: () {}),
-    TodayOffer(
-        brandName: 'Starbucks®',
-        brandLogoUrl: 'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png',
-        bannerImageUrl: 'https://i.ytimg.com/vi/qrO5--Iuy60/maxresdefault.jpg',
-        onTap: () {}),
-    TodayOffer(
-        brandName: 'Starbucks®',
-        brandLogoUrl: 'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png',
-        bannerImageUrl: 'https://i.ytimg.com/vi/qrO5--Iuy60/maxresdefault.jpg',
-        onTap: () {}),
-    TodayOffer(
-        brandName: 'Starbucks®',
-        brandLogoUrl: 'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png',
-        bannerImageUrl: 'https://i.ytimg.com/vi/qrO5--Iuy60/maxresdefault.jpg',
-        onTap: () {}),
+    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}),
+    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}),
+    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}),
+    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}),
   ];
 
   final List<TodayOffer> todayOffersBrandDiscount = [
-    TodayOffer(
-        brandName: 'Starbucks®',
-        brandLogoUrl: 'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png',
-        bannerImageUrl: 'https://i.ytimg.com/vi/qrO5--Iuy60/maxresdefault.jpg',
-        onTap: () {},
-        discount: '10%',
-        deliveryFee: 10),
-    TodayOffer(
-        brandName: 'Starbucks®',
-        brandLogoUrl: 'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png',
-        bannerImageUrl: 'https://i.ytimg.com/vi/qrO5--Iuy60/maxresdefault.jpg',
-        onTap: () {},
-        discount: '10%',
-        deliveryFee: 10),
+    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}, discount: '10%', deliveryFee: 10),
+    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}, discount: '10%', deliveryFee: 10),
   ];
 }

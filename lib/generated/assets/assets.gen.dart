@@ -156,6 +156,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_threedot.svg
   SvgGenImage get icThreedot => const SvgGenImage('assets/icons/ic_threedot.svg');
 
+  /// File path: assets/icons/ic_verified.svg
+  SvgGenImage get icVerified => const SvgGenImage('assets/icons/ic_verified.svg');
+
   /// File path: assets/icons/ic_visa.svg
   SvgGenImage get icVisa => const SvgGenImage('assets/icons/ic_visa.svg');
 
@@ -214,6 +217,7 @@ class $AssetsIconsGen {
     icSettingsFilter,
     icShare,
     icThreedot,
+    icVerified,
     icVisa,
     icWalletFilled,
     icWalletOutlined,
