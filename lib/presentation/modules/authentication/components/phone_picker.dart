@@ -88,7 +88,12 @@ class PhonePicker extends StatelessWidget {
                     keyboardType: TextInputType.phone,
                     controller: inputController,
                     hintText: 'Enter phone number',
-                    prefixIcon: Assets.icons.icPhoneIcon.svg(),
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.all(14),
+                      child: Assets.icons.icPhoneIcon.svg(
+                        colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn),
+                      ),
+                    ),
                     isRequired: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {

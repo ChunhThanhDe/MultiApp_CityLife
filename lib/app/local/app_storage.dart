@@ -62,4 +62,5 @@ class AppStorage extends GetxService {
 
 class SharedPreferencesKeys {
   static const String localeCode = 'locale_code';
+  static const String scannedCardInfo = 'scanned_card_info';
 }

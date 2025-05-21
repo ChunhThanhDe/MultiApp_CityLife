@@ -105,6 +105,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_location.svg
   SvgGenImage get icLocation => const SvgGenImage('assets/icons/ic_location.svg');
 
+  /// File path: assets/icons/ic_lock.svg
+  SvgGenImage get icLock => const SvgGenImage('assets/icons/ic_lock.svg');
+
   /// File path: assets/icons/ic_mastercard.svg
   SvgGenImage get icMastercard => const SvgGenImage('assets/icons/ic_mastercard.svg');
 
@@ -200,6 +203,7 @@ class $AssetsIconsGen {
     icLikeFilled,
     icLikeOutlined,
     icLocation,
+    icLock,
     icMastercard,
     icMouse,
     icPencil,

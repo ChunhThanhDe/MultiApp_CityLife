@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/presentation/modules/account/account_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account/account_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/cart_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_controller.dart';
