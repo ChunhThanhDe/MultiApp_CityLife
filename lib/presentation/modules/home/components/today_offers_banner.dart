@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
 import 'package:sixam_mart_user/theme.dart';
 
-class TodayOffers extends GetView<HomeController> {
-  const TodayOffers({super.key});
+class TodayOffersBanner extends GetView<HomeController> {
+  const TodayOffersBanner({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +22,8 @@ class TodayOffers extends GetView<HomeController> {
         SizedBox(
           height: 180,
           child: ListView.builder(
-            itemCount: controller.todayOffers.length,
-            itemBuilder: (context, index) => _buildItem(controller.todayOffers[index], index),
+            itemCount: controller.todayOffersBanner.length,
+            itemBuilder: (context, index) => _buildItem(controller.todayOffersBanner[index], index),
             scrollDirection: Axis.horizontal,
           ),
         )
@@ -37,10 +37,10 @@ class TodayOffers extends GetView<HomeController> {
         Container(
           height: 180,
           width: 350,
-          margin: EdgeInsets.only(left: index == 0 ? 24 : 16, right: index == controller.todayOffers.length - 1 ? 24 : 0),
+          margin: EdgeInsets.only(left: index == 0 ? 24 : 16, right: index == controller.todayOffersBanner.length - 1 ? 24 : 0),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(offer.imageUrl),
+              image: NetworkImage(offer.bannerImageUrl),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(AppCorner.radius8),
@@ -81,7 +81,7 @@ class TodayOffers extends GetView<HomeController> {
         children: [
           ClipOval(
             child: Image.network(
-              offer.logoUrl,
+              offer.brandLogoUrl,
               width: 24,
               height: 24,
             ),

@@ -75,21 +75,25 @@ class HeaderAndService extends GetView<HomeController> {
     );
   }
 
-  Container _buildServiceItem(Service service, int index) {
-    return Container(
-      margin: EdgeInsets.only(left: index == 0 ? 24 : 16, right: index == controller.services.length - 1 ? 24 : 0),
-      decoration: BoxDecoration(
-        color: AppColors.stateGreyLowest50,
-        borderRadius: BorderRadius.circular(AppCorner.radius8),
-      ),
-      padding: EdgeInsets.all(12),
+  _buildServiceItem(Service service, int index) {
+    return Padding(
+      padding: EdgeInsets.only(right: index == controller.services.length - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(service.image, width: 70, height: 70),
-          SizedBox(height: 18),
+          Container(
+            decoration: BoxDecoration(
+              color: AppColors.stateGreyLowest50,
+              borderRadius: BorderRadius.circular(AppCorner.radius8),
+            ),
+            padding: EdgeInsets.all(12),
+            child: Image.asset(service.image, width: 70, height: 70),
+          ),
+          SizedBox(height: 6),
           Text(
             service.title,
             style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
+            textAlign: TextAlign.center,
           ),
         ],
       ),
