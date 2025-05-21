@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_bottom_section.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_header.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/phone_picker.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
@@ -17,28 +18,27 @@ class SignUpScreen extends BaseScreen<SignUpController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 16.h),
-            const AuthHeader(
-              title: 'Create an account',
-              subtitle: 'Enter Your Account Details',
-            ),
-            SizedBox(height: 24.h),
-            _buildForm(),
-            SizedBox(height: 24.h),
-            _buildNextButton(),
-            SizedBox(height: 16.h),
-            _buildOrDivider(),
-            SizedBox(height: 16.h),
-            _buildToggleSignUpMethodButton(),
-            SizedBox(height: 24.h),
-          ],
-        ),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 16.h),
+          const AuthHeader(
+            title: 'Create an account',
+            subtitle: 'Enter Your Account Details',
+          ),
+          SizedBox(height: 24.h),
+          _buildForm(),
+          SizedBox(height: 24.h),
+          _buildNextButton(),
+          SizedBox(height: 16.h),
+          _buildOrDivider(),
+          SizedBox(height: 16.h),
+          _buildToggleSignUpMethodButton(),
+          const Spacer(),
+          AuthBottomSection(isSignIn: false),
+        ],
       ),
     );
   }
@@ -50,6 +50,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildInput(),
+          SizedBox(height: 16.h),
           _buildNameInput(),
           SizedBox(height: 16.h),
           _buildBirthdayInput(),
@@ -64,7 +65,12 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       isRequired: true,
       controller: vm.nameController,
       hintText: 'Enter your name',
-      prefixIcon: Assets.icons.icPersonIcon.svg(),
+      suffixIcon: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Assets.icons.icPersonIcon.svg(
+          colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn),
+        ),
+      ),
       validator: _validateName,
     );
   }
@@ -92,7 +98,12 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       isRequired: true,
       controller: vm.emailController,
       hintText: 'name@example.com',
-      prefixIcon: Assets.icons.icEmailIcon.svg(),
+      suffixIcon: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Assets.icons.icEmailIcon.svg(
+          colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn),
+        ),
+      ),
       keyboardType: TextInputType.emailAddress,
       validator: _validateEmail,
     );

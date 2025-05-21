@@ -45,6 +45,15 @@ class AppTextField extends StatelessWidget {
   /// Custom style for the label text.
   final TextStyle? labelStyle;
 
+  /// Whether to obscure the text (for password fields)
+  final bool obscureText;
+
+  /// Custom padding for the content of the text field.
+  final EdgeInsets? contentPadding;
+
+  /// Custom helper text for the text field.
+  final String? helperText;
+
   const AppTextField({
     super.key,
     this.label,
@@ -61,6 +70,9 @@ class AppTextField extends StatelessWidget {
     this.textStyle,
     this.hintStyle,
     this.labelStyle,
+    this.obscureText = false,
+    this.contentPadding,
+    this.helperText,
   });
 
   @override
@@ -99,9 +111,10 @@ class AppTextField extends StatelessWidget {
             onChanged: onChanged,
             style: textStyle ?? AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
             validator: validator,
+            obscureText: obscureText,
             decoration: InputDecoration(
               hintText: hintText,
-              helperText: '',
+              helperText: helperText,
               hintStyle: hintStyle ?? AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
               suffixIcon: suffixIcon,
               prefixIcon: prefixIcon,
@@ -134,7 +147,7 @@ class AppTextField extends StatelessWidget {
                   width: 1,
                 ),
               ),
-              contentPadding: const EdgeInsets.all(12),
+              contentPadding: contentPadding ?? const EdgeInsets.all(12),
             ),
           ),
         ),

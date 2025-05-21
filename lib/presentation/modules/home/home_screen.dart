@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/home/components/header_and_service.dart';
 import 'package:sixam_mart_user/presentation/modules/home/components/sliver_box.dart';
 import 'package:sixam_mart_user/presentation/modules/home/components/today_offers.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
 import 'home_controller.dart';
 
@@ -19,6 +21,18 @@ class HomeScreen extends BaseScreen<HomeController> {
         HeaderAndService(),
         SliverBox(height: 12),
         TodayOffers(),
+        SliverToBoxAdapter(
+          child: ElevatedButton(
+            onPressed: () => Get.toNamed(AppRoutes.signIn),
+            child: const Text('Sign In'),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: ElevatedButton(
+            onPressed: () => Get.toNamed(AppRoutes.signUp),
+            child: const Text('Sign Up'),
+          ),
+        )
       ],
     );
   }
