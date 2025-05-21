@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class BasicAppBar extends StatelessWidget {
+class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final VoidCallback? onBack;
 
@@ -12,37 +13,27 @@ class BasicAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 8, bottom: 8),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.9),
-        border: const Border(
-          bottom: BorderSide(color: Color(0xFFE8EBEE)),
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Colors.white,
+      iconTheme: const IconThemeData(color: Color(0xFF161A1D)),
+      title: Text(
+        title,
+        style: const TextStyle(
+          color: Color(0xFF161A1D),
+          fontWeight: FontWeight.w500,
+          fontSize: 18,
         ),
       ),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-            child: Row(
-              children: [
-                IconButton(
-                  onPressed: onBack ?? () => Navigator.pop(context),
-                  icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF161A1D)),
-                ),
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18,
-                    color: Color(0xFF161A1D),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+      centerTitle: false,
+      toolbarHeight: 56,
+      leading: IconButton(
+        onPressed: onBack ?? () => Get.back(),
+        icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF161A1D)),
       ),
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(56);
 }

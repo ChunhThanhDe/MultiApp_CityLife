@@ -15,6 +15,14 @@ class AccountPasskeysScreen extends BaseScreen<AccountPasskeysController> {
   const AccountPasskeysScreen({super.key});
 
   @override
+  PreferredSizeWidget? buildAppBar(BuildContext context) {
+    return BasicAppBar(
+      title: "Passkeys",
+      onBack: () => Get.back(),
+    );
+  }
+
+  @override
   Widget buildScreen(BuildContext context) {
     final List<PasskeyItem> passkeys = [
       PasskeyItem("iPhone 15 Pro Max", "Last used: May 10, 2024, San Francisco, CA, USA"),
@@ -22,40 +30,31 @@ class AccountPasskeysScreen extends BaseScreen<AccountPasskeysController> {
       PasskeyItem("iPhone 14 Pro", "Last used: May 10, 2023, San Francisco, CA, USA"),
       PasskeyItem("iPhone 11", "Last used: May 10, 2020, New York, CA, USA"),
     ];
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          // Status bar & app bar
-          BasicAppBar(
-            title: "Passkeys",
-            onBack: () => Get.back(),
-          ),
-
-          // Passkey list
-          Expanded(
-            child: ListView.separated(
-              padding: EdgeInsets.zero,
-              itemCount: passkeys.length,
-              separatorBuilder: (_, __) => Divider(
-                color: Color(0xFFE8EBEE),
-                indent: 24,
-                endIndent: 24,
-                height: 0,
-                thickness: 1,
-              ),
-              itemBuilder: (context, index) => _PasskeyListItem(
-                item: passkeys[index],
-                onDelete: () {
-                  // Xử lý xóa passkey ở đây
-                },
-              ),
+    return Column(
+      children: [
+        // Passkey list
+        Expanded(
+          child: ListView.separated(
+            padding: EdgeInsets.zero,
+            itemCount: passkeys.length,
+            separatorBuilder: (_, __) => Divider(
+              color: Color(0xFFE8EBEE),
+              indent: 24,
+              endIndent: 24,
+              height: 0,
+              thickness: 1,
+            ),
+            itemBuilder: (context, index) => _PasskeyListItem(
+              item: passkeys[index],
+              onDelete: () {
+                // Xử lý xóa passkey ở đây
+              },
             ),
           ),
-          // Bottom create passkey section
-          _BottomSection(),
-        ],
-      ),
+        ),
+        // Bottom create passkey section
+        _BottomSection(),
+      ],
     );
   }
 }

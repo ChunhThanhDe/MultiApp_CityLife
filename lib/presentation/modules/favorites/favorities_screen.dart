@@ -12,29 +12,31 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
   const FavoritesScreen({super.key});
 
   @override
+  PreferredSizeWidget? buildAppBar(BuildContext context) {
+    return BasicAppBar(
+      title: "Your Favorites",
+      onBack: () => Get.back(),
+    );
+  }
+
+  @override
   Widget buildScreen(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          BasicAppBar(
-            title: 'Your Favorites',
-          ),
-          _buildTabBar(),
-          Expanded(
-            child: Obx(() {
-              // Lấy data theo tab
-              if (controller.currentTab.value == FavoritesTab.store) {
-                // Hiển thị store
-                return _buildStoreGrid(controller.favoritedStores);
-              } else {
-                // Hiển thị items
-                return _buildItemGrid(controller.favoritedItems);
-              }
-            }),
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        _buildTabBar(),
+        Expanded(
+          child: Obx(() {
+            // Lấy data theo tab
+            if (controller.currentTab.value == FavoritesTab.store) {
+              // Hiển thị store
+              return _buildStoreGrid(controller.favoritedStores);
+            } else {
+              // Hiển thị items
+              return _buildItemGrid(controller.favoritedItems);
+            }
+          }),
+        ),
+      ],
     );
   }
 

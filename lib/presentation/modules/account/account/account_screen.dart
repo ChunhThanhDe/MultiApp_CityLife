@@ -24,6 +24,14 @@ class AccountScreen extends BaseScreen<AccountController> {
   const AccountScreen({super.key});
 
   @override
+  PreferredSizeWidget? buildAppBar(BuildContext context) {
+    return BasicAppBar(
+      title: "Account",
+      onBack: () => Get.back(),
+    );
+  }
+
+  @override
   Widget buildScreen(BuildContext context) {
     final List<AccountMenuItem> menuItems = [
       AccountMenuItem(
@@ -95,86 +103,79 @@ class AccountScreen extends BaseScreen<AccountController> {
       ),
     ];
 
-    return Scaffold(
-      body: Column(
-        children: [
-          BasicAppBar(
-            title: "Account",
-            onBack: () => Get.back(),
-          ),
-          // Profile Info
-          _ProfileCard(),
-          // Menu
-          Expanded(
-            child: ListView.separated(
-              padding: EdgeInsets.zero,
-              itemCount: menuItems.length,
-              separatorBuilder: (context, i) => Divider(
-                color: Color(0xFFE8EBEE),
-                indent: 60,
-                height: 0,
-                thickness: 1,
-              ),
-              itemBuilder: (context, index) {
-                final item = menuItems[index];
-                return ListTile(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 24),
-                  leading: Icon(item.icon, color: Color(0xFF4A5763)),
-                  title: Text(
-                    item.title,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xFF161A1D),
-                    ),
-                  ),
-                  trailing: item.trailing ?? Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
-                  onTap: item.onClick,
-                );
-              },
+    return Column(
+      children: [
+        _ProfileCard(),
+        // Menu
+        Expanded(
+          child: ListView.separated(
+            padding: EdgeInsets.zero,
+            itemCount: menuItems.length,
+            separatorBuilder: (context, i) => Divider(
+              color: Color(0xFFE8EBEE),
+              indent: 60,
+              height: 0,
+              thickness: 1,
             ),
-          ),
-          // Sign Out & App version
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-            child: Column(
-              children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFFFECEB),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32),
-                    ),
-                    minimumSize: Size(double.infinity, 48),
-                    elevation: 0,
-                    foregroundColor: Color(0xFFB80900),
-                  ),
-                  onPressed: () {
-                    // TODO: Handle sign out
-                  },
-                  child: Text(
-                    "Sign out",
-                    style: TextStyle(
-                      color: Color(0xFFB80900),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  "v2.380",
+            itemBuilder: (context, index) {
+              final item = menuItems[index];
+              return ListTile(
+                contentPadding: EdgeInsets.symmetric(horizontal: 24),
+                leading: Icon(item.icon, color: Color(0xFF4A5763)),
+                title: Text(
+                  item.title,
                   style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
                     color: Color(0xFF161A1D),
-                    fontSize: 12,
                   ),
                 ),
-              ],
-            ),
+                trailing: item.trailing ?? Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
+                onTap: item.onClick,
+              );
+            },
           ),
-          SizedBox(height: 8),
-        ],
-      ),
+        ),
+        // Sign Out & App version
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          child: Column(
+            children: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFFFECEB),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(32),
+                  ),
+                  minimumSize: Size(double.infinity, 48),
+                  elevation: 0,
+                  foregroundColor: Color(0xFFB80900),
+                ),
+                onPressed: () {
+                  // TODO: Handle sign out
+                },
+                child: Text(
+                  "Sign out",
+                  style: TextStyle(
+                    color: Color(0xFFB80900),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
+                "v2.380",
+                style: TextStyle(
+                  color: Color(0xFF161A1D),
+                  fontSize: 12,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 8),
+      ],
     );
   }
 }
