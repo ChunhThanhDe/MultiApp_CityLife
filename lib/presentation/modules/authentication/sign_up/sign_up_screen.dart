@@ -50,6 +50,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildInput(),
+          SizedBox(height: 16.h),
           _buildNameInput(),
           SizedBox(height: 16.h),
           _buildBirthdayInput(),
@@ -64,7 +65,12 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       isRequired: true,
       controller: vm.nameController,
       hintText: 'Enter your name',
-      prefixIcon: Assets.icons.icPersonIcon.svg(),
+      suffixIcon: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Assets.icons.icPersonIcon.svg(
+          colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn),
+        ),
+      ),
       validator: _validateName,
     );
   }
@@ -92,7 +98,12 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       isRequired: true,
       controller: vm.emailController,
       hintText: 'name@example.com',
-      prefixIcon: Assets.icons.icEmailIcon.svg(),
+      suffixIcon: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Assets.icons.icEmailIcon.svg(
+          colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn),
+        ),
+      ),
       keyboardType: TextInputType.emailAddress,
       validator: _validateEmail,
     );

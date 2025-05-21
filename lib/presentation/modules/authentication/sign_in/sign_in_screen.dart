@@ -131,9 +131,15 @@ class SignInScreen extends BaseScreen<SignInController> {
     return Form(
       key: vm.formKey,
       child: Obx(
-        () => vm.loginMethod.value == LoginMethod.email
-            ? _buildEmailInput()
-            : PhonePicker(inputController: vm.inputController, onChanged: vm.onCountryCodeChanged, countryDialCode: vm.countryDialCode.value),
+        () => Column(
+          children: [
+            vm.loginMethod.value == LoginMethod.email
+                ? _buildEmailInput()
+                : PhonePicker(inputController: vm.inputController, onChanged: vm.onCountryCodeChanged, countryDialCode: vm.countryDialCode.value),
+            SizedBox(height: 24),
+            _buildPasswordInput(),
+          ],
+        ),
       ),
     );
   }
@@ -144,7 +150,15 @@ class SignInScreen extends BaseScreen<SignInController> {
       isRequired: true,
       controller: vm.inputController,
       hintText: 'name@example.com',
-      prefixIcon: Assets.icons.icEmailIcon.svg(),
+      suffixIcon: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Assets.icons.icEmailIcon.svg(
+          colorFilter: ColorFilter.mode(
+            AppColors.textGreyLow300,
+            BlendMode.srcIn,
+          ),
+        ),
+      ),
       keyboardType: TextInputType.emailAddress,
       validator: (value) {
         if (value == null || value.isEmpty) {
@@ -152,6 +166,34 @@ class SignInScreen extends BaseScreen<SignInController> {
         }
         if (!GetUtils.isEmail(value)) {
           return 'Please enter a valid email address';
+        }
+        return null;
+      },
+    );
+  }
+
+  _buildPasswordInput() {
+    return AppTextField(
+      label: 'Password',
+      isRequired: true,
+      controller: vm.passwordController,
+      hintText: 'Enter your password',
+      suffixIcon: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Assets.icons.icLock.svg(
+          colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn),
+        ),
+      ),
+      obscureText: true,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Password is required';
+        }
+        if (value.length < 10) {
+          return 'Password must be at least 10 characters';
+        }
+        if (value.contains(' ')) {
+          return 'Password must not contain spaces';
         }
         return null;
       },
