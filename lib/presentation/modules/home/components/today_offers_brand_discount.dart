@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/app_image.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 class TodayOffersBrandDiscount extends GetView<HomeController> {
@@ -48,7 +49,7 @@ class TodayOffersBrandDiscount extends GetView<HomeController> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(controller.todayOffersBrandDiscount[index].bannerImageUrl),
+                child: AppImage.network(controller.todayOffersBrandDiscount[index].bannerImageUrl, fit: BoxFit.cover),
               ),
               Positioned(
                 top: 8,
@@ -94,7 +95,7 @@ class TodayOffersBrandDiscount extends GetView<HomeController> {
                 top: 8,
                 left: 8,
                 child: ClipOval(
-                  child: Image.network(
+                  child: AppImage.network(
                     controller.todayOffersBrandDiscount[index].brandLogoUrl,
                     width: 64,
                     height: 64,

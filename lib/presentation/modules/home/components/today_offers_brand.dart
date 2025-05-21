@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/app_image.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 class TodayOffersBrand extends GetView<HomeController> {
@@ -45,7 +46,7 @@ class TodayOffersBrand extends GetView<HomeController> {
       ),
       child: Column(
         children: [
-          ClipOval(child: Image.network(controller.todayOffersBrand[index].brandLogoUrl, width: 64, height: 64)),
+          ClipOval(child: AppImage.network(controller.todayOffersBrand[index].brandLogoUrl, width: 64, height: 64)),
           SizedBox(height: 4),
           Text(controller.todayOffersBrand[index].brandName, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBrandDefault500)),
         ],

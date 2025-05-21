@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/app_image.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 class TopOffers extends GetView<HomeController> {
@@ -37,7 +38,7 @@ class TopOffers extends GetView<HomeController> {
         width: 175,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: Image.network(
+          child: AppImage.network(
             controller.topOffers[index].bannerImageUrl,
             fit: BoxFit.cover,
           ),
