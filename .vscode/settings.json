@@ -11,5 +11,6 @@
   "editor.selectionHighlight": false,
   "editor.suggestSelection": "first",
   "editor.tabCompletion": "onlySnippets",
-  "editor.wordBasedSuggestions": "currentDocument"
+  "editor.wordBasedSuggestions": "currentDocument",
+  "dart.flutterSdkPath": ".fvm/versions/3.27.4"
 }

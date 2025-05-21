@@ -49,3 +49,6 @@ app.*.map.json
 /android/app/.cxx
 
 mcp.json
+
+# FVM Version Cache
+.fvm/

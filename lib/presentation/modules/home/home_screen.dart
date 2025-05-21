@@ -36,6 +36,7 @@ class HomeScreen extends BaseScreen<HomeController> {
         SliverBox(child: SectionBreakDivider()),
         SliverBox(height: 16),
         TopOffers(),
+        SliverBox(height: 32),
       ],
     );
   }

@@ -18,7 +18,7 @@ class TodayOffer {
   final String brandLogoUrl;
   final String bannerImageUrl;
   final Function() onTap;
-  final String? discount;
+  final int? discount;
   final double? deliveryFee;
 
   const TodayOffer({
@@ -29,6 +29,13 @@ class TodayOffer {
     this.discount,
     this.deliveryFee,
   });
+}
+
+class TopOffer {
+  final String bannerImageUrl;
+  final Function() onTap;
+
+  const TopOffer({required this.bannerImageUrl, required this.onTap});
 }
 
 const bannerImageUrl = 'https://i.ytimg.com/vi/qrO5--Iuy60/maxresdefault.jpg';
@@ -59,10 +66,16 @@ class HomeController extends BaseController {
   ];
 
   final List<TodayOffer> todayOffersBrandDiscount = [
-    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}, discount: '10%', deliveryFee: 10),
-    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}, discount: '10%', deliveryFee: 10),
-    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}, discount: '10%', deliveryFee: 10),
-    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}, discount: '10%', deliveryFee: 10),
-    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}, discount: '10%', deliveryFee: 10),
+    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}, discount: 10, deliveryFee: 10),
+    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}, discount: 45, deliveryFee: 32),
+    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}, discount: 15, deliveryFee: 12),
+    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}, discount: 15, deliveryFee: 53),
+    TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}, discount: 32, deliveryFee: 33),
+  ];
+
+  final List<TopOffer> topOffers = [
+    TopOffer(bannerImageUrl: 'https://i.pinimg.com/236x/87/60/fc/8760fc8c6e5caf3461b97f4d94543d6e.jpg', onTap: () {}),
+    TopOffer(bannerImageUrl: 'https://i.pinimg.com/236x/87/60/fc/8760fc8c6e5caf3461b97f4d94543d6e.jpg', onTap: () {}),
+    TopOffer(bannerImageUrl: 'https://i.pinimg.com/236x/87/60/fc/8760fc8c6e5caf3461b97f4d94543d6e.jpg', onTap: () {}),
   ];
 }

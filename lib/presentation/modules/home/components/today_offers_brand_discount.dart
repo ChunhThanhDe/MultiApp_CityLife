@@ -82,7 +82,7 @@ class TodayOffersBrandDiscount extends GetView<HomeController> {
                     spacing: 8,
                     children: [
                       Text(
-                        '25% Off',
+                        '${controller.todayOffersBrandDiscount[index].discount}% Off',
                         textAlign: TextAlign.center,
                         style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBaseWhite),
                       ),
@@ -111,7 +111,7 @@ class TodayOffersBrandDiscount extends GetView<HomeController> {
               Assets.icons.icVerified.svg(),
             ],
           ),
-          Text('\$6 Delivery fee', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
+          Text('\$${controller.todayOffersBrandDiscount[index].deliveryFee} Delivery fee', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
         ],
       ),
     );
