@@ -95,13 +95,16 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
                     if (!controller.isScanning.value) {
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 10),
-                        child: ElevatedButton.icon(
-                          onPressed: controller.restartScan,
-                          icon: const Icon(Icons.refresh, color: Colors.white),
-                          label: const Text("Scan again", style: TextStyle(color: Colors.white)),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF5856D7),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                        child: GestureDetector(
+                          onTap: controller.restartScan,
+                          child: const Text(
+                            "Scan again",
+                            style: TextStyle(
+                              color: Color(0xFF5856D7),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              decoration: TextDecoration.underline,
+                            ),
                           ),
                         ),
                       );

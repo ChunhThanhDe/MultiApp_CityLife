@@ -22,7 +22,7 @@ class PaymentController extends BaseController {
   final isValid = false.obs;
 
   PaymentController() {
-    _loadScannedCard();
+    loadScannedCard();
     // Listen for changes in all controllers
     cardNumberController.addListener(validate);
     expDateController.addListener(validate);
@@ -32,7 +32,7 @@ class PaymentController extends BaseController {
     ever(selectedCountry, (_) => validate());
   }
 
-  void _loadScannedCard() {
+  void loadScannedCard() {
     final raw = AppStorage.getString('scanned_card_info');
     if (raw != null && raw.isNotEmpty) {
       try {
