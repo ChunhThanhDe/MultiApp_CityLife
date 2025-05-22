@@ -7,9 +7,10 @@ class BaseRepository {
   late DioClient dioClient;
   final String baseUrl;
   final BaseOptions? options;
+  final List<Interceptor>? interceptors;
 
-  BaseRepository({required this.baseUrl, this.options}) {
-    dioClient = DioClient(Dio(options), baseUrl: baseUrl);
+  BaseRepository({required this.baseUrl, this.options, this.interceptors}) {
+    dioClient = DioClient(Dio(options), baseUrl: baseUrl, interceptors: interceptors);
   }
 
   Future<ApiResult> handleApiRequest<T>(Future<Response<T>> Function() request) async {

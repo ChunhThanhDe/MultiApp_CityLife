@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart' hide Response;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:sixam_mart_user/app_provider.dart';
 
 import '../app/constants/api_const.dart';
 
@@ -11,16 +13,12 @@ class DioClient {
   late Dio _dio;
 
   final String baseUrl;
-  final String? token;
-  final Map<String, dynamic>? headers;
   final List<Interceptor>? interceptors;
 
   DioClient(
     Dio dio, {
     required this.baseUrl,
     this.interceptors,
-    this.token,
-    this.headers,
   }) {
     _dio = dio;
 
@@ -71,7 +69,16 @@ class DioClient {
   }
 
   Map<String, dynamic> getHeader() {
-    return headers ?? {};
+    final Map<String, dynamic> headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    if (Get.find<AppProvider>().userAuthInfo.value.token.isNotEmpty) {
+      headers['Authorization'] = 'Bearer ${Get.find<AppProvider>().userAuthInfo.value.token}';
+    }
+
+    return headers;
   }
 
   Future<dynamic> get(
