@@ -13,11 +13,15 @@ class PhonePicker extends StatelessWidget {
     required this.inputController,
     required this.onChanged,
     required this.countryDialCode,
+    this.errorText,
+    this.validator,
   });
 
   final TextEditingController inputController;
   final Function(CountryCode) onChanged;
   final String countryDialCode;
+  final String? errorText;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -95,15 +99,16 @@ class PhonePicker extends StatelessWidget {
                       ),
                     ),
                     isRequired: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Phone number is required';
-                      }
-                      if (!GetUtils.isPhoneNumber(value)) {
-                        return 'Please enter a valid phone number';
-                      }
-                      return null;
-                    },
+                    validator: validator ??
+                        (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Phone number is required';
+                          }
+                          if (!GetUtils.isPhoneNumber(value)) {
+                            return 'Please enter a valid phone number';
+                          }
+                          return null;
+                        },
                   ),
                 ),
               ),

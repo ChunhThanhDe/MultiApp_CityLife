@@ -91,6 +91,18 @@ class SignUpScreen extends BaseScreen<SignUpController> {
             inputController: vm.phoneController,
             onChanged: vm.onCountryCodeChanged,
             countryDialCode: vm.countryDialCode.value,
+            validator: (value) {
+              if (vm.currentMethod.value == SignUpMethod.email) {
+                return null;
+              }
+              if (value == null || value.isEmpty) {
+                return 'Phone number is required';
+              }
+              if (!GetUtils.isPhoneNumber(value)) {
+                return 'Please enter a valid phone number';
+              }
+              return null;
+            },
           ));
   }
 
@@ -150,18 +162,19 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         ),
       ),
       keyboardType: TextInputType.emailAddress,
-      validator: _validateEmail,
+      validator: (value) {
+        if (vm.currentMethod.value == SignUpMethod.phone) {
+          return null;
+        }
+        if (value == null || value.isEmpty) {
+          return 'Email is required';
+        }
+        if (!GetUtils.isEmail(value)) {
+          return 'Please enter a valid email address';
+        }
+        return null;
+      },
     );
-  }
-
-  String? _validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Email is required';
-    }
-    if (!GetUtils.isEmail(value)) {
-      return 'Please enter a valid email address';
-    }
-    return null;
   }
 
   Widget _buildBirthdayInput() {
