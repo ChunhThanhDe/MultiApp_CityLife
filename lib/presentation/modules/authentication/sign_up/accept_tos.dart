@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_bottom_section.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_header.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/theme.dart';
 
@@ -39,7 +41,7 @@ class AcceptTos extends BaseScreen<SignUpController> {
 
   AppButton _buildNextButton() {
     return AppButton(
-      onTap: () {},
+      onTap: () => Get.offAllNamed(AppRoutes.root),
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       child: Row(

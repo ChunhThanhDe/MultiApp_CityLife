@@ -33,7 +33,9 @@ class RootScreen extends BaseScreen<RootController> {
                     activeIcon: SizedBox(
                       width: 20.w,
                       height: 20.w,
-                      child: SvgPicture.asset(e.iconSelected),
+                      child: SvgPicture.asset(
+                        e.iconSelected,
+                      ),
                     ),
                     label: e.label,
                   ))

@@ -29,8 +29,18 @@ class DioClient {
       ..options.headers = getHeader()
       ..options.connectTimeout = const Duration(seconds: 10)
       ..options.receiveTimeout = const Duration(seconds: 10)
-      ..options.receiveDataWhenStatusError = false
-      ..httpClientAdapter;
+      ..options.receiveDataWhenStatusError = true
+      ..options.validateStatus = (status) {
+        return status != null && status >= 200 && status < 500;
+      }
+      ..options.followRedirects = false
+      ..httpClientAdapter = IOHttpClientAdapter(
+        createHttpClient: () {
+          final HttpClient client = HttpClient(context: SecurityContext(withTrustedRoots: false));
+          client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+          return client;
+        },
+      );
 
     if (interceptors?.isNotEmpty ?? false) {
       _dio.interceptors.addAll(interceptors!);
@@ -89,7 +99,7 @@ class DioClient {
     }
   }
 
-  Future<dynamic> post(
+  Future<Response> post(
     String uri, {
     data,
     Map<String, dynamic>? queryParameters,
@@ -99,7 +109,7 @@ class DioClient {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      var response = await _dio.post(
+      final Response response = await _dio.post(
         uri,
         data: data,
         queryParameters: queryParameters,
@@ -108,7 +118,7 @@ class DioClient {
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
       );
-      return response.data;
+      return response;
     } on FormatException catch (_) {
       throw const FormatException('Unable to process the data');
     } catch (e) {

@@ -8,6 +8,7 @@ import 'package:sixam_mart_user/domain/models/page_param/verification_page_param
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_header.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/components/term_of_service.dart';
+import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/accept_tos.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/theme.dart';
 
@@ -35,7 +36,7 @@ class VerificationScreen extends BaseScreen<VerificationController> {
           _buildExpiredText(),
           SizedBox(height: 24.h),
           AppButton(
-            onTap: () {},
+            onTap: () => Get.to(() => AcceptTos()),
             width: double.infinity,
             color: AppColors.stateBrandDefault500,
             disabledColor: AppColors.stateBrandDefault500.withValues(alpha: 0.5),

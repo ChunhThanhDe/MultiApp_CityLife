@@ -1,8 +1,10 @@
 import 'package:country_code_picker/src/country_code.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/domain/models/page_param/verification_page_param.dart';
+import 'package:sixam_mart_user/domain/models/request/sign_up_request.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_overlay.dart';
@@ -17,6 +19,7 @@ class SignUpController extends BaseController {
   final TextEditingController monthController = TextEditingController();
   final TextEditingController dayController = TextEditingController();
   final TextEditingController yearController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -85,43 +88,77 @@ class SignUpController extends BaseController {
   }
 
   Future<void> onSubmit() async {
-    // Get.to(() => const AcceptTos());
-
     closeKeyboard();
-    if (!formKey.currentState!.validate()) {
+    // if (!formKey.currentState!.validate()) {
+    //   return;
+    // }
+
+    // Check if name is provided
+    if (nameController.text.isEmpty) {
+      Get.snackbar('Error', 'Full name is required', snackPosition: SnackPosition.BOTTOM);
       return;
     }
 
-    // Check if at least name and email are provided
-    if (nameController.text.isEmpty || emailController.text.isEmpty) {
+    if (passwordController.text.isEmpty) {
+      Get.snackbar('Error', 'Password is required', snackPosition: SnackPosition.BOTTOM);
+      return;
+    }
+
+    // Check if email or phone is provided based on the current method
+    bool isEmailMethod = currentMethod.value == SignUpMethod.email;
+    if (isEmailMethod && emailController.text.isEmpty) {
+      Get.snackbar('Error', 'Email is required', snackPosition: SnackPosition.BOTTOM);
+      return;
+    } else if (!isEmailMethod && phoneController.text.isEmpty) {
+      Get.snackbar('Error', 'Phone number is required', snackPosition: SnackPosition.BOTTOM);
       return;
     }
 
     isLoading.value = true;
 
-    await showLoadingOverlay(api: Future.delayed(const Duration(seconds: 2)));
+    // Get birthday if provided
+    final birthday = "2003-10-17";
 
-    // final birthday = _getBirthdayFromInputs();
-    // final ApiResult result = await showLoadingOverlay(
-    //   api: _authRepository.register(RegisterRequest(
-    //     name: nameController.text,
-    //     email: emailController.text,
-    //     birthday: birthday,
-    //   )),
-    // );
-
-    // End loading
-    isLoading.value = false;
-
-    // Navigate to verification screen
-    Get.toNamed(
-      AppRoutes.verification,
-      arguments: VerificationPageParam(
-        method: VerificationMethod.email,
-        verificationId: emailController.text,
-        type: VerificationType.signUp,
-      ),
+    // Create the request object based on the current sign up method
+    final SignUpRequest request = SignUpRequest(
+      name: nameController.text,
+      password: passwordController.text,
+      birthday: birthday,
+      email: isEmailMethod ? emailController.text : null,
+      phone: !isEmailMethod ? phoneController.text : null,
     );
+
+    // Call the API
+    final ApiResult result = await showLoadingOverlay(
+      api: _authRepository.signUp(request),
+    );
+
+    // Process the result
+    switch (result) {
+      case Success(:final data):
+        if (data.statusCode != 200) {
+          Get.snackbar('Error', 'Account creation failed', snackPosition: SnackPosition.BOTTOM);
+          return;
+        }
+
+        Get.snackbar('Success', 'Account created successfully', snackPosition: SnackPosition.BOTTOM);
+        print("API Success: ${data.toString()}");
+
+        // Navigate to verification screen
+        Get.toNamed(
+          AppRoutes.verification,
+          arguments: VerificationPageParam(
+            method: isEmailMethod ? VerificationMethod.email : VerificationMethod.phoneNumber,
+            verificationId: isEmailMethod ? emailController.text : phoneController.text,
+            type: VerificationType.signUp,
+          ),
+        );
+      case Failure(:final error):
+        Get.snackbar('Error', error.toString(), snackPosition: SnackPosition.BOTTOM);
+        print("API Error: $error");
+    }
+
+    isLoading.value = false;
   }
 
   String? _getBirthdayFromInputs() {

@@ -57,7 +57,9 @@ class AccountScreen extends BaseScreen<AccountController> {
       AccountMenuItem(
         icon: Icons.location_on_outlined,
         title: 'Address',
-        onClick: () {},
+        onClick: () {
+          Get.toNamed(AppRoutes.address);
+        },
       ),
       AccountMenuItem(
         icon: Icons.card_giftcard_outlined,

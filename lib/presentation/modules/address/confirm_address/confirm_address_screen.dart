@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/theme.dart';
 
@@ -34,7 +35,7 @@ class ConfirmAddressScreen extends BaseScreen<ConfirmAddressController> {
               style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHigh700),
             ),
             AppButton(
-              onTap: () {},
+              onTap: () => Get.until((route) => Get.currentRoute == AppRoutes.root),
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Text(
