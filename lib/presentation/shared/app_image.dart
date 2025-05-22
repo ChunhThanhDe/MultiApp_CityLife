@@ -22,7 +22,7 @@ class ImageState {
 class _ImageConstants {
   static const int maxRetries = 3;
   static const Duration retryDelay = Duration(seconds: 1);
-  static const Duration maxRetryDelay = Duration(seconds: 10);
+  static const Duration maxRetryDelay = Duration(seconds: 3);
   static const double backoffFactor = 2.0;
   static const Duration fadeInDuration = Duration(milliseconds: 300);
 }
