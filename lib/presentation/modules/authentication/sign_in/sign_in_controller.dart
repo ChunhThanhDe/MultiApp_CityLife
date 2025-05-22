@@ -1,8 +1,15 @@
+import 'dart:convert';
+
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/data/app_storage.dart';
+import 'package:sixam_mart_user/app_provider.dart';
+import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
-import 'package:sixam_mart_user/domain/models/page_param/verification_page_param.dart';
+import 'package:sixam_mart_user/base/error_response.dart';
+import 'package:sixam_mart_user/domain/entities/user_auth_info.dart';
+import 'package:sixam_mart_user/domain/models/request/login_request.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_overlay.dart';
@@ -31,24 +38,39 @@ class SignInController extends BaseController {
       return;
     }
     isLoading.value = true;
-    await showLoadingOverlay(api: Future.delayed(const Duration(seconds: 2)));
 
-    // final ApiResult result = await showLoadingOverlay(api: _authRepository.login(LoginRequest(email: 'test@test.com', password: '123456')));
-    // switch (result) {
-    //   case Success(:final data):
-    //     print(data);
-    //   case Failure(:final error):
-    //     print(error);
-    // }
-    isLoading.value = false;
-    Get.toNamed(
-      AppRoutes.verification,
-      arguments: VerificationPageParam(
-        method: loginMethod.value == LoginMethod.email ? VerificationMethod.email : VerificationMethod.phoneNumber,
-        verificationId: inputController.text,
-        type: VerificationType.signIn,
-      ),
+    final bool isEmail = loginMethod.value == LoginMethod.email;
+    final LoginRequest request = LoginRequest(
+      loginType: 'manual',
+      emailOrPhone: inputController.text,
+      fieldType: isEmail ? 'email' : 'phone',
+      password: passwordController.text,
     );
+
+    final ApiResult result = await showLoadingOverlay(
+      api: _authRepository.login(request),
+    );
+
+    switch (result) {
+      case Success(:final data):
+        if (data.statusCode != 200) {
+          final errorResponse = ErrorResponse.fromJson(data.data);
+          Get.snackbar('Error', errorResponse.errors.first.message, snackPosition: SnackPosition.BOTTOM);
+          isLoading.value = false;
+          return;
+        }
+        final userAuthInfo = UserAuthInfo.fromJson(data.data);
+        AppStorage.setString(SharedPreferencesKeys.userAuthInfo, jsonEncode(userAuthInfo.toJson()));
+        Get.find<AppProvider>().updateUserAuthInfo(userAuthInfo);
+
+        Get.offAllNamed(AppRoutes.root);
+        isLoading.value = false;
+        break;
+      case Failure(:final error):
+        Get.snackbar('Error', error.toString(), snackPosition: SnackPosition.BOTTOM);
+        isLoading.value = false;
+        break;
+    }
   }
 
   onCountryCodeChanged(CountryCode countryCode) {

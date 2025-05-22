@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:country_code_picker/src/country_code.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/data/app_storage.dart';
+import 'package:sixam_mart_user/app_provider.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
+import 'package:sixam_mart_user/base/error_response.dart';
+import 'package:sixam_mart_user/domain/entities/user_auth_info.dart';
 import 'package:sixam_mart_user/domain/models/request/sign_up_request.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/accept_tos.dart';
@@ -116,9 +122,14 @@ class SignUpController extends BaseController {
     switch (result) {
       case Success(:final data):
         if (data.statusCode != 200) {
-          Get.snackbar('Error', 'Account creation failed', snackPosition: SnackPosition.BOTTOM);
+          final errorResponse = ErrorResponse.fromJson(data.data);
+          Get.snackbar('Error', errorResponse.errors.first.message, snackPosition: SnackPosition.BOTTOM);
           return;
         }
+
+        final userAuthInfo = UserAuthInfo.fromJson(data.data);
+        AppStorage.setString(SharedPreferencesKeys.userAuthInfo, jsonEncode(userAuthInfo.toJson()));
+        Get.find<AppProvider>().updateUserAuthInfo(userAuthInfo);
 
         Get.offAll(() => AcceptTos());
         isLoading.value = false;

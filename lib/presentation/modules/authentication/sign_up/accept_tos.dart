@@ -33,7 +33,7 @@ class AcceptTos extends BaseScreen<SignUpController> {
           SizedBox(height: 24),
           _buildResendVerificationLink(),
           Spacer(),
-          AuthBottomSection(isSignIn: false),
+          AuthBottomSection(isSignIn: false, onTapChange: () => Get.offAllNamed(AppRoutes.signIn)),
         ],
       ),
     );

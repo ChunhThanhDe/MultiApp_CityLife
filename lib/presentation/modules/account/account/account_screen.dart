@@ -153,9 +153,7 @@ class AccountScreen extends BaseScreen<AccountController> {
                   elevation: 0,
                   foregroundColor: Color(0xFFB80900),
                 ),
-                onPressed: () {
-                  // TODO: Handle sign out
-                },
+                onPressed: () => Get.offAllNamed(AppRoutes.signIn),
                 child: Text(
                   "Sign out",
                   style: TextStyle(

@@ -104,30 +104,28 @@ class SignInScreen extends BaseScreen<SignInController> {
   }
 
   _buildLoginButton() {
-    return Obx(() => AppButton(
-          onTap: vm.onSubmit,
-          enabled: !vm.isLoading.value,
-          width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SizedBox(),
-              Text(
-                'Log in',
-                style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white),
+    return AppButton(
+        onTap: vm.onSubmit,
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(),
+            Text(
+              'Log in',
+              style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white),
+            ),
+            SvgPicture.asset(
+              Assets.icons.icRightArrow.path,
+              width: 12.w,
+              height: 12.w,
+              colorFilter: const ColorFilter.mode(
+                Colors.white,
+                BlendMode.srcIn,
               ),
-              SvgPicture.asset(
-                Assets.icons.icRightArrow.path,
-                width: 12.w,
-                height: 12.w,
-                colorFilter: const ColorFilter.mode(
-                  Colors.white,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ));
   }
 

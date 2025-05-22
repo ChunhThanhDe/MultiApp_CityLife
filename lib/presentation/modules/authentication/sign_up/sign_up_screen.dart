@@ -289,13 +289,12 @@ class SignUpScreen extends BaseScreen<SignUpController> {
   }
 
   Widget _buildNextButton() {
-    return Obx(() => AppButton(
-          onTap: vm.onSubmit,
-          enabled: !vm.isLoading.value,
-          width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
-          child: _buildNextButtonContent(),
-        ));
+    return AppButton(
+      onTap: vm.onSubmit,
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+      child: _buildNextButtonContent(),
+    );
   }
 
   Widget _buildNextButtonContent() {

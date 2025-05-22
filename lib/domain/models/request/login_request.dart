@@ -4,14 +4,23 @@ part '../../../generated/domain/models/request/login_request.g.dart';
 
 @JsonSerializable()
 class LoginRequest {
-  @JsonKey(name: "email")
-  final String? email;
+  @JsonKey(name: "login_type")
+  final String loginType;
+
+  @JsonKey(name: "email_or_phone")
+  final String emailOrPhone;
+
+  @JsonKey(name: "field_type")
+  final String fieldType;
+
   @JsonKey(name: "password")
-  final String? password;
+  final String password;
 
   LoginRequest({
-    this.email,
-    this.password,
+    required this.loginType,
+    required this.emailOrPhone,
+    required this.fieldType,
+    required this.password,
   });
 
   factory LoginRequest.fromJson(Map<String, dynamic> json) => _$LoginRequestFromJson(json);
