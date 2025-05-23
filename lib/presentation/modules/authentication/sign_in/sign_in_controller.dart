@@ -21,11 +21,12 @@ enum LoginMethod {
 
 class SignInController extends BaseController {
   final AuthRepository _authRepository = Get.find<AuthRepository>();
-  var loginMethod = LoginMethod.email.obs;
   final TextEditingController inputController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  var countryDialCode = '+1'.obs;
+
+  final countryDialCode = '+1'.obs;
+  final loginMethod = LoginMethod.email.obs;
 
   void toggleLoginMethod() {
     inputController.clear();
