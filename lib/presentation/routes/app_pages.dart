@@ -24,6 +24,8 @@ import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign_up_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/verification/verification_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/verification/verification_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/home_delivery/home_delivery_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/home_delivery/home_delivery_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorities_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/payment/payment/payment_binding.dart';
@@ -40,7 +42,7 @@ import 'package:sixam_mart_user/presentation/modules/wallet/view_receipt/view_re
 part 'app_routes.dart';
 
 class AppPages {
-  static String initial = AppRoutes.root;
+  static String initial = AppRoutes.homeDelivery;
 
   static final appRoutes = [
     GetPage(
@@ -138,6 +140,11 @@ class AppPages {
       name: AppRoutes.paymentScan,
       page: () => const ScanCardScreen(),
       binding: ScanCardBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.homeDelivery,
+      page: () => const HomeDeliveryScreen(),
+      binding: HomeDeliveryBinding(),
     ),
   ];
 }

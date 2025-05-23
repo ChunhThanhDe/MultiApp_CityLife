@@ -20,4 +20,5 @@ class AppRoutes {
   static const String viewReceipt = '/view_receipt';
   static const String payment = '/payment';
   static const String paymentScan = '/payment/scan';
+  static const String homeDelivery = '/delivery';
 }
