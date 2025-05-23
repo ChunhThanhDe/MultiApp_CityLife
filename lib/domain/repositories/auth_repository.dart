@@ -15,9 +15,6 @@ class AuthRepository extends BaseRepository {
   Future<ApiResult> signUp(SignUpRequest request) async {
     final Map<String, dynamic> requestData = request.toJson();
 
-    if (request.birthday == null || request.birthday!.isEmpty) {
-      requestData.remove('birthday');
-    }
     if (request.email != null && request.email!.isNotEmpty) {
       requestData.remove('phone');
     } else if (request.phone != null && request.phone!.isNotEmpty) {

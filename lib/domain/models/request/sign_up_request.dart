@@ -1,9 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../base/base_request.dart';
+
 part '../../../generated/domain/models/request/sign_up_request.g.dart';
 
 @JsonSerializable()
-class SignUpRequest {
+class SignUpRequest extends BaseRequest {
   @JsonKey(name: "name")
   final String name;
 
@@ -29,5 +31,6 @@ class SignUpRequest {
 
   factory SignUpRequest.fromJson(Map<String, dynamic> json) => _$SignUpRequestFromJson(json);
 
-  Map<String, dynamic> toJson() => _$SignUpRequestToJson(this);
+  @override
+  Map<String, dynamic> toRawJson() => _$SignUpRequestToJson(this);
 }
