@@ -4,10 +4,21 @@ import '../../../base/base_request.dart';
 
 part '../../../generated/domain/models/request/login_request.g.dart';
 
+@JsonEnum(valueField: 'value')
+enum LoginType {
+  manual('manual'),
+  google('google'),
+  facebook('facebook');
+
+  final String value;
+
+  const LoginType(this.value);
+}
+
 @JsonSerializable()
 class LoginRequest extends BaseRequest {
   @JsonKey(name: "login_type")
-  final String loginType;
+  final LoginType loginType;
 
   @JsonKey(name: "email_or_phone")
   final String emailOrPhone;

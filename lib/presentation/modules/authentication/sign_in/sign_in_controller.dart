@@ -15,8 +15,13 @@ import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_overlay.dart';
 
 enum LoginMethod {
-  email,
-  phone,
+  email('Email', 'email'),
+  phone('Phone', 'phone');
+
+  final String label;
+  final String fieldType;
+
+  const LoginMethod(this.label, this.fieldType);
 }
 
 class SignInController extends BaseController {
@@ -39,12 +44,10 @@ class SignInController extends BaseController {
       return;
     }
     isLoading.value = true;
-
-    final bool isEmail = loginMethod.value == LoginMethod.email;
     final LoginRequest request = LoginRequest(
-      loginType: 'manual',
+      loginType: LoginType.manual,
       emailOrPhone: inputController.text,
-      fieldType: isEmail ? 'email' : 'phone',
+      fieldType: loginMethod.value.fieldType,
       password: passwordController.text,
     );
 
