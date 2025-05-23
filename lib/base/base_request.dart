@@ -25,15 +25,4 @@ abstract class BaseRequest {
       return value;
     }
   }
-
-  /// Optional: Method to get JSON string representation
-  String toJsonString() {
-    return toJson().toString();
-  }
-
-  /// Optional: Method to check if request has any non-null data
-  bool get hasData {
-    final json = toJson();
-    return json.isNotEmpty;
-  }
 }
