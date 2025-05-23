@@ -4,6 +4,7 @@ import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_item.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_service_card.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_status_card.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
 import 'home_delivery_controller.dart';
 
@@ -50,6 +51,7 @@ class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
                       svgAsset: 'assets/icons/ic_box_delivery.svg',
                       title: 'Box Delivery',
                       description: 'Send an item from\npoint A to B',
+                      onTap: () => Get.toNamed(AppRoutes.boxDelivery),
                     ),
                   ),
                   SizedBox(width: 16),

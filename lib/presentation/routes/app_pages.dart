@@ -24,6 +24,8 @@ import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign_up_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/verification/verification_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/verification/verification_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/box_delivery/box_delivery_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/box_delivery/box_delivery_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/home_delivery/home_delivery_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/home_delivery/home_delivery_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_binding.dart';
@@ -42,7 +44,7 @@ import 'package:sixam_mart_user/presentation/modules/wallet/view_receipt/view_re
 part 'app_routes.dart';
 
 class AppPages {
-  static String initial = AppRoutes.homeDelivery;
+  static String initial = AppRoutes.root;
 
   static final appRoutes = [
     GetPage(
@@ -145,6 +147,11 @@ class AppPages {
       name: AppRoutes.homeDelivery,
       page: () => const HomeDeliveryScreen(),
       binding: HomeDeliveryBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.boxDelivery,
+      page: () => const BoxDeliveryScreen(),
+      binding: BoxDeliveryBinding(),
     ),
   ];
 }
