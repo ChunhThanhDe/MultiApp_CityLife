@@ -123,7 +123,7 @@ class SignUpController extends BaseController {
       case Success(:final data):
         if (data.statusCode != 200) {
           final errorResponse = ErrorResponse.fromJson(data.data);
-          Get.snackbar('Error', errorResponse.errors.first.message, snackPosition: SnackPosition.BOTTOM);
+          Get.snackbar('Error', errorResponse.errors.first.message);
           return;
         }
 
@@ -134,7 +134,7 @@ class SignUpController extends BaseController {
         Get.offAll(() => AcceptTos());
         isLoading.value = false;
       case Failure(:final error):
-        Get.snackbar('Error', error.toString(), snackPosition: SnackPosition.BOTTOM);
+        Get.snackbar('Error', error.toString());
         isLoading.value = false;
     }
   }

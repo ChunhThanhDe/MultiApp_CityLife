@@ -55,7 +55,7 @@ class SignInController extends BaseController {
       case Success(:final data):
         if (data.statusCode != 200) {
           final errorResponse = ErrorResponse.fromJson(data.data);
-          Get.snackbar('Error', errorResponse.errors.first.message, snackPosition: SnackPosition.BOTTOM);
+          Get.snackbar('Error', errorResponse.errors.first.message);
           isLoading.value = false;
           return;
         }
@@ -67,7 +67,7 @@ class SignInController extends BaseController {
         isLoading.value = false;
         break;
       case Failure(:final error):
-        Get.snackbar('Error', error.toString(), snackPosition: SnackPosition.BOTTOM);
+        Get.snackbar('Error', error.toString());
         isLoading.value = false;
         break;
     }
