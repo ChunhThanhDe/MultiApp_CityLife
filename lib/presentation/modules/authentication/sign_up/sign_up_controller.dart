@@ -27,19 +27,12 @@ class SignUpController extends BaseController {
   final TextEditingController passwordController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  // Months for dropdown
   final List<String> months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-  // Days for dropdown (1-31)
   final List<String> days = List.generate(31, (index) => (index + 1).toString());
-
-  // Years for dropdown (last 100 years)
   final List<String> years = List.generate(100, (index) => (DateTime.now().year - index).toString());
 
-  var currentMethod = SignUpMethod.email.obs;
-
-  var countryDialCode = '+1'.obs;
+  final currentMethod = SignUpMethod.email.obs;
+  final countryDialCode = '+1'.obs;
 
   void selectMonth(BuildContext context) async {
     FocusScope.of(context).unfocus();
@@ -101,10 +94,8 @@ class SignUpController extends BaseController {
     bool isEmailMethod = currentMethod.value == SignUpMethod.email;
     isLoading.value = true;
 
-    // Lấy birthday từ input
     final birthday = _getBirthdayFromInputs();
 
-    // Create the request object based on the current sign up method
     final SignUpRequest request = SignUpRequest(
       name: nameController.text,
       password: passwordController.text,
@@ -113,12 +104,10 @@ class SignUpController extends BaseController {
       phone: !isEmailMethod ? phoneController.text : null,
     );
 
-    // Call the API
     final ApiResult result = await showLoadingOverlay(
       api: _authRepository.signUp(request),
     );
 
-    // Process the result
     switch (result) {
       case Success(:final data):
         if (data.statusCode != 200) {
@@ -140,11 +129,9 @@ class SignUpController extends BaseController {
   }
 
   String? _getBirthdayFromInputs() {
-    // Return null if any of the birthday fields are empty
     if (monthController.text.isEmpty || dayController.text.isEmpty || yearController.text.isEmpty) {
       return null;
     }
-    // monthController.text, dayController.text đã là số dạng '01', '02', ...
     return '${yearController.text}-${monthController.text.padLeft(2, '0')}-${dayController.text.padLeft(2, '0')}';
   }
 
