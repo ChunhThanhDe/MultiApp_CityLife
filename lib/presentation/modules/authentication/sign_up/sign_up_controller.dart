@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:country_code_picker/src/country_code.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/data/app_storage.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app_provider.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
@@ -27,7 +29,20 @@ class SignUpController extends BaseController {
   final TextEditingController passwordController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final List<String> months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  final List<String> months = [
+    tr(LocaleKeys.authentication_signUp_months_january),
+    tr(LocaleKeys.authentication_signUp_months_february),
+    tr(LocaleKeys.authentication_signUp_months_march),
+    tr(LocaleKeys.authentication_signUp_months_april),
+    tr(LocaleKeys.authentication_signUp_months_may),
+    tr(LocaleKeys.authentication_signUp_months_june),
+    tr(LocaleKeys.authentication_signUp_months_july),
+    tr(LocaleKeys.authentication_signUp_months_august),
+    tr(LocaleKeys.authentication_signUp_months_september),
+    tr(LocaleKeys.authentication_signUp_months_october),
+    tr(LocaleKeys.authentication_signUp_months_november),
+    tr(LocaleKeys.authentication_signUp_months_december)
+  ];
   final List<String> days = List.generate(31, (index) => (index + 1).toString());
   final List<String> years = List.generate(100, (index) => (DateTime.now().year - index).toString());
 
@@ -36,7 +51,7 @@ class SignUpController extends BaseController {
 
   void selectMonth(BuildContext context) async {
     FocusScope.of(context).unfocus();
-    final String? selectedMonth = await _showSelectionDialog(context, 'Select Month', months);
+    final String? selectedMonth = await _showSelectionDialog(context, tr(LocaleKeys.authentication_signUp_selectMonth), months);
     if (selectedMonth != null) {
       monthController.text = selectedMonth;
     }
@@ -44,7 +59,7 @@ class SignUpController extends BaseController {
 
   void selectDay(BuildContext context) async {
     FocusScope.of(context).unfocus();
-    final String? selectedDay = await _showSelectionDialog(context, 'Select Day', days);
+    final String? selectedDay = await _showSelectionDialog(context, tr(LocaleKeys.authentication_signUp_selectDay), days);
     if (selectedDay != null) {
       dayController.text = selectedDay;
     }
@@ -52,7 +67,7 @@ class SignUpController extends BaseController {
 
   void selectYear(BuildContext context) async {
     FocusScope.of(context).unfocus();
-    final String? selectedYear = await _showSelectionDialog(context, 'Select Year', years);
+    final String? selectedYear = await _showSelectionDialog(context, tr(LocaleKeys.authentication_signUp_selectYear), years);
     if (selectedYear != null) {
       yearController.text = selectedYear;
     }
@@ -112,7 +127,7 @@ class SignUpController extends BaseController {
       case Success(:final data):
         if (data.statusCode != 200) {
           final errorResponse = ErrorResponse.fromJson(data.data);
-          Get.snackbar('Error', errorResponse.errors.first.message);
+          Get.snackbar(tr(LocaleKeys.authentication_signIn_errorSnackbar), errorResponse.errors.first.message);
           return;
         }
 
@@ -123,7 +138,7 @@ class SignUpController extends BaseController {
         Get.offAll(() => AcceptTos());
         isLoading.value = false;
       case Failure(:final error):
-        Get.snackbar('Error', error.toString());
+        Get.snackbar(tr(LocaleKeys.authentication_signIn_errorSnackbar), error.toString());
         isLoading.value = false;
     }
   }

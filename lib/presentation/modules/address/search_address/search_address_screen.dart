@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
@@ -28,7 +30,7 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
       surfaceTintColor: Colors.white,
       backgroundColor: Colors.white,
       title: Text(
-        'Address',
+        tr(LocaleKeys.address_title),
         style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
       ),
       centerTitle: false,
@@ -49,7 +51,7 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
         color: AppColors.stateGreyLowest50,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Text(
-          'Add new address',
+          tr(LocaleKeys.address_addNewAddress),
           style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
         ),
       ),
@@ -66,7 +68,7 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppTextField(
-            hintText: 'Search for an address',
+            hintText: tr(LocaleKeys.address_searchHint),
             prefixIcon: Padding(
               padding: const EdgeInsets.all(12),
               child: Assets.icons.icSearch.svg(),
@@ -87,7 +89,7 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
             onChanged: vm.onSearchChanged,
           ),
           Text(
-            'Explore nearby',
+            tr(LocaleKeys.address_exploreNearby),
             style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
           ),
           Expanded(

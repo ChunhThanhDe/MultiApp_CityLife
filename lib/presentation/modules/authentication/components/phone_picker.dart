@@ -1,8 +1,10 @@
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
 import 'package:sixam_mart_user/theme.dart';
@@ -31,7 +33,7 @@ class PhonePicker extends StatelessWidget {
         Text.rich(
           TextSpan(
             children: [
-              TextSpan(text: 'Phone', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+              TextSpan(text: tr(LocaleKeys.authentication_phonePicker_phoneLabel), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
               TextSpan(text: ' *', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textDangerDefault500)),
             ],
           ),
@@ -91,7 +93,7 @@ class PhonePicker extends StatelessWidget {
                   child: AppTextField(
                     keyboardType: TextInputType.phone,
                     controller: inputController,
-                    hintText: 'Enter phone number',
+                    hintText: tr(LocaleKeys.authentication_phonePicker_phoneHint),
                     suffixIcon: Padding(
                       padding: const EdgeInsets.all(14),
                       child: Assets.icons.icPhoneIcon.svg(
@@ -102,10 +104,10 @@ class PhonePicker extends StatelessWidget {
                     validator: validator ??
                         (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Phone number is required';
+                            return tr(LocaleKeys.authentication_phonePicker_phoneRequired);
                           }
                           if (!GetUtils.isPhoneNumber(value)) {
-                            return 'Please enter a valid phone number';
+                            return tr(LocaleKeys.authentication_phonePicker_phoneInvalid);
                           }
                           return null;
                         },

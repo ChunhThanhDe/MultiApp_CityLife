@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_bottom_section.dart';
@@ -25,8 +27,8 @@ class SignInScreen extends BaseScreen<SignInController> {
         children: [
           SizedBox(height: 16.h),
           AuthHeader(
-            title: 'Log in to your account',
-            subtitle: 'Welcome back! Kindly log in with your credentials',
+            title: tr(LocaleKeys.authentication_signIn_title),
+            subtitle: tr(LocaleKeys.authentication_signIn_subtitle),
           ),
           SizedBox(height: 24.h),
           _buildInputField(),
@@ -68,7 +70,7 @@ class SignInScreen extends BaseScreen<SignInController> {
               )),
           SizedBox(width: 8.w),
           Obx(() => Text(
-                vm.loginMethod.value == LoginMethod.email ? 'Log in with phone' : 'Log in with email',
+                vm.loginMethod.value == LoginMethod.email ? tr(LocaleKeys.authentication_signIn_loginWithPhone) : tr(LocaleKeys.authentication_signIn_loginWithEmail),
                 textAlign: TextAlign.center,
                 style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
               )),
@@ -89,7 +91,7 @@ class SignInScreen extends BaseScreen<SignInController> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
-            'OR',
+            tr(LocaleKeys.authentication_signIn_or),
             style: AppTextStyles.typographyH12Medium.copyWith(color: AppColors.textGreyHigh700),
           ),
         ),
@@ -113,7 +115,7 @@ class SignInScreen extends BaseScreen<SignInController> {
           children: [
             const SizedBox(),
             Text(
-              'Log in',
+              tr(LocaleKeys.authentication_signIn_loginButton),
               style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white),
             ),
             SvgPicture.asset(
@@ -148,10 +150,10 @@ class SignInScreen extends BaseScreen<SignInController> {
 
   _buildEmailInput() {
     return AppTextField(
-      label: 'Email address',
+      label: tr(LocaleKeys.authentication_signIn_emailLabel),
       isRequired: true,
       controller: vm.inputController,
-      hintText: 'name@example.com',
+      hintText: tr(LocaleKeys.authentication_signIn_emailHint),
       suffixIcon: Padding(
         padding: const EdgeInsets.all(14),
         child: Assets.icons.icEmailIcon.svg(
@@ -164,10 +166,10 @@ class SignInScreen extends BaseScreen<SignInController> {
       keyboardType: TextInputType.emailAddress,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Email is required';
+          return tr(LocaleKeys.authentication_signIn_emailRequired);
         }
         if (!GetUtils.isEmail(value)) {
-          return 'Please enter a valid email address';
+          return tr(LocaleKeys.authentication_signIn_emailInvalid);
         }
         return null;
       },
@@ -176,10 +178,10 @@ class SignInScreen extends BaseScreen<SignInController> {
 
   _buildPasswordInput() {
     return AppTextField(
-      label: 'Password',
+      label: tr(LocaleKeys.authentication_signIn_passwordLabel),
       isRequired: true,
       controller: vm.passwordController,
-      hintText: 'Enter your password',
+      hintText: tr(LocaleKeys.authentication_signIn_passwordHint),
       suffixIcon: Padding(
         padding: const EdgeInsets.all(14),
         child: Assets.icons.icLock.svg(
@@ -189,27 +191,27 @@ class SignInScreen extends BaseScreen<SignInController> {
       obscureText: true,
       validator: (value) {
         if (value == null || value.trim().isEmpty) {
-          return 'Password is required';
+          return tr(LocaleKeys.authentication_signIn_passwordRequired);
         }
         final regex = RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[^\s]{10,}$');
         if (!regex.hasMatch(value)) {
           if (value.length < 10) {
-            return 'Password must be at least 10 characters';
+            return tr(LocaleKeys.authentication_signIn_passwordMinLength);
           }
           if (value.contains(' ')) {
-            return 'Password must not contain spaces';
+            return tr(LocaleKeys.authentication_signIn_passwordNoSpaces);
           }
           if (!RegExp(r'[A-Z]').hasMatch(value)) {
-            return 'Password must contain at least one uppercase letter';
+            return tr(LocaleKeys.authentication_signIn_passwordUppercase);
           }
           if (!RegExp(r'[a-z]').hasMatch(value)) {
-            return 'Password must contain at least one lowercase letter';
+            return tr(LocaleKeys.authentication_signIn_passwordLowercase);
           }
           if (!RegExp(r'\d').hasMatch(value)) {
-            return 'Password must contain at least one number';
+            return tr(LocaleKeys.authentication_signIn_passwordNumber);
           }
           if (!RegExp(r'[!@#$%^&*]').hasMatch(value)) {
-            return 'Password must contain at least one special character';
+            return tr(LocaleKeys.authentication_signIn_passwordSpecial);
           }
         }
         return null;

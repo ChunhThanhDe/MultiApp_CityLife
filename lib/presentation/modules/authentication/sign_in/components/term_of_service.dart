@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 class TermOfService extends StatelessWidget {
@@ -15,19 +17,19 @@ class TermOfService extends StatelessWidget {
         text: TextSpan(
           children: [
             TextSpan(
-              text: 'By continuing, you agree to Diyaar ',
+              text: tr(LocaleKeys.authentication_termsOfService_agreeTo),
               style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700),
             ),
             TextSpan(
-              text: 'Terms of Service',
+              text: tr(LocaleKeys.authentication_termsOfService_termsOfService),
               style: AppTextStyles.typographyH10SemiBold.copyWith(color: AppColors.textGreyHighest950),
             ),
             TextSpan(
-              text: '\nand confirm that you have read Diyaar  ',
+              text: tr(LocaleKeys.authentication_termsOfService_confirmRead),
               style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700),
             ),
             TextSpan(
-              text: 'Privacy Policy',
+              text: tr(LocaleKeys.authentication_termsOfService_privacyPolicy),
               style: AppTextStyles.typographyH10SemiBold.copyWith(color: AppColors.textGreyHighest950),
             ),
           ],

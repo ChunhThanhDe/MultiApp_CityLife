@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
@@ -23,7 +25,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
           onTap: () {},
           enabled: isEnabled,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          child: Text('Add Funds', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.stateBaseWhite)),
+          child: Text(tr(LocaleKeys.wallet_addFunds), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.stateBaseWhite)),
         );
       }),
     );
@@ -35,7 +37,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
       centerTitle: false,
       surfaceTintColor: AppColors.stateBaseWhite,
       backgroundColor: AppColors.stateBaseWhite,
-      title: Text('Add Funds', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
+      title: Text(tr(LocaleKeys.wallet_addFundsTitle), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
       leading: IconButton(
         onPressed: () => Get.back(),
         icon: Assets.icons.icClose.svg(
@@ -72,11 +74,11 @@ class AddFundScreen extends BaseScreen<AddFundController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Load this amount',
+            tr(LocaleKeys.wallet_loadAmount),
             style: AppTextStyles.typographyH6Medium.copyWith(color: AppColors.textGreyHighest950),
           ),
           Text(
-            'How mach do you want to add to your balance?',
+            tr(LocaleKeys.wallet_loadAmountSubtitle),
             style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHigh700),
           ),
         ],
@@ -108,7 +110,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
                 keyboardType: TextInputType.number,
                 onChanged: controller.onAmountChanged,
                 decoration: InputDecoration(
-                  hintText: '0.00',
+                  hintText: tr(LocaleKeys.wallet_amountHint),
                   hintStyle: AppTextStyles.typographyH7SemiBold.copyWith(color: AppColors.textGreyDefault500),
                   suffixIcon: hasValue
                       ? GestureDetector(
@@ -153,7 +155,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
           }),
           const SizedBox(height: 8),
           Text(
-            'Enter an amount between \$15 and \$900',
+            tr(LocaleKeys.wallet_amountRange),
             style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500),
           ),
           const SizedBox(height: 16),
@@ -196,7 +198,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Payment method', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
+          Text(tr(LocaleKeys.wallet_paymentMethod), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
           const SizedBox(height: 12),
           Obx(() {
             final method = controller.selectedPaymentMethod.value ?? controller.paymentMethods.first;
@@ -234,7 +236,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Row(
                   children: [
-                    Text('Payment method', style: AppTextStyles.typographyH9Medium),
+                    Text(tr(LocaleKeys.wallet_paymentMethod), style: AppTextStyles.typographyH9Medium),
                     const Spacer(),
                     IconButton(
                       icon: const Icon(Icons.close),
@@ -281,7 +283,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
                         colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn),
                       ),
                       const SizedBox(width: 8),
-                      Text('Add Payment card', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
+                      Text(tr(LocaleKeys.wallet_addPaymentCard), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                     ],
                   ),
                 ),
