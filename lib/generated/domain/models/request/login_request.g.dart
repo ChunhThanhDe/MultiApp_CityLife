@@ -7,15 +7,22 @@ part of '../../../../domain/models/request/login_request.dart';
 // **************************************************************************
 
 LoginRequest _$LoginRequestFromJson(Map<String, dynamic> json) => LoginRequest(
-      loginType: json['login_type'] as String,
+      loginType: $enumDecode(_$LoginTypeEnumMap, json['login_type']),
       emailOrPhone: json['email_or_phone'] as String,
       fieldType: json['field_type'] as String,
       password: json['password'] as String,
     );
 
-Map<String, dynamic> _$LoginRequestToJson(LoginRequest instance) => <String, dynamic>{
-      'login_type': instance.loginType,
+Map<String, dynamic> _$LoginRequestToJson(LoginRequest instance) =>
+    <String, dynamic>{
+      'login_type': _$LoginTypeEnumMap[instance.loginType]!,
       'email_or_phone': instance.emailOrPhone,
       'field_type': instance.fieldType,
       'password': instance.password,
     };
+
+const _$LoginTypeEnumMap = {
+  LoginType.manual: 'manual',
+  LoginType.google: 'google',
+  LoginType.facebook: 'facebook',
+};
