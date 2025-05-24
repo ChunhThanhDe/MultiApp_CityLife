@@ -11,19 +11,20 @@ class DependencyInjection {
   static Future<void> init() async {
     Get.put(LanguageManager());
 
-    final appProvider = Get.put(AppProvider());
+    await Get.putAsync(() => AppStorage().sharedPreferences());
 
-    await _loadStoredAuthInfo(appProvider);
+    Get.put(AppProvider());
+
+    await _loadStoredAuthInfo();
   }
 
-  static Future<void> _loadStoredAuthInfo(AppProvider appProvider) async {
+  static Future<void> _loadStoredAuthInfo() async {
     try {
       final String? userAuthInfoJson = AppStorage.getString(SharedPreferencesKeys.userAuthInfo);
-
       if (userAuthInfoJson != null && userAuthInfoJson.isNotEmpty) {
         final Map<String, dynamic> userAuthInfoMap = jsonDecode(userAuthInfoJson);
         final UserAuthInfo userAuthInfo = UserAuthInfo.fromJson(userAuthInfoMap);
-        appProvider.updateUserAuthInfo(userAuthInfo);
+        Get.find<AppProvider>().updateUserAuthInfo(userAuthInfo);
       }
     } catch (e) {
       log('Error loading stored auth info: $e', name: 'DependencyInjection');
