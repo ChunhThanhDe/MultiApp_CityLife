@@ -22,7 +22,7 @@ class AuthBottomSection extends StatelessWidget {
         Divider(color: AppColors.stateGreyLowestHover100, thickness: 1),
         SizedBox(height: 16.h),
         _buildGotoPage(),
-        SizedBox(height: 56.h),
+        SizedBox(height: 24.h),
       ],
     );
   }
