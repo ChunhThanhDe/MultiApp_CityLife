@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/address/address_details/address_details_controller.dart';
@@ -149,7 +151,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
             spacing: 4,
             children: [
               Text(
-                'Building type',
+                tr(LocaleKeys.address_details_buildingType),
                 style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
               ),
               Text(
@@ -180,7 +182,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
                 spacing: 8,
                 children: [
                   Obx(() => Text(
-                        vm.selectedBuildingType.value == -1 ? 'Select building type' : vm.buildingTypes[vm.selectedBuildingType.value].title,
+                        vm.selectedBuildingType.value == -1 ? tr(LocaleKeys.address_details_selectBuildingType) : vm.buildingTypes[vm.selectedBuildingType.value].title,
                         style: AppTextStyles.typographyH11Regular.copyWith(color: vm.selectedBuildingType.value == -1 ? AppColors.textGreyDefault500 : AppColors.textGreyHighest950),
                       )),
                   Assets.icons.icDropdownArrow.svg(),
@@ -191,28 +193,28 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
           const SizedBox(height: 16),
           AppTextField(
             controller: controller.buildingNumberController,
-            hintText: 'E.g. 2030',
-            label: 'Apt, Unit or Floor',
+            hintText: tr(LocaleKeys.address_details_buildingNumberHint),
+            label: tr(LocaleKeys.address_details_buildingNumber),
             isRequired: true,
           ),
           AppTextField(
             controller: controller.buildingNameController,
-            hintText: 'E.g. Center Villa',
-            label: 'Building name',
+            hintText: tr(LocaleKeys.address_details_buildingNameHint),
+            label: tr(LocaleKeys.address_details_buildingName),
             isRequired: true,
           ),
           RichText(
             text: TextSpan(
               children: [
-                TextSpan(text: 'Address label', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
-                TextSpan(text: ' (optional)', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
+                TextSpan(text: tr(LocaleKeys.address_details_addressLabel), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+                TextSpan(text: tr(LocaleKeys.address_details_addressLabelOptional), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
               ],
             ),
           ),
           const SizedBox(height: 8),
           AppTextField(
             controller: controller.addressLabelController,
-            hintText: 'Add a label (ex. my home)',
+            hintText: tr(LocaleKeys.address_details_addressLabelHint),
             isRequired: false,
           ),
         ],
@@ -229,7 +231,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Delivery instructions',
+              tr(LocaleKeys.address_details_deliveryInstructions),
               style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
             ),
             const SizedBox(height: 8),
@@ -272,14 +274,14 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Text(
-              'Select building type',
+              tr(LocaleKeys.address_details_selectBuildingTypeTitle),
               style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950),
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Text(
-              'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+              tr(LocaleKeys.address_details_selectBuildingTypeSubtitle),
               style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700),
             ),
           ),
@@ -329,7 +331,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Text(
-          'Save address',
+          tr(LocaleKeys.address_details_saveAddress),
           style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white),
         ),
       ),

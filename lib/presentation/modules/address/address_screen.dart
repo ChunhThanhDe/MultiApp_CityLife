@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
@@ -23,11 +25,11 @@ class AddressScreen extends StatelessWidget {
                 Assets.images.imgAddress.image(),
                 Spacer(),
                 Text(
-                  'Enter your address',
+                  tr(LocaleKeys.address_enterTitle),
                   style: AppTextStyles.typographyH8Medium.copyWith(color: AppColors.textGreyHighest950),
                 ),
                 Text(
-                  'We need your address to show Food, Groceries and more near you',
+                  tr(LocaleKeys.address_enterSubtitle),
                   style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700),
                 ),
                 const SizedBox(height: 24),
@@ -36,7 +38,7 @@ class AddressScreen extends StatelessWidget {
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   child: Text(
-                    'Add your address',
+                    tr(LocaleKeys.address_addButton),
                     style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite),
                   ),
                 ),
@@ -47,7 +49,7 @@ class AddressScreen extends StatelessWidget {
                   color: AppColors.stateGreyLowest50,
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   child: Text(
-                    'Skip for now',
+                    tr(LocaleKeys.address_skipButton),
                     style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
                   ),
                 ),

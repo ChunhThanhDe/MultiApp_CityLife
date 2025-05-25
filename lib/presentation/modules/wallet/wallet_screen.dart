@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
@@ -17,7 +19,7 @@ class WalletScreen extends BaseScreen<WalletController> {
       surfaceTintColor: AppColors.stateBaseWhite,
       centerTitle: false,
       backgroundColor: AppColors.stateBaseWhite,
-      title: Text('Wallet', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
+      title: Text(tr(LocaleKeys.wallet_title), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 24),
@@ -26,7 +28,7 @@ class WalletScreen extends BaseScreen<WalletController> {
             behavior: HitTestBehavior.opaque,
             child: Row(
               children: [
-                Text('May Gift', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+                Text(tr(LocaleKeys.wallet_mayGift), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
                 const SizedBox(width: 8),
                 Assets.icons.icGift.svg(),
               ],
@@ -59,7 +61,7 @@ class WalletScreen extends BaseScreen<WalletController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Transaction',
+                tr(LocaleKeys.wallet_transaction),
                 style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
               ),
               Assets.icons.icSettingsFilter.svg(),
@@ -145,7 +147,7 @@ class WalletScreen extends BaseScreen<WalletController> {
                   spacing: 4,
                   children: [
                     Text(
-                      'Diyaar Cash',
+                      tr(LocaleKeys.wallet_diyaarCash),
                       style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
                     ),
                     Obx(() => Text(
@@ -169,7 +171,7 @@ class WalletScreen extends BaseScreen<WalletController> {
             child: Row(
               children: [
                 Assets.icons.icPlusAdd.svg(),
-                Text('Add Funds', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textBaseWhite)),
+                Text(tr(LocaleKeys.wallet_addFunds), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textBaseWhite)),
               ],
             ),
           ),

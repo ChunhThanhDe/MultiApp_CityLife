@@ -36,6 +36,7 @@ import 'package:sixam_mart_user/presentation/modules/wallet/add_fund/add_fund_bi
 import 'package:sixam_mart_user/presentation/modules/wallet/add_fund/add_fund_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/wallet/view_receipt/view_receipt_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/wallet/view_receipt/view_receipt_screen.dart';
+import 'package:sixam_mart_user/presentation/routes/auth_middleware.dart';
 
 part 'app_routes.dart';
 
@@ -47,50 +48,60 @@ class AppPages {
       name: AppRoutes.root,
       page: () => const RootScreen(),
       binding: RootBindings(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppRoutes.signIn,
       page: () => const SignInScreen(),
       binding: SignInBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppRoutes.signUp,
       page: () => const SignUpScreen(),
       binding: SignUpBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppRoutes.verification,
       page: () => const VerificationScreen(),
       binding: VerificationBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppRoutes.addFund,
       page: () => const AddFundScreen(),
       binding: AddFundBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppRoutes.viewReceipt,
       page: () => const ViewReceiptScreen(),
       binding: ViewReceiptBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppRoutes.address,
       page: () => const AddressScreen(),
+      middlewares: [AuthMiddleware()],
       children: [
         GetPage(
           name: AppRoutes.searchAddress,
           page: () => const SearchAddressScreen(),
           binding: SearchAddressBinding(),
+          middlewares: [AuthMiddleware()],
         ),
         GetPage(
           name: AppRoutes.addressDetails,
           page: () => const AddressDetailsScreen(),
           binding: AddressDetailsBinding(),
+          middlewares: [AuthMiddleware()],
         ),
         GetPage(
           name: AppRoutes.confirmAddress,
           page: () => const ConfirmAddressScreen(),
           binding: ConfirmAddressBinding(),
+          middlewares: [AuthMiddleware()],
         ),
       ],
     ),
@@ -98,46 +109,55 @@ class AppPages {
       name: AppRoutes.account,
       page: () => const AccountScreen(),
       binding: AccountBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppRoutes.accountManage,
       page: () => const AccountManageScreen(),
       binding: AccountManageBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppRoutes.account2StepVerification,
       page: () => const Account2StepVerificationScreen(),
       binding: Account2StepVerificationBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppRoutes.accountPassword,
       page: () => const AccountPasswordScreen(),
       binding: AccountPasswordBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppRoutes.accountSecurity,
       page: () => const AccountSecurityScreen(),
       binding: AccountSecurityBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppRoutes.accountPasskey,
       page: () => const AccountPasskeysScreen(),
       binding: AccountPasskeysBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppRoutes.favorites,
       page: () => const FavoritesScreen(),
       binding: FavoritesBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppRoutes.payment,
       page: () => const PaymentScreen(),
       binding: PaymentBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppRoutes.paymentScan,
       page: () => const ScanCardScreen(),
       binding: ScanCardBinding(),
+      middlewares: [AuthMiddleware()],
     ),
   ];
 }

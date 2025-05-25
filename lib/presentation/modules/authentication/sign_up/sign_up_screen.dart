@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_bottom_section.dart';
@@ -24,9 +26,9 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 16.h),
-          const AuthHeader(
-            title: 'Create an account',
-            subtitle: 'Enter Your Account Details',
+          AuthHeader(
+            title: tr(LocaleKeys.authentication_signUp_title),
+            subtitle: tr(LocaleKeys.authentication_signUp_subtitle),
           ),
           SizedBox(height: 24.h),
           _buildForm(),
@@ -53,6 +55,8 @@ class SignUpScreen extends BaseScreen<SignUpController> {
           SizedBox(height: 16.h),
           _buildNameInput(),
           SizedBox(height: 16.h),
+          _buildPasswordInput(),
+          SizedBox(height: 16.h),
           _buildBirthdayInput(),
         ],
       ),
@@ -61,10 +65,10 @@ class SignUpScreen extends BaseScreen<SignUpController> {
 
   Widget _buildNameInput() {
     return AppTextField(
-      label: 'Your name',
+      label: tr(LocaleKeys.authentication_signUp_nameLabel),
       isRequired: true,
       controller: vm.nameController,
-      hintText: 'Enter your name',
+      hintText: tr(LocaleKeys.authentication_signUp_nameHint),
       suffixIcon: Padding(
         padding: const EdgeInsets.all(14),
         child: Assets.icons.icPersonIcon.svg(
@@ -77,7 +81,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
 
   String? _validateName(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Full name is required';
+      return tr(LocaleKeys.authentication_signUp_nameRequired);
     }
     return null;
   }
@@ -89,15 +93,70 @@ class SignUpScreen extends BaseScreen<SignUpController> {
             inputController: vm.phoneController,
             onChanged: vm.onCountryCodeChanged,
             countryDialCode: vm.countryDialCode.value,
+            validator: (value) {
+              if (vm.currentMethod.value == SignUpMethod.email) {
+                return null;
+              }
+              if (value == null || value.isEmpty) {
+                return tr(LocaleKeys.authentication_signUp_phoneRequired);
+              }
+              if (!GetUtils.isPhoneNumber(value)) {
+                return tr(LocaleKeys.authentication_signUp_phoneInvalid);
+              }
+              return null;
+            },
           ));
+  }
+
+  _buildPasswordInput() {
+    return AppTextField(
+      label: tr(LocaleKeys.authentication_signIn_passwordLabel),
+      isRequired: true,
+      controller: vm.passwordController,
+      hintText: tr(LocaleKeys.authentication_signIn_passwordHint),
+      suffixIcon: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Assets.icons.icLock.svg(
+          colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn),
+        ),
+      ),
+      obscureText: true,
+      validator: (value) {
+        if (value == null || value.trim().isEmpty) {
+          return tr(LocaleKeys.authentication_signIn_passwordRequired);
+        }
+        final regex = RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[^\s]{10,}$');
+        if (!regex.hasMatch(value)) {
+          if (value.length < 10) {
+            return tr(LocaleKeys.authentication_signIn_passwordMinLength);
+          }
+          if (value.contains(' ')) {
+            return tr(LocaleKeys.authentication_signIn_passwordNoSpaces);
+          }
+          if (!RegExp(r'[A-Z]').hasMatch(value)) {
+            return tr(LocaleKeys.authentication_signIn_passwordUppercase);
+          }
+          if (!RegExp(r'[a-z]').hasMatch(value)) {
+            return tr(LocaleKeys.authentication_signIn_passwordLowercase);
+          }
+          if (!RegExp(r'\d').hasMatch(value)) {
+            return tr(LocaleKeys.authentication_signIn_passwordNumber);
+          }
+          if (!RegExp(r'[!@#$%^&*]').hasMatch(value)) {
+            return tr(LocaleKeys.authentication_signIn_passwordSpecial);
+          }
+        }
+        return null;
+      },
+    );
   }
 
   Widget _buildEmailInput() {
     return AppTextField(
-      label: 'Email address',
+      label: tr(LocaleKeys.authentication_signIn_emailLabel),
       isRequired: true,
       controller: vm.emailController,
-      hintText: 'name@example.com',
+      hintText: tr(LocaleKeys.authentication_signIn_emailHint),
       suffixIcon: Padding(
         padding: const EdgeInsets.all(14),
         child: Assets.icons.icEmailIcon.svg(
@@ -105,18 +164,19 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         ),
       ),
       keyboardType: TextInputType.emailAddress,
-      validator: _validateEmail,
+      validator: (value) {
+        if (vm.currentMethod.value == SignUpMethod.phone) {
+          return null;
+        }
+        if (value == null || value.isEmpty) {
+          return tr(LocaleKeys.authentication_signIn_emailRequired);
+        }
+        if (!GetUtils.isEmail(value)) {
+          return tr(LocaleKeys.authentication_signIn_emailInvalid);
+        }
+        return null;
+      },
     );
-  }
-
-  String? _validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Email is required';
-    }
-    if (!GetUtils.isEmail(value)) {
-      return 'Please enter a valid email address';
-    }
-    return null;
   }
 
   Widget _buildBirthdayInput() {
@@ -134,11 +194,11 @@ class SignUpScreen extends BaseScreen<SignUpController> {
     return Row(
       children: [
         Text(
-          "When's your birthday?",
+          tr(LocaleKeys.authentication_signUp_birthdayQuestion),
           style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
         ),
         Text(
-          " (optional)",
+          tr(LocaleKeys.authentication_signUp_birthdayOptional),
           style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
         ),
       ],
@@ -162,8 +222,8 @@ class SignUpScreen extends BaseScreen<SignUpController> {
     return _buildDropdownField(
       items: months,
       controller: vm.monthController,
-      hint: 'Month',
-      helper: 'MM',
+      hint: tr(LocaleKeys.authentication_signUp_monthHint),
+      helper: tr(LocaleKeys.authentication_signUp_monthHelper),
     );
   }
 
@@ -172,8 +232,8 @@ class SignUpScreen extends BaseScreen<SignUpController> {
     return _buildDropdownField(
       items: days,
       controller: vm.dayController,
-      hint: 'Day',
-      helper: 'DD',
+      hint: tr(LocaleKeys.authentication_signUp_dayHint),
+      helper: tr(LocaleKeys.authentication_signUp_dayHelper),
     );
   }
 
@@ -183,8 +243,8 @@ class SignUpScreen extends BaseScreen<SignUpController> {
     return _buildDropdownField(
       items: years,
       controller: vm.yearController,
-      hint: 'Year',
-      helper: 'YYYY',
+      hint: tr(LocaleKeys.authentication_signUp_yearHint),
+      helper: tr(LocaleKeys.authentication_signUp_yearHelper),
     );
   }
 
@@ -231,13 +291,12 @@ class SignUpScreen extends BaseScreen<SignUpController> {
   }
 
   Widget _buildNextButton() {
-    return Obx(() => AppButton(
-          onTap: vm.onSubmit,
-          enabled: !vm.isLoading.value,
-          width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
-          child: _buildNextButtonContent(),
-        ));
+    return AppButton(
+      onTap: vm.onSubmit,
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+      child: _buildNextButtonContent(),
+    );
   }
 
   Widget _buildNextButtonContent() {
@@ -246,7 +305,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       children: [
         const SizedBox(),
         Text(
-          'Next',
+          tr(LocaleKeys.authentication_signUp_nextButton),
           style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white),
         ),
         SvgPicture.asset(
@@ -266,7 +325,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
-            'OR',
+            tr(LocaleKeys.authentication_signUp_or),
             style: AppTextStyles.typographyH12Medium.copyWith(color: AppColors.textGreyHigh700),
           ),
         ),
@@ -303,7 +362,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         ),
         SizedBox(width: 8.w),
         Text(
-          isEmail ? 'Sign up with phone' : 'Sign up with email',
+          isEmail ? tr(LocaleKeys.authentication_signUp_signUpWithPhone) : tr(LocaleKeys.authentication_signUp_signUpWithEmail),
           textAlign: TextAlign.center,
           style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
         ),

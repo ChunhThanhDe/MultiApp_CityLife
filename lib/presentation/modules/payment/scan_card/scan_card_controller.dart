@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ml_card_scanner/ml_card_scanner.dart';
-import 'package:sixam_mart_user/app/local/app_storage.dart';
+import 'package:sixam_mart_user/app/data/app_storage.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 
 class ScanCardController extends BaseController {

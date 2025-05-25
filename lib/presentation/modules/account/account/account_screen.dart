@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_bar_basic.dart';
+import 'package:sixam_mart_user/services/auth_service.dart';
 
 import 'account_controller.dart';
 
@@ -57,7 +58,9 @@ class AccountScreen extends BaseScreen<AccountController> {
       AccountMenuItem(
         icon: Icons.location_on_outlined,
         title: 'Address',
-        onClick: () {},
+        onClick: () {
+          Get.toNamed(AppRoutes.address);
+        },
       ),
       AccountMenuItem(
         icon: Icons.card_giftcard_outlined,
@@ -151,9 +154,7 @@ class AccountScreen extends BaseScreen<AccountController> {
                   elevation: 0,
                   foregroundColor: Color(0xFFB80900),
                 ),
-                onPressed: () {
-                  // TODO: Handle sign out
-                },
+                onPressed: () => AuthService.logout(),
                 child: Text(
                   "Sign out",
                   style: TextStyle(

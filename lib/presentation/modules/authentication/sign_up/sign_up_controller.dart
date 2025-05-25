@@ -1,10 +1,19 @@
+import 'dart:convert';
+
 import 'package:country_code_picker/src/country_code.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/data/app_storage.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
+import 'package:sixam_mart_user/app_provider.dart';
+import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
-import 'package:sixam_mart_user/domain/models/page_param/verification_page_param.dart';
+import 'package:sixam_mart_user/base/error_response.dart';
+import 'package:sixam_mart_user/domain/entities/user_auth_info.dart';
+import 'package:sixam_mart_user/domain/models/request/sign_up_request.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
-import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
+import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/accept_tos.dart';
 import 'package:sixam_mart_user/presentation/shared/app_overlay.dart';
 
 enum SignUpMethod { email, phone }
@@ -17,25 +26,32 @@ class SignUpController extends BaseController {
   final TextEditingController monthController = TextEditingController();
   final TextEditingController dayController = TextEditingController();
   final TextEditingController yearController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  // Months for dropdown
-  final List<String> months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-  // Days for dropdown (1-31)
+  final List<String> months = [
+    tr(LocaleKeys.authentication_signUp_months_january),
+    tr(LocaleKeys.authentication_signUp_months_february),
+    tr(LocaleKeys.authentication_signUp_months_march),
+    tr(LocaleKeys.authentication_signUp_months_april),
+    tr(LocaleKeys.authentication_signUp_months_may),
+    tr(LocaleKeys.authentication_signUp_months_june),
+    tr(LocaleKeys.authentication_signUp_months_july),
+    tr(LocaleKeys.authentication_signUp_months_august),
+    tr(LocaleKeys.authentication_signUp_months_september),
+    tr(LocaleKeys.authentication_signUp_months_october),
+    tr(LocaleKeys.authentication_signUp_months_november),
+    tr(LocaleKeys.authentication_signUp_months_december)
+  ];
   final List<String> days = List.generate(31, (index) => (index + 1).toString());
-
-  // Years for dropdown (last 100 years)
   final List<String> years = List.generate(100, (index) => (DateTime.now().year - index).toString());
 
-  var currentMethod = SignUpMethod.email.obs;
-
-  var countryDialCode = '+1'.obs;
+  final currentMethod = SignUpMethod.email.obs;
+  final countryDialCode = '+1'.obs;
 
   void selectMonth(BuildContext context) async {
     FocusScope.of(context).unfocus();
-    final String? selectedMonth = await _showSelectionDialog(context, 'Select Month', months);
+    final String? selectedMonth = await _showSelectionDialog(context, tr(LocaleKeys.authentication_signUp_selectMonth), months);
     if (selectedMonth != null) {
       monthController.text = selectedMonth;
     }
@@ -43,7 +59,7 @@ class SignUpController extends BaseController {
 
   void selectDay(BuildContext context) async {
     FocusScope.of(context).unfocus();
-    final String? selectedDay = await _showSelectionDialog(context, 'Select Day', days);
+    final String? selectedDay = await _showSelectionDialog(context, tr(LocaleKeys.authentication_signUp_selectDay), days);
     if (selectedDay != null) {
       dayController.text = selectedDay;
     }
@@ -51,7 +67,7 @@ class SignUpController extends BaseController {
 
   void selectYear(BuildContext context) async {
     FocusScope.of(context).unfocus();
-    final String? selectedYear = await _showSelectionDialog(context, 'Select Year', years);
+    final String? selectedYear = await _showSelectionDialog(context, tr(LocaleKeys.authentication_signUp_selectYear), years);
     if (selectedYear != null) {
       yearController.text = selectedYear;
     }
@@ -85,56 +101,53 @@ class SignUpController extends BaseController {
   }
 
   Future<void> onSubmit() async {
-    // Get.to(() => const AcceptTos());
-
     closeKeyboard();
     if (!formKey.currentState!.validate()) {
       return;
     }
 
-    // Check if at least name and email are provided
-    if (nameController.text.isEmpty || emailController.text.isEmpty) {
-      return;
-    }
-
+    bool isEmailMethod = currentMethod.value == SignUpMethod.email;
     isLoading.value = true;
 
-    await showLoadingOverlay(api: Future.delayed(const Duration(seconds: 2)));
+    final birthday = _getBirthdayFromInputs();
 
-    // final birthday = _getBirthdayFromInputs();
-    // final ApiResult result = await showLoadingOverlay(
-    //   api: _authRepository.register(RegisterRequest(
-    //     name: nameController.text,
-    //     email: emailController.text,
-    //     birthday: birthday,
-    //   )),
-    // );
-
-    // End loading
-    isLoading.value = false;
-
-    // Navigate to verification screen
-    Get.toNamed(
-      AppRoutes.verification,
-      arguments: VerificationPageParam(
-        method: VerificationMethod.email,
-        verificationId: emailController.text,
-        type: VerificationType.signUp,
-      ),
+    final SignUpRequest request = SignUpRequest(
+      name: nameController.text,
+      password: passwordController.text,
+      birthday: birthday,
+      email: isEmailMethod ? emailController.text : null,
+      phone: !isEmailMethod ? phoneController.text : null,
     );
+
+    final ApiResult result = await showLoadingOverlay(
+      api: _authRepository.signUp(request),
+    );
+
+    switch (result) {
+      case Success(:final data):
+        if (data.statusCode != 200) {
+          final errorResponse = ErrorResponse.fromJson(data.data);
+          Get.snackbar(tr(LocaleKeys.authentication_signIn_errorSnackbar), errorResponse.errors.first.message);
+          return;
+        }
+
+        final userAuthInfo = UserAuthInfo.fromJson(data.data);
+        AppStorage.setString(SharedPreferencesKeys.userAuthInfo, jsonEncode(userAuthInfo.toJson()));
+        Get.find<AppProvider>().updateUserAuthInfo(userAuthInfo);
+
+        Get.offAll(() => AcceptTos());
+        isLoading.value = false;
+      case Failure(:final error):
+        Get.snackbar(tr(LocaleKeys.authentication_signIn_errorSnackbar), error.toString());
+        isLoading.value = false;
+    }
   }
 
   String? _getBirthdayFromInputs() {
-    // Return null if any of the birthday fields are empty
     if (monthController.text.isEmpty || dayController.text.isEmpty || yearController.text.isEmpty) {
       return null;
     }
-
-    // Get month number (1-12)
-    int monthNumber = months.indexOf(monthController.text) + 1;
-
-    // Format as YYYY-MM-DD
-    return '${yearController.text}-${monthNumber.toString().padLeft(2, '0')}-${dayController.text.padLeft(2, '0')}';
+    return '${yearController.text}-${monthController.text.padLeft(2, '0')}-${dayController.text.padLeft(2, '0')}';
   }
 
   void toggleMethod() {

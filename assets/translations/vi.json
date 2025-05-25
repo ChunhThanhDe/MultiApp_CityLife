@@ -6,7 +6,154 @@
         "error": {
             "default": "Đã xảy ra lỗi",
             "noInternet": "Không có kết nối internet",
-            "timeout": "Thời gian yêu cầu hết hạn"
+            "timeout": "Hết thời gian chờ"
+        }
+    },
+    "authentication": {
+        "signIn": {
+            "title": "Đăng nhập vào tài khoản của bạn",
+            "subtitle": "Chào mừng trở lại! Vui lòng đăng nhập bằng thông tin đăng nhập của bạn",
+            "loginButton": "Đăng nhập",
+            "loginWithPhone": "Đăng nhập bằng số điện thoại",
+            "loginWithEmail": "Đăng nhập bằng email",
+            "or": "HOẶC",
+            "emailLabel": "Địa chỉ email",
+            "emailHint": "ten@example.com",
+            "passwordLabel": "Mật khẩu",
+            "passwordHint": "Nhập mật khẩu của bạn",
+            "emailRequired": "Email là bắt buộc",
+            "emailInvalid": "Vui lòng nhập địa chỉ email hợp lệ",
+            "passwordRequired": "Mật khẩu là bắt buộc",
+            "passwordMinLength": "Mật khẩu phải có ít nhất 10 ký tự",
+            "passwordNoSpaces": "Mật khẩu không được chứa khoảng trắng",
+            "passwordUppercase": "Mật khẩu phải chứa ít nhất một chữ cái viết hoa",
+            "passwordLowercase": "Mật khẩu phải chứa ít nhất một chữ cái viết thường",
+            "passwordNumber": "Mật khẩu phải chứa ít nhất một số",
+            "passwordSpecial": "Mật khẩu phải chứa ít nhất một ký tự đặc biệt",
+            "dontHaveAccount": "Chưa có tài khoản? ",
+            "signUp": "Đăng ký",
+            "errorSnackbar": "Lỗi"
+        },
+        "signUp": {
+            "title": "Tạo tài khoản",
+            "subtitle": "Nhập thông tin tài khoản của bạn",
+            "nextButton": "Tiếp theo",
+            "signUpWithPhone": "Đăng ký bằng số điện thoại",
+            "signUpWithEmail": "Đăng ký bằng email",
+            "nameLabel": "Tên của bạn",
+            "nameHint": "Nhập tên của bạn",
+            "nameRequired": "Họ và tên là bắt buộc",
+            "phoneRequired": "Số điện thoại là bắt buộc",
+            "phoneInvalid": "Vui lòng nhập số điện thoại hợp lệ",
+            "birthdayQuestion": "Sinh nhật của bạn là khi nào?",
+            "birthdayOptional": " (tùy chọn)",
+            "monthHint": "Tháng",
+            "monthHelper": "TT",
+            "dayHint": "Ngày",
+            "dayHelper": "NN",
+            "yearHint": "Năm",
+            "yearHelper": "NNNN",
+            "alreadyHaveAccount": "Đã có tài khoản? ",
+            "logIn": "Đăng nhập",
+            "or": "HOẶC",
+            "selectMonth": "Chọn tháng",
+            "selectDay": "Chọn ngày",
+            "selectYear": "Chọn năm",
+            "months": {
+                "january": "Tháng 1",
+                "february": "Tháng 2",
+                "march": "Tháng 3",
+                "april": "Tháng 4",
+                "may": "Tháng 5",
+                "june": "Tháng 6",
+                "july": "Tháng 7",
+                "august": "Tháng 8",
+                "september": "Tháng 9",
+                "october": "Tháng 10",
+                "november": "Tháng 11",
+                "december": "Tháng 12"
+            }
+        },
+        "verification": {
+            "checkEmailTitle": "Kiểm tra email của bạn",
+            "verifyPhoneTitle": "Xác minh số điện thoại của bạn",
+            "emailSubtitle": "Vui lòng nhập mã xác minh bạn đã nhận trong email để tiếp tục.",
+            "phoneSubtitle": "Vui lòng nhập mã 5 chữ số chúng tôi đã gửi đến {verificationId}",
+            "verifyButton": "Xác minh mã",
+            "backToLogin": "Quay lại đăng nhập",
+            "backToSignUp": "Quay lại đăng ký",
+            "dontHaveAccount": "Chưa có tài khoản? ",
+            "createAccount": "Tạo ngay!",
+            "codeExpires": "Mã này hết hạn sau ",
+            "thirtyMins": "30 phút."
+        },
+        "acceptTos": {
+            "title": "Chấp nhận Điều khoản SpeedEats & Xem lại Thông báo về Quyền riêng tư",
+            "subtitle": "Bằng cách chọn \"Tôi đồng ý\" bên dưới, tôi đã xem xét và đồng ý với Điều khoản sử dụng và thừa nhận Thông báo về Quyền riêng tư. Tôi ít nhất 18 tuổi.",
+            "nextButton": "Tiếp theo",
+            "didntReceiveEmail": "Không nhận được email? ",
+            "clickResend": "Nhấp để gửi lại"
+        },
+        "phonePicker": {
+            "phoneLabel": "Số điện thoại",
+            "phoneHint": "Nhập số điện thoại",
+            "phoneRequired": "Số điện thoại là bắt buộc",
+            "phoneInvalid": "Vui lòng nhập số điện thoại hợp lệ"
+        },
+        "termsOfService": {
+            "agreeTo": "Bằng cách tiếp tục, bạn đồng ý với ",
+            "termsOfService": "Điều khoản Dịch vụ",
+            "confirmRead": " của Diyaar\nvà xác nhận rằng bạn đã đọc ",
+            "privacyPolicy": "Chính sách Bảo mật"
+        }
+    },
+    "address": {
+        "title": "Địa chỉ",
+        "enterTitle": "Nhập địa chỉ của bạn",
+        "enterSubtitle": "Chúng tôi cần địa chỉ của bạn để hiển thị Thực phẩm, Cửa hàng tạp hóa và hơn thế nữa gần bạn",
+        "addButton": "Thêm địa chỉ của bạn",
+        "skipButton": "Bỏ qua bây giờ",
+        "searchHint": "Tìm kiếm địa chỉ",
+        "exploreNearby": "Khám phá gần đây",
+        "addNewAddress": "Thêm địa chỉ mới",
+        "details": {
+            "buildingType": "Loại tòa nhà",
+            "selectBuildingType": "Chọn loại tòa nhà",
+            "buildingNumber": "Căn hộ, Đơn vị hoặc Tầng",
+            "buildingNumberHint": "Ví dụ: 2030",
+            "buildingName": "Tên tòa nhà",
+            "buildingNameHint": "Ví dụ: Center Villa",
+            "addressLabel": "Nhãn địa chỉ",
+            "addressLabelOptional": " (tùy chọn)",
+            "addressLabelHint": "Thêm nhãn (ví dụ: nhà tôi)",
+            "deliveryInstructions": "Hướng dẫn giao hàng",
+            "saveAddress": "Lưu địa chỉ",
+            "selectBuildingTypeTitle": "Chọn loại tòa nhà",
+            "selectBuildingTypeSubtitle": "Lorem Ipsum đơn giản chỉ là văn bản giả của ngành in ấn và sắp chữ."
+        }
+    },
+    "wallet": {
+        "title": "Ví",
+        "mayGift": "Có thể tặng",
+        "transaction": "Giao dịch",
+        "diyaarCash": "Tiền mặt Diyaar",
+        "addFunds": "Thêm tiền",
+        "addFundsTitle": "Thêm tiền",
+        "loadAmount": "Nạp số tiền này",
+        "loadAmountSubtitle": "Bạn muốn thêm bao nhiều vào số dư của mình?",
+        "amountHint": "0.00",
+        "amountRange": "Nhập số tiền từ $15 đến $900",
+        "paymentMethod": "Phương thức thanh toán",
+        "addPaymentCard": "Thêm thẻ thanh toán",
+        "receipt": {
+            "title": "Hóa đơn",
+            "completed": "Hoàn thành",
+            "items": "Mặt hàng",
+            "payment": "Thanh toán",
+            "total": "Tổng cộng:",
+            "downloadPdf": "Tải PDF",
+            "resendEmail": "Gửi lại email",
+            "share": "Chia sẻ"
         }
     }
 }

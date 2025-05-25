@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
-import 'package:sixam_mart_user/base/error.dart';
+import 'package:sixam_mart_user/base/error_response.dart';
 
 part '../generated/base/network_exceptions.freezed.dart';
 
@@ -46,12 +46,12 @@ sealed class NetworkExceptions with _$NetworkExceptions {
   const factory NetworkExceptions.unexpectedError() = UnexpectedError;
 
   static NetworkExceptions handleResponse(Response? response) {
-    ErrorModel? errorModel;
+    ErrorResponse? errorResponse;
 
     try {
-      errorModel = ErrorModel.fromJson(response?.data);
+      errorResponse = ErrorResponse.fromJson(response?.data);
     } catch (e) {
-      log('ErrorModel.fromJson error: $e', name: 'NetworkExceptions');
+      log('ErrorResponse.fromJson error: $e', name: 'NetworkExceptions');
     }
 
     int statusCode = response?.statusCode ?? 0;
@@ -65,7 +65,7 @@ sealed class NetworkExceptions with _$NetworkExceptions {
         return const NetworkExceptions.badRequest();
       // return Logout.logout(true);
       case 404:
-        return NetworkExceptions.notFound(errorModel?.message ?? tr(LocaleKeys.base_error_default));
+        return NetworkExceptions.notFound(errorResponse?.errors.first.message ?? tr(LocaleKeys.base_error_default));
       case 409:
         return const NetworkExceptions.conflict();
       case 408:
@@ -76,7 +76,7 @@ sealed class NetworkExceptions with _$NetworkExceptions {
         return const NetworkExceptions.serviceUnavailable();
       default:
         return NetworkExceptions.defaultError(
-          errorModel?.message ?? tr(LocaleKeys.base_error_default),
+          errorResponse?.errors.first.message ?? tr(LocaleKeys.base_error_default),
         );
     }
   }
