@@ -308,7 +308,9 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                     ),
                   ),
                   onPressed: () {
-                    Get.toNamed(AppRoutes.paymentScan);
+                    Get.toNamed(AppRoutes.paymentScan)?.then((_) {
+                      controller.loadScannedCard();
+                    });
                   },
                 ),
               ),

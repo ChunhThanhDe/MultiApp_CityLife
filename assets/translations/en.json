@@ -8,6 +8,152 @@
             "noInternet": "No internet connection",
             "timeout": "Request timeout"
         }
+    },
+    "authentication": {
+        "signIn": {
+            "title": "Log in to your account",
+            "subtitle": "Welcome back! Kindly log in with your credentials",
+            "loginButton": "Log in",
+            "loginWithPhone": "Log in with phone",
+            "loginWithEmail": "Log in with email",
+            "or": "OR",
+            "emailLabel": "Email address",
+            "emailHint": "name@example.com",
+            "passwordLabel": "Password",
+            "passwordHint": "Enter your password",
+            "emailRequired": "Email is required",
+            "emailInvalid": "Please enter a valid email address",
+            "passwordRequired": "Password is required",
+            "passwordMinLength": "Password must be at least 10 characters",
+            "passwordNoSpaces": "Password must not contain spaces",
+            "passwordUppercase": "Password must contain at least one uppercase letter",
+            "passwordLowercase": "Password must contain at least one lowercase letter",
+            "passwordNumber": "Password must contain at least one number",
+            "passwordSpecial": "Password must contain at least one special character",
+            "dontHaveAccount": "Don't have an account? ",
+            "signUp": "Sign up",
+            "errorSnackbar": "Error"
+        },
+        "signUp": {
+            "title": "Create an account",
+            "subtitle": "Enter Your Account Details",
+            "nextButton": "Next",
+            "signUpWithPhone": "Sign up with phone",
+            "signUpWithEmail": "Sign up with email",
+            "nameLabel": "Your name",
+            "nameHint": "Enter your name",
+            "nameRequired": "Full name is required",
+            "phoneRequired": "Phone number is required",
+            "phoneInvalid": "Please enter a valid phone number",
+            "birthdayQuestion": "When's your birthday?",
+            "birthdayOptional": " (optional)",
+            "monthHint": "Month",
+            "monthHelper": "MM",
+            "dayHint": "Day",
+            "dayHelper": "DD",
+            "yearHint": "Year",
+            "yearHelper": "YYYY",
+            "alreadyHaveAccount": "Already have an account? ",
+            "logIn": "Log in",
+            "or": "OR",
+            "selectMonth": "Select Month",
+            "selectDay": "Select Day",
+            "selectYear": "Select Year",
+            "months": {
+                "january": "January",
+                "february": "February",
+                "march": "March",
+                "april": "April",
+                "may": "May",
+                "june": "June",
+                "july": "July",
+                "august": "August",
+                "september": "September",
+                "october": "October",
+                "november": "November",
+                "december": "December"
+            }
+        },
+        "verification": {
+            "checkEmailTitle": "Check your email",
+            "verifyPhoneTitle": "Verify your phone number",
+            "emailSubtitle": "Please enter the verification code you received in your email to proceed.",
+            "phoneSubtitle": "Please enter the 5-digit code we sent to {verificationId}",
+            "verifyButton": "Verify code",
+            "backToLogin": "Back to log in",
+            "backToSignUp": "Back to sign up",
+            "dontHaveAccount": "Don't have an account? ",
+            "createAccount": "Create one now!",
+            "codeExpires": "This code expires in ",
+            "thirtyMins": "30 mins."
+        },
+        "acceptTos": {
+            "title": "Accept SpeedEats Terms & Review Privacy Notice",
+            "subtitle": "By selecting \"I Agree\" below, I have reviewed and agree to the Terms of Use and acknowledge the Privacy Notice. I am at least 18 years of age.",
+            "nextButton": "Next",
+            "didntReceiveEmail": "Didn't receive the email?  ",
+            "clickResend": "Click to resend"
+        },
+        "phonePicker": {
+            "phoneLabel": "Phone",
+            "phoneHint": "Enter phone number",
+            "phoneRequired": "Phone number is required",
+            "phoneInvalid": "Please enter a valid phone number"
+        },
+        "termsOfService": {
+            "agreeTo": "By continuing, you agree to Diyaar ",
+            "termsOfService": "Terms of Service",
+            "confirmRead": "\nand confirm that you have read Diyaar  ",
+            "privacyPolicy": "Privacy Policy"
+        }
+    },
+    "address": {
+        "title": "Address",
+        "enterTitle": "Enter your address",
+        "enterSubtitle": "We need your address to show Food, Groceries and more near you",
+        "addButton": "Add your address",
+        "skipButton": "Skip for now",
+        "searchHint": "Search for an address",
+        "exploreNearby": "Explore nearby",
+        "addNewAddress": "Add new address",
+        "details": {
+            "buildingType": "Building type",
+            "selectBuildingType": "Select building type",
+            "buildingNumber": "Apt, Unit or Floor",
+            "buildingNumberHint": "E.g. 2030",
+            "buildingName": "Building name",
+            "buildingNameHint": "E.g. Center Villa",
+            "addressLabel": "Address label",
+            "addressLabelOptional": " (optional)",
+            "addressLabelHint": "Add a label (ex. my home)",
+            "deliveryInstructions": "Delivery instructions",
+            "saveAddress": "Save address",
+            "selectBuildingTypeTitle": "Select building type",
+            "selectBuildingTypeSubtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        }
+    },
+    "wallet": {
+        "title": "Wallet",
+        "mayGift": "May Gift",
+        "transaction": "Transaction",
+        "diyaarCash": "Diyaar Cash",
+        "addFunds": "Add Funds",
+        "addFundsTitle": "Add Funds",
+        "loadAmount": "Load this amount",
+        "loadAmountSubtitle": "How much do you want to add to your balance?",
+        "amountHint": "0.00",
+        "amountRange": "Enter an amount between $15 and $900",
+        "paymentMethod": "Payment method",
+        "addPaymentCard": "Add Payment card",
+        "receipt": {
+            "title": "Receipt",
+            "completed": "Completed",
+            "items": "Items",
+            "payment": "Payment",
+            "total": "Total:",
+            "downloadPdf": "Download PDF",
+            "resendEmail": "Resend Email",
+            "share": "Share"
+        }
     }
-    
 }

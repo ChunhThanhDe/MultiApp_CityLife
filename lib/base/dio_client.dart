@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart' hide Response;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:sixam_mart_user/app_provider.dart';
 
 import '../app/constants/api_const.dart';
 
@@ -11,16 +13,12 @@ class DioClient {
   late Dio _dio;
 
   final String baseUrl;
-  final String? token;
-  final Map<String, dynamic>? headers;
   final List<Interceptor>? interceptors;
 
   DioClient(
     Dio dio, {
     required this.baseUrl,
     this.interceptors,
-    this.token,
-    this.headers,
   }) {
     _dio = dio;
 
@@ -29,8 +27,18 @@ class DioClient {
       ..options.headers = getHeader()
       ..options.connectTimeout = const Duration(seconds: 10)
       ..options.receiveTimeout = const Duration(seconds: 10)
-      ..options.receiveDataWhenStatusError = false
-      ..httpClientAdapter;
+      ..options.receiveDataWhenStatusError = true
+      ..options.validateStatus = (status) {
+        return status != null && status >= 200 && status < 500;
+      }
+      ..options.followRedirects = false
+      ..httpClientAdapter = IOHttpClientAdapter(
+        createHttpClient: () {
+          final HttpClient client = HttpClient(context: SecurityContext(withTrustedRoots: false));
+          client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+          return client;
+        },
+      );
 
     if (interceptors?.isNotEmpty ?? false) {
       _dio.interceptors.addAll(interceptors!);
@@ -61,7 +69,16 @@ class DioClient {
   }
 
   Map<String, dynamic> getHeader() {
-    return headers ?? {};
+    final Map<String, dynamic> headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    if (Get.find<AppProvider>().userAuthInfo.value.token.isNotEmpty) {
+      headers['Authorization'] = 'Bearer ${Get.find<AppProvider>().userAuthInfo.value.token}';
+    }
+
+    return headers;
   }
 
   Future<dynamic> get(
@@ -89,7 +106,7 @@ class DioClient {
     }
   }
 
-  Future<dynamic> post(
+  Future<Response> post(
     String uri, {
     data,
     Map<String, dynamic>? queryParameters,
@@ -99,7 +116,7 @@ class DioClient {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      var response = await _dio.post(
+      final Response response = await _dio.post(
         uri,
         data: data,
         queryParameters: queryParameters,
@@ -108,7 +125,7 @@ class DioClient {
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
       );
-      return response.data;
+      return response;
     } on FormatException catch (_) {
       throw const FormatException('Unable to process the data');
     } catch (e) {

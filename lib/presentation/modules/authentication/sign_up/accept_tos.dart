@@ -1,10 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
-import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_bottom_section.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_header.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_button.dart';
 import 'package:sixam_mart_user/theme.dart';
 
@@ -16,69 +19,60 @@ class AcceptTos extends BaseScreen<SignUpController> {
   @override
   Widget buildScreen(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 16),
+          SizedBox(height: 16.h),
           AuthHeader(
-            title: 'Accept SpeedEats Terms & Review Privacy Notice',
-            subtitle: 'By selecting "I Agree" below, I have reviewed and agree to the Terms of Use and acknowledge the Privacy Notice. I am at least 18 years of age.',
-            titleMaxLines: 2,
-            subtitleMaxLines: 3,
+            title: tr(LocaleKeys.authentication_acceptTos_title),
+            subtitle: tr(LocaleKeys.authentication_acceptTos_subtitle),
           ),
-          SizedBox(height: 24),
-          _buildNextButton(),
-          SizedBox(height: 24),
-          _buildResendVerificationLink(),
-          Spacer(),
-          AuthBottomSection(isSignIn: false),
-        ],
-      ),
-    );
-  }
-
-  AppButton _buildNextButton() {
-    return AppButton(
-      onTap: () {},
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const SizedBox(),
-          Text(
-            'Next',
-            style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white),
-          ),
-          SvgPicture.asset(
-            Assets.icons.icRightArrow.path,
-            width: 12.w,
-            height: 12.w,
-            colorFilter: const ColorFilter.mode(
-              Colors.white,
-              BlendMode.srcIn,
+          SizedBox(height: 32.h),
+          AppButton(
+            onTap: () => Get.toNamed(AppRoutes.root),
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(),
+                Text(
+                  tr(LocaleKeys.authentication_acceptTos_nextButton),
+                  style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white),
+                ),
+                SvgPicture.asset(
+                  Assets.icons.icRightArrow.path,
+                  width: 12.w,
+                  height: 12.w,
+                  colorFilter: const ColorFilter.mode(
+                    Colors.white,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ],
             ),
           ),
+          const Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                tr(LocaleKeys.authentication_acceptTos_didntReceiveEmail),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Text(
+                  tr(LocaleKeys.authentication_acceptTos_clickResend),
+                  style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBrandDefault500),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 56.h),
         ],
       ),
-    );
-  }
-
-  _buildResendVerificationLink() {
-    return Text.rich(
-      TextSpan(
-        children: [
-          TextSpan(
-            text: 'Didn’t receive the email?  ',
-            style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
-          ),
-          TextSpan(
-            text: 'Click to resend',
-            style: AppTextStyles.typographyH11SemiBold.copyWith(color: AppColors.textBrandDefault500),
-          ),
-        ],
-      ),
-      textAlign: TextAlign.center,
     );
   }
 }

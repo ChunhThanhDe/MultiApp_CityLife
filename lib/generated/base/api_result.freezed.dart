@@ -40,7 +40,7 @@ class $ApiResultCopyWith<$Res> {
 class Success implements ApiResult {
   const Success(this.data);
 
-  final BaseResponse data;
+  final Response data;
 
   /// Create a copy of ApiResult
   /// with the given fields replaced by the non-null parameter values.
@@ -72,7 +72,7 @@ abstract mixin class $SuccessCopyWith<$Res>
   factory $SuccessCopyWith(Success value, $Res Function(Success) _then) =
       _$SuccessCopyWithImpl;
   @useResult
-  $Res call({BaseResponse data});
+  $Res call({Response data});
 }
 
 /// @nodoc
@@ -92,7 +92,7 @@ class _$SuccessCopyWithImpl<$Res> implements $SuccessCopyWith<$Res> {
       null == data
           ? _self.data
           : data // ignore: cast_nullable_to_non_nullable
-              as BaseResponse,
+              as Response,
     ));
   }
 }

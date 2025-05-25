@@ -1,9 +1,10 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ml_card_scanner/ml_card_scanner.dart';
-import 'package:sixam_mart_user/app/local/app_storage.dart';
+import 'package:sixam_mart_user/app/data/app_storage.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 
 class ScanCardController extends BaseController {
@@ -32,24 +33,13 @@ class ScanCardController extends BaseController {
       };
       await AppStorage.setString(
         SharedPreferencesKeys.scannedCardInfo,
-        cardJson.toString(),
-      );
-
-      Get.snackbar(
-        "Success",
-        "Scan Done!",
-        snackPosition: SnackPosition.TOP,
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-        duration: const Duration(seconds: 2),
+        jsonEncode(cardJson),
       );
 
       Future.delayed(const Duration(milliseconds: 400), () {
-        if (Get.isOverlaysOpen) {
-          Get.back();
-        } else {
-          Get.back();
-        }
+        // print('Current route before back: ${Get.currentRoute}');
+        Get.back();
+        // print('Current route after back: ${Get.currentRoute}');
       });
     }
   }
