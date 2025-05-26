@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart'; // Add image_picker to pubspec!
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_show_product_image_dialog.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_bar_basic.dart';
 
 import 'box_delivery_controller.dart';
@@ -130,7 +131,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
                       height: 48,
                       child: ElevatedButton(
                         onPressed: () {
-                          // TODO: Handle checkout
+                          Get.toNamed(AppRoutes.checkoutDelivery);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xFF5856D7),
