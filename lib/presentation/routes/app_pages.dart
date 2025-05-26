@@ -30,6 +30,8 @@ import 'package:sixam_mart_user/presentation/modules/delivery/delivery_checkout/
 import 'package:sixam_mart_user/presentation/modules/delivery/delivery_checkout/delivery_checkout_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/home_delivery/home_delivery_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/home_delivery/home_delivery_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/track_delivery/track_delivery_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/track_delivery/track_delivery_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/tracking_delivery/tracking_delivery_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/tracking_delivery/tracking_delivery_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_binding.dart';
@@ -167,5 +169,10 @@ class AppPages {
       page: () => const TrackingDeliveryScreen(),
       binding: TrackingDeliveryBinding(),
     ),
+    GetPage(
+      name: AppRoutes.trackDelivery,
+      page: () => const TrackDeliveryScreen(),
+      binding: TrackDeliveryBinding(),
+    )
   ];
 }

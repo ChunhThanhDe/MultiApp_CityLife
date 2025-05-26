@@ -125,7 +125,7 @@ class TrackingDeliveryScreen extends BaseScreen<TrackingDeliveryController> {
                         // Xử lý track
                         controller.trackReceipt();
 
-                        Get.toName(AppRoutes  .);
+                        Get.toNamed(AppRoutes.trackDelivery);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF5856D7),
