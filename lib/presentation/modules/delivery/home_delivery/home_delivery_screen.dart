@@ -60,6 +60,7 @@ class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
                       svgAsset: 'assets/icons/ic_delivery_tracking.svg',
                       title: 'Tracking',
                       description: 'Send an item from\npoint A to B',
+                      onTap: () => Get.toNamed(AppRoutes.trackingDelivery),
                     ),
                   ),
                 ],
