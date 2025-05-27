@@ -9,6 +9,7 @@ class SelectBoxRowWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<BoxDeliveryController>();
     return Obx(() {
+      print('selectedBox: ${controller.selectedBox.value}');
       return SizedBox(
         height: 112,
         child: ListView.separated(
@@ -19,6 +20,7 @@ class SelectBoxRowWidget extends StatelessWidget {
             final isSelected = controller.selectedBox.value == i;
             return GestureDetector(
               onTap: () {
+                print('Tapped box $i');
                 controller.selectBox(i);
               },
               child: AnimatedContainer(
