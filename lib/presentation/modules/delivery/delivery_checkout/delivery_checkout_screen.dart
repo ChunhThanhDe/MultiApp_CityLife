@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_option.dart';
 import 'package:sixam_mart_user/presentation/shared/app_bar_basic.dart';
 import 'package:sixam_mart_user/theme.dart';
 
@@ -27,7 +28,7 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
           padding: EdgeInsets.zero,
           children: [
             _bodyContent(context),
-            SizedBox(height: 24), // space before action
+            SizedBox(height: 24),
             _Actions(),
           ],
         ),
@@ -75,7 +76,7 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
               children: [
                 Text("Delivery Options", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xFF161A1D))),
                 SizedBox(height: 16),
-                _DeliveryOptionTile(
+                DeliveryOptionTile(
                   svgIcon: 'assets/icons/ic_priority.svg',
                   title: "Priority",
                   subtitle: "5-10 min(s) Delivered directly to you",
@@ -84,7 +85,7 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
                   onTap: () {},
                 ),
                 SizedBox(height: 8),
-                _DeliveryOptionTile(
+                DeliveryOptionTile(
                   svgIcon: 'assets/icons/ic_schedule.svg',
                   title: "Schedule",
                   subtitle: "Select a time",
@@ -94,7 +95,7 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
                   showArrow: true,
                 ),
                 SizedBox(height: 8),
-                _DeliveryOptionTile(
+                DeliveryOptionTile(
                   svgIcon: 'assets/icons/ic_standard.svg',
                   title: "Standard",
                   subtitle: "10-25 mins Delivered",
@@ -270,67 +271,6 @@ class _LocationTile extends StatelessWidget {
         Spacer(),
         Icon(Icons.arrow_forward_ios_rounded, size: 20, color: Color(0xFF4A5763)),
       ],
-    );
-  }
-}
-
-class _DeliveryOptionTile extends StatelessWidget {
-  final String svgIcon; // Thay vì IconData
-  final String title;
-  final String subtitle;
-  final String price;
-  final bool isSelected;
-  final bool showArrow;
-  final VoidCallback onTap;
-
-  const _DeliveryOptionTile({
-    required this.svgIcon,
-    required this.title,
-    required this.subtitle,
-    required this.price,
-    required this.isSelected,
-    required this.onTap,
-    this.showArrow = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          color: isSelected ? Color(0xFFEFEFFB) : Colors.white,
-          border: Border.all(
-            color: isSelected ? Color(0xFFBEBDEF) : Color(0x11001012),
-          ),
-          borderRadius: BorderRadius.circular(6),
-        ),
-        child: Row(
-          children: [
-            // Svg icon
-            SvgPicture.asset(
-              svgIcon,
-              width: 24,
-              height: 24,
-              color: Color(0xFF4A5763),
-            ),
-            SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D))),
-                  Text(subtitle, style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
-                ],
-              ),
-            ),
-            if (price.isNotEmpty) Text(price, style: TextStyle(fontSize: 16, color: Color(0xFF161A1D))),
-            if (showArrow) Icon(Icons.arrow_forward_ios_rounded, size: 20, color: Color(0xFF4A5763)),
-            if (isSelected) Icon(Icons.check_circle, color: Color(0xFF5856D7), size: 24),
-          ],
-        ),
-      ),
     );
   }
 }
