@@ -5,6 +5,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart'; // Add image_picker to pubspec!
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_box_label.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_location_box.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_select_box_row.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_show_product_image_dialog.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_bar_basic.dart';
@@ -24,20 +27,6 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    final List<Map<String, String>> savedAddresses = [
-      {
-        'label': 'My Work',
-        'address': '2150 N Waterman Ave, El Centro, CA 92243',
-      },
-      {
-        'label': 'My Home',
-        'address': '2216 N 10th St, Apt 0, El Centro, CA 92243',
-      },
-      {
-        'label': 'Hospital',
-        'address': '385 Main St, El Centro, CA 92243',
-      },
-    ];
     return Obx(() {
       // Step 1: Pick locations
       if (!controller.canShowDetailForm) {
@@ -46,7 +35,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _label("Location details", isRequired: true),
+              LabelWidget("Location details", isRequired: true),
               SizedBox(height: 8),
               _locationField(
                 context,
@@ -55,7 +44,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
                 onTap: () => _showLocationBottomSheet(
                   context: context,
                   title: "Pickup Location",
-                  addresses: savedAddresses,
+                  addresses: controller.savedAddresses,
                   selectedAddress: controller.pickupLocation.value,
                   onSelect: (val) => controller.setPickupLocation(val),
                 ),
@@ -71,7 +60,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
                     : () => _showLocationBottomSheet(
                           context: context,
                           title: "Dropoff Location",
-                          addresses: savedAddresses,
+                          addresses: controller.savedAddresses,
                           selectedAddress: controller.dropoffLocation.value,
                           onSelect: (val) => controller.setDropoffLocation(val),
                         ),
@@ -89,21 +78,21 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
           // Nội dung chính cuộn được
           Positioned.fill(
             child: ListView(
-              padding: EdgeInsets.fromLTRB(24, 24, 24, 120), // chừa chỗ cho nút
+              padding: EdgeInsets.fromLTRB(24, 24, 24, 120),
               children: [
-                _label("Location details", isRequired: true),
+                LabelWidget("Location details", isRequired: true),
                 SizedBox(height: 8),
-                _locationBox(controller),
+                LocationBoxWidget(controller: controller),
                 SizedBox(height: 24),
-                _label("Select Box", isBold: true, isLarge: true),
+                LabelWidget("Select Box", isBold: true, isLarge: true),
                 SizedBox(height: 8),
-                _selectBoxRow(controller),
+                SelectBoxRowWidget(),
                 SizedBox(height: 24),
                 _imagePickerLabel(controller),
                 SizedBox(height: 8),
                 _imagePickerRow(context, controller),
                 SizedBox(height: 24),
-                _label("Instructions for captain", isBold: true, optional: true),
+                LabelWidget("Instructions for captain", isBold: true, optional: true),
                 SizedBox(height: 8),
                 _instructionBox(controller),
                 SizedBox(height: 16),
@@ -113,7 +102,6 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
             ),
           ),
 
-          // Nút cố định dưới cùng, luôn hiện
           Positioned(
             left: 0,
             right: 0,
@@ -152,16 +140,6 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
                       ),
                     ),
                     SizedBox(height: 8),
-                    Center(
-                      child: Container(
-                        width: 134,
-                        height: 5,
-                        decoration: BoxDecoration(
-                          color: Color(0xFF161A1D),
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -172,42 +150,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
     });
   }
 
-  Widget _label(
-    String text, {
-    bool isRequired = false,
-    bool optional = false,
-    bool isBold = false,
-    bool isLarge = false,
-  }) {
-    return Row(
-      children: [
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: isLarge ? 16 : 14,
-            color: Color(0xFF161A1D),
-            fontWeight: isBold ? FontWeight.w500 : FontWeight.w400,
-          ),
-        ),
-        if (isRequired) Text("*", style: TextStyle(color: Color(0xFFFF3B30), fontSize: isLarge ? 18 : 14)),
-        if (optional)
-          Padding(
-            padding: const EdgeInsets.only(left: 6),
-            child: Text(
-              "(optional)",
-              style: TextStyle(
-                fontSize: isLarge ? 16 : 14,
-                color: Color(0xFF4A4C4F),
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          )
-      ],
-    );
-  }
-
   Widget _imagePickerLabel(BoxDeliveryController c) {
-    // images.length = số ảnh đã pick, 3 là tối đa
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -220,7 +163,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
           ),
         ),
         Text(
-          "${c.productImages.length} (3)", // Ví dụ: 2 (3)
+          "${c.productImages.length} (3)",
           style: TextStyle(
             fontSize: 14,
             color: Color(0xFF161A1D),
@@ -275,126 +218,6 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _locationBox(BoxDeliveryController c) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Color(0xFFE8EBEE)),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        children: [
-          ListTile(
-            leading: SvgPicture.asset('assets/icons/ic_box_package_hand_bottom.svg', width: 24, height: 24),
-            title: Text(c.pickupLocation.value, style: TextStyle(fontSize: 14, color: Color(0xFF161A1D))),
-          ),
-          Divider(height: 1),
-          ListTile(
-            leading: SvgPicture.asset('assets/icons/ic_box_package_courier_hands.svg', width: 24, height: 24),
-            title: Text(c.dropoffLocation.value, style: TextStyle(fontSize: 14, color: Color(0xFF161A1D))),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _selectBoxRow(BoxDeliveryController c) {
-    final boxData = [
-      {
-        'label': 'Small Box',
-        'desc': '20cm x 20cm\nUpto 10kg',
-        'img': 'assets/images/img_box_delivery.png', // file-6efjet27uu88HpNKQ17HUN.png
-      },
-      {
-        'label': 'Larg Box',
-        'desc': '40cm x 40cm\nUpto 50kg',
-        'img': 'assets/images/img_box_delivery.png', // file-Wk9wupNPmr6G5QTF5GVX4f.png
-      },
-    ];
-
-    return SizedBox(
-      height: 112, // đủ để chứa card & ảnh to (tham chiếu figma)
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: boxData.length,
-        separatorBuilder: (context, i) => SizedBox(width: 16),
-        itemBuilder: (context, i) {
-          final isSelected = c.selectedBox.value == i;
-          return GestureDetector(
-            onTap: () => c.selectBox(i),
-            child: AnimatedContainer(
-              duration: Duration(milliseconds: 180),
-              width: 223,
-              height: 104,
-              decoration: BoxDecoration(
-                color: isSelected ? Colors.white : Color(0xFFF7F8F9),
-                border: Border.all(
-                  color: isSelected ? Color(0xFF5856D7) : Colors.transparent,
-                  width: 1.5,
-                ),
-                boxShadow: isSelected
-                    ? [
-                        BoxShadow(
-                          color: Color(0x335856D7),
-                          blurRadius: 4,
-                        )
-                      ]
-                    : [],
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Row(
-                children: [
-                  // Text info (title & desc)
-                  Expanded(
-                    flex: 7,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            boxData[i]['label']!,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                              color: Color(0xFF161A1D),
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            boxData[i]['desc']!,
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Color(0xFF4A5763),
-                              height: 1.4,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  // Image box
-                  Expanded(
-                    flex: 8,
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 12),
-                      child: Image.asset(
-                        boxData[i]['img']!,
-                        height: 72, // ảnh gần max chiều cao card nhưng ko vượt qua
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
       ),
     );
   }
