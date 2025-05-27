@@ -13,6 +13,7 @@ analyzer:
   errors:
     invalid_annotation_target: ignore
     deprecated_member_use: ignore
+    invalid_use_of_protected_member: ignore ignore
   exclude: 
   - build/**
   - '**/*.freezed.dart'
