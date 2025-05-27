@@ -30,8 +30,6 @@ class FavoriteProductCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Ảnh với logo tròn bên trong
-// Ảnh với logo tròn bên trong
           AspectRatio(
             aspectRatio: 183 / 120,
             child: Stack(
@@ -45,7 +43,6 @@ class FavoriteProductCard extends StatelessWidget {
                     height: double.infinity,
                   ),
                 ),
-                // Logo phải tròn chuẩn, không bị dư
                 Positioned(
                     top: 12,
                     left: 12,
@@ -65,7 +62,7 @@ class FavoriteProductCard extends StatelessWidget {
                         ],
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(2), // Đảm bảo không bị méo
+                        padding: const EdgeInsets.all(2),
                         child: ClipOval(
                           child: FittedBox(
                             fit: BoxFit.cover,
@@ -82,13 +79,12 @@ class FavoriteProductCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          // Row: Title + Heart (ngoài phần ảnh, không có nền)
+
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Tên cửa hàng
                 Expanded(
                   child: Text(
                     product.title,
@@ -102,14 +98,13 @@ class FavoriteProductCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 6),
-                // Trái tim (Obx)
                 Obx(() => GestureDetector(
                       onTap: () => controller.toggleFavoriteStore(product.title),
                       child: AnimatedSwitcher(
                         duration: const Duration(milliseconds: 250),
                         transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
                         child: Icon(
-                          controller.isStoreFavorited(product.title) ? Icons.favorite : Icons.favorite_border,
+                          !controller.isStoreFavorited(product.title) ? Icons.favorite : Icons.favorite_border,
                           key: ValueKey(controller.isStoreFavorited(product.title)),
                           color: Color(0xFF5856D7),
                           size: 24,

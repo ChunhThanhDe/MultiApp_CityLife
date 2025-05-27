@@ -52,7 +52,7 @@ dependencies:
   smooth_sheets: ^0.11.5
   google_maps_flutter: ^2.12.2
   ml_card_scanner: ^0.2.3
-
+  image_picker: ^1.1.2
 
 
 dev_dependencies:

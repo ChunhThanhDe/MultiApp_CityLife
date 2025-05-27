@@ -43,7 +43,6 @@ class FavoriteItemCard extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              // Trái tim góc phải dưới
               Positioned(
                 right: 8,
                 bottom: 8,
@@ -68,7 +67,7 @@ class FavoriteItemCard extends StatelessWidget {
                       duration: const Duration(milliseconds: 250),
                       transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
                       child: Icon(
-                        isFavorited ? Icons.favorite : Icons.favorite_border,
+                        !isFavorited ? Icons.favorite : Icons.favorite_border,
                         key: ValueKey(isFavorited),
                         color: Color(0xFF5856D7),
                         size: 24,

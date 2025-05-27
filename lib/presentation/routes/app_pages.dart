@@ -24,6 +24,16 @@ import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign_up_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/verification/verification_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/verification/verification_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/box_delivery/box_delivery_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/box_delivery/box_delivery_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/delivery_checkout/delivery_checkout_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/delivery_checkout/delivery_checkout_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/home_delivery/home_delivery_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/home_delivery/home_delivery_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/track_delivery/track_delivery_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/track_delivery/track_delivery_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/tracking_delivery/tracking_delivery_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/tracking_delivery/tracking_delivery_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorities_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/payment/payment/payment_binding.dart';
@@ -159,5 +169,30 @@ class AppPages {
       binding: ScanCardBinding(),
       middlewares: [AuthMiddleware()],
     ),
+    GetPage(
+      name: AppRoutes.homeDelivery,
+      page: () => const HomeDeliveryScreen(),
+      binding: HomeDeliveryBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.boxDelivery,
+      page: () => const BoxDeliveryScreen(),
+      binding: BoxDeliveryBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.checkoutDelivery,
+      page: () => const DeliveryCheckoutScreen(),
+      binding: DeliveryCheckoutBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.trackingDelivery,
+      page: () => const TrackingDeliveryScreen(),
+      binding: TrackingDeliveryBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.trackDelivery,
+      page: () => const TrackDeliveryScreen(),
+      binding: TrackDeliveryBinding(),
+    )
   ];
 }
