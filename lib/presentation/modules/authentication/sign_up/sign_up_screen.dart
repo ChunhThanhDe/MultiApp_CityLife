@@ -22,25 +22,27 @@ class SignUpScreen extends BaseScreen<SignUpController> {
   Widget buildScreen(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 16.h),
-          AuthHeader(
-            title: tr(LocaleKeys.authentication_signUp_title),
-            subtitle: tr(LocaleKeys.authentication_signUp_subtitle),
-          ),
-          SizedBox(height: 24.h),
-          _buildForm(),
-          SizedBox(height: 24.h),
-          _buildNextButton(),
-          SizedBox(height: 16.h),
-          _buildOrDivider(),
-          SizedBox(height: 16.h),
-          _buildToggleSignUpMethodButton(),
-          const Spacer(),
-          AuthBottomSection(isSignIn: false),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 16.h),
+            AuthHeader(
+              title: tr(LocaleKeys.authentication_signUp_title),
+              subtitle: tr(LocaleKeys.authentication_signUp_subtitle),
+            ),
+            SizedBox(height: 24.h),
+            _buildForm(),
+            SizedBox(height: 24.h),
+            _buildNextButton(),
+            SizedBox(height: 16.h),
+            _buildOrDivider(),
+            SizedBox(height: 16.h),
+            _buildToggleSignUpMethodButton(),
+            SizedBox(height: 80.h),
+            AuthBottomSection(isSignIn: false),
+          ],
+        ),
       ),
     );
   }
