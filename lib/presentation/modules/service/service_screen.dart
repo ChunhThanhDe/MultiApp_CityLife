@@ -15,9 +15,9 @@ class ServiceScreen extends BaseScreen<ServiceController> {
       slivers: [
         // Service banner section
         UnifiedBannerWidget(
-          sectionTitle: 'Service Providers',
+          sectionTitle: 'Recently Viewed',
           items: controller.serviceBannerItems,
-          bannerType: BannerType.todayOffersBanner,
+          bannerType: BannerType.bannerFloatingLogo,
           showArrowIcon: true,
         ),
         SliverBox(height: 16),
@@ -26,22 +26,34 @@ class ServiceScreen extends BaseScreen<ServiceController> {
 
         // Service offers with discounts
         UnifiedBannerWidget(
-          sectionTitle: 'Special Offers',
+          sectionTitle: 'Shops near you',
           items: controller.serviceOffersItems,
-          bannerType: BannerType.todayOffersBrandDiscount,
+          bannerType: BannerType.bannerDiscount,
           showArrowIcon: true,
         ),
-        SliverBox(height: 16),
-        SliverBox(child: SectionBreakDivider()),
-        SliverBox(height: 16),
+        // SliverBox(height: 16),
+        // SliverBox(child: SectionBreakDivider()),
+        // SliverBox(height: 16),
 
         // Top service offers
         UnifiedBannerWidget(
-          sectionTitle: 'Featured Services',
+          sectionTitle: 'Top Offers',
           items: controller.topServiceOffersItems,
-          bannerType: BannerType.topOffers,
+          bannerType: BannerType.bannerSingleImage,
         ),
         SliverBox(height: 32),
+        UnifiedBannerWidget(
+          sectionTitle: 'Top Offers',
+          items: controller.serviceOffersItems,
+          bannerType: BannerType.bannerDiscount,
+          showArrowIcon: true,
+        ),
+        UnifiedBannerWidget(
+          sectionTitle: 'Popular near you',
+          items: controller.serviceOffersItems,
+          bannerType: BannerType.bannerDiscount,
+          showArrowIcon: true,
+        ),
       ],
     );
   }

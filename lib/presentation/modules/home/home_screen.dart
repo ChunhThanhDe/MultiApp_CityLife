@@ -23,7 +23,7 @@ class HomeScreen extends BaseScreen<HomeController> {
         UnifiedBannerWidget(
           sectionTitle: 'Today Offers',
           items: controller.todayOffersBannerItems,
-          bannerType: BannerType.todayOffersBanner,
+          bannerType: BannerType.bannerFloatingLogo,
         ),
         SliverBox(height: 16),
         SliverBox(child: SectionBreakDivider()),
@@ -31,7 +31,7 @@ class HomeScreen extends BaseScreen<HomeController> {
         UnifiedBannerWidget(
           sectionTitle: 'Today Offers',
           items: controller.todayOffersBrandItems,
-          bannerType: BannerType.todayOffersBrand,
+          bannerType: BannerType.brandLogoName,
           showArrowIcon: true,
         ),
         SliverBox(height: 16),
@@ -40,7 +40,7 @@ class HomeScreen extends BaseScreen<HomeController> {
         UnifiedBannerWidget(
           sectionTitle: 'Today Offers',
           items: controller.todayOffersBrandDiscountItems,
-          bannerType: BannerType.todayOffersBrandDiscount,
+          bannerType: BannerType.bannerDiscount,
           showArrowIcon: true,
         ),
         SliverBox(height: 16),
@@ -49,7 +49,7 @@ class HomeScreen extends BaseScreen<HomeController> {
         UnifiedBannerWidget(
           sectionTitle: 'Top Offers',
           items: controller.topOffersItems,
-          bannerType: BannerType.topOffers,
+          bannerType: BannerType.bannerSingleImage,
         ),
         SliverBox(height: 32),
       ],

@@ -3,10 +3,10 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 enum BannerType {
-  todayOffersBanner,
-  todayOffersBrand,
-  todayOffersBrandDiscount,
-  topOffers,
+  bannerFloatingLogo,
+  brandLogoName,
+  bannerDiscount,
+  bannerSingleImage,
 }
 
 class BannerItem {
@@ -36,6 +36,7 @@ class UnifiedBannerWidget extends StatelessWidget {
   final List<BannerItem> items;
   final BannerType bannerType;
   final bool showArrowIcon;
+  final VoidCallback? onTap;
 
   const UnifiedBannerWidget({
     super.key,
@@ -43,6 +44,7 @@ class UnifiedBannerWidget extends StatelessWidget {
     required this.items,
     required this.bannerType,
     this.showArrowIcon = false,
+    this.onTap,
   });
 
   @override
@@ -63,12 +65,16 @@ class UnifiedBannerWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: showArrowIcon
-          ? Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(sectionTitle, style: AppTextStyles.typographyH9Medium),
-                Assets.icons.icRightArrowChevron.svg(width: 28, height: 28),
-              ],
+          ? GestureDetector(
+              onTap: onTap,
+              behavior: HitTestBehavior.opaque,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(sectionTitle, style: AppTextStyles.typographyH9Medium),
+                  Assets.icons.icRightArrowChevron.svg(width: 28, height: 28),
+                ],
+              ),
             )
           : Text(
               sectionTitle,
@@ -79,12 +85,12 @@ class UnifiedBannerWidget extends StatelessWidget {
 
   double _getHeaderSpacing() {
     switch (bannerType) {
-      case BannerType.todayOffersBanner:
+      case BannerType.bannerFloatingLogo:
         return 8;
-      case BannerType.todayOffersBrand:
-      case BannerType.todayOffersBrandDiscount:
+      case BannerType.brandLogoName:
+      case BannerType.bannerDiscount:
         return 12;
-      case BannerType.topOffers:
+      case BannerType.bannerSingleImage:
         return 16;
     }
   }
@@ -102,26 +108,26 @@ class UnifiedBannerWidget extends StatelessWidget {
 
   double _getListHeight() {
     switch (bannerType) {
-      case BannerType.todayOffersBrand:
+      case BannerType.brandLogoName:
         return 100;
-      case BannerType.todayOffersBanner:
+      case BannerType.bannerFloatingLogo:
         return 180;
-      case BannerType.todayOffersBrandDiscount:
+      case BannerType.bannerDiscount:
         return 200;
-      case BannerType.topOffers:
+      case BannerType.bannerSingleImage:
         return 220;
     }
   }
 
   Widget _buildItem(int index) {
     switch (bannerType) {
-      case BannerType.todayOffersBanner:
+      case BannerType.bannerFloatingLogo:
         return _buildBannerItem(index);
-      case BannerType.todayOffersBrand:
+      case BannerType.brandLogoName:
         return _buildBrandItem(index);
-      case BannerType.todayOffersBrandDiscount:
+      case BannerType.bannerDiscount:
         return _buildBrandDiscountItem(index);
-      case BannerType.topOffers:
+      case BannerType.bannerSingleImage:
         return _buildTopOfferItem(index);
     }
   }
