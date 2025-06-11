@@ -12,6 +12,7 @@ class ServiceController extends BaseController {
           imageUrl: serviceBannerImageUrl,
           logoUrl: serviceBrandLogoUrl,
           onTap: () {},
+          status: BannerStatus.closed,
         ),
         BannerItem(
           title: 'DoorDash',
@@ -33,9 +34,11 @@ class ServiceController extends BaseController {
           imageUrl: serviceBannerImageUrl,
           logoUrl: serviceBrandLogoUrl,
           onTap: () {},
+          status: BannerStatus.closed,
           discount: 25,
           deliveryFee: 5.99,
           isVerified: true,
+          time: '10:00 - 12:00',
         ),
         BannerItem(
           title: 'Pizza Palace',
@@ -45,6 +48,7 @@ class ServiceController extends BaseController {
           discount: 15,
           deliveryFee: 3.50,
           isVerified: true,
+          time: '10:00 - 12:00',
         ),
         BannerItem(
           title: 'Healthy Bites',
@@ -54,6 +58,8 @@ class ServiceController extends BaseController {
           discount: 30,
           deliveryFee: 2.99,
           isVerified: false,
+          status: BannerStatus.closed,
+          time: '10:00 - 12:00',
         ),
       ];
 
@@ -62,6 +68,7 @@ class ServiceController extends BaseController {
           title: '',
           imageUrl: serviceBannerImageUrl,
           onTap: () {},
+          status: BannerStatus.unavailable,
         ),
         BannerItem(
           title: '',
