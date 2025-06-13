@@ -15,7 +15,7 @@ class ServiceHeader extends GetView<ServiceController> {
         children: [
           Container(
             width: double.infinity,
-            height: 250,
+            height: 230,
             decoration: BoxDecoration(
               color: AppColors.stateBrandDefault500,
             ),
@@ -29,7 +29,7 @@ class ServiceHeader extends GetView<ServiceController> {
                 _buildSearchBar(),
                 SizedBox(height: 16),
                 _buildDeliveryAddress(),
-                SizedBox(height: 26),
+                SizedBox(height: 16),
                 _buildFoodCategories(),
               ],
             ),
@@ -47,7 +47,7 @@ class ServiceHeader extends GetView<ServiceController> {
         children: [
           Text(
             'Fast food',
-            style: AppTextStyles.typographyH6SemiBold.copyWith(
+            style: AppTextStyles.typographyH9Medium.copyWith(
               color: AppColors.textBaseWhite,
             ),
           ),
