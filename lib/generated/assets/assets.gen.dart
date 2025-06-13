@@ -30,6 +30,18 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_bell.svg
   SvgGenImage get icBell => const SvgGenImage('assets/icons/ic_bell.svg');
 
+  /// File path: assets/icons/ic_box_delivery.svg
+  SvgGenImage get icBoxDelivery => const SvgGenImage('assets/icons/ic_box_delivery.svg');
+
+  /// File path: assets/icons/ic_box_package_courier_hands.svg
+  SvgGenImage get icBoxPackageCourierHands => const SvgGenImage('assets/icons/ic_box_package_courier_hands.svg');
+
+  /// File path: assets/icons/ic_box_package_hand_bottom.svg
+  SvgGenImage get icBoxPackageHandBottom => const SvgGenImage('assets/icons/ic_box_package_hand_bottom.svg');
+
+  /// File path: assets/icons/ic_car.svg
+  SvgGenImage get icCar => const SvgGenImage('assets/icons/ic_car.svg');
+
   /// File path: assets/icons/ic_cart_filled.svg
   SvgGenImage get icCartFilled => const SvgGenImage('assets/icons/ic_cart_filled.svg');
 
@@ -48,6 +60,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_courier_hands.svg
   SvgGenImage get icCourierHands => const SvgGenImage('assets/icons/ic_courier_hands.svg');
 
+  /// File path: assets/icons/ic_delivery_tracking.svg
+  SvgGenImage get icDeliveryTracking => const SvgGenImage('assets/icons/ic_delivery_tracking.svg');
+
   /// File path: assets/icons/ic_door.svg
   SvgGenImage get icDoor => const SvgGenImage('assets/icons/ic_door.svg');
 
@@ -65,6 +80,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_eye_visible.svg
   SvgGenImage get icEyeVisible => const SvgGenImage('assets/icons/ic_eye_visible.svg');
+
+  /// File path: assets/icons/ic_filter.svg
+  SvgGenImage get icFilter => const SvgGenImage('assets/icons/ic_filter.svg');
 
   /// File path: assets/icons/ic_gift.svg
   SvgGenImage get icGift => const SvgGenImage('assets/icons/ic_gift.svg');
@@ -132,6 +150,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_plus_add.svg
   SvgGenImage get icPlusAdd => const SvgGenImage('assets/icons/ic_plus_add.svg');
 
+  /// File path: assets/icons/ic_priority.svg
+  SvgGenImage get icPriority => const SvgGenImage('assets/icons/ic_priority.svg');
+
+  /// File path: assets/icons/ic_promocode.svg
+  SvgGenImage get icPromocode => const SvgGenImage('assets/icons/ic_promocode.svg');
+
   /// File path: assets/icons/ic_reception.svg
   SvgGenImage get icReception => const SvgGenImage('assets/icons/ic_reception.svg');
 
@@ -140,6 +164,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_right_arrow_chevron.svg
   SvgGenImage get icRightArrowChevron => const SvgGenImage('assets/icons/ic_right_arrow_chevron.svg');
+
+  /// File path: assets/icons/ic_schedule.svg
+  SvgGenImage get icSchedule => const SvgGenImage('assets/icons/ic_schedule.svg');
 
   /// File path: assets/icons/ic_search.svg
   SvgGenImage get icSearch => const SvgGenImage('assets/icons/ic_search.svg');
@@ -155,6 +182,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_share.svg
   SvgGenImage get icShare => const SvgGenImage('assets/icons/ic_share.svg');
+
+  /// File path: assets/icons/ic_standard.svg
+  SvgGenImage get icStandard => const SvgGenImage('assets/icons/ic_standard.svg');
 
   /// File path: assets/icons/ic_threedot.svg
   SvgGenImage get icThreedot => const SvgGenImage('assets/icons/ic_threedot.svg');
@@ -178,18 +208,24 @@ class $AssetsIconsGen {
     icApplePay,
     icBackArrow,
     icBell,
+    icBoxDelivery,
+    icBoxPackageCourierHands,
+    icBoxPackageHandBottom,
+    icCar,
     icCartFilled,
     icCartOutlined,
     icCheckmark,
     icClock,
     icClose,
     icCourierHands,
+    icDeliveryTracking,
     icDoor,
     icDropdownArrow,
     icEmailIcon,
     icEvcPlus,
     icEyeHidden,
     icEyeVisible,
+    icFilter,
     icGift,
     icGoogleIcon,
     icHomeFilled,
@@ -212,14 +248,18 @@ class $AssetsIconsGen {
     icPersonOutlined,
     icPhoneIcon,
     icPlusAdd,
+    icPriority,
+    icPromocode,
     icReception,
     icRightArrow,
     icRightArrowChevron,
+    icSchedule,
     icSearch,
     icServiceFilled,
     icServiceOutlined,
     icSettingsFilter,
     icShare,
+    icStandard,
     icThreedot,
     icVerified,
     icVisa,
@@ -239,6 +279,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/img_avatar_default.png
   AssetGenImage get imgAvatarDefault => const AssetGenImage('assets/images/img_avatar_default.png');
+
+  /// File path: assets/images/img_box_delivery.png
+  AssetGenImage get imgBoxDelivery => const AssetGenImage('assets/images/img_box_delivery.png');
 
   /// File path: assets/images/img_cleaning.png
   AssetGenImage get imgCleaning => const AssetGenImage('assets/images/img_cleaning.png');
@@ -327,6 +370,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/img_ticket_plane.png
   AssetGenImage get imgTicketPlane => const AssetGenImage('assets/images/img_ticket_plane.png');
 
+  /// File path: assets/images/img_tracking_box.png
+  AssetGenImage get imgTrackingBox => const AssetGenImage('assets/images/img_tracking_box.png');
+
   /// File path: assets/images/img_walgreen.jpg
   AssetGenImage get imgWalgreen => const AssetGenImage('assets/images/img_walgreen.jpg');
 
@@ -344,6 +390,7 @@ class $AssetsImagesGen {
     imgAddress,
     imgArby,
     imgAvatarDefault,
+    imgBoxDelivery,
     imgCleaning,
     imgDelivery,
     imgDomino,
@@ -373,6 +420,7 @@ class $AssetsImagesGen {
     imgStarbucks,
     imgTarget,
     imgTicketPlane,
+    imgTrackingBox,
     imgWalgreen,
     imgWalletBg,
     imgWalletCard,

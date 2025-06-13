@@ -1,10 +1,38 @@
+import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
+import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/shared/unified_banner_widget.dart';
 
 const serviceBannerImageUrl = 'https://i.ytimg.com/vi/qrO5--Iuy60/maxresdefault.jpg';
 const serviceBrandLogoUrl = 'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png';
 
+class FoodCategory {
+  final String label;
+  final String imagePath;
+  final VoidCallback? onTap;
+
+  const FoodCategory({
+    required this.label,
+    required this.imagePath,
+    this.onTap,
+  });
+}
+
 class ServiceController extends BaseController {
+  // Food categories data
+  List<FoodCategory> get foodCategories => [
+        FoodCategory(label: 'Breakfast', imagePath: Assets.images.imgFood.path),
+        FoodCategory(label: 'Coffee', imagePath: Assets.images.imgFood.path),
+        FoodCategory(label: 'Fast Food', imagePath: Assets.images.imgFood.path),
+        FoodCategory(label: 'Drink', imagePath: Assets.images.imgFood.path),
+        FoodCategory(label: 'Pizza', imagePath: Assets.images.imgFood.path),
+        FoodCategory(label: 'Fresh Food', imagePath: Assets.images.imgGrocery.path),
+        FoodCategory(label: 'Snacks', imagePath: Assets.images.imgFood.path),
+        FoodCategory(label: 'Bread', imagePath: Assets.images.imgGrocery.path),
+        FoodCategory(label: 'Ketchup', imagePath: Assets.images.imgFood.path),
+        FoodCategory(label: 'Drinks', imagePath: Assets.images.imgFood.path),
+      ];
+
   // Service-specific banner data
   List<BannerItem> get serviceBannerItems => [
         BannerItem(
