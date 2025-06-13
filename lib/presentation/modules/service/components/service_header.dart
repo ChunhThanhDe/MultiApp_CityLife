@@ -29,7 +29,7 @@ class ServiceHeader extends GetView<ServiceController> {
                 _buildSearchBar(),
                 SizedBox(height: 16),
                 _buildDeliveryAddress(),
-                SizedBox(height: 20),
+                SizedBox(height: 26),
                 _buildFoodCategories(),
               ],
             ),
@@ -77,7 +77,7 @@ class ServiceHeader extends GetView<ServiceController> {
           child: Assets.icons.icSearch.svg(),
         ),
         suffixIcon: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(15),
           child: Assets.icons.icFilter.svg(),
         ),
       ),
@@ -89,11 +89,18 @@ class ServiceHeader extends GetView<ServiceController> {
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Row(
         children: [
-          Assets.icons.icCar.svg(),
+          Assets.icons.icCar.svg(
+            width: 16,
+            height: 16,
+            colorFilter: ColorFilter.mode(
+              AppColors.textBaseWhite,
+              BlendMode.srcIn,
+            ),
+          ),
           SizedBox(width: 8),
           Text(
             'Deliver',
-            style: AppTextStyles.typographyH10Medium.copyWith(
+            style: AppTextStyles.typographyH11Medium.copyWith(
               color: AppColors.textBaseWhite,
             ),
           ),
@@ -110,7 +117,7 @@ class ServiceHeader extends GetView<ServiceController> {
           Expanded(
             child: Text(
               '2216 N 10th Street, CA 92243',
-              style: AppTextStyles.typographyH10Regular.copyWith(
+              style: AppTextStyles.typographyH12Regular.copyWith(
                 color: AppColors.textBaseWhite,
               ),
             ),
