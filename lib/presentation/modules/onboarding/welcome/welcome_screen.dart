@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
@@ -25,15 +26,20 @@ class WelcomeScreen extends BaseScreen<WelcomeController> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(controller.welcomeModels[index].image),
+                    Flexible(
+                      child: Image.asset(
+                        controller.welcomeModels[index].image,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                     const SizedBox(height: 54),
-                    Text(
+                    AutoSizeText(
                       controller.welcomeModels[index].title,
                       style: AppTextStyles.typographyH6SemiBold,
                       textAlign: TextAlign.center,
+                      maxLines: 1,
                     ),
-                    const SizedBox(height: 16),
-                    Text(
+                    AutoSizeText(
                       controller.welcomeModels[index].description,
                       style: AppTextStyles.typographyH10Regular.copyWith(
                         color: AppColors.textGreyHigh700,

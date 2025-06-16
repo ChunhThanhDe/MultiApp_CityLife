@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
@@ -22,54 +24,53 @@ class WelcomeController extends BaseController {
 
   final List<WelcomeModel> welcomeModels = [
     WelcomeModel(
-      title: 'Welcome to SpeedEats',
-      description: 'Welcome to your one-stop destination for delicious meals delivered right to your doorstep. Get ready to explore a world of culinary delights.',
+      title: tr(LocaleKeys.onboarding_welcome_step1_title),
+      description: tr(LocaleKeys.onboarding_welcome_step1_description),
       image: Assets.images.imgWelcome1.path,
     ),
     WelcomeModel(
-      title: 'Create Your Account',
-      description: "Let's get started! Create your account to enjoy easy ordering, personalized recommendations, and exclusive deals. Enter your email and create a password to begin.",
+      title: tr(LocaleKeys.onboarding_welcome_step2_title),
+      description: tr(LocaleKeys.onboarding_welcome_step2_description),
       image: Assets.images.imgWelcome2.path,
     ),
     WelcomeModel(
-      title: 'Explore Restaurants',
-      description: 'Discover a diverse selection of restaurants offering everything from your favorite comfort foods to exotic cuisines.',
+      title: tr(LocaleKeys.onboarding_welcome_step3_title),
+      description: tr(LocaleKeys.onboarding_welcome_step3_description),
       image: Assets.images.imgWelcome3.path,
     ),
     WelcomeModel(
-      title: 'Customize Your Order',
-      description: 'Hungry for something specific? Customize your order with special instructions, dietary preferences.',
+      title: tr(LocaleKeys.onboarding_welcome_step4_title),
+      description: tr(LocaleKeys.onboarding_welcome_step4_description),
       image: Assets.images.imgWelcome4.path,
     ),
     WelcomeModel(
-      title: 'Checkout & Payment',
-      description: 'Ready to place your order? Review your selections, choose your preferred payment method, and enter your delivery address.',
+      title: tr(LocaleKeys.onboarding_welcome_step5_title),
+      description: tr(LocaleKeys.onboarding_welcome_step5_description),
       image: Assets.images.imgWelcome5.path,
     ),
     WelcomeModel(
-      title: 'Track Your Delivery',
-      description: 'Sit back and relax! Track your order in real-time as it makes its way to your doorstep. Get updates on the estimated delivery time and the status of your delivery driver.',
+      title: tr(LocaleKeys.onboarding_welcome_step6_title),
+      description: tr(LocaleKeys.onboarding_welcome_step6_description),
       image: Assets.images.imgWelcome6.path,
     ),
     WelcomeModel(
-      title: 'Rate & Review',
-      description: 'Share your feedback! Rate your meal and delivery experience to help us improve our service. Your input is valuable to us.',
+      title: tr(LocaleKeys.onboarding_welcome_step7_title),
+      description: tr(LocaleKeys.onboarding_welcome_step7_description),
       image: Assets.images.imgWelcome7.path,
     ),
     WelcomeModel(
-      title: 'Reorder Favorites',
-      description: 'Love what you ordered? Easily reorder your favorite meals with just a few taps. Access your order history to quickly find and reorder past favorites.',
+      title: tr(LocaleKeys.onboarding_welcome_step8_title),
+      description: tr(LocaleKeys.onboarding_welcome_step8_description),
       image: Assets.images.imgWelcome8.path,
     ),
     WelcomeModel(
-      title: 'Promotions & Discounts',
-      description: "Don't miss out on great deals! Stay updated on the latest promotions, discounts, and special offers available exclusively to our app users.",
+      title: tr(LocaleKeys.onboarding_welcome_step9_title),
+      description: tr(LocaleKeys.onboarding_welcome_step9_description),
       image: Assets.images.imgWelcome9.path,
     ),
     WelcomeModel(
-      title: 'Welcome to SpeedEats',
-      description:
-          "Congratulations! You're now ready to embark on a culinary adventure with Food Delivery App. Discover new flavors, indulge in your cravings, and enjoy the convenience of food delivered to your doorstep.",
+      title: tr(LocaleKeys.onboarding_welcome_step10_title),
+      description: tr(LocaleKeys.onboarding_welcome_step10_description),
       image: Assets.images.imgWelcome10.path,
     ),
   ];
