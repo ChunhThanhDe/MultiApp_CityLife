@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 
 class AccountManageController extends BaseController {
+  var avatarPath = ''.obs;
+
   final formKey = GlobalKey<FormState>();
 
-  // Controllers cho từng trường
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final emailController = TextEditingController();
@@ -19,7 +21,6 @@ class AccountManageController extends BaseController {
   @override
   void onInit() {
     super.onInit();
-    // Gán giá trị mặc định
     firstNameController.text = "Abdulkadir";
     lastNameController.text = "Ali";
     emailController.text = "kadir@lukit.com";
@@ -37,13 +38,20 @@ class AccountManageController extends BaseController {
 
   void updateInfo() {
     if (formKey.currentState?.validate() ?? false) {
-      // Gọi API lưu thông tin (mock)
+      //  API (mock)
       Get.snackbar(
         "Success",
         "Cập nhật thông tin thành công!",
         snackPosition: SnackPosition.BOTTOM,
       );
-      // Nếu có backend thì truyền controller.text về backend tại đây
+    }
+  }
+
+  Future<void> pickAvatar() async {
+    final picker = ImagePicker();
+    final XFile? picked = await picker.pickImage(source: ImageSource.gallery);
+    if (picked != null) {
+      avatarPath.value = picked.path;
     }
   }
 }
