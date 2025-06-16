@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/data/app_storage.dart';
 import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
@@ -84,7 +85,8 @@ class WelcomeController extends BaseController {
         curve: Curves.easeInOut,
       );
     } else {
-      Get.toNamed(AppRoutes.signIn);
+      AppStorage.setBool(SharedPreferencesKeys.hasSeenWelcome, true);
+      Get.offAllNamed(AppRoutes.signIn);
     }
   }
 

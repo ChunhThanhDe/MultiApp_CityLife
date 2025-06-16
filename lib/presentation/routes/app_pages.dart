@@ -1,4 +1,5 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:sixam_mart_user/app/data/app_storage.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account/account_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account/account_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account_2_step_verification/account_2_step_verification_binding.dart';
@@ -53,7 +54,24 @@ import 'package:sixam_mart_user/presentation/routes/auth_middleware.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static String initial = AppRoutes.welcome;
+  static String get initial => _getInitialRoute();
+
+  static String _getInitialRoute() {
+    final hasSeenWelcome = AppStorage.getBool(SharedPreferencesKeys.hasSeenWelcome) ?? false;
+
+    if (!hasSeenWelcome) {
+      return AppRoutes.welcome;
+    }
+
+    try {
+      final userAuthInfoJson = AppStorage.getString(SharedPreferencesKeys.userAuthInfo);
+      if (userAuthInfoJson != null && userAuthInfoJson.isNotEmpty) {
+        return AppRoutes.root;
+      }
+    } catch (_) {}
+
+    return AppRoutes.signIn;
+  }
 
   static final appRoutes = [
     GetPage(

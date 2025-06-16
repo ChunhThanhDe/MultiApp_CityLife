@@ -35,6 +35,7 @@ class AuthMiddleware extends GetMiddleware {
       AppRoutes.signIn,
       AppRoutes.signUp,
       AppRoutes.verification,
+      AppRoutes.welcome,
     ];
 
     return publicRoutes.contains(route);
