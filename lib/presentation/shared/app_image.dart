@@ -219,20 +219,44 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
   ) async {
     final config = ImageConfiguration();
     final completer = Completer<ui.Codec>();
-    provider.resolve(config).addListener(
-          ImageStreamListener(
-            (image, _) async {
-              final byteData = await image.image.toByteData(format: ui.ImageByteFormat.png);
-              if (byteData != null) {
-                final buffer = await ImmutableBuffer.fromUint8List(byteData.buffer.asUint8List());
-                completer.complete(await decode(buffer));
-              } else {
-                completer.completeError(Exception('Failed to get byte data'));
-              }
-            },
-            onError: completer.completeError,
-          ),
-        );
+    late final ImageStreamListener listener;
+
+    listener = ImageStreamListener(
+      (image, _) async {
+        if (completer.isCompleted) return; // Prevent multiple completions
+        try {
+          final byteData = await image.image.toByteData(format: ui.ImageByteFormat.png);
+          if (byteData != null) {
+            final buffer = await ImmutableBuffer.fromUint8List(byteData.buffer.asUint8List());
+            if (!completer.isCompleted) {
+              completer.complete(await decode(buffer));
+            }
+          } else {
+            if (!completer.isCompleted) {
+              completer.completeError(Exception('Failed to get byte data'));
+            }
+          }
+        } catch (error) {
+          if (!completer.isCompleted) {
+            completer.completeError(error);
+          }
+        }
+      },
+      onError: (error, stackTrace) {
+        if (!completer.isCompleted) {
+          completer.completeError(error, stackTrace);
+        }
+      },
+    );
+
+    final imageStream = provider.resolve(config);
+    imageStream.addListener(listener);
+
+    // Remove listener when completed to prevent memory leaks
+    completer.future.whenComplete(() {
+      imageStream.removeListener(listener);
+    });
+
     return completer.future;
   }
 
