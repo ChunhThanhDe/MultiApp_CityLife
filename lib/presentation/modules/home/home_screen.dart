@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/home/components/header_and_service.dart';
 import 'package:sixam_mart_user/presentation/modules/home/components/sliver_box.dart';
-import 'package:sixam_mart_user/presentation/modules/home/components/today_offers_banner.dart';
-import 'package:sixam_mart_user/presentation/modules/home/components/today_offers_brand.dart';
-import 'package:sixam_mart_user/presentation/modules/home/components/today_offers_brand_discount.dart';
-import 'package:sixam_mart_user/presentation/modules/home/components/top_offers.dart';
 import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
+import 'package:sixam_mart_user/presentation/shared/unified_banner_widget.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 import 'home_controller.dart';
@@ -23,19 +20,37 @@ class HomeScreen extends BaseScreen<HomeController> {
       slivers: [
         HeaderAndService(),
         SliverBox(child: Divider(height: 1, color: AppColors.stateGreyLowest50)),
-        TodayOffersBanner(),
+        UnifiedBannerWidget(
+          sectionTitle: 'Today Offers',
+          items: controller.todayOffersBannerItems,
+          bannerType: BannerType.bannerFloatingLogo,
+        ),
         SliverBox(height: 16),
         SliverBox(child: SectionBreakDivider()),
         SliverBox(height: 16),
-        TodayOffersBrand(),
+        UnifiedBannerWidget(
+          sectionTitle: 'Today Offers',
+          items: controller.todayOffersBrandItems,
+          bannerType: BannerType.brandLogoName,
+          showArrowIcon: true,
+        ),
         SliverBox(height: 16),
         SliverBox(child: SectionBreakDivider()),
         SliverBox(height: 16),
-        TodayOffersBrandDiscount(),
+        UnifiedBannerWidget(
+          sectionTitle: 'Today Offers',
+          items: controller.todayOffersBrandDiscountItems,
+          bannerType: BannerType.bannerDiscount,
+          showArrowIcon: true,
+        ),
         SliverBox(height: 16),
         SliverBox(child: SectionBreakDivider()),
         SliverBox(height: 16),
-        TopOffers(),
+        UnifiedBannerWidget(
+          sectionTitle: 'Top Offers',
+          items: controller.topOffersItems,
+          bannerType: BannerType.bannerSingleImage,
+        ),
         SliverBox(height: 32),
       ],
     );
