@@ -1,5 +1,6 @@
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/shared/unified_banner_widget.dart';
 
 class Service {
   final String title;
@@ -52,6 +53,122 @@ class HomeController extends BaseController {
     Service(title: 'See More', image: Assets.images.imgSeeMore.path, onTap: () {}),
   ];
 
+  // Unified banner data
+  List<BannerItem> get todayOffersBannerItems => [
+        BannerItem(
+          title: 'Starbucks®',
+          imageUrl: bannerImageUrl,
+          logoUrl: brandLogoUrl,
+          onTap: () {},
+        ),
+        BannerItem(
+          title: 'Starbucks®',
+          imageUrl: bannerImageUrl,
+          logoUrl: brandLogoUrl,
+          onTap: () {},
+        ),
+        BannerItem(
+          title: 'Starbucks®',
+          imageUrl: bannerImageUrl,
+          logoUrl: brandLogoUrl,
+          onTap: () {},
+        ),
+      ];
+
+  List<BannerItem> get todayOffersBrandItems => [
+        BannerItem(
+          title: 'Starbucks®',
+          imageUrl: bannerImageUrl,
+          logoUrl: brandLogoUrl,
+          onTap: () {},
+        ),
+        BannerItem(
+          title: 'Starbucks®',
+          imageUrl: bannerImageUrl,
+          logoUrl: brandLogoUrl,
+          onTap: () {},
+        ),
+        BannerItem(
+          title: 'Starbucks®',
+          imageUrl: bannerImageUrl,
+          logoUrl: brandLogoUrl,
+          onTap: () {},
+        ),
+        BannerItem(
+          title: 'Starbucks®',
+          imageUrl: bannerImageUrl,
+          logoUrl: brandLogoUrl,
+          onTap: () {},
+        ),
+      ];
+
+  List<BannerItem> get todayOffersBrandDiscountItems => [
+        BannerItem(
+          title: 'Starbucks®',
+          imageUrl: bannerImageUrl,
+          logoUrl: brandLogoUrl,
+          onTap: () {},
+          discount: 10,
+          deliveryFee: 10,
+          isVerified: true,
+        ),
+        BannerItem(
+          title: 'Starbucks®',
+          imageUrl: bannerImageUrl,
+          logoUrl: brandLogoUrl,
+          onTap: () {},
+          discount: 45,
+          deliveryFee: 32,
+          isVerified: true,
+        ),
+        BannerItem(
+          title: 'Starbucks®',
+          imageUrl: bannerImageUrl,
+          logoUrl: brandLogoUrl,
+          onTap: () {},
+          discount: 15,
+          deliveryFee: 12,
+          isVerified: true,
+        ),
+        BannerItem(
+          title: 'Starbucks®',
+          imageUrl: bannerImageUrl,
+          logoUrl: brandLogoUrl,
+          onTap: () {},
+          discount: 15,
+          deliveryFee: 53,
+          isVerified: true,
+        ),
+        BannerItem(
+          title: 'Starbucks®',
+          imageUrl: bannerImageUrl,
+          logoUrl: brandLogoUrl,
+          onTap: () {},
+          discount: 32,
+          deliveryFee: 33,
+          isVerified: true,
+        ),
+      ];
+
+  List<BannerItem> get topOffersItems => [
+        BannerItem(
+          title: '',
+          imageUrl: 'https://i.pinimg.com/236x/87/60/fc/8760fc8c6e5caf3461b97f4d94543d6e.jpg',
+          onTap: () {},
+        ),
+        BannerItem(
+          title: '',
+          imageUrl: 'https://i.pinimg.com/236x/87/60/fc/8760fc8c6e5caf3461b97f4d94543d6e.jpg',
+          onTap: () {},
+        ),
+        BannerItem(
+          title: '',
+          imageUrl: 'https://i.pinimg.com/236x/87/60/fc/8760fc8c6e5caf3461b97f4d94543d6e.jpg',
+          onTap: () {},
+        ),
+      ];
+
+  // Legacy data structures (kept for backward compatibility if needed)
   final List<TodayOffer> todayOffersBanner = [
     TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}),
     TodayOffer(brandName: 'Starbucks®', brandLogoUrl: brandLogoUrl, bannerImageUrl: bannerImageUrl, onTap: () {}),

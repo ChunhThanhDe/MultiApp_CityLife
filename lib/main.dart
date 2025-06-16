@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -5,30 +7,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sixam_mart_user/di.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_navigator.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
-  await DependencyInjection.init();
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
 
-  final prefs = await SharedPreferences.getInstance();
-  Get.put<SharedPreferences>(prefs);
+    _setupTheme();
 
-  HttpOverrides.global = MyHttpOverrides();
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: Platform.isAndroid ? Brightness.dark : null),
-  );
-  SystemChrome.setPreferredOrientations(
-    [
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ],
-  ).then((val) {
+    await _setupSystemUI();
+
+    await Future.wait([
+      EasyLocalization.ensureInitialized(),
+      DependencyInjection.init(),
+    ]);
+
     runApp(
       EasyLocalization(
         startLocale: const Locale('en'),
@@ -38,7 +34,29 @@ void main() async {
         child: const MyApp(),
       ),
     );
+  }, (error, stackTrace) {
+    log('Uncaught error: $error', error: error, stackTrace: stackTrace, name: 'MyApp');
   });
+}
+
+void _setupTheme() {
+  SixMartTheme.modifyBrandColor(BrandColorTypes.purple);
+  SixMartTheme.modifyTheme(ThemeTypes.light);
+  SixMartTheme.modifySpacing(SpacingTypes.mode1);
+  SixMartTheme.modifyFontFamily(FontFamilyTypes.inter);
+}
+
+Future<void> _setupSystemUI() async {
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Platform.isAndroid ? Brightness.dark : null,
+    ),
+  );
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 }
 
 class MyApp extends StatelessWidget {
@@ -46,10 +64,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SixMartTheme.modifyBrandColor(BrandColorTypes.purple);
-    SixMartTheme.modifyTheme(ThemeTypes.light);
-    SixMartTheme.modifySpacing(SpacingTypes.mode1);
-    SixMartTheme.modifyFontFamily(FontFamilyTypes.inter);
     return ScreenUtilInit(
       designSize: const Size(430, 932),
       minTextAdapt: true,
@@ -71,12 +85,5 @@ class MyApp extends StatelessWidget {
         );
       },
     );
-  }
-}
-
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
 }

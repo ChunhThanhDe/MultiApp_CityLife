@@ -132,6 +132,50 @@
             "selectBuildingTypeSubtitle": "Lorem Ipsum đơn giản chỉ là văn bản giả của ngành in ấn và sắp chữ."
         }
     },
+    "onboarding": {
+        "welcome": {
+            "step1": {
+                "title": "Chào mừng đến với SpeedEats",
+                "description": "Chào mừng bạn đến với điểm đến một cửa cho những bữa ăn ngon được giao tận nhà. Hãy sẵn sàng khám phá thế giới ẩm thực tuyệt vời."
+            },
+            "step2": {
+                "title": "Tạo tài khoản của bạn",
+                "description": "Hãy bắt đầu! Tạo tài khoản của bạn để tận hưởng việc đặt hàng dễ dàng, các gợi ý cá nhân hóa và ưu đãi độc quyền. Nhập email và tạo mật khẩu để bắt đầu."
+            },
+            "step3": {
+                "title": "Khám phá nhà hàng",
+                "description": "Khám phá sự lựa chọn đa dạng của các nhà hàng cung cấp mọi thứ từ những món ăn yêu thích đến các món ẩm thực lạ."
+            },
+            "step4": {
+                "title": "Tùy chỉnh đơn hàng",
+                "description": "Đói với một thứ gì đó cụ thể? Tùy chỉnh đơn hàng của bạn với các hướng dẫn đặc biệt, sở thích ăn kiêng."
+            },
+            "step5": {
+                "title": "Thanh toán & Đặt hàng",
+                "description": "Sẵn sàng đặt hàng? Xem lại lựa chọn của bạn, chọn phương thức thanh toán ưa thích và nhập địa chỉ giao hàng."
+            },
+            "step6": {
+                "title": "Theo dõi giao hàng",
+                "description": "Hãy ngồi lại và thư giãn! Theo dõi đơn hàng của bạn theo thời gian thực khi nó đang trên đường đến tận nhà bạn. Nhận cập nhật về thời gian giao hàng ước tính và trạng thái của tài xế giao hàng."
+            },
+            "step7": {
+                "title": "Đánh giá & Nhận xét",
+                "description": "Chia sẻ phản hồi của bạn! Đánh giá bữa ăn và trải nghiệm giao hàng để giúp chúng tôi cải thiện dịch vụ. Ý kiến của bạn rất có giá trị đối với chúng tôi."
+            },
+            "step8": {
+                "title": "Đặt lại món yêu thích",
+                "description": "Thích những gì bạn đã đặt? Dễ dàng đặt lại những món ăn yêu thích chỉ với vài cú chạm. Truy cập lịch sử đơn hàng để nhanh chóng tìm và đặt lại những món yêu thích trước đây."
+            },
+            "step9": {
+                "title": "Khuyến mãi & Giảm giá",
+                "description": "Đừng bỏ lỡ những ưu đãi tuyệt vời! Luôn cập nhật những khuyến mãi mới nhất, giảm giá và ưu đãi đặc biệt chỉ dành riêng cho người dùng ứng dụng của chúng tôi."
+            },
+            "step10": {
+                "title": "Chào mừng đến với SpeedEats",
+                "description": "Chúc mừng! Bây giờ bạn đã sẵn sàng bắt đầu cuộc phiêu lưu ẩm thực với Ứng dụng Giao hàng Thức ăn. Khám phá những hương vị mới, thỏa mãn cơn thèm và tận hưởng sự tiện lợi của thức ăn được giao tận nhà."
+            }
+        }
+    },
     "wallet": {
         "title": "Ví",
         "mayGift": "Có thể tặng",

@@ -2,7 +2,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const root_title = 'root.title';
   static const root = 'root';
   static const base_error_default = 'base.error.default';
@@ -123,6 +123,38 @@ abstract class LocaleKeys {
   static const address_details_selectBuildingTypeSubtitle = 'address.details.selectBuildingTypeSubtitle';
   static const address_details = 'address.details';
   static const address = 'address';
+  static const onboarding_welcome_step1_title = 'onboarding.welcome.step1.title';
+  static const onboarding_welcome_step1_description = 'onboarding.welcome.step1.description';
+  static const onboarding_welcome_step1 = 'onboarding.welcome.step1';
+  static const onboarding_welcome_step2_title = 'onboarding.welcome.step2.title';
+  static const onboarding_welcome_step2_description = 'onboarding.welcome.step2.description';
+  static const onboarding_welcome_step2 = 'onboarding.welcome.step2';
+  static const onboarding_welcome_step3_title = 'onboarding.welcome.step3.title';
+  static const onboarding_welcome_step3_description = 'onboarding.welcome.step3.description';
+  static const onboarding_welcome_step3 = 'onboarding.welcome.step3';
+  static const onboarding_welcome_step4_title = 'onboarding.welcome.step4.title';
+  static const onboarding_welcome_step4_description = 'onboarding.welcome.step4.description';
+  static const onboarding_welcome_step4 = 'onboarding.welcome.step4';
+  static const onboarding_welcome_step5_title = 'onboarding.welcome.step5.title';
+  static const onboarding_welcome_step5_description = 'onboarding.welcome.step5.description';
+  static const onboarding_welcome_step5 = 'onboarding.welcome.step5';
+  static const onboarding_welcome_step6_title = 'onboarding.welcome.step6.title';
+  static const onboarding_welcome_step6_description = 'onboarding.welcome.step6.description';
+  static const onboarding_welcome_step6 = 'onboarding.welcome.step6';
+  static const onboarding_welcome_step7_title = 'onboarding.welcome.step7.title';
+  static const onboarding_welcome_step7_description = 'onboarding.welcome.step7.description';
+  static const onboarding_welcome_step7 = 'onboarding.welcome.step7';
+  static const onboarding_welcome_step8_title = 'onboarding.welcome.step8.title';
+  static const onboarding_welcome_step8_description = 'onboarding.welcome.step8.description';
+  static const onboarding_welcome_step8 = 'onboarding.welcome.step8';
+  static const onboarding_welcome_step9_title = 'onboarding.welcome.step9.title';
+  static const onboarding_welcome_step9_description = 'onboarding.welcome.step9.description';
+  static const onboarding_welcome_step9 = 'onboarding.welcome.step9';
+  static const onboarding_welcome_step10_title = 'onboarding.welcome.step10.title';
+  static const onboarding_welcome_step10_description = 'onboarding.welcome.step10.description';
+  static const onboarding_welcome_step10 = 'onboarding.welcome.step10';
+  static const onboarding_welcome = 'onboarding.welcome';
+  static const onboarding = 'onboarding';
   static const wallet_title = 'wallet.title';
   static const wallet_mayGift = 'wallet.mayGift';
   static const wallet_transaction = 'wallet.transaction';
@@ -145,4 +177,5 @@ abstract class LocaleKeys {
   static const wallet_receipt_share = 'wallet.receipt.share';
   static const wallet_receipt = 'wallet.receipt';
   static const wallet = 'wallet';
+
 }

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:country_code_picker/src/country_code.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
