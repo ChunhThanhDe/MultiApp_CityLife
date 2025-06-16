@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({super.key});
@@ -28,13 +29,6 @@ class _FilterScreenState extends State<FilterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Widget icon(IconData data) => Container(
-          width: 24,
-          height: 24,
-          alignment: Alignment.center,
-          child: Icon(data, size: 22, color: const Color(0xFF4A5763)),
-        );
-
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -101,7 +95,11 @@ class _FilterScreenState extends State<FilterScreen> {
                   _ExpandableSection(
                     expanded: deliveryExpanded,
                     onTap: () => setState(() => deliveryExpanded = !deliveryExpanded),
-                    icon: icon(Icons.directions_car),
+                    icon: SvgPicture.asset(
+                      'assets/icons/ic_car_black.svg',
+                      width: 24,
+                      height: 24,
+                    ),
                     title: "Delivery",
                     children: deliveryExpanded
                         ? [
@@ -141,7 +139,11 @@ class _FilterScreenState extends State<FilterScreen> {
                   _ExpandableSection(
                     expanded: priceExpanded,
                     onTap: () => setState(() => priceExpanded = !priceExpanded),
-                    icon: icon(Icons.attach_money),
+                    icon: SvgPicture.asset(
+                      'assets/icons/ic_dollar.svg',
+                      width: 24,
+                      height: 24,
+                    ),
                     title: "Price",
                     showClear: priceExpanded,
                     onClear: () {
@@ -178,7 +180,11 @@ class _FilterScreenState extends State<FilterScreen> {
                   _ExpandableSection(
                     expanded: ratingExpanded,
                     onTap: () => setState(() => ratingExpanded = !ratingExpanded),
-                    icon: icon(Icons.star_border),
+                    icon: SvgPicture.asset(
+                      'assets/icons/ic_star.svg',
+                      width: 24,
+                      height: 24,
+                    ),
                     title: "Rating",
                     children: ratingExpanded
                         ? [
@@ -202,14 +208,22 @@ class _FilterScreenState extends State<FilterScreen> {
 
                   // Under 30 min
                   _CheckableCell(
-                    icon: icon(Icons.access_time),
+                    icon: SvgPicture.asset(
+                      'assets/icons/ic_clock_time.svg',
+                      width: 24,
+                      height: 24,
+                    ),
                     title: "Under 30 min",
                     checked: under30Min,
                     onChanged: (val) => setState(() => under30Min = val),
                   ),
                   _DividerLine(),
                   _CheckableCell(
-                    icon: icon(Icons.local_offer),
+                    icon: SvgPicture.asset(
+                      'assets/icons/ic_sale.svg',
+                      width: 24,
+                      height: 24,
+                    ),
                     title: "Offers",
                     checked: offers,
                     onChanged: (val) => setState(() => offers = val),
