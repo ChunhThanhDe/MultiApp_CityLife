@@ -74,18 +74,6 @@ class WelcomeController extends BaseController {
     ),
   ];
 
-  @override
-  void onInit() {
-    super.onInit();
-    pageController.addListener(() {
-      final newIndex = pageController.page?.round() ?? 0;
-      if (newIndex != currentPageIndex) {
-        currentPageIndex = newIndex;
-        update();
-      }
-    });
-  }
-
   void nextPage() {
     if (currentPageIndex < welcomeModels.length - 1) {
       currentPageIndex++;

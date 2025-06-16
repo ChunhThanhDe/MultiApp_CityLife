@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class AnimatedStepIndicator extends StatelessWidget {
   final int totalSteps;
   final int currentStep;
-  final double dotSize;
+  final double dotWidth;
+  final double dotHeight;
   final double activeDotWidth;
   final double spacing;
   final Color? activeColor;
@@ -14,7 +15,8 @@ class AnimatedStepIndicator extends StatelessWidget {
     super.key,
     required this.totalSteps,
     required this.currentStep,
-    this.dotSize = 8.0,
+    this.dotWidth = 8.0,
+    this.dotHeight = 8.0,
     this.activeDotWidth = 24.0,
     this.spacing = 8.0,
     this.activeColor,
@@ -35,11 +37,11 @@ class AnimatedStepIndicator extends StatelessWidget {
           duration: animationDuration,
           curve: Curves.easeInOut,
           margin: EdgeInsets.symmetric(horizontal: spacing / 2),
-          width: index == currentStep ? activeDotWidth : dotSize,
-          height: dotSize,
+          width: index == currentStep ? activeDotWidth : dotWidth,
+          height: dotHeight,
           decoration: BoxDecoration(
             color: index == currentStep ? effectiveActiveColor : effectiveInactiveColor,
-            borderRadius: BorderRadius.circular(dotSize / 2),
+            borderRadius: BorderRadius.circular(dotHeight / 2),
           ),
         ),
       ),
