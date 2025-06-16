@@ -39,9 +39,6 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_box_package_hand_bottom.svg
   SvgGenImage get icBoxPackageHandBottom => const SvgGenImage('assets/icons/ic_box_package_hand_bottom.svg');
 
-  /// File path: assets/icons/ic_car.svg
-  SvgGenImage get icCar => const SvgGenImage('assets/icons/ic_car.svg');
-
   /// File path: assets/icons/ic_cart_filled.svg
   SvgGenImage get icCartFilled => const SvgGenImage('assets/icons/ic_cart_filled.svg');
 
@@ -203,69 +200,68 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
-    icApartment,
-    icAppleIcon,
-    icApplePay,
-    icBackArrow,
-    icBell,
-    icBoxDelivery,
-    icBoxPackageCourierHands,
-    icBoxPackageHandBottom,
-    icCar,
-    icCartFilled,
-    icCartOutlined,
-    icCheckmark,
-    icClock,
-    icClose,
-    icCourierHands,
-    icDeliveryTracking,
-    icDoor,
-    icDropdownArrow,
-    icEmailIcon,
-    icEvcPlus,
-    icEyeHidden,
-    icEyeVisible,
-    icFilter,
-    icGift,
-    icGoogleIcon,
-    icHomeFilled,
-    icHomeOutlined,
-    icHospital,
-    icHotel,
-    icHouse,
-    icInformation,
-    icInvoice,
-    icLeftArrowChervon,
-    icLikeFilled,
-    icLikeOutlined,
-    icLocation,
-    icLock,
-    icMastercard,
-    icMouse,
-    icPencil,
-    icPersonFilled,
-    icPersonIcon,
-    icPersonOutlined,
-    icPhoneIcon,
-    icPlusAdd,
-    icPriority,
-    icPromocode,
-    icReception,
-    icRightArrow,
-    icRightArrowChevron,
-    icSchedule,
-    icSearch,
-    icServiceFilled,
-    icServiceOutlined,
-    icSettingsFilter,
-    icShare,
-    icStandard,
-    icThreedot,
-    icVerified,
-    icVisa,
-    icWalletFilled,
-    icWalletOutlined,
-  ];
+        icApartment,
+        icAppleIcon,
+        icApplePay,
+        icBackArrow,
+        icBell,
+        icBoxDelivery,
+        icBoxPackageCourierHands,
+        icBoxPackageHandBottom,
+        icCartFilled,
+        icCartOutlined,
+        icCheckmark,
+        icClock,
+        icClose,
+        icCourierHands,
+        icDeliveryTracking,
+        icDoor,
+        icDropdownArrow,
+        icEmailIcon,
+        icEvcPlus,
+        icEyeHidden,
+        icEyeVisible,
+        icFilter,
+        icGift,
+        icGoogleIcon,
+        icHomeFilled,
+        icHomeOutlined,
+        icHospital,
+        icHotel,
+        icHouse,
+        icInformation,
+        icInvoice,
+        icLeftArrowChervon,
+        icLikeFilled,
+        icLikeOutlined,
+        icLocation,
+        icLock,
+        icMastercard,
+        icMouse,
+        icPencil,
+        icPersonFilled,
+        icPersonIcon,
+        icPersonOutlined,
+        icPhoneIcon,
+        icPlusAdd,
+        icPriority,
+        icPromocode,
+        icReception,
+        icRightArrow,
+        icRightArrowChevron,
+        icSchedule,
+        icSearch,
+        icServiceFilled,
+        icServiceOutlined,
+        icSettingsFilter,
+        icShare,
+        icStandard,
+        icThreedot,
+        icVerified,
+        icVisa,
+        icWalletFilled,
+        icWalletOutlined,
+      ];
 }
 
 class $AssetsImagesGen {
@@ -385,47 +381,88 @@ class $AssetsImagesGen {
   /// File path: assets/images/img_walmart.jpg
   AssetGenImage get imgWalmart => const AssetGenImage('assets/images/img_walmart.jpg');
 
+  /// File path: assets/images/img_welcome_1.png
+  AssetGenImage get imgWelcome1 => const AssetGenImage('assets/images/img_welcome_1.png');
+
+  /// File path: assets/images/img_welcome_10.png
+  AssetGenImage get imgWelcome10 => const AssetGenImage('assets/images/img_welcome_10.png');
+
+  /// File path: assets/images/img_welcome_2.png
+  AssetGenImage get imgWelcome2 => const AssetGenImage('assets/images/img_welcome_2.png');
+
+  /// File path: assets/images/img_welcome_3.png
+  AssetGenImage get imgWelcome3 => const AssetGenImage('assets/images/img_welcome_3.png');
+
+  /// File path: assets/images/img_welcome_4.png
+  AssetGenImage get imgWelcome4 => const AssetGenImage('assets/images/img_welcome_4.png');
+
+  /// File path: assets/images/img_welcome_5.png
+  AssetGenImage get imgWelcome5 => const AssetGenImage('assets/images/img_welcome_5.png');
+
+  /// File path: assets/images/img_welcome_6.png
+  AssetGenImage get imgWelcome6 => const AssetGenImage('assets/images/img_welcome_6.png');
+
+  /// File path: assets/images/img_welcome_7.png
+  AssetGenImage get imgWelcome7 => const AssetGenImage('assets/images/img_welcome_7.png');
+
+  /// File path: assets/images/img_welcome_8.png
+  AssetGenImage get imgWelcome8 => const AssetGenImage('assets/images/img_welcome_8.png');
+
+  /// File path: assets/images/img_welcome_9.png
+  AssetGenImage get imgWelcome9 => const AssetGenImage('assets/images/img_welcome_9.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
-    imgAddress,
-    imgArby,
-    imgAvatarDefault,
-    imgBoxDelivery,
-    imgCleaning,
-    imgDelivery,
-    imgDomino,
-    imgFood,
-    imgGrocery,
-    imgItem1,
-    imgItem2,
-    imgItem3,
-    imgItem4,
-    imgItem5,
-    imgItem6,
-    imgItem7,
-    imgItem8,
-    imgKfc,
-    imgLaundry,
-    imgLogoArby,
-    imgLogoDomino,
-    imgLogoKfc,
-    imgLogoMc,
-    imgLogoStarbucks,
-    imgLogoTarget,
-    imgLogoWalgreen,
-    imgLogoWalmart,
-    imgMc,
-    imgNew,
-    imgSeeMore,
-    imgStarbucks,
-    imgTarget,
-    imgTicketPlane,
-    imgTrackingBox,
-    imgWalgreen,
-    imgWalletBg,
-    imgWalletCard,
-    imgWalmart,
-  ];
+        imgAddress,
+        imgArby,
+        imgAvatarDefault,
+        imgBoxDelivery,
+        imgBoxDelivery,
+        imgCleaning,
+        imgDelivery,
+        imgDomino,
+        imgFood,
+        imgGrocery,
+        imgItem1,
+        imgItem2,
+        imgItem3,
+        imgItem4,
+        imgItem5,
+        imgItem6,
+        imgItem7,
+        imgItem8,
+        imgKfc,
+        imgLaundry,
+        imgLogoArby,
+        imgLogoDomino,
+        imgLogoKfc,
+        imgLogoMc,
+        imgLogoStarbucks,
+        imgLogoTarget,
+        imgLogoWalgreen,
+        imgLogoWalmart,
+        imgMc,
+        imgNew,
+        imgSeeMore,
+        imgStarbucks,
+        imgTarget,
+        imgTicketPlane,
+        imgTrackingBox,
+        imgWalgreen,
+        imgWalletBg,
+        imgWalletCard,
+        imgWalmart,
+        imgWelcome1,
+        imgWelcome10,
+        imgWelcome2,
+        imgWelcome3,
+        imgWelcome4,
+        imgWelcome5,
+        imgWelcome6,
+        imgWelcome7,
+        imgWelcome8,
+        imgWelcome9,
+      ];
 }
 
 class $AssetsMapsGen {

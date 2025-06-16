@@ -132,6 +132,50 @@
             "selectBuildingTypeSubtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         }
     },
+    "onboarding": {
+        "welcome": {
+            "step1": {
+                "title": "Welcome to SpeedEats",
+                "description": "Welcome to your one-stop destination for delicious meals delivered right to your doorstep. Get ready to explore a world of culinary delights."
+            },
+            "step2": {
+                "title": "Create Your Account",
+                "description": "Let's get started! Create your account to enjoy easy ordering, personalized recommendations, and exclusive deals. Enter your email and create a password to begin."
+            },
+            "step3": {
+                "title": "Explore Restaurants",
+                "description": "Discover a diverse selection of restaurants offering everything from your favorite comfort foods to exotic cuisines."
+            },
+            "step4": {
+                "title": "Customize Your Order",
+                "description": "Hungry for something specific? Customize your order with special instructions, dietary preferences."
+            },
+            "step5": {
+                "title": "Checkout & Payment",
+                "description": "Ready to place your order? Review your selections, choose your preferred payment method, and enter your delivery address."
+            },
+            "step6": {
+                "title": "Track Your Delivery",
+                "description": "Sit back and relax! Track your order in real-time as it makes its way to your doorstep. Get updates on the estimated delivery time and the status of your delivery driver."
+            },
+            "step7": {
+                "title": "Rate & Review",
+                "description": "Share your feedback! Rate your meal and delivery experience to help us improve our service. Your input is valuable to us."
+            },
+            "step8": {
+                "title": "Reorder Favorites",
+                "description": "Love what you ordered? Easily reorder your favorite meals with just a few taps. Access your order history to quickly find and reorder past favorites."
+            },
+            "step9": {
+                "title": "Promotions & Discounts",
+                "description": "Don't miss out on great deals! Stay updated on the latest promotions, discounts, and special offers available exclusively to our app users."
+            },
+            "step10": {
+                "title": "Welcome to SpeedEats",
+                "description": "Congratulations! You're now ready to embark on a culinary adventure with Food Delivery App. Discover new flavors, indulge in your cravings, and enjoy the convenience of food delivered to your doorstep."
+            }
+        }
+    },
     "wallet": {
         "title": "Wallet",
         "mayGift": "May Gift",
