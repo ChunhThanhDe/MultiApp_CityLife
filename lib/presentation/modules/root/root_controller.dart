@@ -4,8 +4,8 @@ import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account/account_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/cart_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/home_delivery/home_delivery_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/home/home_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/service/service_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/wallet/wallet_screen.dart';
 
 enum RootTab {
@@ -40,7 +40,7 @@ class RootController extends BaseController {
       iconUnselected: Assets.icons.icServiceOutlined.path,
       label: 'Service',
       tab: RootTab.service,
-      screen: HomeDeliveryScreen(),
+      screen: ServiceScreen(),
     ),
     (
       iconSelected: Assets.icons.icCartFilled.path,

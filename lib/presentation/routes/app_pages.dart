@@ -36,6 +36,8 @@ import 'package:sixam_mart_user/presentation/modules/delivery/tracking_delivery/
 import 'package:sixam_mart_user/presentation/modules/delivery/tracking_delivery/tracking_delivery_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorities_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/onboarding/welcome/welcome_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/onboarding/welcome/welcome_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/payment/payment/payment_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/payment/payment/payment_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/payment/scan_card/scan_card_binding.dart';
@@ -51,7 +53,7 @@ import 'package:sixam_mart_user/presentation/routes/auth_middleware.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static String initial = AppRoutes.root;
+  static String initial = AppRoutes.welcome;
 
   static final appRoutes = [
     GetPage(
@@ -193,6 +195,11 @@ class AppPages {
       name: AppRoutes.trackDelivery,
       page: () => const TrackDeliveryScreen(),
       binding: TrackDeliveryBinding(),
-    )
+    ),
+    GetPage(
+      name: AppRoutes.welcome,
+      page: () => const WelcomeScreen(),
+      binding: WelcomeBinding(),
+    ),
   ];
 }

@@ -6,7 +6,5 @@ class VerificationController extends BaseController {
 
   VerificationController({required this.param});
 
-  void updateVerificationCode(String value) {
-    print(value);
-  }
+  void updateVerificationCode(String value) {}
 }
