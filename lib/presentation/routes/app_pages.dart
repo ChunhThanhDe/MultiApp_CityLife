@@ -1,5 +1,4 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:sixam_mart_user/app/data/app_storage.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account/account_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account/account_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account_2_step_verification/account_2_step_verification_binding.dart';
@@ -37,6 +36,8 @@ import 'package:sixam_mart_user/presentation/modules/delivery/tracking_delivery/
 import 'package:sixam_mart_user/presentation/modules/delivery/tracking_delivery/tracking_delivery_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorities_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/onboarding/splash/splash_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/onboarding/splash/splash_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/onboarding/welcome/welcome_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/onboarding/welcome/welcome_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/payment/payment/payment_binding.dart';
@@ -54,26 +55,14 @@ import 'package:sixam_mart_user/presentation/routes/auth_middleware.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static String get initial => _getInitialRoute();
-
-  static String _getInitialRoute() {
-    final hasSeenWelcome = AppStorage.getBool(SharedPreferencesKeys.hasSeenWelcome) ?? false;
-
-    if (!hasSeenWelcome) {
-      return AppRoutes.welcome;
-    }
-
-    try {
-      final userAuthInfoJson = AppStorage.getString(SharedPreferencesKeys.userAuthInfo);
-      if (userAuthInfoJson != null && userAuthInfoJson.isNotEmpty) {
-        return AppRoutes.root;
-      }
-    } catch (_) {}
-
-    return AppRoutes.signIn;
-  }
+  static String get initial => AppRoutes.splash;
 
   static final appRoutes = [
+    GetPage(
+      name: AppRoutes.splash,
+      page: () => const SplashScreen(),
+      binding: SplashBinding(),
+    ),
     GetPage(
       name: AppRoutes.root,
       page: () => const RootScreen(),
