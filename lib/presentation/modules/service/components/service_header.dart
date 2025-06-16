@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/service/components/service_filter.dart';
 import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
 import 'package:sixam_mart_user/theme.dart';
@@ -26,7 +27,7 @@ class ServiceHeader extends GetView<ServiceController> {
               children: [
                 _buildTopBar(),
                 SizedBox(height: 16),
-                _buildSearchBar(),
+                _buildSearchBar(context),
                 SizedBox(height: 16),
                 _buildDeliveryAddress(),
                 SizedBox(height: 16),
@@ -64,7 +65,7 @@ class ServiceHeader extends GetView<ServiceController> {
     );
   }
 
-  Widget _buildSearchBar() {
+  Widget _buildSearchBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: AppTextField(
@@ -76,9 +77,27 @@ class ServiceHeader extends GetView<ServiceController> {
           padding: const EdgeInsets.all(12),
           child: Assets.icons.icSearch.svg(),
         ),
-        suffixIcon: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Assets.icons.icFilter.svg(),
+        suffixIcon: GestureDetector(
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              builder: (context) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                  child: FractionallySizedBox(
+                    heightFactor: 0.75, // Chỉ chiếm 75% chiều cao
+                    child: const FilterScreen(),
+                  ),
+                );
+              },
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Assets.icons.icFilter.svg(),
+          ),
         ),
       ),
     );
