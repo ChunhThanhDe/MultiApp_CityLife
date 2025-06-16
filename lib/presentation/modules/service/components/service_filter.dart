@@ -1,0 +1,571 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+
+class FilterScreen extends StatefulWidget {
+  const FilterScreen({super.key});
+
+  @override
+  State<FilterScreen> createState() => _FilterScreenState();
+}
+
+class _FilterScreenState extends State<FilterScreen> {
+  // Expand state
+  bool deliveryExpanded = false;
+  bool priceExpanded = false;
+  bool ratingExpanded = false;
+
+  // Price values (0: $, 1: $$, 2: $$$, 3: $$$$, 4: $$$$$)
+  RangeValues priceRange = const RangeValues(0, 2);
+  static const priceLabels = ["\$", "\$\$", "\$\$\$", "\$\$\$\$", "\$\$\$\$\$"];
+
+  // Rating values (0: 2+, 1: 2.5+, 2: 4+, 3: 4.5+, 4: 5)
+  double ratingValue = 2;
+  static const ratingMarks = [2.0, 2.5, 4.0, 4.5, 5.0];
+
+  String selectedDelivery = "Delivery";
+
+  bool under30Min = false;
+  bool offers = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Grabber
+          const SizedBox(height: 12),
+          Container(
+            width: 48,
+            height: 4,
+            decoration: BoxDecoration(
+              color: Color(0xFFE8EBEE),
+              borderRadius: BorderRadius.circular(99),
+            ),
+          ),
+          const SizedBox(height: 16),
+          // Header
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Row(
+              children: [
+                const Text(
+                  'Short & Filter',
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                    color: Color(0xFF161A1D),
+                  ),
+                ),
+                const Spacer(),
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      // Reset all filter values
+                      priceRange = const RangeValues(0, 2);
+                      ratingValue = 2;
+                      selectedDelivery = "Delivery";
+                      under30Min = false;
+                      offers = false;
+                    });
+                  },
+                  style: TextButton.styleFrom(
+                    foregroundColor: Color(0xFF798A9A),
+                    padding: EdgeInsets.zero,
+                    minimumSize: Size(0, 0),
+                  ),
+                  child: const Text('Clear all', style: TextStyle(fontSize: 14)),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
+          // Nội dung filter
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // Delivery cell (expandable)
+                  _ExpandableSection(
+                    expanded: deliveryExpanded,
+                    onTap: () => setState(() => deliveryExpanded = !deliveryExpanded),
+                    icon: SvgPicture.asset(
+                      'assets/icons/ic_car_black.svg',
+                      width: 24,
+                      height: 24,
+                    ),
+                    title: "Delivery",
+                    children: deliveryExpanded
+                        ? [
+                            _SelectOption(
+                              label: "In store",
+                              selected: selectedDelivery == "In store",
+                              onTap: () {
+                                setState(() {
+                                  selectedDelivery = "In store";
+                                });
+                              },
+                            ),
+                            _SelectOption(
+                              label: "Delivery",
+                              selected: selectedDelivery == "Delivery",
+                              onTap: () {
+                                setState(() {
+                                  selectedDelivery = "Delivery";
+                                });
+                              },
+                            ),
+                            _SelectOption(
+                              label: "Drive thru",
+                              selected: selectedDelivery == "Drive thru",
+                              onTap: () {
+                                setState(() {
+                                  selectedDelivery = "Drive thru";
+                                });
+                              },
+                            ),
+                          ]
+                        : [],
+                  ),
+                  _DividerLine(),
+
+                  // PRICE (expandable with slider)
+                  _ExpandableSection(
+                    expanded: priceExpanded,
+                    onTap: () => setState(() => priceExpanded = !priceExpanded),
+                    icon: SvgPicture.asset(
+                      'assets/icons/ic_dollar.svg',
+                      width: 24,
+                      height: 24,
+                    ),
+                    title: "Price",
+                    showClear: priceExpanded,
+                    onClear: () {
+                      setState(() {
+                        priceRange = const RangeValues(0, 2);
+                      });
+                    },
+                    children: priceExpanded
+                        ? [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _CustomRangeSlider(
+                                    range: priceRange,
+                                    min: 0,
+                                    max: 4,
+                                    divisions: 4,
+                                    labels: priceLabels,
+                                    onChanged: (RangeValues newRange) {
+                                      setState(() => priceRange = newRange);
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ]
+                        : [],
+                  ),
+                  _DividerLine(),
+
+                  // RATING (expandable with slider)
+                  _ExpandableSection(
+                    expanded: ratingExpanded,
+                    onTap: () => setState(() => ratingExpanded = !ratingExpanded),
+                    icon: SvgPicture.asset(
+                      'assets/icons/ic_star.svg',
+                      width: 24,
+                      height: 24,
+                    ),
+                    title: "Rating",
+                    children: ratingExpanded
+                        ? [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _CustomMarkSlider(
+                                    value: ratingValue,
+                                    marks: ratingMarks,
+                                    onChanged: (double v) => setState(() => ratingValue = v),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ]
+                        : [],
+                  ),
+                  _DividerLine(),
+
+                  // Under 30 min
+                  _CheckableCell(
+                    icon: SvgPicture.asset(
+                      'assets/icons/ic_clock_time.svg',
+                      width: 24,
+                      height: 24,
+                    ),
+                    title: "Under 30 min",
+                    checked: under30Min,
+                    onChanged: (val) => setState(() => under30Min = val),
+                  ),
+                  _DividerLine(),
+                  _CheckableCell(
+                    icon: SvgPicture.asset(
+                      'assets/icons/ic_sale.svg',
+                      width: 24,
+                      height: 24,
+                    ),
+                    title: "Offers",
+                    checked: offers,
+                    onChanged: (val) => setState(() => offers = val),
+                  ),
+
+                  const SizedBox(height: 16),
+                ],
+              ),
+            ),
+          ),
+
+          // View results button
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+            child: SizedBox(
+              width: double.infinity,
+              height: 48,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF5856D7),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                  elevation: 0,
+                ),
+                onPressed: () {},
+                child: const Text(
+                  'View results',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          // Home indicator
+          const SizedBox(height: 8),
+          Container(
+            width: 134,
+            height: 5,
+            decoration: BoxDecoration(
+              color: Color(0xFF161A1D),
+              borderRadius: BorderRadius.circular(100),
+            ),
+          ),
+          const SizedBox(height: 16),
+        ],
+      ),
+    );
+  }
+}
+
+// Section expandable cell
+class _ExpandableSection extends StatelessWidget {
+  final bool expanded;
+  final VoidCallback onTap;
+  final Widget icon;
+  final String title;
+  final bool showClear;
+  final VoidCallback? onClear;
+  final List<Widget> children;
+
+  const _ExpandableSection({
+    required this.expanded,
+    required this.onTap,
+    required this.icon,
+    required this.title,
+    this.showClear = false,
+    this.onClear,
+    this.children = const [],
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    Widget arrowIcon(bool expanded) => Icon(
+          expanded ? Icons.keyboard_arrow_up_rounded : Icons.keyboard_arrow_down_rounded,
+          color: const Color(0xFF798A9A),
+        );
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: onTap,
+          child: Container(
+            height: 48,
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Row(
+              children: [
+                icon,
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      color: Color(0xFF161A1D),
+                    ),
+                  ),
+                ),
+                if (showClear && onClear != null)
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Color(0xFF798A9A),
+                      padding: EdgeInsets.zero,
+                      minimumSize: Size(0, 0),
+                    ),
+                    onPressed: onClear,
+                    child: const Text(
+                      "Clear",
+                      style: TextStyle(fontSize: 14),
+                    ),
+                  ),
+                arrowIcon(expanded),
+              ],
+            ),
+          ),
+        ),
+        ...children,
+      ],
+    );
+  }
+}
+
+// Divider line
+class _DividerLine extends StatelessWidget {
+  const _DividerLine();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: 56),
+      height: 1,
+      color: Color(0xFFE8EBEE),
+    );
+  }
+}
+
+// Widget chọn lựa option nhỏ (ví dụ: Delivery method)
+class _SelectOption extends StatelessWidget {
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+  final bool enabled;
+  const _SelectOption({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+    this.enabled = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Opacity(
+      opacity: enabled ? 1.0 : 0.4,
+      child: InkWell(
+        onTap: enabled ? onTap : null,
+        child: Container(
+          height: 48,
+          padding: const EdgeInsets.symmetric(horizontal: 56),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16,
+                    color: selected ? Color(0xFF161A1D) : Color(0xFF798A9A),
+                  ),
+                ),
+              ),
+              if (selected) Icon(Icons.check, color: Color(0xFF161A1D), size: 22)
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// --- Price: Custom Range Slider với các label đô la
+class _CustomRangeSlider extends StatelessWidget {
+  final RangeValues range;
+  final double min;
+  final double max;
+  final int divisions;
+  final List<String> labels;
+  final ValueChanged<RangeValues> onChanged;
+
+  const _CustomRangeSlider({
+    required this.range,
+    required this.min,
+    required this.max,
+    required this.divisions,
+    required this.labels,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // Labels
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: List.generate(labels.length, (i) {
+            return Text(
+              labels[i],
+              style: const TextStyle(
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+                color: Color(0xFF161A1D),
+              ),
+            );
+          }),
+        ),
+        const SizedBox(height: 12),
+        // Slider
+        SliderTheme(
+          data: SliderTheme.of(context).copyWith(
+            trackHeight: 8,
+            activeTrackColor: Color(0xFF5856D7),
+            inactiveTrackColor: Color(0xFFE8EBEE),
+            thumbColor: Colors.white,
+            overlayColor: Color(0x205856D7),
+            // rangeThumbShape: _CustomRangeThumbShape(),
+            // rangeTrackShape: const _CustomRangeTrackShape(),
+            overlayShape: SliderComponentShape.noOverlay,
+          ),
+          child: RangeSlider(
+            values: range,
+            min: min,
+            max: max,
+            divisions: divisions,
+            onChanged: onChanged,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _CustomMarkSlider extends StatelessWidget {
+  final double value;
+  final List<double> marks;
+  final ValueChanged<double> onChanged;
+
+  const _CustomMarkSlider({
+    required this.value,
+    required this.marks,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final labelWidgets = marks
+        .map((m) => Text(
+              m == m.toInt() ? "${m.toInt()}+" : "${m.toStringAsFixed(1)}+",
+              style: const TextStyle(
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+                color: Color(0xFF161A1D),
+              ),
+            ))
+        .toList();
+
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: labelWidgets,
+        ),
+        const SizedBox(height: 12),
+        SliderTheme(
+          data: SliderTheme.of(context).copyWith(
+            trackHeight: 8,
+            activeTrackColor: Color(0xFF5856D7),
+            inactiveTrackColor: Color(0xFFE8EBEE),
+            thumbColor: Colors.white,
+            overlayColor: Color(0x205856D7),
+            // thumbShape: _CustomThumbShape(),
+            // trackShape: const _CustomTrackShape(),
+            overlayShape: SliderComponentShape.noOverlay,
+          ),
+          child: Slider(
+            value: value,
+            min: marks.first,
+            max: marks.last,
+            divisions: marks.length - 1,
+            label: value.toString(),
+            onChanged: onChanged,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _CheckableCell extends StatelessWidget {
+  final Widget icon;
+  final String title;
+  final bool checked;
+  final ValueChanged<bool> onChanged;
+
+  const _CheckableCell({
+    required this.icon,
+    required this.title,
+    required this.checked,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => onChanged(!checked),
+      child: Container(
+        height: 48,
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Row(
+          children: [
+            icon,
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                  color: checked ? const Color(0xFF161A1D) : const Color(0xFF4A5763),
+                ),
+              ),
+            ),
+            if (checked) const Icon(Icons.check, color: Color(0xFF161A1D), size: 20),
+          ],
+        ),
+      ),
+    );
+  }
+}
