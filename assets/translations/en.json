@@ -1,6 +1,11 @@
 {
     "root": {
-        "title": "Six Mart Hello"
+        "title": "Six Mart Hello",
+        "home": "Home",
+        "service": "Service",
+        "cart": "Cart",
+        "wallet": "Wallet",
+        "account": "Account"
     },
     "base": {
         "error": {
