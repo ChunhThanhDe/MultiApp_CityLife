@@ -11,7 +11,7 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_header.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/components/term_of_service.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/accept_tos.dart';
-import 'package:sixam_mart_user/presentation/shared/app_button.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 import 'verification_controller.dart';

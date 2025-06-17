@@ -10,7 +10,7 @@ import 'package:sixam_mart_user/presentation/modules/delivery/components/deliver
 import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_select_box_row.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_show_product_image_dialog.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
-import 'package:sixam_mart_user/presentation/shared/app_bar_basic.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 
 import 'box_delivery_controller.dart';
 

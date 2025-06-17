@@ -1,26 +1,88 @@
 import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/theme.dart';
 
+/// A customizable button widget with tap animations, loading states, and accessibility support.
+///
+/// This widget provides a Material Design button with scale animation on tap,
+/// loading state management, customizable appearance, and proper accessibility semantics.
+/// The button scales down when pressed and provides visual feedback to users.
+///
+/// Features:
+/// - Scale animation on tap with customizable curve and scale factor
+/// - Loading state with circular progress indicator
+/// - Enable/disable state management
+/// - Customizable colors, shape, padding, and elevation
+/// - Accessibility support with semantic labels
+/// - Size constraints and intrinsic sizing
+///
+/// Example usage:
+/// ```dart
+/// AppButton(
+///   onTap: () => print('Button pressed'),
+///   child: Text('Press Me'),
+///   loading: false,
+///   enabled: true,
+/// )
+/// ```
 class AppButton extends StatefulWidget {
+  /// The widget to display inside the button.
   final Widget child;
+
+  /// Callback function triggered when the button is tapped.
   final VoidCallback onTap;
+
+  /// Optional callback function triggered when the button is long pressed.
   final VoidCallback? onLongPress;
+
+  /// Duration of the scale animation when the button is pressed.
   final Duration duration;
+
+  /// Background color of the button. Defaults to brand primary color.
   final Color? color;
+
+  /// Background color when the button is disabled.
   final Color? disabledColor;
+
+  /// Elevation of the button (shadow depth).
   final double? elevation;
+
+  /// Border radius geometry for the button shape.
   final BorderRadiusGeometry? borderRadius;
+
+  /// Custom shape for the button. Overrides borderRadius if provided.
   final ShapeBorder? shape;
+
+  /// Internal padding of the button content.
   final EdgeInsetsGeometry? padding;
+
+  /// Whether the button is enabled and can be pressed.
   final bool enabled;
+
+  /// Whether the button is in loading state (shows circular progress indicator).
   final bool loading;
+
+  /// Animation curve used for the scale transition.
   final Curve curve;
+
+  /// Scale factor applied when the button is pressed (0.0 to 1.0).
   final double scale;
+
+  /// Accessibility label for screen readers.
   final String? semanticLabel;
+
+  /// Size constraints for the button.
   final BoxConstraints? constraints;
+
+  /// Fixed width of the button. If null, uses intrinsic width.
   final double? width;
+
+  /// Fixed height of the button. If null, uses intrinsic height.
   final double? height;
 
+  /// Creates an [AppButton] with the specified properties.
+  ///
+  /// The [onTap] and [child] parameters are required.
+  /// All other parameters have sensible defaults.
   const AppButton({
     super.key,
     required this.onTap,
@@ -47,9 +109,15 @@ class AppButton extends StatefulWidget {
   State<AppButton> createState() => _AppButtonState();
 }
 
+/// Private state class for [AppButton] that handles animation and tap logic.
 class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMixin {
+  /// Animation controller for the scale animation.
   late AnimationController _controller;
+
+  /// Scale animation that transitions between 1.0 and the specified scale factor.
   late Animation<double> _animation;
+
+  /// Flag to prevent multiple simultaneous animations.
   bool _isAnimating = false;
 
   @override
@@ -81,6 +149,8 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
     super.dispose();
   }
 
+  /// Handles tap events by triggering the scale animation.
+  /// Prevents multiple simultaneous animations and respects enabled/loading states.
   void _handleTap() {
     if (_isAnimating || !widget.enabled || widget.loading) return;
     _isAnimating = true;

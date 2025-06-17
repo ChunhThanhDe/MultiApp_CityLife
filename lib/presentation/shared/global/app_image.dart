@@ -8,37 +8,136 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show ImmutableBuffer, rootBundle;
 
-enum ImageSource { network, asset, file }
+/// Defines the source type for image loading.
+///
+/// This enum specifies where the image data should be loaded from,
+/// which determines the appropriate loading mechanism to use.
+enum ImageSource {
+  /// Load image from a network URL
+  network,
 
-enum ImageLoadingState { loading, retrying, success, error }
+  /// Load image from application assets
+  asset,
 
+  /// Load image from local file system
+  file
+}
+
+/// Represents the current state of image loading operations.
+///
+/// This enum tracks the progress of image loading with retry functionality,
+/// allowing UI components to respond appropriately to different states.
+enum ImageLoadingState {
+  /// Image is currently being loaded for the first time
+  loading,
+
+  /// Image loading failed and is being retried
+  retrying,
+
+  /// Image loaded successfully
+  success,
+
+  /// Image loading failed after all retry attempts
+  error
+}
+
+/// Holds the current state information for image loading operations.
+///
+/// This class combines the loading state with retry count information
+/// to provide comprehensive status tracking for image loading operations.
 class ImageState {
+  /// The current loading state of the image.
   final ImageLoadingState state;
+
+  /// The number of retry attempts made so far.
   final int retryCount;
 
+  /// Creates an [ImageState] with the specified state and retry count.
+  ///
+  /// [state] The current loading state.
+  /// [retryCount] The number of retries attempted (defaults to 0).
   const ImageState({required this.state, this.retryCount = 0});
 }
 
+/// Internal constants used by the image loading system.
+///
+/// This class defines default values for retry logic, timing, and animations
+/// used throughout the image loading implementation.
 class _ImageConstants {
+  /// Maximum number of retry attempts for failed image loads.
   static const int maxRetries = 3;
+
+  /// Initial delay between retry attempts.
   static const Duration retryDelay = Duration(seconds: 1);
+
+  /// Maximum delay between retry attempts (with exponential backoff).
   static const Duration maxRetryDelay = Duration(seconds: 3);
+
+  /// Multiplier for exponential backoff delay calculation.
   static const double backoffFactor = 2.0;
+
+  /// Duration of the fade-in animation when image loads successfully.
   static const Duration fadeInDuration = Duration(milliseconds: 300);
 }
 
+/// A robust image provider with retry logic, caching, and error handling capabilities.
+///
+/// This image provider extends Flutter's [ImageProvider] to add enterprise-grade
+/// features like automatic retry on failure, exponential backoff, caching control,
+/// and comprehensive error handling. It supports loading from multiple sources
+/// including network URLs, local assets, files, and other image providers.
+///
+/// Features:
+/// - Automatic retry with exponential backoff
+/// - Configurable retry limits and timing
+/// - Support for multiple image sources (network, asset, file, provider)
+/// - Caching control for network images
+/// - Error image fallback support
+/// - State notifications for UI updates
+/// - Comprehensive error logging
+///
+/// Example usage:
+/// ```dart
+/// final provider = AppImageProvider.network(
+///   'https://example.com/image.jpg',
+///   maxRetries: 3,
+///   errorImageAsset: 'assets/images/error.png',
+/// );
+///
+/// Image(image: provider)
+/// ```
 class AppImageProvider extends ImageProvider<AppImageProvider> {
+  /// The path or URL of the image to load.
   final String? imagePath;
+
+  /// The source type of the image (network, asset, or file).
   final ImageSource? source;
+
+  /// An existing image provider to wrap with retry functionality.
   final ImageProvider? imageProvider;
+
+  /// Maximum number of retry attempts for failed loads.
   final int maxRetries;
+
+  /// Initial delay between retry attempts.
   final Duration retryDelay;
+
+  /// Maximum delay between retry attempts.
   final Duration maxRetryDelay;
+
+  /// Multiplier for exponential backoff calculation.
   final double backoffFactor;
+
+  /// Asset path for fallback image when loading fails.
   final String? errorImageAsset;
+
+  /// Whether to use caching for network images.
   final bool useCache;
+
+  /// Notifier for image loading state changes.
   final ValueNotifier<ImageState> stateNotifier;
 
+  /// Private constructor for internal use by factory methods.
   AppImageProvider._({
     this.imagePath,
     this.source,
@@ -56,6 +155,19 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
           'Either imageProvider or both imagePath and source must be provided',
         );
 
+  /// Creates an image provider for loading network images.
+  ///
+  /// This factory method creates a provider specifically configured for
+  /// loading images from network URLs with caching and retry support.
+  ///
+  /// [url] The network URL of the image to load.
+  /// [maxRetries] Maximum retry attempts (defaults to 3).
+  /// [retryDelay] Initial delay between retries.
+  /// [maxRetryDelay] Maximum delay with exponential backoff.
+  /// [backoffFactor] Multiplier for exponential backoff.
+  /// [errorImageAsset] Asset path for error fallback image.
+  /// [useCache] Whether to cache the network image.
+  /// [stateNotifier] Optional external state notifier.
   factory AppImageProvider.network(
     String url, {
     int maxRetries = _ImageConstants.maxRetries,
@@ -79,6 +191,18 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
     );
   }
 
+  /// Creates an image provider for loading asset images.
+  ///
+  /// This factory method creates a provider for loading images from
+  /// the application's asset bundle with retry support.
+  ///
+  /// [path] The asset path of the image to load.
+  /// [maxRetries] Maximum retry attempts (defaults to 3).
+  /// [retryDelay] Initial delay between retries.
+  /// [maxRetryDelay] Maximum delay with exponential backoff.
+  /// [backoffFactor] Multiplier for exponential backoff.
+  /// [errorImageAsset] Asset path for error fallback image.
+  /// [stateNotifier] Optional external state notifier.
   factory AppImageProvider.asset(
     String path, {
     int maxRetries = _ImageConstants.maxRetries,
@@ -100,6 +224,18 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
     );
   }
 
+  /// Creates an image provider for loading file images.
+  ///
+  /// This factory method creates a provider for loading images from
+  /// the local file system with retry support.
+  ///
+  /// [path] The file path of the image to load.
+  /// [maxRetries] Maximum retry attempts (defaults to 3).
+  /// [retryDelay] Initial delay between retries.
+  /// [maxRetryDelay] Maximum delay with exponential backoff.
+  /// [backoffFactor] Multiplier for exponential backoff.
+  /// [errorImageAsset] Asset path for error fallback image.
+  /// [stateNotifier] Optional external state notifier.
   factory AppImageProvider.file(
     String path, {
     int maxRetries = _ImageConstants.maxRetries,
@@ -121,6 +257,18 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
     );
   }
 
+  /// Creates an image provider that wraps an existing provider with retry functionality.
+  ///
+  /// This factory method allows wrapping any existing [ImageProvider] with
+  /// the retry and error handling capabilities of [AppImageProvider].
+  ///
+  /// [provider] The existing image provider to wrap.
+  /// [maxRetries] Maximum retry attempts (defaults to 3).
+  /// [retryDelay] Initial delay between retries.
+  /// [maxRetryDelay] Maximum delay with exponential backoff.
+  /// [backoffFactor] Multiplier for exponential backoff.
+  /// [errorImageAsset] Asset path for error fallback image.
+  /// [stateNotifier] Optional external state notifier.
   factory AppImageProvider.provider(
     ImageProvider provider, {
     int maxRetries = _ImageConstants.maxRetries,
@@ -141,6 +289,7 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
     );
   }
 
+  /// Current retry attempt counter.
   int _currentRetry = 0;
 
   @override
@@ -338,25 +487,89 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
       );
 }
 
+/// A comprehensive image widget with advanced loading capabilities and error handling.
+///
+/// This widget provides a robust image display solution with features like:
+/// - Multiple image sources (network, asset, file, provider)
+/// - Automatic retry with exponential backoff
+/// - Customizable placeholder and error widgets
+/// - Smooth fade-in animations
+/// - Accessibility support with alt text
+/// - Loading state management and notifications
+/// - Comprehensive error handling with fallback options
+///
+/// The widget automatically handles loading states, displays placeholders during loading,
+/// and shows error widgets or fallback images when loading fails. It supports both
+/// synchronous (asset, file) and asynchronous (network) image loading with consistent behavior.
+///
+/// Example usage:
+/// ```dart
+/// AppImage.network(
+///   'https://example.com/image.jpg',
+///   width: 200,
+///   height: 200,
+///   placeholder: CircularProgressIndicator(),
+///   errorWidget: Icon(Icons.error),
+///   altText: 'Profile picture',
+/// )
+/// ```
 class AppImage extends StatefulWidget {
+  /// The path or URL of the image to load.
   final String? imagePath;
+
+  /// The source type of the image (network, asset, or file).
   final ImageSource? source;
+
+  /// An existing image provider to use instead of creating one from path/source.
   final ImageProvider? imageProvider;
+
+  /// Maximum number of retry attempts for failed loads.
   final int maxRetries;
+
+  /// Initial delay between retry attempts.
   final Duration retryDelay;
+
+  /// Maximum delay between retry attempts with exponential backoff.
   final Duration maxRetryDelay;
+
+  /// Multiplier for exponential backoff calculation.
   final double backoffFactor;
+
+  /// Widget to display while the image is loading.
   final Widget placeholder;
+
+  /// Widget to display when image loading fails (if no error asset is provided).
   final Widget errorWidget;
+
+  /// Asset path for fallback image when loading fails.
   final String? errorImageAsset;
+
+  /// How the image should be inscribed into the available space.
   final BoxFit fit;
+
+  /// Width of the image widget. If null, uses intrinsic width.
   final double? width;
+
+  /// Height of the image widget. If null, uses intrinsic height.
   final double? height;
+
+  /// Whether to use caching for network images.
   final bool useCache;
+
+  /// Alternative text for accessibility (screen readers).
   final String? altText;
+
+  /// Duration of the fade-in animation when image loads.
   final Duration fadeInDuration;
+
+  /// Optional external state notifier for monitoring loading state.
   final ValueNotifier<ImageState>? stateNotifier;
 
+  /// Private constructor for internal use by factory methods.
+  ///
+  /// This constructor contains the core logic and validation for creating
+  /// an AppImage instance. It ensures that either an imageProvider or
+  /// both imagePath and source are provided.
   const AppImage._({
     super.key,
     this.imagePath,
@@ -381,6 +594,28 @@ class AppImage extends StatefulWidget {
           'Either imageProvider or both imagePath and source must be provided',
         );
 
+  /// Creates an AppImage widget for loading network images.
+  ///
+  /// This factory constructor creates an image widget specifically for loading
+  /// images from network URLs. It includes built-in caching, retry logic,
+  /// and error handling for unreliable network conditions.
+  ///
+  /// [url] The network URL of the image to load.
+  /// [key] Optional widget key for Flutter's widget tree.
+  /// [maxRetries] Maximum retry attempts for failed loads.
+  /// [retryDelay] Initial delay between retry attempts.
+  /// [maxRetryDelay] Maximum delay with exponential backoff.
+  /// [backoffFactor] Multiplier for exponential backoff.
+  /// [placeholder] Widget to show while loading.
+  /// [errorWidget] Widget to show on error (if no error asset).
+  /// [errorImageAsset] Asset path for error fallback image.
+  /// [fit] How the image should fit within its bounds.
+  /// [width] Fixed width for the image.
+  /// [height] Fixed height for the image.
+  /// [useCache] Whether to cache the network image.
+  /// [altText] Accessibility text for screen readers.
+  /// [fadeInDuration] Duration of fade-in animation.
+  /// [stateNotifier] Optional external state notifier.
   factory AppImage.network(
     String url, {
     Key? key,
@@ -420,6 +655,28 @@ class AppImage extends StatefulWidget {
     );
   }
 
+  /// Creates an AppImage widget for loading asset images.
+  ///
+  /// This factory constructor creates an image widget for loading images
+  /// from the application's asset bundle. While asset loading is typically
+  /// reliable, this still provides retry logic for edge cases and consistent
+  /// error handling across all image sources.
+  ///
+  /// [path] The asset path of the image to load (e.g., 'assets/images/logo.png').
+  /// [key] Optional widget key for Flutter's widget tree.
+  /// [maxRetries] Maximum retry attempts for failed loads.
+  /// [retryDelay] Initial delay between retry attempts.
+  /// [maxRetryDelay] Maximum delay with exponential backoff.
+  /// [backoffFactor] Multiplier for exponential backoff.
+  /// [placeholder] Widget to show while loading.
+  /// [errorWidget] Widget to show on error (if no error asset).
+  /// [errorImageAsset] Asset path for error fallback image.
+  /// [fit] How the image should fit within its bounds.
+  /// [width] Fixed width for the image.
+  /// [height] Fixed height for the image.
+  /// [altText] Accessibility text for screen readers.
+  /// [fadeInDuration] Duration of fade-in animation.
+  /// [stateNotifier] Optional external state notifier.
   factory AppImage.asset(
     String path, {
     Key? key,
@@ -457,6 +714,27 @@ class AppImage extends StatefulWidget {
     );
   }
 
+  /// Creates an AppImage widget for loading file images.
+  ///
+  /// This factory constructor creates an image widget for loading images
+  /// from the local file system. This is useful for user-generated content,
+  /// cached images, or images stored in the device's file system.
+  ///
+  /// [path] The file path of the image to load (e.g., '/path/to/image.jpg').
+  /// [key] Optional widget key for Flutter's widget tree.
+  /// [maxRetries] Maximum retry attempts for failed loads.
+  /// [retryDelay] Initial delay between retry attempts.
+  /// [maxRetryDelay] Maximum delay with exponential backoff.
+  /// [backoffFactor] Multiplier for exponential backoff.
+  /// [placeholder] Widget to show while loading.
+  /// [errorWidget] Widget to show on error (if no error asset).
+  /// [errorImageAsset] Asset path for error fallback image.
+  /// [fit] How the image should fit within its bounds.
+  /// [width] Fixed width for the image.
+  /// [height] Fixed height for the image.
+  /// [altText] Accessibility text for screen readers.
+  /// [fadeInDuration] Duration of fade-in animation.
+  /// [stateNotifier] Optional external state notifier.
   factory AppImage.file(
     String path, {
     Key? key,
@@ -494,6 +772,28 @@ class AppImage extends StatefulWidget {
     );
   }
 
+  /// Creates an AppImage widget that wraps an existing ImageProvider.
+  ///
+  /// This factory constructor allows you to wrap any existing ImageProvider
+  /// with AppImage's advanced features like retry logic, error handling,
+  /// and consistent UI behavior. This is useful when you have custom
+  /// image providers or want to add AppImage features to existing code.
+  ///
+  /// [provider] The existing ImageProvider to wrap.
+  /// [key] Optional widget key for Flutter's widget tree.
+  /// [maxRetries] Maximum retry attempts for failed loads.
+  /// [retryDelay] Initial delay between retry attempts.
+  /// [maxRetryDelay] Maximum delay with exponential backoff.
+  /// [backoffFactor] Multiplier for exponential backoff.
+  /// [placeholder] Widget to show while loading.
+  /// [errorWidget] Widget to show on error (if no error asset).
+  /// [errorImageAsset] Asset path for error fallback image.
+  /// [fit] How the image should fit within its bounds.
+  /// [width] Fixed width for the image.
+  /// [height] Fixed height for the image.
+  /// [altText] Accessibility text for screen readers.
+  /// [fadeInDuration] Duration of fade-in animation.
+  /// [stateNotifier] Optional external state notifier.
   factory AppImage.provider(
     ImageProvider provider, {
     Key? key,
@@ -534,9 +834,23 @@ class AppImage extends StatefulWidget {
   State<AppImage> createState() => _AppImageState();
 }
 
+/// Private state class for [AppImage] that manages loading, animations, and error handling.
+///
+/// This state class handles the complete lifecycle of image loading including:
+/// - Creating and managing the image provider
+/// - Controlling fade-in animations
+/// - Handling loading state changes
+/// - Building appropriate UI based on current state
+/// - Managing accessibility semantics
+/// - Proper resource cleanup
 class _AppImageState extends State<AppImage> with SingleTickerProviderStateMixin {
+  /// The image provider instance that handles loading with retry logic.
   late final AppImageProvider _imageProvider;
+
+  /// Animation controller for the fade-in effect when image loads.
   late final AnimationController _fadeController;
+
+  /// The fade animation that transitions from transparent to opaque.
   late final Animation<double> _fadeAnimation;
 
   @override
@@ -568,6 +882,15 @@ class _AppImageState extends State<AppImage> with SingleTickerProviderStateMixin
     super.dispose();
   }
 
+  /// Builds the error widget with proper accessibility semantics.
+  ///
+  /// This method creates the error display widget when image loading fails.
+  /// It prioritizes showing an error image asset if provided, otherwise
+  /// falls back to the custom error widget. Includes proper accessibility
+  /// semantics for screen readers.
+  ///
+  /// Returns a widget with error image or fallback error widget wrapped
+  /// in accessibility semantics.
   Widget _buildErrorWidget() {
     final errorChild = widget.errorImageAsset != null ? Image.asset(widget.errorImageAsset!, fit: widget.fit, width: widget.width, height: widget.height) : widget.errorWidget;
     return Semantics(

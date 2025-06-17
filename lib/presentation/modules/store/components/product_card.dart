@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_controller.dart';
-import 'package:sixam_mart_user/presentation/shared/app_image.dart';
-import 'package:sixam_mart_user/presentation/shared/app_snackbar.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 class ProductCard extends StatelessWidget {

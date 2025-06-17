@@ -4,7 +4,7 @@ import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_package_information_card.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_tracking_progress.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_travel_history_section.dart';
-import 'package:sixam_mart_user/presentation/shared/app_bar_basic.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 
 import 'track_delivery_controller.dart';
 

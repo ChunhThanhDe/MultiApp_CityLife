@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/service_filter.dart';
 import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
-import 'package:sixam_mart_user/presentation/shared/app_text_field.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_text_field.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 class ServiceHeader extends GetView<ServiceController> {

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ml_card_scanner/ml_card_scanner.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/presentation/shared/app_bar_basic.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 
 import 'scan_card_controller.dart';
 

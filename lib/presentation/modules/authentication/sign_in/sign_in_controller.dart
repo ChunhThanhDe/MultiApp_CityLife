@@ -14,8 +14,8 @@ import 'package:sixam_mart_user/domain/entities/user_auth_info.dart';
 import 'package:sixam_mart_user/domain/models/request/login_request.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
-import 'package:sixam_mart_user/presentation/shared/app_overlay.dart';
-import 'package:sixam_mart_user/presentation/shared/app_snackbar.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_overlay.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 
 enum LoginMethod {
   email('Email', 'email'),

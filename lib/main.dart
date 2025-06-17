@@ -9,7 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/di.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
-import 'package:sixam_mart_user/presentation/shared/app_navigator.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_navigator.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 void main() async {

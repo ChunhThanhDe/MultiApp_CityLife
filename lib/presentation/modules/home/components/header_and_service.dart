@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
-import 'package:sixam_mart_user/presentation/shared/app_image.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 class HeaderAndService extends GetView<HomeController> {

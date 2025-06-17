@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/store_filter_bottom_sheet.dart';
-import 'package:sixam_mart_user/presentation/shared/app_bottom_sheet.dart';
-import 'package:sixam_mart_user/presentation/shared/app_image.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_bottom_sheet.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 class StoreAppBar extends StatelessWidget {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/account/components/account_divider.dart';
-import 'package:sixam_mart_user/presentation/shared/app_bar_basic.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 
 import 'account_2_step_verification_controller.dart';
 

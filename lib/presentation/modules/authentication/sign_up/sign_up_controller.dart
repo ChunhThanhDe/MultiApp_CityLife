@@ -14,8 +14,8 @@ import 'package:sixam_mart_user/domain/entities/user_auth_info.dart';
 import 'package:sixam_mart_user/domain/models/request/sign_up_request.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/accept_tos.dart';
-import 'package:sixam_mart_user/presentation/shared/app_overlay.dart';
-import 'package:sixam_mart_user/presentation/shared/app_snackbar.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_overlay.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 
 enum SignUpMethod { email, phone }
 
