@@ -1,4 +1,4 @@
 class AppStrings {
-  static const String appName = 'Flutter Base';
+  static const String appName = '6amMart';
   static const String baseUrl = 'https://trungnghia.space';
 }

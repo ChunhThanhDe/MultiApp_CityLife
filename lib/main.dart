@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/constants/app_strings.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/di.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
@@ -71,7 +72,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return SixMartTheme(
           child: GetMaterialApp(
-            title: 'Six Mart',
+            title: AppStrings.appName,
             debugShowCheckedModeBanner: false,
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
