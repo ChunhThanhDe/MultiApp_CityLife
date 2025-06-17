@@ -23,46 +23,22 @@ class ServiceScreen extends BaseScreen<ServiceController> {
         SliverBox(child: Divider(color: AppColors.stateGreyLowestHover100, height: 1)),
         SliverBox(height: 16),
         // Service banner section
-        UnifiedBannerWidget(
-          sectionTitle: 'Recently Viewed',
-          items: controller.serviceBannerItems,
-          bannerType: BannerType.bannerFloatingLogo,
-          showArrowIcon: true,
-        ),
+        UnifiedBannerWidget(sectionTitle: 'Recently Viewed', items: controller.serviceBannerItems, bannerType: BannerType.bannerFloatingLogo, showArrowIcon: true),
         SliverBox(height: 16),
         SliverBox(child: SectionBreakDivider()),
         SliverBox(height: 16),
 
         // Service offers with discounts
-        UnifiedBannerWidget(
-          sectionTitle: 'Shops near you',
-          items: controller.serviceOffersItems,
-          bannerType: BannerType.bannerDiscount,
-          showArrowIcon: true,
-        ),
+        UnifiedBannerWidget(sectionTitle: 'Shops near you', items: controller.serviceOffersItems, bannerType: BannerType.bannerDiscount, showArrowIcon: true),
         // SliverBox(height: 16),
         // SliverBox(child: SectionBreakDivider()),
         // SliverBox(height: 16),
 
         // Top service offers
-        UnifiedBannerWidget(
-          sectionTitle: 'Top Offers',
-          items: controller.topServiceOffersItems,
-          bannerType: BannerType.bannerSingleImage,
-        ),
+        UnifiedBannerWidget(sectionTitle: 'Top Offers', items: controller.topServiceOffersItems, bannerType: BannerType.bannerSingleImage),
         SliverBox(height: 32),
-        UnifiedBannerWidget(
-          sectionTitle: 'Top Offers',
-          items: controller.serviceOffersItems,
-          bannerType: BannerType.bannerDiscount,
-          showArrowIcon: true,
-        ),
-        UnifiedBannerWidget(
-          sectionTitle: 'Popular near you',
-          items: controller.serviceOffersItems,
-          bannerType: BannerType.bannerDiscount,
-          showArrowIcon: true,
-        ),
+        UnifiedBannerWidget(sectionTitle: 'Top Offers', items: controller.serviceOffersItems, bannerType: BannerType.bannerDiscount, showArrowIcon: true),
+        UnifiedBannerWidget(sectionTitle: 'Popular near you', items: controller.serviceOffersItems, bannerType: BannerType.bannerDiscount, showArrowIcon: true),
       ],
     );
   }

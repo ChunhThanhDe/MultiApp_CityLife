@@ -2,7 +2,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class  LocaleKeys {
+abstract class LocaleKeys {
   static const root_title = 'root.title';
   static const root = 'root';
   static const base_error_default = 'base.error.default';
@@ -177,5 +177,4 @@ abstract class  LocaleKeys {
   static const wallet_receipt_share = 'wallet.receipt.share';
   static const wallet_receipt = 'wallet.receipt';
   static const wallet = 'wallet';
-
 }

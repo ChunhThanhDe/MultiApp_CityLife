@@ -83,27 +83,13 @@ class AppTextField extends StatelessWidget {
       children: [
         Row(
           children: [
-            label != null
-                ? Text(
-                    label!,
-                    style: labelStyle ?? AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
-                  )
-                : const SizedBox.shrink(),
-            if (isRequired && label != null) ...[
-              const SizedBox(width: 4),
-              Text(
-                '*',
-                style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textDangerDefault500),
-              ),
-            ],
+            label != null ? Text(label!, style: labelStyle ?? AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)) : const SizedBox.shrink(),
+            if (isRequired && label != null) ...[const SizedBox(width: 4), Text('*', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textDangerDefault500))],
             label != null ? const SizedBox(height: 8) : const SizedBox.shrink(),
           ],
         ),
         Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(effectiveRadius),
-          ),
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(effectiveRadius)),
           child: TextFormField(
             autofocus: false,
             controller: controller,
@@ -121,32 +107,20 @@ class AppTextField extends StatelessWidget {
               prefixIcon: prefixIcon,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(effectiveRadius),
-                borderSide: BorderSide(
-                  color: AppColors.stateGreyLowestHover100,
-                  width: 1,
-                ),
+                borderSide: BorderSide(color: AppColors.stateGreyLowestHover100, width: 1),
               ),
               errorStyle: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textDangerDefault500),
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(effectiveRadius),
-                borderSide: BorderSide(
-                  color: AppColors.stateDangerDefault500,
-                  width: 1,
-                ),
+                borderSide: BorderSide(color: AppColors.stateDangerDefault500, width: 1),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(effectiveRadius),
-                borderSide: BorderSide(
-                  color: AppColors.stateGreyLowestHover100,
-                  width: 1,
-                ),
+                borderSide: BorderSide(color: AppColors.stateGreyLowestHover100, width: 1),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(effectiveRadius),
-                borderSide: BorderSide(
-                  color: AppColors.stateBrandDefault500,
-                  width: 1,
-                ),
+                borderSide: BorderSide(color: AppColors.stateBrandDefault500, width: 1),
               ),
               contentPadding: contentPadding ?? const EdgeInsets.all(12),
             ),

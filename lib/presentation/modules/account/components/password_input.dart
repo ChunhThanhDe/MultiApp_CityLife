@@ -7,21 +7,17 @@ class PasswordInput extends StatelessWidget {
   final VoidCallback onToggle;
   final String? Function(String?)? validator;
 
-  const PasswordInput({
-    super.key,
-    required this.label,
-    required this.controller,
-    required this.isObscure,
-    required this.onToggle,
-    this.validator,
-  });
+  const PasswordInput({super.key, required this.label, required this.controller, required this.isObscure, required this.onToggle, this.validator});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF161A1D))),
+        Text(
+          label,
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF161A1D)),
+        ),
         const SizedBox(height: 8),
         TextFormField(
           controller: controller,
@@ -50,11 +46,7 @@ class PasswordInput extends StatelessWidget {
               borderSide: BorderSide(color: Colors.red),
             ),
             suffixIcon: IconButton(
-              icon: Icon(
-                isObscure ? Icons.visibility_off : Icons.visibility,
-                color: Color(0xFFB0BAC4),
-                size: 24,
-              ),
+              icon: Icon(isObscure ? Icons.visibility_off : Icons.visibility, color: Color(0xFFB0BAC4), size: 24),
               onPressed: onToggle,
             ),
           ),

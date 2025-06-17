@@ -3,31 +3,14 @@ import 'package:image_picker/image_picker.dart';
 
 class BoxDeliveryController extends GetxController {
   final RxList<Map<String, String>> savedAddresses = <Map<String, String>>[
-    {
-      'label': 'My Work',
-      'address': '2150 N Waterman Ave, El Centro, CA 92243',
-    },
-    {
-      'label': 'My Home',
-      'address': '2216 N 10th St, Apt 0, El Centro, CA 92243',
-    },
-    {
-      'label': 'Hospital',
-      'address': '385 Main St, El Centro, CA 92243',
-    },
+    {'label': 'My Work', 'address': '2150 N Waterman Ave, El Centro, CA 92243'},
+    {'label': 'My Home', 'address': '2216 N 10th St, Apt 0, El Centro, CA 92243'},
+    {'label': 'Hospital', 'address': '385 Main St, El Centro, CA 92243'},
   ].obs;
 
   final RxList<Map<String, String>> boxData = [
-    {
-      'label': 'Small Box',
-      'desc': '20cm x 20cm\nUpto 10kg',
-      'img': 'assets/images/img_box_delivery.png',
-    },
-    {
-      'label': 'Large Box',
-      'desc': '40cm x 40cm\nUpto 50kg',
-      'img': 'assets/images/img_box_delivery.png',
-    },
+    {'label': 'Small Box', 'desc': '20cm x 20cm\nUpto 10kg', 'img': 'assets/images/img_box_delivery.png'},
+    {'label': 'Large Box', 'desc': '40cm x 40cm\nUpto 50kg', 'img': 'assets/images/img_box_delivery.png'},
   ].obs;
 
   var pickupLocation = ''.obs;

@@ -14,42 +14,33 @@ class RootScreen extends BaseScreen<RootController> {
 
   @override
   Widget? buildBottomNavigationBar(BuildContext context) {
-    return Obx(() => BottomNavigationBar(
-          elevation: 0,
-          enableFeedback: false,
-          selectedItemColor: AppColors.stateBrandDefault500,
-          unselectedItemColor: AppColors.textGreyHighest950,
-          selectedLabelStyle: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.stateBrandDefault500),
-          unselectedLabelStyle: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHighest950),
-          backgroundColor: AppColors.alphaWhite10,
-          type: BottomNavigationBarType.fixed,
-          items: vm.tabs
-              .map((e) => BottomNavigationBarItem(
-                    icon: SizedBox(
-                      width: 20.w,
-                      height: 20.w,
-                      child: SvgPicture.asset(e.iconUnselected),
-                    ),
-                    activeIcon: SizedBox(
-                      width: 20.w,
-                      height: 20.w,
-                      child: SvgPicture.asset(
-                        e.iconSelected,
-                      ),
-                    ),
-                    label: e.label,
-                  ))
-              .toList(),
-          currentIndex: vm.currentTab.value.index,
-          onTap: (index) => vm.changeTab(vm.tabs[index].tab),
-        ));
+    return Obx(
+      () => BottomNavigationBar(
+        elevation: 0,
+        enableFeedback: false,
+        selectedItemColor: AppColors.stateBrandDefault500,
+        unselectedItemColor: AppColors.textGreyHighest950,
+        selectedLabelStyle: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.stateBrandDefault500),
+        unselectedLabelStyle: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHighest950),
+        backgroundColor: AppColors.alphaWhite10,
+        type: BottomNavigationBarType.fixed,
+        items: vm.tabs
+            .map(
+              (e) => BottomNavigationBarItem(
+                icon: SizedBox(width: 20.w, height: 20.w, child: SvgPicture.asset(e.iconUnselected)),
+                activeIcon: SizedBox(width: 20.w, height: 20.w, child: SvgPicture.asset(e.iconSelected)),
+                label: e.label,
+              ),
+            )
+            .toList(),
+        currentIndex: vm.currentTab.value.index,
+        onTap: (index) => vm.changeTab(vm.tabs[index].tab),
+      ),
+    );
   }
 
   @override
   Widget buildScreen(BuildContext context) {
-    return Obx(() => IndexedStack(
-          index: vm.currentTab.value.index,
-          children: vm.tabs.map((e) => e.screen).toList(),
-        ));
+    return Obx(() => IndexedStack(index: vm.currentTab.value.index, children: vm.tabs.map((e) => e.screen).toList()));
   }
 }

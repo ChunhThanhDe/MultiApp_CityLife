@@ -7,9 +7,7 @@ class PickupLocationBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           child: Column(
@@ -19,15 +17,9 @@ class PickupLocationBottomSheet extends StatelessWidget {
                 width: 36,
                 height: 4,
                 margin: EdgeInsets.only(bottom: 16),
-                decoration: BoxDecoration(
-                  color: Color(0xFFEBEBF5),
-                  borderRadius: BorderRadius.circular(2),
-                ),
+                decoration: BoxDecoration(color: Color(0xFFEBEBF5), borderRadius: BorderRadius.circular(2)),
               ),
-              Text(
-                'Pickup Location',
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
-              ),
+              Text('Pickup Location', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
               SizedBox(height: 16),
               // Search Field
               TextField(
@@ -37,23 +29,14 @@ class PickupLocationBottomSheet extends StatelessWidget {
                   filled: true,
                   fillColor: Color(0xFFF7F8F9),
                   contentPadding: EdgeInsets.symmetric(vertical: 8),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(100),
-                    borderSide: BorderSide.none,
-                  ),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(100), borderSide: BorderSide.none),
                 ),
               ),
               SizedBox(height: 16),
               // Saved addresses
               Align(
                 alignment: Alignment.centerLeft,
-                child: Text(
-                  'Saved addresses',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Color(0xFF798A9A),
-                  ),
-                ),
+                child: Text('Saved addresses', style: TextStyle(fontSize: 14, color: Color(0xFF798A9A))),
               ),
               ListTile(
                 title: Text("My Work"),

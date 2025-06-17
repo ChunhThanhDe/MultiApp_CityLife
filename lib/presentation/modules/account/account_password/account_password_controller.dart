@@ -33,11 +33,7 @@ class AccountPasswordController extends BaseController {
   void onChangePassword() {
     if (formKey.currentState?.validate() ?? false) {
       // Call your API or logic here
-      Get.snackbar(
-        "Success",
-        "Your password has been changed.",
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      Get.snackbar("Success", "Your password has been changed.", snackPosition: SnackPosition.BOTTOM);
       // Optionally, clear the fields
       oldController.clear();
       newController.clear();

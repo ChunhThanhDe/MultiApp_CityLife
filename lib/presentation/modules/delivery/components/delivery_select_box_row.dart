@@ -29,18 +29,8 @@ class SelectBoxRowWidget extends StatelessWidget {
                 height: 104,
                 decoration: BoxDecoration(
                   color: isSelected ? Colors.white : const Color(0xFFF7F8F9),
-                  border: Border.all(
-                    color: isSelected ? const Color(0xFF5856D7) : Colors.transparent,
-                    width: 1.5,
-                  ),
-                  boxShadow: isSelected
-                      ? [
-                          const BoxShadow(
-                            color: Color(0x335856D7),
-                            blurRadius: 4,
-                          )
-                        ]
-                      : [],
+                  border: Border.all(color: isSelected ? const Color(0xFF5856D7) : Colors.transparent, width: 1.5),
+                  boxShadow: isSelected ? [const BoxShadow(color: Color(0x335856D7), blurRadius: 4)] : [],
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -55,21 +45,10 @@ class SelectBoxRowWidget extends StatelessWidget {
                           children: [
                             Text(
                               controller.boxData[i]['label']!,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                                color: Color(0xFF161A1D),
-                              ),
+                              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: Color(0xFF161A1D)),
                             ),
                             const SizedBox(height: 4),
-                            Text(
-                              controller.boxData[i]['desc']!,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Color(0xFF4A5763),
-                                height: 1.4,
-                              ),
-                            ),
+                            Text(controller.boxData[i]['desc']!, style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763), height: 1.4)),
                           ],
                         ),
                       ),
@@ -78,11 +57,7 @@ class SelectBoxRowWidget extends StatelessWidget {
                       flex: 8,
                       child: Padding(
                         padding: const EdgeInsets.only(right: 12),
-                        child: Image.asset(
-                          controller.boxData[i]['img']!,
-                          height: 72,
-                          fit: BoxFit.contain,
-                        ),
+                        child: Image.asset(controller.boxData[i]['img']!, height: 72, fit: BoxFit.contain),
                       ),
                     ),
                   ],

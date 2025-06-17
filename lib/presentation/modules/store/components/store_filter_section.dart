@@ -20,12 +20,7 @@ class StoreFilterSection extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
               child: Row(
                 children: [
-                  _buildFilterChip(
-                    FilterType.all.icon,
-                    FilterType.all.label,
-                    isSelected: controller.isFilterSelected(FilterType.all),
-                    onTap: () => controller.selectFilter(FilterType.all),
-                  ),
+                  _buildFilterChip(FilterType.all.icon, FilterType.all.label, isSelected: controller.isFilterSelected(FilterType.all), onTap: () => controller.selectFilter(FilterType.all)),
                   SizedBox(width: 12.w),
                   _buildFilterChip(
                     FilterType.drinks.icon,
@@ -34,12 +29,7 @@ class StoreFilterSection extends StatelessWidget {
                     onTap: () => controller.selectFilter(FilterType.drinks),
                   ),
                   SizedBox(width: 12.w),
-                  _buildFilterChip(
-                    FilterType.foods.icon,
-                    FilterType.foods.label,
-                    isSelected: controller.isFilterSelected(FilterType.foods),
-                    onTap: () => controller.selectFilter(FilterType.foods),
-                  ),
+                  _buildFilterChip(FilterType.foods.icon, FilterType.foods.label, isSelected: controller.isFilterSelected(FilterType.foods), onTap: () => controller.selectFilter(FilterType.foods)),
                   SizedBox(width: 12.w),
                   _buildFilterChip(
                     FilterType.atHome.icon,
@@ -56,47 +46,20 @@ class StoreFilterSection extends StatelessWidget {
     );
   }
 
-  Widget _buildFilterChip(
-    String? iconPath,
-    String label, {
-    bool isSelected = false,
-    VoidCallback? onTap,
-  }) {
+  Widget _buildFilterChip(String? iconPath, String label, {bool isSelected = false, VoidCallback? onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
-        decoration: BoxDecoration(
-          color: isSelected
-              ? AppColors.stateBrandDefault500
-              : AppColors.stateGreyLowest50,
-          borderRadius: BorderRadius.circular(20.r),
-        ),
+        decoration: BoxDecoration(color: isSelected ? AppColors.stateBrandDefault500 : AppColors.stateGreyLowest50, borderRadius: BorderRadius.circular(20.r)),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             if (iconPath != null) ...[
-              SvgPicture.asset(
-                iconPath,
-                width: 20,
-                height: 20,
-                colorFilter: ColorFilter.mode(
-                  isSelected
-                      ? AppColors.textBaseWhite
-                      : AppColors.textGreyHighest950,
-                  BlendMode.srcIn,
-                ),
-              ),
+              SvgPicture.asset(iconPath, width: 20, height: 20, colorFilter: ColorFilter.mode(isSelected ? AppColors.textBaseWhite : AppColors.textGreyHighest950, BlendMode.srcIn)),
               SizedBox(width: 6.w),
             ],
-            Text(
-              label,
-              style: AppTextStyles.typographyH12Medium.copyWith(
-                color: isSelected
-                    ? AppColors.textBaseWhite
-                    : AppColors.textGreyHighest950,
-              ),
-            ),
+            Text(label, style: AppTextStyles.typographyH12Medium.copyWith(color: isSelected ? AppColors.textBaseWhite : AppColors.textGreyHighest950)),
           ],
         ),
       ),

@@ -9,11 +9,7 @@ class ProductCategorySection extends StatelessWidget {
   final String title;
   final List<ProductItem> items;
 
-  const ProductCategorySection({
-    super.key,
-    required this.title,
-    required this.items,
-  });
+  const ProductCategorySection({super.key, required this.title, required this.items});
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +25,8 @@ class ProductCategorySection extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  title,
-                  style: AppTextStyles.typographyH9SemiBold.copyWith(
-                    color: AppColors.textGreyHighest950,
-                  ),
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 16.w,
-                  color: AppColors.textGreyDefault500,
-                ),
+                Text(title, style: AppTextStyles.typographyH9SemiBold.copyWith(color: AppColors.textGreyHighest950)),
+                Icon(Icons.arrow_forward_ios, size: 16.w, color: AppColors.textGreyDefault500),
               ],
             ),
           ),

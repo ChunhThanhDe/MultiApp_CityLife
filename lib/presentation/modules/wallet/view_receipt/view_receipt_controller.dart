@@ -23,11 +23,7 @@ class ViewReceiptController extends BaseController {
       price: 6.59,
       image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190617_CaramelMacchiato.jpg?impolicy=1by1_wide_topcrop_630',
     ),
-    ItemInfo(
-      name: 'Caramel Macchiato',
-      price: 6.59,
-      image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190617_CaramelMacchiato.jpg?impolicy=1by1_wide_topcrop_630',
-    ),
+    ItemInfo(name: 'Caramel Macchiato', price: 6.59, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190617_CaramelMacchiato.jpg?impolicy=1by1_wide_topcrop_630'),
     ItemInfo(
       name: 'Caramel Ribbon Crunch Frappuccino® Blended Beverage',
       price: 6.59,

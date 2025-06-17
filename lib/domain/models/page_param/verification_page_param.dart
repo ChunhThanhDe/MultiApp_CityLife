@@ -1,12 +1,6 @@
-enum VerificationMethod {
-  email,
-  phoneNumber,
-}
+enum VerificationMethod { email, phoneNumber }
 
-enum VerificationType {
-  signIn,
-  signUp,
-}
+enum VerificationType { signIn, signUp }
 
 class VerificationPageParam {
   final VerificationMethod method;

@@ -7,13 +7,7 @@ class TravelHistory {
   final String time;
   final Color color;
 
-  TravelHistory({
-    required this.title,
-    required this.desc,
-    required this.date,
-    required this.time,
-    required this.color,
-  });
+  TravelHistory({required this.title, required this.desc, required this.date, required this.time, required this.color});
 }
 
 class TravelHistorySection extends StatelessWidget {
@@ -28,13 +22,7 @@ class TravelHistorySection extends StatelessWidget {
       margin: EdgeInsets.only(top: 16),
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Color(0x1A101214),
-            blurRadius: 24,
-            offset: Offset(0, 2),
-          ),
-        ],
+        boxShadow: [BoxShadow(color: Color(0x1A101214), blurRadius: 24, offset: Offset(0, 2))],
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: Column(
@@ -45,10 +33,7 @@ class TravelHistorySection extends StatelessWidget {
             child: Container(
               width: 48,
               height: 4,
-              decoration: BoxDecoration(
-                color: Color(0xFFE8EBEE),
-                borderRadius: BorderRadius.circular(99),
-              ),
+              decoration: BoxDecoration(color: Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(99)),
             ),
           ),
           // Label
@@ -59,14 +44,10 @@ class TravelHistorySection extends StatelessWidget {
                 Expanded(
                   child: Text(
                     "Travel history",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18,
-                      color: Color(0xFF161A1D),
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xFF161A1D)),
                   ),
                 ),
-                Icon(Icons.keyboard_arrow_up_rounded, color: Color(0xFF161A1D))
+                Icon(Icons.keyboard_arrow_up_rounded, color: Color(0xFF161A1D)),
               ],
             ),
           ),
@@ -87,19 +68,9 @@ class TravelHistorySection extends StatelessWidget {
                           children: [
                             Text(
                               entry.title,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                color: entry.color,
-                              ),
+                              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14, color: entry.color),
                             ),
-                            Text(
-                              entry.desc,
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Color(0xFF4A5763),
-                              ),
-                            ),
+                            Text(entry.desc, style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
                           ],
                         ),
                       ),
@@ -111,19 +82,9 @@ class TravelHistorySection extends StatelessWidget {
                           children: [
                             Text(
                               entry.date,
-                              style: TextStyle(
-                                fontWeight: i == 0 ? FontWeight.w500 : FontWeight.w400,
-                                fontSize: 14,
-                                color: i == 0 ? Color(0xFF5856D7) : Color(0xFF161A1D),
-                              ),
+                              style: TextStyle(fontWeight: i == 0 ? FontWeight.w500 : FontWeight.w400, fontSize: 14, color: i == 0 ? Color(0xFF5856D7) : Color(0xFF161A1D)),
                             ),
-                            Text(
-                              entry.time,
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Color(0xFF4A5763),
-                              ),
-                            ),
+                            Text(entry.time, style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
                           ],
                         ),
                       ),

@@ -56,8 +56,10 @@ class VerificationScreen extends BaseScreen<VerificationController> {
               children: [
                 Assets.icons.icBackArrow.svg(width: 16.w, height: 16.w, colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn)),
                 SizedBox(width: 8.w),
-                Text(vm.param.type == VerificationType.signIn ? tr(LocaleKeys.authentication_verification_backToLogin) : tr(LocaleKeys.authentication_verification_backToSignUp),
-                    style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.black)),
+                Text(
+                  vm.param.type == VerificationType.signIn ? tr(LocaleKeys.authentication_verification_backToLogin) : tr(LocaleKeys.authentication_verification_backToSignUp),
+                  style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.black),
+                ),
               ],
             ),
           ),
@@ -140,9 +142,7 @@ class VerificationScreen extends BaseScreen<VerificationController> {
       enableActiveFill: true,
       onChanged: vm.updateVerificationCode,
       beforeTextPaste: (text) => true,
-      textStyle: AppTextStyles.typographyH11Regular.copyWith(
-        color: AppColors.textGreyHighest950,
-      ),
+      textStyle: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
     );
   }
 }

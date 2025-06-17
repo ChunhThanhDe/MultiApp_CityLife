@@ -39,10 +39,7 @@ class AnimatedStepIndicator extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: spacing / 2),
           width: index == currentStep ? activeDotWidth : dotWidth,
           height: dotHeight,
-          decoration: BoxDecoration(
-            color: index == currentStep ? effectiveActiveColor : effectiveInactiveColor,
-            borderRadius: BorderRadius.circular(dotHeight / 2),
-          ),
+          decoration: BoxDecoration(color: index == currentStep ? effectiveActiveColor : effectiveInactiveColor, borderRadius: BorderRadius.circular(dotHeight / 2)),
         ),
       ),
     );

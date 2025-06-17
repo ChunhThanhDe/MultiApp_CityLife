@@ -39,10 +39,7 @@ Future<T?> showAppBottomSheet<T>({required Widget child, Function(dynamic)? onCl
 
   final modalRoute = ModalSheetRoute<T>(
     swipeDismissible: true,
-    swipeDismissSensitivity: const SwipeDismissSensitivity(
-      minFlingVelocityRatio: 1,
-      minDragDistance: 200,
-    ),
+    swipeDismissSensitivity: const SwipeDismissSensitivity(minFlingVelocityRatio: 1, minDragDistance: 200),
     builder: (context) => AppBottomSheet(onClosed: onClosed, child: child),
   );
 
@@ -98,11 +95,7 @@ class AppBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sheet(
-      decoration: MaterialSheetDecoration(
-        size: SheetSize.fit,
-        borderRadius: BorderRadius.circular(20),
-        clipBehavior: Clip.antiAlias,
-      ),
+      decoration: MaterialSheetDecoration(size: SheetSize.fit, borderRadius: BorderRadius.circular(20), clipBehavior: Clip.antiAlias),
       child: PopScope(
         canPop: isDismissible,
         onPopInvokedWithResult: (didPop, result) {
@@ -124,9 +117,7 @@ class AppBottomSheet extends StatelessWidget {
                     height: 4,
                     decoration: ShapeDecoration(
                       color: AppColors.stateGreyLowestHover100,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(99),
-                      ),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(99)),
                     ),
                   ),
                 ),

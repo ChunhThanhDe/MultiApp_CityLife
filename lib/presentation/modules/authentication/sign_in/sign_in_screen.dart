@@ -35,10 +35,7 @@ class SignInScreen extends BaseScreen<SignInController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 16.h),
-                  AuthHeader(
-                    title: tr(LocaleKeys.authentication_signIn_title),
-                    subtitle: tr(LocaleKeys.authentication_signIn_subtitle),
-                  ),
+                  AuthHeader(title: tr(LocaleKeys.authentication_signIn_title), subtitle: tr(LocaleKeys.authentication_signIn_subtitle)),
                   SizedBox(height: 24.h),
                   _buildInputField(),
                   SizedBox(height: 24.h),
@@ -55,10 +52,7 @@ class SignInScreen extends BaseScreen<SignInController> {
           Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: AuthBottomSection(
-              isSignIn: true,
-              onTapChange: () => Get.toNamed(AppRoutes.signUp),
-            ),
+            child: AuthBottomSection(isSignIn: true, onTapChange: () => Get.toNamed(AppRoutes.signUp)),
           ),
           SizedBox(height: 16.h),
         ],
@@ -77,21 +71,22 @@ class SignInScreen extends BaseScreen<SignInController> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Obx(() => SvgPicture.asset(
-                vm.loginMethod.value == LoginMethod.email ? Assets.icons.icPhoneIcon.path : Assets.icons.icEmailIcon.path,
-                width: 20.w,
-                height: 20.w,
-                colorFilter: ColorFilter.mode(
-                  AppColors.textGreyHighest950,
-                  BlendMode.srcIn,
-                ),
-              )),
+          Obx(
+            () => SvgPicture.asset(
+              vm.loginMethod.value == LoginMethod.email ? Assets.icons.icPhoneIcon.path : Assets.icons.icEmailIcon.path,
+              width: 20.w,
+              height: 20.w,
+              colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn),
+            ),
+          ),
           SizedBox(width: 8.w),
-          Obx(() => Text(
-                vm.loginMethod.value == LoginMethod.email ? tr(LocaleKeys.authentication_signIn_loginWithPhone) : tr(LocaleKeys.authentication_signIn_loginWithEmail),
-                textAlign: TextAlign.center,
-                style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
-              )),
+          Obx(
+            () => Text(
+              vm.loginMethod.value == LoginMethod.email ? tr(LocaleKeys.authentication_signIn_loginWithPhone) : tr(LocaleKeys.authentication_signIn_loginWithEmail),
+              textAlign: TextAlign.center,
+              style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
+            ),
+          ),
         ],
       ),
     );
@@ -100,53 +95,30 @@ class SignInScreen extends BaseScreen<SignInController> {
   Row _buildOrDivider() {
     return Row(
       children: [
-        const Expanded(
-          child: Divider(
-            color: Color(0xFFE8EBEE),
-            thickness: 1,
-          ),
-        ),
+        const Expanded(child: Divider(color: Color(0xFFE8EBEE), thickness: 1)),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Text(
-            tr(LocaleKeys.authentication_signIn_or),
-            style: AppTextStyles.typographyH12Medium.copyWith(color: AppColors.textGreyHigh700),
-          ),
+          child: Text(tr(LocaleKeys.authentication_signIn_or), style: AppTextStyles.typographyH12Medium.copyWith(color: AppColors.textGreyHigh700)),
         ),
-        Expanded(
-          child: Divider(
-            color: AppColors.stateBrandLowestHover100,
-            thickness: 1,
-          ),
-        ),
+        Expanded(child: Divider(color: AppColors.stateBrandLowestHover100, thickness: 1)),
       ],
     );
   }
 
   AppButton _buildLoginButton() {
     return AppButton(
-        onTap: vm.onSubmit,
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const SizedBox(),
-            Text(
-              tr(LocaleKeys.authentication_signIn_loginButton),
-              style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white),
-            ),
-            SvgPicture.asset(
-              Assets.icons.icRightArrow.path,
-              width: 12.w,
-              height: 12.w,
-              colorFilter: const ColorFilter.mode(
-                Colors.white,
-                BlendMode.srcIn,
-              ),
-            ),
-          ],
-        ));
+      onTap: vm.onSubmit,
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const SizedBox(),
+          Text(tr(LocaleKeys.authentication_signIn_loginButton), style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white)),
+          SvgPicture.asset(Assets.icons.icRightArrow.path, width: 12.w, height: 12.w, colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn)),
+        ],
+      ),
+    );
   }
 
   Form _buildInputField() {
@@ -174,12 +146,7 @@ class SignInScreen extends BaseScreen<SignInController> {
       hintText: tr(LocaleKeys.authentication_signIn_emailHint),
       suffixIcon: Padding(
         padding: const EdgeInsets.all(14),
-        child: Assets.icons.icEmailIcon.svg(
-          colorFilter: ColorFilter.mode(
-            AppColors.textGreyLow300,
-            BlendMode.srcIn,
-          ),
-        ),
+        child: Assets.icons.icEmailIcon.svg(colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn)),
       ),
       keyboardType: TextInputType.emailAddress,
       validator: (value) {
@@ -202,9 +169,7 @@ class SignInScreen extends BaseScreen<SignInController> {
       hintText: tr(LocaleKeys.authentication_signIn_passwordHint),
       suffixIcon: Padding(
         padding: const EdgeInsets.all(14),
-        child: Assets.icons.icLock.svg(
-          colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn),
-        ),
+        child: Assets.icons.icLock.svg(colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn)),
       ),
       obscureText: true,
       validator: (value) {

@@ -43,10 +43,7 @@ class _FilterScreenState extends State<FilterScreen> {
           Container(
             width: 48,
             height: 4,
-            decoration: BoxDecoration(
-              color: Color(0xFFE8EBEE),
-              borderRadius: BorderRadius.circular(99),
-            ),
+            decoration: BoxDecoration(color: Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(99)),
           ),
           const SizedBox(height: 16),
           // Header
@@ -56,12 +53,7 @@ class _FilterScreenState extends State<FilterScreen> {
               children: [
                 const Text(
                   'Short & Filter',
-                  style: TextStyle(
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                    color: Color(0xFF161A1D),
-                  ),
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 20, color: Color(0xFF161A1D)),
                 ),
                 const Spacer(),
                 TextButton(
@@ -75,11 +67,7 @@ class _FilterScreenState extends State<FilterScreen> {
                       offers = false;
                     });
                   },
-                  style: TextButton.styleFrom(
-                    foregroundColor: Color(0xFF798A9A),
-                    padding: EdgeInsets.zero,
-                    minimumSize: Size(0, 0),
-                  ),
+                  style: TextButton.styleFrom(foregroundColor: Color(0xFF798A9A), padding: EdgeInsets.zero, minimumSize: Size(0, 0)),
                   child: const Text('Clear all', style: TextStyle(fontSize: 14)),
                 ),
               ],
@@ -95,11 +83,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   _ExpandableSection(
                     expanded: deliveryExpanded,
                     onTap: () => setState(() => deliveryExpanded = !deliveryExpanded),
-                    icon: SvgPicture.asset(
-                      'assets/icons/ic_car_black.svg',
-                      width: 24,
-                      height: 24,
-                    ),
+                    icon: SvgPicture.asset('assets/icons/ic_car_black.svg', width: 24, height: 24),
                     title: "Delivery",
                     children: deliveryExpanded
                         ? [
@@ -139,11 +123,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   _ExpandableSection(
                     expanded: priceExpanded,
                     onTap: () => setState(() => priceExpanded = !priceExpanded),
-                    icon: SvgPicture.asset(
-                      'assets/icons/ic_dollar.svg',
-                      width: 24,
-                      height: 24,
-                    ),
+                    icon: SvgPicture.asset('assets/icons/ic_dollar.svg', width: 24, height: 24),
                     title: "Price",
                     showClear: priceExpanded,
                     onClear: () {
@@ -180,11 +160,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   _ExpandableSection(
                     expanded: ratingExpanded,
                     onTap: () => setState(() => ratingExpanded = !ratingExpanded),
-                    icon: SvgPicture.asset(
-                      'assets/icons/ic_star.svg',
-                      width: 24,
-                      height: 24,
-                    ),
+                    icon: SvgPicture.asset('assets/icons/ic_star.svg', width: 24, height: 24),
                     title: "Rating",
                     children: ratingExpanded
                         ? [
@@ -192,13 +168,7 @@ class _FilterScreenState extends State<FilterScreen> {
                               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  _CustomMarkSlider(
-                                    value: ratingValue,
-                                    marks: ratingMarks,
-                                    onChanged: (double v) => setState(() => ratingValue = v),
-                                  ),
-                                ],
+                                children: [_CustomMarkSlider(value: ratingValue, marks: ratingMarks, onChanged: (double v) => setState(() => ratingValue = v))],
                               ),
                             ),
                           ]
@@ -208,26 +178,13 @@ class _FilterScreenState extends State<FilterScreen> {
 
                   // Under 30 min
                   _CheckableCell(
-                    icon: SvgPicture.asset(
-                      'assets/icons/ic_clock_time.svg',
-                      width: 24,
-                      height: 24,
-                    ),
+                    icon: SvgPicture.asset('assets/icons/ic_clock_time.svg', width: 24, height: 24),
                     title: "Under 30 min",
                     checked: under30Min,
                     onChanged: (val) => setState(() => under30Min = val),
                   ),
                   _DividerLine(),
-                  _CheckableCell(
-                    icon: SvgPicture.asset(
-                      'assets/icons/ic_sale.svg',
-                      width: 24,
-                      height: 24,
-                    ),
-                    title: "Offers",
-                    checked: offers,
-                    onChanged: (val) => setState(() => offers = val),
-                  ),
+                  _CheckableCell(icon: SvgPicture.asset('assets/icons/ic_sale.svg', width: 24, height: 24), title: "Offers", checked: offers, onChanged: (val) => setState(() => offers = val)),
 
                   const SizedBox(height: 16),
                 ],
@@ -250,12 +207,7 @@ class _FilterScreenState extends State<FilterScreen> {
                 onPressed: () {},
                 child: const Text(
                   'View results',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
+                  style: TextStyle(color: Colors.white, fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16),
                 ),
               ),
             ),
@@ -265,10 +217,7 @@ class _FilterScreenState extends State<FilterScreen> {
           Container(
             width: 134,
             height: 5,
-            decoration: BoxDecoration(
-              color: Color(0xFF161A1D),
-              borderRadius: BorderRadius.circular(100),
-            ),
+            decoration: BoxDecoration(color: Color(0xFF161A1D), borderRadius: BorderRadius.circular(100)),
           ),
           const SizedBox(height: 16),
         ],
@@ -287,22 +236,11 @@ class _ExpandableSection extends StatelessWidget {
   final VoidCallback? onClear;
   final List<Widget> children;
 
-  const _ExpandableSection({
-    required this.expanded,
-    required this.onTap,
-    required this.icon,
-    required this.title,
-    this.showClear = false,
-    this.onClear,
-    this.children = const [],
-  });
+  const _ExpandableSection({required this.expanded, required this.onTap, required this.icon, required this.title, this.showClear = false, this.onClear, this.children = const []});
 
   @override
   Widget build(BuildContext context) {
-    Widget arrowIcon(bool expanded) => Icon(
-          expanded ? Icons.keyboard_arrow_up_rounded : Icons.keyboard_arrow_down_rounded,
-          color: const Color(0xFF798A9A),
-        );
+    Widget arrowIcon(bool expanded) => Icon(expanded ? Icons.keyboard_arrow_up_rounded : Icons.keyboard_arrow_down_rounded, color: const Color(0xFF798A9A));
     return Column(
       children: [
         GestureDetector(
@@ -317,26 +255,14 @@ class _ExpandableSection extends StatelessWidget {
                 Expanded(
                   child: Text(
                     title,
-                    style: const TextStyle(
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                      color: Color(0xFF161A1D),
-                    ),
+                    style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
                   ),
                 ),
                 if (showClear && onClear != null)
                   TextButton(
-                    style: TextButton.styleFrom(
-                      foregroundColor: Color(0xFF798A9A),
-                      padding: EdgeInsets.zero,
-                      minimumSize: Size(0, 0),
-                    ),
+                    style: TextButton.styleFrom(foregroundColor: Color(0xFF798A9A), padding: EdgeInsets.zero, minimumSize: Size(0, 0)),
                     onPressed: onClear,
-                    child: const Text(
-                      "Clear",
-                      style: TextStyle(fontSize: 14),
-                    ),
+                    child: const Text("Clear", style: TextStyle(fontSize: 14)),
                   ),
                 arrowIcon(expanded),
               ],
@@ -355,11 +281,7 @@ class _DividerLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(left: 56),
-      height: 1,
-      color: Color(0xFFE8EBEE),
-    );
+    return Container(margin: EdgeInsets.only(left: 56), height: 1, color: Color(0xFFE8EBEE));
   }
 }
 
@@ -391,15 +313,10 @@ class _SelectOption extends StatelessWidget {
               Expanded(
                 child: Text(
                   label,
-                  style: TextStyle(
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                    color: selected ? Color(0xFF161A1D) : Color(0xFF798A9A),
-                  ),
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: selected ? Color(0xFF161A1D) : Color(0xFF798A9A)),
                 ),
               ),
-              if (selected) Icon(Icons.check, color: Color(0xFF161A1D), size: 22)
+              if (selected) Icon(Icons.check, color: Color(0xFF161A1D), size: 22),
             ],
           ),
         ),
@@ -417,14 +334,7 @@ class _CustomRangeSlider extends StatelessWidget {
   final List<String> labels;
   final ValueChanged<RangeValues> onChanged;
 
-  const _CustomRangeSlider({
-    required this.range,
-    required this.min,
-    required this.max,
-    required this.divisions,
-    required this.labels,
-    required this.onChanged,
-  });
+  const _CustomRangeSlider({required this.range, required this.min, required this.max, required this.divisions, required this.labels, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -436,12 +346,7 @@ class _CustomRangeSlider extends StatelessWidget {
           children: List.generate(labels.length, (i) {
             return Text(
               labels[i],
-              style: const TextStyle(
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w400,
-                fontSize: 16,
-                color: Color(0xFF161A1D),
-              ),
+              style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xFF161A1D)),
             );
           }),
         ),
@@ -458,13 +363,7 @@ class _CustomRangeSlider extends StatelessWidget {
             // rangeTrackShape: const _CustomRangeTrackShape(),
             overlayShape: SliderComponentShape.noOverlay,
           ),
-          child: RangeSlider(
-            values: range,
-            min: min,
-            max: max,
-            divisions: divisions,
-            onChanged: onChanged,
-          ),
+          child: RangeSlider(values: range, min: min, max: max, divisions: divisions, onChanged: onChanged),
         ),
       ],
     );
@@ -476,32 +375,22 @@ class _CustomMarkSlider extends StatelessWidget {
   final List<double> marks;
   final ValueChanged<double> onChanged;
 
-  const _CustomMarkSlider({
-    required this.value,
-    required this.marks,
-    required this.onChanged,
-  });
+  const _CustomMarkSlider({required this.value, required this.marks, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     final labelWidgets = marks
-        .map((m) => Text(
-              m == m.toInt() ? "${m.toInt()}+" : "${m.toStringAsFixed(1)}+",
-              style: const TextStyle(
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w400,
-                fontSize: 16,
-                color: Color(0xFF161A1D),
-              ),
-            ))
+        .map(
+          (m) => Text(
+            m == m.toInt() ? "${m.toInt()}+" : "${m.toStringAsFixed(1)}+",
+            style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xFF161A1D)),
+          ),
+        )
         .toList();
 
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: labelWidgets,
-        ),
+        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: labelWidgets),
         const SizedBox(height: 12),
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
@@ -514,14 +403,7 @@ class _CustomMarkSlider extends StatelessWidget {
             // trackShape: const _CustomTrackShape(),
             overlayShape: SliderComponentShape.noOverlay,
           ),
-          child: Slider(
-            value: value,
-            min: marks.first,
-            max: marks.last,
-            divisions: marks.length - 1,
-            label: value.toString(),
-            onChanged: onChanged,
-          ),
+          child: Slider(value: value, min: marks.first, max: marks.last, divisions: marks.length - 1, label: value.toString(), onChanged: onChanged),
         ),
       ],
     );
@@ -534,12 +416,7 @@ class _CheckableCell extends StatelessWidget {
   final bool checked;
   final ValueChanged<bool> onChanged;
 
-  const _CheckableCell({
-    required this.icon,
-    required this.title,
-    required this.checked,
-    required this.onChanged,
-  });
+  const _CheckableCell({required this.icon, required this.title, required this.checked, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -555,12 +432,7 @@ class _CheckableCell extends StatelessWidget {
             Expanded(
               child: Text(
                 title,
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                  color: checked ? const Color(0xFF161A1D) : const Color(0xFF4A5763),
-                ),
+                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: checked ? const Color(0xFF161A1D) : const Color(0xFF4A5763)),
               ),
             ),
             if (checked) const Icon(Icons.check, color: Color(0xFF161A1D), size: 20),

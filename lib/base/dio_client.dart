@@ -15,11 +15,7 @@ class DioClient {
   final String baseUrl;
   final List<Interceptor>? interceptors;
 
-  DioClient(
-    Dio dio, {
-    required this.baseUrl,
-    this.interceptors,
-  }) {
+  DioClient(Dio dio, {required this.baseUrl, this.interceptors}) {
     _dio = dio;
 
     _dio
@@ -46,7 +42,8 @@ class DioClient {
 
     dio.interceptors.add(ApiConstant.aliceDioAdapter);
 
-    _dio.interceptors.add(PrettyDioLogger(
+    _dio.interceptors.add(
+      PrettyDioLogger(
         requestHeader: true,
         requestBody: true,
         responseBody: true,
@@ -57,7 +54,9 @@ class DioClient {
         enabled: kDebugMode,
         filter: (options, args) {
           return !args.isResponse || !args.hasUint8ListData;
-        }));
+        },
+      ),
+    );
 
     _dio.httpClientAdapter = IOHttpClientAdapter(
       createHttpClient: () {
@@ -69,10 +68,7 @@ class DioClient {
   }
 
   Map<String, dynamic> getHeader() {
-    final Map<String, dynamic> headers = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    };
+    final Map<String, dynamic> headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
 
     if (Get.find<AppProvider>().userAuthInfo.value.token.isNotEmpty) {
       headers['Authorization'] = 'Bearer ${Get.find<AppProvider>().userAuthInfo.value.token}';
@@ -81,21 +77,9 @@ class DioClient {
     return headers;
   }
 
-  Future<dynamic> get(
-    String uri, {
-    Map<String, dynamic>? queryParameters,
-    Options? options,
-    CancelToken? cancelToken,
-    ProgressCallback? onReceiveProgress,
-  }) async {
+  Future<dynamic> get(String uri, {Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken, ProgressCallback? onReceiveProgress}) async {
     try {
-      var response = await _dio.get(
-        uri,
-        queryParameters: queryParameters,
-        options: options,
-        cancelToken: cancelToken,
-        onReceiveProgress: onReceiveProgress,
-      );
+      var response = await _dio.get(uri, queryParameters: queryParameters, options: options, cancelToken: cancelToken, onReceiveProgress: onReceiveProgress);
       return response.data;
     } on SocketException catch (e) {
       throw SocketException(e.toString());
@@ -187,21 +171,9 @@ class DioClient {
     }
   }
 
-  Future<dynamic> delete(
-    String uri, {
-    data,
-    Map<String, dynamic>? queryParameters,
-    Options? options,
-    CancelToken? cancelToken,
-  }) async {
+  Future<dynamic> delete(String uri, {data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken}) async {
     try {
-      var response = await _dio.delete(
-        uri,
-        data: data,
-        queryParameters: queryParameters,
-        options: options,
-        cancelToken: cancelToken,
-      );
+      var response = await _dio.delete(uri, data: data, queryParameters: queryParameters, options: options, cancelToken: cancelToken);
       return response.data;
     } on FormatException catch (_) {
       throw const FormatException('Unable to process the data');

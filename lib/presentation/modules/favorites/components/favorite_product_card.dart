@@ -7,11 +7,7 @@ class FavoriteProduct {
   final String logo;
   final String image;
 
-  const FavoriteProduct({
-    required this.title,
-    required this.logo,
-    required this.image,
-  });
+  const FavoriteProduct({required this.title, required this.logo, required this.image});
 }
 
 class FavoriteProductCard extends StatelessWidget {
@@ -22,10 +18,7 @@ class FavoriteProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final FavoritesController controller = Get.find();
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-      ),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,45 +29,31 @@ class FavoriteProductCard extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
-                    product.image,
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: double.infinity,
-                  ),
+                  child: Image.asset(product.image, fit: BoxFit.cover, width: double.infinity, height: double.infinity),
                 ),
                 Positioned(
-                    top: 12,
-                    left: 12,
-                    child: Container(
-                      width: 48,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.white, width: 2),
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0x14000000),
-                            blurRadius: 6,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(2),
-                        child: ClipOval(
-                          child: FittedBox(
-                            fit: BoxFit.cover,
-                            child: SizedBox(
-                              width: 44,
-                              height: 44,
-                              child: Image.asset(product.logo),
-                            ),
-                          ),
+                  top: 12,
+                  left: 12,
+                  child: Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.white, width: 2),
+                      shape: BoxShape.circle,
+                      boxShadow: [BoxShadow(color: Color(0x14000000), blurRadius: 6, offset: Offset(0, 2))],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(2),
+                      child: ClipOval(
+                        child: FittedBox(
+                          fit: BoxFit.cover,
+                          child: SizedBox(width: 44, height: 44, child: Image.asset(product.logo)),
                         ),
                       ),
-                    )),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -88,29 +67,27 @@ class FavoriteProductCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     product.title,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xFF161A1D),
-                    ),
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 const SizedBox(width: 6),
-                Obx(() => GestureDetector(
-                      onTap: () => controller.toggleFavoriteStore(product.title),
-                      child: AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 250),
-                        transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
-                        child: Icon(
-                          !controller.isStoreFavorited(product.title) ? Icons.favorite : Icons.favorite_border,
-                          key: ValueKey(controller.isStoreFavorited(product.title)),
-                          color: Color(0xFF5856D7),
-                          size: 24,
-                        ),
+                Obx(
+                  () => GestureDetector(
+                    onTap: () => controller.toggleFavoriteStore(product.title),
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 250),
+                      transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
+                      child: Icon(
+                        !controller.isStoreFavorited(product.title) ? Icons.favorite : Icons.favorite_border,
+                        key: ValueKey(controller.isStoreFavorited(product.title)),
+                        color: Color(0xFF5856D7),
+                        size: 24,
                       ),
-                    )),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -123,10 +100,7 @@ class FavoriteProductCard extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   "\$0 Delivery fee",
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Color(0xFF4A5763),
-                  ),
+                  style: TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -135,36 +109,17 @@ class FavoriteProductCard extends StatelessWidget {
                   children: [
                     const Text(
                       "4.8★",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFF4A5763),
-                      ),
+                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF4A5763)),
                     ),
                     const SizedBox(width: 2),
-                    const Text(
-                      "(800+)",
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Color(0xFF4A5763),
-                      ),
-                    ),
+                    const Text("(800+)", style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
                     const SizedBox(width: 2),
-                    const Text(
-                      "•",
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Color(0xFF5856D7),
-                      ),
-                    ),
+                    const Text("•", style: TextStyle(fontSize: 12, color: Color(0xFF5856D7))),
                     const SizedBox(width: 2),
                     Flexible(
                       child: Text(
                         "10-20 min",
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: Color(0xFF4A5763),
-                        ),
+                        style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),

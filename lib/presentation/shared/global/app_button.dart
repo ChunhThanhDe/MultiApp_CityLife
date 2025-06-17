@@ -123,16 +123,8 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
-    );
-    _animation = Tween<double>(begin: 1.0, end: widget.scale).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: widget.curve,
-      ),
-    );
+    _controller = AnimationController(duration: widget.duration, vsync: this);
+    _animation = Tween<double>(begin: 1.0, end: widget.scale).animate(CurvedAnimation(parent: _controller, curve: widget.curve));
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         _controller.reverse().then((_) {
@@ -164,43 +156,21 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
     final ShapeBorder effectiveShape = widget.shape ?? RoundedRectangleBorder(borderRadius: effectiveRadius);
     final double effectiveElevation = widget.elevation ?? 0;
 
-    Widget content = widget.loading
-        ? const SizedBox(
-            width: 24,
-            height: 24,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              strokeWidth: 2.5,
-            ),
-          )
-        : widget.child;
+    Widget content = widget.loading ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white), strokeWidth: 2.5)) : widget.child;
 
     // Combine explicit width/height with user-provided constraints
     BoxConstraints effectiveConstraints = widget.constraints ?? const BoxConstraints();
     if (widget.width != null || widget.height != null) {
-      effectiveConstraints = effectiveConstraints.copyWith(
-        minWidth: widget.width,
-        maxWidth: widget.width,
-        minHeight: widget.height,
-        maxHeight: widget.height,
-      );
+      effectiveConstraints = effectiveConstraints.copyWith(minWidth: widget.width, maxWidth: widget.width, minHeight: widget.height, maxHeight: widget.height);
     } else {
-      effectiveConstraints = effectiveConstraints.copyWith(
-        minWidth: 0,
-        minHeight: 0,
-      );
+      effectiveConstraints = effectiveConstraints.copyWith(minWidth: 0, minHeight: 0);
     }
 
     Widget button = Material(
       color: effectiveColor,
       shape: effectiveShape,
       elevation: effectiveElevation,
-      child: Container(
-        padding: widget.padding,
-        alignment: Alignment.center,
-        constraints: effectiveConstraints,
-        child: content,
-      ),
+      child: Container(padding: widget.padding, alignment: Alignment.center, constraints: effectiveConstraints, child: content),
     );
 
     // Apply IntrinsicWidth/Height only if width/height are not specified
@@ -218,10 +188,7 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
       child: GestureDetector(
         onTap: widget.enabled && !widget.loading ? _handleTap : null,
         onLongPress: widget.enabled && !widget.loading ? widget.onLongPress : null,
-        child: ScaleTransition(
-          scale: _animation,
-          child: button,
-        ),
+        child: ScaleTransition(scale: _animation, child: button),
       ),
     );
   }

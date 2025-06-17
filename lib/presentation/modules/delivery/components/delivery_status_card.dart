@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 class DeliveryStatusCard extends StatelessWidget {
   final Map<String, dynamic>? delivery;
 
-  const DeliveryStatusCard({
-    super.key,
-    required this.delivery,
-  });
+  const DeliveryStatusCard({super.key, required this.delivery});
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +13,7 @@ class DeliveryStatusCard extends StatelessWidget {
     final stepStatus = List<bool>.from(delivery?['stepStatus'] ?? [true, true, false, false]);
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
-        color: Color(0xFFEFEFFB),
-        borderRadius: BorderRadius.circular(8),
-      ),
+      decoration: BoxDecoration(color: Color(0xFFEFEFFB), borderRadius: BorderRadius.circular(8)),
       padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +52,7 @@ class DeliveryStatusCard extends StatelessWidget {
                 ],
               ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -83,10 +77,7 @@ class _ProgressSteps extends StatelessWidget {
               alignment: Alignment.center,
               child: Container(
                 height: 8,
-                decoration: BoxDecoration(
-                  color: Color(0xFFDEDEF7),
-                  borderRadius: BorderRadius.circular(6),
-                ),
+                decoration: BoxDecoration(color: Color(0xFFDEDEF7), borderRadius: BorderRadius.circular(6)),
               ),
             ),
           ),
@@ -96,20 +87,11 @@ class _ProgressSteps extends StatelessWidget {
             right: MediaQuery.of(context).size.width * (1 - (stepStatus.where((s) => s).length / stepStatus.length)),
             child: Container(
               height: 8,
-              decoration: BoxDecoration(
-                color: Color(0xFF5856D7),
-                borderRadius: BorderRadius.circular(6),
-              ),
+              decoration: BoxDecoration(color: Color(0xFF5856D7), borderRadius: BorderRadius.circular(6)),
             ),
           ),
           // Step Circles
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(
-              stepStatus.length,
-              (i) => _stepCircle(stepStatus[i]),
-            ),
-          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: List.generate(stepStatus.length, (i) => _stepCircle(stepStatus[i]))),
         ],
       ),
     );
@@ -121,10 +103,7 @@ class _ProgressSteps extends StatelessWidget {
       height: 22,
       decoration: BoxDecoration(
         color: checked ? Color(0xFF5856D7) : Colors.white,
-        border: Border.all(
-          color: Color(0xFF5856D7),
-          width: 2.5,
-        ),
+        border: Border.all(color: Color(0xFF5856D7), width: 2.5),
         shape: BoxShape.circle,
       ),
       child: checked ? Icon(Icons.check, color: Colors.white, size: 14) : null,

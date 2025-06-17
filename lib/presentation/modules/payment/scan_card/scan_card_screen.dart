@@ -32,10 +32,7 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
         Positioned.fill(
           child: Container(
             color: const Color(0xFF101214).withValues(alpha: 0.7),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-              child: const SizedBox.expand(),
-            ),
+            child: BackdropFilter(filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12), child: const SizedBox.expand()),
           ),
         ),
         // 4. BOTTOM PANEL
@@ -44,38 +41,25 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
           child: Container(
             width: double.infinity,
             height: 146,
-            decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.9),
-            ),
+            decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.9)),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 16,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                     child: Column(
                       children: [
                         const Text(
                           "Scan your card",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 20,
-                            color: Color(0xFF161A1D),
-                          ),
+                          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Color(0xFF161A1D)),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 4),
                         const Text(
                           "please make sure the card number is visible.",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFF4A5763),
-                            fontWeight: FontWeight.w400,
-                          ),
+                          style: TextStyle(fontSize: 14, color: Color(0xFF4A5763), fontWeight: FontWeight.w400),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 8),
@@ -83,17 +67,11 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
                           if (controller.isScanning.value) {
                             return const Text(
                               "Scanning...",
-                              style: TextStyle(
-                                color: Color(0xFF5856D7),
-                                fontWeight: FontWeight.w500,
-                              ),
+                              style: TextStyle(color: Color(0xFF5856D7), fontWeight: FontWeight.w500),
                             );
                           }
                           if (controller.scanError.value.isNotEmpty) {
-                            return Text(
-                              controller.scanError.value,
-                              style: const TextStyle(color: Colors.red),
-                            );
+                            return Text(controller.scanError.value, style: const TextStyle(color: Colors.red));
                           }
 
                           return const SizedBox();
@@ -110,12 +88,7 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
                           onTap: controller.restartScan,
                           child: const Text(
                             "Scan again",
-                            style: TextStyle(
-                              color: Color(0xFF5856D7),
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              decoration: TextDecoration.underline,
-                            ),
+                            style: TextStyle(color: Color(0xFF5856D7), fontWeight: FontWeight.w500, fontSize: 16, decoration: TextDecoration.underline),
                           ),
                         ),
                       );

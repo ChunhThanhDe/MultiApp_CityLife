@@ -10,14 +10,7 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_text_field.dart';
 
 class PhonePicker extends StatelessWidget {
-  const PhonePicker({
-    super.key,
-    required this.inputController,
-    required this.onChanged,
-    required this.countryDialCode,
-    this.errorText,
-    this.validator,
-  });
+  const PhonePicker({super.key, required this.inputController, required this.onChanged, required this.countryDialCode, this.errorText, this.validator});
 
   final TextEditingController inputController;
   final Function(CountryCode) onChanged;
@@ -33,8 +26,14 @@ class PhonePicker extends StatelessWidget {
         Text.rich(
           TextSpan(
             children: [
-              TextSpan(text: tr(LocaleKeys.authentication_phonePicker_phoneLabel), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
-              TextSpan(text: ' *', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textDangerDefault500)),
+              TextSpan(
+                text: tr(LocaleKeys.authentication_phonePicker_phoneLabel),
+                style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
+              ),
+              TextSpan(
+                text: ' *',
+                style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textDangerDefault500),
+              ),
             ],
           ),
         ),
@@ -66,20 +65,9 @@ class PhonePicker extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            countryCode?.dialCode ?? '+1',
-                            style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
-                          ),
+                          Text(countryCode?.dialCode ?? '+1', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
                           SizedBox(width: 8.w),
-                          SvgPicture.asset(
-                            Assets.icons.icDropdownArrow.path,
-                            width: 8.w,
-                            height: 8.w,
-                            colorFilter: ColorFilter.mode(
-                              AppColors.textGreyDefault500,
-                              BlendMode.srcIn,
-                            ),
-                          ),
+                          SvgPicture.asset(Assets.icons.icDropdownArrow.path, width: 8.w, height: 8.w, colorFilter: ColorFilter.mode(AppColors.textGreyDefault500, BlendMode.srcIn)),
                         ],
                       ),
                     );
@@ -96,12 +84,11 @@ class PhonePicker extends StatelessWidget {
                     hintText: tr(LocaleKeys.authentication_phonePicker_phoneHint),
                     suffixIcon: Padding(
                       padding: const EdgeInsets.all(14),
-                      child: Assets.icons.icPhoneIcon.svg(
-                        colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn),
-                      ),
+                      child: Assets.icons.icPhoneIcon.svg(colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn)),
                     ),
                     isRequired: true,
-                    validator: validator ??
+                    validator:
+                        validator ??
                         (value) {
                           if (value == null || value.isEmpty) {
                             return tr(LocaleKeys.authentication_phonePicker_phoneRequired);

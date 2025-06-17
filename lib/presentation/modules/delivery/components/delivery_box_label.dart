@@ -7,14 +7,7 @@ class LabelWidget extends StatelessWidget {
   final bool isBold;
   final bool isLarge;
 
-  const LabelWidget(
-    this.text, {
-    super.key,
-    this.isRequired = false,
-    this.optional = false,
-    this.isBold = false,
-    this.isLarge = false,
-  });
+  const LabelWidget(this.text, {super.key, this.isRequired = false, this.optional = false, this.isBold = false, this.isLarge = false});
 
   @override
   Widget build(BuildContext context) {
@@ -22,30 +15,19 @@ class LabelWidget extends StatelessWidget {
       children: [
         Text(
           text,
-          style: TextStyle(
-            fontSize: isLarge ? 16 : 14,
-            color: const Color(0xFF161A1D),
-            fontWeight: isBold ? FontWeight.w500 : FontWeight.w400,
-          ),
+          style: TextStyle(fontSize: isLarge ? 16 : 14, color: const Color(0xFF161A1D), fontWeight: isBold ? FontWeight.w500 : FontWeight.w400),
         ),
         if (isRequired)
           Text(
             "*",
-            style: TextStyle(
-              color: const Color(0xFFFF3B30),
-              fontSize: isLarge ? 18 : 14,
-            ),
+            style: TextStyle(color: const Color(0xFFFF3B30), fontSize: isLarge ? 18 : 14),
           ),
         if (optional)
           Padding(
             padding: const EdgeInsets.only(left: 6),
             child: Text(
               "(optional)",
-              style: TextStyle(
-                fontSize: isLarge ? 16 : 14,
-                color: const Color(0xFF4A4C4F),
-                fontWeight: FontWeight.w400,
-              ),
+              style: TextStyle(fontSize: isLarge ? 16 : 14, color: const Color(0xFF4A4C4F), fontWeight: FontWeight.w400),
             ),
           ),
       ],

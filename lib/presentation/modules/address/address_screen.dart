@@ -24,23 +24,14 @@ class AddressScreen extends StatelessWidget {
               children: [
                 Assets.images.imgAddress.image(),
                 Spacer(),
-                Text(
-                  tr(LocaleKeys.address_enterTitle),
-                  style: AppTextStyles.typographyH8Medium.copyWith(color: AppColors.textGreyHighest950),
-                ),
-                Text(
-                  tr(LocaleKeys.address_enterSubtitle),
-                  style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700),
-                ),
+                Text(tr(LocaleKeys.address_enterTitle), style: AppTextStyles.typographyH8Medium.copyWith(color: AppColors.textGreyHighest950)),
+                Text(tr(LocaleKeys.address_enterSubtitle), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
                 const SizedBox(height: 24),
                 AppButton(
                   onTap: () => Get.toNamed('${AppRoutes.address}/${AppRoutes.searchAddress}'),
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  child: Text(
-                    tr(LocaleKeys.address_addButton),
-                    style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite),
-                  ),
+                  child: Text(tr(LocaleKeys.address_addButton), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite)),
                 ),
                 SizedBox(height: 16),
                 AppButton(
@@ -48,10 +39,7 @@ class AddressScreen extends StatelessWidget {
                   width: double.infinity,
                   color: AppColors.stateGreyLowest50,
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  child: Text(
-                    tr(LocaleKeys.address_skipButton),
-                    style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
-                  ),
+                  child: Text(tr(LocaleKeys.address_skipButton), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                 ),
                 SizedBox(height: 52),
               ],

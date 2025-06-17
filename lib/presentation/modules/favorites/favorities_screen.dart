@@ -13,10 +13,7 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(
-      title: "Your Favorites",
-      onBack: () => Get.back(),
-    );
+    return BasicAppBar(title: "Your Favorites", onBack: () => Get.back());
   }
 
   @override
@@ -45,12 +42,7 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: GridView.builder(
         padding: const EdgeInsets.only(top: 12, bottom: 12),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 183 / 220,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
-        ),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 183 / 220, crossAxisSpacing: 16, mainAxisSpacing: 16),
         itemCount: stores.length,
         itemBuilder: (_, i) => FavoriteProductCard(product: stores[i]),
       ),
@@ -64,26 +56,14 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: GridView.builder(
         padding: const EdgeInsets.only(top: 12, bottom: 12),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 183 / 233,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
-        ),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 183 / 233, crossAxisSpacing: 16, mainAxisSpacing: 16),
         itemCount: items.length,
-        itemBuilder: (_, i) => Obx(() => FavoriteItemCard(
-              item: items[i],
-              isFavorited: controller.isItemFavorited(items[i].title),
-              onFavoriteTap: () => controller.toggleFavoriteItem(items[i].title),
-            )),
+        itemBuilder: (_, i) => Obx(() => FavoriteItemCard(item: items[i], isFavorited: controller.isItemFavorited(items[i].title), onFavoriteTap: () => controller.toggleFavoriteItem(items[i].title))),
       ),
     );
   }
 
   Widget _buildTabBar() {
-    return Obx(() => FavoritesTabBar(
-          currentTab: controller.currentTab.value,
-          onTabChanged: (tab) => controller.changeTab(tab),
-        ));
+    return Obx(() => FavoritesTabBar(currentTab: controller.currentTab.value, onTabChanged: (tab) => controller.changeTab(tab)));
   }
 }

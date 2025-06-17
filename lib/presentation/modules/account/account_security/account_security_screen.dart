@@ -11,20 +11,14 @@ class AccountSecurityScreen extends BaseScreen<AccountSecurityController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(
-      title: "Security",
-      onBack: () => Get.back(),
-    );
+    return BasicAppBar(title: "Security", onBack: () => Get.back());
   }
 
   @override
   Widget buildScreen(BuildContext context) {
     return Column(
       children: [
-        Container(
-          height: 1,
-          color: Color(0xFFE8EBEE),
-        ),
+        Container(height: 1, color: Color(0xFFE8EBEE)),
         Expanded(
           child: SingleChildScrollView(
             child: Column(
@@ -58,10 +52,7 @@ class AccountSecurityScreen extends BaseScreen<AccountSecurityController> {
                   ],
                 ),
                 const SizedBox(height: 10),
-                Container(
-                  height: 5,
-                  color: Color(0xFFE8EBEE),
-                ),
+                Container(height: 5, color: Color(0xFFE8EBEE)),
               ],
             ),
           ),
@@ -94,13 +85,7 @@ class _SecurityCell extends StatelessWidget {
   final Widget? trailing;
   final VoidCallback? onTap;
 
-  const _SecurityCell({
-    required this.title,
-    this.subtitle,
-    this.obfuscated = false,
-    this.trailing,
-    this.onTap,
-  });
+  const _SecurityCell({required this.title, this.subtitle, this.obfuscated = false, this.trailing, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -122,17 +107,10 @@ class _SecurityCell extends StatelessWidget {
                       children: [
                         Text(
                           title,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF161A1D),
-                          ),
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
                         ),
                         Spacer(),
-                        if (obfuscated) ...[
-                          SizedBox(width: 8),
-                          Text("••••••••", style: TextStyle(letterSpacing: 2, fontSize: 18, color: Color(0xFF4A5763))),
-                        ]
+                        if (obfuscated) ...[SizedBox(width: 8), Text("••••••••", style: TextStyle(letterSpacing: 2, fontSize: 18, color: Color(0xFF4A5763)))],
                       ],
                     ),
                     if (subtitle != null)
@@ -148,10 +126,7 @@ class _SecurityCell extends StatelessWidget {
                   ],
                 ),
               ),
-              if (trailing != null) ...[
-                SizedBox(width: 12),
-                trailing!,
-              ],
+              if (trailing != null) ...[SizedBox(width: 12), trailing!],
             ],
           ),
         ),
@@ -164,12 +139,7 @@ class _SecurityCell extends StatelessWidget {
 class _DividerLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(left: 24),
-      width: MediaQuery.of(context).size.width - 48,
-      height: 1,
-      color: Color(0xFFE8EBEE),
-    );
+    return Container(margin: EdgeInsets.only(left: 24), width: MediaQuery.of(context).size.width - 48, height: 1, color: Color(0xFFE8EBEE));
   }
 }
 
@@ -179,12 +149,7 @@ class SocialConnectCell extends StatelessWidget {
   final String label;
   final VoidCallback? onDisconnect;
 
-  const SocialConnectCell({
-    super.key,
-    required this.icon,
-    required this.label,
-    this.onDisconnect,
-  });
+  const SocialConnectCell({super.key, required this.icon, required this.label, this.onDisconnect});
 
   @override
   Widget build(BuildContext context) {
@@ -198,22 +163,14 @@ class SocialConnectCell extends StatelessWidget {
           Expanded(
             child: Text(
               label,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFF161A1D),
-              ),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
             ),
           ),
           InkWell(
             onTap: onDisconnect,
             child: Text(
               "Disconnect",
-              style: TextStyle(
-                color: Color(0xFFFF3B30),
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
+              style: TextStyle(color: Color(0xFFFF3B30), fontSize: 14, fontWeight: FontWeight.w400),
             ),
           ),
         ],

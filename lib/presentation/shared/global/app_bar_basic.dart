@@ -26,11 +26,7 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   ///
   /// The [title] parameter is required and will be displayed as the app bar title.
   /// The [onBack] parameter is optional and defaults to Get.back() if not provided.
-  const BasicAppBar({
-    super.key,
-    required this.title,
-    this.onBack,
-  });
+  const BasicAppBar({super.key, required this.title, this.onBack});
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +36,7 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
       iconTheme: const IconThemeData(color: Color(0xFF161A1D)),
       title: Text(
         title,
-        style: const TextStyle(
-          color: Color(0xFF161A1D),
-          fontWeight: FontWeight.w500,
-          fontSize: 18,
-        ),
+        style: const TextStyle(color: Color(0xFF161A1D), fontWeight: FontWeight.w500, fontSize: 18),
       ),
       centerTitle: false,
       toolbarHeight: 56,

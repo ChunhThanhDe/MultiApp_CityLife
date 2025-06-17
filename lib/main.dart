@@ -16,33 +16,33 @@ import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_navigator.dart';
 
 void main() async {
-  runZonedGuarded(() async {
-    WidgetsFlutterBinding.ensureInitialized();
+  runZonedGuarded(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
 
-    _setupTheme();
+      _setupTheme();
 
-    await _setupSystemUI();
+      await _setupSystemUI();
 
-    await Future.wait([
-      EasyLocalization.ensureInitialized(),
-      DependencyInjection.init(),
-    ]);
+      await Future.wait([EasyLocalization.ensureInitialized(), DependencyInjection.init()]);
 
-    runApp(
-      DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => EasyLocalization(
-          startLocale: const Locale('en'),
-          supportedLocales: const [Locale('vi'), Locale('en')],
-          path: 'assets/translations',
-          fallbackLocale: const Locale('en'),
-          child: const MyApp(),
+      runApp(
+        DevicePreview(
+          enabled: !kReleaseMode,
+          builder: (context) => EasyLocalization(
+            startLocale: const Locale('en'),
+            supportedLocales: const [Locale('vi'), Locale('en')],
+            path: 'assets/translations',
+            fallbackLocale: const Locale('en'),
+            child: const MyApp(),
+          ),
         ),
-      ),
-    );
-  }, (error, stackTrace) {
-    log('Uncaught error: $error', error: error, stackTrace: stackTrace, name: 'MyApp');
-  });
+      );
+    },
+    (error, stackTrace) {
+      log('Uncaught error: $error', error: error, stackTrace: stackTrace, name: 'MyApp');
+    },
+  );
 }
 
 void _setupTheme() {
@@ -53,16 +53,8 @@ void _setupTheme() {
 }
 
 Future<void> _setupSystemUI() async {
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Platform.isAndroid ? Brightness.dark : null,
-    ),
-  );
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: Platform.isAndroid ? Brightness.dark : null));
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 }
 
 class MyApp extends StatelessWidget {

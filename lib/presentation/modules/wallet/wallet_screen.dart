@@ -19,12 +19,7 @@ class WalletScreen extends BaseScreen<WalletController> {
       surfaceTintColor: AppColors.stateBaseWhite,
       centerTitle: false,
       backgroundColor: AppColors.stateBaseWhite,
-      title: Text(
-        tr(LocaleKeys.wallet_title),
-        style: AppTextStyles.typographyH9Medium.copyWith(
-          color: AppColors.textGreyHighest950,
-        ),
-      ),
+      title: Text(tr(LocaleKeys.wallet_title), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 24),
@@ -33,12 +28,7 @@ class WalletScreen extends BaseScreen<WalletController> {
             behavior: HitTestBehavior.opaque,
             child: Row(
               children: [
-                Text(
-                  tr(LocaleKeys.wallet_mayGift),
-                  style: AppTextStyles.typographyH11Regular.copyWith(
-                    color: AppColors.textGreyHighest950,
-                  ),
-                ),
+                Text(tr(LocaleKeys.wallet_mayGift), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
                 const SizedBox(width: 8),
                 Assets.icons.icGift.svg(),
               ],
@@ -51,15 +41,7 @@ class WalletScreen extends BaseScreen<WalletController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          _buildWalletCardSection(),
-          const SizedBox(height: 16),
-          _buildTransactionSection(),
-        ],
-      ),
-    );
+    return SingleChildScrollView(child: Column(children: [_buildWalletCardSection(), const SizedBox(height: 16), _buildTransactionSection()]));
   }
 
   Padding _buildTransactionSection() {
@@ -70,12 +52,7 @@ class WalletScreen extends BaseScreen<WalletController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                tr(LocaleKeys.wallet_transaction),
-                style: AppTextStyles.typographyH9Medium.copyWith(
-                  color: AppColors.textGreyHighest950,
-                ),
-              ),
+              Text(tr(LocaleKeys.wallet_transaction), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
               Assets.icons.icSettingsFilter.svg(),
             ],
           ),
@@ -84,10 +61,8 @@ class WalletScreen extends BaseScreen<WalletController> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: vm.transactions.length,
-            separatorBuilder: (_, _) =>
-                Divider(color: AppColors.textGreyLow300, height: 1),
-            itemBuilder: (context, index) =>
-                _buildTransactionItem(vm.transactions[index]),
+            separatorBuilder: (_, _) => Divider(color: AppColors.textGreyLow300, height: 1),
+            itemBuilder: (context, index) => _buildTransactionItem(vm.transactions[index]),
           ),
         ],
       ),
@@ -106,27 +81,12 @@ class WalletScreen extends BaseScreen<WalletController> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  transaction.title,
-                  style: AppTextStyles.typographyH10Medium.copyWith(
-                    color: AppColors.textGreyHighest950,
-                  ),
-                ),
+                Text(transaction.title, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                 const SizedBox(height: 2),
-                Text(
-                  transaction.date,
-                  style: AppTextStyles.typographyH12Regular.copyWith(
-                    color: AppColors.textGreyDefault500,
-                  ),
-                ),
+                Text(transaction.date, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
               ],
             ),
-            Text(
-              transaction.amount,
-              style: AppTextStyles.typographyH11Regular.copyWith(
-                color: AppColors.textGreyHigh700,
-              ),
-            ),
+            Text(transaction.amount, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
           ],
         ),
       ),
@@ -137,10 +97,7 @@ class WalletScreen extends BaseScreen<WalletController> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        image: DecorationImage(
-          image: Assets.images.imgWalletBg.provider(),
-          fit: BoxFit.cover,
-        ),
+        image: DecorationImage(image: Assets.images.imgWalletBg.provider(), fit: BoxFit.cover),
       ),
       child: _buildWalletCard(),
     );
@@ -154,10 +111,7 @@ class WalletScreen extends BaseScreen<WalletController> {
         color: AppColors.stateBaseWhite,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: AppColors.stateBaseWhite, width: 0.5),
-        image: DecorationImage(
-          image: Assets.images.imgWalletCard.provider(),
-          fit: BoxFit.cover,
-        ),
+        image: DecorationImage(image: Assets.images.imgWalletCard.provider(), fit: BoxFit.cover),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -175,20 +129,8 @@ class WalletScreen extends BaseScreen<WalletController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: 4,
                   children: [
-                    Text(
-                      tr(LocaleKeys.wallet_diyaarCash),
-                      style: AppTextStyles.typographyH11Regular.copyWith(
-                        color: AppColors.textGreyHighest950,
-                      ),
-                    ),
-                    Obx(
-                      () => Text(
-                        vm.showBalance.value ? '\$843.25' : '****',
-                        style: AppTextStyles.typographyH6SemiBold.copyWith(
-                          color: AppColors.textGreyHighest950,
-                        ),
-                      ),
-                    ),
+                    Text(tr(LocaleKeys.wallet_diyaarCash), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+                    Obx(() => Text(vm.showBalance.value ? '\$843.25' : '****', style: AppTextStyles.typographyH6SemiBold.copyWith(color: AppColors.textGreyHighest950))),
                   ],
                 ),
               ),
@@ -196,9 +138,7 @@ class WalletScreen extends BaseScreen<WalletController> {
                 () => GestureDetector(
                   onTap: vm.toggleBalanceVisibility,
                   behavior: HitTestBehavior.opaque,
-                  child: vm.showBalance.value
-                      ? Assets.icons.icEyeVisible.svg()
-                      : Assets.icons.icEyeHidden.svg(),
+                  child: vm.showBalance.value ? Assets.icons.icEyeVisible.svg() : Assets.icons.icEyeHidden.svg(),
                 ),
               ),
             ],
@@ -210,12 +150,7 @@ class WalletScreen extends BaseScreen<WalletController> {
             child: Row(
               children: [
                 Assets.icons.icPlusAdd.svg(),
-                Text(
-                  tr(LocaleKeys.wallet_addFunds),
-                  style: AppTextStyles.typographyH11Regular.copyWith(
-                    color: AppColors.textBaseWhite,
-                  ),
-                ),
+                Text(tr(LocaleKeys.wallet_addFunds), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textBaseWhite)),
               ],
             ),
           ),

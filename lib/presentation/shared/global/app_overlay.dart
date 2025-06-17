@@ -96,9 +96,7 @@ class _AppLoadingOverlay {
   ///
   /// [child] Optional custom loading widget. If not provided,
   /// defaults to a dark rounded container with activity indicator.
-  static void createHighlightOverlay({
-    Widget? child,
-  }) {
+  static void createHighlightOverlay({Widget? child}) {
     removeHighlightOverlay();
     final overlayState = AppNavigator.navigatorKey.currentState?.overlay;
     assert(overlayEntry == null);
@@ -114,14 +112,13 @@ class _AppLoadingOverlay {
             child: Container(
               color: Colors.transparent,
               child: Center(
-                child: child ??
+                child:
+                    child ??
                     Container(
                       width: 64,
                       height: 64,
                       decoration: BoxDecoration(color: Colors.black54, borderRadius: BorderRadius.circular(12)),
-                      child: const CupertinoActivityIndicator(
-                        color: Colors.white,
-                      ),
+                      child: const CupertinoActivityIndicator(color: Colors.white),
                     ),
               ),
             ),

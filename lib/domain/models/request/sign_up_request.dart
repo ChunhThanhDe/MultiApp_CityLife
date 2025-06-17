@@ -21,13 +21,7 @@ class SignUpRequest extends BaseRequest {
   @JsonKey(name: "birthday")
   final String? birthday;
 
-  SignUpRequest({
-    required this.name,
-    this.email,
-    this.phone,
-    required this.password,
-    this.birthday,
-  });
+  SignUpRequest({required this.name, this.email, this.phone, required this.password, this.birthday});
 
   factory SignUpRequest.fromJson(Map<String, dynamic> json) => _$SignUpRequestFromJson(json);
 

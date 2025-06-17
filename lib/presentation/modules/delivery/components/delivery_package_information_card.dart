@@ -8,14 +8,7 @@ class PackageInfo {
   final String to;
   final String estimated;
 
-  PackageInfo({
-    required this.trackingId,
-    required this.from,
-    required this.deliveryStatus,
-    required this.custom,
-    required this.to,
-    required this.estimated,
-  });
+  PackageInfo({required this.trackingId, required this.from, required this.deliveryStatus, required this.custom, required this.to, required this.estimated});
 }
 
 class PackageInformationCard extends StatelessWidget {
@@ -36,20 +29,12 @@ class PackageInformationCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     "Package Information",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18,
-                      color: Color(0xFF161A1D),
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xFF161A1D)),
                   ),
                 ),
                 Text(
                   "Save",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
-                    color: Color(0xFF5856D7),
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF5856D7)),
                 ),
               ],
             ),
@@ -109,11 +94,7 @@ class _InfoField extends StatelessWidget {
         SizedBox(height: 2),
         Text(
           value,
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 14,
-            color: Color(0xFF161A1D),
-          ),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14, color: Color(0xFF161A1D)),
         ),
       ],
     );

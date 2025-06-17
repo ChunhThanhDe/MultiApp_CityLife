@@ -40,9 +40,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
       title: Text(tr(LocaleKeys.wallet_addFundsTitle), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
       leading: IconButton(
         onPressed: () => Get.back(),
-        icon: Assets.icons.icClose.svg(
-          colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn),
-        ),
+        icon: Assets.icons.icClose.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
       ),
       leadingWidth: 40,
     );
@@ -56,11 +54,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
         _buildTextHeader(),
         const SizedBox(height: 16),
         _buildInputAmount(),
-        Container(
-          width: double.infinity,
-          height: 6,
-          color: AppColors.stateGreyLowest50,
-        ),
+        Container(width: double.infinity, height: 6, color: AppColors.stateGreyLowest50),
         const SizedBox(height: 24),
         _buildPaymentMethod(context),
       ],
@@ -73,14 +67,8 @@ class AddFundScreen extends BaseScreen<AddFundController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            tr(LocaleKeys.wallet_loadAmount),
-            style: AppTextStyles.typographyH6Medium.copyWith(color: AppColors.textGreyHighest950),
-          ),
-          Text(
-            tr(LocaleKeys.wallet_loadAmountSubtitle),
-            style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHigh700),
-          ),
+          Text(tr(LocaleKeys.wallet_loadAmount), style: AppTextStyles.typographyH6Medium.copyWith(color: AppColors.textGreyHighest950)),
+          Text(tr(LocaleKeys.wallet_loadAmountSubtitle), style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHigh700)),
         ],
       ),
     );
@@ -97,12 +85,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
             final isFocused = controller.isAmountFocused.value;
             final isFilled = hasValue && !isFocused;
             return Container(
-              decoration: isFilled
-                  ? BoxDecoration(
-                      color: AppColors.stateGreyLowest50,
-                      borderRadius: BorderRadius.circular(6),
-                    )
-                  : null,
+              decoration: isFilled ? BoxDecoration(color: AppColors.stateGreyLowest50, borderRadius: BorderRadius.circular(6)) : null,
               child: TextField(
                 controller: controller.amountController,
                 focusNode: controller.amountFocusNode,
@@ -117,9 +100,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
                           onTap: controller.onClearAmount,
                           child: Padding(
                             padding: const EdgeInsets.all(8),
-                            child: Assets.icons.icClose.svg(
-                              colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn),
-                            ),
+                            child: Assets.icons.icClose.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
                           ),
                         )
                       : null,
@@ -154,10 +135,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
             );
           }),
           const SizedBox(height: 8),
-          Text(
-            tr(LocaleKeys.wallet_amountRange),
-            style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500),
-          ),
+          Text(tr(LocaleKeys.wallet_amountRange), style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
           const SizedBox(height: 16),
           _buildRecommendedAmounts(),
         ],
@@ -171,21 +149,21 @@ class AddFundScreen extends BaseScreen<AddFundController> {
           .map(
             (amount) => GestureDetector(
               onTap: () => controller.onSelectRecommendedAmount(amount),
-              child: Obx(() => Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                    margin: const EdgeInsets.only(right: 12, bottom: 12),
-                    decoration: BoxDecoration(
-                      color: controller.amountText.value == amount.toString() ? AppColors.stateBaseGrey950 : AppColors.stateGreyLowest50,
-                      borderRadius: BorderRadius.circular(32),
-                    ),
-                    child: Text(
-                      amount.toString(),
-                      textAlign: TextAlign.center,
-                      style: AppTextStyles.typographyH11Regular.copyWith(
-                        color: controller.amountText.value == amount.toString() ? AppColors.textGreyLowestWhite : AppColors.textGreyHighest950,
-                      ),
-                    ),
-                  )),
+              child: Obx(
+                () => Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  margin: const EdgeInsets.only(right: 12, bottom: 12),
+                  decoration: BoxDecoration(
+                    color: controller.amountText.value == amount.toString() ? AppColors.stateBaseGrey950 : AppColors.stateGreyLowest50,
+                    borderRadius: BorderRadius.circular(32),
+                  ),
+                  child: Text(
+                    amount.toString(),
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.typographyH11Regular.copyWith(color: controller.amountText.value == amount.toString() ? AppColors.textGreyLowestWhite : AppColors.textGreyHighest950),
+                  ),
+                ),
+              ),
             ),
           )
           .toList(),
@@ -229,68 +207,65 @@ class AddFundScreen extends BaseScreen<AddFundController> {
           controller.onSelectPaymentMethod(selected);
         }
       },
-      child: Obx(() => Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Row(
-                  children: [
-                    Text(tr(LocaleKeys.wallet_paymentMethod), style: AppTextStyles.typographyH9Medium),
-                    const Spacer(),
-                    IconButton(
-                      icon: const Icon(Icons.close),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                  ],
-                ),
+      child: Obx(
+        () => Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Row(
+                children: [
+                  Text(tr(LocaleKeys.wallet_paymentMethod), style: AppTextStyles.typographyH9Medium),
+                  const Spacer(),
+                  IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.pop(context)),
+                ],
               ),
-              ...controller.paymentMethods.asMap().entries.map((entry) => GestureDetector(
-                    onTap: () => Navigator.pop(context, entry.value),
-                    behavior: HitTestBehavior.opaque,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(entry.value.iconAsset),
-                          const SizedBox(width: 12),
-                          Text('${entry.value.name} ****${entry.value.last4}', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
-                          const Spacer(),
-                          (controller.selectedPaymentMethod.value ?? controller.paymentMethods.first) == entry.value
-                              ? Assets.icons.icCheckmark.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn))
-                              : const SizedBox.shrink(),
-                        ],
-                      ),
-                    ),
-                  )),
-              const SizedBox(height: 16),
-              Divider(height: 1, color: AppColors.stateGreyLowest50),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-                child: AppButton(
-                  onTap: () {
-                    Get.toNamed(AppRoutes.payment);
-                  },
-                  width: double.infinity,
-                  color: AppColors.stateGreyLowest50,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            ),
+            ...controller.paymentMethods.asMap().entries.map(
+              (entry) => GestureDetector(
+                onTap: () => Navigator.pop(context, entry.value),
+                behavior: HitTestBehavior.opaque,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Assets.icons.icPlusAdd.svg(
-                        width: 24,
-                        height: 24,
-                        colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(tr(LocaleKeys.wallet_addPaymentCard), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
+                      SvgPicture.asset(entry.value.iconAsset),
+                      const SizedBox(width: 12),
+                      Text('${entry.value.name} ****${entry.value.last4}', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
+                      const Spacer(),
+                      (controller.selectedPaymentMethod.value ?? controller.paymentMethods.first) == entry.value
+                          ? Assets.icons.icCheckmark.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn))
+                          : const SizedBox.shrink(),
                     ],
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
-            ],
-          )),
+            ),
+            const SizedBox(height: 16),
+            Divider(height: 1, color: AppColors.stateGreyLowest50),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+              child: AppButton(
+                onTap: () {
+                  Get.toNamed(AppRoutes.payment);
+                },
+                width: double.infinity,
+                color: AppColors.stateGreyLowest50,
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Assets.icons.icPlusAdd.svg(width: 24, height: 24, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
+                    const SizedBox(width: 8),
+                    Text(tr(LocaleKeys.wallet_addPaymentCard), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+          ],
+        ),
+      ),
     );
   }
 }

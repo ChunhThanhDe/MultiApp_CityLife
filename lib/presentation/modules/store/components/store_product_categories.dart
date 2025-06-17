@@ -15,10 +15,7 @@ class StoreProductCategories extends StatelessWidget {
     return GetBuilder<StoreController>(
       builder: (controller) {
         List<Widget> categoryWidgets = [
-          ProductCategorySection(
-            title: 'Popular Items',
-            items: controller.popularItems,
-          ),
+          ProductCategorySection(title: 'Popular Items', items: controller.popularItems),
           SectionBreakDivider(color: AppColors.stateGreyLowestHover100, height: 1),
           StoreFilterSection(),
         ];
@@ -27,10 +24,7 @@ class StoreProductCategories extends StatelessWidget {
 
         // Add categories with filtered items
         filteredCategories.forEach((categoryTitle, items) {
-          categoryWidgets.add(ProductCategorySection(
-            title: categoryTitle,
-            items: items,
-          ));
+          categoryWidgets.add(ProductCategorySection(title: categoryTitle, items: items));
         });
 
         // Show message when no categories available for selected filter
@@ -41,24 +35,13 @@ class StoreProductCategories extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 50.h),
-                  Icon(
-                    Icons.inbox_outlined,
-                    size: 64.w,
-                    color: AppColors.textGreyDefault500,
-                  ),
+                  Icon(Icons.inbox_outlined, size: 64.w, color: AppColors.textGreyDefault500),
                   SizedBox(height: 16.h),
-                  Text(
-                    'No items available',
-                    style: AppTextStyles.typographyH7SemiBold.copyWith(
-                      color: AppColors.textGreyDefault500,
-                    ),
-                  ),
+                  Text('No items available', style: AppTextStyles.typographyH7SemiBold.copyWith(color: AppColors.textGreyDefault500)),
                   SizedBox(height: 8.h),
                   Text(
                     'We\'ll add more items to this category soon.',
-                    style: AppTextStyles.typographyH12Regular.copyWith(
-                      color: AppColors.textGreyDefault500,
-                    ),
+                    style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -69,9 +52,7 @@ class StoreProductCategories extends StatelessWidget {
 
         categoryWidgets.add(SizedBox(height: 100.h));
 
-        return SliverList(
-          delegate: SliverChildListDelegate(categoryWidgets),
-        );
+        return SliverList(delegate: SliverChildListDelegate(categoryWidgets));
       },
     );
   }

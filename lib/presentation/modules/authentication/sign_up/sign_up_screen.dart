@@ -27,10 +27,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 16.h),
-            AuthHeader(
-              title: tr(LocaleKeys.authentication_signUp_title),
-              subtitle: tr(LocaleKeys.authentication_signUp_subtitle),
-            ),
+            AuthHeader(title: tr(LocaleKeys.authentication_signUp_title), subtitle: tr(LocaleKeys.authentication_signUp_subtitle)),
             SizedBox(height: 24.h),
             _buildForm(),
             SizedBox(height: 24.h),
@@ -73,9 +70,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       hintText: tr(LocaleKeys.authentication_signUp_nameHint),
       suffixIcon: Padding(
         padding: const EdgeInsets.all(14),
-        child: Assets.icons.icPersonIcon.svg(
-          colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn),
-        ),
+        child: Assets.icons.icPersonIcon.svg(colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn)),
       ),
       validator: _validateName,
     );
@@ -89,25 +84,27 @@ class SignUpScreen extends BaseScreen<SignUpController> {
   }
 
   Widget _buildInput() {
-    return Obx(() => vm.currentMethod.value == SignUpMethod.email
-        ? _buildEmailInput()
-        : PhonePicker(
-            inputController: vm.phoneController,
-            onChanged: vm.onCountryCodeChanged,
-            countryDialCode: vm.countryDialCode.value,
-            validator: (value) {
-              if (vm.currentMethod.value == SignUpMethod.email) {
+    return Obx(
+      () => vm.currentMethod.value == SignUpMethod.email
+          ? _buildEmailInput()
+          : PhonePicker(
+              inputController: vm.phoneController,
+              onChanged: vm.onCountryCodeChanged,
+              countryDialCode: vm.countryDialCode.value,
+              validator: (value) {
+                if (vm.currentMethod.value == SignUpMethod.email) {
+                  return null;
+                }
+                if (value == null || value.isEmpty) {
+                  return tr(LocaleKeys.authentication_signUp_phoneRequired);
+                }
+                if (!GetUtils.isPhoneNumber(value)) {
+                  return tr(LocaleKeys.authentication_signUp_phoneInvalid);
+                }
                 return null;
-              }
-              if (value == null || value.isEmpty) {
-                return tr(LocaleKeys.authentication_signUp_phoneRequired);
-              }
-              if (!GetUtils.isPhoneNumber(value)) {
-                return tr(LocaleKeys.authentication_signUp_phoneInvalid);
-              }
-              return null;
-            },
-          ));
+              },
+            ),
+    );
   }
 
   AppTextField _buildPasswordInput() {
@@ -118,9 +115,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       hintText: tr(LocaleKeys.authentication_signIn_passwordHint),
       suffixIcon: Padding(
         padding: const EdgeInsets.all(14),
-        child: Assets.icons.icLock.svg(
-          colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn),
-        ),
+        child: Assets.icons.icLock.svg(colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn)),
       ),
       obscureText: true,
       validator: (value) {
@@ -161,9 +156,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       hintText: tr(LocaleKeys.authentication_signIn_emailHint),
       suffixIcon: Padding(
         padding: const EdgeInsets.all(14),
-        child: Assets.icons.icEmailIcon.svg(
-          colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn),
-        ),
+        child: Assets.icons.icEmailIcon.svg(colorFilter: ColorFilter.mode(AppColors.textGreyLow300, BlendMode.srcIn)),
       ),
       keyboardType: TextInputType.emailAddress,
       validator: (value) {
@@ -195,14 +188,8 @@ class SignUpScreen extends BaseScreen<SignUpController> {
   Widget _buildBirthdayHeader() {
     return Row(
       children: [
-        Text(
-          tr(LocaleKeys.authentication_signUp_birthdayQuestion),
-          style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
-        ),
-        Text(
-          tr(LocaleKeys.authentication_signUp_birthdayOptional),
-          style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
-        ),
+        Text(tr(LocaleKeys.authentication_signUp_birthdayQuestion), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+        Text(tr(LocaleKeys.authentication_signUp_birthdayOptional), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
       ],
     );
   }
@@ -221,45 +208,32 @@ class SignUpScreen extends BaseScreen<SignUpController> {
 
   Widget _buildMonthDropdown() {
     final months = List.generate(12, (i) => (i + 1).toString().padLeft(2, '0'));
-    return _buildDropdownField(
-      items: months,
-      controller: vm.monthController,
-      hint: tr(LocaleKeys.authentication_signUp_monthHint),
-      helper: tr(LocaleKeys.authentication_signUp_monthHelper),
-    );
+    return _buildDropdownField(items: months, controller: vm.monthController, hint: tr(LocaleKeys.authentication_signUp_monthHint), helper: tr(LocaleKeys.authentication_signUp_monthHelper));
   }
 
   Widget _buildDayDropdown() {
     final days = List.generate(31, (i) => (i + 1).toString().padLeft(2, '0'));
-    return _buildDropdownField(
-      items: days,
-      controller: vm.dayController,
-      hint: tr(LocaleKeys.authentication_signUp_dayHint),
-      helper: tr(LocaleKeys.authentication_signUp_dayHelper),
-    );
+    return _buildDropdownField(items: days, controller: vm.dayController, hint: tr(LocaleKeys.authentication_signUp_dayHint), helper: tr(LocaleKeys.authentication_signUp_dayHelper));
   }
 
   Widget _buildYearDropdown() {
     final currentYear = DateTime.now().year;
     final years = List.generate(100, (i) => (currentYear - i).toString());
-    return _buildDropdownField(
-      items: years,
-      controller: vm.yearController,
-      hint: tr(LocaleKeys.authentication_signUp_yearHint),
-      helper: tr(LocaleKeys.authentication_signUp_yearHelper),
-    );
+    return _buildDropdownField(items: years, controller: vm.yearController, hint: tr(LocaleKeys.authentication_signUp_yearHint), helper: tr(LocaleKeys.authentication_signUp_yearHelper));
   }
 
-  Widget _buildDropdownField({
-    required List<String> items,
-    required TextEditingController controller,
-    required String hint,
-    required String helper,
-  }) {
+  Widget _buildDropdownField({required List<String> items, required TextEditingController controller, required String hint, required String helper}) {
     return DropdownButtonFormField<String>(
       value: controller.text.isNotEmpty ? controller.text : null,
       style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
-      items: items.map((item) => DropdownMenuItem(value: item, child: Text(item, style: AppTextStyles.typographyH11Regular))).toList(),
+      items: items
+          .map(
+            (item) => DropdownMenuItem(
+              value: item,
+              child: Text(item, style: AppTextStyles.typographyH11Regular),
+            ),
+          )
+          .toList(),
       onChanged: (val) => controller.text = val ?? '',
       icon: Assets.icons.icDropdownArrow.svg(),
       decoration: InputDecoration(
@@ -268,24 +242,15 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         helperText: helper,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppCorner.radius6),
-          borderSide: BorderSide(
-            color: AppColors.stateGreyLowestHover100,
-            width: 1,
-          ),
+          borderSide: BorderSide(color: AppColors.stateGreyLowestHover100, width: 1),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppCorner.radius6),
-          borderSide: BorderSide(
-            color: AppColors.stateGreyLowestHover100,
-            width: 1,
-          ),
+          borderSide: BorderSide(color: AppColors.stateGreyLowestHover100, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppCorner.radius6),
-          borderSide: BorderSide(
-            color: AppColors.stateGreyLowestHover100,
-            width: 1,
-          ),
+          borderSide: BorderSide(color: AppColors.stateGreyLowestHover100, width: 1),
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
       ),
@@ -306,16 +271,8 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const SizedBox(),
-        Text(
-          tr(LocaleKeys.authentication_signUp_nextButton),
-          style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white),
-        ),
-        SvgPicture.asset(
-          Assets.icons.icRightArrow.path,
-          width: 12.w,
-          height: 12.w,
-          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-        ),
+        Text(tr(LocaleKeys.authentication_signUp_nextButton), style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white)),
+        SvgPicture.asset(Assets.icons.icRightArrow.path, width: 12.w, height: 12.w, colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn)),
       ],
     );
   }
@@ -326,10 +283,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         Expanded(child: Divider(color: AppColors.stateGreyLowestHover100, thickness: 1)),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Text(
-            tr(LocaleKeys.authentication_signUp_or),
-            style: AppTextStyles.typographyH12Medium.copyWith(color: AppColors.textGreyHigh700),
-          ),
+          child: Text(tr(LocaleKeys.authentication_signUp_or), style: AppTextStyles.typographyH12Medium.copyWith(color: AppColors.textGreyHigh700)),
         ),
         Expanded(child: Divider(color: AppColors.stateGreyLowestHover100, thickness: 1)),
       ],
@@ -357,10 +311,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
           isEmail ? Assets.icons.icPhoneIcon.path : Assets.icons.icEmailIcon.path,
           width: 20.w,
           height: 20.w,
-          colorFilter: ColorFilter.mode(
-            AppColors.textGreyHighest950,
-            BlendMode.srcIn,
-          ),
+          colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn),
         ),
         SizedBox(width: 8.w),
         Text(

@@ -149,15 +149,8 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
     this.errorImageAsset,
     this.useCache = true,
     ValueNotifier<ImageState>? stateNotifier,
-  }) : stateNotifier =
-           stateNotifier ??
-           ValueNotifier<ImageState>(
-             const ImageState(state: ImageLoadingState.loading),
-           ),
-       assert(
-         (imageProvider != null) || (imagePath != null && source != null),
-         'Either imageProvider or both imagePath and source must be provided',
-       );
+  }) : stateNotifier = stateNotifier ?? ValueNotifier<ImageState>(const ImageState(state: ImageLoadingState.loading)),
+       assert((imageProvider != null) || (imagePath != null && source != null), 'Either imageProvider or both imagePath and source must be provided');
 
   /// Creates an image provider for loading network images.
   ///
@@ -297,63 +290,32 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
   int _currentRetry = 0;
 
   @override
-  Future<AppImageProvider> obtainKey(ImageConfiguration configuration) =>
-      Future.value(this);
+  Future<AppImageProvider> obtainKey(ImageConfiguration configuration) => Future.value(this);
 
   @override
-  ImageStreamCompleter loadImage(
-    AppImageProvider key,
-    Future<ui.Codec> Function(
-      ImmutableBuffer buffer, {
-      ui.TargetImageSize Function(int, int)? getTargetSize,
-    })
-    decode,
-  ) {
-    stateNotifier.value = ImageState(
-      state: ImageLoadingState.loading,
-      retryCount: _currentRetry,
-    );
+  ImageStreamCompleter loadImage(AppImageProvider key, Future<ui.Codec> Function(ImmutableBuffer buffer, {ui.TargetImageSize Function(int, int)? getTargetSize}) decode) {
+    stateNotifier.value = ImageState(state: ImageLoadingState.loading, retryCount: _currentRetry);
     return MultiFrameImageStreamCompleter(
       codec: _loadImageWithRetries(decode),
       scale: 1.0,
-      informationCollector: () => [
-        DiagnosticsProperty('Image provider', this),
-        DiagnosticsProperty('Image key', key),
-      ],
+      informationCollector: () => [DiagnosticsProperty('Image provider', this), DiagnosticsProperty('Image key', key)],
     );
   }
 
-  Future<ui.Codec> _loadImageWithRetries(
-    Future<ui.Codec> Function(
-      ImmutableBuffer buffer, {
-      ui.TargetImageSize Function(int, int)? getTargetSize,
-    })
-    decode,
-  ) async {
+  Future<ui.Codec> _loadImageWithRetries(Future<ui.Codec> Function(ImmutableBuffer buffer, {ui.TargetImageSize Function(int, int)? getTargetSize}) decode) async {
     while (_currentRetry <= maxRetries) {
       try {
-        final codec = imageProvider != null
-            ? await _loadProviderImage(imageProvider!, decode)
-            : await _loadImageFromSource(decode);
-        stateNotifier.value = ImageState(
-          state: ImageLoadingState.success,
-          retryCount: _currentRetry,
-        );
+        final codec = imageProvider != null ? await _loadProviderImage(imageProvider!, decode) : await _loadImageFromSource(decode);
+        stateNotifier.value = ImageState(state: ImageLoadingState.success, retryCount: _currentRetry);
         return codec;
       } catch (error) {
         _logError('Failed to load image: ${imageProvider ?? imagePath}', error);
         if (_currentRetry < maxRetries) {
           _currentRetry++;
-          stateNotifier.value = ImageState(
-            state: ImageLoadingState.retrying,
-            retryCount: _currentRetry,
-          );
+          stateNotifier.value = ImageState(state: ImageLoadingState.retrying, retryCount: _currentRetry);
           await Future.delayed(_calculateRetryDelay());
         } else {
-          stateNotifier.value = ImageState(
-            state: ImageLoadingState.error,
-            retryCount: _currentRetry,
-          );
+          stateNotifier.value = ImageState(state: ImageLoadingState.error, retryCount: _currentRetry);
           if (errorImageAsset != null) {
             return await _loadAssetImage(errorImageAsset!, decode);
           }
@@ -364,13 +326,7 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
     throw Exception('Max retries exceeded');
   }
 
-  Future<ui.Codec> _loadImageFromSource(
-    Future<ui.Codec> Function(
-      ImmutableBuffer buffer, {
-      ui.TargetImageSize Function(int, int)? getTargetSize,
-    })
-    decode,
-  ) async {
+  Future<ui.Codec> _loadImageFromSource(Future<ui.Codec> Function(ImmutableBuffer buffer, {ui.TargetImageSize Function(int, int)? getTargetSize}) decode) async {
     switch (source!) {
       case ImageSource.network:
         return await _loadNetworkImage(imagePath!, decode);
@@ -381,14 +337,7 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
     }
   }
 
-  Future<ui.Codec> _loadProviderImage(
-    ImageProvider provider,
-    Future<ui.Codec> Function(
-      ImmutableBuffer buffer, {
-      ui.TargetImageSize Function(int, int)? getTargetSize,
-    })
-    decode,
-  ) async {
+  Future<ui.Codec> _loadProviderImage(ImageProvider provider, Future<ui.Codec> Function(ImmutableBuffer buffer, {ui.TargetImageSize Function(int, int)? getTargetSize}) decode) async {
     final config = ImageConfiguration();
     final completer = Completer<ui.Codec>();
     late final ImageStreamListener listener;
@@ -397,13 +346,9 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
       (image, _) async {
         if (completer.isCompleted) return; // Prevent multiple completions
         try {
-          final byteData = await image.image.toByteData(
-            format: ui.ImageByteFormat.png,
-          );
+          final byteData = await image.image.toByteData(format: ui.ImageByteFormat.png);
           if (byteData != null) {
-            final buffer = await ImmutableBuffer.fromUint8List(
-              byteData.buffer.asUint8List(),
-            );
+            final buffer = await ImmutableBuffer.fromUint8List(byteData.buffer.asUint8List());
             if (!completer.isCompleted) {
               completer.complete(await decode(buffer));
             }
@@ -436,44 +381,18 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
     return completer.future;
   }
 
-  Future<ui.Codec> _loadNetworkImage(
-    String url,
-    Future<ui.Codec> Function(
-      ImmutableBuffer buffer, {
-      ui.TargetImageSize Function(int, int)? getTargetSize,
-    })
-    decode,
-  ) async {
-    final provider = CachedNetworkImageProvider(
-      url,
-      cacheKey: useCache ? url : null,
-    );
+  Future<ui.Codec> _loadNetworkImage(String url, Future<ui.Codec> Function(ImmutableBuffer buffer, {ui.TargetImageSize Function(int, int)? getTargetSize}) decode) async {
+    final provider = CachedNetworkImageProvider(url, cacheKey: useCache ? url : null);
     return _loadProviderImage(provider, decode);
   }
 
-  Future<ui.Codec> _loadAssetImage(
-    String path,
-    Future<ui.Codec> Function(
-      ImmutableBuffer buffer, {
-      ui.TargetImageSize Function(int, int)? getTargetSize,
-    })
-    decode,
-  ) async {
+  Future<ui.Codec> _loadAssetImage(String path, Future<ui.Codec> Function(ImmutableBuffer buffer, {ui.TargetImageSize Function(int, int)? getTargetSize}) decode) async {
     final data = await rootBundle.load(path);
-    final buffer = await ImmutableBuffer.fromUint8List(
-      data.buffer.asUint8List(),
-    );
+    final buffer = await ImmutableBuffer.fromUint8List(data.buffer.asUint8List());
     return decode(buffer);
   }
 
-  Future<ui.Codec> _loadFileImage(
-    String path,
-    Future<ui.Codec> Function(
-      ImmutableBuffer buffer, {
-      ui.TargetImageSize Function(int, int)? getTargetSize,
-    })
-    decode,
-  ) async {
+  Future<ui.Codec> _loadFileImage(String path, Future<ui.Codec> Function(ImmutableBuffer buffer, {ui.TargetImageSize Function(int, int)? getTargetSize}) decode) async {
     final file = File(path);
     final bytes = await file.readAsBytes();
     final buffer = await ImmutableBuffer.fromUint8List(bytes);
@@ -482,18 +401,11 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
 
   Duration _calculateRetryDelay() {
     final delayMs = retryDelay.inMilliseconds * (backoffFactor * _currentRetry);
-    return Duration(
-      milliseconds: delayMs.clamp(0, maxRetryDelay.inMilliseconds).toInt(),
-    );
+    return Duration(milliseconds: delayMs.clamp(0, maxRetryDelay.inMilliseconds).toInt());
   }
 
   void _logError(String message, dynamic error) {
-    dev.log(
-      message,
-      name: 'AppImageProvider',
-      error: error,
-      time: DateTime.now(),
-    );
+    dev.log(message, name: 'AppImageProvider', error: error, time: DateTime.now());
   }
 
   @override
@@ -511,17 +423,7 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
           useCache == other.useCache;
 
   @override
-  int get hashCode => Object.hash(
-    imagePath,
-    source,
-    imageProvider,
-    maxRetries,
-    retryDelay,
-    maxRetryDelay,
-    backoffFactor,
-    errorImageAsset,
-    useCache,
-  );
+  int get hashCode => Object.hash(imagePath, source, imageProvider, maxRetries, retryDelay, maxRetryDelay, backoffFactor, errorImageAsset, useCache);
 }
 
 /// A comprehensive image widget with advanced loading capabilities and error handling.
@@ -617,11 +519,7 @@ class AppImage extends StatefulWidget {
     this.maxRetryDelay = _ImageConstants.maxRetryDelay,
     this.backoffFactor = _ImageConstants.backoffFactor,
     this.placeholder = const Center(child: CircularProgressIndicator()),
-    this.errorWidget = const Icon(
-      Icons.broken_image,
-      size: 50,
-      color: Colors.grey,
-    ),
+    this.errorWidget = const Icon(Icons.broken_image, size: 50, color: Colors.grey),
     this.errorImageAsset,
     this.fit = BoxFit.cover,
     this.width,
@@ -630,10 +528,7 @@ class AppImage extends StatefulWidget {
     this.altText,
     this.fadeInDuration = _ImageConstants.fadeInDuration,
     this.stateNotifier,
-  }) : assert(
-         (imageProvider != null) || (imagePath != null && source != null),
-         'Either imageProvider or both imagePath and source must be provided',
-       );
+  }) : assert((imageProvider != null) || (imagePath != null && source != null), 'Either imageProvider or both imagePath and source must be provided');
 
   /// Creates an AppImage widget for loading network images.
   ///
@@ -665,11 +560,7 @@ class AppImage extends StatefulWidget {
     Duration maxRetryDelay = _ImageConstants.maxRetryDelay,
     double backoffFactor = _ImageConstants.backoffFactor,
     Widget placeholder = const Center(child: CircularProgressIndicator()),
-    Widget errorWidget = const Icon(
-      Icons.broken_image,
-      size: 50,
-      color: Colors.grey,
-    ),
+    Widget errorWidget = const Icon(Icons.broken_image, size: 50, color: Colors.grey),
     String? errorImageAsset,
     BoxFit fit = BoxFit.cover,
     double? width,
@@ -730,11 +621,7 @@ class AppImage extends StatefulWidget {
     Duration maxRetryDelay = _ImageConstants.maxRetryDelay,
     double backoffFactor = _ImageConstants.backoffFactor,
     Widget placeholder = const Center(child: CircularProgressIndicator()),
-    Widget errorWidget = const Icon(
-      Icons.broken_image,
-      size: 50,
-      color: Colors.grey,
-    ),
+    Widget errorWidget = const Icon(Icons.broken_image, size: 50, color: Colors.grey),
     String? errorImageAsset,
     BoxFit fit = BoxFit.cover,
     double? width,
@@ -792,11 +679,7 @@ class AppImage extends StatefulWidget {
     Duration maxRetryDelay = _ImageConstants.maxRetryDelay,
     double backoffFactor = _ImageConstants.backoffFactor,
     Widget placeholder = const Center(child: CircularProgressIndicator()),
-    Widget errorWidget = const Icon(
-      Icons.broken_image,
-      size: 50,
-      color: Colors.grey,
-    ),
+    Widget errorWidget = const Icon(Icons.broken_image, size: 50, color: Colors.grey),
     String? errorImageAsset,
     BoxFit fit = BoxFit.cover,
     double? width,
@@ -855,11 +738,7 @@ class AppImage extends StatefulWidget {
     Duration maxRetryDelay = _ImageConstants.maxRetryDelay,
     double backoffFactor = _ImageConstants.backoffFactor,
     Widget placeholder = const Center(child: CircularProgressIndicator()),
-    Widget errorWidget = const Icon(
-      Icons.broken_image,
-      size: 50,
-      color: Colors.grey,
-    ),
+    Widget errorWidget = const Icon(Icons.broken_image, size: 50, color: Colors.grey),
     String? errorImageAsset,
     BoxFit fit = BoxFit.cover,
     double? width,
@@ -900,8 +779,7 @@ class AppImage extends StatefulWidget {
 /// - Building appropriate UI based on current state
 /// - Managing accessibility semantics
 /// - Proper resource cleanup
-class _AppImageState extends State<AppImage>
-    with SingleTickerProviderStateMixin {
+class _AppImageState extends State<AppImage> with SingleTickerProviderStateMixin {
   /// The image provider instance that handles loading with retry logic.
   late final AppImageProvider _imageProvider;
 
@@ -914,14 +792,8 @@ class _AppImageState extends State<AppImage>
   @override
   void initState() {
     super.initState();
-    _fadeController = AnimationController(
-      vsync: this,
-      duration: widget.fadeInDuration,
-    );
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(_fadeController);
+    _fadeController = AnimationController(vsync: this, duration: widget.fadeInDuration);
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(_fadeController);
     _imageProvider = AppImageProvider._(
       imagePath: widget.imagePath,
       source: widget.source,
@@ -956,19 +828,8 @@ class _AppImageState extends State<AppImage>
   /// Returns a widget with error image or fallback error widget wrapped
   /// in accessibility semantics.
   Widget _buildErrorWidget() {
-    final errorChild = widget.errorImageAsset != null
-        ? Image.asset(
-            widget.errorImageAsset!,
-            fit: widget.fit,
-            width: widget.width,
-            height: widget.height,
-          )
-        : widget.errorWidget;
-    return Semantics(
-      image: true,
-      label: widget.altText ?? 'Error loading image',
-      child: errorChild,
-    );
+    final errorChild = widget.errorImageAsset != null ? Image.asset(widget.errorImageAsset!, fit: widget.fit, width: widget.width, height: widget.height) : widget.errorWidget;
+    return Semantics(image: true, label: widget.altText ?? 'Error loading image', child: errorChild);
   }
 
   @override
@@ -989,8 +850,7 @@ class _AppImageState extends State<AppImage>
               fit: widget.fit,
               width: widget.width,
               height: widget.height,
-              frameBuilder: (_, child, frame, _) =>
-                  frame != null ? child : widget.placeholder,
+              frameBuilder: (_, child, frame, _) => frame != null ? child : widget.placeholder,
               errorBuilder: (_, _, _) => widget.placeholder,
             ),
           ),

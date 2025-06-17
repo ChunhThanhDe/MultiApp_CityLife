@@ -8,10 +8,7 @@ import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 class ProductCard extends StatelessWidget {
   final ProductItem item;
 
-  const ProductCard({
-    super.key,
-    required this.item,
-  });
+  const ProductCard({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +25,7 @@ class ProductCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AppColors.stateGreyLowest50,
                   borderRadius: BorderRadius.circular(12.r),
-                  image: DecorationImage(
-                    image: AppImageProvider.network(item.imageUrl),
-                    fit: BoxFit.cover,
-                  ),
+                  image: DecorationImage(image: AppImageProvider.network(item.imageUrl), fit: BoxFit.cover),
                 ),
               ),
               Positioned(
@@ -43,22 +37,13 @@ class ProductCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: AppColors.stateBaseWhite,
                     shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.shadowSm5,
-                        blurRadius: 4,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
+                    boxShadow: [BoxShadow(color: AppColors.shadowSm5, blurRadius: 4, offset: Offset(0, 2))],
                   ),
                   child: GestureDetector(
                     onTap: () {
                       showAppSnackBar(title: 'Add to cart');
                     },
-                    child: Icon(
-                      Icons.add,
-                      size: 20.w,
-                    ),
+                    child: Icon(Icons.add, size: 20.w),
                   ),
                 ),
               ),
@@ -67,19 +52,12 @@ class ProductCard extends StatelessWidget {
           SizedBox(height: 8.h),
           Text(
             item.name,
-            style: AppTextStyles.typographyH11Medium.copyWith(
-              color: AppColors.textGreyHighest950,
-            ),
+            style: AppTextStyles.typographyH11Medium.copyWith(color: AppColors.textGreyHighest950),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           SizedBox(height: 4.h),
-          Text(
-            item.price,
-            style: AppTextStyles.typographyH12Regular.copyWith(
-              color: AppColors.textGreyDefault500,
-            ),
-          ),
+          Text(item.price, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
         ],
       ),
     );

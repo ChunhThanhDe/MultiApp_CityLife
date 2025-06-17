@@ -32,10 +32,7 @@ class _FilterHeader extends StatelessWidget {
       alignment: Alignment.center,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
-        child: Text(
-          'Filter menu',
-          style: AppTextStyles.typographyH8SemiBold,
-        ),
+        child: Text('Filter menu', style: AppTextStyles.typographyH8SemiBold),
       ),
     );
   }
@@ -84,10 +81,7 @@ class _FilterCategoriesList extends StatelessWidget {
       child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: filterCategories.map((category) => _FilterItem(category)).toList(),
-          ),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: filterCategories.map((category) => _FilterItem(category)).toList()),
         ),
       ),
     );
@@ -121,12 +115,7 @@ class _DismissButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(32.r),
         padding: EdgeInsets.symmetric(vertical: 12.h),
         onTap: Get.back,
-        child: Text(
-          'Dismiss',
-          style: AppTextStyles.typographyH10Medium.copyWith(
-            color: AppColors.textBaseWhite,
-          ),
-        ),
+        child: Text('Dismiss', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite)),
       ),
     );
   }

@@ -3,12 +3,7 @@ import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
-enum BannerType {
-  bannerFloatingLogo,
-  brandLogoName,
-  bannerDiscount,
-  bannerSingleImage,
-}
+enum BannerType { bannerFloatingLogo, brandLogoName, bannerDiscount, bannerSingleImage }
 
 enum BannerStatus { available, unavailable, closed }
 
@@ -44,14 +39,7 @@ class UnifiedBannerWidget extends StatelessWidget {
   final bool showArrowIcon;
   final VoidCallback? onTap;
 
-  const UnifiedBannerWidget({
-    super.key,
-    required this.sectionTitle,
-    required this.items,
-    required this.bannerType,
-    this.showArrowIcon = false,
-    this.onTap,
-  });
+  const UnifiedBannerWidget({super.key, required this.sectionTitle, required this.items, required this.bannerType, this.showArrowIcon = false, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -82,12 +70,7 @@ class UnifiedBannerWidget extends StatelessWidget {
                 ],
               ),
             )
-          : Text(
-              sectionTitle,
-              style: AppTextStyles.typographyH9Medium.copyWith(
-                color: AppColors.textGreyHighest950,
-              ),
-            ),
+          : Text(sectionTitle, style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
     );
   }
 
@@ -106,11 +89,7 @@ class UnifiedBannerWidget extends StatelessWidget {
   Widget _buildList() {
     return SizedBox(
       height: _getListHeight(),
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: items.length,
-        itemBuilder: (context, index) => _buildItem(index),
-      ),
+      child: ListView.builder(scrollDirection: Axis.horizontal, itemCount: items.length, itemBuilder: (context, index) => _buildItem(index)),
     );
   }
 
@@ -149,15 +128,9 @@ class UnifiedBannerWidget extends StatelessWidget {
           Container(
             height: 180,
             width: 350,
-            margin: EdgeInsets.only(
-              left: index == 0 ? 24 : 16,
-              right: index == items.length - 1 ? 24 : 0,
-            ),
+            margin: EdgeInsets.only(left: index == 0 ? 24 : 16, right: index == items.length - 1 ? 24 : 0),
             decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AppImageProvider.network(item.imageUrl),
-                fit: BoxFit.cover,
-              ),
+              image: DecorationImage(image: AppImageProvider.network(item.imageUrl), fit: BoxFit.cover),
               borderRadius: BorderRadius.circular(AppCorner.radius8),
             ),
           ),
@@ -166,51 +139,26 @@ class UnifiedBannerWidget extends StatelessWidget {
             Container(
               height: 180,
               width: 350,
-              margin: EdgeInsets.only(
-                left: index == 0 ? 24 : 16,
-                right: index == items.length - 1 ? 24 : 0,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.6),
-                borderRadius: BorderRadius.circular(AppCorner.radius8),
-              ),
+              margin: EdgeInsets.only(left: index == 0 ? 24 : 16, right: index == items.length - 1 ? 24 : 0),
+              decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.6), borderRadius: BorderRadius.circular(AppCorner.radius8)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                     padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.2),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      item.status == BannerStatus.closed
-                          ? Icons.nightlight_round
-                          : Icons.lock,
-                      color: Colors.white,
-                      size: 24,
-                    ),
+                    decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), shape: BoxShape.circle),
+                    child: Icon(item.status == BannerStatus.closed ? Icons.nightlight_round : Icons.lock, color: Colors.white, size: 24),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    item.status == BannerStatus.closed
-                        ? 'Closed'
-                        : 'Currently Unavailable',
-                    style: AppTextStyles.typographyH10Medium.copyWith(
-                      color: Colors.white,
-                    ),
+                    item.status == BannerStatus.closed ? 'Closed' : 'Currently Unavailable',
+                    style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
                 ],
               ),
             ),
-          if (item.logoUrl != null && item.status == BannerStatus.available)
-            Positioned(
-              top: 16,
-              left: 0,
-              right: 0,
-              child: Center(child: _buildBrandNameChip(item)),
-            ),
+          if (item.logoUrl != null && item.status == BannerStatus.available) Positioned(top: 16, left: 0, right: 0, child: Center(child: _buildBrandNameChip(item))),
         ],
       ),
     );
@@ -222,14 +170,7 @@ class UnifiedBannerWidget extends StatelessWidget {
       decoration: ShapeDecoration(
         color: Colors.white.withValues(alpha: 0.8),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-        shadows: [
-          BoxShadow(
-            color: Color(0x3D000000),
-            blurRadius: 32,
-            offset: Offset(0, 0),
-            spreadRadius: 0,
-          ),
-        ],
+        shadows: [BoxShadow(color: Color(0x3D000000), blurRadius: 32, offset: Offset(0, 0), spreadRadius: 0)],
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -237,16 +178,11 @@ class UnifiedBannerWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         spacing: 8,
         children: [
-          if (item.logoUrl != null)
-            ClipOval(
-              child: AppImage.network(item.logoUrl!, width: 24, height: 24),
-            ),
+          if (item.logoUrl != null) ClipOval(child: AppImage.network(item.logoUrl!, width: 24, height: 24)),
           Text(
             item.title,
             textAlign: TextAlign.center,
-            style: AppTextStyles.typographyH11Medium.copyWith(
-              color: AppColors.textGreyHighest950,
-            ),
+            style: AppTextStyles.typographyH11Medium.copyWith(color: AppColors.textGreyHighest950),
           ),
         ],
       ),
@@ -258,47 +194,24 @@ class UnifiedBannerWidget extends StatelessWidget {
     return GestureDetector(
       onTap: item.status == BannerStatus.available ? item.onTap : null,
       child: Padding(
-        padding: EdgeInsets.only(
-          right: index == items.length - 1 ? 24 : 16,
-          left: index == 0 ? 24 : 0,
-        ),
+        padding: EdgeInsets.only(right: index == items.length - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
         child: Column(
           children: [
             Stack(
               children: [
-                ClipOval(
-                  child: AppImage.network(
-                    item.logoUrl ?? item.imageUrl,
-                    width: 64,
-                    height: 64,
-                  ),
-                ),
+                ClipOval(child: AppImage.network(item.logoUrl ?? item.imageUrl, width: 64, height: 64)),
                 // Status overlay (unavailable/closed)
                 if (item.status != BannerStatus.available)
                   Container(
                     width: 64,
                     height: 64,
-                    decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.6),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      item.status == BannerStatus.closed
-                          ? Icons.nightlight_round
-                          : Icons.lock,
-                      color: Colors.white,
-                      size: 20,
-                    ),
+                    decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.6), shape: BoxShape.circle),
+                    child: Icon(item.status == BannerStatus.closed ? Icons.nightlight_round : Icons.lock, color: Colors.white, size: 20),
                   ),
               ],
             ),
             SizedBox(height: 4),
-            Text(
-              item.title,
-              style: AppTextStyles.typographyH12Regular.copyWith(
-                color: AppColors.textBrandDefault500,
-              ),
-            ),
+            Text(item.title, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBrandDefault500)),
           ],
         ),
       ),
@@ -311,122 +224,65 @@ class UnifiedBannerWidget extends StatelessWidget {
       onTap: item.status == BannerStatus.available ? item.onTap : null,
       child: Container(
         width: 223,
-        margin: EdgeInsets.only(
-          right: index == items.length - 1 ? 24 : 16,
-          left: index == 0 ? 24 : 0,
-        ),
+        margin: EdgeInsets.only(right: index == items.length - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: AppImage.network(item.imageUrl),
-                ),
+                ClipRRect(borderRadius: BorderRadius.circular(8), child: AppImage.network(item.imageUrl)),
                 // Status overlay (unavailable/closed)
                 if (item.status != BannerStatus.available)
                   Positioned.fill(
                     child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.6),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+                      decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.6), borderRadius: BorderRadius.circular(8)),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
                             padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withValues(alpha: 0.2),
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(
-                              item.status == BannerStatus.closed
-                                  ? Icons.nightlight_round
-                                  : Icons.lock,
-                              color: Colors.white,
-                              size: 20,
-                            ),
+                            decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), shape: BoxShape.circle),
+                            child: Icon(item.status == BannerStatus.closed ? Icons.nightlight_round : Icons.lock, color: Colors.white, size: 20),
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            item.status == BannerStatus.closed
-                                ? 'Closed'
-                                : 'Currently Unavailable',
-                            style: AppTextStyles.typographyH11Medium.copyWith(
-                              color: Colors.white,
-                            ),
+                            item.status == BannerStatus.closed ? 'Closed' : 'Currently Unavailable',
+                            style: AppTextStyles.typographyH11Medium.copyWith(color: Colors.white),
                             textAlign: TextAlign.center,
                           ),
                         ],
                       ),
                     ),
                   ),
-                if (item.discount != null &&
-                    item.status == BannerStatus.available)
+                if (item.discount != null && item.status == BannerStatus.available)
                   Positioned(
                     top: 8,
                     right: 8,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 2,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
                       decoration: ShapeDecoration(
                         color: AppColors.stateSuccessHigh700,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(32),
-                        ),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                         shadows: [
-                          BoxShadow(
-                            color: Color(0x19101214),
-                            blurRadius: 16,
-                            offset: Offset(0, 12),
-                            spreadRadius: -6,
-                          ),
-                          BoxShadow(
-                            color: Color(0x0C101214),
-                            blurRadius: 4,
-                            offset: Offset(0, 2),
-                            spreadRadius: -2,
-                          ),
+                          BoxShadow(color: Color(0x19101214), blurRadius: 16, offset: Offset(0, 12), spreadRadius: -6),
+                          BoxShadow(color: Color(0x0C101214), blurRadius: 4, offset: Offset(0, 2), spreadRadius: -2),
                         ],
                       ),
                       child: Text(
                         '${item.discount}% Off',
                         textAlign: TextAlign.center,
-                        style: AppTextStyles.typographyH12Regular.copyWith(
-                          color: AppColors.textBaseWhite,
-                        ),
+                        style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBaseWhite),
                       ),
                     ),
                   ),
-                if (item.logoUrl != null &&
-                    item.status == BannerStatus.available)
-                  Positioned(
-                    top: 8,
-                    left: 8,
-                    child: ClipOval(
-                      child: AppImage.network(
-                        item.logoUrl!,
-                        width: 64,
-                        height: 64,
-                      ),
-                    ),
-                  ),
+                if (item.logoUrl != null && item.status == BannerStatus.available) Positioned(top: 8, left: 8, child: ClipOval(child: AppImage.network(item.logoUrl!, width: 64, height: 64))),
               ],
             ),
             SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  item.title,
-                  style: AppTextStyles.typographyH10Medium.copyWith(
-                    color: AppColors.textGreyHighest950,
-                  ),
-                ),
+                Text(item.title, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                 if (item.isVerified == true) Assets.icons.icVerified.svg(),
               ],
             ),
@@ -434,26 +290,10 @@ class UnifiedBannerWidget extends StatelessWidget {
               Row(
                 spacing: 4,
                 children: [
-                  if (item.deliveryFee != null)
-                    Text(
-                      '\$${item.deliveryFee} Delivery fee',
-                      style: AppTextStyles.typographyH12Regular.copyWith(
-                        color: AppColors.textGreyHigh700,
-                      ),
-                    ),
+                  if (item.deliveryFee != null) Text('\$${item.deliveryFee} Delivery fee', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
                   if (item.time != null) ...[
-                    Text(
-                      '•',
-                      style: AppTextStyles.typographyH12Regular.copyWith(
-                        color: AppColors.textBrandDefault500,
-                      ),
-                    ),
-                    Text(
-                      item.time!,
-                      style: AppTextStyles.typographyH12Regular.copyWith(
-                        color: AppColors.textGreyHigh700,
-                      ),
-                    ),
+                    Text('•', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBrandDefault500)),
+                    Text(item.time!, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
                   ],
                 ],
               ),
@@ -468,10 +308,7 @@ class UnifiedBannerWidget extends StatelessWidget {
     return GestureDetector(
       onTap: item.status == BannerStatus.available ? item.onTap : null,
       child: Padding(
-        padding: EdgeInsets.only(
-          right: index == items.length - 1 ? 24 : 16,
-          left: index == 0 ? 24 : 0,
-        ),
+        padding: EdgeInsets.only(right: index == items.length - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
         child: SizedBox(
           width: 175,
           height: 220,
@@ -479,46 +316,25 @@ class UnifiedBannerWidget extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: AppImage.network(
-                  item.imageUrl,
-                  width: 175,
-                  height: 220,
-                  fit: BoxFit.cover,
-                ),
+                child: AppImage.network(item.imageUrl, width: 175, height: 220, fit: BoxFit.cover),
               ),
               // Status overlay (unavailable/closed)
               if (item.status != BannerStatus.available)
                 Positioned.fill(
                   child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.6),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
+                    decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.6), borderRadius: BorderRadius.circular(8)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
                           padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.2),
-                            shape: BoxShape.circle,
-                          ),
-                          child: Icon(
-                            item.status == BannerStatus.closed
-                                ? Icons.nightlight_round
-                                : Icons.lock,
-                            color: Colors.white,
-                            size: 20,
-                          ),
+                          decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), shape: BoxShape.circle),
+                          child: Icon(item.status == BannerStatus.closed ? Icons.nightlight_round : Icons.lock, color: Colors.white, size: 20),
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          item.status == BannerStatus.closed
-                              ? 'Closed'
-                              : 'Currently Unavailable',
-                          style: AppTextStyles.typographyH11Medium.copyWith(
-                            color: Colors.white,
-                          ),
+                          item.status == BannerStatus.closed ? 'Closed' : 'Currently Unavailable',
+                          style: AppTextStyles.typographyH11Medium.copyWith(color: Colors.white),
                           textAlign: TextAlign.center,
                         ),
                       ],

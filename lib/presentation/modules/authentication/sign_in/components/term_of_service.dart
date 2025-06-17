@@ -5,9 +5,7 @@ import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class TermOfService extends StatelessWidget {
-  const TermOfService({
-    super.key,
-  });
+  const TermOfService({super.key});
 
   @override
   Widget build(BuildContext context) {

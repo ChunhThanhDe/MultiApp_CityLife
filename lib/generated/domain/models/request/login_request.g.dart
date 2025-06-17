@@ -13,16 +13,11 @@ LoginRequest _$LoginRequestFromJson(Map<String, dynamic> json) => LoginRequest(
   password: json['password'] as String,
 );
 
-Map<String, dynamic> _$LoginRequestToJson(LoginRequest instance) =>
-    <String, dynamic>{
-      'login_type': _$LoginTypeEnumMap[instance.loginType]!,
-      'email_or_phone': instance.emailOrPhone,
-      'field_type': instance.fieldType,
-      'password': instance.password,
-    };
-
-const _$LoginTypeEnumMap = {
-  LoginType.manual: 'manual',
-  LoginType.google: 'google',
-  LoginType.facebook: 'facebook',
+Map<String, dynamic> _$LoginRequestToJson(LoginRequest instance) => <String, dynamic>{
+  'login_type': _$LoginTypeEnumMap[instance.loginType]!,
+  'email_or_phone': instance.emailOrPhone,
+  'field_type': instance.fieldType,
+  'password': instance.password,
 };
+
+const _$LoginTypeEnumMap = {LoginType.manual: 'manual', LoginType.google: 'google', LoginType.facebook: 'facebook'};

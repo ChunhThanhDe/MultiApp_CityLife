@@ -11,10 +11,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(
-      title: "Password",
-      onBack: () => Get.back(),
-    );
+    return BasicAppBar(title: "Password", onBack: () => Get.back());
   }
 
   @override
@@ -32,59 +29,53 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
                   const SizedBox(height: 24),
                   Text(
                     "Change My Password",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF161A1D),
-                    ),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     "In order to best protect your account, please select a password that is at least 8 characters long and contains a combination of uppercase and lowercase letters, numbers and/or symbols.",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Color(0xFF4A5763),
-                      height: 1.42,
-                    ),
+                    style: TextStyle(fontSize: 14, color: Color(0xFF4A5763), height: 1.42),
                   ),
                   const SizedBox(height: 24),
 
                   // Old Password
-                  Obx(() => PasswordInput(
-                        label: "Old Password",
-                        controller: controller.oldController,
-                        isObscure: !controller.showOldPassword.value,
-                        onToggle: controller.toggleOld,
-                        validator: controller.validateOldPassword,
-                      )),
+                  Obx(
+                    () => PasswordInput(
+                      label: "Old Password",
+                      controller: controller.oldController,
+                      isObscure: !controller.showOldPassword.value,
+                      onToggle: controller.toggleOld,
+                      validator: controller.validateOldPassword,
+                    ),
+                  ),
                   const SizedBox(height: 16),
 
                   // New Password
-                  Obx(() => PasswordInput(
-                        label: "New password",
-                        controller: controller.newController,
-                        isObscure: !controller.showNewPassword.value,
-                        onToggle: controller.toggleNew,
-                        validator: controller.validateNewPassword,
-                      )),
+                  Obx(
+                    () => PasswordInput(
+                      label: "New password",
+                      controller: controller.newController,
+                      isObscure: !controller.showNewPassword.value,
+                      onToggle: controller.toggleNew,
+                      validator: controller.validateNewPassword,
+                    ),
+                  ),
                   const SizedBox(height: 16),
 
                   // Confirm New Password
-                  Obx(() => PasswordInput(
-                        label: "Confirm new password",
-                        controller: controller.confirmController,
-                        isObscure: !controller.showConfirmPassword.value,
-                        onToggle: controller.toggleConfirm,
-                        validator: controller.validateConfirmPassword,
-                      )),
+                  Obx(
+                    () => PasswordInput(
+                      label: "Confirm new password",
+                      controller: controller.confirmController,
+                      isObscure: !controller.showConfirmPassword.value,
+                      onToggle: controller.toggleConfirm,
+                      validator: controller.validateConfirmPassword,
+                    ),
+                  ),
                   const SizedBox(height: 24),
                   Text(
                     "We recommend choosing a password that:",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF161A1D),
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
                   ),
                   const SizedBox(height: 8),
                   _recommendationText(),
@@ -111,19 +102,13 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
                   onPressed: controller.onChangePassword,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF5856D7),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                     padding: EdgeInsets.symmetric(vertical: 12),
                     elevation: 0,
                   ),
                   child: const Text(
                     "Change password",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
                   ),
                 ),
               ),

@@ -17,27 +17,21 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
 
   // Mock search results (replace with real data from controller)
   List<SearchItem> get _mockSearchResults => [
-        SearchItem(title: '123 Main St', address: '123 Main St', type: SearchItemType.history),
-        SearchItem(title: '456 Elm St', address: '456 Elm St', type: SearchItemType.address),
-        SearchItem(title: '789 Oak Ave', address: '789 Oak Ave', type: SearchItemType.nearby),
-        SearchItem(title: '101 Maple Rd', address: '101 Maple Rd', type: SearchItemType.history),
-        SearchItem(title: '202 Pine Ln', address: '202 Pine Ln', type: SearchItemType.address),
-      ];
+    SearchItem(title: '123 Main St', address: '123 Main St', type: SearchItemType.history),
+    SearchItem(title: '456 Elm St', address: '456 Elm St', type: SearchItemType.address),
+    SearchItem(title: '789 Oak Ave', address: '789 Oak Ave', type: SearchItemType.nearby),
+    SearchItem(title: '101 Maple Rd', address: '101 Maple Rd', type: SearchItemType.history),
+    SearchItem(title: '202 Pine Ln', address: '202 Pine Ln', type: SearchItemType.address),
+  ];
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return AppBar(
       surfaceTintColor: Colors.white,
       backgroundColor: Colors.white,
-      title: Text(
-        tr(LocaleKeys.address_title),
-        style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
-      ),
+      title: Text(tr(LocaleKeys.address_title), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
       centerTitle: false,
-      leading: IconButton(
-        onPressed: () => Get.back(),
-        icon: Assets.icons.icBackArrow.svg(),
-      ),
+      leading: IconButton(onPressed: () => Get.back(), icon: Assets.icons.icBackArrow.svg()),
     );
   }
 
@@ -50,10 +44,7 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
         width: double.infinity,
         color: AppColors.stateGreyLowest50,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: Text(
-          tr(LocaleKeys.address_addNewAddress),
-          style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
-        ),
+        child: Text(tr(LocaleKeys.address_addNewAddress), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
       ),
     );
   }
@@ -69,18 +60,12 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
         children: [
           AppTextField(
             hintText: tr(LocaleKeys.address_searchHint),
-            prefixIcon: Padding(
-              padding: const EdgeInsets.all(12),
-              child: Assets.icons.icSearch.svg(),
-            ),
+            prefixIcon: Padding(padding: const EdgeInsets.all(12), child: Assets.icons.icSearch.svg()),
             suffixIcon: Obx(() {
               return vm.isShowClearButton.value
                   ? GestureDetector(
                       onTap: vm.onClearSearch,
-                      child: Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: Assets.icons.icClose.svg(),
-                      ),
+                      child: Padding(padding: const EdgeInsets.all(12), child: Assets.icons.icClose.svg()),
                     )
                   : const SizedBox.shrink();
             }),
@@ -88,10 +73,7 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
             borderRadius: 32,
             onChanged: vm.onSearchChanged,
           ),
-          Text(
-            tr(LocaleKeys.address_exploreNearby),
-            style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
-          ),
+          Text(tr(LocaleKeys.address_exploreNearby), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
           Expanded(
             child: ListView.separated(
               itemCount: results.length,
@@ -118,8 +100,8 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
               item.type == SearchItemType.history
                   ? Assets.icons.icClock.path
                   : item.type == SearchItemType.address
-                      ? Assets.icons.icLocation.path
-                      : Assets.icons.icMouse.path,
+                  ? Assets.icons.icLocation.path
+                  : Assets.icons.icMouse.path,
             ),
             const SizedBox(width: 12),
             Column(
