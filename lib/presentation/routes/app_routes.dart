@@ -27,4 +27,5 @@ class AppRoutes {
   static const String trackDelivery = '/delivery/tracking/trackingId';
   static const String welcome = '/welcome';
   static const String splash = '/splash';
+  static const String store = '/store';
 }

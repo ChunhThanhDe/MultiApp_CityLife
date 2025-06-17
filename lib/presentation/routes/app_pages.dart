@@ -46,6 +46,8 @@ import 'package:sixam_mart_user/presentation/modules/payment/scan_card/scan_card
 import 'package:sixam_mart_user/presentation/modules/payment/scan_card/scan_card_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_bindings.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/store/store_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/store/store_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/wallet/add_fund/add_fund_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/wallet/add_fund/add_fund_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/wallet/view_receipt/view_receipt_binding.dart';
@@ -207,6 +209,11 @@ class AppPages {
       name: AppRoutes.welcome,
       page: () => const WelcomeScreen(),
       binding: WelcomeBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.store,
+      page: () => const StoreScreen(),
+      binding: StoreBinding(),
     ),
   ];
 }
