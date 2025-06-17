@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/shared/app_image.dart';
+import 'package:sixam_mart_user/presentation/shared/app_tabbar.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 import 'store_controller.dart';
@@ -138,41 +139,36 @@ class StoreScreen extends BaseScreen<StoreController> {
       child: Container(
         color: AppColors.stateBaseWhite,
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
-        child: Row(
-          children: [
-            _buildServiceOption(Icons.store, 'In store', true),
-            SizedBox(width: 24.w),
-            _buildServiceOption(Icons.delivery_dining, 'Delivery', false),
-            SizedBox(width: 24.w),
-            _buildServiceOption(Icons.drive_eta, 'Drive thru', false),
-          ],
+        child: GetBuilder<StoreController>(
+          builder: (controller) {
+            return AppTabBar(
+              tabController: controller.serviceTabController,
+              listTab: [
+                _buildServiceTab(Icons.store, 'In store'),
+                _buildServiceTab(Icons.delivery_dining, 'Delivery'),
+                _buildServiceTab(Icons.drive_eta, 'Drive thru'),
+              ],
+              onTap: (index) => controller.serviceTabController.animateTo(index),
+            );
+          },
         ),
       ),
     );
   }
 
-  Widget _buildServiceOption(IconData icon, String label, bool isSelected) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-      decoration: BoxDecoration(
-        color: isSelected ? AppColors.stateBrandLowestHover100 : AppColors.stateGreyLowest50,
-        borderRadius: BorderRadius.circular(8.r),
-        border: isSelected ? Border.all(color: AppColors.stateBrandDefault500, width: 1) : null,
-      ),
+  Widget _buildServiceTab(IconData icon, String label) {
+    return Tab(
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
             icon,
             size: 16.w,
-            color: isSelected ? AppColors.stateBrandDefault500 : AppColors.textGreyDefault500,
           ),
           SizedBox(width: 8.w),
           Text(
             label,
-            style: AppTextStyles.typographyH12Medium.copyWith(
-              color: isSelected ? AppColors.stateBrandDefault500 : AppColors.textGreyDefault500,
-            ),
+            style: AppTextStyles.typographyH12Medium,
           ),
         ],
       ),
@@ -180,20 +176,57 @@ class StoreScreen extends BaseScreen<StoreController> {
   }
 
   Widget _buildProductCategories() {
-    return SliverList(
-      delegate: SliverChildListDelegate([
-        _buildCategorySection('Popular Items', controller.popularItems),
-        _buildFilterSection(),
-        _buildCategorySection('Brewed Coffees', controller.brewedCoffees),
-        _buildCategorySection('Hot Coffees', controller.hotCoffees),
-        _buildCategorySection('Cold Coffees', controller.coldCoffees),
-        _buildCategorySection('Starbucks Refreshers® Beverages', controller.refresherBeverages),
-        _buildCategorySection('Frappuccino® Blended Beverages', controller.frappuccinoBeverages),
-        _buildCategorySection('Iced Tea and Lemonade', controller.icedTeaLemonade),
-        _buildCategorySection('Hot Teas', controller.hotTeas),
-        _buildCategorySection('Bottled Beverages', controller.bottledBeverages),
-        SizedBox(height: 100.h),
-      ]),
+    return GetBuilder<StoreController>(
+      builder: (controller) {
+        List<Widget> categoryWidgets = [_buildCategorySection('Popular Items', controller.popularItems), _buildFilterSection()];
+
+        Map<String, List<ProductItem>> filteredCategories = controller.filteredCategories;
+
+        // Add categories with filtered items
+        filteredCategories.forEach((categoryTitle, items) {
+          categoryWidgets.add(_buildCategorySection(categoryTitle, items));
+        });
+
+        // Show message when no categories available for selected filter
+        if (filteredCategories.isEmpty) {
+          categoryWidgets.add(
+            Container(
+              padding: EdgeInsets.all(24.w),
+              child: Column(
+                children: [
+                  SizedBox(height: 50.h),
+                  Icon(
+                    Icons.inbox_outlined,
+                    size: 64.w,
+                    color: AppColors.textGreyDefault500,
+                  ),
+                  SizedBox(height: 16.h),
+                  Text(
+                    'No items available',
+                    style: AppTextStyles.typographyH7SemiBold.copyWith(
+                      color: AppColors.textGreyDefault500,
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    'We\'ll add more items to this category soon.',
+                    style: AppTextStyles.typographyH12Regular.copyWith(
+                      color: AppColors.textGreyDefault500,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+
+        categoryWidgets.add(SizedBox(height: 100.h));
+
+        return SliverList(
+          delegate: SliverChildListDelegate(categoryWidgets),
+        );
+      },
     );
   }
 
@@ -201,43 +234,70 @@ class StoreScreen extends BaseScreen<StoreController> {
     return Container(
       color: AppColors.stateBaseWhite,
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
-      child: Row(
-        children: [
-          _buildFilterChip(Icons.tune, 'Filter'),
-          SizedBox(width: 12.w),
-          _buildFilterChip(Icons.local_drink, 'Drinks', isSelected: true),
-          SizedBox(width: 12.w),
-          _buildFilterChip(Icons.restaurant, 'Foods'),
-          SizedBox(width: 12.w),
-          _buildFilterChip(Icons.whatshot, 'At Home'),
-        ],
+      child: GetBuilder<StoreController>(
+        builder: (controller) {
+          return Row(
+            children: [
+              _buildFilterChip(
+                FilterType.all.icon,
+                FilterType.all.label,
+                isSelected: controller.isFilterSelected(FilterType.all),
+                onTap: () => controller.selectFilter(FilterType.all),
+              ),
+              SizedBox(width: 12.w),
+              _buildFilterChip(
+                FilterType.drinks.icon,
+                FilterType.drinks.label,
+                isSelected: controller.isFilterSelected(FilterType.drinks),
+                onTap: () => controller.selectFilter(FilterType.drinks),
+              ),
+              SizedBox(width: 12.w),
+              _buildFilterChip(
+                FilterType.foods.icon,
+                FilterType.foods.label,
+                isSelected: controller.isFilterSelected(FilterType.foods),
+                onTap: () => controller.selectFilter(FilterType.foods),
+              ),
+              SizedBox(width: 12.w),
+              _buildFilterChip(
+                FilterType.atHome.icon,
+                FilterType.atHome.label,
+                isSelected: controller.isFilterSelected(FilterType.atHome),
+                onTap: () => controller.selectFilter(FilterType.atHome),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
 
-  Widget _buildFilterChip(IconData icon, String label, {bool isSelected = false}) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-      decoration: BoxDecoration(
-        color: isSelected ? AppColors.stateBrandDefault500 : AppColors.stateGreyLowest50,
-        borderRadius: BorderRadius.circular(20.r),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            size: 14.w,
-            color: isSelected ? AppColors.textBaseWhite : AppColors.textGreyDefault500,
-          ),
-          SizedBox(width: 6.w),
-          Text(
-            label,
-            style: AppTextStyles.typographyH12Medium.copyWith(
+  Widget _buildFilterChip(IconData icon, String label, {bool isSelected = false, VoidCallback? onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+        decoration: BoxDecoration(
+          color: isSelected ? AppColors.stateBrandDefault500 : AppColors.stateGreyLowest50,
+          borderRadius: BorderRadius.circular(20.r),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              size: 14.w,
               color: isSelected ? AppColors.textBaseWhite : AppColors.textGreyDefault500,
             ),
-          ),
-        ],
+            SizedBox(width: 6.w),
+            Text(
+              label,
+              style: AppTextStyles.typographyH12Medium.copyWith(
+                color: isSelected ? AppColors.textBaseWhite : AppColors.textGreyDefault500,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -276,7 +336,6 @@ class StoreScreen extends BaseScreen<StoreController> {
               itemBuilder: (context, index) => _buildProductCard(items[index]),
             ),
           ),
-          SizedBox(height: 24.h),
         ],
       ),
     );
