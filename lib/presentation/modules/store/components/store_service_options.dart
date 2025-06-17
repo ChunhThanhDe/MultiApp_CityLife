@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/app_tabbar.dart';
 import 'package:sixam_mart_user/theme.dart';
@@ -19,9 +21,9 @@ class StoreServiceOptions extends StatelessWidget {
             return AppTabBar(
               tabController: controller.serviceTabController,
               listTab: [
-                _buildServiceTab(Icons.store, 'In store'),
-                _buildServiceTab(Icons.delivery_dining, 'Delivery'),
-                _buildServiceTab(Icons.drive_eta, 'Drive thru'),
+                _buildServiceTab(Assets.icons.icStore.path, 'In store'),
+                _buildServiceTab(Assets.icons.icCar.path, 'Delivery'),
+                _buildServiceTab(Assets.icons.icCarThru.path, 'Drive thru'),
               ],
               onTap: (index) => controller.serviceTabController.animateTo(index),
             );
@@ -31,19 +33,21 @@ class StoreServiceOptions extends StatelessWidget {
     );
   }
 
-  Widget _buildServiceTab(IconData icon, String label) {
+  Widget _buildServiceTab(String iconPath, String label) {
     return Tab(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            icon,
-            size: 16.w,
+          SvgPicture.asset(
+            iconPath,
+            width: 16.w,
+            height: 16.w,
+            colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn),
           ),
           SizedBox(width: 8.w),
           Text(
             label,
-            style: AppTextStyles.typographyH12Medium,
+            style: AppTextStyles.typographyH12Medium.copyWith(color: AppColors.textGreyHighest950),
           ),
         ],
       ),

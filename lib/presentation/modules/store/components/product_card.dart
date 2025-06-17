@@ -53,7 +53,6 @@ class ProductCard extends StatelessWidget {
                   child: Icon(
                     Icons.add,
                     size: 20.w,
-                    color: AppColors.stateBrandDefault500,
                   ),
                 ),
               ),
