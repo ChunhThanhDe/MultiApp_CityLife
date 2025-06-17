@@ -66,7 +66,7 @@ class SignInScreen extends BaseScreen<SignInController> {
     );
   }
 
-  _buildSwitchLoginMethodButton() {
+  AppButton _buildSwitchLoginMethodButton() {
     return AppButton(
       onTap: vm.toggleLoginMethod,
       width: double.infinity,
@@ -123,7 +123,7 @@ class SignInScreen extends BaseScreen<SignInController> {
     );
   }
 
-  _buildLoginButton() {
+  AppButton _buildLoginButton() {
     return AppButton(
         onTap: vm.onSubmit,
         width: double.infinity,
@@ -149,7 +149,7 @@ class SignInScreen extends BaseScreen<SignInController> {
         ));
   }
 
-  _buildInputField() {
+  Form _buildInputField() {
     return Form(
       key: vm.formKey,
       child: Obx(
@@ -166,7 +166,7 @@ class SignInScreen extends BaseScreen<SignInController> {
     );
   }
 
-  _buildEmailInput() {
+  AppTextField _buildEmailInput() {
     return AppTextField(
       label: tr(LocaleKeys.authentication_signIn_emailLabel),
       isRequired: true,
@@ -194,7 +194,7 @@ class SignInScreen extends BaseScreen<SignInController> {
     );
   }
 
-  _buildPasswordInput() {
+  AppTextField _buildPasswordInput() {
     return AppTextField(
       label: tr(LocaleKeys.authentication_signIn_passwordLabel),
       isRequired: true,

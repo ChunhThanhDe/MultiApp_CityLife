@@ -56,13 +56,20 @@ class StoreFilterSection extends StatelessWidget {
     );
   }
 
-  Widget _buildFilterChip(String? iconPath, String label, {bool isSelected = false, VoidCallback? onTap}) {
+  Widget _buildFilterChip(
+    String? iconPath,
+    String label, {
+    bool isSelected = false,
+    VoidCallback? onTap,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.stateBrandDefault500 : AppColors.stateGreyLowest50,
+          color: isSelected
+              ? AppColors.stateBrandDefault500
+              : AppColors.stateGreyLowest50,
           borderRadius: BorderRadius.circular(20.r),
         ),
         child: Row(
@@ -73,14 +80,21 @@ class StoreFilterSection extends StatelessWidget {
                 iconPath,
                 width: 20,
                 height: 20,
-                color: isSelected ? AppColors.textBaseWhite : AppColors.textGreyHighest950,
+                colorFilter: ColorFilter.mode(
+                  isSelected
+                      ? AppColors.textBaseWhite
+                      : AppColors.textGreyHighest950,
+                  BlendMode.srcIn,
+                ),
               ),
               SizedBox(width: 6.w),
             ],
             Text(
               label,
               style: AppTextStyles.typographyH12Medium.copyWith(
-                color: isSelected ? AppColors.textBaseWhite : AppColors.textGreyHighest950,
+                color: isSelected
+                    ? AppColors.textBaseWhite
+                    : AppColors.textGreyHighest950,
               ),
             ),
           ],

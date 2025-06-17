@@ -28,7 +28,9 @@ class FavoritesTabBar extends StatelessWidget {
           // Animated moving white background for active tab
           AnimatedAlign(
             duration: const Duration(milliseconds: 260),
-            alignment: currentTab == FavoritesTab.store ? Alignment.centerLeft : Alignment.centerRight,
+            alignment: currentTab == FavoritesTab.store
+                ? Alignment.centerLeft
+                : Alignment.centerRight,
             curve: Curves.easeOutCubic,
             child: Container(
               width: (MediaQuery.of(context).size.width - 48) / 2,
@@ -39,7 +41,7 @@ class FavoritesTabBar extends StatelessWidget {
                 borderRadius: BorderRadius.circular(32),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.02),
+                    color: Colors.black.withValues(alpha: 0.02),
                     blurRadius: 4,
                     offset: Offset(0, 2),
                   ),
@@ -70,7 +72,12 @@ class FavoritesTabBar extends StatelessWidget {
     );
   }
 
-  Widget _buildTabButton(BuildContext context, {required bool isActive, required String text, required VoidCallback onTap}) {
+  Widget _buildTabButton(
+    BuildContext context, {
+    required bool isActive,
+    required String text,
+    required VoidCallback onTap,
+  }) {
     return Expanded(
       child: GestureDetector(
         onTap: onTap,

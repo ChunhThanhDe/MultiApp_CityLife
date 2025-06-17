@@ -27,7 +27,7 @@ class WalletController extends BaseController {
   ];
   final showBalance = true.obs;
 
-  toggleBalanceVisibility() {
+  void toggleBalanceVisibility() {
     showBalance.value = !showBalance.value;
   }
 }

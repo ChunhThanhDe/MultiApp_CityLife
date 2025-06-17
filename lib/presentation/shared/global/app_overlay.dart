@@ -82,7 +82,7 @@ class _AppLoadingOverlay {
   /// This method safely removes and disposes of the overlay entry
   /// if one is currently being displayed. It performs proper cleanup
   /// to prevent memory leaks.
-  static removeHighlightOverlay() {
+  static void removeHighlightOverlay() {
     overlayEntry?.remove();
     overlayEntry?.dispose();
     overlayEntry = null;
@@ -96,7 +96,7 @@ class _AppLoadingOverlay {
   ///
   /// [child] Optional custom loading widget. If not provided,
   /// defaults to a dark rounded container with activity indicator.
-  static createHighlightOverlay({
+  static void createHighlightOverlay({
     Widget? child,
   }) {
     removeHighlightOverlay();

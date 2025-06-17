@@ -14,7 +14,7 @@ class AppStorage extends GetxService {
     return await SharedPreferences.getInstance();
   }
 
-  static setString(String key, String value) async {
+  static Future<void> setString(String key, String value) async {
     SharedPreferences pref = Get.find();
     await pref.setString(key, value);
   }
@@ -24,7 +24,7 @@ class AppStorage extends GetxService {
     return pref.getString(key);
   }
 
-  static setInt(String key, int value) async {
+  static Future<void> setInt(String key, int value) async {
     SharedPreferences pref = Get.find();
     await pref.setInt(key, value);
   }
@@ -34,7 +34,7 @@ class AppStorage extends GetxService {
     return pref.getInt(key);
   }
 
-  static setListString(String key, List<String> value) async {
+  static Future<void> setListString(String key, List<String> value) async {
     SharedPreferences pref = Get.find();
     await pref.setStringList(key, value);
   }
@@ -44,7 +44,7 @@ class AppStorage extends GetxService {
     return pref.getStringList(key);
   }
 
-  static setBool(String key, bool value) async {
+  static Future<void> setBool(String key, bool value) async {
     SharedPreferences pref = Get.find();
     await pref.setBool(key, value);
   }
@@ -54,7 +54,7 @@ class AppStorage extends GetxService {
     return pref.getBool(key);
   }
 
-  static removeSharedPrefrences(String key) async {
+  static Future<void> removeSharedPrefrences(String key) async {
     SharedPreferences pref = Get.find();
     await pref.remove(key);
   }

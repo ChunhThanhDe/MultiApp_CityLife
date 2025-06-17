@@ -14,10 +14,7 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(
-      title: "Box Delivery",
-      onBack: () => Get.back(),
-    );
+    return BasicAppBar(title: "Box Delivery", onBack: () => Get.back());
   }
 
   @override
@@ -26,11 +23,7 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
       children: [
         ListView(
           padding: EdgeInsets.zero,
-          children: [
-            _bodyContent(context),
-            SizedBox(height: 24),
-            _Actions(),
-          ],
+          children: [_bodyContent(context), SizedBox(height: 24), _Actions()],
         ),
       ],
     );
@@ -74,7 +67,14 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Delivery Options", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xFF161A1D))),
+                Text(
+                  "Delivery Options",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18,
+                    color: Color(0xFF161A1D),
+                  ),
+                ),
                 SizedBox(height: 16),
                 DeliveryOptionTile(
                   svgIcon: 'assets/icons/ic_priority.svg',
@@ -113,7 +113,14 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Promocode", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xFF161A1D))),
+                Text(
+                  "Promocode",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18,
+                    color: Color(0xFF161A1D),
+                  ),
+                ),
                 SizedBox(width: 8),
                 Row(
                   children: [
@@ -121,7 +128,10 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
                       'assets/icons/ic_promocode.svg',
                       width: 24,
                       height: 24,
-                      color: Color(0xFF4A5763),
+                      colorFilter: ColorFilter.mode(
+                        Color(0xFF4A5763),
+                        BlendMode.srcIn,
+                      ),
                     ),
                     SizedBox(width: 8),
                     SizedBox(
@@ -143,10 +153,7 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
                       ),
                     ),
                     Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text("Apply"),
-                    ),
+                    TextButton(onPressed: () {}, child: Text("Apply")),
                   ],
                 ),
                 SizedBox(height: 16),
@@ -157,14 +164,35 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Total:", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Color(0xFF161A1D))),
-                    Text("\$43.87", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Color(0xFF161A1D))),
+                    Text(
+                      "Total:",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20,
+                        color: Color(0xFF161A1D),
+                      ),
+                    ),
+                    Text(
+                      "\$43.87",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20,
+                        color: Color(0xFF161A1D),
+                      ),
+                    ),
                   ],
                 ),
                 SizedBox(height: 16),
                 Divider(thickness: 3, color: Color(0xFFE8EBEE)),
                 SizedBox(height: 16),
-                Text("Payment", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xFF161A1D))),
+                Text(
+                  "Payment",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18,
+                    color: Color(0xFF161A1D),
+                  ),
+                ),
                 SizedBox(height: 8),
                 Row(
                   children: [
@@ -176,12 +204,25 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
                         borderRadius: BorderRadius.circular(4),
                       ),
                       alignment: Alignment.center,
-                      child: Text("VISA", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      child: Text(
+                        "VISA",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                     SizedBox(width: 12),
-                    Text("Visa ••••5290", style: TextStyle(fontSize: 16, color: Color(0xFF161A1D))),
+                    Text(
+                      "Visa ••••5290",
+                      style: TextStyle(fontSize: 16, color: Color(0xFF161A1D)),
+                    ),
                     Spacer(),
-                    Icon(Icons.arrow_forward_ios_rounded, size: 20, color: Color(0xFF4A5763)),
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 20,
+                      color: Color(0xFF4A5763),
+                    ),
                   ],
                 ),
               ],
@@ -192,7 +233,7 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
     );
   }
 
-  _buildAddressMap(BuildContext context) {
+  SizedBox _buildAddressMap(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       height: 200,
@@ -226,10 +267,15 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
                     borderRadius: BorderRadius.circular(24),
                     onTap: () {},
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
                       child: Text(
                         'Edit pin',
-                        style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
+                        style: AppTextStyles.typographyH11Regular.copyWith(
+                          color: AppColors.textGreyHighest950,
+                        ),
                       ),
                     ),
                   ),
@@ -248,7 +294,11 @@ class _LocationTile extends StatelessWidget {
   final String title;
   final String subtitle;
 
-  const _LocationTile({required this.icon, required this.title, required this.subtitle});
+  const _LocationTile({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -258,18 +308,32 @@ class _LocationTile extends StatelessWidget {
           icon,
           width: 24,
           height: 24,
-          color: Color(0xFF4A5763),
+          colorFilter: ColorFilter.mode(Color(0xFF4A5763), BlendMode.srcIn),
         ),
         SizedBox(width: 12),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D))),
-            Text(subtitle, style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+            Text(
+              title,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+                color: Color(0xFF161A1D),
+              ),
+            ),
+            Text(
+              subtitle,
+              style: TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
+            ),
           ],
         ),
         Spacer(),
-        Icon(Icons.arrow_forward_ios_rounded, size: 20, color: Color(0xFF4A5763)),
+        Icon(
+          Icons.arrow_forward_ios_rounded,
+          size: 20,
+          color: Color(0xFF4A5763),
+        ),
       ],
     );
   }

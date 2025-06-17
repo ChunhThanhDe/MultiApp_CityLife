@@ -373,6 +373,7 @@ class _SelectOption extends StatelessWidget {
     required this.label,
     required this.selected,
     required this.onTap,
+    // ignore: unused_element_parameter
     this.enabled = true,
   });
 

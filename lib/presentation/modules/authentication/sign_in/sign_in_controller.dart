@@ -78,7 +78,7 @@ class SignInController extends BaseController {
     }
   }
 
-  onCountryCodeChanged(CountryCode countryCode) {
+  void onCountryCodeChanged(CountryCode countryCode) {
     countryDialCode.value = countryCode.dialCode ?? '+1';
   }
 }

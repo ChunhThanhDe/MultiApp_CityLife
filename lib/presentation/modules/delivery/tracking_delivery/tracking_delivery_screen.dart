@@ -11,10 +11,7 @@ class TrackingDeliveryScreen extends BaseScreen<TrackingDeliveryController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(
-      title: 'Tracking',
-      onBack: () => Get.back(),
-    );
+    return BasicAppBar(title: 'Tracking', onBack: () => Get.back());
   }
 
   @override
@@ -41,7 +38,7 @@ class TrackingDeliveryScreen extends BaseScreen<TrackingDeliveryController> {
                         border: Border.all(color: Color(0xFFBEBDEF)),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
+                            color: Colors.black.withValues(alpha: 0.05),
                             blurRadius: 2,
                             offset: Offset(0, 1),
                           ),
@@ -50,12 +47,19 @@ class TrackingDeliveryScreen extends BaseScreen<TrackingDeliveryController> {
                       child: Row(
                         children: [
                           SizedBox(width: 12),
-                          Icon(Icons.search, color: Color(0xFF798A9A), size: 24),
+                          Icon(
+                            Icons.search,
+                            color: Color(0xFF798A9A),
+                            size: 24,
+                          ),
                           SizedBox(width: 8),
                           Expanded(
                             child: TextField(
                               controller: controller.textController,
-                              style: TextStyle(fontSize: 14, color: Color(0xFF161A1D)),
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Color(0xFF161A1D),
+                              ),
                               decoration: InputDecoration(
                                 hintText: "Tracking by Receipt",
                                 border: InputBorder.none,
@@ -69,7 +73,11 @@ class TrackingDeliveryScreen extends BaseScreen<TrackingDeliveryController> {
                               onTap: controller.clearText,
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 12),
-                                child: Icon(Icons.close, color: Color(0xFF798A9A), size: 24),
+                                child: Icon(
+                                  Icons.close,
+                                  color: Color(0xFF798A9A),
+                                  size: 24,
+                                ),
                               ),
                             ),
                         ],
@@ -115,7 +123,9 @@ class TrackingDeliveryScreen extends BaseScreen<TrackingDeliveryController> {
                   padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    border: Border(top: BorderSide(color: Color(0xFFE8EBEE), width: 1)),
+                    border: Border(
+                      top: BorderSide(color: Color(0xFFE8EBEE), width: 1),
+                    ),
                   ),
                   child: SizedBox(
                     width: double.infinity,

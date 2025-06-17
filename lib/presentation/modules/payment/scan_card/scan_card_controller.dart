@@ -45,7 +45,7 @@ class ScanCardController extends BaseController {
   }
 
   void _onError(ScannerException exception) {
-    scanError.value = exception.message ?? "Unknown error";
+    scanError.value = exception.message;
     isScanning.value = false;
     Get.snackbar(
       "Error",

@@ -12,10 +12,7 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(
-      title: "Manage account",
-      onBack: () => Get.back(),
-    );
+    return BasicAppBar(title: "Manage account", onBack: () => Get.back());
   }
 
   @override
@@ -30,55 +27,68 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24),
+              padding: const EdgeInsets.symmetric(
+                vertical: 16.0,
+                horizontal: 24,
+              ),
               child: SizedBox(
-                  height: 143,
-                  width: 143,
-                  child: Obx(
-                    () => GestureDetector(
-                      onTap: controller.pickAvatar,
-                      child: Stack(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: CircleAvatar(
-                              radius: 71.5,
-                              backgroundColor: Color(0xFF5856D7),
-                              backgroundImage: controller.avatarPath.value.isEmpty
-                                  ? AssetImage('assets/images/img_avatar_default.png')
-                                  : FileImage(
-                                      File(controller.avatarPath.value),
-                                    ) as ImageProvider,
+                height: 143,
+                width: 143,
+                child: Obx(
+                  () => GestureDetector(
+                    onTap: controller.pickAvatar,
+                    child: Stack(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: CircleAvatar(
+                            radius: 71.5,
+                            backgroundColor: Color(0xFF5856D7),
+                            backgroundImage: controller.avatarPath.value.isEmpty
+                                ? AssetImage(
+                                    'assets/images/img_avatar_default.png',
+                                  )
+                                : FileImage(File(controller.avatarPath.value))
+                                      as ImageProvider,
+                          ),
+                        ),
+                        Positioned(
+                          right: 8,
+                          bottom: 8,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color(0xFFF7F8F9),
+                              borderRadius: BorderRadius.circular(100),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color(
+                                    0xFF101214,
+                                  ).withValues(alpha: 0.1),
+                                  blurRadius: 16,
+                                  offset: Offset(0, 6),
+                                ),
+                                BoxShadow(
+                                  color: Color(
+                                    0xFF101214,
+                                  ).withValues(alpha: 0.05),
+                                  blurRadius: 4,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            padding: EdgeInsets.all(6),
+                            child: Icon(
+                              Icons.edit,
+                              size: 24,
+                              color: Color(0xFF161A1D),
                             ),
                           ),
-                          Positioned(
-                            right: 8,
-                            bottom: 8,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xFFF7F8F9),
-                                borderRadius: BorderRadius.circular(100),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color(0xFF101214).withOpacity(0.1),
-                                    blurRadius: 16,
-                                    offset: Offset(0, 6),
-                                  ),
-                                  BoxShadow(
-                                    color: Color(0xFF101214).withOpacity(0.05),
-                                    blurRadius: 4,
-                                    offset: Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                              padding: EdgeInsets.all(6),
-                              child: Icon(Icons.edit, size: 24, color: Color(0xFF161A1D)),
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  )),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
@@ -97,7 +107,9 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                       label: "First name",
                       controller: controller.firstNameController,
                       required: true,
-                      validator: (v) => (v == null || v.isEmpty) ? "Please enter your first name" : null,
+                      validator: (v) => (v == null || v.isEmpty)
+                          ? "Please enter your first name"
+                          : null,
                       suffix: Icon(Icons.check, color: Color(0xFF4A5763)),
                     ),
                     // Last name
@@ -105,7 +117,9 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                       label: "Last name",
                       controller: controller.lastNameController,
                       required: true,
-                      validator: (v) => (v == null || v.isEmpty) ? "Please enter your last name" : null,
+                      validator: (v) => (v == null || v.isEmpty)
+                          ? "Please enter your last name"
+                          : null,
                       suffix: Icon(Icons.check, color: Color(0xFF4A5763)),
                     ),
                     // Birthday
@@ -116,51 +130,70 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                         children: [
                           Text(
                             "When's your birthday?",
-                            style: TextStyle(fontSize: 14, color: Color(0xFF161A1D)),
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Color(0xFF161A1D),
+                            ),
                           ),
                           SizedBox(width: 4),
                           Text(
                             "(optional)",
-                            style: TextStyle(fontSize: 14, color: Color(0xFF798A9A)),
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Color(0xFF798A9A),
+                            ),
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Obx(() => Row(
-                          children: [
-                            _BirthdayDropdown(
-                              items: List.generate(12, (i) => (i + 1).toString().padLeft(2, '0')),
-                              value: controller.month.value,
-                              onChanged: (v) => controller.month.value = v!,
-                              width: 100,
-                              hint: "MM",
+                    Obx(
+                      () => Row(
+                        children: [
+                          _BirthdayDropdown(
+                            items: List.generate(
+                              12,
+                              (i) => (i + 1).toString().padLeft(2, '0'),
                             ),
-                            SizedBox(width: 10),
-                            _BirthdayDropdown(
-                              items: List.generate(31, (i) => (i + 1).toString().padLeft(2, '0')),
-                              value: controller.day.value,
-                              onChanged: (v) => controller.day.value = v!,
-                              width: 100,
-                              hint: "DD",
+                            value: controller.month.value,
+                            onChanged: (v) => controller.month.value = v!,
+                            width: 100,
+                            hint: "MM",
+                          ),
+                          SizedBox(width: 10),
+                          _BirthdayDropdown(
+                            items: List.generate(
+                              31,
+                              (i) => (i + 1).toString().padLeft(2, '0'),
                             ),
-                            SizedBox(width: 10),
-                            _BirthdayDropdown(
-                              items: List.generate(100, (i) => (DateTime.now().year - i).toString()),
-                              value: controller.year.value,
-                              onChanged: (v) => controller.year.value = v!,
-                              width: 120,
-                              hint: "YYYY",
+                            value: controller.day.value,
+                            onChanged: (v) => controller.day.value = v!,
+                            width: 100,
+                            hint: "DD",
+                          ),
+                          SizedBox(width: 10),
+                          _BirthdayDropdown(
+                            items: List.generate(
+                              100,
+                              (i) => (DateTime.now().year - i).toString(),
                             ),
-                          ],
-                        )),
+                            value: controller.year.value,
+                            onChanged: (v) => controller.year.value = v!,
+                            width: 120,
+                            hint: "YYYY",
+                          ),
+                        ],
+                      ),
+                    ),
                     const SizedBox(height: 16),
                     // Email
                     _InputTextField(
                       label: "Email address",
                       controller: controller.emailController,
                       required: true,
-                      validator: (v) => (v == null || v.isEmpty) ? "Please enter your email" : null,
+                      validator: (v) => (v == null || v.isEmpty)
+                          ? "Please enter your email"
+                          : null,
                       suffix: Icon(Icons.check, color: Color(0xFF4A5763)),
                     ),
                     // Phone
@@ -168,7 +201,9 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                       label: "Phone number",
                       controller: controller.phoneController,
                       required: true,
-                      validator: (v) => (v == null || v.isEmpty) ? "Please enter your phone number" : null,
+                      validator: (v) => (v == null || v.isEmpty)
+                          ? "Please enter your phone number"
+                          : null,
                     ),
                     const SizedBox(height: 24),
                     // Update button
@@ -232,10 +267,7 @@ class _InputTextField extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Color(0xFF161A1D),
-                ),
+                style: TextStyle(fontSize: 14, color: Color(0xFF161A1D)),
               ),
               if (required)
                 Text(
@@ -255,7 +287,10 @@ class _InputTextField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(6),
                 borderSide: BorderSide.none,
               ),
-              contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 14,
+              ),
               suffixIcon: suffix,
             ),
             validator: validator,
@@ -298,10 +333,7 @@ class _BirthdayDropdown extends StatelessWidget {
           onChanged: onChanged,
           style: TextStyle(fontSize: 14, color: Color(0xFF161A1D)),
           items: items
-              .map((e) => DropdownMenuItem(
-                    value: e,
-                    child: Text(e),
-                  ))
+              .map((e) => DropdownMenuItem(value: e, child: Text(e)))
               .toList(),
         ),
       ),

@@ -11,32 +11,49 @@ class TermOfService extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: AutoSizeText.rich(
-        textAlign: TextAlign.center,
-        maxLines: 2,
-        TextSpan(
-          children: [
-            TextSpan(
-              text: tr(LocaleKeys.authentication_termsOfService_agreeTo),
-              style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700),
-            ),
-            TextSpan(
-              text: tr(LocaleKeys.authentication_termsOfService_termsOfService),
-              style: AppTextStyles.typographyH10SemiBold.copyWith(color: AppColors.textGreyHighest950),
-            ),
-            TextSpan(
-              text: tr(LocaleKeys.authentication_termsOfService_confirmRead),
-              style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700),
-            ),
-            TextSpan(
-              text: tr(LocaleKeys.authentication_termsOfService_privacyPolicy),
-              style: AppTextStyles.typographyH10SemiBold.copyWith(color: AppColors.textGreyHighest950),
-            ),
-          ],
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        AutoSizeText.rich(
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          minFontSize: 8,
+          stepGranularity: 0.5,
+          overflow: TextOverflow.ellipsis,
+          TextSpan(
+            children: [
+              TextSpan(
+                text: tr(LocaleKeys.authentication_termsOfService_agreeTo),
+                style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700),
+              ),
+              TextSpan(
+                text: tr(LocaleKeys.authentication_termsOfService_termsOfService),
+                style: AppTextStyles.typographyH10SemiBold.copyWith(color: AppColors.textGreyHighest950),
+              ),
+            ],
+          ),
         ),
-      ),
+        AutoSizeText.rich(
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          minFontSize: 8,
+          stepGranularity: 0.5,
+          overflow: TextOverflow.ellipsis,
+          TextSpan(
+            children: [
+              TextSpan(
+                text: tr(LocaleKeys.authentication_termsOfService_confirmRead),
+                style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700),
+              ),
+              TextSpan(
+                text: tr(LocaleKeys.authentication_termsOfService_privacyPolicy),
+                style: AppTextStyles.typographyH10SemiBold.copyWith(color: AppColors.textGreyHighest950),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

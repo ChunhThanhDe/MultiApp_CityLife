@@ -110,7 +110,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
           ));
   }
 
-  _buildPasswordInput() {
+  AppTextField _buildPasswordInput() {
     return AppTextField(
       label: tr(LocaleKeys.authentication_signIn_passwordLabel),
       isRequired: true,

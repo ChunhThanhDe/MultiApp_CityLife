@@ -18,11 +18,11 @@ class SearchItem {
 class SearchAddressController extends BaseController {
   final TextEditingController searchAddressController = TextEditingController();
   var isShowClearButton = false.obs;
-  onSearchChanged(String value) {
+  void onSearchChanged(String value) {
     isShowClearButton.value = value.isNotEmpty;
   }
 
-  onClearSearch() {
+  void onClearSearch() {
     searchAddressController.clear();
     isShowClearButton.value = false;
   }

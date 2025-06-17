@@ -114,7 +114,7 @@ class VerificationScreen extends BaseScreen<VerificationController> {
     );
   }
 
-  _buildInput(BuildContext context) {
+  PinCodeTextField _buildInput(BuildContext context) {
     return PinCodeTextField(
       length: 5,
       autoFocus: false,

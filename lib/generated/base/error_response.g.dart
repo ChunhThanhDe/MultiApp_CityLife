@@ -14,17 +14,10 @@ ErrorResponse _$ErrorResponseFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$ErrorResponseToJson(ErrorResponse instance) =>
-    <String, dynamic>{
-      'errors': instance.errors,
-    };
+    <String, dynamic>{'errors': instance.errors};
 
-ErrorModel _$ErrorModelFromJson(Map<String, dynamic> json) => ErrorModel(
-      json['code'] as String,
-      json['message'] as String,
-    );
+ErrorModel _$ErrorModelFromJson(Map<String, dynamic> json) =>
+    ErrorModel(json['code'] as String, json['message'] as String);
 
 Map<String, dynamic> _$ErrorModelToJson(ErrorModel instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'message': instance.message,
-    };
+    <String, dynamic>{'code': instance.code, 'message': instance.message};

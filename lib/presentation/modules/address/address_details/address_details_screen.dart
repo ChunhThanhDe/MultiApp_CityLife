@@ -63,7 +63,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
     );
   }
 
-  _buildAddressInfo() {
+  Padding _buildAddressInfo() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Row(
@@ -90,7 +90,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
     );
   }
 
-  _buildAddressMap(BuildContext context) {
+  Container _buildAddressMap(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       width: double.infinity,
@@ -141,7 +141,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
     );
   }
 
-  _buildAddressDetailsInput(BuildContext context) {
+  Padding _buildAddressDetailsInput(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
@@ -222,7 +222,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
     );
   }
 
-  _buildDeliveryInstructions() {
+  Padding _buildDeliveryInstructions() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Obx(() {
@@ -264,7 +264,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
     );
   }
 
-  _buildBuildingTypeSheet() {
+  ColoredBox _buildBuildingTypeSheet() {
     return ColoredBox(
       color: Colors.white,
       child: Column(
@@ -323,7 +323,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
     );
   }
 
-  _buildSaveButton() {
+  Padding _buildSaveButton() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: AppButton(

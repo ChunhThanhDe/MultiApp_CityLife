@@ -42,7 +42,7 @@ class StoreAppBar extends StatelessWidget {
     );
   }
 
-  _onTapStore() {
+  void _onTapStore() {
     showAppBottomSheet(
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,

@@ -24,7 +24,7 @@ class TrackingDeliveryController extends BaseController {
   }
 
   void trackReceipt() {
-    print("Tracking: ${textController.text}");
+    debugPrint("Tracking: ${textController.text}");
   }
 
   @override

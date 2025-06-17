@@ -41,21 +41,41 @@ class DeliveryOptionTile extends StatelessWidget {
               svgIcon,
               width: 24,
               height: 24,
-              color: Color(0xFF4A5763),
+              colorFilter: ColorFilter.mode(Color(0xFF4A5763), BlendMode.srcIn),
             ),
             SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D))),
-                  Text(subtitle, style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      color: Color(0xFF161A1D),
+                    ),
+                  ),
+                  Text(
+                    subtitle,
+                    style: TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
+                  ),
                 ],
               ),
             ),
-            if (price.isNotEmpty) Text(price, style: TextStyle(fontSize: 16, color: Color(0xFF161A1D))),
-            if (showArrow) Icon(Icons.arrow_forward_ios_rounded, size: 20, color: Color(0xFF4A5763)),
-            if (isSelected) Icon(Icons.check_circle, color: Color(0xFF5856D7), size: 24),
+            if (price.isNotEmpty)
+              Text(
+                price,
+                style: TextStyle(fontSize: 16, color: Color(0xFF161A1D)),
+              ),
+            if (showArrow)
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 20,
+                color: Color(0xFF4A5763),
+              ),
+            if (isSelected)
+              Icon(Icons.check_circle, color: Color(0xFF5856D7), size: 24),
           ],
         ),
       ),

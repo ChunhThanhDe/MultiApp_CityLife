@@ -67,7 +67,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
     );
   }
 
-  _buildTextHeader() {
+  Padding _buildTextHeader() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
@@ -165,7 +165,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
     );
   }
 
-  _buildRecommendedAmounts() {
+  Wrap _buildRecommendedAmounts() {
     return Wrap(
       children: controller.recommendedAmounts
           .map(

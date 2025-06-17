@@ -113,7 +113,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
     );
   }
 
-  _buildDeliveryPersonInfo() {
+  Container _buildDeliveryPersonInfo() {
     return Container(
       width: 430,
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
@@ -161,7 +161,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
     );
   }
 
-  _buildItemsInfo() {
+  Padding _buildItemsInfo() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
@@ -232,7 +232,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
     );
   }
 
-  _buildTransactionInfo() {
+  Padding _buildTransactionInfo() {
     const date = 'Sep 18, 2023  7:30 AM';
     const subtotal = 35.87;
     const deliveryFee = 3.99;
@@ -321,7 +321,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
     );
   }
 
-  _buildReceiptActions() {
+  Padding _buildReceiptActions() {
     const fileSize = '12 KB';
     final List<ReceiptAction> actions = [
       (

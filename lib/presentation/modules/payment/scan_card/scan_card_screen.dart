@@ -31,7 +31,7 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
       children: [
         Positioned.fill(
           child: Container(
-            color: const Color(0xFF101214).withOpacity(0.7),
+            color: const Color(0xFF101214).withValues(alpha: 0.7),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
               child: const SizedBox.expand(),
@@ -45,7 +45,7 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
             width: double.infinity,
             height: 146,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.9),
+              color: Colors.white.withValues(alpha: 0.9),
             ),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
@@ -53,18 +53,29 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 16,
+                    ),
                     child: Column(
                       children: [
                         const Text(
                           "Scan your card",
-                          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Color(0xFF161A1D)),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20,
+                            color: Color(0xFF161A1D),
+                          ),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 4),
                         const Text(
                           "please make sure the card number is visible.",
-                          style: TextStyle(fontSize: 14, color: Color(0xFF4A5763), fontWeight: FontWeight.w400),
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFF4A5763),
+                            fontWeight: FontWeight.w400,
+                          ),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 8),

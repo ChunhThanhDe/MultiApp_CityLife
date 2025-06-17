@@ -16,18 +16,24 @@ class AccountPasskeysScreen extends BaseScreen<AccountPasskeysController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(
-      title: "Passkeys",
-      onBack: () => Get.back(),
-    );
+    return BasicAppBar(title: "Passkeys", onBack: () => Get.back());
   }
 
   @override
   Widget buildScreen(BuildContext context) {
     final List<PasskeyItem> passkeys = [
-      PasskeyItem("iPhone 15 Pro Max", "Last used: May 10, 2024, San Francisco, CA, USA"),
-      PasskeyItem("iCloud Keychain", "Last used: May 26, 2024, San Francisco, CA, USA"),
-      PasskeyItem("iPhone 14 Pro", "Last used: May 10, 2023, San Francisco, CA, USA"),
+      PasskeyItem(
+        "iPhone 15 Pro Max",
+        "Last used: May 10, 2024, San Francisco, CA, USA",
+      ),
+      PasskeyItem(
+        "iCloud Keychain",
+        "Last used: May 26, 2024, San Francisco, CA, USA",
+      ),
+      PasskeyItem(
+        "iPhone 14 Pro",
+        "Last used: May 10, 2023, San Francisco, CA, USA",
+      ),
       PasskeyItem("iPhone 11", "Last used: May 10, 2020, New York, CA, USA"),
     ];
     return Column(
@@ -37,7 +43,7 @@ class AccountPasskeysScreen extends BaseScreen<AccountPasskeysController> {
           child: ListView.separated(
             padding: EdgeInsets.zero,
             itemCount: passkeys.length,
-            separatorBuilder: (_, __) => Divider(
+            separatorBuilder: (_, _) => Divider(
               color: Color(0xFFE8EBEE),
               indent: 24,
               endIndent: 24,
@@ -62,10 +68,7 @@ class AccountPasskeysScreen extends BaseScreen<AccountPasskeysController> {
 class _PasskeyListItem extends StatelessWidget {
   final PasskeyItem item;
   final VoidCallback onDelete;
-  const _PasskeyListItem({
-    required this.item,
-    required this.onDelete,
-  });
+  const _PasskeyListItem({required this.item, required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -90,10 +93,7 @@ class _PasskeyListItem extends StatelessWidget {
                 SizedBox(height: 2),
                 Text(
                   item.subtitle,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Color(0xFF4A5763),
-                  ),
+                  style: TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
                 ),
               ],
             ),

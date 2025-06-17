@@ -19,10 +19,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(
-      title: "Box Delivery",
-      onBack: () => Get.back(),
-    );
+    return BasicAppBar(title: "Box Delivery", onBack: () => Get.back());
   }
 
   @override
@@ -40,7 +37,9 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
               _locationField(
                 context,
                 icon: 'assets/icons/ic_box_package_hand_bottom.svg',
-                text: controller.pickupLocation.value.isEmpty ? "Pickup Location" : controller.pickupLocation.value,
+                text: controller.pickupLocation.value.isEmpty
+                    ? "Pickup Location"
+                    : controller.pickupLocation.value,
                 onTap: () => _showLocationBottomSheet(
                   context: context,
                   title: "Pickup Location",
@@ -54,16 +53,18 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
               _locationField(
                 context,
                 icon: 'assets/icons/ic_box_package_courier_hands.svg',
-                text: controller.dropoffLocation.value.isEmpty ? "Dropoff Location" : controller.dropoffLocation.value,
+                text: controller.dropoffLocation.value.isEmpty
+                    ? "Dropoff Location"
+                    : controller.dropoffLocation.value,
                 onTap: controller.pickupLocation.value.isEmpty
                     ? null
                     : () => _showLocationBottomSheet(
-                          context: context,
-                          title: "Dropoff Location",
-                          addresses: controller.savedAddresses,
-                          selectedAddress: controller.dropoffLocation.value,
-                          onSelect: (val) => controller.setDropoffLocation(val),
-                        ),
+                        context: context,
+                        title: "Dropoff Location",
+                        addresses: controller.savedAddresses,
+                        selectedAddress: controller.dropoffLocation.value,
+                        onSelect: (val) => controller.setDropoffLocation(val),
+                      ),
                 isSelected: controller.dropoffLocation.value.isNotEmpty,
                 isEnabled: controller.pickupLocation.value.isNotEmpty,
               ),
@@ -92,7 +93,11 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
                 SizedBox(height: 8),
                 _imagePickerRow(context, controller),
                 SizedBox(height: 24),
-                LabelWidget("Instructions for captain", isBold: true, optional: true),
+                LabelWidget(
+                  "Instructions for captain",
+                  isBold: true,
+                  optional: true,
+                ),
                 SizedBox(height: 8),
                 _instructionBox(controller),
                 SizedBox(height: 16),
@@ -211,8 +216,8 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
                 color: isSelected
                     ? Color(0xFF161A1D)
                     : isEnabled
-                        ? Color(0xFF798A9A)
-                        : Color(0xFFB0B3B8),
+                    ? Color(0xFF798A9A)
+                    : Color(0xFFB0B3B8),
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -238,10 +243,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
               height: 96,
               decoration: BoxDecoration(
                 color: Color(0xFFF7F8F9),
-                border: Border.all(
-                  color: Color(0xFFE8EBEE),
-                  width: 1,
-                ),
+                border: Border.all(color: Color(0xFFE8EBEE), width: 1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(Icons.add, size: 36, color: Color(0xFF161A1D)),
@@ -279,7 +281,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
                   onTap: () => c.removeImage(i),
                   child: CircleAvatar(
                     radius: 12,
-                    backgroundColor: Colors.white.withOpacity(0.7),
+                    backgroundColor: Colors.white.withValues(alpha: 0.7),
                     child: Icon(Icons.close, color: Colors.black, size: 16),
                   ),
                 ),
@@ -325,14 +327,15 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
           (i) => Padding(
             padding: EdgeInsets.only(right: 8),
             child: ChoiceChip(
-              label: Text(options[i], style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+              label: Text(
+                options[i],
+                style: TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
+              ),
               selected: c.instruction.value == options[i],
               onSelected: (_) => c.setInstruction(options[i]),
               backgroundColor: Colors.white,
               selectedColor: Color(0xFFF0F0F1),
-              shape: StadiumBorder(
-                side: BorderSide(color: Color(0xFFE8EBEE)),
-              ),
+              shape: StadiumBorder(side: BorderSide(color: Color(0xFFE8EBEE))),
             ),
           ),
         ),
@@ -351,86 +354,101 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
     RxList<Map<String, String>> filteredAddresses = addresses.obs;
 
     Get.bottomSheet(
-      Obx(() => SafeArea(
-            child: Padding(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
-              ),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 36,
-                      height: 4,
-                      margin: EdgeInsets.only(bottom: 16),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFEBEBF5),
-                        borderRadius: BorderRadius.circular(2),
+      Obx(
+        () => SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 36,
+                    height: 4,
+                    margin: EdgeInsets.only(bottom: 16),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFEBEBF5),
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                  Text(
+                    title,
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                  ),
+                  SizedBox(height: 16),
+                  // Search Field
+                  TextField(
+                    controller: searchController,
+                    onChanged: (value) {
+                      filteredAddresses.value = value.isEmpty
+                          ? addresses
+                          : addresses
+                                .where(
+                                  (a) =>
+                                      a['label']!.toLowerCase().contains(
+                                        value.toLowerCase(),
+                                      ) ||
+                                      a['address']!.toLowerCase().contains(
+                                        value.toLowerCase(),
+                                      ),
+                                )
+                                .toList();
+                    },
+                    decoration: InputDecoration(
+                      hintText: "Search for an address",
+                      prefixIcon: Icon(Icons.search, size: 20),
+                      filled: true,
+                      fillColor: Color(0xFFF7F8F9),
+                      contentPadding: EdgeInsets.symmetric(vertical: 8),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                        borderSide: BorderSide.none,
                       ),
                     ),
-                    Text(
-                      title,
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                  ),
+                  SizedBox(height: 16),
+                  // Saved addresses
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Saved addresses',
+                      style: TextStyle(fontSize: 14, color: Color(0xFF798A9A)),
                     ),
-                    SizedBox(height: 16),
-                    // Search Field
-                    TextField(
-                      controller: searchController,
-                      onChanged: (value) {
-                        filteredAddresses.value = value.isEmpty
-                            ? addresses
-                            : addresses.where((a) => a['label']!.toLowerCase().contains(value.toLowerCase()) || a['address']!.toLowerCase().contains(value.toLowerCase())).toList();
+                  ),
+                  ...filteredAddresses.map(
+                    (a) => ListTile(
+                      title: Text(a['label'] ?? ''),
+                      subtitle: Text(a['address'] ?? ''),
+                      trailing: selectedAddress == a['address']
+                          ? Icon(Icons.check, color: Color(0xFF5856D7))
+                          : null,
+                      onTap: () {
+                        onSelect(a['address']!);
+                        Get.back();
                       },
-                      decoration: InputDecoration(
-                        hintText: "Search for an address",
-                        prefixIcon: Icon(Icons.search, size: 20),
-                        filled: true,
-                        fillColor: Color(0xFFF7F8F9),
-                        contentPadding: EdgeInsets.symmetric(vertical: 8),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(100),
-                          borderSide: BorderSide.none,
-                        ),
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  OutlinedButton(
+                    onPressed: () {}, // TODO: Handle add new address
+                    style: OutlinedButton.styleFrom(
+                      minimumSize: Size.fromHeight(48),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    SizedBox(height: 16),
-                    // Saved addresses
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Saved addresses',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF798A9A),
-                        ),
-                      ),
-                    ),
-                    ...filteredAddresses.map((a) => ListTile(
-                          title: Text(a['label'] ?? ''),
-                          subtitle: Text(a['address'] ?? ''),
-                          trailing: selectedAddress == a['address'] ? Icon(Icons.check, color: Color(0xFF5856D7)) : null,
-                          onTap: () {
-                            onSelect(a['address']!);
-                            Get.back();
-                          },
-                        )),
-                    SizedBox(height: 8),
-                    OutlinedButton(
-                      onPressed: () {}, // TODO: Handle add new address
-                      style: OutlinedButton.styleFrom(
-                        minimumSize: Size.fromHeight(48),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      ),
-                      child: Text("Add new address"),
-                    ),
-                    SizedBox(height: 12),
-                  ],
-                ),
+                    child: Text("Add new address"),
+                  ),
+                  SizedBox(height: 12),
+                ],
               ),
             ),
-          )),
+          ),
+        ),
+      ),
       isScrollControlled: true,
       backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(

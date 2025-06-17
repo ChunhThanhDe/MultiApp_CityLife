@@ -166,7 +166,7 @@ class SignUpController extends BaseController {
     super.onClose();
   }
 
-  onCountryCodeChanged(CountryCode p1) {
+  void onCountryCodeChanged(CountryCode p1) {
     countryDialCode.value = p1.dialCode ?? '+1';
   }
 }

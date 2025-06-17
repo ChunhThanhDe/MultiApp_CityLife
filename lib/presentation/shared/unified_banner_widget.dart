@@ -10,11 +10,7 @@ enum BannerType {
   bannerSingleImage,
 }
 
-enum BannerStatus {
-  available,
-  unavailable,
-  closed,
-}
+enum BannerStatus { available, unavailable, closed }
 
 class BannerItem {
   final String title;
@@ -88,7 +84,9 @@ class UnifiedBannerWidget extends StatelessWidget {
             )
           : Text(
               sectionTitle,
-              style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
+              style: AppTextStyles.typographyH9Medium.copyWith(
+                color: AppColors.textGreyHighest950,
+              ),
             ),
     );
   }
@@ -173,7 +171,7 @@ class UnifiedBannerWidget extends StatelessWidget {
                 right: index == items.length - 1 ? 24 : 0,
               ),
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.6),
+                color: Colors.black.withValues(alpha: 0.6),
                 borderRadius: BorderRadius.circular(AppCorner.radius8),
               ),
               child: Column(
@@ -182,18 +180,22 @@ class UnifiedBannerWidget extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
-                      item.status == BannerStatus.closed ? Icons.nightlight_round : Icons.lock,
+                      item.status == BannerStatus.closed
+                          ? Icons.nightlight_round
+                          : Icons.lock,
                       color: Colors.white,
                       size: 24,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    item.status == BannerStatus.closed ? 'Closed' : 'Currently Unavailable',
+                    item.status == BannerStatus.closed
+                        ? 'Closed'
+                        : 'Currently Unavailable',
                     style: AppTextStyles.typographyH10Medium.copyWith(
                       color: Colors.white,
                     ),
@@ -218,17 +220,15 @@ class UnifiedBannerWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: ShapeDecoration(
-        color: Colors.white.withOpacity(0.8),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(32),
-        ),
+        color: Colors.white.withValues(alpha: 0.8),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
         shadows: [
           BoxShadow(
             color: Color(0x3D000000),
             blurRadius: 32,
             offset: Offset(0, 0),
             spreadRadius: 0,
-          )
+          ),
         ],
       ),
       child: Row(
@@ -239,16 +239,14 @@ class UnifiedBannerWidget extends StatelessWidget {
         children: [
           if (item.logoUrl != null)
             ClipOval(
-              child: AppImage.network(
-                item.logoUrl!,
-                width: 24,
-                height: 24,
-              ),
+              child: AppImage.network(item.logoUrl!, width: 24, height: 24),
             ),
           Text(
             item.title,
             textAlign: TextAlign.center,
-            style: AppTextStyles.typographyH11Medium.copyWith(color: AppColors.textGreyHighest950),
+            style: AppTextStyles.typographyH11Medium.copyWith(
+              color: AppColors.textGreyHighest950,
+            ),
           ),
         ],
       ),
@@ -281,11 +279,13 @@ class UnifiedBannerWidget extends StatelessWidget {
                     width: 64,
                     height: 64,
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.6),
+                      color: Colors.black.withValues(alpha: 0.6),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
-                      item.status == BannerStatus.closed ? Icons.nightlight_round : Icons.lock,
+                      item.status == BannerStatus.closed
+                          ? Icons.nightlight_round
+                          : Icons.lock,
                       color: Colors.white,
                       size: 20,
                     ),
@@ -295,7 +295,9 @@ class UnifiedBannerWidget extends StatelessWidget {
             SizedBox(height: 4),
             Text(
               item.title,
-              style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBrandDefault500),
+              style: AppTextStyles.typographyH12Regular.copyWith(
+                color: AppColors.textBrandDefault500,
+              ),
             ),
           ],
         ),
@@ -327,7 +329,7 @@ class UnifiedBannerWidget extends StatelessWidget {
                   Positioned.fill(
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.6),
+                        color: Colors.black.withValues(alpha: 0.6),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Column(
@@ -336,18 +338,22 @@ class UnifiedBannerWidget extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
+                              color: Colors.white.withValues(alpha: 0.2),
                               shape: BoxShape.circle,
                             ),
                             child: Icon(
-                              item.status == BannerStatus.closed ? Icons.nightlight_round : Icons.lock,
+                              item.status == BannerStatus.closed
+                                  ? Icons.nightlight_round
+                                  : Icons.lock,
                               color: Colors.white,
                               size: 20,
                             ),
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            item.status == BannerStatus.closed ? 'Closed' : 'Currently Unavailable',
+                            item.status == BannerStatus.closed
+                                ? 'Closed'
+                                : 'Currently Unavailable',
                             style: AppTextStyles.typographyH11Medium.copyWith(
                               color: Colors.white,
                             ),
@@ -357,12 +363,16 @@ class UnifiedBannerWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                if (item.discount != null && item.status == BannerStatus.available)
+                if (item.discount != null &&
+                    item.status == BannerStatus.available)
                   Positioned(
                     top: 8,
                     right: 8,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 2,
+                      ),
                       decoration: ShapeDecoration(
                         color: AppColors.stateSuccessHigh700,
                         shape: RoundedRectangleBorder(
@@ -380,17 +390,20 @@ class UnifiedBannerWidget extends StatelessWidget {
                             blurRadius: 4,
                             offset: Offset(0, 2),
                             spreadRadius: -2,
-                          )
+                          ),
                         ],
                       ),
                       child: Text(
                         '${item.discount}% Off',
                         textAlign: TextAlign.center,
-                        style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBaseWhite),
+                        style: AppTextStyles.typographyH12Regular.copyWith(
+                          color: AppColors.textBaseWhite,
+                        ),
                       ),
                     ),
                   ),
-                if (item.logoUrl != null && item.status == BannerStatus.available)
+                if (item.logoUrl != null &&
+                    item.status == BannerStatus.available)
                   Positioned(
                     top: 8,
                     left: 8,
@@ -410,7 +423,9 @@ class UnifiedBannerWidget extends StatelessWidget {
               children: [
                 Text(
                   item.title,
-                  style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
+                  style: AppTextStyles.typographyH10Medium.copyWith(
+                    color: AppColors.textGreyHighest950,
+                  ),
                 ),
                 if (item.isVerified == true) Assets.icons.icVerified.svg(),
               ],
@@ -422,18 +437,24 @@ class UnifiedBannerWidget extends StatelessWidget {
                   if (item.deliveryFee != null)
                     Text(
                       '\$${item.deliveryFee} Delivery fee',
-                      style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700),
+                      style: AppTextStyles.typographyH12Regular.copyWith(
+                        color: AppColors.textGreyHigh700,
+                      ),
                     ),
                   if (item.time != null) ...[
                     Text(
                       '•',
-                      style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBrandDefault500),
+                      style: AppTextStyles.typographyH12Regular.copyWith(
+                        color: AppColors.textBrandDefault500,
+                      ),
                     ),
                     Text(
                       item.time!,
-                      style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700),
+                      style: AppTextStyles.typographyH12Regular.copyWith(
+                        color: AppColors.textGreyHigh700,
+                      ),
                     ),
-                  ]
+                  ],
                 ],
               ),
           ],
@@ -470,7 +491,7 @@ class UnifiedBannerWidget extends StatelessWidget {
                 Positioned.fill(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.6),
+                      color: Colors.black.withValues(alpha: 0.6),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Column(
@@ -479,18 +500,22 @@ class UnifiedBannerWidget extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white.withValues(alpha: 0.2),
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
-                            item.status == BannerStatus.closed ? Icons.nightlight_round : Icons.lock,
+                            item.status == BannerStatus.closed
+                                ? Icons.nightlight_round
+                                : Icons.lock,
                             color: Colors.white,
                             size: 20,
                           ),
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          item.status == BannerStatus.closed ? 'Closed' : 'Currently Unavailable',
+                          item.status == BannerStatus.closed
+                              ? 'Closed'
+                              : 'Currently Unavailable',
                           style: AppTextStyles.typographyH11Medium.copyWith(
                             color: Colors.white,
                           ),
