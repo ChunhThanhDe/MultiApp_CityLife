@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/localization/locale_manager.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bottom_sheet.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_overlay.dart';
 
 class AccountController extends BaseController {
   final LanguageManager _languageManager = Get.find<LanguageManager>();
@@ -16,10 +17,10 @@ class AccountController extends BaseController {
   void showLanguageSelection() {
     showAppBottomSheet(
       child: _LanguageSelectionBottomSheet(
-        onLanguageSelected: (locale) {
-          _languageManager.changeLanguage(locale: locale);
+        onLanguageSelected: (locale) async {
+          await showAppOverlayLoading(future: _languageManager.changeLanguage(locale: locale));
           Get.back();
-          update(); // Update UI to reflect new language
+          update();
         },
       ),
     );

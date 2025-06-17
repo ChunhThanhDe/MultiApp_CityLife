@@ -1,13 +1,11 @@
-import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
-import 'package:sixam_mart_user/app/utils/permission_handle.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/store/components/store_filter_bottom_sheet.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bottom_sheet.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
@@ -73,9 +71,7 @@ class StoreAppBar extends StatelessWidget {
   }
 
   void _onTapFilter() async {
-    // StoreFilterBottomSheet.show();
-    final check = await checkPermission(permission: Permission.photos);
-    log(check.toString());
+    StoreFilterBottomSheet.show();
   }
 
   Widget _circularButton(Widget icon, VoidCallback onPressed) {

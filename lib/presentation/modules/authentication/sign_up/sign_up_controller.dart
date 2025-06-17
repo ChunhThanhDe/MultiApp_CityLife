@@ -120,7 +120,7 @@ class SignUpController extends BaseController {
       phone: !isEmailMethod ? phoneController.text : null,
     );
 
-    final ApiResult result = await showLoadingOverlay(api: _authRepository.signUp(request));
+    final ApiResult result = await showAppOverlayLoading(future: _authRepository.signUp(request));
 
     switch (result) {
       case Success(:final data):

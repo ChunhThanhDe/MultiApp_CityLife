@@ -29,13 +29,13 @@ import 'app_navigator.dart';
 /// );
 /// ```
 ///
-/// [api] The Future to execute while showing the loading overlay.
+/// [future] The Future to execute while showing the loading overlay.
 /// [child] Optional custom loading widget.
 /// [isShowLoading] Whether to show the loading overlay. Defaults to true.
 ///
-/// Returns the result of the [api] Future when it completes.
-Future<dynamic> showLoadingOverlay({required Future<dynamic> api, Widget? child, bool isShowLoading = true}) {
-  return _AppLoadingOverlay.show(api: api, child: child, isShowLoading: isShowLoading);
+/// Returns the result of the [future] Future when it completes.
+Future<dynamic> showAppOverlayLoading({required Future<dynamic> future, Widget? child, bool isShowLoading = true}) {
+  return _AppLoadingOverlay.show(future: future, child: child, isShowLoading: isShowLoading);
 }
 
 /// Private class that manages the loading overlay display and lifecycle.
@@ -56,17 +56,17 @@ class _AppLoadingOverlay {
   /// 3. Enforces minimum display duration to prevent flickering
   /// 4. Removes the overlay when complete
   ///
-  /// [api] The Future to execute while showing the loading overlay.
+  /// [future] The Future to execute while showing the loading overlay.
   /// [child] Optional custom loading widget.
   /// [isShowLoading] Whether to show the loading overlay.
   ///
   /// Returns the result of the API call.
-  static Future<dynamic> show({required Future<dynamic> api, Widget? child, bool isShowLoading = true}) async {
+  static Future<dynamic> show({required Future<dynamic> future, Widget? child, bool isShowLoading = true}) async {
     if (isShowLoading) {
       createHighlightOverlay(child: child);
     }
     Stopwatch stopwatch = Stopwatch()..start();
-    final result = await api;
+    final result = await future;
     stopwatch.stop();
     if (stopwatch.elapsedMilliseconds < 200) {
       await Future.delayed(const Duration(milliseconds: 300));
