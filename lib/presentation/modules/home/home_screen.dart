@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/home/components/header_and_service.dart';
 import 'package:sixam_mart_user/presentation/modules/home/components/sliver_box.dart';
 import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
 import 'package:sixam_mart_user/presentation/shared/unified_banner_widget.dart';
-import 'package:sixam_mart_user/theme.dart';
 
 import 'home_controller.dart';
 

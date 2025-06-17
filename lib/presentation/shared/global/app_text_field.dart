@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sixam_mart_user/theme.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 /// A customizable text field with optional label, prefix/suffix icons, and validation.
 class AppTextField extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:sixam_mart_user/theme.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class AuthHeader extends StatelessWidget {
   final String title;

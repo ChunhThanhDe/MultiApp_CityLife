@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
-import 'package:sixam_mart_user/theme.dart';
 
 import '../../../shared/animation/animated_step_indicator.dart';
 import 'welcome_controller.dart';

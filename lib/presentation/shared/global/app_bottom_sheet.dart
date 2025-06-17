@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sixam_mart_user/theme.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:smooth_sheets/smooth_sheets.dart';
 
 import 'app_navigator.dart';
