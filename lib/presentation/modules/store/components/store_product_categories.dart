@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_category_section.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/store_filter_section.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 class StoreProductCategories extends StatelessWidget {
@@ -18,6 +19,7 @@ class StoreProductCategories extends StatelessWidget {
             title: 'Popular Items',
             items: controller.popularItems,
           ),
+          SectionBreakDivider(color: AppColors.stateGreyLowestHover100, height: 1),
           StoreFilterSection(),
         ];
 

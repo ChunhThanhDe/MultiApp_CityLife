@@ -3,15 +3,15 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 
 enum FilterType {
-  all(label: 'Filter', icon: Icons.tune),
-  drinks(label: 'Drinks', icon: Icons.local_drink),
-  foods(label: 'Foods', icon: Icons.restaurant),
-  atHome(label: 'At Home', icon: Icons.whatshot);
+  all(label: 'Filter', icon: 'assets/icons/ic_filter.svg'),
+  drinks(label: 'Drinks', icon: 'assets/icons/ic_drink.svg'),
+  foods(label: 'Foods', icon: 'assets/icons/ic_burger.svg'),
+  atHome(label: 'At Home');
 
-  const FilterType({required this.label, required this.icon});
+  const FilterType({required this.label, this.icon});
 
   final String label;
-  final IconData icon;
+  final String? icon;
 }
 
 class ProductItem {

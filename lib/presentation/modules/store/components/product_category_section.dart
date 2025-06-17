@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_card.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 class ProductCategorySection extends StatelessWidget {
@@ -21,8 +22,10 @@ class ProductCategorySection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SectionBreakDivider(color: AppColors.stateGreyLowestHover100, height: 1),
+          SizedBox(height: 24.h),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -40,6 +43,7 @@ class ProductCategorySection extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(height: 18.h),
           SizedBox(
             height: 200.h,
             child: ListView.builder(
