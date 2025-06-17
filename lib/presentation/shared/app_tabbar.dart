@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/theme.dart';
 
-/// A customizable tab bar widget with rounded corners and custom styling.
-///
-/// This widget provides a container-style tab bar with rounded corners,
-/// custom colors, and smooth transitions between tabs.
 class AppTabBar extends StatelessWidget {
-  /// Creates an [AppTabBar].
-  ///
-  /// The [listTab] parameter is required and must not be empty.
   const AppTabBar({
     super.key,
     this.tabController,
@@ -27,53 +20,26 @@ class AppTabBar extends StatelessWidget {
     this.indicatorPadding,
   }) : assert(listTab.length > 0, 'listTab cannot be empty');
 
-  /// Controller for the tab bar
   final TabController? tabController;
-
-  /// List of tabs to display
   final List<Widget> listTab;
-
-  /// Callback when a tab is tapped
   final Function(int)? onTap;
-
-  /// Height of the tab bar
   final double height;
-
-  /// Border radius of the tab bar
   final double borderRadius;
-
-  /// Background color of the tab bar container
   final Color? backgroundColor;
-
-  /// Color of the selected tab
   final Color? selectedColor;
-
-  /// Color of unselected tabs
   final Color? unselectedColor;
-
-  /// Color of the tab indicator
   final Color? indicatorColor;
-
-  /// Padding inside the tab bar container
   final EdgeInsets? padding;
-
-  /// Text style for selected tab labels
   final TextStyle? labelStyle;
-
-  /// Text style for unselected tab labels
   final TextStyle? unselectedLabelStyle;
-
-  /// Whether the tab bar should be scrollable
   final bool isScrollable;
-
-  /// Padding around the indicator
   final EdgeInsets? indicatorPadding;
 
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 100),
         height: height,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRadius),
@@ -86,8 +52,6 @@ class AppTabBar extends StatelessWidget {
           isScrollable: isScrollable,
           indicatorWeight: 0,
           dividerColor: Colors.transparent,
-          indicatorSize: TabBarIndicatorSize.tab,
-          indicatorPadding: indicatorPadding ?? EdgeInsets.zero,
           indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(borderRadius),
             color: indicatorColor ?? Colors.white,
@@ -99,25 +63,23 @@ class AppTabBar extends StatelessWidget {
               ),
             ],
           ),
+          labelPadding: EdgeInsets.zero,
           labelStyle: labelStyle ?? AppTextStyles.typographyH12SemiBold,
           unselectedLabelStyle: unselectedLabelStyle ?? AppTextStyles.typographyH12Regular,
-          labelPadding: const EdgeInsets.symmetric(horizontal: 10),
           labelColor: selectedColor ?? AppColors.stateBrandDefault500,
           unselectedLabelColor: unselectedColor ?? AppColors.textGreyDefault500,
           automaticIndicatorColorAdjustment: false,
           splashFactory: NoSplash.splashFactory,
           overlayColor: WidgetStateProperty.resolveWith<Color?>(
-            (Set<WidgetState> states) {
-              return Colors.transparent;
-            },
+            (Set<WidgetState> states) => Colors.transparent,
           ),
+          physics: NeverScrollableScrollPhysics(),
           tabs: listTab.map((tab) => _buildAccessibleTab(tab)).toList(),
         ),
       ),
     );
   }
 
-  /// Wraps each tab with accessibility features
   Widget _buildAccessibleTab(Widget tab) {
     return Semantics(
       button: true,
@@ -126,9 +88,7 @@ class AppTabBar extends StatelessWidget {
   }
 }
 
-/// Extension to provide convenient factory constructors for common use cases
 extension AppTabBarFactories on AppTabBar {
-  /// Creates a compact tab bar with smaller height
   static AppTabBar compact({
     Key? key,
     TabController? tabController,
@@ -154,7 +114,6 @@ extension AppTabBarFactories on AppTabBar {
     );
   }
 
-  /// Creates a large tab bar with bigger height
   static AppTabBar large({
     Key? key,
     TabController? tabController,

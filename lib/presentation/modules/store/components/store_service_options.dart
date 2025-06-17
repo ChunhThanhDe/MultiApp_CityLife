@@ -34,7 +34,7 @@ class StoreServiceOptions extends StatelessWidget {
   Widget _buildServiceTab(IconData icon, String label) {
     return Tab(
       child: Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
             icon,
