@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -29,7 +30,7 @@ class RootScreen extends BaseScreen<RootController> {
               (e) => BottomNavigationBarItem(
                 icon: SizedBox(width: 20.w, height: 20.w, child: SvgPicture.asset(e.iconUnselected)),
                 activeIcon: SizedBox(width: 20.w, height: 20.w, child: SvgPicture.asset(e.iconSelected)),
-                label: e.label,
+                label: tr(e.label),
               ),
             )
             .toList(),

@@ -2,8 +2,13 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const root_title = 'root.title';
+  static const root_home = 'root.home';
+  static const root_service = 'root.service';
+  static const root_cart = 'root.cart';
+  static const root_wallet = 'root.wallet';
+  static const root_account = 'root.account';
   static const root = 'root';
   static const base_error_default = 'base.error.default';
   static const base_error_noInternet = 'base.error.noInternet';
@@ -155,6 +160,11 @@ abstract class LocaleKeys {
   static const onboarding_welcome_step10 = 'onboarding.welcome.step10';
   static const onboarding_welcome = 'onboarding.welcome';
   static const onboarding = 'onboarding';
+  static const theme_displayMode = 'theme.displayMode';
+  static const theme_auto = 'theme.auto';
+  static const theme_light = 'theme.light';
+  static const theme_dark = 'theme.dark';
+  static const theme = 'theme';
   static const wallet_title = 'wallet.title';
   static const wallet_mayGift = 'wallet.mayGift';
   static const wallet_transaction = 'wallet.transaction';
@@ -177,4 +187,7 @@ abstract class LocaleKeys {
   static const wallet_receipt_share = 'wallet.receipt.share';
   static const wallet_receipt = 'wallet.receipt';
   static const wallet = 'wallet';
+  static const account_selectLanguage = 'account.selectLanguage';
+  static const account = 'account';
+
 }

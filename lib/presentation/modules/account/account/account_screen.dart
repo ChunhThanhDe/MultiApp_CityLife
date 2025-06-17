@@ -52,8 +52,10 @@ class AccountScreen extends BaseScreen<AccountController> {
       AccountMenuItem(
         icon: Icons.language_outlined,
         title: 'Language',
-        trailing: Text('English (US)', style: TextStyle(color: Color(0xFF4A5763))),
-        onClick: () {},
+        trailing: GetBuilder<AccountController>(
+          builder: (controller) => Text(controller.currentLanguageDisplayName, style: TextStyle(color: Color(0xFF4A5763))),
+        ),
+        onClick: () => controller.showLanguageSelection(),
       ),
       AccountMenuItem(icon: Icons.info_outline, title: 'About App', onClick: () {}),
     ];

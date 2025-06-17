@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
-            themeMode: ThemeMode.light,
+            // themeMode: ,
             navigatorKey: AppNavigator.navigatorKey,
             initialRoute: AppPages.initial,
             getPages: AppPages.appRoutes,
