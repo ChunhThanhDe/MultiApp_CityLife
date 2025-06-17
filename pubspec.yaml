@@ -71,8 +71,12 @@ dev_dependencies:
   freezed: ^3.0.6
   json_serializable: ^6.9.5
   flutter_gen_runner: ^5.10.0
+  flutter_launcher_icons: ^0.14.4
 
-
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/img_launcher.png"
 
 flutter_gen:
   output: lib/generated/assets
