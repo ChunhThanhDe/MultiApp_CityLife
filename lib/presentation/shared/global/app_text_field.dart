@@ -105,6 +105,7 @@ class AppTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(effectiveRadius),
           ),
           child: TextFormField(
+            autofocus: false,
             controller: controller,
             keyboardType: keyboardType,
             focusNode: focusNode,

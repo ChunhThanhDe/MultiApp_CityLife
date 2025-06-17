@@ -15,7 +15,6 @@ class AuthBottomSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: [
         const Center(child: TermOfService()),
         SizedBox(height: 16.h),

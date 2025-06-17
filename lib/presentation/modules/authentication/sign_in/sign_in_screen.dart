@@ -18,31 +18,49 @@ import 'sign_in_controller.dart';
 
 class SignInScreen extends BaseScreen<SignInController> {
   const SignInScreen({super.key});
+
+  @override
+  bool get setBottomSafeArea => false;
   @override
   Widget buildScreen(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24.w),
+    return MediaQuery.removePadding(
+      context: context,
+      removeBottom: true,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 16.h),
-          AuthHeader(
-            title: tr(LocaleKeys.authentication_signIn_title),
-            subtitle: tr(LocaleKeys.authentication_signIn_subtitle),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 16.h),
+                  AuthHeader(
+                    title: tr(LocaleKeys.authentication_signIn_title),
+                    subtitle: tr(LocaleKeys.authentication_signIn_subtitle),
+                  ),
+                  SizedBox(height: 24.h),
+                  _buildInputField(),
+                  SizedBox(height: 24.h),
+                  _buildLoginButton(),
+                  SizedBox(height: 16.h),
+                  _buildOrDivider(),
+                  SizedBox(height: 16.h),
+                  _buildSwitchLoginMethodButton(),
+                  SizedBox(height: 24.h),
+                ],
+              ),
+            ),
           ),
-          SizedBox(height: 24.h),
-          _buildInputField(),
-          SizedBox(height: 24.h),
-          _buildLoginButton(),
-          SizedBox(height: 16.h),
-          _buildOrDivider(),
-          SizedBox(height: 16.h),
-          _buildSwitchLoginMethodButton(),
-          const Spacer(),
-          AuthBottomSection(
-            isSignIn: true,
-            onTapChange: () => Get.toNamed(AppRoutes.signUp),
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: AuthBottomSection(
+              isSignIn: true,
+              onTapChange: () => Get.toNamed(AppRoutes.signUp),
+            ),
           ),
+          SizedBox(height: 16.h),
         ],
       ),
     );

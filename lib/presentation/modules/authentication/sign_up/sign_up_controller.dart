@@ -128,7 +128,7 @@ class SignUpController extends BaseController {
       case Success(:final data):
         if (data.statusCode != 200) {
           final errorResponse = ErrorResponse.fromJson(data.data);
-          showAppSnackBar(title: tr(LocaleKeys.authentication_signIn_errorSnackbar), message: errorResponse.errors.first.message, type: SnackBarType.error);
+          showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
           return;
         }
 
@@ -139,7 +139,7 @@ class SignUpController extends BaseController {
         Get.offAll(() => AcceptTos());
         isLoading.value = false;
       case Failure(:final error):
-        showAppSnackBar(title: tr(LocaleKeys.authentication_signIn_errorSnackbar), message: error.toString(), type: SnackBarType.error);
+        showAppSnackBar(title: error.toString(), type: SnackBarType.error);
         isLoading.value = false;
     }
   }

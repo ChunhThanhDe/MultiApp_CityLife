@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
@@ -12,9 +13,10 @@ class TermOfService extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: RichText(
+      child: AutoSizeText.rich(
         textAlign: TextAlign.center,
-        text: TextSpan(
+        maxLines: 2,
+        TextSpan(
           children: [
             TextSpan(
               text: tr(LocaleKeys.authentication_termsOfService_agreeTo),

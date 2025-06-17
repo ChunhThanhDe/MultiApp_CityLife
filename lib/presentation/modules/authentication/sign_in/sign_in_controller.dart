@@ -1,11 +1,9 @@
 import 'dart:convert';
 
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/data/app_storage.dart';
-import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app_provider.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
@@ -62,7 +60,7 @@ class SignInController extends BaseController {
       case Success(:final data):
         if (data.statusCode != 200) {
           final errorResponse = ErrorResponse.fromJson(data.data);
-          showAppSnackBar(title: tr(LocaleKeys.authentication_signIn_errorSnackbar), message: errorResponse.errors.first.message, type: SnackBarType.error);
+          showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
           isLoading.value = false;
           return;
         }
@@ -74,7 +72,7 @@ class SignInController extends BaseController {
         isLoading.value = false;
         break;
       case Failure(:final error):
-        showAppSnackBar(title: tr(LocaleKeys.authentication_signIn_errorSnackbar), message: error.toString(), type: SnackBarType.error);
+        showAppSnackBar(title: error.toString(), type: SnackBarType.error);
         isLoading.value = false;
         break;
     }
