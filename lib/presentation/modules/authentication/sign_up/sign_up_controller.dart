@@ -15,6 +15,7 @@ import 'package:sixam_mart_user/domain/models/request/sign_up_request.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/accept_tos.dart';
 import 'package:sixam_mart_user/presentation/shared/app_overlay.dart';
+import 'package:sixam_mart_user/presentation/shared/app_snackbar.dart';
 
 enum SignUpMethod { email, phone }
 
@@ -127,7 +128,7 @@ class SignUpController extends BaseController {
       case Success(:final data):
         if (data.statusCode != 200) {
           final errorResponse = ErrorResponse.fromJson(data.data);
-          Get.snackbar(tr(LocaleKeys.authentication_signIn_errorSnackbar), errorResponse.errors.first.message);
+          showAppSnackBar(title: tr(LocaleKeys.authentication_signIn_errorSnackbar), message: errorResponse.errors.first.message, type: SnackBarType.error);
           return;
         }
 
@@ -138,7 +139,7 @@ class SignUpController extends BaseController {
         Get.offAll(() => AcceptTos());
         isLoading.value = false;
       case Failure(:final error):
-        Get.snackbar(tr(LocaleKeys.authentication_signIn_errorSnackbar), error.toString());
+        showAppSnackBar(title: tr(LocaleKeys.authentication_signIn_errorSnackbar), message: error.toString(), type: SnackBarType.error);
         isLoading.value = false;
     }
   }

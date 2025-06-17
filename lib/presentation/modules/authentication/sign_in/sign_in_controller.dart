@@ -15,6 +15,7 @@ import 'package:sixam_mart_user/domain/models/request/login_request.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/app_overlay.dart';
+import 'package:sixam_mart_user/presentation/shared/app_snackbar.dart';
 
 enum LoginMethod {
   email('Email', 'email'),
@@ -61,7 +62,7 @@ class SignInController extends BaseController {
       case Success(:final data):
         if (data.statusCode != 200) {
           final errorResponse = ErrorResponse.fromJson(data.data);
-          Get.snackbar(tr(LocaleKeys.authentication_signIn_errorSnackbar), errorResponse.errors.first.message);
+          showAppSnackBar(title: tr(LocaleKeys.authentication_signIn_errorSnackbar), message: errorResponse.errors.first.message, type: SnackBarType.error);
           isLoading.value = false;
           return;
         }
@@ -73,7 +74,7 @@ class SignInController extends BaseController {
         isLoading.value = false;
         break;
       case Failure(:final error):
-        Get.snackbar(tr(LocaleKeys.authentication_signIn_errorSnackbar), error.toString());
+        showAppSnackBar(title: tr(LocaleKeys.authentication_signIn_errorSnackbar), message: error.toString(), type: SnackBarType.error);
         isLoading.value = false;
         break;
     }

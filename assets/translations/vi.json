@@ -24,7 +24,7 @@
             "emailRequired": "Email là bắt buộc",
             "emailInvalid": "Vui lòng nhập địa chỉ email hợp lệ",
             "passwordRequired": "Mật khẩu là bắt buộc",
-            "passwordMinLength": "Mật khẩu phải có ít nhất 10 ký tự",
+            "passwordMinLength": "Mật khẩu phải có ít nhất 6 ký tự",
             "passwordNoSpaces": "Mật khẩu không được chứa khoảng trắng",
             "passwordUppercase": "Mật khẩu phải chứa ít nhất một chữ cái viết hoa",
             "passwordLowercase": "Mật khẩu phải chứa ít nhất một chữ cái viết thường",

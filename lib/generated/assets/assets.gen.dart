@@ -90,6 +90,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_email_icon.svg
   SvgGenImage get icEmailIcon => const SvgGenImage('assets/icons/ic_email_icon.svg');
 
+  /// File path: assets/icons/ic_error.svg
+  SvgGenImage get icError => const SvgGenImage('assets/icons/ic_error.svg');
+
   /// File path: assets/icons/ic_evc_plus.svg
   SvgGenImage get icEvcPlus => const SvgGenImage('assets/icons/ic_evc_plus.svg');
 
@@ -225,6 +228,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_store.svg
   SvgGenImage get icStore => const SvgGenImage('assets/icons/ic_store.svg');
 
+  /// File path: assets/icons/ic_success.svg
+  SvgGenImage get icSuccess => const SvgGenImage('assets/icons/ic_success.svg');
+
   /// File path: assets/icons/ic_sync.svg
   SvgGenImage get icSync => const SvgGenImage('assets/icons/ic_sync.svg');
 
@@ -270,6 +276,7 @@ class $AssetsIconsGen {
     icDrink,
     icDropdownArrow,
     icEmailIcon,
+    icError,
     icEvcPlus,
     icEyeHidden,
     icEyeVisible,
@@ -315,6 +322,7 @@ class $AssetsIconsGen {
     icStandard,
     icStar,
     icStore,
+    icSuccess,
     icSync,
     icThreedot,
     icVerified,

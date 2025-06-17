@@ -9,7 +9,7 @@ class StoreFilterBottomSheet {
   static void show() {
     showAppBottomSheet(
       child: SizedBox(
-        height: MediaQuery.of(Get.context!).size.height * 0.6,
+        height: Get.height * 0.6,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -65,6 +65,17 @@ class _FilterCategoriesList extends StatelessWidget {
     'Hot Breakfast',
     'Oatmeal & Yogurt',
     'Bakery',
+    'Hot Coffees',
+    'Cold Coffees',
+    'Starbucks Refreshers® Beverages',
+    'Frappuccino® Blended Beverages',
+    'Iced Tea and Lemonade',
+    'Hot Teas',
+    'Milk, Juice & More',
+    'Bottled Beverages',
+    'Hot Breakfast',
+    'Oatmeal & Yogurt',
+    'Bakery',
   ];
 
   @override
@@ -90,9 +101,12 @@ class _FilterItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.h),
-      child: Text(title, style: AppTextStyles.typographyH11Regular),
+    return GestureDetector(
+      onTap: Get.back,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 8.h),
+        child: Text(title, style: AppTextStyles.typographyH11Regular),
+      ),
     );
   }
 }
