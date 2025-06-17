@@ -147,6 +147,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_like_outlined.svg
   SvgGenImage get icLikeOutlined => const SvgGenImage('assets/icons/ic_like_outlined.svg');
 
+  /// File path: assets/icons/ic_line_direction.svg
+  SvgGenImage get icLineDirection => const SvgGenImage('assets/icons/ic_line_direction.svg');
+
   /// File path: assets/icons/ic_location.svg
   SvgGenImage get icLocation => const SvgGenImage('assets/icons/ic_location.svg');
 
@@ -286,6 +289,7 @@ class $AssetsIconsGen {
     icLeftArrowChervon,
     icLikeFilled,
     icLikeOutlined,
+    icLineDirection,
     icLocation,
     icLock,
     icMastercard,

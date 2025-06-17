@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/store/components/store_filter_bottom_sheet.dart';
 import 'package:sixam_mart_user/presentation/shared/app_bottom_sheet.dart';
 import 'package:sixam_mart_user/presentation/shared/app_image.dart';
 import 'package:sixam_mart_user/theme.dart';
@@ -28,7 +29,7 @@ class StoreAppBar extends StatelessWidget {
               children: [
                 _circularButton(Icon(Icons.arrow_back, color: AppColors.textGreyHighest950), () => Get.back()),
                 Spacer(),
-                _circularButton(Assets.icons.icSearch.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)), () {}),
+                _circularButton(Assets.icons.icSearch.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)), _onTapFilter),
                 SizedBox(width: 12.w),
                 _circularButton(Assets.icons.icStore.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)), _onTapStore),
               ],
@@ -65,8 +66,14 @@ class StoreAppBar extends StatelessWidget {
           ),
         ),
         _buildActionButton(),
+        _buildStoreInfo(),
+        SizedBox(height: 16.h),
       ],
     ));
+  }
+
+  void _onTapFilter() {
+    StoreFilterBottomSheet.show();
   }
 
   Widget _circularButton(Widget icon, VoidCallback onPressed) {
@@ -258,6 +265,88 @@ class StoreAppBar extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildStoreInfo() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+      child: Column(
+        children: [
+          _buildInfoRow(
+            icon: Assets.icons.icLocation.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
+            title: '2216 N 10th Street',
+            subtitle: 'El Centro, CA 92243',
+            trailing: Assets.icons.icSync.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
+          ),
+          SizedBox(height: 16.h),
+          _buildInfoRow(
+            icon: Assets.icons.icCar.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
+            title: 'Delivery Fee',
+            trailing: Text('\$6.99', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
+          ),
+          SizedBox(height: 16.h),
+          _buildInfoRow(
+            icon: Assets.icons.icClock.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
+            title: 'Delivery Time',
+            trailing: Text('20-25 min', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
+          ),
+          SizedBox(height: 16.h),
+          _buildInfoRow(
+            icon: Assets.icons.icLineDirection.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
+            title: 'Today 7:30 AM - 10:30 PM',
+            trailing: Icon(Icons.keyboard_arrow_down, size: 24, color: AppColors.textGreyHigh700),
+          ),
+          SizedBox(height: 16.h),
+          _buildInfoRow(
+            icon: Assets.icons.icStar.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
+            title: '4.2 (500+ ratings)',
+            trailing: Icon(Icons.keyboard_arrow_right, size: 24, color: AppColors.textGreyDefault500),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoRow({
+    required Widget icon,
+    required String title,
+    String? subtitle,
+    Widget? trailing,
+  }) {
+    return Row(
+      children: [
+        Container(
+          padding: EdgeInsets.all(8.w),
+          decoration: BoxDecoration(
+            color: AppColors.stateBaseWhite.withValues(alpha: 200),
+            borderRadius: BorderRadius.circular(8.r),
+          ),
+          child: icon,
+        ),
+        SizedBox(width: 12.w),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: AppTextStyles.typographyH11Medium,
+              ),
+              if (subtitle != null) ...[
+                SizedBox(height: 2.h),
+                Text(
+                  subtitle,
+                  style: AppTextStyles.typographyH12Regular.copyWith(
+                    color: AppColors.textGreyHigh700,
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+        if (trailing != null) trailing,
+      ],
     );
   }
 }
