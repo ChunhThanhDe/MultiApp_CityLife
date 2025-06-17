@@ -57,17 +57,17 @@ class StoreScreen extends BaseScreen<StoreController> {
   }
 
   Widget _circularButton(IconData icon, VoidCallback onPressed) {
-    return Container(
-      padding: const EdgeInsets.all(2),
-      decoration: ShapeDecoration(
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(32),
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        padding: EdgeInsets.all(6.w),
+        decoration: ShapeDecoration(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(32),
+          ),
         ),
-      ),
-      child: IconButton(
-        icon: Icon(icon, color: AppColors.textGreyHighest950),
-        onPressed: onPressed,
+        child: Icon(icon, color: AppColors.textGreyHighest950),
       ),
     );
   }
@@ -309,7 +309,7 @@ class StoreScreen extends BaseScreen<StoreController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -393,7 +393,7 @@ class StoreScreen extends BaseScreen<StoreController> {
             style: AppTextStyles.typographyH11Medium.copyWith(
               color: AppColors.textGreyHighest950,
             ),
-            maxLines: 2,
+            maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           SizedBox(height: 4.h),

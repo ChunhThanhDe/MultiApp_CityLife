@@ -201,7 +201,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
           name: 'Vanilla Sweet Cream Cold Brew',
           price: '\$4.95 • 160 Calories',
           imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400',
-          categories: [FilterType.drinks],
+          categories: [FilterType.drinks, FilterType.atHome],
         ),
         ProductItem(
           name: 'Iced Starbucks Blonde Vanilla Latte',
