@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/presentation/shared/app_image.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 import 'store_controller.dart';
@@ -10,125 +13,121 @@ class StoreScreen extends BaseScreen<StoreController> {
   const StoreScreen({super.key});
 
   @override
+  bool get wrapWithSafeArea => false;
+
+  @override
   Widget buildScreen(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: [_buildAppBar(), _buildStoreHeader(), _buildServiceOptions(), _buildProductCategories()],
-      ),
+    return CustomScrollView(
+      slivers: [
+        _buildAppBar(),
+        _buildServiceOptions(),
+        _buildProductCategories(),
+      ],
     );
   }
 
   Widget _buildAppBar() {
-    return SliverAppBar(
-      expandedHeight: 200.h,
-      floating: false,
-      pinned: true,
-      backgroundColor: AppColors.stateBaseWhite,
-      elevation: 0,
-      leading: IconButton(
-        icon: Icon(Icons.arrow_back, color: AppColors.textGreyHighest950),
-        onPressed: () => Get.back(),
-      ),
-      actions: [
-        IconButton(
-          icon: Icon(Icons.search, color: AppColors.textGreyHighest950),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: Icon(Icons.qr_code_scanner, color: AppColors.textGreyHighest950),
-          onPressed: () {},
-        ),
-      ],
-      flexibleSpace: FlexibleSpaceBar(
-        background: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage('https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=800'),
-              fit: BoxFit.cover,
-            ),
+    return SliverToBoxAdapter(
+      child: Container(
+        padding: EdgeInsets.only(top: 54.h, left: 24.w, right: 24.w, bottom: 24.h),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AppImageProvider.network('https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=800'),
+            fit: BoxFit.cover,
           ),
         ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                _circularButton(Icons.arrow_back, () => Get.back()),
+                Spacer(),
+                _circularButton(Icons.search, () {}),
+                SizedBox(width: 12.w),
+                _circularButton(Icons.favorite_border, () {}),
+              ],
+            ),
+            SizedBox(height: 88.h),
+            _buildStoreHeader(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _circularButton(IconData icon, VoidCallback onPressed) {
+    return Container(
+      padding: const EdgeInsets.all(2),
+      decoration: ShapeDecoration(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(32),
+        ),
+      ),
+      child: IconButton(
+        icon: Icon(icon, color: AppColors.textGreyHighest950),
+        onPressed: onPressed,
       ),
     );
   }
 
   Widget _buildStoreHeader() {
-    return SliverToBoxAdapter(
-      child: Container(
-        color: AppColors.stateBaseWhite,
-        padding: EdgeInsets.all(24.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 60.w,
-                  height: 60.w,
-                  decoration: BoxDecoration(
-                    color: AppColors.stateSuccessDefault500,
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'S',
-                      style: AppTextStyles.typographyH6SemiBold.copyWith(
-                        color: AppColors.textBaseWhite,
-                      ),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12.r),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+        child: Container(
+          padding: EdgeInsets.all(16.w),
+          color: AppColors.stateBaseWhite.withValues(alpha: 100),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipOval(
+                    child: AppImage.network(
+                      'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png',
+                      width: 56.w,
+                      height: 56.w,
                     ),
                   ),
-                ),
-                SizedBox(width: 16.w),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            'Starbucks®',
-                            style: AppTextStyles.typographyH8SemiBold.copyWith(
-                              color: AppColors.textGreyHighest950,
+                  SizedBox(width: 16.w),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Starbucks®', style: AppTextStyles.typographyH7SemiBold),
+                        SizedBox(height: 4.h),
+                        Row(
+                          children: [
+                            Icon(Icons.star, size: 16.w, color: Colors.black),
+                            SizedBox(width: 4.w),
+                            Text.rich(
+                              TextSpan(
+                                children: [
+                                  TextSpan(text: '4.2 ', style: AppTextStyles.typographyH12SemiBold),
+                                  TextSpan(text: '(300+ ratings)', style: AppTextStyles.typographyH12Regular),
+                                  TextSpan(text: ' • ', style: AppTextStyles.typographyH12Regular),
+                                  TextSpan(text: '2.5 Mile', style: AppTextStyles.typographyH12Regular),
+                                ],
+                              ),
                             ),
-                          ),
-                          SizedBox(width: 8.w),
-                          Icon(
-                            Icons.verified,
-                            size: 16.w,
-                            color: AppColors.stateBrandDefault500,
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 4.h),
-                      Row(
-                        children: [
-                          Icon(Icons.star, size: 16.w, color: Colors.orange),
-                          SizedBox(width: 4.w),
-                          Text(
-                            '4.2 (300+ ratings)',
-                            style: AppTextStyles.typographyH12Regular.copyWith(
-                              color: AppColors.textGreyDefault500,
-                            ),
-                          ),
-                          SizedBox(width: 16.w),
-                          Text(
-                            '2.5 Mile',
-                            style: AppTextStyles.typographyH12Regular.copyWith(
-                              color: AppColors.textGreyDefault500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.favorite_border, color: AppColors.textGreyDefault500),
-                  onPressed: () {},
-                ),
-              ],
-            ),
-          ],
+                  IconButton(
+                    icon: Icon(Icons.favorite_border, color: AppColors.textGreyDefault500),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
