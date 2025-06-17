@@ -5,10 +5,8 @@ import 'package:sixam_mart_user/app_provider.dart';
 
 class DependencyInjection {
   static Future<void> init() async {
-    Get.put(LanguageManager());
-
     await Get.putAsync(() => AppStorage().sharedPreferences());
-
+    Get.put(LanguageManager());
     Get.put(AppProvider());
   }
 }

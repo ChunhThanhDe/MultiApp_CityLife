@@ -12,32 +12,58 @@ class ServiceHeader extends GetView<ServiceController> {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Stack(
+      child: Column(
         children: [
           Container(
             width: double.infinity,
-            height: 230,
             decoration: BoxDecoration(
               color: AppColors.stateBrandDefault500,
             ),
-          ),
-          SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 54),
                 _buildTopBar(),
                 SizedBox(height: 16),
                 _buildSearchBar(context),
                 SizedBox(height: 16),
                 _buildDeliveryAddress(),
                 SizedBox(height: 16),
-                _buildFoodCategories(),
               ],
             ),
-          )
+          ),
+          SizedBox(height: 16),
+          _buildFoodCategories(),
         ],
       ),
     );
+    // return SliverToBoxAdapter(
+    //   child: Stack(
+    //     children: [
+    //       Container(
+    //         width: double.infinity,
+    //         height: 230,
+    //         decoration: BoxDecoration(
+    //           color: AppColors.stateBrandDefault500,
+    //         ),
+    //       ),
+    //       SafeArea(
+    //         child: Column(
+    //           crossAxisAlignment: CrossAxisAlignment.start,
+    //           children: [
+    //             _buildTopBar(),
+    //             SizedBox(height: 16),
+    //             _buildSearchBar(context),
+    //             SizedBox(height: 16),
+    //             _buildDeliveryAddress(),
+    //             SizedBox(height: 16),
+    //             _buildFoodCategories(),
+    //           ],
+    //         ),
+    //       )
+    //     ],
+    //   ),
+    // );
   }
 
   Widget _buildTopBar() {

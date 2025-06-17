@@ -2,17 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 class SectionBreakDivider extends StatelessWidget {
+  final Color? color;
+  final double? height;
+
   const SectionBreakDivider({
     super.key,
+    this.color,
+    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 6,
+      height: height ?? 6,
       decoration: BoxDecoration(
-        color: AppColors.stateGreyLowest50,
+        color: color ?? AppColors.stateGreyLowest50,
       ),
     );
   }

@@ -1,5 +1,7 @@
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/unified_banner_widget.dart';
 
 class Service {
@@ -59,7 +61,9 @@ class HomeController extends BaseController {
           title: 'Starbucks®',
           imageUrl: bannerImageUrl,
           logoUrl: brandLogoUrl,
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(AppRoutes.store);
+          },
         ),
         BannerItem(
           title: 'Starbucks®',

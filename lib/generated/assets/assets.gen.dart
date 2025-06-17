@@ -39,8 +39,17 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_box_package_hand_bottom.svg
   SvgGenImage get icBoxPackageHandBottom => const SvgGenImage('assets/icons/ic_box_package_hand_bottom.svg');
 
+  /// File path: assets/icons/ic_burger.svg
+  SvgGenImage get icBurger => const SvgGenImage('assets/icons/ic_burger.svg');
+
   /// File path: assets/icons/ic_car.svg
   SvgGenImage get icCar => const SvgGenImage('assets/icons/ic_car.svg');
+
+  /// File path: assets/icons/ic_car_black.svg
+  SvgGenImage get icCarBlack => const SvgGenImage('assets/icons/ic_car_black.svg');
+
+  /// File path: assets/icons/ic_car_thru.svg
+  SvgGenImage get icCarThru => const SvgGenImage('assets/icons/ic_car_thru.svg');
 
   /// File path: assets/icons/ic_cart_filled.svg
   SvgGenImage get icCartFilled => const SvgGenImage('assets/icons/ic_cart_filled.svg');
@@ -54,6 +63,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_clock.svg
   SvgGenImage get icClock => const SvgGenImage('assets/icons/ic_clock.svg');
 
+  /// File path: assets/icons/ic_clock_time.svg
+  SvgGenImage get icClockTime => const SvgGenImage('assets/icons/ic_clock_time.svg');
+
   /// File path: assets/icons/ic_close.svg
   SvgGenImage get icClose => const SvgGenImage('assets/icons/ic_close.svg');
 
@@ -63,8 +75,14 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_delivery_tracking.svg
   SvgGenImage get icDeliveryTracking => const SvgGenImage('assets/icons/ic_delivery_tracking.svg');
 
+  /// File path: assets/icons/ic_dollar.svg
+  SvgGenImage get icDollar => const SvgGenImage('assets/icons/ic_dollar.svg');
+
   /// File path: assets/icons/ic_door.svg
   SvgGenImage get icDoor => const SvgGenImage('assets/icons/ic_door.svg');
+
+  /// File path: assets/icons/ic_drink.svg
+  SvgGenImage get icDrink => const SvgGenImage('assets/icons/ic_drink.svg');
 
   /// File path: assets/icons/ic_dropdown_arrow.svg
   SvgGenImage get icDropdownArrow => const SvgGenImage('assets/icons/ic_dropdown_arrow.svg');
@@ -89,6 +107,15 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_google_icon.svg
   SvgGenImage get icGoogleIcon => const SvgGenImage('assets/icons/ic_google_icon.svg');
+
+  /// File path: assets/icons/ic_hands_package.svg
+  SvgGenImage get icHandsPackage => const SvgGenImage('assets/icons/ic_hands_package.svg');
+
+  /// File path: assets/icons/ic_heart_filled.svg
+  SvgGenImage get icHeartFilled => const SvgGenImage('assets/icons/ic_heart_filled.svg');
+
+  /// File path: assets/icons/ic_heart_outlined.svg
+  SvgGenImage get icHeartOutlined => const SvgGenImage('assets/icons/ic_heart_outlined.svg');
 
   /// File path: assets/icons/ic_home_filled.svg
   SvgGenImage get icHomeFilled => const SvgGenImage('assets/icons/ic_home_filled.svg');
@@ -119,6 +146,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_like_outlined.svg
   SvgGenImage get icLikeOutlined => const SvgGenImage('assets/icons/ic_like_outlined.svg');
+
+  /// File path: assets/icons/ic_line_direction.svg
+  SvgGenImage get icLineDirection => const SvgGenImage('assets/icons/ic_line_direction.svg');
 
   /// File path: assets/icons/ic_location.svg
   SvgGenImage get icLocation => const SvgGenImage('assets/icons/ic_location.svg');
@@ -165,6 +195,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_right_arrow_chevron.svg
   SvgGenImage get icRightArrowChevron => const SvgGenImage('assets/icons/ic_right_arrow_chevron.svg');
 
+  /// File path: assets/icons/ic_sale.svg
+  SvgGenImage get icSale => const SvgGenImage('assets/icons/ic_sale.svg');
+
   /// File path: assets/icons/ic_schedule.svg
   SvgGenImage get icSchedule => const SvgGenImage('assets/icons/ic_schedule.svg');
 
@@ -185,6 +218,15 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_standard.svg
   SvgGenImage get icStandard => const SvgGenImage('assets/icons/ic_standard.svg');
+
+  /// File path: assets/icons/ic_star.svg
+  SvgGenImage get icStar => const SvgGenImage('assets/icons/ic_star.svg');
+
+  /// File path: assets/icons/ic_store.svg
+  SvgGenImage get icStore => const SvgGenImage('assets/icons/ic_store.svg');
+
+  /// File path: assets/icons/ic_sync.svg
+  SvgGenImage get icSync => const SvgGenImage('assets/icons/ic_sync.svg');
 
   /// File path: assets/icons/ic_threedot.svg
   SvgGenImage get icThreedot => const SvgGenImage('assets/icons/ic_threedot.svg');
@@ -211,15 +253,21 @@ class $AssetsIconsGen {
     icBoxDelivery,
     icBoxPackageCourierHands,
     icBoxPackageHandBottom,
+    icBurger,
     icCar,
+    icCarBlack,
+    icCarThru,
     icCartFilled,
     icCartOutlined,
     icCheckmark,
     icClock,
+    icClockTime,
     icClose,
     icCourierHands,
     icDeliveryTracking,
+    icDollar,
     icDoor,
+    icDrink,
     icDropdownArrow,
     icEmailIcon,
     icEvcPlus,
@@ -228,6 +276,9 @@ class $AssetsIconsGen {
     icFilter,
     icGift,
     icGoogleIcon,
+    icHandsPackage,
+    icHeartFilled,
+    icHeartOutlined,
     icHomeFilled,
     icHomeOutlined,
     icHospital,
@@ -238,6 +289,7 @@ class $AssetsIconsGen {
     icLeftArrowChervon,
     icLikeFilled,
     icLikeOutlined,
+    icLineDirection,
     icLocation,
     icLock,
     icMastercard,
@@ -253,6 +305,7 @@ class $AssetsIconsGen {
     icReception,
     icRightArrow,
     icRightArrowChevron,
+    icSale,
     icSchedule,
     icSearch,
     icServiceFilled,
@@ -260,6 +313,9 @@ class $AssetsIconsGen {
     icSettingsFilter,
     icShare,
     icStandard,
+    icStar,
+    icStore,
+    icSync,
     icThreedot,
     icVerified,
     icVisa,

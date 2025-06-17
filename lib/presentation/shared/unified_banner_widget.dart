@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/shared/app_image.dart';
 import 'package:sixam_mart_user/theme.dart';
 
 enum BannerType {
@@ -156,7 +157,7 @@ class UnifiedBannerWidget extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(item.imageUrl),
+                image: AppImageProvider.network(item.imageUrl),
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.circular(AppCorner.radius8),
@@ -238,7 +239,7 @@ class UnifiedBannerWidget extends StatelessWidget {
         children: [
           if (item.logoUrl != null)
             ClipOval(
-              child: Image.network(
+              child: AppImage.network(
                 item.logoUrl!,
                 width: 24,
                 height: 24,
@@ -268,7 +269,7 @@ class UnifiedBannerWidget extends StatelessWidget {
             Stack(
               children: [
                 ClipOval(
-                  child: Image.network(
+                  child: AppImage.network(
                     item.logoUrl ?? item.imageUrl,
                     width: 64,
                     height: 64,
@@ -319,7 +320,7 @@ class UnifiedBannerWidget extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.network(item.imageUrl),
+                  child: AppImage.network(item.imageUrl),
                 ),
                 // Status overlay (unavailable/closed)
                 if (item.status != BannerStatus.available)
@@ -394,7 +395,7 @@ class UnifiedBannerWidget extends StatelessWidget {
                     top: 8,
                     left: 8,
                     child: ClipOval(
-                      child: Image.network(
+                      child: AppImage.network(
                         item.logoUrl!,
                         width: 64,
                         height: 64,
@@ -457,7 +458,7 @@ class UnifiedBannerWidget extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(
+                child: AppImage.network(
                   item.imageUrl,
                   width: 175,
                   height: 220,
