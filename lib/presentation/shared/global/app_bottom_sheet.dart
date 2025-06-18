@@ -34,8 +34,10 @@ import 'app_navigator.dart';
 /// [isDismissible] Whether the bottom sheet can be dismissed by user interaction.
 ///
 /// Returns a [Future] that completes with the result when the bottom sheet is dismissed.
-Future<T?> showAppBottomSheet<T>({required Widget child, Function(dynamic)? onClosed, bool isDismissible = true}) async {
-  // FocusScope.of(AppNavigator.navigatorKey.currentContext!).unfocus();
+Future<T?> showAppBottomSheet<T>({required Widget child, Function(dynamic)? onClosed, bool isDismissible = true, bool autoCloseKeyboard = false}) async {
+  if (autoCloseKeyboard) {
+    FocusScope.of(AppNavigator.navigatorKey.currentContext!).unfocus();
+  }
 
   final modalRoute = ModalSheetRoute<T>(
     swipeDismissible: true,
@@ -44,7 +46,9 @@ Future<T?> showAppBottomSheet<T>({required Widget child, Function(dynamic)? onCl
   );
 
   return Navigator.push<T>(AppNavigator.navigatorKey.currentContext!, modalRoute).then((value) {
-    // FocusScope.of(AppNavigator.navigatorKey.currentContext!).unfocus();
+    if (autoCloseKeyboard) {
+      FocusScope.of(AppNavigator.navigatorKey.currentContext!).unfocus();
+    }
     return value;
   });
 }

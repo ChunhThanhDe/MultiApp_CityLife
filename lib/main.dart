@@ -2,9 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:device_preview_plus/device_preview_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,16 +25,7 @@ void main() async {
       await Future.wait([EasyLocalization.ensureInitialized(), DependencyInjection.init()]);
 
       runApp(
-        DevicePreview(
-          enabled: !kReleaseMode,
-          builder: (context) => EasyLocalization(
-            startLocale: const Locale('en'),
-            supportedLocales: const [Locale('vi'), Locale('en')],
-            path: 'assets/translations',
-            fallbackLocale: const Locale('en'),
-            child: const MyApp(),
-          ),
-        ),
+        EasyLocalization(startLocale: const Locale('en'), supportedLocales: const [Locale('vi'), Locale('en')], path: 'assets/translations', fallbackLocale: const Locale('en'), child: const MyApp()),
       );
     },
     (error, stackTrace) {

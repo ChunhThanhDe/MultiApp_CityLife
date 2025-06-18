@@ -201,6 +201,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
 
   Future<void> _showPaymentMethodSheet(BuildContext context) async {
     await showAppBottomSheet<PaymentMethod?>(
+      autoCloseKeyboard: true,
       onClosed: (result) {
         final selected = result;
         if (selected != null) {
