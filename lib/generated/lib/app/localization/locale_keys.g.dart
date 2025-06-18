@@ -99,11 +99,15 @@ abstract class  LocaleKeys {
   static const authentication_phonePicker_phoneRequired = 'authentication.phonePicker.phoneRequired';
   static const authentication_phonePicker_phoneInvalid = 'authentication.phonePicker.phoneInvalid';
   static const authentication_phonePicker = 'authentication.phonePicker';
+  static const authentication_termsOfService_agreeTo = 'authentication.termsOfService.agreeTo';
   static const authentication_termsOfService_termsOfService = 'authentication.termsOfService.termsOfService';
+  static const authentication_termsOfService_confirmRead = 'authentication.termsOfService.confirmRead';
   static const authentication_termsOfService_privacyPolicy = 'authentication.termsOfService.privacyPolicy';
-  static const authentication_termsOfService_agreeToTermsOfService = 'authentication.termsOfService.agreeToTermsOfService';
-  static const authentication_termsOfService_confirmReadPrivacyPolicy = 'authentication.termsOfService.confirmReadPrivacyPolicy';
   static const authentication_termsOfService = 'authentication.termsOfService';
+  static const authentication_termAndCondition_description = 'authentication.termAndCondition.description';
+  static const authentication_termAndCondition_termOfService = 'authentication.termAndCondition.termOfService';
+  static const authentication_termAndCondition_privacyPolicy = 'authentication.termAndCondition.privacyPolicy';
+  static const authentication_termAndCondition = 'authentication.termAndCondition';
   static const authentication = 'authentication';
   static const address_title = 'address.title';
   static const address_enterTitle = 'address.enterTitle';

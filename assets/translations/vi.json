@@ -106,10 +106,10 @@
             "phoneInvalid": "Vui lòng nhập số điện thoại hợp lệ"
         },
         "termsOfService": {
-            "agreeTo": "Bằng cách tiếp tục, bạn đồng ý với ",
             "termsOfService": "Điều khoản Dịch vụ",
-            "confirmRead": " của Diyaar\nvà xác nhận rằng bạn đã đọc ",
-            "privacyPolicy": "Chính sách Bảo mật"
+            "privacyPolicy": "Chính sách Bảo mật",
+            "agreeToTermsOfService": "Bằng cách tiếp tục, bạn đồng ý với Điều khoản Dịch vụ của Diyaar",
+            "confirmReadPrivacyPolicy": "và xác nhận rằng bạn đã đọc Chính sách Bảo mật của Diyaar"
         }
     },
     "address": {

@@ -106,10 +106,10 @@
             "phoneInvalid": "Please enter a valid phone number"
         },
         "termsOfService": {
-            "agreeTo": "By continuing, you agree to Diyaar ",
             "termsOfService": "Terms of Service",
-            "confirmRead": "\nand confirm that you have read Diyaar  ",
-            "privacyPolicy": "Privacy Policy"
+            "privacyPolicy": "Privacy Policy",
+            "agreeToTermsOfService": "By continuing, you agree to Diyaar Terms of Service",
+            "confirmReadPrivacyPolicy": "and confirm that you have read Diyaar Privacy Policy"
         }
     },
     "address": {
