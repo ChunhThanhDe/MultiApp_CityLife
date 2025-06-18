@@ -49,8 +49,20 @@ class HighlightedText extends StatelessWidget {
 
   final int? maxLines;
 
+  final TextOverflow? overflow;
+
   /// Creates a new HighlightedText widget.
-  const HighlightedText({super.key, required this.text, required this.highlights, this.highlightStyle, this.normalTextStyle, this.onTapHighlight, this.textAlign = TextAlign.start, this.maxLines});
+  const HighlightedText({
+    super.key,
+    required this.text,
+    required this.highlights,
+    this.highlightStyle,
+    this.normalTextStyle,
+    this.onTapHighlight,
+    this.textAlign = TextAlign.start,
+    this.maxLines,
+    this.overflow,
+  });
 
   /// The default text style for the non-highlighted portions of the text.
   static TextStyle normalTextStyleDefault = AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700);
@@ -98,6 +110,7 @@ class HighlightedText extends StatelessWidget {
       TextSpan(children: spans),
       textAlign: textAlign,
       maxLines: maxLines,
+      overflow: overflow,
     );
   }
 }

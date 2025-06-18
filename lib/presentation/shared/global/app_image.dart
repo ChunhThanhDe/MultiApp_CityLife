@@ -7,6 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show ImmutableBuffer, rootBundle;
+import 'package:shimmer_animation/shimmer_animation.dart';
 
 /// Defines the source type for image loading.
 ///
@@ -426,6 +427,25 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
   int get hashCode => Object.hash(imagePath, source, imageProvider, maxRetries, retryDelay, maxRetryDelay, backoffFactor, errorImageAsset, useCache);
 }
 
+/// Creates a skeleton placeholder widget with shimmer animation.
+///
+/// This creates an animated skeleton placeholder that provides a better
+/// visual loading experience compared to simple loading spinners.
+///
+/// [width] The width of the skeleton (uses available width if null).
+/// [height] The height of the skeleton (uses available height if null).
+/// [borderRadius] The border radius for the skeleton shape.
+Widget _buildSkeletonPlaceholder({double? width, double? height, BorderRadius? borderRadius}) {
+  return Shimmer(
+    color: Colors.grey[300]!,
+    child: Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(color: Colors.grey[300], borderRadius: borderRadius ?? BorderRadius.circular(8)),
+    ),
+  );
+}
+
 /// A comprehensive image widget with advanced loading capabilities and error handling.
 ///
 /// This widget provides a robust image display solution with features like:
@@ -518,7 +538,7 @@ class AppImage extends StatefulWidget {
     this.retryDelay = _ImageConstants.retryDelay,
     this.maxRetryDelay = _ImageConstants.maxRetryDelay,
     this.backoffFactor = _ImageConstants.backoffFactor,
-    this.placeholder = const Center(child: CircularProgressIndicator()),
+    required this.placeholder,
     this.errorWidget = const Icon(Icons.broken_image, size: 50, color: Colors.grey),
     this.errorImageAsset,
     this.fit = BoxFit.cover,
@@ -559,7 +579,7 @@ class AppImage extends StatefulWidget {
     Duration retryDelay = _ImageConstants.retryDelay,
     Duration maxRetryDelay = _ImageConstants.maxRetryDelay,
     double backoffFactor = _ImageConstants.backoffFactor,
-    Widget placeholder = const Center(child: CircularProgressIndicator()),
+    Widget? placeholder,
     Widget errorWidget = const Icon(Icons.broken_image, size: 50, color: Colors.grey),
     String? errorImageAsset,
     BoxFit fit = BoxFit.cover,
@@ -578,7 +598,7 @@ class AppImage extends StatefulWidget {
       retryDelay: retryDelay,
       maxRetryDelay: maxRetryDelay,
       backoffFactor: backoffFactor,
-      placeholder: placeholder,
+      placeholder: placeholder ?? _buildSkeletonPlaceholder(width: width, height: height),
       errorWidget: errorWidget,
       errorImageAsset: errorImageAsset,
       fit: fit,
@@ -620,7 +640,7 @@ class AppImage extends StatefulWidget {
     Duration retryDelay = _ImageConstants.retryDelay,
     Duration maxRetryDelay = _ImageConstants.maxRetryDelay,
     double backoffFactor = _ImageConstants.backoffFactor,
-    Widget placeholder = const Center(child: CircularProgressIndicator()),
+    Widget? placeholder,
     Widget errorWidget = const Icon(Icons.broken_image, size: 50, color: Colors.grey),
     String? errorImageAsset,
     BoxFit fit = BoxFit.cover,
@@ -638,7 +658,7 @@ class AppImage extends StatefulWidget {
       retryDelay: retryDelay,
       maxRetryDelay: maxRetryDelay,
       backoffFactor: backoffFactor,
-      placeholder: placeholder,
+      placeholder: placeholder ?? _buildSkeletonPlaceholder(width: width, height: height),
       errorWidget: errorWidget,
       errorImageAsset: errorImageAsset,
       fit: fit,
@@ -678,7 +698,7 @@ class AppImage extends StatefulWidget {
     Duration retryDelay = _ImageConstants.retryDelay,
     Duration maxRetryDelay = _ImageConstants.maxRetryDelay,
     double backoffFactor = _ImageConstants.backoffFactor,
-    Widget placeholder = const Center(child: CircularProgressIndicator()),
+    Widget? placeholder,
     Widget errorWidget = const Icon(Icons.broken_image, size: 50, color: Colors.grey),
     String? errorImageAsset,
     BoxFit fit = BoxFit.cover,
@@ -696,7 +716,7 @@ class AppImage extends StatefulWidget {
       retryDelay: retryDelay,
       maxRetryDelay: maxRetryDelay,
       backoffFactor: backoffFactor,
-      placeholder: placeholder,
+      placeholder: placeholder ?? _buildSkeletonPlaceholder(width: width, height: height),
       errorWidget: errorWidget,
       errorImageAsset: errorImageAsset,
       fit: fit,
@@ -737,7 +757,7 @@ class AppImage extends StatefulWidget {
     Duration retryDelay = _ImageConstants.retryDelay,
     Duration maxRetryDelay = _ImageConstants.maxRetryDelay,
     double backoffFactor = _ImageConstants.backoffFactor,
-    Widget placeholder = const Center(child: CircularProgressIndicator()),
+    Widget? placeholder,
     Widget errorWidget = const Icon(Icons.broken_image, size: 50, color: Colors.grey),
     String? errorImageAsset,
     BoxFit fit = BoxFit.cover,
@@ -754,7 +774,7 @@ class AppImage extends StatefulWidget {
       retryDelay: retryDelay,
       maxRetryDelay: maxRetryDelay,
       backoffFactor: backoffFactor,
-      placeholder: placeholder,
+      placeholder: placeholder ?? _buildSkeletonPlaceholder(width: width, height: height),
       errorWidget: errorWidget,
       errorImageAsset: errorImageAsset,
       fit: fit,
