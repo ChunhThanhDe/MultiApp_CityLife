@@ -3,13 +3,7 @@ import 'package:flutter/material.dart';
 class DeliveryItem extends StatelessWidget {
   final String code, date, status;
   final Color? statusColor;
-  const DeliveryItem({
-    super.key,
-    required this.code,
-    required this.date,
-    required this.status,
-    this.statusColor,
-  });
+  const DeliveryItem({super.key, required this.code, required this.date, required this.status, this.statusColor});
   @override
   Widget build(BuildContext context) {
     TextStyle inter(double size, [FontWeight? w, Color? c]) => TextStyle(fontSize: size, fontWeight: w, color: c);
@@ -32,10 +26,7 @@ class DeliveryItem extends StatelessWidget {
                   ),
                 ),
                 // Status
-                Text(
-                  status,
-                  style: inter(14, FontWeight.w400, statusColor ?? Color(0xFF4A5763)),
-                ),
+                Text(status, style: inter(14, FontWeight.w400, statusColor ?? Color(0xFF4A5763))),
               ],
             ),
           ),

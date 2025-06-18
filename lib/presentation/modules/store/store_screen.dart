@@ -14,12 +14,6 @@ class StoreScreen extends BaseScreen<StoreController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        StoreAppBar(),
-        StoreServiceOptions(),
-        StoreProductCategories(),
-      ],
-    );
+    return CustomScrollView(slivers: [StoreAppBar(), StoreServiceOptions(), StoreProductCategories()]);
   }
 }

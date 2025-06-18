@@ -26,22 +26,13 @@ class ConfirmAddressScreen extends BaseScreen<ConfirmAddressController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 16,
           children: [
-            Text(
-              'Confirm delivery address',
-              style: AppTextStyles.typographyH6SemiBold.copyWith(color: AppColors.textGreyHighest950),
-            ),
-            Text(
-              'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-              style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHigh700),
-            ),
+            Text('Confirm delivery address', style: AppTextStyles.typographyH6SemiBold.copyWith(color: AppColors.textGreyHighest950)),
+            Text('Lorem Ipsum is simply dummy text of the printing and typesetting industry.', style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHigh700)),
             AppButton(
               onTap: () => Get.until((route) => Get.currentRoute == AppRoutes.root),
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: Text(
-                'Confirm location',
-                style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite),
-              ),
+              child: Text('Confirm location', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite)),
             ),
           ],
         ),
@@ -51,12 +42,7 @@ class ConfirmAddressScreen extends BaseScreen<ConfirmAddressController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    return Stack(
-      children: [
-        _buildMapView(),
-        _buildCloseButton(),
-      ],
-    );
+    return Stack(children: [_buildMapView(), _buildCloseButton()]);
   }
 
   Obx _buildMapView() {
@@ -70,12 +56,7 @@ class ConfirmAddressScreen extends BaseScreen<ConfirmAddressController> {
             mapType: MapType.normal,
             initialCameraPosition: controller.cameraPosition,
             style: mapStyle,
-            markers: {
-              Marker(
-                markerId: const MarkerId('selected-location'),
-                position: controller.latLng,
-              ),
-            },
+            markers: {Marker(markerId: const MarkerId('selected-location'), position: controller.latLng)},
             onMapCreated: (GoogleMapController mapController) {
               controller.mapController.complete(mapController);
             },
@@ -97,22 +78,10 @@ class ConfirmAddressScreen extends BaseScreen<ConfirmAddressController> {
           padding: const EdgeInsets.all(6),
           decoration: ShapeDecoration(
             color: AppColors.stateBaseWhite,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(32),
-            ),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
             shadows: [
-              BoxShadow(
-                color: Color(0x19101214),
-                blurRadius: 16,
-                offset: Offset(0, 12),
-                spreadRadius: -6,
-              ),
-              BoxShadow(
-                color: Color(0x0C101214),
-                blurRadius: 4,
-                offset: Offset(0, 2),
-                spreadRadius: -2,
-              )
+              BoxShadow(color: Color(0x19101214), blurRadius: 16, offset: Offset(0, 12), spreadRadius: -6),
+              BoxShadow(color: Color(0x0C101214), blurRadius: 4, offset: Offset(0, 2), spreadRadius: -2),
             ],
           ),
           child: Assets.icons.icClose.svg(),

@@ -22,24 +22,17 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
       title: Text('Receipt ', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
       leading: IconButton(
         onPressed: () => Get.back(),
-        icon: Assets.icons.icLeftArrowChervon.svg(
-          colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn),
-          width: 28,
-          height: 28,
-        ),
+        icon: Assets.icons.icLeftArrowChervon.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn), width: 28, height: 28),
       ),
       actions: [
         Row(
           children: [
-            Text(
-              '#203358',
-              style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
-            ),
+            Text('#203358', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
             const SizedBox(width: 8),
             Assets.icons.icInvoice.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
             const SizedBox(width: 24),
           ],
-        )
+        ),
       ],
     );
   }
@@ -66,10 +59,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
   }
 
   Padding _dividerSection() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      child: const SectionBreakDivider(),
-    );
+    return Padding(padding: const EdgeInsets.symmetric(vertical: 16), child: const SectionBreakDivider());
   }
 
   Container _buildBrandInfo() {
@@ -96,14 +86,8 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Starbucks®',
-                style: AppTextStyles.typographyH7SemiBold.copyWith(color: AppColors.textBaseWhite),
-              ),
-              Text(
-                'Completed • 7:25 PM',
-                style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBaseWhite),
-              ),
+              Text('Starbucks®', style: AppTextStyles.typographyH7SemiBold.copyWith(color: AppColors.textBaseWhite)),
+              Text('Completed • 7:25 PM', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBaseWhite)),
             ],
           ),
           const Spacer(),
@@ -113,7 +97,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
     );
   }
 
-  _buildDeliveryPersonInfo() {
+  Container _buildDeliveryPersonInfo() {
     return Container(
       width: 430,
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
@@ -139,17 +123,11 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
               children: [
                 SizedBox(
                   width: 261,
-                  child: Text(
-                    'Abdulkadir Ali',
-                    style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
-                  ),
+                  child: Text('Abdulkadir Ali', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                 ),
                 SizedBox(
                   width: 261,
-                  child: Text(
-                    'Toyota Camry • 84D23B63',
-                    style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700),
-                  ),
+                  child: Text('Toyota Camry • 84D23B63', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
                 ),
               ],
             ),
@@ -161,16 +139,13 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
     );
   }
 
-  _buildItemsInfo() {
+  Padding _buildItemsInfo() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Items',
-            style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
-          ),
+          Text('Items', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
           const SizedBox(height: 16),
           ListView.separated(
             shrinkWrap: true,
@@ -188,28 +163,15 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ClipOval(
-                    child: Image.network(
-                      item.image,
-                      width: 56,
-                      height: 56,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  ClipOval(child: Image.network(item.image, width: 56, height: 56, fit: BoxFit.cover)),
                   const SizedBox(width: 16),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          item.name,
-                          style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
-                        ),
+                        Text(item.name, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                         const SizedBox(height: 4),
-                        Text(
-                          '\$${item.price}',
-                          style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700),
-                        ),
+                        Text('\$${item.price}', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
                       ],
                     ),
                   ),
@@ -217,10 +179,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
                     width: 40,
                     height: 40,
                     padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: AppColors.stateGreyLowest50,
-                      shape: BoxShape.circle,
-                    ),
+                    decoration: BoxDecoration(color: AppColors.stateGreyLowest50, shape: BoxShape.circle),
                     child: Assets.icons.icPlusAdd.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
                   ),
                 ],
@@ -232,7 +191,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
     );
   }
 
-  _buildTransactionInfo() {
+  Padding _buildTransactionInfo() {
     const date = 'Sep 18, 2023  7:30 AM';
     const subtotal = 35.87;
     const deliveryFee = 3.99;
@@ -321,24 +280,12 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
     );
   }
 
-  _buildReceiptActions() {
+  Padding _buildReceiptActions() {
     const fileSize = '12 KB';
     final List<ReceiptAction> actions = [
-      (
-        icon: Assets.icons.icInvoice,
-        label: 'Download PDF',
-        onTap: () {},
-      ),
-      (
-        icon: Assets.icons.icEmailIcon,
-        label: 'Resend Email',
-        onTap: () {},
-      ),
-      (
-        icon: Assets.icons.icShare,
-        label: 'Share',
-        onTap: () {},
-      ),
+      (icon: Assets.icons.icInvoice, label: 'Download PDF', onTap: () {}),
+      (icon: Assets.icons.icEmailIcon, label: 'Resend Email', onTap: () {}),
+      (icon: Assets.icons.icShare, label: 'Share', onTap: () {}),
     ];
 
     return Padding(
@@ -359,22 +306,12 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     child: Row(
                       children: [
-                        action.icon.svg(
-                          width: 28,
-                          height: 28,
-                          colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn),
-                        ),
+                        action.icon.svg(width: 28, height: 28, colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: Text(
-                            action.label,
-                            style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
-                          ),
+                          child: Text(action.label, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                         ),
-                        Text(
-                          fileSize,
-                          style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700),
-                        ),
+                        Text(fileSize, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
                       ],
                     ),
                   ),

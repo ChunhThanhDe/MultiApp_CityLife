@@ -1,6 +1,6 @@
 # Setup
 
-**Lưu ý**: Project sử dụng flutter phiên bản `3.27.4`. Chạy `flutter pub get` trước khi làm những bước dưới
+**Lưu ý**: Project sử dụng flutter phiên bản `3.32.4`. Chạy `flutter pub get` trước khi làm những bước dưới
 
 ## 1. Chạy build runner để tạo các file json parse support
 

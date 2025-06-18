@@ -29,13 +29,13 @@ import 'app_navigator.dart';
 /// );
 /// ```
 ///
-/// [api] The Future to execute while showing the loading overlay.
+/// [future] The Future to execute while showing the loading overlay.
 /// [child] Optional custom loading widget.
 /// [isShowLoading] Whether to show the loading overlay. Defaults to true.
 ///
-/// Returns the result of the [api] Future when it completes.
-Future<dynamic> showLoadingOverlay({required Future<dynamic> api, Widget? child, bool isShowLoading = true}) {
-  return _AppLoadingOverlay.show(api: api, child: child, isShowLoading: isShowLoading);
+/// Returns the result of the [future] Future when it completes.
+Future<dynamic> showAppOverlayLoading({required Future<dynamic> future, Widget? child, bool isShowLoading = true}) {
+  return _AppLoadingOverlay.show(future: future, child: child, isShowLoading: isShowLoading);
 }
 
 /// Private class that manages the loading overlay display and lifecycle.
@@ -56,17 +56,17 @@ class _AppLoadingOverlay {
   /// 3. Enforces minimum display duration to prevent flickering
   /// 4. Removes the overlay when complete
   ///
-  /// [api] The Future to execute while showing the loading overlay.
+  /// [future] The Future to execute while showing the loading overlay.
   /// [child] Optional custom loading widget.
   /// [isShowLoading] Whether to show the loading overlay.
   ///
   /// Returns the result of the API call.
-  static Future<dynamic> show({required Future<dynamic> api, Widget? child, bool isShowLoading = true}) async {
+  static Future<dynamic> show({required Future<dynamic> future, Widget? child, bool isShowLoading = true}) async {
     if (isShowLoading) {
       createHighlightOverlay(child: child);
     }
     Stopwatch stopwatch = Stopwatch()..start();
-    final result = await api;
+    final result = await future;
     stopwatch.stop();
     if (stopwatch.elapsedMilliseconds < 200) {
       await Future.delayed(const Duration(milliseconds: 300));
@@ -82,7 +82,7 @@ class _AppLoadingOverlay {
   /// This method safely removes and disposes of the overlay entry
   /// if one is currently being displayed. It performs proper cleanup
   /// to prevent memory leaks.
-  static removeHighlightOverlay() {
+  static void removeHighlightOverlay() {
     overlayEntry?.remove();
     overlayEntry?.dispose();
     overlayEntry = null;
@@ -96,9 +96,7 @@ class _AppLoadingOverlay {
   ///
   /// [child] Optional custom loading widget. If not provided,
   /// defaults to a dark rounded container with activity indicator.
-  static createHighlightOverlay({
-    Widget? child,
-  }) {
+  static void createHighlightOverlay({Widget? child}) {
     removeHighlightOverlay();
     final overlayState = AppNavigator.navigatorKey.currentState?.overlay;
     assert(overlayEntry == null);
@@ -114,14 +112,13 @@ class _AppLoadingOverlay {
             child: Container(
               color: Colors.transparent,
               child: Center(
-                child: child ??
+                child:
+                    child ??
                     Container(
                       width: 64,
                       height: 64,
                       decoration: BoxDecoration(color: Colors.black54, borderRadius: BorderRadius.circular(12)),
-                      child: const CupertinoActivityIndicator(
-                        color: Colors.white,
-                      ),
+                      child: const CupertinoActivityIndicator(color: Colors.white),
                     ),
               ),
             ),

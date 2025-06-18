@@ -16,20 +16,10 @@ class ServiceHeader extends GetView<ServiceController> {
         children: [
           Container(
             width: double.infinity,
-            decoration: BoxDecoration(
-              color: AppColors.stateBrandDefault500,
-            ),
+            decoration: BoxDecoration(color: AppColors.stateBrandDefault500),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 54),
-                _buildTopBar(),
-                SizedBox(height: 16),
-                _buildSearchBar(context),
-                SizedBox(height: 16),
-                _buildDeliveryAddress(),
-                SizedBox(height: 16),
-              ],
+              children: [SizedBox(height: 54), _buildTopBar(), SizedBox(height: 16), _buildSearchBar(context), SizedBox(height: 16), _buildDeliveryAddress(), SizedBox(height: 16)],
             ),
           ),
           SizedBox(height: 16),
@@ -72,20 +62,8 @@ class ServiceHeader extends GetView<ServiceController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            'Fast food',
-            style: AppTextStyles.typographyH9Medium.copyWith(
-              color: AppColors.textBaseWhite,
-            ),
-          ),
-          Assets.icons.icBell.svg(
-            width: 24,
-            height: 24,
-            colorFilter: ColorFilter.mode(
-              AppColors.textBaseWhite,
-              BlendMode.srcIn,
-            ),
-          ),
+          Text('Fast food', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textBaseWhite)),
+          Assets.icons.icBell.svg(width: 24, height: 24, colorFilter: ColorFilter.mode(AppColors.textBaseWhite, BlendMode.srcIn)),
         ],
       ),
     );
@@ -99,10 +77,7 @@ class ServiceHeader extends GetView<ServiceController> {
         borderRadius: 24,
         isRequired: false,
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        prefixIcon: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Assets.icons.icSearch.svg(),
-        ),
+        prefixIcon: Padding(padding: const EdgeInsets.all(12), child: Assets.icons.icSearch.svg()),
         suffixIcon: GestureDetector(
           onTap: () {
             showModalBottomSheet(
@@ -120,10 +95,7 @@ class ServiceHeader extends GetView<ServiceController> {
               },
             );
           },
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Assets.icons.icFilter.svg(),
-          ),
+          child: Padding(padding: const EdgeInsets.all(15), child: Assets.icons.icFilter.svg()),
         ),
       ),
     );
@@ -134,44 +106,20 @@ class ServiceHeader extends GetView<ServiceController> {
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Row(
         children: [
-          Assets.icons.icCar.svg(
-            width: 16,
-            height: 16,
-            colorFilter: ColorFilter.mode(
-              AppColors.textBaseWhite,
-              BlendMode.srcIn,
-            ),
-          ),
+          Assets.icons.icCar.svg(width: 16, height: 16, colorFilter: ColorFilter.mode(AppColors.textBaseWhite, BlendMode.srcIn)),
           SizedBox(width: 8),
-          Text(
-            'Deliver',
-            style: AppTextStyles.typographyH11Medium.copyWith(
-              color: AppColors.textBaseWhite,
-            ),
-          ),
+          Text('Deliver', style: AppTextStyles.typographyH11Medium.copyWith(color: AppColors.textBaseWhite)),
           SizedBox(width: 8),
           Container(
             width: 4,
             height: 4,
-            decoration: BoxDecoration(
-              color: AppColors.textBaseWhite,
-              shape: BoxShape.circle,
-            ),
+            decoration: BoxDecoration(color: AppColors.textBaseWhite, shape: BoxShape.circle),
           ),
           SizedBox(width: 8),
           Expanded(
-            child: Text(
-              '2216 N 10th Street, CA 92243',
-              style: AppTextStyles.typographyH12Regular.copyWith(
-                color: AppColors.textBaseWhite,
-              ),
-            ),
+            child: Text('2216 N 10th Street, CA 92243', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBaseWhite)),
           ),
-          Icon(
-            Icons.keyboard_arrow_down,
-            color: AppColors.textBaseWhite,
-            size: 20,
-          ),
+          Icon(Icons.keyboard_arrow_down, color: AppColors.textBaseWhite, size: 20),
         ],
       ),
     );
@@ -194,19 +142,9 @@ class ServiceHeader extends GetView<ServiceController> {
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Column(
                   children: [
-                    Center(
-                      child: Image.asset(
-                        category.imagePath,
-                        width: 40,
-                        height: 40,
-                      ),
-                    ),
+                    Center(child: Image.asset(category.imagePath, width: 40, height: 40)),
                     SizedBox(height: 8),
-                    Text(
-                      category.label,
-                      style: AppTextStyles.typographyH12Regular,
-                      textAlign: TextAlign.center,
-                    ),
+                    Text(category.label, style: AppTextStyles.typographyH12Regular, textAlign: TextAlign.center),
                   ],
                 ),
               ),

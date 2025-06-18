@@ -39,11 +39,7 @@ class AccountManageController extends BaseController {
   void updateInfo() {
     if (formKey.currentState?.validate() ?? false) {
       //  API (mock)
-      Get.snackbar(
-        "Success",
-        "Cập nhật thông tin thành công!",
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      Get.snackbar("Success", "Cập nhật thông tin thành công!", snackPosition: SnackPosition.BOTTOM);
     }
   }
 

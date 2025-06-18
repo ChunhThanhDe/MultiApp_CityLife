@@ -9,11 +9,7 @@ class Service {
   final String image;
   final Function() onTap;
 
-  const Service({
-    required this.title,
-    required this.image,
-    required this.onTap,
-  });
+  const Service({required this.title, required this.image, required this.onTap});
 }
 
 class TodayOffer {
@@ -24,14 +20,7 @@ class TodayOffer {
   final int? discount;
   final double? deliveryFee;
 
-  const TodayOffer({
-    required this.brandName,
-    required this.brandLogoUrl,
-    required this.bannerImageUrl,
-    required this.onTap,
-    this.discount,
-    this.deliveryFee,
-  });
+  const TodayOffer({required this.brandName, required this.brandLogoUrl, required this.bannerImageUrl, required this.onTap, this.discount, this.deliveryFee});
 }
 
 class TopOffer {
@@ -57,120 +46,38 @@ class HomeController extends BaseController {
 
   // Unified banner data
   List<BannerItem> get todayOffersBannerItems => [
-        BannerItem(
-          title: 'Starbucks®',
-          imageUrl: bannerImageUrl,
-          logoUrl: brandLogoUrl,
-          onTap: () {
-            Get.toNamed(AppRoutes.store);
-          },
-        ),
-        BannerItem(
-          title: 'Starbucks®',
-          imageUrl: bannerImageUrl,
-          logoUrl: brandLogoUrl,
-          onTap: () {},
-        ),
-        BannerItem(
-          title: 'Starbucks®',
-          imageUrl: bannerImageUrl,
-          logoUrl: brandLogoUrl,
-          onTap: () {},
-        ),
-      ];
+    BannerItem(
+      title: 'Starbucks®',
+      imageUrl: bannerImageUrl,
+      logoUrl: brandLogoUrl,
+      onTap: () {
+        Get.toNamed(AppRoutes.store);
+      },
+    ),
+    BannerItem(title: 'Starbucks®', imageUrl: bannerImageUrl, logoUrl: brandLogoUrl, onTap: () {}),
+    BannerItem(title: 'Starbucks®', imageUrl: bannerImageUrl, logoUrl: brandLogoUrl, onTap: () {}),
+  ];
 
   List<BannerItem> get todayOffersBrandItems => [
-        BannerItem(
-          title: 'Starbucks®',
-          imageUrl: bannerImageUrl,
-          logoUrl: brandLogoUrl,
-          onTap: () {},
-        ),
-        BannerItem(
-          title: 'Starbucks®',
-          imageUrl: bannerImageUrl,
-          logoUrl: brandLogoUrl,
-          onTap: () {},
-        ),
-        BannerItem(
-          title: 'Starbucks®',
-          imageUrl: bannerImageUrl,
-          logoUrl: brandLogoUrl,
-          onTap: () {},
-        ),
-        BannerItem(
-          title: 'Starbucks®',
-          imageUrl: bannerImageUrl,
-          logoUrl: brandLogoUrl,
-          onTap: () {},
-        ),
-      ];
+    BannerItem(title: 'Starbucks®', imageUrl: bannerImageUrl, logoUrl: brandLogoUrl, onTap: () {}),
+    BannerItem(title: 'Starbucks®', imageUrl: bannerImageUrl, logoUrl: brandLogoUrl, onTap: () {}),
+    BannerItem(title: 'Starbucks®', imageUrl: bannerImageUrl, logoUrl: brandLogoUrl, onTap: () {}),
+    BannerItem(title: 'Starbucks®', imageUrl: bannerImageUrl, logoUrl: brandLogoUrl, onTap: () {}),
+  ];
 
   List<BannerItem> get todayOffersBrandDiscountItems => [
-        BannerItem(
-          title: 'Starbucks®',
-          imageUrl: bannerImageUrl,
-          logoUrl: brandLogoUrl,
-          onTap: () {},
-          discount: 10,
-          deliveryFee: 10,
-          isVerified: true,
-        ),
-        BannerItem(
-          title: 'Starbucks®',
-          imageUrl: bannerImageUrl,
-          logoUrl: brandLogoUrl,
-          onTap: () {},
-          discount: 45,
-          deliveryFee: 32,
-          isVerified: true,
-        ),
-        BannerItem(
-          title: 'Starbucks®',
-          imageUrl: bannerImageUrl,
-          logoUrl: brandLogoUrl,
-          onTap: () {},
-          discount: 15,
-          deliveryFee: 12,
-          isVerified: true,
-        ),
-        BannerItem(
-          title: 'Starbucks®',
-          imageUrl: bannerImageUrl,
-          logoUrl: brandLogoUrl,
-          onTap: () {},
-          discount: 15,
-          deliveryFee: 53,
-          isVerified: true,
-        ),
-        BannerItem(
-          title: 'Starbucks®',
-          imageUrl: bannerImageUrl,
-          logoUrl: brandLogoUrl,
-          onTap: () {},
-          discount: 32,
-          deliveryFee: 33,
-          isVerified: true,
-        ),
-      ];
+    BannerItem(title: 'Starbucks®', imageUrl: bannerImageUrl, logoUrl: brandLogoUrl, onTap: () {}, discount: 10, deliveryFee: 10, isVerified: true),
+    BannerItem(title: 'Starbucks®', imageUrl: bannerImageUrl, logoUrl: brandLogoUrl, onTap: () {}, discount: 45, deliveryFee: 32, isVerified: true),
+    BannerItem(title: 'Starbucks®', imageUrl: bannerImageUrl, logoUrl: brandLogoUrl, onTap: () {}, discount: 15, deliveryFee: 12, isVerified: true),
+    BannerItem(title: 'Starbucks®', imageUrl: bannerImageUrl, logoUrl: brandLogoUrl, onTap: () {}, discount: 15, deliveryFee: 53, isVerified: true),
+    BannerItem(title: 'Starbucks®', imageUrl: bannerImageUrl, logoUrl: brandLogoUrl, onTap: () {}, discount: 32, deliveryFee: 33, isVerified: true),
+  ];
 
   List<BannerItem> get topOffersItems => [
-        BannerItem(
-          title: '',
-          imageUrl: 'https://i.pinimg.com/236x/87/60/fc/8760fc8c6e5caf3461b97f4d94543d6e.jpg',
-          onTap: () {},
-        ),
-        BannerItem(
-          title: '',
-          imageUrl: 'https://i.pinimg.com/236x/87/60/fc/8760fc8c6e5caf3461b97f4d94543d6e.jpg',
-          onTap: () {},
-        ),
-        BannerItem(
-          title: '',
-          imageUrl: 'https://i.pinimg.com/236x/87/60/fc/8760fc8c6e5caf3461b97f4d94543d6e.jpg',
-          onTap: () {},
-        ),
-      ];
+    BannerItem(title: '', imageUrl: 'https://i.pinimg.com/236x/87/60/fc/8760fc8c6e5caf3461b97f4d94543d6e.jpg', onTap: () {}),
+    BannerItem(title: '', imageUrl: 'https://i.pinimg.com/236x/87/60/fc/8760fc8c6e5caf3461b97f4d94543d6e.jpg', onTap: () {}),
+    BannerItem(title: '', imageUrl: 'https://i.pinimg.com/236x/87/60/fc/8760fc8c6e5caf3461b97f4d94543d6e.jpg', onTap: () {}),
+  ];
 
   // Legacy data structures (kept for backward compatibility if needed)
   final List<TodayOffer> todayOffersBanner = [

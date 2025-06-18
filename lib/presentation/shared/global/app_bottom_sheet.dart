@@ -34,20 +34,21 @@ import 'app_navigator.dart';
 /// [isDismissible] Whether the bottom sheet can be dismissed by user interaction.
 ///
 /// Returns a [Future] that completes with the result when the bottom sheet is dismissed.
-Future<T?> showAppBottomSheet<T>({required Widget child, Function(dynamic)? onClosed, bool isDismissible = true}) async {
-  // FocusScope.of(AppNavigator.navigatorKey.currentContext!).unfocus();
+Future<T?> showAppBottomSheet<T>({required Widget child, Function(dynamic)? onClosed, bool isDismissible = true, bool autoCloseKeyboard = false}) async {
+  if (autoCloseKeyboard) {
+    FocusScope.of(AppNavigator.navigatorKey.currentContext!).unfocus();
+  }
 
   final modalRoute = ModalSheetRoute<T>(
     swipeDismissible: true,
-    swipeDismissSensitivity: const SwipeDismissSensitivity(
-      minFlingVelocityRatio: 1,
-      minDragDistance: 200,
-    ),
+    swipeDismissSensitivity: const SwipeDismissSensitivity(minFlingVelocityRatio: 1, minDragDistance: 200),
     builder: (context) => AppBottomSheet(onClosed: onClosed, child: child),
   );
 
   return Navigator.push<T>(AppNavigator.navigatorKey.currentContext!, modalRoute).then((value) {
-    // FocusScope.of(AppNavigator.navigatorKey.currentContext!).unfocus();
+    if (autoCloseKeyboard) {
+      FocusScope.of(AppNavigator.navigatorKey.currentContext!).unfocus();
+    }
     return value;
   });
 }
@@ -98,11 +99,7 @@ class AppBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sheet(
-      decoration: MaterialSheetDecoration(
-        size: SheetSize.fit,
-        borderRadius: BorderRadius.circular(20),
-        clipBehavior: Clip.antiAlias,
-      ),
+      decoration: MaterialSheetDecoration(size: SheetSize.fit, borderRadius: BorderRadius.circular(20), clipBehavior: Clip.antiAlias),
       child: PopScope(
         canPop: isDismissible,
         onPopInvokedWithResult: (didPop, result) {
@@ -124,9 +121,7 @@ class AppBottomSheet extends StatelessWidget {
                     height: 4,
                     decoration: ShapeDecoration(
                       color: AppColors.stateGreyLowestHover100,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(99),
-                      ),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(99)),
                     ),
                   ),
                 ),

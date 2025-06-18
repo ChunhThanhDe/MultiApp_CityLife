@@ -4,6 +4,11 @@
 
 abstract class  LocaleKeys {
   static const root_title = 'root.title';
+  static const root_home = 'root.home';
+  static const root_service = 'root.service';
+  static const root_cart = 'root.cart';
+  static const root_wallet = 'root.wallet';
+  static const root_account = 'root.account';
   static const root = 'root';
   static const base_error_default = 'base.error.default';
   static const base_error_noInternet = 'base.error.noInternet';
@@ -94,10 +99,10 @@ abstract class  LocaleKeys {
   static const authentication_phonePicker_phoneRequired = 'authentication.phonePicker.phoneRequired';
   static const authentication_phonePicker_phoneInvalid = 'authentication.phonePicker.phoneInvalid';
   static const authentication_phonePicker = 'authentication.phonePicker';
-  static const authentication_termsOfService_agreeTo = 'authentication.termsOfService.agreeTo';
   static const authentication_termsOfService_termsOfService = 'authentication.termsOfService.termsOfService';
-  static const authentication_termsOfService_confirmRead = 'authentication.termsOfService.confirmRead';
   static const authentication_termsOfService_privacyPolicy = 'authentication.termsOfService.privacyPolicy';
+  static const authentication_termsOfService_agreeToTermsOfService = 'authentication.termsOfService.agreeToTermsOfService';
+  static const authentication_termsOfService_confirmReadPrivacyPolicy = 'authentication.termsOfService.confirmReadPrivacyPolicy';
   static const authentication_termsOfService = 'authentication.termsOfService';
   static const authentication = 'authentication';
   static const address_title = 'address.title';
@@ -177,5 +182,7 @@ abstract class  LocaleKeys {
   static const wallet_receipt_share = 'wallet.receipt.share';
   static const wallet_receipt = 'wallet.receipt';
   static const wallet = 'wallet';
+  static const account_selectLanguage = 'account.selectLanguage';
+  static const account = 'account';
 
 }

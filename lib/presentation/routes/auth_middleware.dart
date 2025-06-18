@@ -31,23 +31,14 @@ class AuthMiddleware extends GetMiddleware {
 
   /// Determines if a route is PUBLIC (doesn't require authentication)
   bool _isPublicRoute(String? route) {
-    const publicRoutes = [
-      AppRoutes.signIn,
-      AppRoutes.signUp,
-      AppRoutes.verification,
-      AppRoutes.welcome,
-    ];
+    const publicRoutes = [AppRoutes.signIn, AppRoutes.signUp, AppRoutes.verification, AppRoutes.welcome];
 
     return publicRoutes.contains(route);
   }
 
   /// Determines if a route is an authentication route (login/signup)
   bool _isAuthRoute(String? route) {
-    const authRoutes = [
-      AppRoutes.signIn,
-      AppRoutes.signUp,
-      AppRoutes.verification,
-    ];
+    const authRoutes = [AppRoutes.signIn, AppRoutes.signUp, AppRoutes.verification];
 
     return authRoutes.contains(route);
   }

@@ -42,7 +42,7 @@ class SignUpController extends BaseController {
     tr(LocaleKeys.authentication_signUp_months_september),
     tr(LocaleKeys.authentication_signUp_months_october),
     tr(LocaleKeys.authentication_signUp_months_november),
-    tr(LocaleKeys.authentication_signUp_months_december)
+    tr(LocaleKeys.authentication_signUp_months_december),
   ];
   final List<String> days = List.generate(31, (index) => (index + 1).toString());
   final List<String> years = List.generate(100, (index) => (DateTime.now().year - index).toString());
@@ -120,9 +120,7 @@ class SignUpController extends BaseController {
       phone: !isEmailMethod ? phoneController.text : null,
     );
 
-    final ApiResult result = await showLoadingOverlay(
-      api: _authRepository.signUp(request),
-    );
+    final ApiResult result = await showAppOverlayLoading(future: _authRepository.signUp(request));
 
     switch (result) {
       case Success(:final data):
@@ -166,7 +164,7 @@ class SignUpController extends BaseController {
     super.onClose();
   }
 
-  onCountryCodeChanged(CountryCode p1) {
+  void onCountryCodeChanged(CountryCode p1) {
     countryDialCode.value = p1.dialCode ?? '+1';
   }
 }

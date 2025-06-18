@@ -7,24 +7,12 @@ class LanguageOption {
   final Locale locale;
   final String displayName;
 
-  LanguageOption({
-    required this.locale,
-    required this.displayName,
-  });
+  LanguageOption({required this.locale, required this.displayName});
 }
 
 class LanguageManager extends GetxController {
   List<LanguageOption> getLanguageOptions() {
-    return [
-      LanguageOption(
-        locale: const Locale('en'),
-        displayName: 'English',
-      ),
-      LanguageOption(
-        locale: const Locale('vi'),
-        displayName: 'Tiếng Việt',
-      ),
-    ];
+    return [LanguageOption(locale: const Locale('en'), displayName: 'English'), LanguageOption(locale: const Locale('vi'), displayName: 'Tiếng Việt')];
   }
 
   Locale getSelectedLanguage() {
@@ -32,9 +20,7 @@ class LanguageManager extends GetxController {
     return Locale(localeCode);
   }
 
-  Future<void> changeLanguage({
-    required Locale locale,
-  }) async {
+  Future<void> changeLanguage({required Locale locale}) async {
     await Get.context!.setLocale(locale);
     Get.context!.setLocale(locale);
     Get.updateLocale(locale);

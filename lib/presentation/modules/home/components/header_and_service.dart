@@ -16,20 +16,11 @@ class HeaderAndService extends GetView<HomeController> {
           Container(
             width: double.infinity,
             height: 223,
-            decoration: BoxDecoration(
-              color: AppColors.stateBrandDefault500,
-            ),
+            decoration: BoxDecoration(color: AppColors.stateBrandDefault500),
           ),
           SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildHeader(),
-                SizedBox(height: 24),
-                _buildService(),
-              ],
-            ),
-          )
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [_buildHeader(), SizedBox(height: 24), _buildService()]),
+          ),
         ],
       ),
     );
@@ -55,38 +46,27 @@ class HeaderAndService extends GetView<HomeController> {
               ],
             ),
           ),
-          Assets.icons.icBell.svg(
-            width: 24,
-            height: 24,
-            colorFilter: ColorFilter.mode(AppColors.textBaseWhite, BlendMode.srcIn),
-          ),
+          Assets.icons.icBell.svg(width: 24, height: 24, colorFilter: ColorFilter.mode(AppColors.textBaseWhite, BlendMode.srcIn)),
         ],
       ),
     );
   }
 
-  _buildService() {
+  SizedBox _buildService() {
     return SizedBox(
       height: 150,
-      child: ListView.builder(
-        itemCount: controller.services.length,
-        itemBuilder: (context, index) => _buildServiceItem(controller.services[index], index),
-        scrollDirection: Axis.horizontal,
-      ),
+      child: ListView.builder(itemCount: controller.services.length, itemBuilder: (context, index) => _buildServiceItem(controller.services[index], index), scrollDirection: Axis.horizontal),
     );
   }
 
-  _buildServiceItem(Service service, int index) {
+  Padding _buildServiceItem(Service service, int index) {
     return Padding(
       padding: EdgeInsets.only(right: index == controller.services.length - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            decoration: BoxDecoration(
-              color: AppColors.stateGreyLowest50,
-              borderRadius: BorderRadius.circular(AppCorner.radius8),
-            ),
+            decoration: BoxDecoration(color: AppColors.stateGreyLowest50, borderRadius: BorderRadius.circular(AppCorner.radius8)),
             padding: EdgeInsets.all(12),
             child: AppImage.asset(service.image, width: 70, height: 70),
           ),

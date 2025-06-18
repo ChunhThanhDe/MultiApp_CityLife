@@ -1,6 +1,11 @@
 {
     "root": {
-        "title": "Six Mart Xin chào"
+        "title": "Six Mart Xin chào",
+        "home": "Trang chủ",
+        "service": "Dịch vụ",
+        "cart": "Giỏ hàng",
+        "wallet": "Ví",
+        "account": "Tài khoản"
     },
     "base": {
         "error": {
@@ -101,10 +106,10 @@
             "phoneInvalid": "Vui lòng nhập số điện thoại hợp lệ"
         },
         "termsOfService": {
-            "agreeTo": "Bằng cách tiếp tục, bạn đồng ý với ",
             "termsOfService": "Điều khoản Dịch vụ",
-            "confirmRead": " của Diyaar\nvà xác nhận rằng bạn đã đọc ",
-            "privacyPolicy": "Chính sách Bảo mật"
+            "privacyPolicy": "Chính sách Bảo mật",
+            "agreeToTermsOfService": "Bằng cách tiếp tục, bạn đồng ý với Điều khoản Dịch vụ của Diyaar",
+            "confirmReadPrivacyPolicy": "và xác nhận rằng bạn đã đọc Chính sách Bảo mật của Diyaar"
         }
     },
     "address": {
@@ -199,5 +204,8 @@
             "resendEmail": "Gửi lại email",
             "share": "Chia sẻ"
         }
+    },
+    "account": {
+        "selectLanguage": "Chọn ngôn ngữ"
     }
 }

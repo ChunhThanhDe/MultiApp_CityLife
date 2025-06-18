@@ -14,13 +14,7 @@ abstract class BaseScreen<T extends GetxController> extends GetView<T> {
       onTap: opTapScreen,
       child: Container(
         color: unSafeAreaColor,
-        child: wrapWithSafeArea
-            ? SafeArea(
-                top: setTopSafeArea,
-                bottom: setBottomSafeArea,
-                child: _buildScaffold(context),
-              )
-            : _buildScaffold(context),
+        child: wrapWithSafeArea ? SafeArea(top: setTopSafeArea, bottom: setBottomSafeArea, child: _buildScaffold(context)) : _buildScaffold(context),
       ),
     );
   }

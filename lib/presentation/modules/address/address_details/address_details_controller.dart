@@ -22,10 +22,7 @@ class AddressDetailsController extends BaseController {
 
   final Completer<GoogleMapController> mapController = Completer<GoogleMapController>();
 
-  final CameraPosition googlePlex = CameraPosition(
-    target: LatLng(21.028511, 105.804817),
-    zoom: 14.4746,
-  );
+  final CameraPosition googlePlex = CameraPosition(target: LatLng(21.028511, 105.804817), zoom: 14.4746);
 
   final deliveryOptions = [
     (title: 'Hand it to me', icon: Assets.icons.icCourierHands.svg()),

@@ -45,16 +45,9 @@ class SignInController extends BaseController {
       return;
     }
     isLoading.value = true;
-    final LoginRequest request = LoginRequest(
-      loginType: LoginType.manual,
-      emailOrPhone: inputController.text,
-      fieldType: loginMethod.value.fieldType,
-      password: passwordController.text,
-    );
+    final LoginRequest request = LoginRequest(loginType: LoginType.manual, emailOrPhone: inputController.text, fieldType: loginMethod.value.fieldType, password: passwordController.text);
 
-    final ApiResult result = await showLoadingOverlay(
-      api: _authRepository.login(request),
-    );
+    final ApiResult result = await showAppOverlayLoading(future: _authRepository.login(request));
 
     switch (result) {
       case Success(:final data):
@@ -78,7 +71,7 @@ class SignInController extends BaseController {
     }
   }
 
-  onCountryCodeChanged(CountryCode countryCode) {
+  void onCountryCodeChanged(CountryCode countryCode) {
     countryDialCode.value = countryCode.dialCode ?? '+1';
   }
 }

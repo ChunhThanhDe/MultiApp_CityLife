@@ -14,24 +14,14 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(
-      title: "Box Delivery",
-      onBack: () => Get.back(),
-    );
+    return BasicAppBar(title: "Box Delivery", onBack: () => Get.back());
   }
 
   @override
   Widget buildScreen(BuildContext context) {
     return Stack(
       children: [
-        ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            _bodyContent(context),
-            SizedBox(height: 24),
-            _Actions(),
-          ],
-        ),
+        ListView(padding: EdgeInsets.zero, children: [_bodyContent(context), SizedBox(height: 24), _Actions()]),
       ],
     );
   }
@@ -51,17 +41,9 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
             padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
             child: Column(
               children: [
-                _LocationTile(
-                  icon: 'assets/icons/ic_box_package_courier_hands.svg',
-                  title: "Pickup",
-                  subtitle: "2216 North 10th St",
-                ),
+                _LocationTile(icon: 'assets/icons/ic_box_package_courier_hands.svg', title: "Pickup", subtitle: "2216 North 10th St"),
                 SizedBox(height: 8),
-                _LocationTile(
-                  icon: 'assets/icons/ic_box_package_hand_bottom.svg',
-                  title: "Dropoff",
-                  subtitle: "2150 N Waterman Ave",
-                ),
+                _LocationTile(icon: 'assets/icons/ic_box_package_hand_bottom.svg', title: "Dropoff", subtitle: "2150 N Waterman Ave"),
                 SizedBox(height: 16),
                 _buildAddressMap(context),
                 SizedBox(height: 24),
@@ -74,35 +56,16 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Delivery Options", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xFF161A1D))),
+                Text(
+                  "Delivery Options",
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xFF161A1D)),
+                ),
                 SizedBox(height: 16),
-                DeliveryOptionTile(
-                  svgIcon: 'assets/icons/ic_priority.svg',
-                  title: "Priority",
-                  subtitle: "5-10 min(s) Delivered directly to you",
-                  price: "\$5.99",
-                  isSelected: false,
-                  onTap: () {},
-                ),
+                DeliveryOptionTile(svgIcon: 'assets/icons/ic_priority.svg', title: "Priority", subtitle: "5-10 min(s) Delivered directly to you", price: "\$5.99", isSelected: false, onTap: () {}),
                 SizedBox(height: 8),
-                DeliveryOptionTile(
-                  svgIcon: 'assets/icons/ic_schedule.svg',
-                  title: "Schedule",
-                  subtitle: "Select a time",
-                  price: "",
-                  isSelected: false,
-                  onTap: () {},
-                  showArrow: true,
-                ),
+                DeliveryOptionTile(svgIcon: 'assets/icons/ic_schedule.svg', title: "Schedule", subtitle: "Select a time", price: "", isSelected: false, onTap: () {}, showArrow: true),
                 SizedBox(height: 8),
-                DeliveryOptionTile(
-                  svgIcon: 'assets/icons/ic_standard.svg',
-                  title: "Standard",
-                  subtitle: "10-25 mins Delivered",
-                  price: "",
-                  isSelected: true,
-                  onTap: () {},
-                ),
+                DeliveryOptionTile(svgIcon: 'assets/icons/ic_standard.svg', title: "Standard", subtitle: "10-25 mins Delivered", price: "", isSelected: true, onTap: () {}),
               ],
             ),
           ),
@@ -113,16 +76,14 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Promocode", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xFF161A1D))),
+                Text(
+                  "Promocode",
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xFF161A1D)),
+                ),
                 SizedBox(width: 8),
                 Row(
                   children: [
-                    SvgPicture.asset(
-                      'assets/icons/ic_promocode.svg',
-                      width: 24,
-                      height: 24,
-                      color: Color(0xFF4A5763),
-                    ),
+                    SvgPicture.asset('assets/icons/ic_promocode.svg', width: 24, height: 24, colorFilter: ColorFilter.mode(Color(0xFF4A5763), BlendMode.srcIn)),
                     SizedBox(width: 8),
                     SizedBox(
                       width: 100,
@@ -131,22 +92,14 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
                         children: [
                           Expanded(
                             child: TextField(
-                              decoration: InputDecoration(
-                                hintText: "Enter Code",
-                                border: InputBorder.none,
-                                isDense: true,
-                                contentPadding: EdgeInsets.zero,
-                              ),
+                              decoration: InputDecoration(hintText: "Enter Code", border: InputBorder.none, isDense: true, contentPadding: EdgeInsets.zero),
                             ),
                           ),
                         ],
                       ),
                     ),
                     Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text("Apply"),
-                    ),
+                    TextButton(onPressed: () {}, child: Text("Apply")),
                   ],
                 ),
                 SizedBox(height: 16),
@@ -157,26 +110,35 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Total:", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Color(0xFF161A1D))),
-                    Text("\$43.87", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Color(0xFF161A1D))),
+                    Text(
+                      "Total:",
+                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Color(0xFF161A1D)),
+                    ),
+                    Text(
+                      "\$43.87",
+                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Color(0xFF161A1D)),
+                    ),
                   ],
                 ),
                 SizedBox(height: 16),
                 Divider(thickness: 3, color: Color(0xFFE8EBEE)),
                 SizedBox(height: 16),
-                Text("Payment", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xFF161A1D))),
+                Text(
+                  "Payment",
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xFF161A1D)),
+                ),
                 SizedBox(height: 8),
                 Row(
                   children: [
                     Container(
                       width: 42,
                       height: 28,
-                      decoration: BoxDecoration(
-                        color: Color(0xFF1434CB),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
+                      decoration: BoxDecoration(color: Color(0xFF1434CB), borderRadius: BorderRadius.circular(4)),
                       alignment: Alignment.center,
-                      child: Text("VISA", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      child: Text(
+                        "VISA",
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
                     ),
                     SizedBox(width: 12),
                     Text("Visa ••••5290", style: TextStyle(fontSize: 16, color: Color(0xFF161A1D))),
@@ -192,7 +154,7 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
     );
   }
 
-  _buildAddressMap(BuildContext context) {
+  SizedBox _buildAddressMap(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       height: 200,
@@ -227,10 +189,7 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
                     onTap: () {},
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                      child: Text(
-                        'Edit pin',
-                        style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
-                      ),
+                      child: Text('Edit pin', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
                     ),
                   ),
                 ),
@@ -254,17 +213,15 @@ class _LocationTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SvgPicture.asset(
-          icon,
-          width: 24,
-          height: 24,
-          color: Color(0xFF4A5763),
-        ),
+        SvgPicture.asset(icon, width: 24, height: 24, colorFilter: ColorFilter.mode(Color(0xFF4A5763), BlendMode.srcIn)),
         SizedBox(width: 12),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D))),
+            Text(
+              title,
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+            ),
             Text(subtitle, style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
           ],
         ),
@@ -311,17 +268,11 @@ class _Actions extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             minimumSize: Size(382, 48),
             backgroundColor: Color(0xFF5856D7),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(32),
-            ),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
           ),
           child: Text(
             "Order Now",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
-            ),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
           ),
         ),
       ),

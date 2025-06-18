@@ -75,13 +75,11 @@ sealed class NetworkExceptions with _$NetworkExceptions {
       case 503:
         return const NetworkExceptions.serviceUnavailable();
       default:
-        return NetworkExceptions.defaultError(
-          errorResponse?.errors.first.message ?? tr(LocaleKeys.base_error_default),
-        );
+        return NetworkExceptions.defaultError(errorResponse?.errors.first.message ?? tr(LocaleKeys.base_error_default));
     }
   }
 
-  static NetworkExceptions getDioException(error) {
+  static NetworkExceptions getDioException(Object error) {
     if (error is Exception) {
       try {
         NetworkExceptions networkExceptions;

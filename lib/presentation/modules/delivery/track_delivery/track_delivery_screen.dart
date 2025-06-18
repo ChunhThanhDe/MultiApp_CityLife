@@ -13,10 +13,7 @@ class TrackDeliveryScreen extends BaseScreen<TrackDeliveryController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(
-      title: 'Tracking',
-      onBack: () => Get.back(),
-    );
+    return BasicAppBar(title: 'Tracking', onBack: () => Get.back());
   }
 
   @override
@@ -31,14 +28,16 @@ class TrackDeliveryScreen extends BaseScreen<TrackDeliveryController> {
                 // Package Information
                 Obx(() => PackageInformationCard(info: controller.packageInfo.value)),
                 // Progress & Stepper
-                Obx(() => TrackingProgress(
-                      steps: controller.steps,
-                      progressPercent: controller.progressPercent.value, // double
-                      leftDate: "Jan 12, 2025",
-                      leftPlace: "Mississauga, ON CA",
-                      rightDate: "Jan 28, 2025",
-                      rightPlace: "WINNIPEG, MB CA",
-                    )),
+                Obx(
+                  () => TrackingProgress(
+                    steps: controller.steps,
+                    progressPercent: controller.progressPercent.value, // double
+                    leftDate: "Jan 12, 2025",
+                    leftPlace: "Mississauga, ON CA",
+                    rightDate: "Jan 28, 2025",
+                    rightPlace: "WINNIPEG, MB CA",
+                  ),
+                ),
                 // Travel History
                 Obx(() => TravelHistorySection(travelData: controller.travelHistory.value)),
 

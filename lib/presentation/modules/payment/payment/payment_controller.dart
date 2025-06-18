@@ -45,7 +45,8 @@ class PaymentController extends BaseController {
 
   // Realtime validation logic
   void validate() {
-    isValid.value = cardNumberController.text.trim().isNotEmpty &&
+    isValid.value =
+        cardNumberController.text.trim().isNotEmpty &&
         expDateController.text.trim().isNotEmpty &&
         cvvController.text.trim().isNotEmpty &&
         zipController.text.trim().isNotEmpty &&
@@ -63,10 +64,6 @@ class PaymentController extends BaseController {
   }
 
   void onSave() {
-    Get.snackbar(
-      "Success",
-      "Your card has been added.",
-      snackPosition: SnackPosition.BOTTOM,
-    );
+    Get.snackbar("Success", "Your card has been added.", snackPosition: SnackPosition.BOTTOM);
   }
 }

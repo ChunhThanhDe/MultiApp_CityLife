@@ -11,10 +11,7 @@ class PaymentScreen extends BaseScreen<PaymentController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(
-      title: "Add payment card",
-      onBack: () => Get.back(),
-    );
+    return BasicAppBar(title: "Add payment card", onBack: () => Get.back());
   }
 
   @override
@@ -48,10 +45,7 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                                 hintText: "XXXX XXXX XXXX XXXX",
                                 border: InputBorder.none,
                                 isDense: true,
-                                hintStyle: TextStyle(
-                                  fontSize: 14,
-                                  color: Color(0xFF798A9A),
-                                ),
+                                hintStyle: TextStyle(fontSize: 14, color: Color(0xFF798A9A)),
                               ),
                               style: const TextStyle(fontSize: 14),
                             ),
@@ -78,10 +72,7 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                                     hintText: "MM/YY",
                                     border: InputBorder.none,
                                     isDense: true,
-                                    hintStyle: TextStyle(
-                                      fontSize: 14,
-                                      color: Color(0xFF798A9A),
-                                    ),
+                                    hintStyle: TextStyle(fontSize: 14, color: Color(0xFF798A9A)),
                                   ),
                                   style: const TextStyle(fontSize: 14),
                                 ),
@@ -97,37 +88,32 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                               _LabelRow("CVV", required: true),
                               const SizedBox(height: 8),
                               _InputBox(
-                                child: Obx(() => Row(
-                                      children: [
-                                        Expanded(
-                                          child: TextFormField(
-                                            controller: controller.cvvController,
-                                            obscureText: controller.obscureCvv.value,
-                                            keyboardType: TextInputType.number,
-                                            decoration: const InputDecoration(
-                                              hintText: "CVV",
-                                              border: InputBorder.none,
-                                              isDense: true,
-                                              hintStyle: TextStyle(
-                                                fontSize: 14,
-                                                color: Color(0xFF798A9A),
-                                              ),
-                                            ),
-                                            style: const TextStyle(fontSize: 14),
+                                child: Obx(
+                                  () => Row(
+                                    children: [
+                                      Expanded(
+                                        child: TextFormField(
+                                          controller: controller.cvvController,
+                                          obscureText: controller.obscureCvv.value,
+                                          keyboardType: TextInputType.number,
+                                          decoration: const InputDecoration(
+                                            hintText: "CVV",
+                                            border: InputBorder.none,
+                                            isDense: true,
+                                            hintStyle: TextStyle(fontSize: 14, color: Color(0xFF798A9A)),
                                           ),
+                                          style: const TextStyle(fontSize: 14),
                                         ),
-                                        IconButton(
-                                          icon: Icon(
-                                            controller.obscureCvv.value ? Icons.visibility_off : Icons.visibility,
-                                            color: const Color(0xFFB0BAC4),
-                                            size: 20,
-                                          ),
-                                          onPressed: () {
-                                            controller.obscureCvv.value = !controller.obscureCvv.value;
-                                          },
-                                        ),
-                                      ],
-                                    )),
+                                      ),
+                                      IconButton(
+                                        icon: Icon(controller.obscureCvv.value ? Icons.visibility_off : Icons.visibility, color: const Color(0xFFB0BAC4), size: 20),
+                                        onPressed: () {
+                                          controller.obscureCvv.value = !controller.obscureCvv.value;
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -149,35 +135,18 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                                   () => DropdownButtonFormField<String>(
                                     value: controller.selectedCountry.value,
                                     isExpanded: true,
-                                    hint: const Text(
-                                      "Country",
-                                      style: TextStyle(fontSize: 14, color: Color(0xFF798A9A)),
-                                    ),
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      isDense: true,
-                                      contentPadding: EdgeInsets.zero,
-                                    ),
+                                    hint: const Text("Country", style: TextStyle(fontSize: 14, color: Color(0xFF798A9A))),
+                                    decoration: const InputDecoration(border: InputBorder.none, isDense: true, contentPadding: EdgeInsets.zero),
                                     icon: const Icon(Icons.keyboard_arrow_down),
                                     items: const [
                                       DropdownMenuItem(
-                                          value: "US",
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.flag, size: 16),
-                                              SizedBox(width: 8),
-                                              Text("United States"),
-                                            ],
-                                          )),
+                                        value: "US",
+                                        child: Row(children: [Icon(Icons.flag, size: 16), SizedBox(width: 8), Text("United States")]),
+                                      ),
                                       DropdownMenuItem(
-                                          value: "VN",
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.flag, size: 16),
-                                              SizedBox(width: 8),
-                                              Text("Vietnam"),
-                                            ],
-                                          )),
+                                        value: "VN",
+                                        child: Row(children: [Icon(Icons.flag, size: 16), SizedBox(width: 8), Text("Vietnam")]),
+                                      ),
                                     ],
                                     onChanged: (value) {
                                       controller.selectedCountry.value = value;
@@ -241,49 +210,38 @@ class PaymentScreen extends BaseScreen<PaymentController> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Obx(() => SizedBox(
-                    width: double.infinity,
-                    height: 48,
-                    child: ElevatedButton(
-                      onPressed: controller.isValid.value ? controller.onSave : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF5856D7).withOpacity(controller.isValid.value ? 1 : 0.5),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(32),
-                        ),
-                        elevation: 0,
-                      ),
-                      child: const Text(
-                        "Save",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                        ),
-                      ),
+              Obx(
+                () => SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: ElevatedButton(
+                    onPressed: controller.isValid.value ? controller.onSave : null,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF5856D7).withValues(alpha: controller.isValid.value ? 1 : 0.5),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                      elevation: 0,
                     ),
-                  )),
+                    child: const Text(
+                      "Save",
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16),
+                    ),
+                  ),
+                ),
+              ),
 
               const SizedBox(height: 16),
               // Divider with "or"
               Row(
                 children: [
-                  const Expanded(
-                    child: Divider(
-                      color: Color(0xFFE8EBEE),
-                      thickness: 1,
-                    ),
-                  ),
+                  const Expanded(child: Divider(color: Color(0xFFE8EBEE), thickness: 1)),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text("OR", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12, color: Color(0xFF4A5763))),
-                  ),
-                  const Expanded(
-                    child: Divider(
-                      color: Color(0xFFE8EBEE),
-                      thickness: 1,
+                    child: Text(
+                      "OR",
+                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12, color: Color(0xFF4A5763)),
                     ),
                   ),
+                  const Expanded(child: Divider(color: Color(0xFFE8EBEE), thickness: 1)),
                 ],
               ),
               const SizedBox(height: 16),
@@ -294,18 +252,12 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                   icon: const Icon(Icons.camera_alt, color: Color(0xFF161A1D)),
                   label: const Text(
                     "Scan your card",
-                    style: TextStyle(
-                      color: Color(0xFF161A1D),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                    ),
+                    style: TextStyle(color: Color(0xFF161A1D), fontWeight: FontWeight.w500, fontSize: 16),
                   ),
                   style: OutlinedButton.styleFrom(
                     backgroundColor: const Color(0xFFF7F8F9),
                     side: BorderSide.none,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                   ),
                   onPressed: () {
                     Get.toNamed(AppRoutes.paymentScan)?.then((_) {
@@ -337,16 +289,8 @@ class _LabelRow extends StatelessWidget {
           text,
           style: const TextStyle(fontSize: 14, color: Color(0xFF161A1D), fontWeight: FontWeight.w400),
         ),
-        if (required)
-          const Text(
-            " *",
-            style: TextStyle(fontSize: 14, color: Color(0xFFFF3B30)),
-          ),
-        if (optional)
-          const Text(
-            " (optional)",
-            style: TextStyle(fontSize: 14, color: Color(0xFF798A9A)),
-          ),
+        if (required) const Text(" *", style: TextStyle(fontSize: 14, color: Color(0xFFFF3B30))),
+        if (optional) const Text(" (optional)", style: TextStyle(fontSize: 14, color: Color(0xFF798A9A))),
       ],
     );
   }

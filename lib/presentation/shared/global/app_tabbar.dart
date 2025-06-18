@@ -99,10 +99,7 @@ class AppTabBar extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 100),
         height: height,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(borderRadius),
-          color: backgroundColor ?? AppColors.stateGreyLowestHover100,
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(borderRadius), color: backgroundColor ?? AppColors.stateGreyLowestHover100),
         padding: padding ?? const EdgeInsets.all(4),
         child: TabBar(
           onTap: onTap,
@@ -113,13 +110,7 @@ class AppTabBar extends StatelessWidget {
           indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(borderRadius),
             color: indicatorColor ?? Colors.white,
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 2,
-                offset: Offset(0, 1),
-              ),
-            ],
+            boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2, offset: Offset(0, 1))],
           ),
           labelPadding: EdgeInsets.zero,
           labelStyle: labelStyle ?? AppTextStyles.typographyH12SemiBold,
@@ -128,9 +119,7 @@ class AppTabBar extends StatelessWidget {
           unselectedLabelColor: unselectedColor ?? AppColors.textGreyDefault500,
           automaticIndicatorColorAdjustment: false,
           splashFactory: NoSplash.splashFactory,
-          overlayColor: WidgetStateProperty.resolveWith<Color?>(
-            (Set<WidgetState> states) => Colors.transparent,
-          ),
+          overlayColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) => Colors.transparent),
           physics: NeverScrollableScrollPhysics(),
           tabs: listTab.map((tab) => _buildAccessibleTab(tab)).toList(),
         ),
@@ -143,10 +132,7 @@ class AppTabBar extends StatelessWidget {
   /// This method adds proper button semantics to each tab for screen readers
   /// and other accessibility tools.
   Widget _buildAccessibleTab(Widget tab) {
-    return Semantics(
-      button: true,
-      child: tab,
-    );
+    return Semantics(button: true, child: tab);
   }
 }
 

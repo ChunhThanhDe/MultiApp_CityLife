@@ -16,10 +16,7 @@ class AccountPasskeysScreen extends BaseScreen<AccountPasskeysController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(
-      title: "Passkeys",
-      onBack: () => Get.back(),
-    );
+    return BasicAppBar(title: "Passkeys", onBack: () => Get.back());
   }
 
   @override
@@ -37,13 +34,7 @@ class AccountPasskeysScreen extends BaseScreen<AccountPasskeysController> {
           child: ListView.separated(
             padding: EdgeInsets.zero,
             itemCount: passkeys.length,
-            separatorBuilder: (_, __) => Divider(
-              color: Color(0xFFE8EBEE),
-              indent: 24,
-              endIndent: 24,
-              height: 0,
-              thickness: 1,
-            ),
+            separatorBuilder: (_, _) => Divider(color: Color(0xFFE8EBEE), indent: 24, endIndent: 24, height: 0, thickness: 1),
             itemBuilder: (context, index) => _PasskeyListItem(
               item: passkeys[index],
               onDelete: () {
@@ -62,10 +53,7 @@ class AccountPasskeysScreen extends BaseScreen<AccountPasskeysController> {
 class _PasskeyListItem extends StatelessWidget {
   final PasskeyItem item;
   final VoidCallback onDelete;
-  const _PasskeyListItem({
-    required this.item,
-    required this.onDelete,
-  });
+  const _PasskeyListItem({required this.item, required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -81,20 +69,10 @@ class _PasskeyListItem extends StatelessWidget {
               children: [
                 Text(
                   item.title,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF161A1D),
-                  ),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
                 ),
                 SizedBox(height: 2),
-                Text(
-                  item.subtitle,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Color(0xFF4A5763),
-                  ),
-                ),
+                Text(item.subtitle, style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
               ],
             ),
           ),
@@ -125,17 +103,10 @@ class _BottomSection extends StatelessWidget {
           // Title & desc
           Text(
             "Create a passkey on this device",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF161A1D),
-            ),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
           ),
           SizedBox(height: 4),
-          Text(
-            "Speed up your sign in next time by creating a passkey on this device",
-            style: TextStyle(fontSize: 14, color: Color(0xFF4A5763)),
-          ),
+          Text("Speed up your sign in next time by creating a passkey on this device", style: TextStyle(fontSize: 14, color: Color(0xFF4A5763))),
           SizedBox(height: 16),
           SizedBox(
             width: double.infinity,
@@ -146,19 +117,13 @@ class _BottomSection extends StatelessWidget {
               icon: Icon(Icons.add, color: Color(0xFF161A1D)),
               label: Text(
                 "Create a passkey",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF161A1D),
-                ),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
               ),
               style: OutlinedButton.styleFrom(
                 backgroundColor: Color(0xFFF7F8F9),
                 padding: EdgeInsets.symmetric(vertical: 12),
                 side: BorderSide(color: Colors.transparent),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(32),
-                ),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
               ),
             ),
           ),

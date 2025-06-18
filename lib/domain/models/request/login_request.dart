@@ -29,12 +29,7 @@ class LoginRequest extends BaseRequest {
   @JsonKey(name: "password")
   final String password;
 
-  LoginRequest({
-    required this.loginType,
-    required this.emailOrPhone,
-    required this.fieldType,
-    required this.password,
-  });
+  LoginRequest({required this.loginType, required this.emailOrPhone, required this.fieldType, required this.password});
 
   factory LoginRequest.fromJson(Map<String, dynamic> json) => _$LoginRequestFromJson(json);
 

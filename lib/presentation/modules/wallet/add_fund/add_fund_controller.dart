@@ -11,12 +11,7 @@ class PaymentMethod {
   final PaymentMethodType type;
   final String iconAsset;
 
-  PaymentMethod({
-    required this.name,
-    required this.last4,
-    required this.type,
-    required this.iconAsset,
-  });
+  PaymentMethod({required this.name, required this.last4, required this.type, required this.iconAsset});
 }
 
 class AddFundController extends BaseController {

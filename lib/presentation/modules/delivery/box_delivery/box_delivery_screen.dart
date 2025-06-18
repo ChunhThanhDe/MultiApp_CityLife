@@ -19,10 +19,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(
-      title: "Box Delivery",
-      onBack: () => Get.back(),
-    );
+    return BasicAppBar(title: "Box Delivery", onBack: () => Get.back());
   }
 
   @override
@@ -58,12 +55,12 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
                 onTap: controller.pickupLocation.value.isEmpty
                     ? null
                     : () => _showLocationBottomSheet(
-                          context: context,
-                          title: "Dropoff Location",
-                          addresses: controller.savedAddresses,
-                          selectedAddress: controller.dropoffLocation.value,
-                          onSelect: (val) => controller.setDropoffLocation(val),
-                        ),
+                        context: context,
+                        title: "Dropoff Location",
+                        addresses: controller.savedAddresses,
+                        selectedAddress: controller.dropoffLocation.value,
+                        onSelect: (val) => controller.setDropoffLocation(val),
+                      ),
                 isSelected: controller.dropoffLocation.value.isNotEmpty,
                 isEnabled: controller.pickupLocation.value.isNotEmpty,
               ),
@@ -123,19 +120,13 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xFF5856D7),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(32),
-                          ),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                           elevation: 0,
                           padding: EdgeInsets.zero,
                         ),
                         child: Text(
                           "Continue to Checkout",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
-                          ),
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
                         ),
                       ),
                     ),
@@ -156,47 +147,24 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
       children: [
         Text(
           "Add Product image",
-          style: TextStyle(
-            fontSize: 16,
-            color: Color(0xFF161A1D),
-            fontWeight: FontWeight.w500,
-          ),
+          style: TextStyle(fontSize: 16, color: Color(0xFF161A1D), fontWeight: FontWeight.w500),
         ),
         Text(
           "${c.productImages.length} (3)",
-          style: TextStyle(
-            fontSize: 14,
-            color: Color(0xFF161A1D),
-            fontWeight: FontWeight.w400,
-          ),
+          style: TextStyle(fontSize: 14, color: Color(0xFF161A1D), fontWeight: FontWeight.w400),
         ),
       ],
     );
   }
 
-  Widget _locationField(
-    BuildContext context, {
-    required String icon,
-    required String text,
-    VoidCallback? onTap,
-    bool isSelected = false,
-    bool isEnabled = true,
-  }) {
+  Widget _locationField(BuildContext context, {required String icon, required String text, VoidCallback? onTap, bool isSelected = false, bool isEnabled = true}) {
     return GestureDetector(
       onTap: isEnabled ? onTap : null,
       child: Container(
         decoration: BoxDecoration(
           color: isEnabled ? Colors.white : Color(0xFFF4F4F4),
-          border: Border.all(
-            color: isSelected ? Color(0xFF5856D7) : Color(0xFFE8EBEE),
-            width: isSelected ? 1.5 : 1,
-          ),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(8),
-            topRight: Radius.circular(8),
-            bottomLeft: Radius.circular(8),
-            bottomRight: Radius.circular(8),
-          ),
+          border: Border.all(color: isSelected ? Color(0xFF5856D7) : Color(0xFFE8EBEE), width: isSelected ? 1.5 : 1),
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8), bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
         ),
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
         margin: EdgeInsets.only(bottom: 0, top: 8),
@@ -211,8 +179,8 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
                 color: isSelected
                     ? Color(0xFF161A1D)
                     : isEnabled
-                        ? Color(0xFF798A9A)
-                        : Color(0xFFB0B3B8),
+                    ? Color(0xFF798A9A)
+                    : Color(0xFFB0B3B8),
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -238,10 +206,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
               height: 96,
               decoration: BoxDecoration(
                 color: Color(0xFFF7F8F9),
-                border: Border.all(
-                  color: Color(0xFFE8EBEE),
-                  width: 1,
-                ),
+                border: Border.all(color: Color(0xFFE8EBEE), width: 1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(Icons.add, size: 36, color: Color(0xFF161A1D)),
@@ -254,10 +219,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
             children: [
               GestureDetector(
                 onTap: () {
-                  showProductImageDialog(
-                    Get.context ?? context,
-                    images[i].path,
-                  );
+                  showProductImageDialog(Get.context ?? context, images[i].path);
                 },
                 child: Container(
                   width: 96,
@@ -265,10 +227,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
                   margin: EdgeInsets.only(right: 8),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    image: DecorationImage(
-                      image: FileImage(File(images[i].path)),
-                      fit: BoxFit.cover,
-                    ),
+                    image: DecorationImage(image: FileImage(File(images[i].path)), fit: BoxFit.cover),
                   ),
                 ),
               ),
@@ -279,7 +238,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
                   onTap: () => c.removeImage(i),
                   child: CircleAvatar(
                     radius: 12,
-                    backgroundColor: Colors.white.withOpacity(0.7),
+                    backgroundColor: Colors.white.withValues(alpha: 0.7),
                     child: Icon(Icons.close, color: Colors.black, size: 16),
                   ),
                 ),
@@ -303,20 +262,13 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
         onChanged: c.setInstruction,
         minLines: 3,
         maxLines: 5,
-        decoration: InputDecoration(
-          hintText: "e.g. leave at reception, don’t ring bell",
-          border: InputBorder.none,
-        ),
+        decoration: InputDecoration(hintText: "e.g. leave at reception, don’t ring bell", border: InputBorder.none),
       ),
     );
   }
 
   Widget _noteChips(BoxDeliveryController c) {
-    final options = [
-      "Ring the bell",
-      "No need to ring the bell",
-      "Leave the package",
-    ];
+    final options = ["Ring the bell", "No need to ring the bell", "Leave the package"];
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -330,9 +282,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
               onSelected: (_) => c.setInstruction(options[i]),
               backgroundColor: Colors.white,
               selectedColor: Color(0xFFF0F0F1),
-              shape: StadiumBorder(
-                side: BorderSide(color: Color(0xFFE8EBEE)),
-              ),
+              shape: StadiumBorder(side: BorderSide(color: Color(0xFFE8EBEE))),
             ),
           ),
         ),
@@ -351,91 +301,76 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
     RxList<Map<String, String>> filteredAddresses = addresses.obs;
 
     Get.bottomSheet(
-      Obx(() => SafeArea(
-            child: Padding(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
-              ),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 36,
-                      height: 4,
-                      margin: EdgeInsets.only(bottom: 16),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFEBEBF5),
-                        borderRadius: BorderRadius.circular(2),
-                      ),
+      Obx(
+        () => SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 36,
+                    height: 4,
+                    margin: EdgeInsets.only(bottom: 16),
+                    decoration: BoxDecoration(color: Color(0xFFEBEBF5), borderRadius: BorderRadius.circular(2)),
+                  ),
+                  Text(title, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
+                  SizedBox(height: 16),
+                  // Search Field
+                  TextField(
+                    controller: searchController,
+                    onChanged: (value) {
+                      filteredAddresses.value = value.isEmpty
+                          ? addresses
+                          : addresses.where((a) => a['label']!.toLowerCase().contains(value.toLowerCase()) || a['address']!.toLowerCase().contains(value.toLowerCase())).toList();
+                    },
+                    decoration: InputDecoration(
+                      hintText: "Search for an address",
+                      prefixIcon: Icon(Icons.search, size: 20),
+                      filled: true,
+                      fillColor: Color(0xFFF7F8F9),
+                      contentPadding: EdgeInsets.symmetric(vertical: 8),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(100), borderSide: BorderSide.none),
                     ),
-                    Text(
-                      title,
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
-                    ),
-                    SizedBox(height: 16),
-                    // Search Field
-                    TextField(
-                      controller: searchController,
-                      onChanged: (value) {
-                        filteredAddresses.value = value.isEmpty
-                            ? addresses
-                            : addresses.where((a) => a['label']!.toLowerCase().contains(value.toLowerCase()) || a['address']!.toLowerCase().contains(value.toLowerCase())).toList();
+                  ),
+                  SizedBox(height: 16),
+                  // Saved addresses
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('Saved addresses', style: TextStyle(fontSize: 14, color: Color(0xFF798A9A))),
+                  ),
+                  ...filteredAddresses.map(
+                    (a) => ListTile(
+                      title: Text(a['label'] ?? ''),
+                      subtitle: Text(a['address'] ?? ''),
+                      trailing: selectedAddress == a['address'] ? Icon(Icons.check, color: Color(0xFF5856D7)) : null,
+                      onTap: () {
+                        onSelect(a['address']!);
+                        Get.back();
                       },
-                      decoration: InputDecoration(
-                        hintText: "Search for an address",
-                        prefixIcon: Icon(Icons.search, size: 20),
-                        filled: true,
-                        fillColor: Color(0xFFF7F8F9),
-                        contentPadding: EdgeInsets.symmetric(vertical: 8),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(100),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
                     ),
-                    SizedBox(height: 16),
-                    // Saved addresses
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Saved addresses',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF798A9A),
-                        ),
-                      ),
+                  ),
+                  SizedBox(height: 8),
+                  OutlinedButton(
+                    onPressed: () {}, // TODO: Handle add new address
+                    style: OutlinedButton.styleFrom(
+                      minimumSize: Size.fromHeight(48),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
-                    ...filteredAddresses.map((a) => ListTile(
-                          title: Text(a['label'] ?? ''),
-                          subtitle: Text(a['address'] ?? ''),
-                          trailing: selectedAddress == a['address'] ? Icon(Icons.check, color: Color(0xFF5856D7)) : null,
-                          onTap: () {
-                            onSelect(a['address']!);
-                            Get.back();
-                          },
-                        )),
-                    SizedBox(height: 8),
-                    OutlinedButton(
-                      onPressed: () {}, // TODO: Handle add new address
-                      style: OutlinedButton.styleFrom(
-                        minimumSize: Size.fromHeight(48),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      ),
-                      child: Text("Add new address"),
-                    ),
-                    SizedBox(height: 12),
-                  ],
-                ),
+                    child: Text("Add new address"),
+                  ),
+                  SizedBox(height: 12),
+                ],
               ),
             ),
-          )),
+          ),
+        ),
+      ),
       isScrollControlled: true,
       backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
     );
   }
 }

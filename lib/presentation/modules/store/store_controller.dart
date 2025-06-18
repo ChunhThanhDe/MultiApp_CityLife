@@ -14,12 +14,23 @@ enum FilterType {
   final String? icon;
 }
 
+enum ServiceType {
+  inStore(label: 'In store'),
+  delivery(label: 'Delivery'),
+  driveThru(label: 'Drive thru');
+
+  const ServiceType({required this.label});
+
+  final String label;
+}
+
 class ProductItem {
   final String name;
   final String price;
   final String imageUrl;
   final String description;
   final List<FilterType> categories;
+  final List<ServiceType> availableServices;
 
   ProductItem({
     required this.name,
@@ -27,6 +38,7 @@ class ProductItem {
     required this.imageUrl,
     this.description = '',
     this.categories = const [FilterType.drinks],
+    this.availableServices = const [ServiceType.inStore],
   });
 }
 
@@ -37,10 +49,21 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
   FilterType _selectedFilter = FilterType.all;
   FilterType get selectedFilter => _selectedFilter;
 
+  // Service filter state
+  ServiceType _selectedService = ServiceType.inStore;
+  ServiceType get selectedService => _selectedService;
+
   @override
   void onInit() {
     super.onInit();
     serviceTabController = TabController(length: 3, vsync: this);
+
+    // Listen to tab changes
+    serviceTabController.addListener(() {
+      if (!serviceTabController.indexIsChanging) {
+        selectService(ServiceType.values[serviceTabController.index]);
+      }
+    });
   }
 
   @override
@@ -59,12 +82,29 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
     return _selectedFilter == filter;
   }
 
-  // Filter items based on selected filter
+  // Service filter methods
+  void selectService(ServiceType service) {
+    _selectedService = service;
+    update();
+  }
+
+  bool isServiceSelected(ServiceType service) {
+    return _selectedService == service;
+  }
+
+  // Filter items based on selected filter and service
   List<ProductItem> filterItems(List<ProductItem> items) {
-    if (_selectedFilter == FilterType.all) {
-      return items;
+    List<ProductItem> filteredItems = items;
+
+    // Filter by category
+    if (_selectedFilter != FilterType.all) {
+      filteredItems = filteredItems.where((item) => item.categories.contains(_selectedFilter)).toList();
     }
-    return items.where((item) => item.categories.contains(_selectedFilter)).toList();
+
+    // Filter by service
+    filteredItems = filteredItems.where((item) => item.availableServices.contains(_selectedService)).toList();
+
+    return filteredItems;
   }
 
   // Get all available categories with their filtered items
@@ -125,199 +165,150 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
 
   // Popular Items
   List<ProductItem> get popularItems => [
-        ProductItem(
-          name: 'Summer-Berry Strawberry Refresher',
-          price: '\$5.95 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400',
-          categories: [FilterType.drinks],
-        ),
-        ProductItem(
-          name: 'White Chocolate Mocha',
-          price: '\$5.65 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400',
-          categories: [FilterType.drinks, FilterType.atHome], // Can be enjoyed both ways
-        ),
-        ProductItem(
-          name: 'Caramel Macchiato',
-          price: '\$5.65 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400',
-          categories: [FilterType.drinks],
-        ),
-      ];
+    ProductItem(
+      name: 'Summer-Berry Strawberry Refresher',
+      price: '\$5.95 • 160 Calories',
+      imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400',
+      categories: [FilterType.drinks],
+      availableServices: [ServiceType.inStore, ServiceType.delivery], // Không có drive thru
+    ),
+    ProductItem(
+      name: 'White Chocolate Mocha',
+      price: '\$5.65 • 160 Calories',
+      imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400',
+      categories: [FilterType.drinks, FilterType.atHome], // Can be enjoyed both ways
+      availableServices: [ServiceType.inStore, ServiceType.delivery, ServiceType.driveThru], // Có tất cả service
+    ),
+    ProductItem(
+      name: 'Caramel Macchiato',
+      price: '\$5.65 • 160 Calories',
+      imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400',
+      categories: [FilterType.drinks],
+      availableServices: [ServiceType.inStore, ServiceType.driveThru], // Không có delivery
+    ),
+  ];
 
   // Brewed Coffees
   List<ProductItem> get brewedCoffees => [
-        ProductItem(
-          name: 'Caffè Americano',
-          price: '\$4.95 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400',
-          categories: [FilterType.drinks],
-        ),
-        ProductItem(
-          name: 'Featured Blonde Roast',
-          price: '\$4.35 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=400',
-          categories: [FilterType.drinks],
-        ),
-        ProductItem(
-          name: 'Featured Dark Roast',
-          price: '\$4.35 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400',
-          categories: [FilterType.drinks],
-        ),
-      ];
+    ProductItem(name: 'Caffè Americano', price: '\$4.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400', categories: [FilterType.drinks]),
+    ProductItem(name: 'Featured Blonde Roast', price: '\$4.35 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=400', categories: [FilterType.drinks]),
+    ProductItem(name: 'Featured Dark Roast', price: '\$4.35 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400', categories: [FilterType.drinks]),
+  ];
 
   // Hot Coffees
   List<ProductItem> get hotCoffees => [
-        ProductItem(
-          name: 'Honey Almond Milk Flat White',
-          price: '\$4.15 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=400',
-          categories: [FilterType.drinks],
-        ),
-        ProductItem(
-          name: 'Lavender Oatmilk Latte',
-          price: '\$4.35 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400',
-          categories: [FilterType.drinks, FilterType.atHome], // Available as take-home blend
-        ),
-        ProductItem(
-          name: 'Caramel Macchiato',
-          price: '\$4.15 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400',
-          categories: [FilterType.drinks],
-        ),
-      ];
+    ProductItem(name: 'Honey Almond Milk Flat White', price: '\$4.15 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=400', categories: [FilterType.drinks]),
+    ProductItem(
+      name: 'Lavender Oatmilk Latte',
+      price: '\$4.35 • 160 Calories',
+      imageUrl: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400',
+      categories: [FilterType.drinks, FilterType.atHome], // Available as take-home blend
+      availableServices: [ServiceType.inStore],
+    ),
+    ProductItem(name: 'Caramel Macchiato', price: '\$4.15 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400', categories: [FilterType.drinks]),
+  ];
 
   // Cold Coffees
   List<ProductItem> get coldCoffees => [
-        ProductItem(
-          name: 'White Chocolate Mocha',
-          price: '\$5.95 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400',
-          categories: [FilterType.drinks],
-        ),
-        ProductItem(
-          name: 'Vanilla Sweet Cream Cold Brew',
-          price: '\$4.95 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400',
-          categories: [FilterType.drinks, FilterType.atHome],
-        ),
-        ProductItem(
-          name: 'Iced Starbucks Blonde Vanilla Latte',
-          price: '\$4.95 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400',
-          categories: [FilterType.drinks],
-        ),
-      ];
+    ProductItem(name: 'White Chocolate Mocha', price: '\$5.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400', categories: [FilterType.drinks]),
+    ProductItem(
+      name: 'Vanilla Sweet Cream Cold Brew',
+      price: '\$4.95 • 160 Calories',
+      imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400',
+      categories: [FilterType.drinks, FilterType.atHome],
+    ),
+    ProductItem(
+      name: 'Iced Starbucks Blonde Vanilla Latte',
+      price: '\$4.95 • 160 Calories',
+      imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400',
+      categories: [FilterType.drinks],
+    ),
+  ];
 
   // Starbucks Refreshers Beverages
   List<ProductItem> get refresherBeverages => [
-        ProductItem(
-          name: 'Summer-Berry Strawberry Refresher',
-          price: '\$5.35 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400',
-          categories: [FilterType.drinks],
-        ),
-        ProductItem(
-          name: 'Mango Dragonfruit Lemonade Refresher',
-          price: '\$4.95 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1546173159-315724a31696?w=400',
-          categories: [FilterType.drinks],
-        ),
-        ProductItem(
-          name: 'Spicy Strawberry Lemonade Refresher',
-          price: '\$4.95 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400',
-          categories: [FilterType.drinks],
-        ),
-      ];
+    ProductItem(
+      name: 'Summer-Berry Strawberry Refresher',
+      price: '\$5.35 • 160 Calories',
+      imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400',
+      categories: [FilterType.drinks],
+    ),
+    ProductItem(
+      name: 'Mango Dragonfruit Lemonade Refresher',
+      price: '\$4.95 • 160 Calories',
+      imageUrl: 'https://images.unsplash.com/photo-1546173159-315724a31696?w=400',
+      categories: [FilterType.drinks],
+    ),
+    ProductItem(
+      name: 'Spicy Strawberry Lemonade Refresher',
+      price: '\$4.95 • 160 Calories',
+      imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400',
+      categories: [FilterType.drinks],
+    ),
+  ];
 
   // Frappuccino Blended Beverages
   List<ProductItem> get frappuccinoBeverages => [
-        ProductItem(
-          name: 'Mocha Cookie Crumble Frappuccino',
-          price: '\$5.95 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400',
-          categories: [FilterType.drinks],
-        ),
-        ProductItem(
-          name: 'Caramel Ribbon Crunch Frappuccino',
-          price: '\$5.95 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400',
-          categories: [FilterType.drinks],
-        ),
-        ProductItem(
-          name: 'Strawberry Açaí Lemonade Refresher',
-          price: '\$4.95 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400',
-          categories: [FilterType.drinks],
-        ),
-      ];
+    ProductItem(
+      name: 'Mocha Cookie Crumble Frappuccino',
+      price: '\$5.95 • 160 Calories',
+      imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400',
+      categories: [FilterType.drinks],
+    ),
+    ProductItem(
+      name: 'Caramel Ribbon Crunch Frappuccino',
+      price: '\$5.95 • 160 Calories',
+      imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400',
+      categories: [FilterType.drinks],
+    ),
+    ProductItem(
+      name: 'Strawberry Açaí Lemonade Refresher',
+      price: '\$4.95 • 160 Calories',
+      imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400',
+      categories: [FilterType.drinks],
+    ),
+  ];
 
   // Iced Tea and Lemonade
   List<ProductItem> get icedTeaLemonade => [
-        ProductItem(
-          name: 'Iced Matcha Lemonade',
-          price: '\$4.95 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400',
-          categories: [FilterType.drinks],
-        ),
-        ProductItem(
-          name: 'Iced Passion Tango Tea',
-          price: '\$4.35 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400',
-          categories: [FilterType.drinks],
-        ),
-        ProductItem(
-          name: 'Iced Lavender Oatmilk Latte',
-          price: '\$4.15 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400',
-          categories: [FilterType.drinks],
-        ),
-      ];
+    ProductItem(
+      name: 'Iced Matcha Lemonade',
+      price: '\$4.95 • 160 Calories',
+      imageUrl: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400',
+      categories: [FilterType.drinks],
+      availableServices: [ServiceType.delivery],
+    ),
+    ProductItem(name: 'Iced Passion Tango Tea', price: '\$4.35 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400', categories: [FilterType.drinks]),
+    ProductItem(name: 'Iced Lavender Oatmilk Latte', price: '\$4.15 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400', categories: [FilterType.drinks]),
+  ];
 
   // Hot Teas
   List<ProductItem> get hotTeas => [
-        ProductItem(
-          name: 'Chai Tea',
-          price: '\$3.95 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400',
-          categories: [FilterType.drinks],
-        ),
-        ProductItem(
-          name: 'Teavana London Fog Tea Latte',
-          price: '\$4.35 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400',
-          categories: [FilterType.drinks],
-        ),
-        ProductItem(
-          name: 'Matcha Tea Latte',
-          price: '\$4.95 • 160 Calories',
-          imageUrl: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400',
-          categories: [FilterType.drinks],
-        ),
-      ];
+    ProductItem(name: 'Chai Tea', price: '\$3.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400', categories: [FilterType.drinks]),
+    ProductItem(name: 'Teavana London Fog Tea Latte', price: '\$4.35 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400', categories: [FilterType.drinks]),
+    ProductItem(name: 'Matcha Tea Latte', price: '\$4.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400', categories: [FilterType.drinks]),
+  ];
 
   // Bottled Beverages
   List<ProductItem> get bottledBeverages => [
-        ProductItem(
-          name: 'Smartwater Lemon',
-          price: '\$2.95',
-          imageUrl: 'https://images.unsplash.com/photo-1523362628745-0c100150b504?w=400',
-          categories: [FilterType.drinks, FilterType.atHome], // Perfect for home
-        ),
-        ProductItem(
-          name: 'Evolution Fresh Mighty Watermelon',
-          price: '\$4.95',
-          imageUrl: 'https://images.unsplash.com/photo-1546173159-315724a31696?w=400',
-          categories: [FilterType.drinks, FilterType.atHome], // Take home beverage
-        ),
-        ProductItem(
-          name: 'Horizon Organic Milk',
-          price: '\$2.95',
-          imageUrl: 'https://images.unsplash.com/photo-1523362628745-0c100150b504?w=400',
-          categories: [FilterType.drinks, FilterType.atHome], // Great for home use
-        ),
-      ];
+    ProductItem(
+      name: 'Smartwater Lemon',
+      price: '\$2.95',
+      imageUrl: 'https://images.unsplash.com/photo-1523362628745-0c100150b504?w=400',
+      categories: [FilterType.drinks, FilterType.atHome], // Perfect for home
+      availableServices: [ServiceType.driveThru],
+    ),
+    ProductItem(
+      name: 'Evolution Fresh Mighty Watermelon',
+      price: '\$4.95',
+      imageUrl: 'https://images.unsplash.com/photo-1546173159-315724a31696?w=400',
+      categories: [FilterType.drinks, FilterType.atHome], // Take home beverage
+    ),
+    ProductItem(
+      name: 'Horizon Organic Milk',
+      price: '\$2.95',
+      imageUrl: 'https://images.unsplash.com/photo-1523362628745-0c100150b504?w=400',
+      categories: [FilterType.drinks, FilterType.atHome], // Great for home use
+    ),
+  ];
 }

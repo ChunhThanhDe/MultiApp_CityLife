@@ -18,10 +18,7 @@ class StoreAppBar extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.only(top: 54.h, left: 24.w, right: 24.w, bottom: 24.h),
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AppImageProvider.network('https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=800'),
-            fit: BoxFit.cover,
-          ),
+          image: DecorationImage(image: AppImageProvider.network('https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=800'), fit: BoxFit.cover),
         ),
         child: Column(
           children: [
@@ -42,37 +39,38 @@ class StoreAppBar extends StatelessWidget {
     );
   }
 
-  _onTapStore() {
+  void _onTapStore() {
     showAppBottomSheet(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
-          child: Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(text: 'Starbucks®\n', style: AppTextStyles.typographyH8SemiBold),
-                TextSpan(
-                  text:
-                      'Our story begins in 1971 along the cobblestone streets of Seattle’s historic Pike Place Market. It was here where Starbucks opened its first store, offering fresh-roasted coffee beans, tea and spices from around the world for our customers to take home. Our name was inspired by the classic tale, “Moby-Dick,” evoking the seafaring tradition of the early coffee traders.',
-                  style: AppTextStyles.typographyH11Regular,
-                ),
-              ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(text: 'Starbucks®\n', style: AppTextStyles.typographyH8SemiBold),
+                  TextSpan(
+                    text:
+                        'Our story begins in 1971 along the cobblestone streets of Seattle’s historic Pike Place Market. It was here where Starbucks opened its first store, offering fresh-roasted coffee beans, tea and spices from around the world for our customers to take home. Our name was inspired by the classic tale, “Moby-Dick,” evoking the seafaring tradition of the early coffee traders.',
+                    style: AppTextStyles.typographyH11Regular,
+                  ),
+                ],
+              ),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
             ),
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
           ),
-        ),
-        _buildActionButton(),
-        _buildStoreInfo(),
-        SizedBox(height: 16.h),
-      ],
-    ));
+          _buildActionButton(),
+          _buildStoreInfo(),
+          SizedBox(height: 16.h),
+        ],
+      ),
+    );
   }
 
-  void _onTapFilter() {
+  void _onTapFilter() async {
     StoreFilterBottomSheet.show();
   }
 
@@ -83,9 +81,7 @@ class StoreAppBar extends StatelessWidget {
         padding: EdgeInsets.all(6.w),
         decoration: ShapeDecoration(
           color: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(32),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
         ),
         child: icon,
       ),
@@ -161,11 +157,7 @@ class StoreAppBar extends StatelessWidget {
               Expanded(
                 child: _actionButton(
                   text: 'Add to favorites',
-                  icon: Assets.icons.icHeartOutlined.svg(
-                    width: 24.w,
-                    height: 24.w,
-                    colorFilter: ColorFilter.mode(Colors.red, BlendMode.srcIn),
-                  ),
+                  icon: Assets.icons.icHeartOutlined.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(Colors.red, BlendMode.srcIn)),
                   backgroundColor: AppColors.stateDangerLowest50,
                   borderColor: AppColors.stateDangerLowestHover100,
                   textColor: AppColors.stateDangerHigh700,
@@ -176,11 +168,7 @@ class StoreAppBar extends StatelessWidget {
               Expanded(
                 child: _actionButton(
                   text: 'Search the store',
-                  icon: Assets.icons.icSearch.svg(
-                    width: 24.w,
-                    height: 24.w,
-                    colorFilter: ColorFilter.mode(Colors.blue, BlendMode.srcIn),
-                  ),
+                  icon: Assets.icons.icSearch.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(Colors.blue, BlendMode.srcIn)),
                   backgroundColor: AppColors.stateBrandLowest50,
                   borderColor: AppColors.stateBrandLowestHover100,
                   textColor: AppColors.stateBrandHigh700,
@@ -195,11 +183,7 @@ class StoreAppBar extends StatelessWidget {
               Expanded(
                 child: _actionButton(
                   text: 'Share a friend',
-                  icon: Assets.icons.icSync.svg(
-                    width: 24.w,
-                    height: 24.w,
-                    colorFilter: ColorFilter.mode(Colors.green, BlendMode.srcIn),
-                  ),
+                  icon: Assets.icons.icSync.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(Colors.green, BlendMode.srcIn)),
                   backgroundColor: AppColors.stateSuccessLowest50,
                   borderColor: AppColors.stateSuccessLowestHover100,
                   textColor: AppColors.stateSuccessHigh700,
@@ -210,11 +194,7 @@ class StoreAppBar extends StatelessWidget {
               Expanded(
                 child: _actionButton(
                   text: 'Contact',
-                  icon: Icon(
-                    Icons.phone,
-                    size: 24.w,
-                    color: Colors.blue,
-                  ),
+                  icon: Icon(Icons.phone, size: 24.w, color: Colors.blue),
                   backgroundColor: AppColors.stateInformationLowest50,
                   borderColor: AppColors.stateInformationLowestHover100,
                   textColor: AppColors.stateInformationHigh700,
@@ -228,14 +208,7 @@ class StoreAppBar extends StatelessWidget {
     );
   }
 
-  Widget _actionButton({
-    required String text,
-    required Widget icon,
-    required Color backgroundColor,
-    required Color borderColor,
-    required Color textColor,
-    required VoidCallback onPressed,
-  }) {
+  Widget _actionButton({required String text, required Widget icon, required Color backgroundColor, required Color borderColor, required Color textColor, required VoidCallback onPressed}) {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
@@ -243,10 +216,7 @@ class StoreAppBar extends StatelessWidget {
         decoration: ShapeDecoration(
           color: backgroundColor,
           shape: RoundedRectangleBorder(
-            side: BorderSide(
-              width: 1,
-              color: borderColor,
-            ),
+            side: BorderSide(width: 1, color: borderColor),
             borderRadius: BorderRadius.circular(32),
           ),
         ),
@@ -308,20 +278,12 @@ class StoreAppBar extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoRow({
-    required Widget icon,
-    required String title,
-    String? subtitle,
-    Widget? trailing,
-  }) {
+  Widget _buildInfoRow({required Widget icon, required String title, String? subtitle, Widget? trailing}) {
     return Row(
       children: [
         Container(
           padding: EdgeInsets.all(8.w),
-          decoration: BoxDecoration(
-            color: AppColors.stateBaseWhite.withValues(alpha: 200),
-            borderRadius: BorderRadius.circular(8.r),
-          ),
+          decoration: BoxDecoration(color: AppColors.stateBaseWhite.withValues(alpha: 200), borderRadius: BorderRadius.circular(8.r)),
           child: icon,
         ),
         SizedBox(width: 12.w),
@@ -329,19 +291,8 @@ class StoreAppBar extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: AppTextStyles.typographyH11Medium,
-              ),
-              if (subtitle != null) ...[
-                SizedBox(height: 2.h),
-                Text(
-                  subtitle,
-                  style: AppTextStyles.typographyH12Regular.copyWith(
-                    color: AppColors.textGreyHigh700,
-                  ),
-                ),
-              ],
+              Text(title, style: AppTextStyles.typographyH11Medium),
+              if (subtitle != null) ...[SizedBox(height: 2.h), Text(subtitle, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700))],
             ],
           ),
         ),
@@ -364,18 +315,9 @@ class _AnimatedHeartButtonState extends State<_AnimatedHeartButton> with SingleT
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      duration: Duration(milliseconds: 400),
-      vsync: this,
-    );
+    _animationController = AnimationController(duration: Duration(milliseconds: 400), vsync: this);
 
-    _scaleAnimation = Tween<double>(
-      begin: 1.0,
-      end: 1.15,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOutBack,
-    ));
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.15).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOutBack));
   }
 
   @override
@@ -408,30 +350,11 @@ class _AnimatedHeartButtonState extends State<_AnimatedHeartButton> with SingleT
             child: AnimatedSwitcher(
               duration: Duration(milliseconds: 200),
               transitionBuilder: (Widget child, Animation<double> animation) {
-                return ScaleTransition(
-                  scale: animation,
-                  child: child,
-                );
+                return ScaleTransition(scale: animation, child: child);
               },
               child: isFavorite
-                  ? Assets.icons.icHeartFilled.svg(
-                      key: ValueKey('filled'),
-                      width: 24.w,
-                      height: 24.w,
-                      colorFilter: ColorFilter.mode(
-                        AppColors.stateBrandDefault500,
-                        BlendMode.srcIn,
-                      ),
-                    )
-                  : Assets.icons.icHeartOutlined.svg(
-                      key: ValueKey('outlined'),
-                      width: 24.w,
-                      height: 24.w,
-                      colorFilter: ColorFilter.mode(
-                        AppColors.textGreyHighest950,
-                        BlendMode.srcIn,
-                      ),
-                    ),
+                  ? Assets.icons.icHeartFilled.svg(key: ValueKey('filled'), width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.stateBrandDefault500, BlendMode.srcIn))
+                  : Assets.icons.icHeartOutlined.svg(key: ValueKey('outlined'), width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
             ),
           );
         },

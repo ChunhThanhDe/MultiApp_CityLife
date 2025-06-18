@@ -11,10 +11,7 @@ class TrackingDeliveryScreen extends BaseScreen<TrackingDeliveryController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(
-      title: 'Tracking',
-      onBack: () => Get.back(),
-    );
+    return BasicAppBar(title: 'Tracking', onBack: () => Get.back());
   }
 
   @override
@@ -39,13 +36,7 @@ class TrackingDeliveryScreen extends BaseScreen<TrackingDeliveryController> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(9999),
                         border: Border.all(color: Color(0xFFBEBDEF)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            blurRadius: 2,
-                            offset: Offset(0, 1),
-                          ),
-                        ],
+                        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 2, offset: Offset(0, 1))],
                       ),
                       child: Row(
                         children: [
@@ -56,11 +47,7 @@ class TrackingDeliveryScreen extends BaseScreen<TrackingDeliveryController> {
                             child: TextField(
                               controller: controller.textController,
                               style: TextStyle(fontSize: 14, color: Color(0xFF161A1D)),
-                              decoration: InputDecoration(
-                                hintText: "Tracking by Receipt",
-                                border: InputBorder.none,
-                                isDense: true,
-                              ),
+                              decoration: InputDecoration(hintText: "Tracking by Receipt", border: InputBorder.none, isDense: true),
                               onChanged: controller.onTextChanged,
                             ),
                           ),
@@ -85,11 +72,7 @@ class TrackingDeliveryScreen extends BaseScreen<TrackingDeliveryController> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(height: 100),
-                              Image.asset(
-                                "assets/images/img_tracking_box.png",
-                                width: size.width * 0.6,
-                                fit: BoxFit.contain,
-                              ),
+                              Image.asset("assets/images/img_tracking_box.png", width: size.width * 0.6, fit: BoxFit.contain),
                               SizedBox(height: 100),
                             ],
                           );
@@ -129,18 +112,12 @@ class TrackingDeliveryScreen extends BaseScreen<TrackingDeliveryController> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF5856D7),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(32),
-                        ),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                         elevation: 0,
                       ),
                       child: Text(
                         "Track",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                        ),
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
                       ),
                     ),
                   ),

@@ -8,8 +8,6 @@ class CartScreen extends BaseScreen<CartController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    return Center(
-      child: Text('Cart'),
-    );
+    return Center(child: Text('Cart'));
   }
 }

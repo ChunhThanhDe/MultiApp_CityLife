@@ -22,11 +22,7 @@ class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
     return Stack(
       children: [
         // Purple Header
-        Container(
-          width: double.infinity,
-          height: 180,
-          color: const Color(0xFF5856D7),
-        ),
+        Container(width: double.infinity, height: 180, color: const Color(0xFF5856D7)),
         Column(
           children: [
             // Status bar & header
@@ -70,9 +66,7 @@ class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
             // "On the way" Card
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Obx(() => DeliveryStatusCard(
-                    delivery: controller.selectedDelivery.value,
-                  )),
+              child: Obx(() => DeliveryStatusCard(delivery: controller.selectedDelivery.value)),
             ),
 
             const SizedBox(height: 32),
@@ -89,24 +83,21 @@ class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
             ),
             // Delivery List
             Expanded(
-              child: Obx(() => ListView.builder(
-                    itemCount: controller.deliveries.length,
-                    padding: EdgeInsets.only(top: 8, bottom: 94),
-                    itemBuilder: (context, index) {
-                      final delivery = controller.deliveries[index];
-                      return GestureDetector(
-                        onTap: () {
-                          controller.selectDelivery(delivery);
-                        },
-                        child: DeliveryItem(
-                          code: delivery["code"],
-                          date: delivery["date"],
-                          status: delivery["status"],
-                          statusColor: delivery["statusColor"],
-                        ),
-                      );
-                    },
-                  )),
+              child: Obx(
+                () => ListView.builder(
+                  itemCount: controller.deliveries.length,
+                  padding: EdgeInsets.only(top: 8, bottom: 94),
+                  itemBuilder: (context, index) {
+                    final delivery = controller.deliveries[index];
+                    return GestureDetector(
+                      onTap: () {
+                        controller.selectDelivery(delivery);
+                      },
+                      child: DeliveryItem(code: delivery["code"], date: delivery["date"], status: delivery["status"], statusColor: delivery["statusColor"]),
+                    );
+                  },
+                ),
+              ),
             ),
           ],
         ),

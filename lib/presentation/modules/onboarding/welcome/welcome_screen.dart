@@ -26,24 +26,12 @@ class WelcomeScreen extends BaseScreen<WelcomeController> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Flexible(
-                      child: Image.asset(
-                        controller.welcomeModels[index].image,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
+                    Flexible(child: Image.asset(controller.welcomeModels[index].image, fit: BoxFit.contain)),
                     const SizedBox(height: 54),
-                    AutoSizeText(
-                      controller.welcomeModels[index].title,
-                      style: AppTextStyles.typographyH6SemiBold,
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                    ),
+                    AutoSizeText(controller.welcomeModels[index].title, style: AppTextStyles.typographyH6SemiBold, textAlign: TextAlign.center, maxLines: 1),
                     AutoSizeText(
                       controller.welcomeModels[index].description,
-                      style: AppTextStyles.typographyH10Regular.copyWith(
-                        color: AppColors.textGreyHigh700,
-                      ),
+                      style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHigh700),
                       textAlign: TextAlign.center,
                     ),
                   ],
@@ -75,12 +63,8 @@ class WelcomeScreen extends BaseScreen<WelcomeController> {
               controller.nextPage();
             },
             child: GetBuilder<WelcomeController>(
-              builder: (controller) => Text(
-                controller.currentPageIndex == controller.welcomeModels.length - 1 ? 'Get Started' : 'Next',
-                style: AppTextStyles.typographyH10Medium.copyWith(
-                  color: AppColors.textBaseWhite,
-                ),
-              ),
+              builder: (controller) =>
+                  Text(controller.currentPageIndex == controller.welcomeModels.length - 1 ? 'Get Started' : 'Next', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite)),
             ),
           ),
         ),

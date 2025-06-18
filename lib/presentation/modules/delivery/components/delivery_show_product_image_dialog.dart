@@ -21,11 +21,7 @@ void showProductImageDialog(BuildContext context, String imagePath) {
                 Expanded(
                   child: Text(
                     "Add Product image",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                      color: Color(0xFF161A1D),
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
                   ),
                 ),
                 InkWell(
@@ -41,24 +37,13 @@ void showProductImageDialog(BuildContext context, String imagePath) {
             SizedBox(height: 16),
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
-              child: Image.file(
-                File(imagePath),
-                width: 240,
-                height: 320,
-                fit: BoxFit.cover,
-              ),
+              child: Image.file(File(imagePath), width: 240, height: 320, fit: BoxFit.cover),
             ),
             SizedBox(height: 12),
             Align(
               alignment: Alignment.centerRight,
-              child: Text(
-                "Date image",
-                style: TextStyle(
-                  color: Color(0xFFFF3B30),
-                  fontSize: 14,
-                ),
-              ),
-            )
+              child: Text("Date image", style: TextStyle(color: Color(0xFFFF3B30), fontSize: 14)),
+            ),
           ],
         ),
       ),

@@ -21,11 +21,14 @@ class StoreServiceOptions extends StatelessWidget {
             return AppTabBar(
               tabController: controller.serviceTabController,
               listTab: [
-                _buildServiceTab(Assets.icons.icStore.path, 'In store'),
-                _buildServiceTab(Assets.icons.icCar.path, 'Delivery'),
-                _buildServiceTab(Assets.icons.icCarThru.path, 'Drive thru'),
+                _buildServiceTab(Assets.icons.icStore.path, 'In store', ServiceType.inStore, controller),
+                _buildServiceTab(Assets.icons.icCar.path, 'Delivery', ServiceType.delivery, controller),
+                _buildServiceTab(Assets.icons.icCarThru.path, 'Drive thru', ServiceType.driveThru, controller),
               ],
-              onTap: (index) => controller.serviceTabController.animateTo(index),
+              onTap: (index) {
+                controller.serviceTabController.animateTo(index);
+                controller.selectService(ServiceType.values[index]);
+              },
             );
           },
         ),
@@ -33,22 +36,18 @@ class StoreServiceOptions extends StatelessWidget {
     );
   }
 
-  Widget _buildServiceTab(String iconPath, String label) {
+  Widget _buildServiceTab(String iconPath, String label, ServiceType serviceType, StoreController controller) {
+    bool isSelected = controller.isServiceSelected(serviceType);
+    Color iconColor = isSelected ? AppColors.stateBrandDefault500 : AppColors.textGreyDefault500;
+    Color textColor = isSelected ? AppColors.stateBrandDefault500 : AppColors.textGreyDefault500;
+
     return Tab(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset(
-            iconPath,
-            width: 16.w,
-            height: 16.w,
-            colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn),
-          ),
+          SvgPicture.asset(iconPath, width: 16.w, height: 16.w, colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn)),
           SizedBox(width: 8.w),
-          Text(
-            label,
-            style: AppTextStyles.typographyH12Medium.copyWith(color: AppColors.textGreyHighest950),
-          ),
+          Text(label, style: AppTextStyles.typographyH12Medium.copyWith(color: textColor)),
         ],
       ),
     );

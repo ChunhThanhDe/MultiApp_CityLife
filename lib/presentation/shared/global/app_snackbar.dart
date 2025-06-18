@@ -14,12 +14,7 @@ enum SnackBarType { error, success }
 /// [message] The main message of the snackbar.
 /// [position] The position of the snackbar on the screen (default is TOP).
 /// [type] The type of snackbar (success or error, default is success).
-void showAppSnackBar({
-  required String title,
-  String? message,
-  SnackPosition position = SnackPosition.TOP,
-  SnackBarType type = SnackBarType.success,
-}) {
+void showAppSnackBar({required String title, String? message, SnackPosition position = SnackPosition.TOP, SnackBarType type = SnackBarType.success}) {
   Get.showSnackbar(
     GetSnackBar(
       messageText: _buildSnackbarContent(type, title, message),
@@ -55,14 +50,7 @@ Widget _buildSnackbarContent(SnackBarType type, String title, String? message) {
       color: Colors.white,
       borderRadius: BorderRadius.circular(12),
       border: isSuccess ? Border(left: BorderSide(width: 5, color: color)) : null,
-      boxShadow: [
-        BoxShadow(
-          color: isSuccess ? const Color(0x1E0EAA0B) : const Color(0x19000000),
-          blurRadius: isSuccess ? 12 : 20,
-          offset: const Offset(0, 4),
-          spreadRadius: 0,
-        )
-      ],
+      boxShadow: [BoxShadow(color: isSuccess ? const Color(0x1E0EAA0B) : const Color(0x19000000), blurRadius: isSuccess ? 12 : 20, offset: const Offset(0, 4), spreadRadius: 0)],
     ),
     child: Row(
       mainAxisSize: MainAxisSize.min,
@@ -76,9 +64,7 @@ Widget _buildSnackbarContent(SnackBarType type, String title, String? message) {
           padding: const EdgeInsets.all(8),
           decoration: ShapeDecoration(
             color: color,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
           child: SvgPicture.asset(icon),
         ),
@@ -93,20 +79,12 @@ Widget _buildSnackbarContent(SnackBarType type, String title, String? message) {
               // Title
               Visibility(
                 visible: title.isNotEmpty,
-                child: AutoSizeText(
-                  title,
-                  maxLines: 2,
-                  style: AppTextStyles.typographyH10SemiBold.copyWith(color: color),
-                ),
+                child: AutoSizeText(title, maxLines: 2, style: AppTextStyles.typographyH10SemiBold.copyWith(color: color)),
               ),
               // Message
               Visibility(
                 visible: message != null && message.isNotEmpty,
-                child: AutoSizeText(
-                  message ?? '',
-                  style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHighest950),
-                  maxLines: 2,
-                ),
+                child: AutoSizeText(message ?? '', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHighest950), maxLines: 2),
               ),
             ],
           ),

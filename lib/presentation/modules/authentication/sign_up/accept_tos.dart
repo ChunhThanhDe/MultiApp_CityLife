@@ -24,10 +24,7 @@ class AcceptTos extends BaseScreen<SignUpController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 16.h),
-          AuthHeader(
-            title: tr(LocaleKeys.authentication_acceptTos_title),
-            subtitle: tr(LocaleKeys.authentication_acceptTos_subtitle),
-          ),
+          AuthHeader(title: tr(LocaleKeys.authentication_acceptTos_title), subtitle: tr(LocaleKeys.authentication_acceptTos_subtitle)),
           SizedBox(height: 32.h),
           AppButton(
             onTap: () => Get.toNamed(AppRoutes.root),
@@ -37,19 +34,8 @@ class AcceptTos extends BaseScreen<SignUpController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(),
-                Text(
-                  tr(LocaleKeys.authentication_acceptTos_nextButton),
-                  style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white),
-                ),
-                SvgPicture.asset(
-                  Assets.icons.icRightArrow.path,
-                  width: 12.w,
-                  height: 12.w,
-                  colorFilter: const ColorFilter.mode(
-                    Colors.white,
-                    BlendMode.srcIn,
-                  ),
-                ),
+                Text(tr(LocaleKeys.authentication_acceptTos_nextButton), style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white)),
+                SvgPicture.asset(Assets.icons.icRightArrow.path, width: 12.w, height: 12.w, colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn)),
               ],
             ),
           ),
@@ -57,16 +43,10 @@ class AcceptTos extends BaseScreen<SignUpController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                tr(LocaleKeys.authentication_acceptTos_didntReceiveEmail),
-                style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
-              ),
+              Text(tr(LocaleKeys.authentication_acceptTos_didntReceiveEmail), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
               GestureDetector(
                 onTap: () {},
-                child: Text(
-                  tr(LocaleKeys.authentication_acceptTos_clickResend),
-                  style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBrandDefault500),
-                ),
+                child: Text(tr(LocaleKeys.authentication_acceptTos_clickResend), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBrandDefault500)),
               ),
             ],
           ),

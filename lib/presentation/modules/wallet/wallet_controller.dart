@@ -6,11 +6,7 @@ class Transaction {
   final String date;
   final String amount;
 
-  Transaction({
-    required this.title,
-    required this.date,
-    required this.amount,
-  });
+  Transaction({required this.title, required this.date, required this.amount});
 }
 
 class WalletController extends BaseController {
@@ -27,7 +23,7 @@ class WalletController extends BaseController {
   ];
   final showBalance = true.obs;
 
-  toggleBalanceVisibility() {
+  void toggleBalanceVisibility() {
     showBalance.value = !showBalance.value;
   }
 }

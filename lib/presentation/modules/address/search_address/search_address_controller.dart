@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 
-enum SearchItemType {
-  history,
-  address,
-  nearby,
-}
+enum SearchItemType { history, address, nearby }
 
 class SearchItem {
   final String title;
@@ -18,11 +14,11 @@ class SearchItem {
 class SearchAddressController extends BaseController {
   final TextEditingController searchAddressController = TextEditingController();
   var isShowClearButton = false.obs;
-  onSearchChanged(String value) {
+  void onSearchChanged(String value) {
     isShowClearButton.value = value.isNotEmpty;
   }
 
-  onClearSearch() {
+  void onClearSearch() {
     searchAddressController.clear();
     isShowClearButton.value = false;
   }

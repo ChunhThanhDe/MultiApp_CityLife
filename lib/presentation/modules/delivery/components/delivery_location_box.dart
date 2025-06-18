@@ -5,10 +5,7 @@ import 'package:sixam_mart_user/presentation/modules/delivery/box_delivery/box_d
 class LocationBoxWidget extends StatelessWidget {
   final BoxDeliveryController controller;
 
-  const LocationBoxWidget({
-    super.key,
-    required this.controller,
-  });
+  const LocationBoxWidget({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {

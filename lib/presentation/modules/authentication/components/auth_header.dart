@@ -9,15 +9,7 @@ class AuthHeader extends StatelessWidget {
   final int subtitleMaxLines;
   final TextStyle? titleStyle;
   final TextStyle? subtitleStyle;
-  const AuthHeader({
-    super.key,
-    required this.title,
-    required this.subtitle,
-    this.titleMaxLines = 1,
-    this.subtitleMaxLines = 2,
-    this.titleStyle,
-    this.subtitleStyle,
-  });
+  const AuthHeader({super.key, required this.title, required this.subtitle, this.titleMaxLines = 1, this.subtitleMaxLines = 2, this.titleStyle, this.subtitleStyle});
 
   @override
   Widget build(BuildContext context) {

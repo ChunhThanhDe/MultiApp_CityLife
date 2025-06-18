@@ -116,11 +116,7 @@ AnimationController? _animationControllerFontFamilyDefault;
 class SixMartTheme extends StatefulWidget {
   final Widget child;
   final Duration duration;
-  const SixMartTheme({
-    super.key,
-    required this.child,
-    this.duration = const Duration(milliseconds: 300),
-  });
+  const SixMartTheme({super.key, required this.child, this.duration = const Duration(milliseconds: 300)});
 
   static TypographyTypes typographytypes = TypographyTypes.mode1;
   static void modifyTypography(TypographyTypes type) {
@@ -210,34 +206,13 @@ class _SixMartThemeState extends State<SixMartTheme> with TickerProviderStateMix
   @override
   void initState() {
     super.initState();
-    _animationControllerTypographyDefault = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    );
-    _animationControllerAllColorsDefault = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    );
-    _animationControllerThemeDefault = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    );
-    _animationControllerBrandColorDefault = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    );
-    _animationControllerSpacingDefault = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    );
-    _animationControllerCornerDefault = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    );
-    _animationControllerFontFamilyDefault = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    );
+    _animationControllerTypographyDefault = AnimationController(vsync: this, duration: widget.duration);
+    _animationControllerAllColorsDefault = AnimationController(vsync: this, duration: widget.duration);
+    _animationControllerThemeDefault = AnimationController(vsync: this, duration: widget.duration);
+    _animationControllerBrandColorDefault = AnimationController(vsync: this, duration: widget.duration);
+    _animationControllerSpacingDefault = AnimationController(vsync: this, duration: widget.duration);
+    _animationControllerCornerDefault = AnimationController(vsync: this, duration: widget.duration);
+    _animationControllerFontFamilyDefault = AnimationController(vsync: this, duration: widget.duration);
     _Typography.addListener(() {
       _animationControllerTypographyDefault?.forward(from: 0);
     });
@@ -288,11 +263,7 @@ enum TypographyTypes { mode1 }
 
 TypographyDefault get Typography {
   if (_animationControllerTypographyDefault?.isAnimating ?? false) {
-    return TypographyDefault._lerpResolve(
-      _Typography.value,
-      _TypographyLast,
-      _animationControllerTypographyDefault?.value ?? 1,
-    );
+    return TypographyDefault._lerpResolve(_Typography.value, _TypographyLast, _animationControllerTypographyDefault?.value ?? 1);
   }
   return _Typography.value;
 }
@@ -304,11 +275,7 @@ enum AllColorsTypes { mode1 }
 
 AllColorsDefault get AllColors {
   if (_animationControllerAllColorsDefault?.isAnimating ?? false) {
-    return AllColorsDefault._lerpResolve(
-      _AllColors.value,
-      _AllColorsLast,
-      _animationControllerAllColorsDefault?.value ?? 1,
-    );
+    return AllColorsDefault._lerpResolve(_AllColors.value, _AllColorsLast, _animationControllerAllColorsDefault?.value ?? 1);
   }
   return _AllColors.value;
 }
@@ -320,11 +287,7 @@ enum ThemeTypes { light, dark }
 
 ThemeDefault get Theme {
   if (_animationControllerThemeDefault?.isAnimating ?? false) {
-    return ThemeDefault._lerpResolve(
-      _Theme.value,
-      _ThemeLast,
-      _animationControllerThemeDefault?.value ?? 1,
-    );
+    return ThemeDefault._lerpResolve(_Theme.value, _ThemeLast, _animationControllerThemeDefault?.value ?? 1);
   }
   return _Theme.value;
 }
@@ -336,11 +299,7 @@ enum BrandColorTypes { blue, purple, violet, orange }
 
 BrandColorDefault get BrandColor {
   if (_animationControllerBrandColorDefault?.isAnimating ?? false) {
-    return BrandColorDefault._lerpResolve(
-      _BrandColor.value,
-      _BrandColorLast,
-      _animationControllerBrandColorDefault?.value ?? 1,
-    );
+    return BrandColorDefault._lerpResolve(_BrandColor.value, _BrandColorLast, _animationControllerBrandColorDefault?.value ?? 1);
   }
   return _BrandColor.value;
 }
@@ -352,11 +311,7 @@ enum SpacingTypes { mode1 }
 
 SpacingDefault get Spacing {
   if (_animationControllerSpacingDefault?.isAnimating ?? false) {
-    return SpacingDefault._lerpResolve(
-      _Spacing.value,
-      _SpacingLast,
-      _animationControllerSpacingDefault?.value ?? 1,
-    );
+    return SpacingDefault._lerpResolve(_Spacing.value, _SpacingLast, _animationControllerSpacingDefault?.value ?? 1);
   }
   return _Spacing.value;
 }
@@ -368,11 +323,7 @@ enum CornerTypes { classic, sharp }
 
 CornerDefault get Corner {
   if (_animationControllerCornerDefault?.isAnimating ?? false) {
-    return CornerDefault._lerpResolve(
-      _Corner.value,
-      _CornerLast,
-      _animationControllerCornerDefault?.value ?? 1,
-    );
+    return CornerDefault._lerpResolve(_Corner.value, _CornerLast, _animationControllerCornerDefault?.value ?? 1);
   }
   return _Corner.value;
 }
@@ -384,11 +335,7 @@ enum FontFamilyTypes { inter, barlow, manrope, robotoMono }
 
 FontFamilyDefault get FontFamily {
   if (_animationControllerFontFamilyDefault?.isAnimating ?? false) {
-    return FontFamilyDefault._lerpResolve(
-      _FontFamily.value,
-      _FontFamilyLast,
-      _animationControllerFontFamilyDefault?.value ?? 1,
-    );
+    return FontFamilyDefault._lerpResolve(_FontFamily.value, _FontFamilyLast, _animationControllerFontFamilyDefault?.value ?? 1);
   }
   return _FontFamily.value;
 }
@@ -2734,14 +2681,10 @@ class _CornerSharp extends CornerDefault {
 
 class FontFamilyDefault {
   FontFamilyDefault._();
-  FontFamilyDefault._lerp({
-    required this.fonts,
-  });
+  FontFamilyDefault._lerp({required this.fonts});
   late final String fonts;
   static FontFamilyDefault _lerpResolve(FontFamilyDefault a, FontFamilyDefault b, double t) {
-    return FontFamilyDefault._lerp(
-      fonts: b.fonts._lerp(a.fonts, t),
-    );
+    return FontFamilyDefault._lerp(fonts: b.fonts._lerp(a.fonts, t));
   }
 }
 
@@ -2868,10 +2811,7 @@ class Style extends TextStyle {
 class Styles {
   const Styles._();
 
-  static const _parent = TextStyle(
-    debugLabel: '',
-    leadingDistribution: TextLeadingDistribution.even,
-  );
+  static const _parent = TextStyle(debugLabel: '', leadingDistribution: TextLeadingDistribution.even);
 
   static final typographyH1Regular = Style._style(
     _parent.copyWith(
@@ -3403,255 +3343,73 @@ class Styles {
 }
 
 class Shadow extends BoxShadow {
-  const Shadow._({
-    super.color,
-    super.offset,
-    super.blurRadius,
-    super.spreadRadius = 0.0,
-    super.blurStyle,
-  });
+  const Shadow._({super.color, super.offset, super.blurRadius, super.spreadRadius = 0.0, super.blurStyle});
 }
 
 class Shadows {
   const Shadows._();
 
-  static final List<Shadow> shadowSm = [
-    Shadow._(
-      color: Theme.shadowSm5,
-      offset: Offset(0, 1),
-      blurRadius: 4,
-      spreadRadius: 0,
-      blurStyle: BlurStyle.normal,
-    ),
-  ];
+  static final List<Shadow> shadowSm = [Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 4, spreadRadius: 0, blurStyle: BlurStyle.normal)];
 
   static final List<Shadow> shadowMd = [
-    Shadow._(
-      color: Theme.shadowSm5,
-      offset: Offset(0, 1),
-      blurRadius: 4,
-      spreadRadius: 0,
-      blurStyle: BlurStyle.normal,
-    ),
-    Shadow._(
-      color: Theme.shadowSm5,
-      offset: Offset(0, 1),
-      blurRadius: 2,
-      spreadRadius: 0,
-      blurStyle: BlurStyle.normal,
-    ),
+    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 4, spreadRadius: 0, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> shadowLg = [
-    Shadow._(
-      color: Theme.shadowMd10,
-      offset: Offset(0, 4),
-      blurRadius: 8,
-      spreadRadius: -2,
-      blurStyle: BlurStyle.normal,
-    ),
-    Shadow._(
-      color: Theme.shadowSm5,
-      offset: Offset(0, 2),
-      blurRadius: 4,
-      spreadRadius: -2,
-      blurStyle: BlurStyle.normal,
-    ),
+    Shadow._(color: Theme.shadowMd10, offset: Offset(0, 4), blurRadius: 8, spreadRadius: -2, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 2), blurRadius: 4, spreadRadius: -2, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> shadowXl = [
-    Shadow._(
-      color: Theme.shadowMd10,
-      offset: Offset(0, 12),
-      blurRadius: 16,
-      spreadRadius: -6,
-      blurStyle: BlurStyle.normal,
-    ),
-    Shadow._(
-      color: Theme.shadowSm5,
-      offset: Offset(0, 2),
-      blurRadius: 4,
-      spreadRadius: -2,
-      blurStyle: BlurStyle.normal,
-    ),
+    Shadow._(color: Theme.shadowMd10, offset: Offset(0, 12), blurRadius: 16, spreadRadius: -6, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 2), blurRadius: 4, spreadRadius: -2, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> shadow2xl = [
-    Shadow._(
-      color: Theme.shadowMd10,
-      offset: Offset(0, 18),
-      blurRadius: 24,
-      spreadRadius: -6,
-      blurStyle: BlurStyle.normal,
-    ),
-    Shadow._(
-      color: Theme.shadowSm5,
-      offset: Offset(0, 6),
-      blurRadius: 8,
-      spreadRadius: -4,
-      blurStyle: BlurStyle.normal,
-    ),
+    Shadow._(color: Theme.shadowMd10, offset: Offset(0, 18), blurRadius: 24, spreadRadius: -6, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 6), blurRadius: 8, spreadRadius: -4, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> shadow3xl = [
-    Shadow._(
-      color: Theme.shadowXl30,
-      offset: Offset(0, 24),
-      blurRadius: 48,
-      spreadRadius: -10,
-      blurStyle: BlurStyle.normal,
-    ),
-    Shadow._(
-      color: Theme.shadowSm5,
-      offset: Offset(0, 6),
-      blurRadius: 8,
-      spreadRadius: -4,
-      blurStyle: BlurStyle.normal,
-    ),
+    Shadow._(color: Theme.shadowXl30, offset: Offset(0, 24), blurRadius: 48, spreadRadius: -10, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 6), blurRadius: 8, spreadRadius: -4, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> focusBrand = [
-    Shadow._(
-      color: Theme.stateBrandDefault500,
-      offset: Offset(0, 0),
-      blurRadius: 0,
-      spreadRadius: 4,
-      blurStyle: BlurStyle.normal,
-    ),
-    Shadow._(
-      color: Theme.alphaWhite80,
-      offset: Offset(0, 0),
-      blurRadius: 0,
-      spreadRadius: 4,
-      blurStyle: BlurStyle.normal,
-    ),
-    Shadow._(
-      color: Theme.shadowSm5,
-      offset: Offset(0, 1),
-      blurRadius: 2,
-      spreadRadius: 0,
-      blurStyle: BlurStyle.normal,
-    ),
+    Shadow._(color: Theme.stateBrandDefault500, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.alphaWhite80, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> focusGray = [
-    Shadow._(
-      color: Theme.stateGreyHighest900,
-      offset: Offset(0, 0),
-      blurRadius: 0,
-      spreadRadius: 4,
-      blurStyle: BlurStyle.normal,
-    ),
-    Shadow._(
-      color: Theme.alphaWhite80,
-      offset: Offset(0, 0),
-      blurRadius: 0,
-      spreadRadius: 4,
-      blurStyle: BlurStyle.normal,
-    ),
-    Shadow._(
-      color: Theme.shadowSm5,
-      offset: Offset(0, 1),
-      blurRadius: 2,
-      spreadRadius: 0,
-      blurStyle: BlurStyle.normal,
-    ),
+    Shadow._(color: Theme.stateGreyHighest900, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.alphaWhite80, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> focusSuccess = [
-    Shadow._(
-      color: Theme.stateSuccessDefault500,
-      offset: Offset(0, 0),
-      blurRadius: 0,
-      spreadRadius: 4,
-      blurStyle: BlurStyle.normal,
-    ),
-    Shadow._(
-      color: Theme.alphaWhite80,
-      offset: Offset(0, 0),
-      blurRadius: 0,
-      spreadRadius: 4,
-      blurStyle: BlurStyle.normal,
-    ),
-    Shadow._(
-      color: Theme.shadowSm5,
-      offset: Offset(0, 1),
-      blurRadius: 2,
-      spreadRadius: 0,
-      blurStyle: BlurStyle.normal,
-    ),
+    Shadow._(color: Theme.stateSuccessDefault500, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.alphaWhite80, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> focusWarning = [
-    Shadow._(
-      color: Theme.stateWarningDefault500,
-      offset: Offset(0, 0),
-      blurRadius: 0,
-      spreadRadius: 4,
-      blurStyle: BlurStyle.normal,
-    ),
-    Shadow._(
-      color: Theme.alphaWhite80,
-      offset: Offset(0, 0),
-      blurRadius: 0,
-      spreadRadius: 4,
-      blurStyle: BlurStyle.normal,
-    ),
-    Shadow._(
-      color: Theme.shadowSm5,
-      offset: Offset(0, 1),
-      blurRadius: 2,
-      spreadRadius: 0,
-      blurStyle: BlurStyle.normal,
-    ),
+    Shadow._(color: Theme.stateWarningDefault500, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.alphaWhite80, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> focusInformation = [
-    Shadow._(
-      color: Theme.stateInformationDefault500,
-      offset: Offset(0, 0),
-      blurRadius: 0,
-      spreadRadius: 4,
-      blurStyle: BlurStyle.normal,
-    ),
-    Shadow._(
-      color: Theme.alphaWhite80,
-      offset: Offset(0, 0),
-      blurRadius: 0,
-      spreadRadius: 4,
-      blurStyle: BlurStyle.normal,
-    ),
-    Shadow._(
-      color: Theme.shadowSm5,
-      offset: Offset(0, 1),
-      blurRadius: 2,
-      spreadRadius: 0,
-      blurStyle: BlurStyle.normal,
-    ),
+    Shadow._(color: Theme.stateInformationDefault500, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.alphaWhite80, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> focusDanger = [
-    Shadow._(
-      color: Theme.stateDangerDefault500,
-      offset: Offset(0, 0),
-      blurRadius: 0,
-      spreadRadius: 4,
-      blurStyle: BlurStyle.normal,
-    ),
-    Shadow._(
-      color: Theme.alphaWhite80,
-      offset: Offset(0, 0),
-      blurRadius: 0,
-      spreadRadius: 4,
-      blurStyle: BlurStyle.normal,
-    ),
-    Shadow._(
-      color: Theme.shadowSm5,
-      offset: Offset(0, 1),
-      blurRadius: 2,
-      spreadRadius: 0,
-      blurStyle: BlurStyle.normal,
-    ),
+    Shadow._(color: Theme.stateDangerDefault500, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.alphaWhite80, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
   ];
 }
 
