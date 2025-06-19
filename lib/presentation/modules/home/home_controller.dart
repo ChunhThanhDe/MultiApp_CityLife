@@ -68,6 +68,10 @@ class HomeController extends BaseController {
     }
   }
 
+  Future<void> refreshData() async {
+    await getModules();
+  }
+
   final List<Service> services = [
     Service(title: 'Food', image: Assets.images.imgFood.path, onTap: () {}),
     Service(title: 'Grocery', image: Assets.images.imgGrocery.path, onTap: () {}),

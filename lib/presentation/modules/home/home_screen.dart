@@ -16,25 +16,28 @@ class HomeScreen extends BaseScreen<HomeController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        HeaderAndService(),
-        SliverBox(child: Divider(height: 1, color: AppColors.stateGreyLowest50)),
-        UnifiedBannerWidget(sectionTitle: 'Today Offers', items: controller.todayOffersBannerItems, bannerType: BannerType.bannerFloatingLogo),
-        SliverBox(height: 16),
-        SliverBox(child: SectionBreakDivider()),
-        SliverBox(height: 16),
-        UnifiedBannerWidget(sectionTitle: 'Today Offers', items: controller.todayOffersBrandItems, bannerType: BannerType.brandLogoName, showArrowIcon: true),
-        SliverBox(height: 16),
-        SliverBox(child: SectionBreakDivider()),
-        SliverBox(height: 16),
-        UnifiedBannerWidget(sectionTitle: 'Today Offers', items: controller.todayOffersBrandDiscountItems, bannerType: BannerType.bannerDiscount, showArrowIcon: true),
-        SliverBox(height: 16),
-        SliverBox(child: SectionBreakDivider()),
-        SliverBox(height: 16),
-        UnifiedBannerWidget(sectionTitle: 'Top Offers', items: controller.topOffersItems, bannerType: BannerType.bannerSingleImage),
-        SliverBox(height: 32),
-      ],
+    return RefreshIndicator(
+      onRefresh: controller.refreshData,
+      child: CustomScrollView(
+        slivers: [
+          HeaderAndService(),
+          SliverBox(child: Divider(height: 1, color: AppColors.stateGreyLowest50)),
+          UnifiedBannerWidget(sectionTitle: 'Today Offers', items: controller.todayOffersBannerItems, bannerType: BannerType.bannerFloatingLogo),
+          SliverBox(height: 16),
+          SliverBox(child: SectionBreakDivider()),
+          SliverBox(height: 16),
+          UnifiedBannerWidget(sectionTitle: 'Today Offers', items: controller.todayOffersBrandItems, bannerType: BannerType.brandLogoName, showArrowIcon: true),
+          SliverBox(height: 16),
+          SliverBox(child: SectionBreakDivider()),
+          SliverBox(height: 16),
+          UnifiedBannerWidget(sectionTitle: 'Today Offers', items: controller.todayOffersBrandDiscountItems, bannerType: BannerType.bannerDiscount, showArrowIcon: true),
+          SliverBox(height: 16),
+          SliverBox(child: SectionBreakDivider()),
+          SliverBox(height: 16),
+          UnifiedBannerWidget(sectionTitle: 'Top Offers', items: controller.topOffersItems, bannerType: BannerType.bannerSingleImage),
+          SliverBox(height: 32),
+        ],
+      ),
     );
   }
 }
