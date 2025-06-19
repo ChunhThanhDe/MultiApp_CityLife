@@ -37,7 +37,7 @@ class HeaderAndService extends GetView<HomeController> {
             TextSpan(
               children: [
                 TextSpan(
-                  text: '${controller.greetingMessage}\n',
+                  text: '${controller.getGreetingByTime()}\n',
                   style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite),
                 ),
                 TextSpan(

@@ -50,7 +50,7 @@ class HomeController extends BaseController {
 
   final RxList<GetModuleResponse> modules = <GetModuleResponse>[].obs;
 
-  String _getGreetingByTime() {
+  String getGreetingByTime() {
     final now = DateTime.now();
     final hour = now.hour;
 
@@ -64,8 +64,6 @@ class HomeController extends BaseController {
       return 'Good night 🌙';
     }
   }
-
-  String get greetingMessage => _getGreetingByTime();
 
   Future<void> getModules() async {
     final result = await _moduleRepository.getModules();
