@@ -40,35 +40,37 @@ class SignInController extends BaseController {
   }
 
   Future<void> onSubmit() async {
-    closeKeyboard();
-    if (!formKey.currentState!.validate()) {
-      return;
-    }
-    isLoading.value = true;
-    final LoginRequest request = LoginRequest(loginType: LoginType.manual, emailOrPhone: inputController.text, fieldType: loginMethod.value.fieldType, password: passwordController.text);
+    safeExecute(() async {
+      closeKeyboard();
+      if (!formKey.currentState!.validate()) {
+        return;
+      }
+      isLoading.value = true;
+      final LoginRequest request = LoginRequest(loginType: LoginType.manual, emailOrPhone: inputController.text, fieldType: loginMethod.value.fieldType, password: passwordController.text);
 
-    final ApiResult result = await showAppOverlayLoading(future: _authRepository.login(request));
+      final ApiResult result = await showAppOverlayLoading(future: _authRepository.login(request));
 
-    switch (result) {
-      case Success(:final response):
-        if (response.statusCode != 200) {
-          final errorResponse = ErrorResponse.fromJson(response.data);
-          showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
+      switch (result) {
+        case Success(:final response):
+          if (response.statusCode != 200) {
+            final errorResponse = ErrorResponse.fromJson(response.data);
+            showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
+            isLoading.value = false;
+            return;
+          }
+          final userAuthInfo = UserAuthInfo.fromJson(response.data);
+          AppStorage.setString(SharedPreferencesKeys.userAuthInfo, jsonEncode(userAuthInfo.toJson()));
+          Get.find<AppProvider>().updateUserAuthInfo(userAuthInfo);
+
+          Get.offAllNamed(AppRoutes.root);
           isLoading.value = false;
-          return;
-        }
-        final userAuthInfo = UserAuthInfo.fromJson(response.data);
-        AppStorage.setString(SharedPreferencesKeys.userAuthInfo, jsonEncode(userAuthInfo.toJson()));
-        Get.find<AppProvider>().updateUserAuthInfo(userAuthInfo);
-
-        Get.offAllNamed(AppRoutes.root);
-        isLoading.value = false;
-        break;
-      case Failure(:final error):
-        showAppSnackBar(title: error.toString(), type: SnackBarType.error);
-        isLoading.value = false;
-        break;
-    }
+          break;
+        case Failure(:final error):
+          showAppSnackBar(title: error.toString(), type: SnackBarType.error);
+          isLoading.value = false;
+          break;
+      }
+    });
   }
 
   void onCountryCodeChanged(CountryCode countryCode) {

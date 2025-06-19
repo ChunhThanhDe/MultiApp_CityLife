@@ -8,4 +8,12 @@ abstract class BaseController extends GetxController {
   final isLoading = false.obs;
 
   void closeKeyboard() => FocusScope.of(Get.context!).unfocus();
+
+  Future<void> safeExecute(Future<void> Function() function) async {
+    try {
+      await function();
+    } catch (e) {
+      debugPrint('🔍 error: $e');
+    }
+  }
 }

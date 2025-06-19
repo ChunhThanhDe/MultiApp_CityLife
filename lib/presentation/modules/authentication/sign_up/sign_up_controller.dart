@@ -102,44 +102,46 @@ class SignUpController extends BaseController {
   }
 
   Future<void> onSubmit() async {
-    closeKeyboard();
-    if (!formKey.currentState!.validate()) {
-      return;
-    }
+    safeExecute(() async {
+      closeKeyboard();
+      if (!formKey.currentState!.validate()) {
+        return;
+      }
 
-    bool isEmailMethod = currentMethod.value == SignUpMethod.email;
-    isLoading.value = true;
+      bool isEmailMethod = currentMethod.value == SignUpMethod.email;
+      isLoading.value = true;
 
-    final birthday = _getBirthdayFromInputs();
+      final birthday = _getBirthdayFromInputs();
 
-    final SignUpRequest request = SignUpRequest(
-      name: nameController.text,
-      password: passwordController.text,
-      birthday: birthday,
-      email: isEmailMethod ? emailController.text : null,
-      phone: !isEmailMethod ? phoneController.text : null,
-    );
+      final SignUpRequest request = SignUpRequest(
+        name: nameController.text,
+        password: passwordController.text,
+        birthday: birthday,
+        email: isEmailMethod ? emailController.text : null,
+        phone: !isEmailMethod ? phoneController.text : null,
+      );
 
-    final ApiResult result = await showAppOverlayLoading(future: _authRepository.signUp(request));
+      final ApiResult result = await showAppOverlayLoading(future: _authRepository.signUp(request));
 
-    switch (result) {
-      case Success(:final response):
-        if (response.statusCode != 200) {
-          final errorResponse = ErrorResponse.fromJson(response.data);
-          showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
-          return;
-        }
+      switch (result) {
+        case Success(:final response):
+          if (response.statusCode != 200) {
+            final errorResponse = ErrorResponse.fromJson(response.data);
+            showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
+            return;
+          }
 
-        final userAuthInfo = UserAuthInfo.fromJson(response.data);
-        AppStorage.setString(SharedPreferencesKeys.userAuthInfo, jsonEncode(userAuthInfo.toJson()));
-        Get.find<AppProvider>().updateUserAuthInfo(userAuthInfo);
+          final userAuthInfo = UserAuthInfo.fromJson(response.data);
+          AppStorage.setString(SharedPreferencesKeys.userAuthInfo, jsonEncode(userAuthInfo.toJson()));
+          Get.find<AppProvider>().updateUserAuthInfo(userAuthInfo);
 
-        Get.offAll(() => AcceptTos());
-        isLoading.value = false;
-      case Failure(:final error):
-        showAppSnackBar(title: error.toString(), type: SnackBarType.error);
-        isLoading.value = false;
-    }
+          Get.offAll(() => AcceptTos());
+          isLoading.value = false;
+        case Failure(:final error):
+          showAppSnackBar(title: error.toString(), type: SnackBarType.error);
+          isLoading.value = false;
+      }
+    });
   }
 
   String? _getBirthdayFromInputs() {

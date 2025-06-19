@@ -66,21 +66,23 @@ class HomeController extends BaseController {
   }
 
   Future<void> getModules() async {
-    final result = await _moduleRepository.getModules();
-    switch (result) {
-      case Success(:final response):
-        if (response.statusCode != 200) {
-          final errorResponse = ErrorResponse.fromJson(response.data);
-          showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
-          return;
-        }
-        final baseResponse = BaseResponse.fromJson(response.data);
-        final modules = (baseResponse.data as List).map((e) => GetModuleResponse.fromJson(e)).toList();
-        this.modules.clear();
-        this.modules.addAll(modules);
-      case Failure(:final error):
-        showAppSnackBar(title: error.toString(), type: SnackBarType.error);
-    }
+    await safeExecute(() async {
+      final result = await _moduleRepository.getModules();
+      switch (result) {
+        case Success(:final response):
+          if (response.statusCode != 200) {
+            final errorResponse = ErrorResponse.fromJson(response.data);
+            showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
+            return;
+          }
+          final baseResponse = BaseResponse.fromJson(response.data);
+          final modules = (baseResponse.data as List).map((e) => GetModuleResponse.fromJson(e)).toList();
+          this.modules.clear();
+          this.modules.addAll(modules);
+        case Failure(:final error):
+          showAppSnackBar(title: error.toString(), type: SnackBarType.error);
+      }
+    });
   }
 
   Future<void> refreshData() async {
