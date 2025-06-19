@@ -50,6 +50,23 @@ class HomeController extends BaseController {
 
   final RxList<GetModuleResponse> modules = <GetModuleResponse>[].obs;
 
+  String _getGreetingByTime() {
+    final now = DateTime.now();
+    final hour = now.hour;
+
+    if (hour >= 5 && hour < 12) {
+      return 'Good morning ☀️';
+    } else if (hour >= 12 && hour < 17) {
+      return 'Good afternoon 🌤️';
+    } else if (hour >= 17 && hour < 21) {
+      return 'Good evening 🌆';
+    } else {
+      return 'Good night 🌙';
+    }
+  }
+
+  String get greetingMessage => _getGreetingByTime();
+
   Future<void> getModules() async {
     final result = await _moduleRepository.getModules();
     switch (result) {
