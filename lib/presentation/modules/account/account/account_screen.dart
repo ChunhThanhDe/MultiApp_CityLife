@@ -4,7 +4,6 @@ import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
-import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_dialog.dart';
 import 'package:sixam_mart_user/services/auth_service.dart';
 
@@ -28,53 +27,21 @@ class AccountScreen extends BaseScreen<AccountController> {
   }
 
   void _showLogoutConfirmation() {
-    showAppDialog(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Sign Out', style: AppTextStyles.typographyH10SemiBold),
-          SizedBox(height: 12),
-          Text('Are you sure you want to sign out of your account?', style: AppTextStyles.typographyH11Regular),
-          SizedBox(height: 24),
-          Row(
-            children: [
-              Expanded(
-                child: AppButton(
-                  onTap: () {
-                    Get.back();
-                  },
-                  color: Colors.transparent,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    side: BorderSide(color: Color(0xFFE8EBEE)),
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: 12),
-                  child: Text(
-                    'Cancel',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xFF4A5763)),
-                  ),
-                ),
-              ),
-              SizedBox(width: 12),
-              Expanded(
-                child: AppButton(
-                  onTap: () {
-                    Get.back();
-                    AuthService.logout();
-                  },
-                  color: Color(0xFFB80900),
-                  padding: EdgeInsets.symmetric(vertical: 12),
-                  child: Text(
-                    'Sign Out',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.white),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+    showConfirmationDialog(
+      onCancel: () => Get.back(),
+      onConfirm: () {
+        Get.back();
+        AuthService.logout();
+      },
+      title: 'Sign Out',
+      message: 'Are you sure you want to sign out of your account?',
+      cancelText: 'Cancel',
+      confirmText: 'Sign Out',
+      cancelColor: AppColors.textGreyDefault500,
+      confirmColor: AppColors.textDangerDefault500,
+      cancelTextStyle: AppTextStyles.typographyH10SemiBold,
+      confirmTextStyle: AppTextStyles.typographyH10SemiBold.copyWith(color: Colors.white),
+      titleStyle: AppTextStyles.typographyH10SemiBold,
     );
   }
 
