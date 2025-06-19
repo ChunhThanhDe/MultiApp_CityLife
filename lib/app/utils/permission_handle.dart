@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:sixam_mart_user/app/theme/theme.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_dialog.dart';
 
 Future<bool> checkPermission({required Permission permission, String? titleRestricted, String? titlePermanentlyDenied}) async {
   final PermissionStatus status = await permission.status;
@@ -37,117 +38,42 @@ Future<bool> checkPermission({required Permission permission, String? titleRestr
 }
 
 Future<void> _showModalNotifyPermissionRestricted(String? titleRestricted) async {
-  Get.dialog(
-    transitionDuration: const Duration(milliseconds: 100),
-    transitionCurve: Curves.easeInOut,
-    Dialog(
-      insetPadding: const EdgeInsets.symmetric(horizontal: 24),
-      backgroundColor: Colors.white,
-      child: CustomModal(
-        title: 'Permission Restricted',
-        message: titleRestricted ?? 'This permission is restricted by the system and cannot be changed.',
-        onConfirm: () {
-          Get.back();
-        },
-        onCancel: () {},
-      ),
+  showAppDialog(
+    child: Column(
+      children: [
+        Text('Permission Restricted'),
+        Text(titleRestricted ?? 'This permission is restricted by the system and cannot be changed.'),
+        AppButton(
+          child: Text('OK'),
+          onTap: () {
+            Get.back();
+          },
+        ),
+      ],
     ),
   );
 }
 
 Future<void> _showGoToAppSettingsModal(String? titlePermanentlyDenied) async {
-  Get.dialog(
-    transitionDuration: const Duration(milliseconds: 100),
-    transitionCurve: Curves.easeInOut,
-    Dialog(
-      insetPadding: const EdgeInsets.symmetric(horizontal: 24),
-      backgroundColor: Colors.white,
-      child: CustomModal(
-        title: 'Permission Required',
-        message: titlePermanentlyDenied ?? 'This permission is required for the app to function properly. Please enable it in settings.',
-        onCancel: () {
-          Get.back();
-        },
-        onConfirm: () {
-          openAppSettings();
-          Get.back();
-        },
-      ),
+  showAppDialog(
+    child: Column(
+      children: [
+        Text('Permission Required'),
+        Text(titlePermanentlyDenied ?? 'This permission is required for the app to function properly. Please enable it in settings.'),
+        AppButton(
+          child: Text('Open Settings'),
+          onTap: () {
+            openAppSettings();
+            Get.back();
+          },
+        ),
+        AppButton(
+          child: Text('Cancel'),
+          onTap: () {
+            Get.back();
+          },
+        ),
+      ],
     ),
   );
-}
-
-class CustomModal extends StatelessWidget {
-  final String title;
-  final String message;
-  final VoidCallback onConfirm;
-  final VoidCallback onCancel;
-  final String? txtCancel;
-  final String? txtConfirm;
-
-  const CustomModal({super.key, required this.title, required this.message, required this.onConfirm, required this.onCancel, this.txtCancel, this.txtConfirm});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(title, style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950)),
-              IconButton(icon: const Icon(Icons.close), onPressed: onCancel),
-            ],
-          ),
-          Text(message, style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyDefault500)),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: onCancel,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(18),
-                      border: Border.all(color: AppColors.stateGreyLowestHover100),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    alignment: Alignment.center,
-                    child: Text(
-                      txtCancel ?? 'Cancel',
-                      style: AppTextStyles.typographyH10SemiBold.copyWith(color: AppColors.textGreyHighest950),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: GestureDetector(
-                  onTap: onConfirm,
-                  child: Container(
-                    decoration: BoxDecoration(color: AppColors.stateBrandDefault500, borderRadius: BorderRadius.circular(18)),
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    alignment: Alignment.center,
-                    child: Text(
-                      txtConfirm ?? 'Confirm',
-                      style: AppTextStyles.typographyH10SemiBold.copyWith(color: AppColors.textGreyLowestWhite),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
 }

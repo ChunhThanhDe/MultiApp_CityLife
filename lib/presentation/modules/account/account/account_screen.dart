@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_dialog.dart';
 import 'package:sixam_mart_user/services/auth_service.dart';
 
 import 'account_controller.dart';
@@ -22,6 +25,57 @@ class AccountScreen extends BaseScreen<AccountController> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return BasicAppBar(title: "Account", onBack: () => Get.back());
+  }
+
+  void _showLogoutConfirmation() {
+    showAppDialog(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Sign Out', style: AppTextStyles.typographyH10SemiBold),
+          SizedBox(height: 12),
+          Text('Are you sure you want to sign out of your account?', style: AppTextStyles.typographyH11Regular),
+          SizedBox(height: 24),
+          Row(
+            children: [
+              Expanded(
+                child: AppButton(
+                  onTap: () {
+                    Get.back();
+                  },
+                  color: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(color: Color(0xFFE8EBEE)),
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 12),
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xFF4A5763)),
+                  ),
+                ),
+              ),
+              SizedBox(width: 12),
+              Expanded(
+                child: AppButton(
+                  onTap: () {
+                    Get.back();
+                    AuthService.logout();
+                  },
+                  color: Color(0xFFB80900),
+                  padding: EdgeInsets.symmetric(vertical: 12),
+                  child: Text(
+                    'Sign Out',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -97,7 +151,7 @@ class AccountScreen extends BaseScreen<AccountController> {
                   elevation: 0,
                   foregroundColor: Color(0xFFB80900),
                 ),
-                onPressed: () => AuthService.logout(),
+                onPressed: _showLogoutConfirmation,
                 child: Text(
                   "Sign out",
                   style: TextStyle(color: Color(0xFFB80900), fontSize: 16, fontWeight: FontWeight.w500),
