@@ -1,7 +1,13 @@
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
+import 'package:sixam_mart_user/base/base_response.dart';
+import 'package:sixam_mart_user/base/error_response.dart';
+import 'package:sixam_mart_user/domain/models/response/get_module_response.dart';
+import 'package:sixam_mart_user/domain/repositories/module.repository.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 import 'package:sixam_mart_user/presentation/shared/unified_banner_widget.dart';
 
 class Service {
@@ -34,6 +40,34 @@ const bannerImageUrl = 'https://i.ytimg.com/vi/qrO5--Iuy60/maxresdefault.jpg';
 const brandLogoUrl = 'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png';
 
 class HomeController extends BaseController {
+  final ModuleRepository _moduleRepository = Get.find<ModuleRepository>();
+
+  @override
+  void onInit() {
+    super.onInit();
+    getModules();
+  }
+
+  final RxList<GetModuleResponse> modules = <GetModuleResponse>[].obs;
+
+  Future<void> getModules() async {
+    final result = await _moduleRepository.getModules();
+    switch (result) {
+      case Success(:final response):
+        if (response.statusCode != 200) {
+          final errorResponse = ErrorResponse.fromJson(response.data);
+          showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
+          return;
+        }
+        final baseResponse = BaseResponse.fromJson(response.data);
+        final modules = (baseResponse.data as List).map((e) => GetModuleResponse.fromJson(e)).toList();
+        this.modules.clear();
+        this.modules.addAll(modules);
+      case Failure(:final error):
+        showAppSnackBar(title: error.toString(), type: SnackBarType.error);
+    }
+  }
+
   final List<Service> services = [
     Service(title: 'Food', image: Assets.images.imgFood.path, onTap: () {}),
     Service(title: 'Grocery', image: Assets.images.imgGrocery.path, onTap: () {}),

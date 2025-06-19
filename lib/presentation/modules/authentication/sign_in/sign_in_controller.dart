@@ -50,14 +50,14 @@ class SignInController extends BaseController {
     final ApiResult result = await showAppOverlayLoading(future: _authRepository.login(request));
 
     switch (result) {
-      case Success(:final data):
-        if (data.statusCode != 200) {
-          final errorResponse = ErrorResponse.fromJson(data.data);
+      case Success(:final response):
+        if (response.statusCode != 200) {
+          final errorResponse = ErrorResponse.fromJson(response.data);
           showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
           isLoading.value = false;
           return;
         }
-        final userAuthInfo = UserAuthInfo.fromJson(data.data);
+        final userAuthInfo = UserAuthInfo.fromJson(response.data);
         AppStorage.setString(SharedPreferencesKeys.userAuthInfo, jsonEncode(userAuthInfo.toJson()));
         Get.find<AppProvider>().updateUserAuthInfo(userAuthInfo);
 

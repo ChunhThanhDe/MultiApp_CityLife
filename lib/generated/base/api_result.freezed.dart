@@ -46,10 +46,10 @@ $ApiResultCopyWith(ApiResult _, $Res Function(ApiResult) __);
 
 
 class Success implements ApiResult {
-  const Success(this.data);
+  const Success(this.response);
   
 
- final  Response data;
+ final  Response response;
 
 /// Create a copy of ApiResult
 /// with the given fields replaced by the non-null parameter values.
@@ -61,16 +61,16 @@ $SuccessCopyWith<Success> get copyWith => _$SuccessCopyWithImpl<Success>(this, _
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Success&&(identical(other.data, data) || other.data == data));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Success&&(identical(other.response, response) || other.response == response));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,data);
+int get hashCode => Object.hash(runtimeType,response);
 
 @override
 String toString() {
-  return 'ApiResult.success(data: $data)';
+  return 'ApiResult.success(response: $response)';
 }
 
 
@@ -81,7 +81,7 @@ abstract mixin class $SuccessCopyWith<$Res> implements $ApiResultCopyWith<$Res> 
   factory $SuccessCopyWith(Success value, $Res Function(Success) _then) = _$SuccessCopyWithImpl;
 @useResult
 $Res call({
- Response data
+ Response response
 });
 
 
@@ -98,9 +98,9 @@ class _$SuccessCopyWithImpl<$Res>
 
 /// Create a copy of ApiResult
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? data = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? response = null,}) {
   return _then(Success(
-null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+null == response ? _self.response : response // ignore: cast_nullable_to_non_nullable
 as Response,
   ));
 }

@@ -6,6 +6,6 @@ part '../generated/base/api_result.freezed.dart';
 
 @freezed
 sealed class ApiResult with _$ApiResult {
-  const factory ApiResult.success(Response data) = Success;
+  const factory ApiResult.success(Response response) = Success;
   const factory ApiResult.failure(NetworkExceptions error) = Failure;
 }

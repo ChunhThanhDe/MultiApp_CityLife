@@ -77,10 +77,10 @@ class DioClient {
     return headers;
   }
 
-  Future<dynamic> get(String uri, {Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken, ProgressCallback? onReceiveProgress}) async {
+  Future<Response> get(String uri, {Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken, ProgressCallback? onReceiveProgress}) async {
     try {
       var response = await _dio.get(uri, queryParameters: queryParameters, options: options, cancelToken: cancelToken, onReceiveProgress: onReceiveProgress);
-      return response.data;
+      return response;
     } on SocketException catch (e) {
       throw SocketException(e.toString());
     } on FormatException catch (_) {
@@ -117,7 +117,7 @@ class DioClient {
     }
   }
 
-  Future<dynamic> patch(
+  Future<Response> patch(
     String uri, {
     data,
     Map<String, dynamic>? queryParameters,
@@ -136,7 +136,7 @@ class DioClient {
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
       );
-      return response.data;
+      return response;
     } on FormatException catch (_) {
       throw const FormatException('Unable to process the data');
     } catch (e) {
@@ -144,7 +144,7 @@ class DioClient {
     }
   }
 
-  Future<dynamic> put(
+  Future<Response> put(
     String uri, {
     data,
     Map<String, dynamic>? queryParameters,
@@ -163,7 +163,7 @@ class DioClient {
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
       );
-      return response.data;
+      return response;
     } on FormatException catch (_) {
       throw const FormatException('Unable to process the data');
     } catch (e) {
@@ -171,10 +171,10 @@ class DioClient {
     }
   }
 
-  Future<dynamic> delete(String uri, {data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken}) async {
+  Future<Response> delete(String uri, {data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken}) async {
     try {
       var response = await _dio.delete(uri, data: data, queryParameters: queryParameters, options: options, cancelToken: cancelToken);
-      return response.data;
+      return response;
     } on FormatException catch (_) {
       throw const FormatException('Unable to process the data');
     } catch (e) {

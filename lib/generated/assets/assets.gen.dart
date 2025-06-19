@@ -389,6 +389,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/img_kfc.jpg
   AssetGenImage get imgKfc => const AssetGenImage('assets/images/img_kfc.jpg');
 
+  /// File path: assets/images/img_launcher.png
+  AssetGenImage get imgLauncher => const AssetGenImage('assets/images/img_launcher.png');
+
   /// File path: assets/images/img_laundry.png
   AssetGenImage get imgLaundry => const AssetGenImage('assets/images/img_laundry.png');
 
@@ -499,6 +502,7 @@ class $AssetsImagesGen {
     imgItem7,
     imgItem8,
     imgKfc,
+    imgLauncher,
     imgLaundry,
     imgLogoArby,
     imgLogoDomino,
