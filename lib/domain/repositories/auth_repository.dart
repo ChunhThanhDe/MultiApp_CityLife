@@ -1,7 +1,7 @@
 import 'package:sixam_mart_user/app/constants/app_strings.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_repository.dart';
-import 'package:sixam_mart_user/domain/models/request/login_request.dart';
+import 'package:sixam_mart_user/domain/models/request/sign_in_request.dart';
 import 'package:sixam_mart_user/domain/models/request/sign_up_request.dart';
 
 class AuthApiPath {
@@ -24,7 +24,7 @@ class AuthRepository extends BaseRepository {
     return handleApiRequest(() => dioClient.post(AuthApiPath.signUp, data: requestData));
   }
 
-  Future<ApiResult> login(LoginRequest request) async {
+  Future<ApiResult> login(SignInRequest request) async {
     final Map<String, dynamic> requestData = request.toJson();
     return handleApiRequest(() => dioClient.post(AuthApiPath.login, data: requestData));
   }

@@ -9,7 +9,7 @@ import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/base/error_response.dart';
 import 'package:sixam_mart_user/domain/entities/user_auth_info.dart';
-import 'package:sixam_mart_user/domain/models/request/login_request.dart';
+import 'package:sixam_mart_user/domain/models/request/sign_in_request.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_overlay.dart';
@@ -46,7 +46,7 @@ class SignInController extends BaseController {
         return;
       }
       isLoading.value = true;
-      final LoginRequest request = LoginRequest(loginType: LoginType.manual, emailOrPhone: inputController.text, fieldType: loginMethod.value.fieldType, password: passwordController.text);
+      final SignInRequest request = SignInRequest(loginType: SignInType.manual, emailOrPhone: inputController.text, fieldType: loginMethod.value.fieldType, password: passwordController.text);
 
       final ApiResult result = await showAppOverlayLoading(future: _authRepository.login(request));
 
