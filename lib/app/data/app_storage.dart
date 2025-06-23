@@ -65,4 +65,5 @@ class SharedPreferencesKeys {
   static const String scannedCardInfo = 'scanned_card_info';
   static const String userAuthInfo = 'user_auth_info';
   static const String hasSeenWelcome = 'has_seen_welcome';
+  static const String themeMode = 'theme_mode';
 }

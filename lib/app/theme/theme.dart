@@ -3447,8 +3447,8 @@ final class AppTheme {
   static FontFamilyDefault get fontFamily => FontFamily;
 }
 
-final AppColors = AppTheme.theme;
-final AppCorner = AppTheme.corner;
-final AppSpacing = AppTheme.spacing;
+ThemeDefault get AppColors => AppTheme.theme;
+CornerDefault get AppCorner => AppTheme.corner;
+SpacingDefault get AppSpacing => AppTheme.spacing;
 typedef AppTextStyles = Styles;
 typedef AppShadows = Shadows;

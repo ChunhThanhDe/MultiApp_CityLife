@@ -67,8 +67,10 @@ class AccountScreen extends BaseScreen<AccountController> {
       AccountMenuItem(
         icon: Icons.nightlight_round_outlined,
         title: 'Dark Mode',
-        trailing: Text('Auto', style: TextStyle(color: Color(0xFF4A5763))),
-        onClick: () {},
+        trailing: GetBuilder<AccountController>(
+          builder: (controller) => Text(controller.currentThemeDisplayName, style: TextStyle(color: Color(0xFF4A5763))),
+        ),
+        onClick: () => controller.showThemeSelection(),
       ),
       AccountMenuItem(
         icon: Icons.language_outlined,

@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/constants/app_strings.dart';
+import 'package:sixam_mart_user/app/data/app_storage.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/di.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
@@ -18,11 +19,11 @@ void main() async {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
 
-      _setupTheme();
+      await Future.wait([EasyLocalization.ensureInitialized(), DependencyInjection.init()]);
+
+      await _setupTheme();
 
       await _setupSystemUI();
-
-      await Future.wait([EasyLocalization.ensureInitialized(), DependencyInjection.init()]);
 
       runApp(
         EasyLocalization(startLocale: const Locale('en'), supportedLocales: const [Locale('vi'), Locale('en')], path: 'assets/translations', fallbackLocale: const Locale('en'), child: const MyApp()),
@@ -34,11 +35,26 @@ void main() async {
   );
 }
 
-void _setupTheme() {
+Future<void> _setupTheme() async {
   SixMartTheme.modifyBrandColor(BrandColorTypes.purple);
-  SixMartTheme.modifyTheme(ThemeTypes.light);
+  await _loadSavedTheme();
   SixMartTheme.modifySpacing(SpacingTypes.mode1);
   SixMartTheme.modifyFontFamily(FontFamilyTypes.inter);
+}
+
+Future<void> _loadSavedTheme() async {
+  try {
+    final savedTheme = AppStorage.getString(SharedPreferencesKeys.themeMode);
+    if (savedTheme != null) {
+      final themeType = ThemeTypes.values.firstWhere((type) => type.name == savedTheme, orElse: () => ThemeTypes.light);
+      SixMartTheme.modifyTheme(themeType);
+    } else {
+      SixMartTheme.modifyTheme(ThemeTypes.light);
+    }
+  } catch (e) {
+    // Fallback to light theme if there's any error reading from storage
+    SixMartTheme.modifyTheme(ThemeTypes.light);
+  }
 }
 
 Future<void> _setupSystemUI() async {
