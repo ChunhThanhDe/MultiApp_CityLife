@@ -49,26 +49,24 @@ Future<T?> showConfirmationDialog<T>({
               onTap: onCancel,
               color: Colors.transparent,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-                side: BorderSide(color: Color(0xFFE8EBEE)),
+                borderRadius: BorderRadius.circular(AppCorner.radius12),
+                side: BorderSide(color: AppColors.stateGreyLowest50, width: 1),
               ),
               padding: EdgeInsets.symmetric(vertical: 12),
-              child: Text(
-                cancelText,
-                style: cancelTextStyle ?? TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xFF4A5763)),
-              ),
+              child: Text(cancelText, style: cancelTextStyle ?? AppTextStyles.typographyH10SemiBold),
             ),
           ),
           SizedBox(width: 12),
           Expanded(
             child: AppButton(
               onTap: onConfirm,
-              color: confirmColor ?? Color(0xFFB80900),
-              padding: EdgeInsets.symmetric(vertical: 12),
-              child: Text(
-                confirmText,
-                style: confirmTextStyle ?? TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.white),
+              color: confirmColor ?? AppColors.stateDangerLowest50,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppCorner.radius12),
+                side: BorderSide(color: AppColors.stateGreyLowest50, width: 1),
               ),
+              padding: EdgeInsets.symmetric(vertical: 12),
+              child: Text(confirmText, style: confirmTextStyle ?? AppTextStyles.typographyH10SemiBold.copyWith(color: Colors.white)),
             ),
           ),
         ],
