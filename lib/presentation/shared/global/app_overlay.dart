@@ -35,7 +35,7 @@ import 'app_navigator.dart';
 ///
 /// Returns the result of the [future] Future when it completes.
 Future<dynamic> showAppOverlayLoading({required Future<dynamic> future, Widget? child, bool isShowLoading = true}) {
-  return _AppLoadingOverlay.show(future: future, child: child, isShowLoading: isShowLoading);
+  return AppLoadingOverlay.show(future: future, child: child, isShowLoading: isShowLoading);
 }
 
 /// Private class that manages the loading overlay display and lifecycle.
@@ -44,7 +44,7 @@ Future<dynamic> showAppOverlayLoading({required Future<dynamic> future, Widget? 
 /// with proper timing controls to ensure smooth user experience.
 /// It uses the Flutter Overlay system to display the loading indicator
 /// above all other content.
-class _AppLoadingOverlay {
+class AppLoadingOverlay {
   /// The current overlay entry being displayed, if any.
   static OverlayEntry? overlayEntry;
 
