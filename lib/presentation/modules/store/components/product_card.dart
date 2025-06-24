@@ -22,10 +22,10 @@ class ProductCard extends StatelessWidget {
             children: [
               Container(
                 height: 120.h,
-                decoration: BoxDecoration(
-                  color: AppColors.stateGreyLowest50,
+                decoration: BoxDecoration(color: AppColors.stateGreyLowest50, borderRadius: BorderRadius.circular(12.r)),
+                child: ClipRRect(
                   borderRadius: BorderRadius.circular(12.r),
-                  image: DecorationImage(image: AppImageProvider.network(item.imageUrl), fit: BoxFit.cover),
+                  child: AppImage.network(item.imageUrl, width: 120.w, height: 120.h),
                 ),
               ),
               Positioned(

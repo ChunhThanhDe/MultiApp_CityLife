@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,7 @@ class StoreAppBar extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.only(top: 54.h, left: 24.w, right: 24.w, bottom: 24.h),
         decoration: BoxDecoration(
-          image: DecorationImage(image: AppImageProvider.network('https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=800'), fit: BoxFit.cover),
+          image: DecorationImage(image: CachedNetworkImageProvider('https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=800'), fit: BoxFit.cover),
         ),
         child: Column(
           children: [
