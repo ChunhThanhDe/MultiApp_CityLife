@@ -12,7 +12,7 @@ GetModuleResponse _$GetModuleResponseFromJson(Map<String, dynamic> json) =>
       moduleName: json['module_name'] as String,
       status: json['status'] as String,
       moduleType: json['module_type'] as String,
-      iconFullUrl: json['icon_full_url'] as String,
+      iconFullUrl: json['icon_full_url'] as String?,
     );
 
 Map<String, dynamic> _$GetModuleResponseToJson(GetModuleResponse instance) =>

@@ -71,7 +71,7 @@ class HeaderAndService extends GetView<HomeController> {
           Container(
             decoration: BoxDecoration(color: AppColors.stateGreyLowest50, borderRadius: BorderRadius.circular(AppCorner.radius8)),
             padding: EdgeInsets.all(12),
-            child: AppImage.network(module.iconFullUrl, width: 70, height: 70),
+            child: AppImage.network(module.iconFullUrl ?? '', width: 70, height: 70),
           ),
           SizedBox(height: 6),
           Text(

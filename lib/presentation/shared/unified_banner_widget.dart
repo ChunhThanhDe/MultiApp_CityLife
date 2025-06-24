@@ -131,18 +131,7 @@ class UnifiedBannerWidget extends StatelessWidget {
             margin: EdgeInsets.only(left: index == 0 ? 24 : 16, right: index == items.length - 1 ? 24 : 0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(AppCorner.radius8),
-              child: AppImage.network(
-                item.imageUrl,
-                width: 350,
-                height: 180,
-                fit: BoxFit.cover,
-                errorWidget: Container(
-                  width: 350,
-                  height: 180,
-                  decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(AppCorner.radius8)),
-                  child: Icon(Icons.broken_image, size: 50, color: Colors.grey[600]),
-                ),
-              ),
+              child: AppImage.network(item.imageUrl, width: 350, height: 180, fit: BoxFit.cover),
             ),
           ),
           // Status overlay (unavailable/closed)
@@ -189,20 +178,7 @@ class UnifiedBannerWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         spacing: 8,
         children: [
-          if (item.logoUrl != null)
-            ClipOval(
-              child: AppImage.network(
-                item.logoUrl!,
-                width: 24,
-                height: 24,
-                errorWidget: Container(
-                  width: 24,
-                  height: 24,
-                  decoration: BoxDecoration(color: Colors.grey[300], shape: BoxShape.circle),
-                  child: Icon(Icons.broken_image, size: 12, color: Colors.grey[600]),
-                ),
-              ),
-            ),
+          if (item.logoUrl != null) ClipOval(child: AppImage.network(item.logoUrl!, width: 24, height: 24)),
           Text(
             item.title,
             textAlign: TextAlign.center,
@@ -223,19 +199,7 @@ class UnifiedBannerWidget extends StatelessWidget {
           children: [
             Stack(
               children: [
-                ClipOval(
-                  child: AppImage.network(
-                    item.logoUrl ?? item.imageUrl,
-                    width: 64,
-                    height: 64,
-                    errorWidget: Container(
-                      width: 64,
-                      height: 64,
-                      decoration: BoxDecoration(color: Colors.grey[300], shape: BoxShape.circle),
-                      child: Icon(Icons.broken_image, size: 24, color: Colors.grey[600]),
-                    ),
-                  ),
-                ),
+                ClipOval(child: AppImage.network(item.logoUrl ?? item.imageUrl, width: 64, height: 64)),
                 // Status overlay (unavailable/closed)
                 if (item.status != BannerStatus.available)
                   Container(
@@ -268,18 +232,7 @@ class UnifiedBannerWidget extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: AppImage.network(
-                    item.imageUrl,
-                    width: 223,
-                    height: 120,
-                    fit: BoxFit.cover,
-                    errorWidget: Container(
-                      width: 223,
-                      height: 120,
-                      decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(8)),
-                      child: Icon(Icons.broken_image, size: 50, color: Colors.grey[600]),
-                    ),
-                  ),
+                  child: AppImage.network(item.imageUrl, width: 223, height: 120, fit: BoxFit.cover),
                 ),
                 // Status overlay (unavailable/closed)
                 if (item.status != BannerStatus.available)
@@ -325,24 +278,7 @@ class UnifiedBannerWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                if (item.logoUrl != null && item.status == BannerStatus.available)
-                  Positioned(
-                    top: 8,
-                    left: 8,
-                    child: ClipOval(
-                      child: AppImage.network(
-                        item.logoUrl!,
-                        width: 64,
-                        height: 64,
-                        errorWidget: Container(
-                          width: 64,
-                          height: 64,
-                          decoration: BoxDecoration(color: Colors.grey[300], shape: BoxShape.circle),
-                          child: Icon(Icons.broken_image, size: 24, color: Colors.grey[600]),
-                        ),
-                      ),
-                    ),
-                  ),
+                if (item.logoUrl != null && item.status == BannerStatus.available) Positioned(top: 8, left: 8, child: ClipOval(child: AppImage.network(item.logoUrl!, width: 64, height: 64))),
               ],
             ),
             SizedBox(height: 8),
@@ -383,18 +319,7 @@ class UnifiedBannerWidget extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: AppImage.network(
-                  item.imageUrl,
-                  width: 175,
-                  height: 220,
-                  fit: BoxFit.cover,
-                  errorWidget: Container(
-                    width: 175,
-                    height: 220,
-                    decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(8)),
-                    child: Icon(Icons.broken_image, size: 50, color: Colors.grey[600]),
-                  ),
-                ),
+                child: AppImage.network(item.imageUrl, width: 175, height: 220, fit: BoxFit.cover),
               ),
               // Status overlay (unavailable/closed)
               if (item.status != BannerStatus.available)

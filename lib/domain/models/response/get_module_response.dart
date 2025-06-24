@@ -8,7 +8,7 @@ class GetModuleResponse {
   final String moduleName;
   final String status;
   final String moduleType;
-  final String iconFullUrl;
+  final String? iconFullUrl;
 
   GetModuleResponse({required this.id, required this.moduleName, required this.status, required this.moduleType, required this.iconFullUrl});
 

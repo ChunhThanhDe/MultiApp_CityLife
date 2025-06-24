@@ -296,11 +296,91 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
   @override
   ImageStreamCompleter loadImage(AppImageProvider key, Future<ui.Codec> Function(ImmutableBuffer buffer, {ui.TargetImageSize Function(int, int)? getTargetSize}) decode) {
     stateNotifier.value = ImageState(state: ImageLoadingState.loading, retryCount: _currentRetry);
+
+    // For network images, use CachedNetworkImageProvider directly
+    if (source == ImageSource.network && imagePath != null) {
+      final networkProvider = CachedNetworkImageProvider(imagePath!);
+      return _createRetryingCompleter(networkProvider, decode);
+    }
+
+    // For other types, use the original approach
     return MultiFrameImageStreamCompleter(
       codec: _loadImageWithRetries(decode),
       scale: 1.0,
       informationCollector: () => [DiagnosticsProperty('Image provider', this), DiagnosticsProperty('Image key', key)],
     );
+  }
+
+  ImageStreamCompleter _createRetryingCompleter(ImageProvider provider, Future<ui.Codec> Function(ImmutableBuffer buffer, {ui.TargetImageSize Function(int, int)? getTargetSize}) decode) {
+    return MultiFrameImageStreamCompleter(codec: _loadWithRetryWrapper(provider, decode), scale: 1.0, informationCollector: () => [DiagnosticsProperty('Image provider', this)]);
+  }
+
+  Future<ui.Codec> _loadWithRetryWrapper(ImageProvider provider, Future<ui.Codec> Function(ImmutableBuffer buffer, {ui.TargetImageSize Function(int, int)? getTargetSize}) decode) async {
+    while (_currentRetry <= maxRetries) {
+      try {
+        // Use the provider's own loadImage method
+        final ImageConfiguration config = ImageConfiguration();
+        final ImageStreamCompleter completer = provider.loadImage(provider.obtainKey(config) as dynamic, decode);
+
+        // Create a completer to convert the stream to a codec
+        final codecCompleter = Completer<ui.Codec>();
+        late ImageStreamListener listener;
+
+        listener = ImageStreamListener(
+          (ImageInfo image, bool synchronousCall) {
+            if (!codecCompleter.isCompleted) {
+              // Convert ImageInfo to codec by creating a simple codec
+              _convertImageInfoToCodec(image, decode)
+                  .then((codec) {
+                    if (!codecCompleter.isCompleted) {
+                      stateNotifier.value = ImageState(state: ImageLoadingState.success, retryCount: _currentRetry);
+                      codecCompleter.complete(codec);
+                    }
+                  })
+                  .catchError((error) {
+                    if (!codecCompleter.isCompleted) {
+                      codecCompleter.completeError(error);
+                    }
+                  });
+            }
+          },
+          onError: (dynamic exception, StackTrace? stackTrace) {
+            if (!codecCompleter.isCompleted) {
+              codecCompleter.completeError(exception, stackTrace);
+            }
+          },
+        );
+
+        completer.addListener(listener);
+        codecCompleter.future.whenComplete(() => completer.removeListener(listener));
+
+        return await codecCompleter.future;
+      } catch (error) {
+        _logError('Failed to load image: $provider', error);
+        if (_currentRetry < maxRetries) {
+          _currentRetry++;
+          stateNotifier.value = ImageState(state: ImageLoadingState.retrying, retryCount: _currentRetry);
+          await Future.delayed(_calculateRetryDelay());
+        } else {
+          stateNotifier.value = ImageState(state: ImageLoadingState.error, retryCount: _currentRetry);
+          if (errorImageAsset != null) {
+            return await _loadAssetImage(errorImageAsset!, decode);
+          }
+          rethrow;
+        }
+      }
+    }
+    throw Exception('Max retries exceeded');
+  }
+
+  Future<ui.Codec> _convertImageInfoToCodec(ImageInfo imageInfo, Future<ui.Codec> Function(ImmutableBuffer buffer, {ui.TargetImageSize Function(int, int)? getTargetSize}) decode) async {
+    final byteData = await imageInfo.image.toByteData(format: ui.ImageByteFormat.png);
+    if (byteData != null) {
+      final buffer = await ImmutableBuffer.fromUint8List(byteData.buffer.asUint8List());
+      return decode(buffer);
+    } else {
+      throw Exception('Failed to get byte data from image');
+    }
   }
 
   Future<ui.Codec> _loadImageWithRetries(Future<ui.Codec> Function(ImmutableBuffer buffer, {ui.TargetImageSize Function(int, int)? getTargetSize}) decode) async {
@@ -446,6 +526,15 @@ Widget _buildSkeletonPlaceholder({double? width, double? height, BorderRadius? b
   );
 }
 
+Widget _buildErrorImage(double? width, double? height) {
+  return Container(
+    width: width,
+    color: Colors.grey[300],
+    height: height,
+    child: Icon(Icons.broken_image, size: 50, color: Colors.grey),
+  );
+}
+
 /// A comprehensive image widget with advanced loading capabilities and error handling.
 ///
 /// This widget provides a robust image display solution with features like:
@@ -495,13 +584,10 @@ class AppImage extends StatefulWidget {
   final double backoffFactor;
 
   /// Widget to display while the image is loading.
-  final Widget placeholder;
+  final Widget? placeholder;
 
   /// Widget to display when image loading fails (if no error asset is provided).
-  final Widget errorWidget;
-
-  /// Asset path for fallback image when loading fails.
-  final String? errorImageAsset;
+  final Widget? errorWidget;
 
   /// How the image should be inscribed into the available space.
   final BoxFit fit;
@@ -538,9 +624,8 @@ class AppImage extends StatefulWidget {
     this.retryDelay = _ImageConstants.retryDelay,
     this.maxRetryDelay = _ImageConstants.maxRetryDelay,
     this.backoffFactor = _ImageConstants.backoffFactor,
-    required this.placeholder,
-    this.errorWidget = const Icon(Icons.broken_image, size: 50, color: Colors.grey),
-    this.errorImageAsset,
+    this.placeholder,
+    this.errorWidget,
     this.fit = BoxFit.cover,
     this.width,
     this.height,
@@ -580,8 +665,7 @@ class AppImage extends StatefulWidget {
     Duration maxRetryDelay = _ImageConstants.maxRetryDelay,
     double backoffFactor = _ImageConstants.backoffFactor,
     Widget? placeholder,
-    Widget errorWidget = const Icon(Icons.broken_image, size: 50, color: Colors.grey),
-    String? errorImageAsset,
+    Widget? errorWidget,
     BoxFit fit = BoxFit.cover,
     double? width,
     double? height,
@@ -598,9 +682,8 @@ class AppImage extends StatefulWidget {
       retryDelay: retryDelay,
       maxRetryDelay: maxRetryDelay,
       backoffFactor: backoffFactor,
-      placeholder: placeholder ?? _buildSkeletonPlaceholder(width: width, height: height),
+      placeholder: placeholder,
       errorWidget: errorWidget,
-      errorImageAsset: errorImageAsset,
       fit: fit,
       width: width,
       height: height,
@@ -641,8 +724,7 @@ class AppImage extends StatefulWidget {
     Duration maxRetryDelay = _ImageConstants.maxRetryDelay,
     double backoffFactor = _ImageConstants.backoffFactor,
     Widget? placeholder,
-    Widget errorWidget = const Icon(Icons.broken_image, size: 50, color: Colors.grey),
-    String? errorImageAsset,
+    Widget? errorWidget,
     BoxFit fit = BoxFit.cover,
     double? width,
     double? height,
@@ -658,9 +740,8 @@ class AppImage extends StatefulWidget {
       retryDelay: retryDelay,
       maxRetryDelay: maxRetryDelay,
       backoffFactor: backoffFactor,
-      placeholder: placeholder ?? _buildSkeletonPlaceholder(width: width, height: height),
+      placeholder: placeholder,
       errorWidget: errorWidget,
-      errorImageAsset: errorImageAsset,
       fit: fit,
       width: width,
       height: height,
@@ -699,8 +780,7 @@ class AppImage extends StatefulWidget {
     Duration maxRetryDelay = _ImageConstants.maxRetryDelay,
     double backoffFactor = _ImageConstants.backoffFactor,
     Widget? placeholder,
-    Widget errorWidget = const Icon(Icons.broken_image, size: 50, color: Colors.grey),
-    String? errorImageAsset,
+    Widget? errorWidget,
     BoxFit fit = BoxFit.cover,
     double? width,
     double? height,
@@ -716,9 +796,8 @@ class AppImage extends StatefulWidget {
       retryDelay: retryDelay,
       maxRetryDelay: maxRetryDelay,
       backoffFactor: backoffFactor,
-      placeholder: placeholder ?? _buildSkeletonPlaceholder(width: width, height: height),
+      placeholder: placeholder,
       errorWidget: errorWidget,
-      errorImageAsset: errorImageAsset,
       fit: fit,
       width: width,
       height: height,
@@ -759,7 +838,6 @@ class AppImage extends StatefulWidget {
     double backoffFactor = _ImageConstants.backoffFactor,
     Widget? placeholder,
     Widget errorWidget = const Icon(Icons.broken_image, size: 50, color: Colors.grey),
-    String? errorImageAsset,
     BoxFit fit = BoxFit.cover,
     double? width,
     double? height,
@@ -774,9 +852,8 @@ class AppImage extends StatefulWidget {
       retryDelay: retryDelay,
       maxRetryDelay: maxRetryDelay,
       backoffFactor: backoffFactor,
-      placeholder: placeholder ?? _buildSkeletonPlaceholder(width: width, height: height),
+      placeholder: placeholder,
       errorWidget: errorWidget,
-      errorImageAsset: errorImageAsset,
       fit: fit,
       width: width,
       height: height,
@@ -800,9 +877,6 @@ class AppImage extends StatefulWidget {
 /// - Managing accessibility semantics
 /// - Proper resource cleanup
 class _AppImageState extends State<AppImage> with SingleTickerProviderStateMixin {
-  /// The image provider instance that handles loading with retry logic.
-  late final AppImageProvider _imageProvider;
-
   /// Animation controller for the fade-in effect when image loads.
   late final AnimationController _fadeController;
 
@@ -814,27 +888,16 @@ class _AppImageState extends State<AppImage> with SingleTickerProviderStateMixin
     super.initState();
     _fadeController = AnimationController(vsync: this, duration: widget.fadeInDuration);
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(_fadeController);
-    _imageProvider = AppImageProvider._(
-      imagePath: widget.imagePath,
-      source: widget.source,
-      imageProvider: widget.imageProvider,
-      maxRetries: widget.maxRetries,
-      retryDelay: widget.retryDelay,
-      maxRetryDelay: widget.maxRetryDelay,
-      backoffFactor: widget.backoffFactor,
-      errorImageAsset: widget.errorImageAsset,
-      useCache: widget.useCache,
-      stateNotifier: widget.stateNotifier,
-    );
-    _fadeController.forward();
+
+    // Start the animation immediately for asset and file images
+    if (widget.source == ImageSource.asset || widget.source == ImageSource.file || widget.imageProvider != null) {
+      _fadeController.forward();
+    }
   }
 
   @override
   void dispose() {
     _fadeController.dispose();
-    if (widget.stateNotifier == null) {
-      _imageProvider.stateNotifier.dispose();
-    }
     super.dispose();
   }
 
@@ -848,34 +911,92 @@ class _AppImageState extends State<AppImage> with SingleTickerProviderStateMixin
   /// Returns a widget with error image or fallback error widget wrapped
   /// in accessibility semantics.
   Widget _buildErrorWidget() {
-    final errorChild = widget.errorImageAsset != null ? Image.asset(widget.errorImageAsset!, fit: widget.fit, width: widget.width, height: widget.height) : widget.errorWidget;
-    return Semantics(image: true, label: widget.altText ?? 'Error loading image', child: errorChild);
+    return Semantics(image: true, label: widget.altText ?? 'Error loading image', child: widget.errorWidget ?? _buildErrorImage(widget.width, widget.height));
   }
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<ImageState>(
-      valueListenable: _imageProvider.stateNotifier,
-      builder: (context, state, _) {
-        if (state.state == ImageLoadingState.error) {
-          return _buildErrorWidget();
-        }
-        return Semantics(
-          image: true,
-          label: widget.altText ?? 'Image',
-          child: FadeTransition(
-            opacity: _fadeAnimation,
-            child: Image(
-              image: _imageProvider,
-              fit: widget.fit,
-              width: widget.width,
-              height: widget.height,
-              frameBuilder: (_, child, frame, _) => frame != null ? child : widget.placeholder,
-              errorBuilder: (_, _, _) => widget.placeholder,
-            ),
-          ),
-        );
-      },
-    );
+    // Early validation - if URL is empty or null, show error immediately
+    if (widget.source == ImageSource.network && (widget.imagePath == null || widget.imagePath!.isEmpty || widget.imagePath == '')) {
+      dev.log('Empty or null URL provided: "${widget.imagePath}"', name: 'AppImage');
+      return _buildErrorWidget();
+    }
+
+    // Use CachedNetworkImage directly for network images - much simpler and more reliable
+    if (widget.source == ImageSource.network && widget.imagePath != null) {
+      return CachedNetworkImage(
+        imageUrl: widget.imagePath!,
+        width: widget.width,
+        height: widget.height,
+        fit: widget.fit,
+        placeholder: (context, url) => widget.placeholder ?? _buildSkeletonPlaceholder(width: widget.width, height: widget.height),
+        errorWidget: (context, url, error) {
+          dev.log('CachedNetworkImage error: $error for URL: $url', name: 'AppImage');
+          return widget.errorWidget ?? _buildErrorImage(widget.width, widget.height);
+        },
+        fadeInDuration: widget.fadeInDuration,
+        useOldImageOnUrlChange: true,
+        cacheKey: widget.useCache ? widget.imagePath : null,
+      );
+    }
+
+    // For asset images, use regular Image.asset
+    if (widget.source == ImageSource.asset && widget.imagePath != null) {
+      return FadeTransition(
+        opacity: _fadeAnimation,
+        child: Image.asset(
+          widget.imagePath!,
+          width: widget.width,
+          height: widget.height,
+          fit: widget.fit,
+          errorBuilder: (context, error, stackTrace) {
+            dev.log('Asset image error: $error for path: ${widget.imagePath}', name: 'AppImage');
+            return widget.errorWidget ?? _buildErrorImage(widget.width, widget.height);
+          },
+        ),
+      );
+    }
+
+    // For file images, use regular Image.file
+    if (widget.source == ImageSource.file && widget.imagePath != null) {
+      return FadeTransition(
+        opacity: _fadeAnimation,
+        child: Image.file(
+          File(widget.imagePath!),
+          width: widget.width,
+          height: widget.height,
+          fit: widget.fit,
+          errorBuilder: (context, error, stackTrace) {
+            dev.log('File image error: $error for path: ${widget.imagePath}', name: 'AppImage');
+            return widget.errorWidget ?? _buildErrorImage(widget.width, widget.height);
+          },
+        ),
+      );
+    }
+
+    // For custom image providers
+    if (widget.imageProvider != null) {
+      return FadeTransition(
+        opacity: _fadeAnimation,
+        child: Image(
+          image: widget.imageProvider!,
+          width: widget.width,
+          height: widget.height,
+          fit: widget.fit,
+          loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress == null) return child;
+            return widget.placeholder ?? _buildSkeletonPlaceholder(width: widget.width, height: widget.height);
+          },
+          errorBuilder: (context, error, stackTrace) {
+            dev.log('Custom provider error: $error', name: 'AppImage');
+            return widget.errorWidget ?? _buildErrorImage(widget.width, widget.height);
+          },
+        ),
+      );
+    }
+
+    // Fallback error
+    dev.log('No valid image source provided', name: 'AppImage');
+    return _buildErrorWidget();
   }
 }
