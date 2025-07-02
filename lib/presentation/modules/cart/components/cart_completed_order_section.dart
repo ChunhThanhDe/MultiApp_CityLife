@@ -19,6 +19,7 @@ class CompletedOrderSection extends StatelessWidget {
               Expanded(
                 child: Text(date, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
               ),
+
               Text(status, style: TextStyle(fontSize: 14)),
             ],
           ),

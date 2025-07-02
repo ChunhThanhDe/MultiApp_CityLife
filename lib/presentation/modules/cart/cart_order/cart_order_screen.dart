@@ -22,25 +22,27 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
         InProgressOrderCard(
           label: "Heading your way",
           time: "Today 7:35 AM",
-          brandLogo: AssetImage('assets/starbucks.png'),
+          brandLogo: AssetImage('assets/images/starbucks.png'),
           brandName: "Starbucks®",
           subtitle: "4 items",
           price: "\$35.87",
           progressStep: 3,
           totalStep: 4,
         ),
+        SizedBox(height: 16),
         Divider(height: 1),
         // Another In-progress Order
         InProgressOrderCard(
           label: "Heading your way",
           time: "Today 7:35 AM",
-          brandLogo: AssetImage('assets/starbucks.png'),
+          brandLogo: AssetImage('assets/images/starbucks.png'),
           brandName: "Starbucks®",
           subtitle: "4 items",
           price: "\$35.87",
           progressStep: 3,
           totalStep: 4,
         ),
+        SizedBox(height: 16),
         Divider(height: 1),
 
         // Completed Orders Section
@@ -48,11 +50,12 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
           date: "Sep 18, 2023 7:30 AM",
           status: "Completed",
           orders: [
-            OrderListItem(brandLogo: AssetImage('assets/starbucks.png'), brandName: "Starbucks®", subtitle: "4 items", price: "\$14.32"),
-            OrderListItem(brandLogo: AssetImage('assets/starbucks.png'), brandName: "Starbucks®", subtitle: "4 items", price: "\$14.32"),
-            OrderListItem(brandLogo: AssetImage('assets/mcdonalds.png'), brandName: "McDonald's", subtitle: "2 items", price: "\$21.55"),
+            OrderListItem(brandLogo: AssetImage('assets/images/starbucks.png'), brandName: "Starbucks®", subtitle: "4 items", price: "\$14.32"),
+            OrderListItem(brandLogo: AssetImage('assets/images/starbucks.png'), brandName: "Starbucks®", subtitle: "4 items", price: "\$14.32"),
+            OrderListItem(brandLogo: AssetImage('assets/images/mcdonalds.png'), brandName: "McDonald's", subtitle: "2 items", price: "\$21.55"),
           ],
         ),
+        SizedBox(height: 16),
         Divider(height: 1),
 
         // Another Completed Orders Section
@@ -60,10 +63,11 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
           date: "Sep 18, 2023 7:30 AM",
           status: "Completed",
           orders: [
-            OrderListItem(brandLogo: AssetImage('assets/starbucks.png'), brandName: "Starbucks®", subtitle: "4 items", price: "\$14.32"),
-            OrderListItem(brandLogo: AssetImage('assets/mcdonalds.png'), brandName: "McDonald's", subtitle: "2 items", price: "\$21.55"),
+            OrderListItem(brandLogo: AssetImage('assets/images/starbucks.png'), brandName: "Starbucks®", subtitle: "4 items", price: "\$14.32"),
+            OrderListItem(brandLogo: AssetImage('assets/images/mcdonalds.png'), brandName: "McDonald's", subtitle: "2 items", price: "\$21.55"),
           ],
         ),
+        SizedBox(height: 16),
       ],
     );
   }
