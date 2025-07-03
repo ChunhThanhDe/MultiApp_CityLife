@@ -18,6 +18,8 @@ import 'package:sixam_mart_user/presentation/modules/address/confirm_address/con
 import 'package:sixam_mart_user/presentation/modules/address/confirm_address/confirm_address_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/address/search_address/search_address_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/address/search_address/search_address_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/sign_in_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/sign_in_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign_up_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign_up_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/verification/verification_binding.dart';
@@ -68,7 +70,7 @@ class AppPages {
   static final appRoutes = [
     GetPage(name: AppRoutes.splash, page: () => const SplashScreen(), binding: SplashBinding()),
     GetPage(name: AppRoutes.root, page: () => const RootScreen(), binding: RootBindings(), middlewares: [AuthMiddleware()]),
-    GetPage(name: AppRoutes.signIn, page: () => const ViewCartScreen(), binding: ViewCartBinding(), middlewares: [AuthMiddleware()]),
+    GetPage(name: AppRoutes.signIn, page: () => const SignInScreen(), binding: SignInBinding(), middlewares: [AuthMiddleware()]),
     GetPage(name: AppRoutes.signUp, page: () => const SignUpScreen(), binding: SignUpBinding(), middlewares: [AuthMiddleware()]),
     GetPage(name: AppRoutes.verification, page: () => const VerificationScreen(), binding: VerificationBinding(), middlewares: [AuthMiddleware()]),
     GetPage(name: AppRoutes.addFund, page: () => const AddFundScreen(), binding: AddFundBinding(), middlewares: [AuthMiddleware()]),
