@@ -24,6 +24,14 @@ import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign_up_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/verification/verification_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/verification/verification_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/cart_checkout/cart_checkout_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/cart_checkout/cart_checkout_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/cart_order/cart_order_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/cart_order/cart_order_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/cart_order_confirm/cart_order_confirm_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/cart_order_confirm/cart_order_confirm_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/view_cart/view_cart_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/view_cart/view_cart_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/box_delivery/box_delivery_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/box_delivery/box_delivery_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/delivery_checkout/delivery_checkout_binding.dart';
@@ -93,5 +101,9 @@ class AppPages {
     GetPage(name: AppRoutes.trackDelivery, page: () => const TrackDeliveryScreen(), binding: TrackDeliveryBinding()),
     GetPage(name: AppRoutes.welcome, page: () => const WelcomeScreen(), binding: WelcomeBinding()),
     GetPage(name: AppRoutes.store, page: () => const StoreScreen(), binding: StoreBinding()),
+    GetPage(name: AppRoutes.cart, page: () => const ViewCartScreen(), binding: ViewCartBinding()),
+    GetPage(name: AppRoutes.cartOrder, page: () => const CartOrderScreen(), binding: CartOrderBinding()),
+    GetPage(name: AppRoutes.cartCheckout, page: () => const CartCheckoutScreen(), binding: CartCheckoutBinding()),
+    GetPage(name: AppRoutes.cartConfirm, page: () => const CartOrderConfirmScreen(), binding: CartOrderConfirmBinding()),
   ];
 }
