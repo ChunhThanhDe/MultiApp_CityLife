@@ -3,6 +3,7 @@ import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/base/error_response.dart';
 import 'package:sixam_mart_user/base/network_exceptions.dart';
+import 'package:sixam_mart_user/domain/enums/service_type.dart';
 import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart';
 import 'package:sixam_mart_user/domain/repositories/module.repository.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
@@ -11,8 +12,6 @@ import 'package:sixam_mart_user/presentation/modules/service/service_controller.
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 import 'package:sixam_mart_user/presentation/shared/unified_banner_widget.dart';
-
-enum ServiceType { food, grocery, delivery, laundry, ticket, cleaning, seeMore }
 
 class Service {
   final String title;
@@ -111,19 +110,6 @@ class HomeController extends BaseController {
     // Get ServiceController and load data for specific service type
     final serviceController = Get.find<ServiceController>();
     serviceController.loadServiceTypeData(serviceType);
-  }
-
-  // Navigation method to handle service category tap
-  void navigateToServiceWithCategory(Category category) {
-    // Get RootController to change tabs
-    final rootController = Get.find<RootController>();
-
-    // Change to Service tab
-    rootController.changeTab(RootTab.service);
-
-    // Get ServiceController and load data for specific category
-    final serviceController = Get.find<ServiceController>();
-    serviceController.loadCategoryData(category);
   }
 
   // Helper methods to get data from the new API responses

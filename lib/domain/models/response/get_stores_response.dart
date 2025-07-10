@@ -57,3 +57,36 @@ abstract class Product with _$Product {
 
   factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
 }
+
+// Extension to dynamically extract all List fields from GetStoresResponse
+extension GetStoresResponseDynamic on GetStoresResponse {
+  Map<String, List<dynamic>> toListFieldsMap() {
+    final listFields = <String, List<dynamic>>{};
+
+    // Convert object to JSON to dynamically detect all fields
+    final json = toJson();
+
+    // Iterate through all JSON fields and extract List types
+    for (final entry in json.entries) {
+      final fieldName = entry.key;
+      final fieldValue = entry.value;
+
+      // Skip non-list fields (like userLocation)
+      if (fieldValue is List && fieldValue.isNotEmpty) {
+        // Convert field name from snake_case to camelCase for consistency
+        final camelCaseFieldName = _toCamelCase(fieldName);
+        listFields[camelCaseFieldName] = List<dynamic>.from(fieldValue);
+      }
+    }
+
+    return listFields;
+  }
+
+  // Convert snake_case to camelCase
+  String _toCamelCase(String snakeCase) {
+    final parts = snakeCase.split('_');
+    if (parts.length == 1) return snakeCase;
+
+    return parts.first + parts.skip(1).map((part) => part[0].toUpperCase() + part.substring(1)).join();
+  }
+}
