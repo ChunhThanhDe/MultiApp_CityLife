@@ -122,7 +122,7 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white.withOpacity(0.9),
+      backgroundColor: Colors.white.withValues(alpha: 0.9),
       elevation: 0.5,
       title: const Text(
         "View Cart",
@@ -243,7 +243,7 @@ class _AnimatedCartBodyState extends State<_AnimatedCartBody> {
           child: ListView.separated(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
             itemCount: cartItems.length,
-            separatorBuilder: (_, __) => Divider(height: 0, color: Color(0xFFE8EBEE), indent: 24, endIndent: 24),
+            separatorBuilder: (_, _) => Divider(height: 0, color: Color(0xFFE8EBEE), indent: 24, endIndent: 24),
             itemBuilder: (context, index) => CartProductItem(item: cartItems[index]),
           ),
         ),
