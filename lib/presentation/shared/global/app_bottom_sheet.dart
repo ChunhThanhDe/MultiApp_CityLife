@@ -110,7 +110,7 @@ class AppBottomSheet extends StatelessWidget {
         },
         child: IntrinsicHeight(
           child: ColoredBox(
-            color: Colors.white,
+            color: AppColors.backgroundSurfacePrimaryWhite,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

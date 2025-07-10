@@ -83,18 +83,24 @@ class AccountScreen extends BaseScreen<AccountController> {
       AccountMenuItem(icon: Icons.info_outline, title: 'About App', onClick: () {}),
     ];
 
-    return Column(
-      children: [
-        _ProfileCard(),
-        // Menu
-        Expanded(
-          child: ListView.separated(
-            padding: EdgeInsets.zero,
-            itemCount: menuItems.length,
-            separatorBuilder: (context, i) => Divider(color: Color(0xFFE8EBEE), indent: 60, height: 0, thickness: 1),
-            itemBuilder: (context, index) {
-              final item = menuItems[index];
-              return ListTile(
+    // Total items: 1 profile card + menu items + 1 sign out section
+    final totalItems = 1 + menuItems.length + 1;
+
+    return ListView.builder(
+      padding: EdgeInsets.zero,
+      itemCount: totalItems,
+      itemBuilder: (context, index) {
+        // Profile card at index 0
+        if (index == 0) {
+          return _ProfileCard();
+        }
+        // Menu items
+        else if (index <= menuItems.length) {
+          final menuIndex = index - 1;
+          final item = menuItems[menuIndex];
+          return Column(
+            children: [
+              ListTile(
                 contentPadding: EdgeInsets.symmetric(horizontal: 24),
                 leading: Icon(item.icon, color: Color(0xFF4A5763)),
                 title: Text(
@@ -103,36 +109,39 @@ class AccountScreen extends BaseScreen<AccountController> {
                 ),
                 trailing: item.trailing ?? Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
                 onTap: item.onClick,
-              );
-            },
-          ),
-        ),
-        // Sign Out & App version
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          child: Column(
-            children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFFFECEB),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-                  minimumSize: Size(double.infinity, 48),
-                  elevation: 0,
-                  foregroundColor: Color(0xFFB80900),
-                ),
-                onPressed: _showLogoutConfirmation,
-                child: Text(
-                  "Sign out",
-                  style: TextStyle(color: Color(0xFFB80900), fontSize: 16, fontWeight: FontWeight.w500),
-                ),
               ),
-              SizedBox(height: 8),
-              Text("v2.380", style: TextStyle(color: Color(0xFF161A1D), fontSize: 12)),
+              if (menuIndex < menuItems.length - 1) Divider(color: Color(0xFFE8EBEE), indent: 60, height: 0, thickness: 1),
             ],
-          ),
-        ),
-        SizedBox(height: 8),
-      ],
+          );
+        }
+        // Sign out section at the last index
+        else {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            child: Column(
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFFFECEB),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                    minimumSize: Size(double.infinity, 48),
+                    elevation: 0,
+                    foregroundColor: Color(0xFFB80900),
+                  ),
+                  onPressed: _showLogoutConfirmation,
+                  child: Text(
+                    "Sign out",
+                    style: TextStyle(color: Color(0xFFB80900), fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text("v2.380", style: TextStyle(color: Color(0xFF161A1D), fontSize: 12)),
+                SizedBox(height: 8),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 }
