@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/home/components/sliver_box.dart';
@@ -16,30 +17,59 @@ class ServiceScreen extends BaseScreen<ServiceController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        // Service header section
-        ServiceHeader(),
-        SliverBox(child: Divider(color: AppColors.stateGreyLowestHover100, height: 1)),
-        SliverBox(height: 16),
-        // Service banner section
-        UnifiedBannerWidget(sectionTitle: 'Recently Viewed', items: controller.serviceBannerItems, bannerType: BannerType.bannerFloatingLogo, showArrowIcon: true),
-        SliverBox(height: 16),
-        SliverBox(child: SectionBreakDivider()),
-        SliverBox(height: 16),
+    return RefreshIndicator(
+      onRefresh: controller.refreshData,
+      child: Obx(() {
+        // Get dynamic sections from controller
+        final sections = controller.dynamicSections;
 
-        // Service offers with discounts
-        UnifiedBannerWidget(sectionTitle: 'Shops near you', items: controller.serviceOffersItems, bannerType: BannerType.bannerDiscount, showArrowIcon: true),
-        // SliverBox(height: 16),
-        // SliverBox(child: SectionBreakDivider()),
-        // SliverBox(height: 16),
+        // Build dynamic sections based on API data
+        List<Widget> slivers = [
+          // Service header section
+          ServiceHeader(),
+          SliverBox(child: Divider(color: AppColors.stateGreyLowestHover100, height: 1)),
+          SliverBox(height: 16),
+        ];
 
-        // Top service offers
-        UnifiedBannerWidget(sectionTitle: 'Top Offers', items: controller.topServiceOffersItems, bannerType: BannerType.bannerSingleImage),
-        SliverBox(height: 32),
-        UnifiedBannerWidget(sectionTitle: 'Top Offers', items: controller.serviceOffersItems, bannerType: BannerType.bannerDiscount, showArrowIcon: true),
-        UnifiedBannerWidget(sectionTitle: 'Popular near you', items: controller.serviceOffersItems, bannerType: BannerType.bannerDiscount, showArrowIcon: true),
-      ],
+        // If no data available, show empty state
+        if (sections.isEmpty) {
+          slivers.add(
+            SliverFillRemaining(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.store_outlined, size: 64, color: AppColors.textGreyDefault500),
+                    SizedBox(height: 16),
+                    Text('No data available', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyDefault500)),
+                    SizedBox(height: 8),
+                    Text('Please try again later', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
+                  ],
+                ),
+              ),
+            ),
+          );
+          return CustomScrollView(slivers: slivers);
+        }
+
+        // Add dynamic sections from API
+        for (int index = 0; index < sections.length; index++) {
+          final section = sections[index];
+
+          // Add section widget
+          slivers.add(UnifiedBannerWidget(sectionTitle: section.title, items: section.items, bannerType: section.bannerType, showArrowIcon: section.showArrowIcon));
+
+          // Add spacing and divider after each section (except last)
+          if (index < sections.length - 1) {
+            slivers.addAll([SliverBox(height: 16), SliverBox(child: SectionBreakDivider()), SliverBox(height: 16)]);
+          }
+        }
+
+        // Add final spacing
+        slivers.add(SliverBox(height: 32));
+
+        return CustomScrollView(slivers: slivers);
+      }),
     );
   }
 }

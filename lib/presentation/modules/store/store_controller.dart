@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
+import 'package:sixam_mart_user/domain/enums/service_type.dart';
 
 enum FilterType {
   all(label: 'Filter', icon: 'assets/icons/ic_filter.svg'),
@@ -14,23 +15,13 @@ enum FilterType {
   final String? icon;
 }
 
-enum ServiceType {
-  inStore(label: 'In store'),
-  delivery(label: 'Delivery'),
-  driveThru(label: 'Drive thru');
-
-  const ServiceType({required this.label});
-
-  final String label;
-}
-
 class ProductItem {
   final String name;
   final String price;
   final String imageUrl;
   final String description;
   final List<FilterType> categories;
-  final List<ServiceType> availableServices;
+  final List<StoreServiceType> availableServices;
 
   ProductItem({
     required this.name,
@@ -38,7 +29,7 @@ class ProductItem {
     required this.imageUrl,
     this.description = '',
     this.categories = const [FilterType.drinks],
-    this.availableServices = const [ServiceType.inStore],
+    this.availableServices = const [StoreServiceType.inStore],
   });
 }
 
@@ -50,8 +41,8 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
   FilterType get selectedFilter => _selectedFilter;
 
   // Service filter state
-  ServiceType _selectedService = ServiceType.inStore;
-  ServiceType get selectedService => _selectedService;
+  StoreServiceType _selectedService = StoreServiceType.inStore;
+  StoreServiceType get selectedService => _selectedService;
 
   @override
   void onInit() {
@@ -61,7 +52,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
     // Listen to tab changes
     serviceTabController.addListener(() {
       if (!serviceTabController.indexIsChanging) {
-        selectService(ServiceType.values[serviceTabController.index]);
+        selectService(StoreServiceType.values[serviceTabController.index]);
       }
     });
   }
@@ -83,12 +74,12 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
   }
 
   // Service filter methods
-  void selectService(ServiceType service) {
+  void selectService(StoreServiceType service) {
     _selectedService = service;
     update();
   }
 
-  bool isServiceSelected(ServiceType service) {
+  bool isServiceSelected(StoreServiceType service) {
     return _selectedService == service;
   }
 
@@ -170,21 +161,21 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
       price: '\$5.95 • 160 Calories',
       imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400',
       categories: [FilterType.drinks],
-      availableServices: [ServiceType.inStore, ServiceType.delivery], // Không có drive thru
+      availableServices: [StoreServiceType.inStore, StoreServiceType.delivery], // No drive thru
     ),
     ProductItem(
       name: 'White Chocolate Mocha',
       price: '\$5.65 • 160 Calories',
       imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400',
       categories: [FilterType.drinks, FilterType.atHome], // Can be enjoyed both ways
-      availableServices: [ServiceType.inStore, ServiceType.delivery, ServiceType.driveThru], // Có tất cả service
+      availableServices: [StoreServiceType.inStore, StoreServiceType.delivery, StoreServiceType.driveThru], // All services
     ),
     ProductItem(
       name: 'Caramel Macchiato',
       price: '\$5.65 • 160 Calories',
       imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400',
       categories: [FilterType.drinks],
-      availableServices: [ServiceType.inStore, ServiceType.driveThru], // Không có delivery
+      availableServices: [StoreServiceType.inStore, StoreServiceType.driveThru], // No delivery
     ),
   ];
 
@@ -203,7 +194,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
       price: '\$4.35 • 160 Calories',
       imageUrl: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400',
       categories: [FilterType.drinks, FilterType.atHome], // Available as take-home blend
-      availableServices: [ServiceType.inStore],
+      availableServices: [StoreServiceType.inStore],
     ),
     ProductItem(name: 'Caramel Macchiato', price: '\$4.15 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400', categories: [FilterType.drinks]),
   ];
@@ -227,66 +218,53 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
 
   // Starbucks Refreshers Beverages
   List<ProductItem> get refresherBeverages => [
+    ProductItem(name: 'Paradise Pink Refresher', price: '\$4.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400', categories: [FilterType.drinks]),
     ProductItem(
-      name: 'Summer-Berry Strawberry Refresher',
-      price: '\$5.35 • 160 Calories',
-      imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400',
-      categories: [FilterType.drinks],
-    ),
-    ProductItem(
-      name: 'Mango Dragonfruit Lemonade Refresher',
+      name: 'Pineapple Passionfruit Refresher',
       price: '\$4.95 • 160 Calories',
       imageUrl: 'https://images.unsplash.com/photo-1546173159-315724a31696?w=400',
       categories: [FilterType.drinks],
+      availableServices: [StoreServiceType.inStore], // Only in store
     ),
-    ProductItem(
-      name: 'Spicy Strawberry Lemonade Refresher',
-      price: '\$4.95 • 160 Calories',
-      imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400',
-      categories: [FilterType.drinks],
-    ),
+    ProductItem(name: 'Strawberry Açaí Refresher', price: '\$4.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1553909489-ec2175ef3ce9?w=400', categories: [FilterType.drinks]),
   ];
 
   // Frappuccino Blended Beverages
   List<ProductItem> get frappuccinoBeverages => [
+    ProductItem(name: 'Caramel Frappuccino', price: '\$5.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400', categories: [FilterType.drinks]),
     ProductItem(
-      name: 'Mocha Cookie Crumble Frappuccino',
+      name: 'Java Chip Frappuccino',
       price: '\$5.95 • 160 Calories',
-      imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400',
-      categories: [FilterType.drinks],
+      imageUrl: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400',
+      categories: [FilterType.drinks, FilterType.atHome], // Popular for home recreation
+      availableServices: [StoreServiceType.delivery], // Only delivery
     ),
-    ProductItem(
-      name: 'Caramel Ribbon Crunch Frappuccino',
-      price: '\$5.95 • 160 Calories',
-      imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400',
-      categories: [FilterType.drinks],
-    ),
-    ProductItem(
-      name: 'Strawberry Açaí Lemonade Refresher',
-      price: '\$4.95 • 160 Calories',
-      imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400',
-      categories: [FilterType.drinks],
-    ),
+    ProductItem(name: 'Mocha Frappuccino', price: '\$5.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400', categories: [FilterType.drinks]),
   ];
 
   // Iced Tea and Lemonade
   List<ProductItem> get icedTeaLemonade => [
+    ProductItem(name: 'Green Tea Lemonade', price: '\$4.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400', categories: [FilterType.drinks]),
     ProductItem(
-      name: 'Iced Matcha Lemonade',
+      name: 'Black Tea Lemonade',
       price: '\$4.95 • 160 Calories',
-      imageUrl: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400',
-      categories: [FilterType.drinks],
-      availableServices: [ServiceType.delivery],
+      imageUrl: 'https://images.unsplash.com/photo-1546173159-315724a31696?w=400',
+      categories: [FilterType.drinks, FilterType.atHome], // Good for home preparation
     ),
-    ProductItem(name: 'Iced Passion Tango Tea', price: '\$4.35 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400', categories: [FilterType.drinks]),
-    ProductItem(name: 'Iced Lavender Oatmilk Latte', price: '\$4.15 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400', categories: [FilterType.drinks]),
+    ProductItem(name: 'Passion Iced Tea', price: '\$4.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1553909489-ec2175ef3ce9?w=400', categories: [FilterType.drinks]),
   ];
 
   // Hot Teas
   List<ProductItem> get hotTeas => [
-    ProductItem(name: 'Chai Tea', price: '\$3.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400', categories: [FilterType.drinks]),
-    ProductItem(name: 'Teavana London Fog Tea Latte', price: '\$4.35 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400', categories: [FilterType.drinks]),
-    ProductItem(name: 'Matcha Tea Latte', price: '\$4.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400', categories: [FilterType.drinks]),
+    ProductItem(name: 'Earl Grey Tea', price: '\$3.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400', categories: [FilterType.drinks]),
+    ProductItem(
+      name: 'Chai Tea Latte',
+      price: '\$4.95 • 160 Calories',
+      imageUrl: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400',
+      categories: [FilterType.drinks, FilterType.atHome], // Perfect for home brewing
+      availableServices: [StoreServiceType.driveThru], // Only drive thru
+    ),
+    ProductItem(name: 'Green Tea', price: '\$3.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1553909489-ec2175ef3ce9?w=400', categories: [FilterType.drinks]),
   ];
 
   // Bottled Beverages
@@ -296,7 +274,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
       price: '\$2.95',
       imageUrl: 'https://images.unsplash.com/photo-1523362628745-0c100150b504?w=400',
       categories: [FilterType.drinks, FilterType.atHome], // Perfect for home
-      availableServices: [ServiceType.driveThru],
+      availableServices: [StoreServiceType.driveThru],
     ),
     ProductItem(
       name: 'Evolution Fresh Mighty Watermelon',

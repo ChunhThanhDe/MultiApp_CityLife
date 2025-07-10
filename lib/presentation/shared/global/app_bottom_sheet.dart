@@ -14,7 +14,7 @@ import 'app_navigator.dart';
 /// - Smooth slide-up animation
 /// - Swipe-to-dismiss with customizable sensitivity
 /// - Automatic focus management
-/// - Callback support for close events
+/// - Callback support for close events`
 /// - Customizable dismissal behavior
 ///
 /// Example usage:

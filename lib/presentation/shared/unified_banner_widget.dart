@@ -96,11 +96,11 @@ class UnifiedBannerWidget extends StatelessWidget {
   double _getListHeight() {
     switch (bannerType) {
       case BannerType.brandLogoName:
-        return 100;
+        return 120;
       case BannerType.bannerFloatingLogo:
         return 180;
       case BannerType.bannerDiscount:
-        return 200;
+        return 230;
       case BannerType.bannerSingleImage:
         return 220;
     }
@@ -179,10 +179,14 @@ class UnifiedBannerWidget extends StatelessWidget {
         spacing: 8,
         children: [
           if (item.logoUrl != null) ClipOval(child: AppImage.network(item.logoUrl!, width: 24, height: 24)),
-          Text(
-            item.title,
-            textAlign: TextAlign.center,
-            style: AppTextStyles.typographyH11Medium.copyWith(color: AppColors.textGreyHighest950),
+          Flexible(
+            child: Text(
+              item.title,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: AppTextStyles.typographyH11Medium.copyWith(color: AppColors.textGreyHighest950),
+            ),
           ),
         ],
       ),
@@ -193,8 +197,9 @@ class UnifiedBannerWidget extends StatelessWidget {
     final item = items[index];
     return GestureDetector(
       onTap: item.status == BannerStatus.available ? item.onTap : null,
-      child: Padding(
-        padding: EdgeInsets.only(right: index == items.length - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
+      child: Container(
+        width: 80,
+        margin: EdgeInsets.only(right: index == items.length - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
         child: Column(
           children: [
             Stack(
@@ -211,7 +216,13 @@ class UnifiedBannerWidget extends StatelessWidget {
               ],
             ),
             SizedBox(height: 4),
-            Text(item.title, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBrandDefault500)),
+            Text(
+              item.title,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBrandDefault500),
+            ),
           ],
         ),
       ),
@@ -284,16 +295,24 @@ class UnifiedBannerWidget extends StatelessWidget {
             SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(item.title, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
-                if (item.isVerified == true) Assets.icons.icVerified.svg(),
+                Expanded(
+                  child: Text(
+                    item.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
+                  ),
+                ),
+                if (item.isVerified == true) Padding(padding: const EdgeInsets.only(left: 8), child: Assets.icons.icVerified.svg()),
               ],
             ),
             if (item.time != null || item.deliveryFee != null)
               Row(
                 spacing: 4,
                 children: [
-                  if (item.deliveryFee != null) Text('\$${item.deliveryFee} Delivery fee', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
+                  if (item.deliveryFee != null) Text('\$${item.deliveryFee!.toStringAsFixed(2)} Delivery fee', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
                   if (item.time != null) ...[
                     Text('•', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBrandDefault500)),
                     Text(item.time!, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),

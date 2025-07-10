@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
+import 'package:sixam_mart_user/domain/enums/service_type.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_tabbar.dart';
@@ -21,13 +22,13 @@ class StoreServiceOptions extends StatelessWidget {
             return AppTabBar(
               tabController: controller.serviceTabController,
               listTab: [
-                _buildServiceTab(Assets.icons.icStore.path, 'In store', ServiceType.inStore, controller),
-                _buildServiceTab(Assets.icons.icCar.path, 'Delivery', ServiceType.delivery, controller),
-                _buildServiceTab(Assets.icons.icCarThru.path, 'Drive thru', ServiceType.driveThru, controller),
+                _buildServiceTab(Assets.icons.icStore.path, 'In store', StoreServiceType.inStore, controller),
+                _buildServiceTab(Assets.icons.icCar.path, 'Delivery', StoreServiceType.delivery, controller),
+                _buildServiceTab(Assets.icons.icCarThru.path, 'Drive thru', StoreServiceType.driveThru, controller),
               ],
               onTap: (index) {
                 controller.serviceTabController.animateTo(index);
-                controller.selectService(ServiceType.values[index]);
+                controller.selectService(StoreServiceType.values[index]);
               },
             );
           },
@@ -36,7 +37,7 @@ class StoreServiceOptions extends StatelessWidget {
     );
   }
 
-  Widget _buildServiceTab(String iconPath, String label, ServiceType serviceType, StoreController controller) {
+  Widget _buildServiceTab(String iconPath, String label, StoreServiceType serviceType, StoreController controller) {
     bool isSelected = controller.isServiceSelected(serviceType);
     Color iconColor = isSelected ? AppColors.stateBrandDefault500 : AppColors.textGreyDefault500;
     Color textColor = isSelected ? AppColors.stateBrandDefault500 : AppColors.textGreyDefault500;

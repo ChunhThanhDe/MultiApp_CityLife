@@ -8,6 +8,7 @@ import 'package:sixam_mart_user/app_provider.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/base/error_response.dart';
+import 'package:sixam_mart_user/base/network_exceptions.dart';
 import 'package:sixam_mart_user/domain/entities/user_auth_info.dart';
 import 'package:sixam_mart_user/domain/models/request/sign_in_request.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
@@ -66,7 +67,7 @@ class SignInController extends BaseController {
           isLoading.value = false;
           break;
         case Failure(:final error):
-          showAppSnackBar(title: error.toString(), type: SnackBarType.error);
+          showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
           isLoading.value = false;
           break;
       }
