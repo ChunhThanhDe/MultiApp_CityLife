@@ -7,6 +7,7 @@ import 'package:sixam_mart_user/app_provider.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/domain/entities/user_auth_info.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
+import 'package:sixam_mart_user/services/user_service.dart';
 
 class SplashController extends BaseController {
   @override
@@ -83,7 +84,15 @@ class SplashController extends BaseController {
       // Update app provider with auth info
       Get.find<AppProvider>().updateUserAuthInfo(userAuthInfo);
 
-      log('Successfully loaded stored auth info', name: 'SplashController');
+      // Load user info from storage
+      await UserService.loadUserInfoFromStorage();
+
+      // Try to fetch fresh user info from API if authenticated
+      if (userAuthInfo.token.isNotEmpty) {
+        await UserService.fetchAndUpdateUserInfo();
+      }
+
+      log('Successfully loaded stored auth info and user info', name: 'SplashController');
     } catch (e) {
       log('Error loading stored auth info: $e', name: 'SplashController');
       // Clear corrupted data

@@ -151,34 +151,46 @@ class _ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xFFF7F8F9),
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      child: Row(
-        children: [
-          CircleAvatar(radius: 24, backgroundImage: AssetImage('assets/images/img_avatar_default.png'), backgroundColor: Color(0xFF5856D7)),
-          SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Abdulkadir Ali',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
+    return GetBuilder<AccountController>(
+      builder: (controller) {
+        final userName = controller.hasUserInfo ? controller.userName : 'User';
+        final userRefId = controller.hasUserInfo && controller.currentUserInfo.refCode.isNotEmpty ? '#${controller.currentUserInfo.refCode}' : '#Unknown';
+        final userImage = controller.hasUserInfo && controller.currentUserInfo.imageFullUrl.isNotEmpty ? controller.currentUserInfo.imageFullUrl : 'assets/images/img_avatar_default.png';
+
+        return Container(
+          color: Color(0xFFF7F8F9),
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 24,
+                backgroundImage: controller.hasUserInfo && controller.currentUserInfo.imageFullUrl.isNotEmpty ? NetworkImage(userImage) : AssetImage(userImage) as ImageProvider,
+                backgroundColor: Color(0xFF5856D7),
+              ),
+              SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      userName,
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
+                    ),
+                    SizedBox(height: 4),
+                    Text(userRefId, style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                  ],
                 ),
-                SizedBox(height: 4),
-                Text('#SE32-4834-5037', style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
-              ],
-            ),
+              ),
+              IconButton(
+                onPressed: () {
+                  Get.toNamed(AppRoutes.accountManage);
+                },
+                icon: Icon(Icons.edit, color: Color(0xFF4A5763)),
+              ),
+            ],
           ),
-          IconButton(
-            onPressed: () {
-              Get.toNamed(AppRoutes.accountManage);
-            },
-            icon: Icon(Icons.edit, color: Color(0xFF4A5763)),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

@@ -15,6 +15,7 @@ import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_overlay.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
+import 'package:sixam_mart_user/services/user_service.dart';
 
 enum LoginMethod {
   email('Email', 'email'),
@@ -62,6 +63,9 @@ class SignInController extends BaseController {
           final userAuthInfo = UserAuthInfo.fromJson(response.data);
           AppStorage.setString(SharedPreferencesKeys.userAuthInfo, jsonEncode(userAuthInfo.toJson()));
           Get.find<AppProvider>().updateUserAuthInfo(userAuthInfo);
+
+          // Fetch user info after successful login
+          await UserService.fetchAndUpdateUserInfo();
 
           Get.offAllNamed(AppRoutes.root);
           isLoading.value = false;

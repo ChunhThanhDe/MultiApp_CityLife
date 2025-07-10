@@ -3,12 +3,49 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/data/app_storage.dart';
 import 'package:sixam_mart_user/app/localization/locale_manager.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
+import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
+import 'package:sixam_mart_user/base/error_response.dart';
+import 'package:sixam_mart_user/base/network_exceptions.dart';
+import 'package:sixam_mart_user/domain/models/request/update_appearance_request.dart';
+import 'package:sixam_mart_user/domain/models/response/get_user_info_response.dart';
+import 'package:sixam_mart_user/domain/repositories/setting_repository.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bottom_sheet.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_overlay.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
+import 'package:sixam_mart_user/services/user_service.dart';
 
 class AccountController extends BaseController {
   final LanguageManager _languageManager = Get.find<LanguageManager>();
+  final SettingRepository _settingRepository = Get.find<SettingRepository>();
+
+  // User info getters - examples of how to use user information
+  UserInfo get currentUserInfo => UserService.getCurrentUserInfo();
+
+  String get userName => currentUserInfo.fName.isNotEmpty ? '${currentUserInfo.fName} ${currentUserInfo.lName}'.trim() : 'User';
+
+  String get userEmail => currentUserInfo.email;
+
+  String get userPhone => currentUserInfo.phone;
+
+  int get loyaltyPoints => currentUserInfo.loyaltyPoint;
+
+  int get walletBalance => currentUserInfo.walletBalance;
+
+  bool get hasUserInfo => UserService.hasUserInfo();
+
+  // Refresh user info from API
+  Future<void> refreshUserInfo() async {
+    await safeExecute(() async {
+      final success = await UserService.fetchAndUpdateUserInfo();
+      if (success) {
+        update(); // Update UI
+        showAppSnackBar(title: 'User info refreshed', type: SnackBarType.success);
+      } else {
+        showAppSnackBar(title: 'Failed to refresh user info', type: SnackBarType.error);
+      }
+    });
+  }
 
   String get currentLanguageDisplayName {
     final currentLocale = _languageManager.getSelectedLanguage();
@@ -36,7 +73,7 @@ class AccountController extends BaseController {
     showAppBottomSheet(
       child: _ThemeSelectionBottomSheet(
         onThemeSelected: (themeType) async {
-          await _changeTheme(themeType);
+          await showAppOverlayLoading(future: _changeTheme(themeType));
           Get.back();
           update();
         },
@@ -45,8 +82,31 @@ class AccountController extends BaseController {
   }
 
   Future<void> _changeTheme(ThemeTypes themeType) async {
-    SixMartTheme.modifyTheme(themeType);
-    await AppStorage.setString(SharedPreferencesKeys.themeMode, themeType.name);
+    await safeExecute(() async {
+      // Update local theme first
+      SixMartTheme.modifyTheme(themeType);
+      await AppStorage.setString(SharedPreferencesKeys.themeMode, themeType.name);
+
+      // Update theme on server
+      final String appearanceValue = themeType == ThemeTypes.dark ? 'dark' : 'light';
+      final UpdateAppearanceRequest request = UpdateAppearanceRequest(appearance: appearanceValue);
+
+      final ApiResult result = await _settingRepository.updateAppearance(request);
+
+      switch (result) {
+        case Success(:final response):
+          if (response.statusCode != 200) {
+            final errorResponse = ErrorResponse.fromJson(response.data);
+            showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
+            return;
+          }
+          // Success - theme updated on server
+          showAppSnackBar(title: 'Theme updated successfully', type: SnackBarType.success);
+        case Failure(:final error):
+          // API failed but local theme is already changed, show warning
+          showAppSnackBar(title: 'Theme changed locally. ${NetworkExceptions.getErrorMessage(error)}', type: SnackBarType.error);
+      }
+    });
   }
 }
 

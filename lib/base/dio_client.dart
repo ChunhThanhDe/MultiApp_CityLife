@@ -9,6 +9,16 @@ import 'package:sixam_mart_user/app_provider.dart';
 
 import '../app/constants/api_const.dart';
 
+Map<String, dynamic> getAuthHeader() {
+  final Map<String, dynamic> headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
+
+  if (Get.find<AppProvider>().userAuthInfo.value.token.isNotEmpty) {
+    headers['Authorization'] = 'Bearer ${Get.find<AppProvider>().userAuthInfo.value.token}';
+  }
+
+  return headers;
+}
+
 class DioClient {
   late Dio _dio;
 
@@ -20,7 +30,7 @@ class DioClient {
 
     _dio
       ..options.baseUrl = baseUrl
-      ..options.headers = getHeader()
+      ..options.headers = getAuthHeader()
       ..options.connectTimeout = const Duration(seconds: 10)
       ..options.receiveTimeout = const Duration(seconds: 10)
       ..options.receiveDataWhenStatusError = true
@@ -65,16 +75,6 @@ class DioClient {
         return client;
       },
     );
-  }
-
-  Map<String, dynamic> getHeader() {
-    final Map<String, dynamic> headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
-
-    if (Get.find<AppProvider>().userAuthInfo.value.token.isNotEmpty) {
-      headers['Authorization'] = 'Bearer ${Get.find<AppProvider>().userAuthInfo.value.token}';
-    }
-
-    return headers;
   }
 
   Future<Response> get(String uri, {Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken, ProgressCallback? onReceiveProgress}) async {
