@@ -5,6 +5,7 @@ import 'package:sixam_mart_user/app_provider.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/domain/models/response/get_user_info_response.dart';
 import 'package:sixam_mart_user/domain/repositories/user_repository.dart';
+import 'package:sixam_mart_user/services/auth_token_manager.dart';
 
 /// Service class for handling user-related operations
 class UserService {
@@ -56,8 +57,18 @@ class UserService {
     await _appProvider.loadUserInfoFromStorage();
   }
 
-  /// Clear all user data
+  /// Clear all user data and tokens
   static Future<void> clearUserData() async {
+    // Clear tokens from AuthTokenManager
+    try {
+      await Get.find<AuthTokenManager>().clearTokens();
+    } catch (e) {
+      log('Error clearing tokens: $e', name: 'UserService');
+    }
+
+    // Clear user data from AppProvider
     _appProvider.clearUserData();
+
+    log('All user data and tokens cleared', name: 'UserService');
   }
 }

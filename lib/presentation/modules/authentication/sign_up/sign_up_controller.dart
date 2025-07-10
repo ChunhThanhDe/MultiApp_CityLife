@@ -1,12 +1,8 @@
-import 'dart:convert';
-
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/app/data/app_storage.dart';
 import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
-import 'package:sixam_mart_user/app_provider.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/base/error_response.dart';
@@ -17,6 +13,7 @@ import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/accept_tos.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_overlay.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
+import 'package:sixam_mart_user/services/auth_token_manager.dart';
 import 'package:sixam_mart_user/services/user_service.dart';
 
 enum SignUpMethod { email, phone }
@@ -134,14 +131,16 @@ class SignUpController extends BaseController {
           }
 
           final userAuthInfo = UserAuthInfo.fromJson(response.data);
-          AppStorage.setString(SharedPreferencesKeys.userAuthInfo, jsonEncode(userAuthInfo.toJson()));
-          Get.find<AppProvider>().updateUserAuthInfo(userAuthInfo);
+
+          // Save tokens to AuthTokenManager
+          await Get.find<AuthTokenManager>().saveTokens(token: userAuthInfo.token, refreshToken: userAuthInfo.refreshToken);
 
           // Fetch user info after successful sign up
           await UserService.fetchAndUpdateUserInfo();
 
           Get.offAll(() => AcceptTos());
           isLoading.value = false;
+
         case Failure(:final error):
           showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
           isLoading.value = false;

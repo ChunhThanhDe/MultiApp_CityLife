@@ -1,10 +1,6 @@
-import 'dart:convert';
-
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/app/data/app_storage.dart';
-import 'package:sixam_mart_user/app_provider.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/base/error_response.dart';
@@ -15,6 +11,7 @@ import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_overlay.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
+import 'package:sixam_mart_user/services/auth_token_manager.dart';
 import 'package:sixam_mart_user/services/user_service.dart';
 
 enum LoginMethod {
@@ -47,7 +44,9 @@ class SignInController extends BaseController {
       if (!formKey.currentState!.validate()) {
         return;
       }
+
       isLoading.value = true;
+
       final SignInRequest request = SignInRequest(loginType: SignInType.manual, emailOrPhone: inputController.text, fieldType: loginMethod.value.fieldType, password: passwordController.text);
 
       final ApiResult result = await showAppOverlayLoading(future: _authRepository.login(request));
@@ -60,20 +59,21 @@ class SignInController extends BaseController {
             isLoading.value = false;
             return;
           }
+
           final userAuthInfo = UserAuthInfo.fromJson(response.data);
-          AppStorage.setString(SharedPreferencesKeys.userAuthInfo, jsonEncode(userAuthInfo.toJson()));
-          Get.find<AppProvider>().updateUserAuthInfo(userAuthInfo);
+
+          // Save tokens to AuthTokenManager
+          await Get.find<AuthTokenManager>().saveTokens(token: userAuthInfo.token, refreshToken: userAuthInfo.refreshToken);
 
           // Fetch user info after successful login
           await UserService.fetchAndUpdateUserInfo();
 
           Get.offAllNamed(AppRoutes.root);
           isLoading.value = false;
-          break;
+
         case Failure(:final error):
           showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
           isLoading.value = false;
-          break;
       }
     });
   }

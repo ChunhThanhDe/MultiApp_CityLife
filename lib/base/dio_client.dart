@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -5,15 +6,21 @@ import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:sixam_mart_user/app_provider.dart';
+import 'package:sixam_mart_user/services/auth_token_manager.dart';
 
 import '../app/constants/api_const.dart';
 
 Map<String, dynamic> getAuthHeader() {
   final Map<String, dynamic> headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
 
-  if (Get.find<AppProvider>().userAuthInfo.value.token.isNotEmpty) {
-    headers['Authorization'] = 'Bearer ${Get.find<AppProvider>().userAuthInfo.value.token}';
+  try {
+    final String token = Get.find<AuthTokenManager>().token;
+    // log('token: $token', name: 'token');
+    if (token.isNotEmpty) {
+      headers['Authorization'] = 'Bearer $token';
+    }
+  } catch (e) {
+    log('Error getting token from AuthTokenManager: $e', name: 'token');
   }
 
   return headers;

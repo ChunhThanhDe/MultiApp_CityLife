@@ -6,11 +6,24 @@ import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/service_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/setting_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/user_repository.dart';
+import 'package:sixam_mart_user/services/auth_token_manager.dart';
 
 class DependencyInjection {
   static Future<void> init() async {
+    // Initialize SharedPreferences first
     await Get.putAsync(() => AppStorage().sharedPreferences());
+
+    // Initialize core services
     Get.put(LanguageManager());
+
+    // Initialize AuthTokenManager to ensure tokens are available immediately
+    await Get.putAsync(() async {
+      final tokenManager = AuthTokenManager();
+      await tokenManager.onInit();
+      return tokenManager;
+    });
+
+    // Initialize other services
     Get.put(AppProvider());
     Get.put(AuthRepository());
     Get.put(ServiceRepository());

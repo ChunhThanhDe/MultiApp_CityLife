@@ -1,12 +1,10 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/data/app_storage.dart';
-import 'package:sixam_mart_user/app_provider.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
-import 'package:sixam_mart_user/domain/entities/user_auth_info.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
+import 'package:sixam_mart_user/services/auth_token_manager.dart';
 import 'package:sixam_mart_user/services/user_service.dart';
 
 class SplashController extends BaseController {
@@ -20,7 +18,8 @@ class SplashController extends BaseController {
     try {
       isLoading.value = true;
 
-      await _loadStoredAuthInfo();
+      // Load user info from storage if tokens exist
+      await _loadUserDataIfAuthenticated();
 
       await Future.delayed(const Duration(milliseconds: 1500));
 
@@ -54,49 +53,31 @@ class SplashController extends BaseController {
 
   bool _isUserAuthenticated() {
     try {
-      final userAuthInfoJson = AppStorage.getString(SharedPreferencesKeys.userAuthInfo);
-
-      if (userAuthInfoJson == null || userAuthInfoJson.isEmpty) {
-        return false;
-      }
-
-      final Map<String, dynamic> userAuthInfoMap = jsonDecode(userAuthInfoJson);
-      return userAuthInfoMap.isNotEmpty;
+      // Check authentication status from AuthTokenManager
+      final authTokenManager = Get.find<AuthTokenManager>();
+      return authTokenManager.hasValidToken;
     } catch (e) {
       log('Error checking authentication: $e', name: 'SplashController');
-      AppStorage.removeSharedPrefrences(SharedPreferencesKeys.userAuthInfo);
       return false;
     }
   }
 
-  Future<void> _loadStoredAuthInfo() async {
+  Future<void> _loadUserDataIfAuthenticated() async {
     try {
-      final String? userAuthInfoJson = AppStorage.getString(SharedPreferencesKeys.userAuthInfo);
+      // Only load user data if user is authenticated
+      if (_isUserAuthenticated()) {
+        // Load user info from storage
+        await UserService.loadUserInfoFromStorage();
 
-      if (userAuthInfoJson == null || userAuthInfoJson.isEmpty) {
-        log('No stored auth info found', name: 'SplashController');
-        return;
-      }
-
-      final Map<String, dynamic> userAuthInfoMap = jsonDecode(userAuthInfoJson);
-      final UserAuthInfo userAuthInfo = UserAuthInfo.fromJson(userAuthInfoMap);
-
-      // Update app provider with auth info
-      Get.find<AppProvider>().updateUserAuthInfo(userAuthInfo);
-
-      // Load user info from storage
-      await UserService.loadUserInfoFromStorage();
-
-      // Try to fetch fresh user info from API if authenticated
-      if (userAuthInfo.token.isNotEmpty) {
+        // Try to fetch fresh user info from API
         await UserService.fetchAndUpdateUserInfo();
-      }
 
-      log('Successfully loaded stored auth info and user info', name: 'SplashController');
+        log('Successfully loaded user data for authenticated user', name: 'SplashController');
+      } else {
+        log('User not authenticated, skipping user data loading', name: 'SplashController');
+      }
     } catch (e) {
-      log('Error loading stored auth info: $e', name: 'SplashController');
-      // Clear corrupted data
-      AppStorage.removeSharedPrefrences(SharedPreferencesKeys.userAuthInfo);
+      log('Error loading user data: $e', name: 'SplashController');
     }
   }
 }
