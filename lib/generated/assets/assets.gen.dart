@@ -27,6 +27,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_back_arrow.svg
   SvgGenImage get icBackArrow => const SvgGenImage('assets/icons/ic_back_arrow.svg');
 
+  /// File path: assets/icons/ic_basket_preparing.svg
+  SvgGenImage get icBasketPreparing => const SvgGenImage('assets/icons/ic_basket_preparing.svg');
+
+  /// File path: assets/icons/ic_basket_shopping_check.svg
+  SvgGenImage get icBasketShoppingCheck => const SvgGenImage('assets/icons/ic_basket_shopping_check.svg');
+
   /// File path: assets/icons/ic_bell.svg
   SvgGenImage get icBell => const SvgGenImage('assets/icons/ic_bell.svg');
 
@@ -90,6 +96,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_email_icon.svg
   SvgGenImage get icEmailIcon => const SvgGenImage('assets/icons/ic_email_icon.svg');
 
+  /// File path: assets/icons/ic_enjoy_order.svg
+  SvgGenImage get icEnjoyOrder => const SvgGenImage('assets/icons/ic_enjoy_order.svg');
+
   /// File path: assets/icons/ic_error.svg
   SvgGenImage get icError => const SvgGenImage('assets/icons/ic_error.svg');
 
@@ -119,6 +128,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_heart_outlined.svg
   SvgGenImage get icHeartOutlined => const SvgGenImage('assets/icons/ic_heart_outlined.svg');
+
+  /// File path: assets/icons/ic_home.svg
+  SvgGenImage get icHome => const SvgGenImage('assets/icons/ic_home.svg');
 
   /// File path: assets/icons/ic_home_filled.svg
   SvgGenImage get icHomeFilled => const SvgGenImage('assets/icons/ic_home_filled.svg');
@@ -165,6 +177,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_mouse.svg
   SvgGenImage get icMouse => const SvgGenImage('assets/icons/ic_mouse.svg');
 
+  /// File path: assets/icons/ic_order.svg
+  SvgGenImage get icOrder => const SvgGenImage('assets/icons/ic_order.svg');
+
   /// File path: assets/icons/ic_pencil.svg
   SvgGenImage get icPencil => const SvgGenImage('assets/icons/ic_pencil.svg');
 
@@ -179,6 +194,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_phone_icon.svg
   SvgGenImage get icPhoneIcon => const SvgGenImage('assets/icons/ic_phone_icon.svg');
+
+  /// File path: assets/icons/ic_pickup_order.svg
+  SvgGenImage get icPickupOrder => const SvgGenImage('assets/icons/ic_pickup_order.svg');
 
   /// File path: assets/icons/ic_plus_add.svg
   SvgGenImage get icPlusAdd => const SvgGenImage('assets/icons/ic_plus_add.svg');
@@ -255,6 +273,8 @@ class $AssetsIconsGen {
     icAppleIcon,
     icApplePay,
     icBackArrow,
+    icBasketPreparing,
+    icBasketShoppingCheck,
     icBell,
     icBoxDelivery,
     icBoxPackageCourierHands,
@@ -276,6 +296,7 @@ class $AssetsIconsGen {
     icDrink,
     icDropdownArrow,
     icEmailIcon,
+    icEnjoyOrder,
     icError,
     icEvcPlus,
     icEyeHidden,
@@ -286,6 +307,7 @@ class $AssetsIconsGen {
     icHandsPackage,
     icHeartFilled,
     icHeartOutlined,
+    icHome,
     icHomeFilled,
     icHomeOutlined,
     icHospital,
@@ -301,11 +323,13 @@ class $AssetsIconsGen {
     icLock,
     icMastercard,
     icMouse,
+    icOrder,
     icPencil,
     icPersonFilled,
     icPersonIcon,
     icPersonOutlined,
     icPhoneIcon,
+    icPickupOrder,
     icPlusAdd,
     icPriority,
     icPromocode,
@@ -343,6 +367,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/img_avatar_default.png
   AssetGenImage get imgAvatarDefault => const AssetGenImage('assets/images/img_avatar_default.png');
+
+  /// File path: assets/images/img_bag.png
+  AssetGenImage get imgBag => const AssetGenImage('assets/images/img_bag.png');
 
   /// File path: assets/images/img_box_delivery.png
   AssetGenImage get imgBoxDelivery => const AssetGenImage('assets/images/img_box_delivery.png');
@@ -482,11 +509,30 @@ class $AssetsImagesGen {
   /// File path: assets/images/img_welcome_9.png
   AssetGenImage get imgWelcome9 => const AssetGenImage('assets/images/img_welcome_9.png');
 
+  /// File path: assets/images/mcdonalds.png
+  AssetGenImage get mcdonalds => const AssetGenImage('assets/images/mcdonalds.png');
+
+  /// File path: assets/images/starbucks.png
+  AssetGenImage get starbucks => const AssetGenImage('assets/images/starbucks.png');
+
+  /// File path: assets/images/starbucks_drink1.png
+  AssetGenImage get starbucksDrink1 => const AssetGenImage('assets/images/starbucks_drink1.png');
+
+  /// File path: assets/images/starbucks_drink2.png
+  AssetGenImage get starbucksDrink2 => const AssetGenImage('assets/images/starbucks_drink2.png');
+
+  /// File path: assets/images/starbucks_drink3.png
+  AssetGenImage get starbucksDrink3 => const AssetGenImage('assets/images/starbucks_drink3.png');
+
+  /// File path: assets/images/starbucks_drink4.png
+  AssetGenImage get starbucksDrink4 => const AssetGenImage('assets/images/starbucks_drink4.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
     imgAddress,
     imgArby,
     imgAvatarDefault,
+    imgBag,
     imgBoxDelivery,
     imgCleaning,
     imgDelivery,
@@ -533,6 +579,12 @@ class $AssetsImagesGen {
     imgWelcome7,
     imgWelcome8,
     imgWelcome9,
+    mcdonalds,
+    starbucks,
+    starbucksDrink1,
+    starbucksDrink2,
+    starbucksDrink3,
+    starbucksDrink4,
   ];
 }
 

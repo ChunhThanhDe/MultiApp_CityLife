@@ -293,7 +293,7 @@ class UnifiedBannerWidget extends StatelessWidget {
               Row(
                 spacing: 4,
                 children: [
-                  if (item.deliveryFee != null) Text('\$${item.deliveryFee} Delivery fee', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
+                  if (item.deliveryFee != null) Text('\$${item.deliveryFee!.toStringAsFixed(2)} Delivery fee', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
                   if (item.time != null) ...[
                     Text('•', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBrandDefault500)),
                     Text(item.time!, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
