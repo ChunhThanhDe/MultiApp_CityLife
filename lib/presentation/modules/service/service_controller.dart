@@ -5,7 +5,7 @@ import 'package:sixam_mart_user/base/error_response.dart';
 import 'package:sixam_mart_user/base/network_exceptions.dart';
 import 'package:sixam_mart_user/domain/enums/service_type.dart';
 import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart';
-import 'package:sixam_mart_user/domain/repositories/module.repository.dart';
+import 'package:sixam_mart_user/domain/repositories/service_repository.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_overlay.dart';
@@ -34,7 +34,7 @@ class SectionMetadata {
 }
 
 class ServiceController extends BaseController {
-  final ModuleRepository _moduleRepository = Get.find<ModuleRepository>();
+  final ServiceRepository _moduleRepository = Get.find<ServiceRepository>();
 
   @override
   void onReady() {
@@ -46,7 +46,7 @@ class ServiceController extends BaseController {
   final Rx<ServiceType?> currentServiceType = Rx<ServiceType?>(ServiceType.food);
 
   // Get current service configuration
-  ServiceConfig get currentServiceConfig => ModuleRepository.getServiceConfig(currentServiceType.value ?? ServiceType.food);
+  ServiceConfig get currentServiceConfig => ServiceRepository.getServiceConfig(currentServiceType.value ?? ServiceType.food);
 
   // Method to load data for specific service type
   void loadServiceTypeData(ServiceType serviceType) async {

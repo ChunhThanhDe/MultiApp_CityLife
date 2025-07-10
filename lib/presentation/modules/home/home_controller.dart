@@ -5,7 +5,7 @@ import 'package:sixam_mart_user/base/error_response.dart';
 import 'package:sixam_mart_user/base/network_exceptions.dart';
 import 'package:sixam_mart_user/domain/enums/service_type.dart';
 import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart';
-import 'package:sixam_mart_user/domain/repositories/module.repository.dart';
+import 'package:sixam_mart_user/domain/repositories/service_repository.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
@@ -22,13 +22,12 @@ class Service {
 }
 
 class HomeController extends BaseController {
-  final ModuleRepository _moduleRepository = Get.find<ModuleRepository>();
+  final ServiceRepository _serviceRepository = Get.find<ServiceRepository>();
 
   @override
   void onInit() {
     super.onInit();
     getFastFoodStores();
-    getGroceryStores();
   }
 
   final Rx<GetStoresResponse?> fastFoodData = Rx<GetStoresResponse?>(null);
@@ -61,7 +60,7 @@ class HomeController extends BaseController {
 
   Future<void> getFastFoodStores() async {
     await safeExecute(() async {
-      final result = await _moduleRepository.getFastFoodStores(zoneId: 1, moduleId: 3, id: 1);
+      final result = await _serviceRepository.getServiceData(ServiceType.food);
       switch (result) {
         case Success(:final response):
           if (response.statusCode != 200) {
@@ -77,26 +76,8 @@ class HomeController extends BaseController {
     });
   }
 
-  Future<void> getGroceryStores() async {
-    await safeExecute(() async {
-      final result = await _moduleRepository.getGroceryStores(zoneId: 1, moduleId: 4, id: 1);
-      switch (result) {
-        case Success(:final response):
-          if (response.statusCode != 200) {
-            final errorResponse = ErrorResponse.fromJson(response.data);
-            showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
-            return;
-          }
-          final storesData = GetStoresResponse.fromJson(response.data);
-          groceryData.value = storesData;
-        case Failure(:final error):
-          showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
-      }
-    });
-  }
-
   Future<void> refreshData() async {
-    await Future.wait([getFastFoodStores(), getGroceryStores()]);
+    await Future.wait([getFastFoodStores()]);
   }
 
   // Navigation method to handle service type tap
