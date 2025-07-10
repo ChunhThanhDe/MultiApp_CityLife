@@ -236,7 +236,6 @@ class ServiceController extends BaseController {
 
   // Dynamic category assets based on service type
   String getCategoryImageAsset(Category category, ServiceType serviceType) {
-    // You can expand this logic to map specific categories to assets
     switch (serviceType) {
       case ServiceType.food:
         return Assets.images.imgFood.path;
