@@ -2,13 +2,25 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/base/error_response.dart';
+import 'package:sixam_mart_user/base/network_exceptions.dart';
 import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart';
 import 'package:sixam_mart_user/domain/repositories/module.repository.dart';
+import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 import 'package:sixam_mart_user/presentation/shared/unified_banner_widget.dart';
+
+enum ServiceType { food, grocery, delivery, laundry, ticket, cleaning, seeMore }
+
+class Service {
+  final String title;
+  final String image;
+  final ServiceType serviceType;
+
+  const Service({required this.title, required this.image, required this.serviceType});
+}
 
 class HomeController extends BaseController {
   final ModuleRepository _moduleRepository = Get.find<ModuleRepository>();
@@ -38,6 +50,16 @@ class HomeController extends BaseController {
     }
   }
 
+  final List<Service> services = [
+    Service(title: 'Food', image: Assets.images.imgFood.path, serviceType: ServiceType.food),
+    Service(title: 'Grocery', image: Assets.images.imgGrocery.path, serviceType: ServiceType.grocery),
+    Service(title: 'Delivery', image: Assets.images.imgDelivery.path, serviceType: ServiceType.delivery),
+    Service(title: 'Laundry', image: Assets.images.imgLaundry.path, serviceType: ServiceType.laundry),
+    Service(title: 'Ticket', image: Assets.images.imgTicketPlane.path, serviceType: ServiceType.ticket),
+    Service(title: 'Cleaning', image: Assets.images.imgCleaning.path, serviceType: ServiceType.cleaning),
+    Service(title: 'See More', image: Assets.images.imgSeeMore.path, serviceType: ServiceType.seeMore),
+  ];
+
   Future<void> getFastFoodStores() async {
     await safeExecute(() async {
       final result = await _moduleRepository.getFastFoodStores(zoneId: 1, moduleId: 3, id: 1);
@@ -51,7 +73,7 @@ class HomeController extends BaseController {
           final storesData = GetStoresResponse.fromJson(response.data);
           fastFoodData.value = storesData;
         case Failure(:final error):
-          showAppSnackBar(title: error.toString(), type: SnackBarType.error);
+          showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
       }
     });
   }
@@ -69,13 +91,26 @@ class HomeController extends BaseController {
           final storesData = GetStoresResponse.fromJson(response.data);
           groceryData.value = storesData;
         case Failure(:final error):
-          showAppSnackBar(title: error.toString(), type: SnackBarType.error);
+          showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
       }
     });
   }
 
   Future<void> refreshData() async {
     await Future.wait([getFastFoodStores(), getGroceryStores()]);
+  }
+
+  // Navigation method to handle service type tap
+  void navigateToServiceWithType(ServiceType serviceType) {
+    // Get RootController to change tabs
+    final rootController = Get.find<RootController>();
+
+    // Change to Service tab
+    rootController.changeTab(RootTab.service);
+
+    // Get ServiceController and load data for specific service type
+    final serviceController = Get.find<ServiceController>();
+    serviceController.loadServiceTypeData(serviceType);
   }
 
   // Navigation method to handle service category tap

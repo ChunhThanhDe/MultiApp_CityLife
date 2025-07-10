@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/base/error_response.dart';
+import 'package:sixam_mart_user/base/network_exceptions.dart';
 import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart';
 import 'package:sixam_mart_user/domain/repositories/module.repository.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 import 'package:sixam_mart_user/presentation/shared/unified_banner_widget.dart';
@@ -25,7 +27,6 @@ class ServiceController extends BaseController {
   void onInit() {
     super.onInit();
     getFastFoodStores();
-    getGroceryStores();
   }
 
   final Rx<GetStoresResponse?> fastFoodData = Rx<GetStoresResponse?>(null);
@@ -36,15 +37,32 @@ class ServiceController extends BaseController {
   void loadCategoryData(Category category) {
     selectedCategory.value = category;
 
-    // Based on category, load appropriate data
-    // You can implement logic to determine if it's food or grocery based on category
-    // For now, we'll reload both data sets
     refreshData();
   }
 
   // Method to clear selected category
   void clearSelectedCategory() {
     selectedCategory.value = null;
+  }
+
+  // Method to load data for specific service type
+  void loadServiceTypeData(ServiceType serviceType) {
+    selectedCategory.value = null;
+
+    switch (serviceType) {
+      case ServiceType.food:
+        getFastFoodStores();
+        break;
+      case ServiceType.grocery:
+        getGroceryStores();
+        break;
+      case ServiceType.delivery:
+      case ServiceType.laundry:
+      case ServiceType.ticket:
+      case ServiceType.cleaning:
+      case ServiceType.seeMore:
+        break;
+    }
   }
 
   // Get filtered data based on selected category
@@ -135,7 +153,7 @@ class ServiceController extends BaseController {
           final storesData = GetStoresResponse.fromJson(response.data);
           fastFoodData.value = storesData;
         case Failure(:final error):
-          showAppSnackBar(title: error.toString(), type: SnackBarType.error);
+          showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
       }
     });
   }
@@ -153,7 +171,7 @@ class ServiceController extends BaseController {
           final storesData = GetStoresResponse.fromJson(response.data);
           groceryData.value = storesData;
         case Failure(:final error):
-          showAppSnackBar(title: error.toString(), type: SnackBarType.error);
+          showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
       }
     });
   }
