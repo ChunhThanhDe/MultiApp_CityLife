@@ -31,18 +31,20 @@ class HeaderAndService extends GetView<HomeController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                  text: '${controller.getGreetingByTime()}\n',
-                  style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite),
-                ),
-                TextSpan(
-                  text: 'Abdulkadir Ali',
-                  style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textBaseWhite),
-                ),
-              ],
+          Obx(
+            () => Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: '${controller.getGreetingByTime()}\n',
+                    style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite),
+                  ),
+                  TextSpan(
+                    text: '${controller.appProvider.userInfo.value.fName} ${controller.appProvider.userInfo.value.lName}',
+                    style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textBaseWhite),
+                  ),
+                ],
+              ),
             ),
           ),
           Assets.icons.icBell.svg(width: 24, height: 24, colorFilter: ColorFilter.mode(AppColors.textBaseWhite, BlendMode.srcIn)),
