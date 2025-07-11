@@ -122,26 +122,8 @@ class SignUpScreen extends BaseScreen<SignUpController> {
         if (value == null || value.trim().isEmpty) {
           return tr(LocaleKeys.authentication_signIn_passwordRequired);
         }
-        final regex = RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[^\s]{10,}$');
-        if (!regex.hasMatch(value)) {
-          if (value.length < 10) {
-            return tr(LocaleKeys.authentication_signIn_passwordMinLength);
-          }
-          if (value.contains(' ')) {
-            return tr(LocaleKeys.authentication_signIn_passwordNoSpaces);
-          }
-          if (!RegExp(r'[A-Z]').hasMatch(value)) {
-            return tr(LocaleKeys.authentication_signIn_passwordUppercase);
-          }
-          if (!RegExp(r'[a-z]').hasMatch(value)) {
-            return tr(LocaleKeys.authentication_signIn_passwordLowercase);
-          }
-          if (!RegExp(r'\d').hasMatch(value)) {
-            return tr(LocaleKeys.authentication_signIn_passwordNumber);
-          }
-          if (!RegExp(r'[!@#$%^&*]').hasMatch(value)) {
-            return tr(LocaleKeys.authentication_signIn_passwordSpecial);
-          }
+        if (value.length < 6) {
+          return tr(LocaleKeys.authentication_signIn_passwordMinLength);
         }
         return null;
       },

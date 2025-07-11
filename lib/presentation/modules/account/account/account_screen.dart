@@ -23,7 +23,7 @@ class AccountScreen extends BaseScreen<AccountController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(title: "Account", onBack: () => Get.back());
+    return BasicAppBar(title: "Account", isShowBackButton: false);
   }
 
   void _showLogoutConfirmation() {

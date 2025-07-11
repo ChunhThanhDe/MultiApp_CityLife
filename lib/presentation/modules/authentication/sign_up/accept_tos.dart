@@ -27,7 +27,7 @@ class AcceptTos extends BaseScreen<SignUpController> {
           AuthHeader(title: tr(LocaleKeys.authentication_acceptTos_title), subtitle: tr(LocaleKeys.authentication_acceptTos_subtitle)),
           SizedBox(height: 32.h),
           AppButton(
-            onTap: () => Get.toNamed(AppRoutes.root),
+            onTap: () => Get.offAllNamed(AppRoutes.root),
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
             child: Row(

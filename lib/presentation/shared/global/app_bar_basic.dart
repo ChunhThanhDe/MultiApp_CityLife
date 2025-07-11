@@ -22,11 +22,13 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// If not provided, defaults to calling Get.back().
   final VoidCallback? onBack;
 
+  final bool isShowBackButton;
+
   /// Creates a [BasicAppBar] with the specified [title] and optional [onBack] callback.
   ///
   /// The [title] parameter is required and will be displayed as the app bar title.
   /// The [onBack] parameter is optional and defaults to Get.back() if not provided.
-  const BasicAppBar({super.key, required this.title, this.onBack});
+  const BasicAppBar({super.key, required this.title, this.onBack, this.isShowBackButton = true});
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +42,12 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       centerTitle: false,
       toolbarHeight: 56,
-      leading: IconButton(
-        onPressed: onBack ?? () => Get.back(),
-        icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF161A1D)),
-      ),
+      leading: isShowBackButton
+          ? IconButton(
+              onPressed: onBack ?? () => Get.back(),
+              icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF161A1D)),
+            )
+          : null,
     );
   }
 
