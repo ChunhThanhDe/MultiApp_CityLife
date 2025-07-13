@@ -10,6 +10,7 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_header.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
+import 'package:sixam_mart_user/services/user_service.dart';
 
 import 'sign_up_controller.dart';
 
@@ -27,7 +28,7 @@ class AcceptTos extends BaseScreen<SignUpController> {
           AuthHeader(title: tr(LocaleKeys.authentication_acceptTos_title), subtitle: tr(LocaleKeys.authentication_acceptTos_subtitle)),
           SizedBox(height: 32.h),
           AppButton(
-            onTap: () => Get.offAllNamed(AppRoutes.signIn),
+            onTap: () => _handleAcceptTos(),
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
             child: Row(
@@ -54,5 +55,14 @@ class AcceptTos extends BaseScreen<SignUpController> {
         ],
       ),
     );
+  }
+
+  /// Handle TOS acceptance - clear any temporary user data and navigate to sign in
+  Future<void> _handleAcceptTos() async {
+    // Clear any temporary user data and tokens to ensure clean state
+    await UserService.clearUserData();
+
+    // Navigate to sign in screen
+    Get.offAllNamed(AppRoutes.signIn);
   }
 }
