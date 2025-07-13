@@ -28,7 +28,7 @@ class AddressScreen extends StatelessWidget {
                 Text(tr(LocaleKeys.address_enterSubtitle), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
                 const SizedBox(height: 24),
                 AppButton(
-                  onTap: () => Get.toNamed('${AppRoutes.address}/${AppRoutes.searchAddress}'),
+                  onTap: () => Get.toNamed('${AppRoutes.address}${AppRoutes.searchAddress}'),
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   child: Text(tr(LocaleKeys.address_addButton), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite)),

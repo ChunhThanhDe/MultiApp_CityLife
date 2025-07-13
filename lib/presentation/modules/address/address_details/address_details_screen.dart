@@ -288,7 +288,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: AppButton(
-        onTap: () => Get.toNamed('${AppRoutes.address}/${AppRoutes.confirmAddress}', arguments: vm.googlePlex.target),
+        onTap: () => Get.toNamed('${AppRoutes.address}${AppRoutes.confirmAddress}', arguments: vm.googlePlex.target),
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Text(tr(LocaleKeys.address_details_saveAddress), style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white)),
