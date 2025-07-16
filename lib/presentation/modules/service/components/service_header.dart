@@ -70,7 +70,14 @@ class ServiceHeader extends GetView<ServiceController> {
                       borderRadius: BorderRadius.circular(24),
                       border: Border.all(color: AppColors.stateGreyLowestHover100, width: 1),
                     ),
-                    child: Text('Search...', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
+                    child: Row(
+                      children: [
+                        Padding(padding: const EdgeInsets.only(right: 12), child: Assets.icons.icSearch.svg()),
+                        Expanded(
+                          child: Text('Search food and stores', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
@@ -90,7 +97,7 @@ class ServiceHeader extends GetView<ServiceController> {
                 children: [
                   Padding(padding: const EdgeInsets.only(right: 12), child: Assets.icons.icSearch.svg()),
                   Expanded(
-                    child: Text('Search...', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
+                    child: Text('Search food and stores', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
                   ),
                   GestureDetector(
                     onTap: () {
