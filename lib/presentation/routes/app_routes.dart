@@ -12,6 +12,7 @@ class AppRoutes {
   static const String accountSecurity = '/account/security';
   static const String accountPasskey = '/account/passkey';
   static const String favorites = '/favorites';
+  static const String search = '/search';
   static const String address = '/address';
   static const String searchAddress = '/search_address';
   static const String addressDetails = '/address_details';

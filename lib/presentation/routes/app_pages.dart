@@ -1,4 +1,4 @@
-import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account/account_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account/account_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account_2_step_verification/account_2_step_verification_binding.dart';
@@ -54,6 +54,8 @@ import 'package:sixam_mart_user/presentation/modules/payment/scan_card/scan_card
 import 'package:sixam_mart_user/presentation/modules/payment/scan_card/scan_card_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_bindings.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/search/search_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/search/search_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/wallet/add_fund/add_fund_binding.dart';
@@ -92,6 +94,7 @@ class AppPages {
     GetPage(name: AppRoutes.accountSecurity, page: () => const AccountSecurityScreen(), binding: AccountSecurityBinding(), middlewares: [AuthMiddleware()]),
     GetPage(name: AppRoutes.accountPasskey, page: () => const AccountPasskeysScreen(), binding: AccountPasskeysBinding(), middlewares: [AuthMiddleware()]),
     GetPage(name: AppRoutes.favorites, page: () => const FavoritesScreen(), binding: FavoritesBinding(), middlewares: [AuthMiddleware()]),
+    GetPage(name: AppRoutes.search, page: () => const SearchScreen(), binding: SearchBinding(), middlewares: [AuthMiddleware()], transition: Transition.noTransition),
     GetPage(name: AppRoutes.payment, page: () => const PaymentScreen(), binding: PaymentBinding(), middlewares: [AuthMiddleware()]),
     GetPage(name: AppRoutes.paymentScan, page: () => const ScanCardScreen(), binding: ScanCardBinding(), middlewares: [AuthMiddleware()]),
     GetPage(name: AppRoutes.homeDelivery, page: () => const HomeDeliveryScreen(), binding: HomeDeliveryBinding()),

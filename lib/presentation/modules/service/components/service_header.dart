@@ -5,7 +5,7 @@ import 'package:sixam_mart_user/domain/enums/service_type.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/service_filter.dart';
 import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
-import 'package:sixam_mart_user/presentation/shared/global/app_text_field.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
 class ServiceHeader extends GetView<ServiceController> {
   const ServiceHeader({super.key});
@@ -50,29 +50,48 @@ class ServiceHeader extends GetView<ServiceController> {
   Widget _buildSearchBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: AppTextField(
-        borderRadius: 24,
-        isRequired: false,
-        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        prefixIcon: Padding(padding: const EdgeInsets.all(12), child: Assets.icons.icSearch.svg()),
-        suffixIcon: GestureDetector(
-          onTap: () {
-            showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              backgroundColor: Colors.transparent,
-              builder: (context) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-                  child: FractionallySizedBox(
-                    heightFactor: 0.75, // Chỉ chiếm 75% chiều cao
-                    child: const FilterScreen(),
+      child: GestureDetector(
+        onTap: () {
+          Get.toNamed(AppRoutes.search);
+        },
+        child: Hero(
+          tag: 'search_bar',
+          child: Material(
+            color: Colors.transparent,
+            child: Container(
+              height: 48,
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+                border: Border.all(color: AppColors.stateGreyLowestHover100, width: 1),
+              ),
+              child: Row(
+                children: [
+                  Padding(padding: const EdgeInsets.only(right: 12), child: Assets.icons.icSearch.svg()),
+                  Expanded(
+                    child: Text('Search...', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
                   ),
-                );
-              },
-            );
-          },
-          child: Padding(padding: const EdgeInsets.all(15), child: Assets.icons.icFilter.svg()),
+                  GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) {
+                          return ClipRRect(
+                            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                            child: FractionallySizedBox(heightFactor: 0.75, child: const FilterScreen()),
+                          );
+                        },
+                      );
+                    },
+                    child: Padding(padding: const EdgeInsets.only(left: 12), child: Assets.icons.icFilter.svg()),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
