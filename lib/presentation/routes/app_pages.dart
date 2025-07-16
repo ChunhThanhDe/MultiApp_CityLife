@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account/account_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account/account_screen.dart';
@@ -94,7 +95,15 @@ class AppPages {
     GetPage(name: AppRoutes.accountSecurity, page: () => const AccountSecurityScreen(), binding: AccountSecurityBinding(), middlewares: [AuthMiddleware()]),
     GetPage(name: AppRoutes.accountPasskey, page: () => const AccountPasskeysScreen(), binding: AccountPasskeysBinding(), middlewares: [AuthMiddleware()]),
     GetPage(name: AppRoutes.favorites, page: () => const FavoritesScreen(), binding: FavoritesBinding(), middlewares: [AuthMiddleware()]),
-    GetPage(name: AppRoutes.search, page: () => const SearchScreen(), binding: SearchBinding(), middlewares: [AuthMiddleware()], transition: Transition.noTransition),
+    GetPage(
+      name: AppRoutes.search,
+      page: () => const SearchScreen(),
+      binding: SearchBinding(),
+      middlewares: [AuthMiddleware()],
+      transition: Transition.fadeIn,
+      transitionDuration: Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    ),
     GetPage(name: AppRoutes.payment, page: () => const PaymentScreen(), binding: PaymentBinding(), middlewares: [AuthMiddleware()]),
     GetPage(name: AppRoutes.paymentScan, page: () => const ScanCardScreen(), binding: ScanCardBinding(), middlewares: [AuthMiddleware()]),
     GetPage(name: AppRoutes.homeDelivery, page: () => const HomeDeliveryScreen(), binding: HomeDeliveryBinding()),

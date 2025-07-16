@@ -54,6 +54,9 @@ class AppTextField extends StatelessWidget {
   /// Custom helper text for the text field.
   final String? helperText;
 
+  /// Whether to automatically focus the text field when the widget is built.
+  final bool autofocus;
+
   const AppTextField({
     super.key,
     this.label,
@@ -73,6 +76,7 @@ class AppTextField extends StatelessWidget {
     this.obscureText = false,
     this.contentPadding,
     this.helperText,
+    this.autofocus = false,
   });
 
   @override
@@ -91,7 +95,7 @@ class AppTextField extends StatelessWidget {
         Container(
           decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(effectiveRadius)),
           child: TextFormField(
-            autofocus: false,
+            autofocus: autofocus,
             controller: controller,
             keyboardType: keyboardType,
             focusNode: focusNode,

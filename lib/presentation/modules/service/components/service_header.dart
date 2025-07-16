@@ -56,6 +56,26 @@ class ServiceHeader extends GetView<ServiceController> {
         },
         child: Hero(
           tag: 'search_bar',
+          flightShuttleBuilder: (BuildContext flightContext, Animation<double> animation, HeroFlightDirection flightDirection, BuildContext fromHeroContext, BuildContext toHeroContext) {
+            return AnimatedBuilder(
+              animation: CurvedAnimation(parent: animation, curve: Curves.easeInOutCubic),
+              builder: (context, child) {
+                return Material(
+                  color: Colors.transparent,
+                  child: Container(
+                    height: 48,
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(24),
+                      border: Border.all(color: AppColors.stateGreyLowestHover100, width: 1),
+                    ),
+                    child: Text('Search...', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
+                  ),
+                );
+              },
+            );
+          },
           child: Material(
             color: Colors.transparent,
             child: Container(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart' hide SearchController;
-import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
@@ -15,9 +14,30 @@ class SearchScreen extends BaseScreen<SearchController> {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
-      leading: IconButton(onPressed: () => Get.back(), icon: Assets.icons.icBackArrow.svg()),
+      leadingWidth: 0,
+      leading: SizedBox.shrink(),
       title: Hero(
         tag: 'search_bar',
+        flightShuttleBuilder: (BuildContext flightContext, Animation<double> animation, HeroFlightDirection flightDirection, BuildContext fromHeroContext, BuildContext toHeroContext) {
+          return AnimatedBuilder(
+            animation: CurvedAnimation(parent: animation, curve: Curves.easeInOutCubic),
+            builder: (context, child) {
+              return Material(
+                color: Colors.transparent,
+                child: Container(
+                  height: 48,
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(24),
+                    border: Border.all(color: AppColors.stateGreyLowestHover100, width: 1),
+                  ),
+                  child: Text('Search...', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
+                ),
+              );
+            },
+          );
+        },
         child: Material(
           color: Colors.transparent,
           child: AppTextField(
@@ -27,6 +47,8 @@ class SearchScreen extends BaseScreen<SearchController> {
             prefixIcon: Padding(padding: const EdgeInsets.all(12), child: Assets.icons.icSearch.svg()),
             hintText: 'Search...',
             focusNode: controller.focusNode,
+            controller: controller.textController,
+            autofocus: true,
           ),
         ),
       ),
@@ -35,11 +57,6 @@ class SearchScreen extends BaseScreen<SearchController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    // Focus vào text field khi màn hình mở
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller.focusNode.requestFocus();
-    });
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(24),
