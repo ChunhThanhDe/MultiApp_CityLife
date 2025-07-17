@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/domain/enums/service_type.dart';
+import 'package:sixam_mart_user/domain/repositories/store_repository.dart';
 
 enum FilterType {
   all(label: 'Filter', icon: 'assets/icons/ic_filter.svg'),
@@ -44,12 +46,81 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
   StoreServiceType _selectedService = StoreServiceType.inStore;
   StoreServiceType get selectedService => _selectedService;
 
+  final StoreRepository _storeRepository = Get.find<StoreRepository>();
+
+  final RxList<ProductItem> _popularItems = <ProductItem>[].obs;
+  List<ProductItem> get popularItems => _popularItems;
+
+  final RxMap<String, List<ProductItem>> _categories = <String, List<ProductItem>>{}.obs;
+  Map<String, List<ProductItem>> get categories => _categories;
+
+  @override
+  // ignore: overridden_fields
+  final RxBool isLoading = true.obs;
+
+  final StoreType storeType;
+
+  final int storeId;
+
+  StoreController({required this.storeType, required this.storeId});
+
+  Future<void> loadStoreDetail() async {
+    isLoading.value = true;
+
+    final result = await _storeRepository.getStoreDetail(
+      storeId: storeId,
+      storeType: storeType,
+    );
+
+    switch (result) {
+      case Success(:final response):
+        final data = response.data;
+
+        final Map<String, List<ProductItem>> catMap = {};
+
+        // ✅ Với storeType.food => parse đúng với "data" và "category"
+        if (storeType == StoreType.food) {
+          for (var category in data['data']) {
+            final categoryName = category['category'];
+            final items = (category['items'] as List)
+                .map(
+                  (item) => ProductItem(
+                    name: item['name'],
+                    price: '', // Giá chưa có trong API => set rỗng hoặc thêm nếu cần
+                    imageUrl: item['image_url'],
+                    categories: [FilterType.foods],
+                  ),
+                )
+                .toList();
+            catMap[categoryName] = items;
+          }
+          _categories.value = catMap;
+        }
+
+        // TODO: Các trường hợp khác giữ nguyên nếu cần
+
+        isLoading.value = false;
+        break;
+
+      case Failure(:final error):
+        isLoading.value = false;
+        break;
+    }
+  }
+
+  void showError(String message) {
+    Get.snackbar('Error', message);
+  }
+
   @override
   void onInit() {
     super.onInit();
     serviceTabController = TabController(length: 3, vsync: this);
 
-    // Listen to tab changes
+    // Gọi API lấy dữ liệu
+    loadStoreDetail();
+
+    // Listen tab
     serviceTabController.addListener(() {
       if (!serviceTabController.indexIsChanging) {
         selectService(StoreServiceType.values[serviceTabController.index]);
@@ -153,31 +224,6 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
 
     return categories;
   }
-
-  // Popular Items
-  List<ProductItem> get popularItems => [
-    ProductItem(
-      name: 'Summer-Berry Strawberry Refresher',
-      price: '\$5.95 • 160 Calories',
-      imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400',
-      categories: [FilterType.drinks],
-      availableServices: [StoreServiceType.inStore, StoreServiceType.delivery], // No drive thru
-    ),
-    ProductItem(
-      name: 'White Chocolate Mocha',
-      price: '\$5.65 • 160 Calories',
-      imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400',
-      categories: [FilterType.drinks, FilterType.atHome], // Can be enjoyed both ways
-      availableServices: [StoreServiceType.inStore, StoreServiceType.delivery, StoreServiceType.driveThru], // All services
-    ),
-    ProductItem(
-      name: 'Caramel Macchiato',
-      price: '\$5.65 • 160 Calories',
-      imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400',
-      categories: [FilterType.drinks],
-      availableServices: [StoreServiceType.inStore, StoreServiceType.driveThru], // No delivery
-    ),
-  ];
 
   // Brewed Coffees
   List<ProductItem> get brewedCoffees => [

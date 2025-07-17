@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/store_app_bar.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/store_product_categories.dart';
@@ -14,6 +15,18 @@ class StoreScreen extends BaseScreen<StoreController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    return CustomScrollView(slivers: [StoreAppBar(), StoreServiceOptions(), StoreProductCategories()]);
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return const Center(child: CircularProgressIndicator());
+      }
+
+      return CustomScrollView(
+        slivers: [
+          StoreAppBar(),
+          StoreServiceOptions(),
+          StoreProductCategories(),
+        ],
+      );
+    });
   }
 }
