@@ -1,12 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/data/app_storage.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/localization/locale_manager.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/base/error_response.dart';
-import 'package:sixam_mart_user/base/network_exceptions.dart';
 import 'package:sixam_mart_user/domain/models/request/update_appearance_request.dart';
 import 'package:sixam_mart_user/domain/models/response/get_user_info_response.dart';
 import 'package:sixam_mart_user/domain/repositories/setting_repository.dart';
@@ -39,10 +40,9 @@ class AccountController extends BaseController {
     await safeExecute(() async {
       final success = await UserService.fetchAndUpdateUserInfo();
       if (success) {
-        update(); // Update UI
-        showAppSnackBar(title: 'User info refreshed', type: SnackBarType.success);
+        update();
       } else {
-        showAppSnackBar(title: 'Failed to refresh user info', type: SnackBarType.error);
+        showAppSnackBar(title: tr(LocaleKeys.base_error_default), type: SnackBarType.error);
       }
     });
   }
@@ -100,11 +100,8 @@ class AccountController extends BaseController {
             showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
             return;
           }
-          // Success - theme updated on server
-          showAppSnackBar(title: 'Theme updated successfully', type: SnackBarType.success);
-        case Failure(:final error):
-          // API failed but local theme is already changed, show warning
-          showAppSnackBar(title: 'Theme changed locally. ${NetworkExceptions.getErrorMessage(error)}', type: SnackBarType.error);
+        case Failure():
+          showAppSnackBar(title: tr(LocaleKeys.base_error_default), type: SnackBarType.error);
       }
     });
   }
