@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart' hide SearchController;
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_text_field.dart';
+import 'package:sixam_mart_user/presentation/shared/unified_banner_widget.dart';
 
 import 'search_controller.dart';
 
@@ -66,13 +68,32 @@ class SearchScreen extends BaseScreen<SearchController> {
   Widget buildScreen(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [SizedBox(height: 24), _buildTopSearches(), SizedBox(height: 32), _buildRecentSearches(), SizedBox(height: 32), _buildTopCategories(), SizedBox(height: 24)],
-        ),
-      ),
+      body: Obx(() {
+        if (controller.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        }
+        if (controller.hasSearchResults.value && controller.searchBannerItems.isNotEmpty) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: UnifiedBannerWidget(sectionTitle: 'Search Results', items: controller.searchBannerItems, bannerType: BannerType.brandLogoName),
+          );
+        }
+        // Show recent stores as banners if available
+        if (controller.recentStoreBannerItems.isNotEmpty) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: UnifiedBannerWidget(sectionTitle: 'Recent Stores', items: controller.recentStoreBannerItems, bannerType: BannerType.brandLogoName),
+          );
+        }
+        // Fallback: show top/recent searches and categories
+        return SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [SizedBox(height: 24), _buildTopSearches(), SizedBox(height: 32), _buildRecentSearches(), SizedBox(height: 32), _buildTopCategories(), SizedBox(height: 24)],
+          ),
+        );
+      }),
     );
   }
 
@@ -82,7 +103,7 @@ class SearchScreen extends BaseScreen<SearchController> {
       children: [
         Text('Top searches', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
         SizedBox(height: 16),
-        ...controller.topSearches.map((item) => _buildSearchItem(item, Assets.icons.icSearch.svg())),
+        ...controller.topSearches.map((item) => _buildSearchItemString(item, Assets.icons.icSearch.svg())),
       ],
     );
   }
@@ -93,8 +114,23 @@ class SearchScreen extends BaseScreen<SearchController> {
       children: [
         Text('Recent', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
         SizedBox(height: 16),
-        ...controller.recentSearches.map((item) => _buildSearchItem(item, Assets.icons.icClock.svg())),
+        ...controller.recentSearches.map((item) => _buildSearchItemString(item, Assets.icons.icClock.svg())),
       ],
+    );
+  }
+
+  Widget _buildSearchItemString(String title, Widget icon) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 12),
+      child: Row(
+        children: [
+          SizedBox(width: 20, height: 20, child: icon),
+          SizedBox(width: 16),
+          Expanded(
+            child: Text(title, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+          ),
+        ],
+      ),
     );
   }
 
@@ -106,21 +142,6 @@ class SearchScreen extends BaseScreen<SearchController> {
         SizedBox(height: 16),
         ...controller.topCategories.map((item) => _buildCategoryItem(item)),
       ],
-    );
-  }
-
-  Widget _buildSearchItem(SearchItem item, Widget icon) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 12),
-      child: Row(
-        children: [
-          SizedBox(width: 20, height: 20, child: icon),
-          SizedBox(width: 16),
-          Expanded(
-            child: Text(item.title, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
-          ),
-        ],
-      ),
     );
   }
 
