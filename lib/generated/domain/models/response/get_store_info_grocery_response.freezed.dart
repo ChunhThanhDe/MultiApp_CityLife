@@ -4,7 +4,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of '../../../../domain/models/response/get_store_grocery_response.dart';
+part of '../../../../domain/models/response/get_store_info_grocery_response.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,22 +14,22 @@ part of '../../../../domain/models/response/get_store_grocery_response.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$StoreGroceryResponse {
+mixin _$StoreInfoGroceryResponse {
 
  GroceryStore get store; List<GroceryCategory> get categories; List<GrocerySection> get sections;
-/// Create a copy of StoreGroceryResponse
+/// Create a copy of StoreInfoGroceryResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$StoreGroceryResponseCopyWith<StoreGroceryResponse> get copyWith => _$StoreGroceryResponseCopyWithImpl<StoreGroceryResponse>(this as StoreGroceryResponse, _$identity);
+$StoreInfoGroceryResponseCopyWith<StoreInfoGroceryResponse> get copyWith => _$StoreInfoGroceryResponseCopyWithImpl<StoreInfoGroceryResponse>(this as StoreInfoGroceryResponse, _$identity);
 
-  /// Serializes this StoreGroceryResponse to a JSON map.
+  /// Serializes this StoreInfoGroceryResponse to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StoreGroceryResponse&&(identical(other.store, store) || other.store == store)&&const DeepCollectionEquality().equals(other.categories, categories)&&const DeepCollectionEquality().equals(other.sections, sections));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StoreInfoGroceryResponse&&(identical(other.store, store) || other.store == store)&&const DeepCollectionEquality().equals(other.categories, categories)&&const DeepCollectionEquality().equals(other.sections, sections));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -38,15 +38,15 @@ int get hashCode => Object.hash(runtimeType,store,const DeepCollectionEquality()
 
 @override
 String toString() {
-  return 'StoreGroceryResponse(store: $store, categories: $categories, sections: $sections)';
+  return 'StoreInfoGroceryResponse(store: $store, categories: $categories, sections: $sections)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $StoreGroceryResponseCopyWith<$Res>  {
-  factory $StoreGroceryResponseCopyWith(StoreGroceryResponse value, $Res Function(StoreGroceryResponse) _then) = _$StoreGroceryResponseCopyWithImpl;
+abstract mixin class $StoreInfoGroceryResponseCopyWith<$Res>  {
+  factory $StoreInfoGroceryResponseCopyWith(StoreInfoGroceryResponse value, $Res Function(StoreInfoGroceryResponse) _then) = _$StoreInfoGroceryResponseCopyWithImpl;
 @useResult
 $Res call({
  GroceryStore store, List<GroceryCategory> categories, List<GrocerySection> sections
@@ -57,14 +57,14 @@ $GroceryStoreCopyWith<$Res> get store;
 
 }
 /// @nodoc
-class _$StoreGroceryResponseCopyWithImpl<$Res>
-    implements $StoreGroceryResponseCopyWith<$Res> {
-  _$StoreGroceryResponseCopyWithImpl(this._self, this._then);
+class _$StoreInfoGroceryResponseCopyWithImpl<$Res>
+    implements $StoreInfoGroceryResponseCopyWith<$Res> {
+  _$StoreInfoGroceryResponseCopyWithImpl(this._self, this._then);
 
-  final StoreGroceryResponse _self;
-  final $Res Function(StoreGroceryResponse) _then;
+  final StoreInfoGroceryResponse _self;
+  final $Res Function(StoreInfoGroceryResponse) _then;
 
-/// Create a copy of StoreGroceryResponse
+/// Create a copy of StoreInfoGroceryResponse
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? store = null,Object? categories = null,Object? sections = null,}) {
   return _then(_self.copyWith(
@@ -74,7 +74,7 @@ as List<GroceryCategory>,sections: null == sections ? _self.sections : sections 
 as List<GrocerySection>,
   ));
 }
-/// Create a copy of StoreGroceryResponse
+/// Create a copy of StoreInfoGroceryResponse
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -90,9 +90,9 @@ $GroceryStoreCopyWith<$Res> get store {
 /// @nodoc
 @JsonSerializable()
 
-class _StoreGroceryResponse implements StoreGroceryResponse {
-  const _StoreGroceryResponse({required this.store, required final  List<GroceryCategory> categories, required final  List<GrocerySection> sections}): _categories = categories,_sections = sections;
-  factory _StoreGroceryResponse.fromJson(Map<String, dynamic> json) => _$StoreGroceryResponseFromJson(json);
+class _StoreInfoGroceryResponse implements StoreInfoGroceryResponse {
+  const _StoreInfoGroceryResponse({required this.store, required final  List<GroceryCategory> categories, required final  List<GrocerySection> sections}): _categories = categories,_sections = sections;
+  factory _StoreInfoGroceryResponse.fromJson(Map<String, dynamic> json) => _$StoreInfoGroceryResponseFromJson(json);
 
 @override final  GroceryStore store;
  final  List<GroceryCategory> _categories;
@@ -110,20 +110,20 @@ class _StoreGroceryResponse implements StoreGroceryResponse {
 }
 
 
-/// Create a copy of StoreGroceryResponse
+/// Create a copy of StoreInfoGroceryResponse
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$StoreGroceryResponseCopyWith<_StoreGroceryResponse> get copyWith => __$StoreGroceryResponseCopyWithImpl<_StoreGroceryResponse>(this, _$identity);
+_$StoreInfoGroceryResponseCopyWith<_StoreInfoGroceryResponse> get copyWith => __$StoreInfoGroceryResponseCopyWithImpl<_StoreInfoGroceryResponse>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$StoreGroceryResponseToJson(this, );
+  return _$StoreInfoGroceryResponseToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StoreGroceryResponse&&(identical(other.store, store) || other.store == store)&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._sections, _sections));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StoreInfoGroceryResponse&&(identical(other.store, store) || other.store == store)&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._sections, _sections));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -132,15 +132,15 @@ int get hashCode => Object.hash(runtimeType,store,const DeepCollectionEquality()
 
 @override
 String toString() {
-  return 'StoreGroceryResponse(store: $store, categories: $categories, sections: $sections)';
+  return 'StoreInfoGroceryResponse(store: $store, categories: $categories, sections: $sections)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$StoreGroceryResponseCopyWith<$Res> implements $StoreGroceryResponseCopyWith<$Res> {
-  factory _$StoreGroceryResponseCopyWith(_StoreGroceryResponse value, $Res Function(_StoreGroceryResponse) _then) = __$StoreGroceryResponseCopyWithImpl;
+abstract mixin class _$StoreInfoGroceryResponseCopyWith<$Res> implements $StoreInfoGroceryResponseCopyWith<$Res> {
+  factory _$StoreInfoGroceryResponseCopyWith(_StoreInfoGroceryResponse value, $Res Function(_StoreInfoGroceryResponse) _then) = __$StoreInfoGroceryResponseCopyWithImpl;
 @override @useResult
 $Res call({
  GroceryStore store, List<GroceryCategory> categories, List<GrocerySection> sections
@@ -151,17 +151,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$StoreGroceryResponseCopyWithImpl<$Res>
-    implements _$StoreGroceryResponseCopyWith<$Res> {
-  __$StoreGroceryResponseCopyWithImpl(this._self, this._then);
+class __$StoreInfoGroceryResponseCopyWithImpl<$Res>
+    implements _$StoreInfoGroceryResponseCopyWith<$Res> {
+  __$StoreInfoGroceryResponseCopyWithImpl(this._self, this._then);
 
-  final _StoreGroceryResponse _self;
-  final $Res Function(_StoreGroceryResponse) _then;
+  final _StoreInfoGroceryResponse _self;
+  final $Res Function(_StoreInfoGroceryResponse) _then;
 
-/// Create a copy of StoreGroceryResponse
+/// Create a copy of StoreInfoGroceryResponse
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? store = null,Object? categories = null,Object? sections = null,}) {
-  return _then(_StoreGroceryResponse(
+  return _then(_StoreInfoGroceryResponse(
 store: null == store ? _self.store : store // ignore: cast_nullable_to_non_nullable
 as GroceryStore,categories: null == categories ? _self._categories : categories // ignore: cast_nullable_to_non_nullable
 as List<GroceryCategory>,sections: null == sections ? _self._sections : sections // ignore: cast_nullable_to_non_nullable
@@ -169,7 +169,7 @@ as List<GrocerySection>,
   ));
 }
 
-/// Create a copy of StoreGroceryResponse
+/// Create a copy of StoreInfoGroceryResponse
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')

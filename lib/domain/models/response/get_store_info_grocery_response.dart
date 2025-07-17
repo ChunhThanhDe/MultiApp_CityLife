@@ -2,18 +2,18 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part '../../../generated/domain/models/response/get_store_grocery_response.freezed.dart';
-part '../../../generated/domain/models/response/get_store_grocery_response.g.dart';
+part '../../../generated/domain/models/response/get_store_info_grocery_response.freezed.dart';
+part '../../../generated/domain/models/response/get_store_info_grocery_response.g.dart';
 
 @freezed
-abstract class StoreGroceryResponse with _$StoreGroceryResponse {
-  const factory StoreGroceryResponse({
+abstract class StoreInfoGroceryResponse with _$StoreInfoGroceryResponse {
+  const factory StoreInfoGroceryResponse({
     required GroceryStore store,
     required List<GroceryCategory> categories,
     required List<GrocerySection> sections,
-  }) = _StoreGroceryResponse;
+  }) = _StoreInfoGroceryResponse;
 
-  factory StoreGroceryResponse.fromJson(Map<String, dynamic> json) => _$StoreGroceryResponseFromJson(json);
+  factory StoreInfoGroceryResponse.fromJson(Map<String, dynamic> json) => _$StoreInfoGroceryResponseFromJson(json);
 }
 
 @freezed

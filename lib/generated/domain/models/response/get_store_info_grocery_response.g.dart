@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../../domain/models/response/get_store_grocery_response.dart';
+part of '../../../../domain/models/response/get_store_info_grocery_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_StoreGroceryResponse _$StoreGroceryResponseFromJson(
+_StoreInfoGroceryResponse _$StoreInfoGroceryResponseFromJson(
   Map<String, dynamic> json,
-) => _StoreGroceryResponse(
+) => _StoreInfoGroceryResponse(
   store: GroceryStore.fromJson(json['store'] as Map<String, dynamic>),
   categories: (json['categories'] as List<dynamic>)
       .map((e) => GroceryCategory.fromJson(e as Map<String, dynamic>))
@@ -18,8 +18,8 @@ _StoreGroceryResponse _$StoreGroceryResponseFromJson(
       .toList(),
 );
 
-Map<String, dynamic> _$StoreGroceryResponseToJson(
-  _StoreGroceryResponse instance,
+Map<String, dynamic> _$StoreInfoGroceryResponseToJson(
+  _StoreInfoGroceryResponse instance,
 ) => <String, dynamic>{
   'store': instance.store,
   'categories': instance.categories,
