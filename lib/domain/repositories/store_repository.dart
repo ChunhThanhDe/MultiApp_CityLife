@@ -3,7 +3,7 @@ import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_repository.dart';
 
 class StoreApiPath {
-  static const String storeFood = '/api/v1/stores/StoreProductFood';
+  static const String storeFood = '/api/v1/stores/storeInformationFood/';
   static const String storeGrocery = '/api/v1/stores/StoreProductGrocery';
   static const String storeGeneral = '/api/v1/stores/StoreProductGeneral';
   static const String storeReviews = '/api/v1/stores/StoreReview';
@@ -29,13 +29,14 @@ class StoreRepository extends BaseRepository {
     int reviewsOffset = 0,
   }) async {
     late String apiPath;
-    final Map<String, dynamic> params = {
-      'store_id': storeId,
-    };
+    final Map<String, dynamic> params = {};
 
     switch (storeType) {
       case StoreType.food:
-        apiPath = StoreApiPath.storeFood;
+        // Sử dụng storeId làm path param
+        apiPath = '${StoreApiPath.storeFood}$storeId';
+
+        // Nếu API food có param limit thì giữ lại, không có thì bỏ đi
         params.addAll({
           'popular_limit': popularLimit,
           'category_item_limit': categoryItemLimit,
@@ -46,6 +47,7 @@ class StoreRepository extends BaseRepository {
       case StoreType.grocery:
         apiPath = StoreApiPath.storeGrocery;
         params.addAll({
+          'store_id': storeId,
           'category_limit': categoryLimit,
           'category_offset': categoryOffset,
           'category_item_limit': categoryItemLimit,
@@ -56,6 +58,7 @@ class StoreRepository extends BaseRepository {
       case StoreType.general:
         apiPath = StoreApiPath.storeGeneral;
         params.addAll({
+          'store_id': storeId,
           'menu_limit': menuLimit,
           'menu_offset': menuOffset,
         });
@@ -67,6 +70,7 @@ class StoreRepository extends BaseRepository {
       case StoreType.reviews:
         apiPath = StoreApiPath.storeReviews;
         params.addAll({
+          'store_id': storeId,
           'reviews_limit': reviewsLimit,
           'reviews_offset': reviewsOffset,
         });

@@ -3,16 +3,18 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/domain/enums/service_type.dart';
+import 'package:sixam_mart_user/domain/models/response/get_store_info_food_response.dart';
+import 'package:sixam_mart_user/domain/models/response/get_store_info_grocery_response.dart';
+import 'package:sixam_mart_user/domain/models/response/get_store_info_response.dart';
 import 'package:sixam_mart_user/domain/repositories/store_repository.dart';
 
 enum FilterType {
-  all(label: 'Filter', icon: 'assets/icons/ic_filter.svg'),
+  all(label: 'All', icon: null),
   drinks(label: 'Drinks', icon: 'assets/icons/ic_drink.svg'),
   foods(label: 'Foods', icon: 'assets/icons/ic_burger.svg'),
-  atHome(label: 'At Home');
+  atHome(label: 'At Home', icon: 'assets/icons/ic_home.svg');
 
   const FilterType({required this.label, this.icon});
-
   final String label;
   final String? icon;
 }
@@ -21,7 +23,6 @@ class ProductItem {
   final String name;
   final String price;
   final String imageUrl;
-  final String description;
   final List<FilterType> categories;
   final List<StoreServiceType> availableServices;
 
@@ -29,25 +30,37 @@ class ProductItem {
     required this.name,
     required this.price,
     required this.imageUrl,
-    this.description = '',
-    this.categories = const [FilterType.drinks],
+    this.categories = const [FilterType.foods],
     this.availableServices = const [StoreServiceType.inStore],
   });
 }
 
 class StoreController extends BaseController with GetSingleTickerProviderStateMixin {
-  late TabController serviceTabController;
-
-  // Filter state
-  FilterType _selectedFilter = FilterType.all;
-  FilterType get selectedFilter => _selectedFilter;
-
-  // Service filter state
-  StoreServiceType _selectedService = StoreServiceType.inStore;
-  StoreServiceType get selectedService => _selectedService;
-
   final StoreRepository _storeRepository = Get.find<StoreRepository>();
 
+  late TabController serviceTabController;
+
+  final StoreType storeType;
+  final int storeId;
+
+  StoreController({required this.storeType, required this.storeId});
+
+  /// State
+  @override
+  final RxBool isLoading = true.obs;
+  FilterType _selectedFilter = FilterType.all;
+  StoreServiceType _selectedService = StoreServiceType.inStore;
+
+  FilterType get selectedFilter => _selectedFilter;
+  StoreServiceType get selectedService => _selectedService;
+
+  /// Responses
+  final Rx<StoreInfoFoodResponse?> foodResponse = Rx<StoreInfoFoodResponse?>(null);
+  final Rx<StoreInfoGroceryResponse?> groceryResponse = Rx<StoreInfoGroceryResponse?>(null);
+  final Rx<StoreInfoResponse?> generalResponse = Rx<StoreInfoResponse?>(null);
+  final Rx<StoreDetail?> storeInfo = Rx<StoreDetail?>(null);
+
+  /// Popular Items & Categories
   final RxList<ProductItem> _popularItems = <ProductItem>[].obs;
   List<ProductItem> get popularItems => _popularItems;
 
@@ -55,72 +68,11 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
   Map<String, List<ProductItem>> get categories => _categories;
 
   @override
-  // ignore: overridden_fields
-  final RxBool isLoading = true.obs;
-
-  final StoreType storeType;
-
-  final int storeId;
-
-  StoreController({required this.storeType, required this.storeId});
-
-  Future<void> loadStoreDetail() async {
-    isLoading.value = true;
-
-    final result = await _storeRepository.getStoreDetail(
-      storeId: storeId,
-      storeType: storeType,
-    );
-
-    switch (result) {
-      case Success(:final response):
-        final data = response.data;
-
-        final Map<String, List<ProductItem>> catMap = {};
-
-        // ✅ Với storeType.food => parse đúng với "data" và "category"
-        if (storeType == StoreType.food) {
-          for (var category in data['data']) {
-            final categoryName = category['category'];
-            final items = (category['items'] as List)
-                .map(
-                  (item) => ProductItem(
-                    name: item['name'],
-                    price: '', // Giá chưa có trong API => set rỗng hoặc thêm nếu cần
-                    imageUrl: item['image_url'],
-                    categories: [FilterType.foods],
-                  ),
-                )
-                .toList();
-            catMap[categoryName] = items;
-          }
-          _categories.value = catMap;
-        }
-
-        // TODO: Các trường hợp khác giữ nguyên nếu cần
-
-        isLoading.value = false;
-        break;
-
-      case Failure(:final error):
-        isLoading.value = false;
-        break;
-    }
-  }
-
-  void showError(String message) {
-    Get.snackbar('Error', message);
-  }
-
-  @override
   void onInit() {
     super.onInit();
     serviceTabController = TabController(length: 3, vsync: this);
-
-    // Gọi API lấy dữ liệu
     loadStoreDetail();
 
-    // Listen tab
     serviceTabController.addListener(() {
       if (!serviceTabController.indexIsChanging) {
         selectService(StoreServiceType.values[serviceTabController.index]);
@@ -134,205 +86,151 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
     super.onClose();
   }
 
-  // Filter methods
+  Future<void> loadStoreDetail() async {
+    isLoading.value = true;
+
+    final result = await _storeRepository.getStoreDetail(
+      storeId: storeId,
+      storeType: storeType,
+    );
+
+    try {
+      switch (result) {
+        case Success(:final response):
+          switch (storeType) {
+            case StoreType.food:
+              final data = StoreInfoFoodResponse.fromJson(response.data);
+              foodResponse.value = data;
+              storeInfo.value = data.store;
+
+              print('🍔 [Food] API sections: ${data.sections.length}');
+              print('🍔 [Food] API popular items: ${data.popularItems.length}');
+
+              _popularItems.value = data.popularItems
+                  .map(
+                    (e) => ProductItem(
+                      name: e.name,
+                      price: e.price.toString(),
+                      imageUrl: e.imageUrl,
+                      categories: [FilterType.foods],
+                      availableServices: StoreServiceType.values,
+                    ),
+                  )
+                  .toList();
+
+              _categories.value = {
+                for (var section in data.sections)
+                  section.categoryName: section.items
+                      .map(
+                        (e) => ProductItem(
+                          name: e.name,
+                          price: e.price.toString(),
+                          imageUrl: e.imageUrl,
+                          categories: [FilterType.foods],
+                          availableServices: StoreServiceType.values,
+                        ),
+                      )
+                      .toList(),
+              };
+
+              // Gán thông tin store vào storeInfo
+
+              print('🍔 [Food] Controller popularItems.length: ${_popularItems.length}');
+              print('🍔 [Food] Controller categories: ${_categories.keys}');
+              break;
+
+            case StoreType.grocery:
+              final data = StoreInfoGroceryResponse.fromJson(response.data);
+              groceryResponse.value = data;
+
+              _categories.value = {
+                for (var section in data.sections)
+                  section.categoryId.toString(): section.items
+                      .map(
+                        (e) => ProductItem(
+                          name: e.name,
+                          price: e.price.toString(),
+                          imageUrl: e.imageUrl,
+                          categories: [FilterType.foods],
+                          availableServices: StoreServiceType.values,
+                        ),
+                      )
+                      .toList(),
+              };
+
+              print('🛒 [Grocery] Controller categories: ${_categories.keys}');
+              break;
+
+            case StoreType.general:
+              final data = StoreInfoResponse.fromJson(response.data);
+              generalResponse.value = data;
+
+              _categories.value = {
+                for (var menu in data.menu)
+                  menu.categoryName: menu.items
+                      .map(
+                        (e) => ProductItem(
+                          name: e.name,
+                          price: e.price.toString(),
+                          imageUrl: e.imageUrl,
+                          categories: [FilterType.foods],
+                          availableServices: StoreServiceType.values,
+                        ),
+                      )
+                      .toList(),
+              };
+
+              print('🛍️ [General] Controller categories: ${_categories.keys}');
+              break;
+
+            case StoreType.reviews:
+              return;
+          }
+          break;
+
+        case Failure(:final error):
+          Get.snackbar('Error', 'Load store detail failed');
+          break;
+      }
+    } finally {
+      isLoading.value = false;
+      print('🔄 Load complete. isLoading: ${isLoading.value}');
+    }
+  }
+
+  /// Filter logic
   void selectFilter(FilterType filter) {
     _selectedFilter = filter;
     update();
   }
 
-  bool isFilterSelected(FilterType filter) {
-    return _selectedFilter == filter;
-  }
+  bool isFilterSelected(FilterType filter) => _selectedFilter == filter;
 
-  // Service filter methods
   void selectService(StoreServiceType service) {
     _selectedService = service;
     update();
   }
 
-  bool isServiceSelected(StoreServiceType service) {
-    return _selectedService == service;
-  }
+  bool isServiceSelected(StoreServiceType service) => _selectedService == service;
 
-  // Filter items based on selected filter and service
   List<ProductItem> filterItems(List<ProductItem> items) {
-    List<ProductItem> filteredItems = items;
-
-    // Filter by category
-    if (_selectedFilter != FilterType.all) {
-      filteredItems = filteredItems.where((item) => item.categories.contains(_selectedFilter)).toList();
-    }
-
-    // Filter by service
-    filteredItems = filteredItems.where((item) => item.availableServices.contains(_selectedService)).toList();
-
-    return filteredItems;
+    return items.where((item) {
+      final matchFilter = _selectedFilter == FilterType.all || item.categories.contains(_selectedFilter);
+      final matchService = item.availableServices.contains(_selectedService);
+      return matchFilter && matchService;
+    }).toList();
   }
 
-  // Get all available categories with their filtered items
   Map<String, List<ProductItem>> get filteredCategories {
-    Map<String, List<ProductItem>> categories = {};
+    final Map<String, List<ProductItem>> result = {};
 
-    // Add Popular Items only for 'all' filter
-    if (_selectedFilter == FilterType.all) {
-      List<ProductItem> filteredPopular = filterItems(popularItems);
-      if (filteredPopular.isNotEmpty) {
-        categories['Popular Items'] = filteredPopular;
+    _categories.forEach((key, items) {
+      final filtered = filterItems(items);
+      if (filtered.isNotEmpty) {
+        result[key] = filtered;
       }
-    }
+    });
 
-    // Add other categories with filtered items
-    List<ProductItem> filteredBrewed = filterItems(brewedCoffees);
-    if (filteredBrewed.isNotEmpty) {
-      categories['Brewed Coffees'] = filteredBrewed;
-    }
-
-    List<ProductItem> filteredHot = filterItems(hotCoffees);
-    if (filteredHot.isNotEmpty) {
-      categories['Hot Coffees'] = filteredHot;
-    }
-
-    List<ProductItem> filteredCold = filterItems(coldCoffees);
-    if (filteredCold.isNotEmpty) {
-      categories['Cold Coffees'] = filteredCold;
-    }
-
-    List<ProductItem> filteredRefresher = filterItems(refresherBeverages);
-    if (filteredRefresher.isNotEmpty) {
-      categories['Starbucks Refreshers® Beverages'] = filteredRefresher;
-    }
-
-    List<ProductItem> filteredFrappuccino = filterItems(frappuccinoBeverages);
-    if (filteredFrappuccino.isNotEmpty) {
-      categories['Frappuccino® Blended Beverages'] = filteredFrappuccino;
-    }
-
-    List<ProductItem> filteredIcedTea = filterItems(icedTeaLemonade);
-    if (filteredIcedTea.isNotEmpty) {
-      categories['Iced Tea and Lemonade'] = filteredIcedTea;
-    }
-
-    List<ProductItem> filteredHotTea = filterItems(hotTeas);
-    if (filteredHotTea.isNotEmpty) {
-      categories['Hot Teas'] = filteredHotTea;
-    }
-
-    List<ProductItem> filteredBottled = filterItems(bottledBeverages);
-    if (filteredBottled.isNotEmpty) {
-      categories['Bottled Beverages'] = filteredBottled;
-    }
-
-    return categories;
+    return result;
   }
-
-  // Brewed Coffees
-  List<ProductItem> get brewedCoffees => [
-    ProductItem(name: 'Caffè Americano', price: '\$4.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400', categories: [FilterType.drinks]),
-    ProductItem(name: 'Featured Blonde Roast', price: '\$4.35 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=400', categories: [FilterType.drinks]),
-    ProductItem(name: 'Featured Dark Roast', price: '\$4.35 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400', categories: [FilterType.drinks]),
-  ];
-
-  // Hot Coffees
-  List<ProductItem> get hotCoffees => [
-    ProductItem(name: 'Honey Almond Milk Flat White', price: '\$4.15 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=400', categories: [FilterType.drinks]),
-    ProductItem(
-      name: 'Lavender Oatmilk Latte',
-      price: '\$4.35 • 160 Calories',
-      imageUrl: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400',
-      categories: [FilterType.drinks, FilterType.atHome], // Available as take-home blend
-      availableServices: [StoreServiceType.inStore],
-    ),
-    ProductItem(name: 'Caramel Macchiato', price: '\$4.15 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400', categories: [FilterType.drinks]),
-  ];
-
-  // Cold Coffees
-  List<ProductItem> get coldCoffees => [
-    ProductItem(name: 'White Chocolate Mocha', price: '\$5.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400', categories: [FilterType.drinks]),
-    ProductItem(
-      name: 'Vanilla Sweet Cream Cold Brew',
-      price: '\$4.95 • 160 Calories',
-      imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400',
-      categories: [FilterType.drinks, FilterType.atHome],
-    ),
-    ProductItem(
-      name: 'Iced Starbucks Blonde Vanilla Latte',
-      price: '\$4.95 • 160 Calories',
-      imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400',
-      categories: [FilterType.drinks],
-    ),
-  ];
-
-  // Starbucks Refreshers Beverages
-  List<ProductItem> get refresherBeverages => [
-    ProductItem(name: 'Paradise Pink Refresher', price: '\$4.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400', categories: [FilterType.drinks]),
-    ProductItem(
-      name: 'Pineapple Passionfruit Refresher',
-      price: '\$4.95 • 160 Calories',
-      imageUrl: 'https://images.unsplash.com/photo-1546173159-315724a31696?w=400',
-      categories: [FilterType.drinks],
-      availableServices: [StoreServiceType.inStore], // Only in store
-    ),
-    ProductItem(name: 'Strawberry Açaí Refresher', price: '\$4.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1553909489-ec2175ef3ce9?w=400', categories: [FilterType.drinks]),
-  ];
-
-  // Frappuccino Blended Beverages
-  List<ProductItem> get frappuccinoBeverages => [
-    ProductItem(name: 'Caramel Frappuccino', price: '\$5.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400', categories: [FilterType.drinks]),
-    ProductItem(
-      name: 'Java Chip Frappuccino',
-      price: '\$5.95 • 160 Calories',
-      imageUrl: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400',
-      categories: [FilterType.drinks, FilterType.atHome], // Popular for home recreation
-      availableServices: [StoreServiceType.delivery], // Only delivery
-    ),
-    ProductItem(name: 'Mocha Frappuccino', price: '\$5.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400', categories: [FilterType.drinks]),
-  ];
-
-  // Iced Tea and Lemonade
-  List<ProductItem> get icedTeaLemonade => [
-    ProductItem(name: 'Green Tea Lemonade', price: '\$4.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400', categories: [FilterType.drinks]),
-    ProductItem(
-      name: 'Black Tea Lemonade',
-      price: '\$4.95 • 160 Calories',
-      imageUrl: 'https://images.unsplash.com/photo-1546173159-315724a31696?w=400',
-      categories: [FilterType.drinks, FilterType.atHome], // Good for home preparation
-    ),
-    ProductItem(name: 'Passion Iced Tea', price: '\$4.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1553909489-ec2175ef3ce9?w=400', categories: [FilterType.drinks]),
-  ];
-
-  // Hot Teas
-  List<ProductItem> get hotTeas => [
-    ProductItem(name: 'Earl Grey Tea', price: '\$3.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400', categories: [FilterType.drinks]),
-    ProductItem(
-      name: 'Chai Tea Latte',
-      price: '\$4.95 • 160 Calories',
-      imageUrl: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400',
-      categories: [FilterType.drinks, FilterType.atHome], // Perfect for home brewing
-      availableServices: [StoreServiceType.driveThru], // Only drive thru
-    ),
-    ProductItem(name: 'Green Tea', price: '\$3.95 • 160 Calories', imageUrl: 'https://images.unsplash.com/photo-1553909489-ec2175ef3ce9?w=400', categories: [FilterType.drinks]),
-  ];
-
-  // Bottled Beverages
-  List<ProductItem> get bottledBeverages => [
-    ProductItem(
-      name: 'Smartwater Lemon',
-      price: '\$2.95',
-      imageUrl: 'https://images.unsplash.com/photo-1523362628745-0c100150b504?w=400',
-      categories: [FilterType.drinks, FilterType.atHome], // Perfect for home
-      availableServices: [StoreServiceType.driveThru],
-    ),
-    ProductItem(
-      name: 'Evolution Fresh Mighty Watermelon',
-      price: '\$4.95',
-      imageUrl: 'https://images.unsplash.com/photo-1546173159-315724a31696?w=400',
-      categories: [FilterType.drinks, FilterType.atHome], // Take home beverage
-    ),
-    ProductItem(
-      name: 'Horizon Organic Milk',
-      price: '\$2.95',
-      imageUrl: 'https://images.unsplash.com/photo-1523362628745-0c100150b504?w=400',
-      categories: [FilterType.drinks, FilterType.atHome], // Great for home use
-    ),
-  ];
 }

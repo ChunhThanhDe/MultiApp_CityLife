@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/store_filter_bottom_sheet.dart';
+import 'package:sixam_mart_user/presentation/modules/store/store_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bottom_sheet.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
@@ -89,25 +90,84 @@ class StoreAppBar extends StatelessWidget {
     );
   }
 
+  // Widget _buildStoreHeader() {
+  //   return ClipRRect(
+  //     borderRadius: BorderRadius.circular(12.r),
+  //     child: BackdropFilter(
+  //       filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+  //       child: Container(
+  //         padding: EdgeInsets.all(16.w),
+  //         color: AppColors.stateBaseWhite.withValues(alpha: 100),
+  //         child: Column(
+  //           crossAxisAlignment: CrossAxisAlignment.start,
+  //           mainAxisAlignment: MainAxisAlignment.start,
+  //           children: [
+  //             Row(
+  //               mainAxisAlignment: MainAxisAlignment.start,
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //               children: [
+  //                 ClipOval(
+  //                   child: AppImage.network(
+  //                     'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png',
+  //                     width: 56.w,
+  //                     height: 56.w,
+  //                   ),
+  //                 ),
+  //                 SizedBox(width: 16.w),
+  //                 Expanded(
+  //                   child: Column(
+  //                     crossAxisAlignment: CrossAxisAlignment.start,
+  //                     children: [
+  //                       Text('Starbucks®', style: AppTextStyles.typographyH7SemiBold),
+  //                       SizedBox(height: 4.h),
+  //                       Row(
+  //                         children: [
+  //                           Icon(Icons.star, size: 16.w, color: Colors.black),
+  //                           SizedBox(width: 4.w),
+  //                           Text.rich(
+  //                             TextSpan(
+  //                               children: [
+  //                                 TextSpan(text: '4.2 ', style: AppTextStyles.typographyH12SemiBold),
+  //                                 TextSpan(text: '(300+ ratings)', style: AppTextStyles.typographyH12Regular),
+  //                                 TextSpan(text: ' • ', style: AppTextStyles.typographyH12Regular),
+  //                                 TextSpan(text: '2.5 Mile', style: AppTextStyles.typographyH12Regular),
+  //                               ],
+  //                             ),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ),
+  //                 _AnimatedHeartButton(),
+  //               ],
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
   Widget _buildStoreHeader() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(12.r),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-        child: Container(
-          padding: EdgeInsets.all(16.w),
-          color: AppColors.stateBaseWhite.withValues(alpha: 100),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+    return GetBuilder<StoreController>(
+      builder: (controller) {
+        final store = controller.storeInfo.value;
+        if (store == null) return SizedBox();
+
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(12.r),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+            child: Container(
+              padding: EdgeInsets.all(16.w),
+              color: AppColors.stateBaseWhite.withValues(alpha: 100),
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ClipOval(
                     child: AppImage.network(
-                      'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png',
+                      store.logoUrl,
                       width: 56.w,
                       height: 56.w,
                     ),
@@ -117,7 +177,7 @@ class StoreAppBar extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Starbucks®', style: AppTextStyles.typographyH7SemiBold),
+                        Text(store.name, style: AppTextStyles.typographyH7SemiBold),
                         SizedBox(height: 4.h),
                         Row(
                           children: [
@@ -126,10 +186,8 @@ class StoreAppBar extends StatelessWidget {
                             Text.rich(
                               TextSpan(
                                 children: [
-                                  TextSpan(text: '4.2 ', style: AppTextStyles.typographyH12SemiBold),
-                                  TextSpan(text: '(300+ ratings)', style: AppTextStyles.typographyH12Regular),
-                                  TextSpan(text: ' • ', style: AppTextStyles.typographyH12Regular),
-                                  TextSpan(text: '2.5 Mile', style: AppTextStyles.typographyH12Regular),
+                                  TextSpan(text: '${store.rating} ', style: AppTextStyles.typographyH12SemiBold),
+                                  TextSpan(text: '(${store.reviewCount} ratings)', style: AppTextStyles.typographyH12Regular),
                                 ],
                               ),
                             ),
@@ -141,10 +199,10 @@ class StoreAppBar extends StatelessWidget {
                   _AnimatedHeartButton(),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
