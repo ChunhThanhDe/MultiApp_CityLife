@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
+import 'package:sixam_mart_user/services/user_service.dart';
+
+import '../../../shared/global/app_snackbar.dart';
 
 class AccountManageController extends BaseController {
   var avatarPath = ''.obs;
@@ -21,10 +24,24 @@ class AccountManageController extends BaseController {
   @override
   void onInit() {
     super.onInit();
-    firstNameController.text = "Abdulkadir";
-    lastNameController.text = "Ali";
-    emailController.text = "kadir@lukit.com";
-    phoneController.text = "+1 (000) 000-0000";
+    final userInfo = UserService.getCurrentUserInfo();
+    firstNameController.text = userInfo.fName;
+    lastNameController.text = userInfo.lName;
+    emailController.text = userInfo.email;
+    phoneController.text = userInfo.phone;
+    // Parse birthday if available (format: YYYY-MM-DD or similar)
+    if (userInfo.birthday.isNotEmpty) {
+      final parts = userInfo.birthday.split('-');
+      if (parts.length == 3) {
+        year.value = parts[0];
+        month.value = parts[1].padLeft(2, '0');
+        day.value = parts[2].padLeft(2, '0');
+      }
+    }
+    // Avatar (if available)
+    if (userInfo.imageFullUrl.isNotEmpty) {
+      avatarPath.value = userInfo.imageFullUrl;
+    }
   }
 
   @override
@@ -38,8 +55,7 @@ class AccountManageController extends BaseController {
 
   void updateInfo() {
     if (formKey.currentState?.validate() ?? false) {
-      //  API (mock)
-      Get.snackbar("Success", "Cập nhật thông tin thành công!", snackPosition: SnackPosition.BOTTOM);
+      showAppSnackBar(title: 'Cập nhật thông tin thành công!');
     }
   }
 
