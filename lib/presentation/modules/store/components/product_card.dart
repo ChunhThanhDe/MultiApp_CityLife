@@ -56,10 +56,26 @@ class ProductCard extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          SizedBox(height: 4.h),
-          Text(item.price, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
+          if (item.price != null && item.price!.isNotEmpty || item.calories != null && item.calories!.isNotEmpty) ...[
+            SizedBox(height: 4.h),
+            Text(_buildPriceCaloriesText(), style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
+          ],
         ],
       ),
     );
+  }
+
+  String _buildPriceCaloriesText() {
+    final price = item.price;
+    final calories = item.calories;
+
+    if (price != null && price.isNotEmpty && calories != null && calories.isNotEmpty) {
+      return '$price • $calories';
+    } else if (price != null && price.isNotEmpty) {
+      return price;
+    } else if (calories != null && calories.isNotEmpty) {
+      return calories;
+    }
+    return '';
   }
 }

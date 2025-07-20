@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class FavoriteItem {
   final String title;
   final String image;
-  final String price;
-  final String calories;
+  final String? price;
+  final String? calories;
 
-  const FavoriteItem({required this.title, required this.image, required this.price, required this.calories});
+  const FavoriteItem({required this.title, required this.image, this.price, this.calories});
 }
 
 class FavoriteItemCard extends StatelessWidget {
@@ -14,6 +14,20 @@ class FavoriteItemCard extends StatelessWidget {
   final bool isFavorited;
   final VoidCallback onFavoriteTap;
   const FavoriteItemCard({super.key, required this.item, this.isFavorited = false, required this.onFavoriteTap});
+
+  String _buildPriceCaloriesText() {
+    final priceText = item.price != null && item.price!.isNotEmpty ? item.price! : '';
+    final caloriesText = item.calories != null && item.calories!.isNotEmpty ? item.calories! : '';
+
+    if (priceText.isNotEmpty && caloriesText.isNotEmpty) {
+      return '$priceText • $caloriesText';
+    } else if (priceText.isNotEmpty) {
+      return priceText;
+    } else if (caloriesText.isNotEmpty) {
+      return caloriesText;
+    }
+    return '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,13 +74,15 @@ class FavoriteItemCard extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          const SizedBox(height: 2),
-          Text(
-            "${item.price} • ${item.calories}",
-            style: TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
+          if (item.price != null && item.price!.isNotEmpty || item.calories != null && item.calories!.isNotEmpty) ...[
+            const SizedBox(height: 2),
+            Text(
+              _buildPriceCaloriesText(),
+              style: TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
         ],
       ),
     );
