@@ -7,6 +7,7 @@ import 'package:sixam_mart_user/domain/repositories/cart_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/service_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/setting_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/user_repository.dart';
+import 'package:sixam_mart_user/domain/repositories/wishlist_repository.dart';
 import 'package:sixam_mart_user/services/auth_token_manager.dart';
 import 'package:sixam_mart_user/services/cart_service.dart';
 
@@ -31,6 +32,7 @@ class DependencyInjection {
     Get.put(ServiceRepository());
     Get.put(SettingRepository());
     Get.put(UserRepository());
+    Get.put(WishlistRepository());
 
     // Initialize CartService with permanent persistence
     Get.put(CartRepository());

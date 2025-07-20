@@ -1,38 +1,78 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
-import 'package:sixam_mart_user/presentation/modules/favorites/components/favorite_item_card.dart';
-import 'package:sixam_mart_user/presentation/modules/favorites/components/favorite_product_card.dart';
+import 'package:sixam_mart_user/domain/models/request/add_wishlist_request.dart';
+import 'package:sixam_mart_user/domain/models/response/wishlist_response.dart';
+import 'package:sixam_mart_user/domain/repositories/wishlist_repository.dart';
 
 enum FavoritesTab { store, items }
 
 class FavoritesController extends BaseController {
-  var currentTab = FavoritesTab.store.obs;
-  var favoritedStores = <FavoriteProduct>[
-    FavoriteProduct(title: "Walmart", logo: "assets/images/img_logo_walmart.png", image: "assets/images/img_walmart.jpg"),
-    FavoriteProduct(title: "Starbucks", logo: "assets/images/img_logo_starbucks.png", image: "assets/images/img_starbucks.png"),
-    FavoriteProduct(title: "Domino's", logo: "assets/images/img_logo_domino.png", image: "assets/images/img_domino.png"),
-    FavoriteProduct(title: "Target", logo: "assets/images/img_logo_target.png", image: "assets/images/img_target.jpg"),
-    FavoriteProduct(title: "Walgreen", logo: "assets/images/img_logo_walgreen.png", image: "assets/images/img_walgreen.jpg"),
-    FavoriteProduct(title: "McDonald's", logo: "assets/images/img_logo_mc.png", image: "assets/images/img_mc.jpg"),
-    FavoriteProduct(title: "KFC", logo: "assets/images/img_logo_kfc.png", image: "assets/images/img_kfc.jpg"),
-    FavoriteProduct(title: "Arby's", logo: "assets/images/img_logo_arby.png", image: "assets/images/img_arby.png"),
-  ].obs;
+  final WishlistRepository _wishlistRepository = Get.find<WishlistRepository>();
 
-  var favoritedItems = <FavoriteItem>[
-    FavoriteItem(title: "White Chocolate Macchiato", image: "assets/images/img_item1.png", price: "\$6.59", calories: "160 Calories"),
-    FavoriteItem(title: "Caramel Macchiato", image: "assets/images/img_item2.png", price: "\$6.59", calories: "160 Calories"),
-    FavoriteItem(title: "Caramel Ribbon Crunch", image: "assets/images/img_item3.png", price: "\$6.59", calories: "160 Calories"),
-    FavoriteItem(title: "Strawberry Crème Frappuccino", image: "assets/images/img_item4.png", price: "\$6.59", calories: "160 Calories"),
-    FavoriteItem(title: "Iced Matcha Lemonade", image: "assets/images/img_item5.png", price: "\$6.59", calories: "160 Calories"),
-    FavoriteItem(title: "White Chocolate Macchiato", image: "assets/images/img_item6.png", price: "\$6.59", calories: "160 Calories"),
-    FavoriteItem(title: "Summer-Berry Starbucks", image: "assets/images/img_item7.png", price: "\$6.59", calories: "160 Calories"),
-    FavoriteItem(title: "Mango Dragonfruit Lemonade", image: "assets/images/img_item8.png", price: "\$6.59", calories: "160 Calories"),
-  ].obs;
+  var currentTab = FavoritesTab.store.obs;
+  var isLoadingWishlist = true.obs;
+  var wishlistItems = <WishlistItem>[].obs;
+  var storeList = <WishlistStore>[].obs;
 
   void changeTab(FavoritesTab tab) => currentTab.value = tab;
 
   var favoriteStoreTitles = <String>{}.obs;
   var favoriteItemTitles = <String>{}.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchWishlistData();
+  }
+
+  Future<void> fetchWishlistData() async {
+    isLoadingWishlist.value = true;
+
+    try {
+      final result = await _wishlistRepository.getWishlist();
+
+      switch (result) {
+        case Success(:final response):
+          final data = response.data;
+          if (data != null) {
+            final wishlistResponse = WishlistResponse.fromJson(data);
+            wishlistItems.value = wishlistResponse.item;
+            storeList.value = wishlistResponse.store;
+          }
+        case Failure(:final error):
+          log('Error fetching wishlist: $error', name: 'FavoritesController');
+          wishlistItems.clear();
+          storeList.clear();
+      }
+    } catch (e) {
+      log('Exception fetching wishlist: $e', name: 'FavoritesController');
+      wishlistItems.clear();
+      storeList.clear();
+    } finally {
+      isLoadingWishlist.value = false;
+    }
+  }
+
+  Future<void> addToWishlist(String type, int id) async {
+    try {
+      final request = AddWishlistRequest(type: type, id: id);
+      final result = await _wishlistRepository.addWishlist(request);
+
+      switch (result) {
+        case Success():
+          log('Successfully added to wishlist: $type with id $id');
+          // Refresh the wishlist data after adding
+          await fetchWishlistData();
+        case Failure():
+          log('Failed to add to wishlist: ${result.error}');
+      }
+    } catch (e) {
+      log('Error adding to wishlist: $e');
+    }
+  }
 
   // --- STORE ---
   void toggleFavoriteStore(String title) {

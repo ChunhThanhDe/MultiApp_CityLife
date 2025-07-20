@@ -1,4 +1,3 @@
-import 'package:sixam_mart_user/app/constants/app_strings.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_repository.dart';
 
@@ -7,8 +6,6 @@ class UserApiPath {
 }
 
 class UserRepository extends BaseRepository {
-  UserRepository() : super(baseUrl: AppStrings.baseUrl);
-
   Future<ApiResult> getUserInfo() async {
     return handleApiRequest(() => dioClient.get(UserApiPath.getUserInfo));
   }

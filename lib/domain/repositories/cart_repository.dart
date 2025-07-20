@@ -1,4 +1,3 @@
-import 'package:sixam_mart_user/app/constants/app_strings.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_repository.dart';
 import 'package:sixam_mart_user/domain/models/request/cart_models.dart';
@@ -12,8 +11,6 @@ class CartApiPath {
 }
 
 class CartRepository extends BaseRepository {
-  CartRepository() : super(baseUrl: AppStrings.baseUrl);
-
   Future<ApiResult> getCartList() async {
     return handleApiRequest(() => dioClient.get(CartApiPath.getCartList));
   }

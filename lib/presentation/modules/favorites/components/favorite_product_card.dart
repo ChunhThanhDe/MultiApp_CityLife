@@ -1,22 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:sixam_mart_user/presentation/modules/favorites/favorites_controller.dart';
-
-class FavoriteProduct {
-  final String title;
-  final String logo;
-  final String image;
-
-  const FavoriteProduct({required this.title, required this.logo, required this.image});
-}
+import 'package:sixam_mart_user/domain/models/response/wishlist_response.dart';
 
 class FavoriteProductCard extends StatelessWidget {
-  final FavoriteProduct product;
-  const FavoriteProductCard({super.key, required this.product});
+  final WishlistStore store;
+  final VoidCallback? onFavoriteTap;
+
+  const FavoriteProductCard({super.key, required this.store, this.onFavoriteTap});
 
   @override
   Widget build(BuildContext context) {
-    final FavoritesController controller = Get.find();
     return Container(
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
       child: Column(
@@ -29,7 +21,18 @@ class FavoriteProductCard extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(product.image, fit: BoxFit.cover, width: double.infinity, height: double.infinity),
+                  child: Image.network(
+                    store.coverPhotoFullUrl ?? '',
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: double.infinity,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        color: Colors.grey[300],
+                        child: const Icon(Icons.image_not_supported, color: Colors.grey),
+                      );
+                    },
+                  ),
                 ),
                 Positioned(
                   top: 12,
@@ -41,14 +44,26 @@ class FavoriteProductCard extends StatelessWidget {
                       color: Colors.white,
                       border: Border.all(color: Colors.white, width: 2),
                       shape: BoxShape.circle,
-                      boxShadow: [BoxShadow(color: Color(0x14000000), blurRadius: 6, offset: Offset(0, 2))],
+                      boxShadow: const [BoxShadow(color: Color(0x14000000), blurRadius: 6, offset: Offset(0, 2))],
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(2),
                       child: ClipOval(
                         child: FittedBox(
                           fit: BoxFit.cover,
-                          child: SizedBox(width: 44, height: 44, child: Image.asset(product.logo)),
+                          child: SizedBox(
+                            width: 44,
+                            height: 44,
+                            child: Image.network(
+                              store.logoFullUrl,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  color: Colors.grey[300],
+                                  child: const Icon(Icons.store, color: Colors.grey),
+                                );
+                              },
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -66,26 +81,24 @@ class FavoriteProductCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    product.title,
+                    store.name,
                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 const SizedBox(width: 6),
-                Obx(
-                  () => GestureDetector(
-                    onTap: () => controller.toggleFavoriteStore(product.title),
-                    child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 250),
-                      transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
-                      child: Icon(
-                        !controller.isStoreFavorited(product.title) ? Icons.favorite : Icons.favorite_border,
-                        key: ValueKey(controller.isStoreFavorited(product.title)),
-                        color: Color(0xFF5856D7),
-                        size: 24,
-                      ),
-                    ),
+                GestureDetector(
+                  onTap:
+                      onFavoriteTap ??
+                      () {
+                        // Remove from wishlist (since this is already in favorites)
+                        // You might want to implement a remove wishlist API
+                      },
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 250),
+                    transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
+                    child: const Icon(Icons.favorite, key: ValueKey(true), color: Color(0xFF5856D7), size: 24),
                   ),
                 ),
               ],
@@ -99,26 +112,26 @@ class FavoriteProductCard extends StatelessWidget {
               children: [
                 const SizedBox(height: 2),
                 Text(
-                  "\$0 Delivery fee",
-                  style: TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
+                  "\$${store.minimumShippingCharge ?? 0} Delivery fee",
+                  style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 2),
                 Row(
                   children: [
-                    const Text(
-                      "4.8★",
-                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF4A5763)),
+                    Text(
+                      "${store.avgRating ?? 0}★",
+                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF4A5763)),
                     ),
                     const SizedBox(width: 2),
-                    const Text("(800+)", style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                    Text("(${store.ratingCount ?? 0})", style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
                     const SizedBox(width: 2),
                     const Text("•", style: TextStyle(fontSize: 12, color: Color(0xFF5856D7))),
                     const SizedBox(width: 2),
                     Flexible(
                       child: Text(
-                        "10-20 min",
+                        "${store.deliveryTime ?? '10-20'} min",
                         style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
