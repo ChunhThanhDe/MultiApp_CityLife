@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
+import 'package:sixam_mart_user/domain/enums/wishlist_item_type.dart';
 import 'package:sixam_mart_user/domain/models/request/add_wishlist_request.dart';
+import 'package:sixam_mart_user/domain/models/request/remove_wishlist_request.dart';
 import 'package:sixam_mart_user/domain/models/response/wishlist_response.dart';
 import 'package:sixam_mart_user/domain/repositories/wishlist_repository.dart';
 
@@ -56,7 +58,7 @@ class FavoritesController extends BaseController {
     }
   }
 
-  Future<void> addToWishlist(String type, int id) async {
+  Future<void> addToWishlist(WishlistItemType type, int id) async {
     try {
       final request = AddWishlistRequest(type: type, id: id);
       final result = await _wishlistRepository.addWishlist(request);
@@ -71,6 +73,24 @@ class FavoritesController extends BaseController {
       }
     } catch (e) {
       log('Error adding to wishlist: $e');
+    }
+  }
+
+  Future<void> removeFromWishlist(WishlistItemType type, int id) async {
+    try {
+      final request = RemoveWishlistRequest(type: type, id: id);
+      final result = await _wishlistRepository.removeWishlist(request);
+
+      switch (result) {
+        case Success():
+          log('Successfully removed from wishlist: $type with id $id');
+          // Refresh the wishlist data after removing
+          await fetchWishlistData();
+        case Failure():
+          log('Failed to remove from wishlist: ${result.error}');
+      }
+    } catch (e) {
+      log('Error removing from wishlist: $e');
     }
   }
 

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sixam_mart_user/domain/enums/wishlist_item_type.dart';
 import 'package:sixam_mart_user/domain/models/response/wishlist_response.dart';
+import 'package:sixam_mart_user/presentation/modules/favorites/favorites_controller.dart';
 
 class FavoriteProductCard extends StatelessWidget {
   final WishlistStore store;
@@ -9,6 +12,8 @@ class FavoriteProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final FavoritesController controller = Get.find();
+
     return Container(
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
       child: Column(
@@ -92,8 +97,8 @@ class FavoriteProductCard extends StatelessWidget {
                   onTap:
                       onFavoriteTap ??
                       () {
-                        // Remove from wishlist (since this is already in favorites)
-                        // You might want to implement a remove wishlist API
+                        // Remove from wishlist
+                        controller.removeFromWishlist(WishlistItemType.store, store.id);
                       },
                   child: AnimatedSwitcher(
                     duration: const Duration(milliseconds: 250),

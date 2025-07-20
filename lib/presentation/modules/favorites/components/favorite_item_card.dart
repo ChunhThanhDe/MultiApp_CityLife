@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sixam_mart_user/domain/enums/wishlist_item_type.dart';
 import 'package:sixam_mart_user/domain/models/response/wishlist_response.dart';
+import 'package:sixam_mart_user/presentation/modules/favorites/favorites_controller.dart';
 
 class FavoriteItemCard extends StatelessWidget {
   final WishlistItem item;
   final bool isFavorited;
-  final VoidCallback onFavoriteTap;
+  final VoidCallback? onFavoriteTap;
 
-  const FavoriteItemCard({super.key, required this.item, this.isFavorited = true, required this.onFavoriteTap});
+  const FavoriteItemCard({super.key, required this.item, this.isFavorited = true, this.onFavoriteTap});
 
   String _buildPriceText() {
     return '\$${item.price.toStringAsFixed(2)}';
@@ -14,6 +17,8 @@ class FavoriteItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final FavoritesController controller = Get.find();
+
     return SizedBox(
       width: 183,
       child: Column(
@@ -42,7 +47,12 @@ class FavoriteItemCard extends StatelessWidget {
                 right: 8,
                 bottom: 8,
                 child: GestureDetector(
-                  onTap: onFavoriteTap,
+                  onTap:
+                      onFavoriteTap ??
+                      () {
+                        // Remove from wishlist
+                        controller.removeFromWishlist(WishlistItemType.item, item.id);
+                      },
                   child: Container(
                     width: 36,
                     height: 36,
