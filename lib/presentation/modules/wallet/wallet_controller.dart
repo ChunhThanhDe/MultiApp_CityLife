@@ -26,4 +26,10 @@ class WalletController extends BaseController {
   void toggleBalanceVisibility() {
     showBalance.value = !showBalance.value;
   }
+
+  @override
+  Future<void> refresh() async {
+    // TODO: Replace with real refresh logic (e.g., fetch from server)
+    await Future.delayed(Duration(seconds: 1));
+  }
 }

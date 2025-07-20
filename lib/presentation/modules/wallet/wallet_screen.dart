@@ -41,7 +41,13 @@ class WalletScreen extends BaseScreen<WalletController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    return SingleChildScrollView(child: Column(children: [_buildWalletCardSection(), const SizedBox(height: 16), _buildTransactionSection()]));
+    return RefreshIndicator(
+      onRefresh: controller.refresh,
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: Column(children: [_buildWalletCardSection(), const SizedBox(height: 16), _buildTransactionSection()]),
+      ),
+    );
   }
 
   Padding _buildTransactionSection() {

@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/request/cart_models.dart';
+import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/services/cart_service.dart';
@@ -203,7 +204,7 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
           ),
         ),
         IconButton(
-          icon: SvgPicture.asset('assets/icons/ic_order.svg', width: 24, height: 24),
+          icon: SvgPicture.asset(Assets.icons.icOrder.path, width: 24, height: 24),
           onPressed: () {
             Get.toNamed(AppRoutes.cartOrder);
           },
@@ -218,7 +219,6 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
   }
 }
 
-// Tách phần body để xài StatefulWidget riêng cho dễ quản lý
 class _AnimatedCartBody extends StatefulWidget {
   @override
   State<_AnimatedCartBody> createState() => _AnimatedCartBodyState();
@@ -240,7 +240,6 @@ class _AnimatedCartBodyState extends State<_AnimatedCartBody> {
     final cartService = Get.find<CartService>();
 
     if (!showCartUI) {
-      // UI ban đầu (giống cũ)
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -253,7 +252,7 @@ class _AnimatedCartBodyState extends State<_AnimatedCartBody> {
                   height: 222,
                   decoration: BoxDecoration(color: Color(0xFFE8EBEE), shape: BoxShape.circle),
                 ),
-                AppImage.asset('assets/images/img_bag.png', width: 195, height: 195, fit: BoxFit.contain),
+                AppImage.asset(Assets.images.imgBag.path, width: 195, height: 195, fit: BoxFit.contain),
               ],
             ),
             SizedBox(height: 32),
@@ -293,129 +292,133 @@ class _AnimatedCartBodyState extends State<_AnimatedCartBody> {
       );
     }
 
-    // Reactive cart UI using Obx
     return Obx(() {
-      if (cartService.isEmpty) {
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Stack(
-                alignment: Alignment.center,
+      return RefreshIndicator(
+        onRefresh: () => cartService.fetchCartList(),
+        child: cartService.isEmpty
+            ? ListView(
+                physics: const AlwaysScrollableScrollPhysics(),
                 children: [
-                  Container(
-                    width: 221,
-                    height: 222,
-                    decoration: BoxDecoration(color: Color(0xFFE8EBEE), shape: BoxShape.circle),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Container(
+                            width: 221,
+                            height: 222,
+                            decoration: BoxDecoration(color: Color(0xFFE8EBEE), shape: BoxShape.circle),
+                          ),
+                          AppImage.asset(Assets.images.imgBag.path, width: 195, height: 195, fit: BoxFit.contain),
+                        ],
+                      ),
+                      SizedBox(height: 32),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Your cart is empty",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              "Add some items to your cart to get started.",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 16, color: Color(0xFF4A5763), fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 24),
+                      ElevatedButton(
+                        onPressed: () {
+                          Get.back(); // Go back to previous screen
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF5856D7),
+                          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                        ),
+                        child: Text(
+                          "Start shopping",
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16),
+                        ),
+                      ),
+                    ],
                   ),
-                  AppImage.asset('assets/images/img_bag.png', width: 195, height: 195, fit: BoxFit.contain),
+                ],
+              )
+            : Column(
+                children: [
+                  Expanded(
+                    child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+                      itemCount: cartService.storesInCart.length,
+                      separatorBuilder: (_, _) => Divider(height: 0, color: Color(0xFFE8EBEE), indent: 24, endIndent: 24),
+                      itemBuilder: (context, storeIndex) {
+                        final store = cartService.storesInCart[storeIndex];
+                        return Column(
+                          children: [
+                            // Store header
+                            StoreHeader(store: store),
+                            // Store items
+                            ...store.items.map((item) => CartProductItem(item: item)),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                    decoration: BoxDecoration(
+                      border: Border(top: BorderSide(color: Color(0x1A101214), width: 1)),
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                'Subtotal',
+                                style: TextStyle(color: Color(0xFF4A5763), fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                            Text(
+                              '\$${cartService.totalPrice.toStringAsFixed(2)}',
+                              style: TextStyle(color: Color(0xFF161A1D), fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 48,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Get.toNamed(AppRoutes.cartCheckout);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xFF5856D7),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                              padding: EdgeInsets.symmetric(vertical: 12),
+                            ),
+                            child: Text(
+                              'Checkout Now',
+                              style: TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-              SizedBox(height: 32),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Column(
-                  children: [
-                    Text(
-                      "Your cart is empty",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      "Add some items to your cart to get started.",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16, color: Color(0xFF4A5763), fontWeight: FontWeight.w400),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: () {
-                  Get.back(); // Go back to previous screen
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF5856D7),
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-                ),
-                child: Text(
-                  "Start shopping",
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16),
-                ),
-              ),
-            ],
-          ),
-        );
-      }
-
-      return Column(
-        children: [
-          Expanded(
-            child: ListView.separated(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
-              itemCount: cartService.storesInCart.length,
-              separatorBuilder: (_, _) => Divider(height: 0, color: Color(0xFFE8EBEE), indent: 24, endIndent: 24),
-              itemBuilder: (context, storeIndex) {
-                final store = cartService.storesInCart[storeIndex];
-                return Column(
-                  children: [
-                    // Store header
-                    StoreHeader(store: store),
-                    // Store items
-                    ...store.items.map((item) => CartProductItem(item: item)),
-                  ],
-                );
-              },
-            ),
-          ),
-          const SizedBox(height: 12),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-            decoration: BoxDecoration(
-              border: Border(top: BorderSide(color: Color(0x1A101214), width: 1)),
-              color: Colors.white,
-            ),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Subtotal',
-                        style: TextStyle(color: Color(0xFF4A5763), fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    Text(
-                      '\$${cartService.totalPrice.toStringAsFixed(2)}',
-                      style: TextStyle(color: Color(0xFF161A1D), fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w700),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                SizedBox(
-                  width: double.infinity,
-                  height: 48,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Get.toNamed(AppRoutes.cartCheckout);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF5856D7),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-                      padding: EdgeInsets.symmetric(vertical: 12),
-                    ),
-                    child: Text(
-                      'Checkout Now',
-                      style: TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
       );
     });
   }
