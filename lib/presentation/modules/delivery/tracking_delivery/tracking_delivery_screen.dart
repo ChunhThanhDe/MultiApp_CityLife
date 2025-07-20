@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 import 'tracking_delivery_controller.dart';
 
@@ -72,7 +73,7 @@ class TrackingDeliveryScreen extends BaseScreen<TrackingDeliveryController> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(height: 100),
-                              Image.asset("assets/images/img_tracking_box.png", width: size.width * 0.6, fit: BoxFit.contain),
+                              AppImage.asset("assets/images/img_tracking_box.png", width: size.width * 0.6, fit: BoxFit.contain),
                               SizedBox(height: 100),
                             ],
                           );

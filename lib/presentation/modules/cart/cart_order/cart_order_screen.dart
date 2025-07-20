@@ -3,6 +3,7 @@ import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/components/cart_completed_order_section.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/components/cart_in_progress_order_card.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 import 'cart_order_controller.dart';
 
@@ -22,7 +23,7 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
         InProgressOrderCard(
           label: "Heading your way",
           time: "Today 7:35 AM",
-          brandLogo: AssetImage('assets/images/starbucks.png'),
+          brandLogo: AppImageProvider.asset('assets/images/starbucks.png'),
           brandName: "Starbucks®",
           subtitle: "4 items",
           price: "\$35.87",
@@ -35,7 +36,7 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
         InProgressOrderCard(
           label: "Heading your way",
           time: "Today 7:35 AM",
-          brandLogo: AssetImage('assets/images/starbucks.png'),
+          brandLogo: AppImageProvider.asset('assets/images/starbucks.png'),
           brandName: "Starbucks®",
           subtitle: "4 items",
           price: "\$35.87",
@@ -50,9 +51,9 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
           date: "Sep 18, 2023 7:30 AM",
           status: "Completed",
           orders: [
-            OrderListItem(brandLogo: AssetImage('assets/images/starbucks.png'), brandName: "Starbucks®", subtitle: "4 items", price: "\$14.32"),
-            OrderListItem(brandLogo: AssetImage('assets/images/starbucks.png'), brandName: "Starbucks®", subtitle: "4 items", price: "\$14.32"),
-            OrderListItem(brandLogo: AssetImage('assets/images/mcdonalds.png'), brandName: "McDonald's", subtitle: "2 items", price: "\$21.55"),
+            OrderListItem(brandLogo: AppImageProvider.asset('assets/images/starbucks.png'), brandName: "Starbucks®", subtitle: "4 items", price: "\$14.32"),
+            OrderListItem(brandLogo: AppImageProvider.asset('assets/images/starbucks.png'), brandName: "Starbucks®", subtitle: "4 items", price: "\$14.32"),
+            OrderListItem(brandLogo: AppImageProvider.asset('assets/images/mcdonalds.png'), brandName: "McDonald's", subtitle: "2 items", price: "\$21.55"),
           ],
         ),
         SizedBox(height: 16),
@@ -63,8 +64,8 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
           date: "Sep 18, 2023 7:30 AM",
           status: "Completed",
           orders: [
-            OrderListItem(brandLogo: AssetImage('assets/images/starbucks.png'), brandName: "Starbucks®", subtitle: "4 items", price: "\$14.32"),
-            OrderListItem(brandLogo: AssetImage('assets/images/mcdonalds.png'), brandName: "McDonald's", subtitle: "2 items", price: "\$21.55"),
+            OrderListItem(brandLogo: AppImageProvider.asset('assets/images/starbucks.png'), brandName: "Starbucks®", subtitle: "4 items", price: "\$14.32"),
+            OrderListItem(brandLogo: AppImageProvider.asset('assets/images/mcdonalds.png'), brandName: "McDonald's", subtitle: "2 items", price: "\$21.55"),
           ],
         ),
         SizedBox(height: 16),

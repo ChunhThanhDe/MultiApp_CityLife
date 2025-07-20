@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/request/cart_models.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/services/cart_service.dart';
 
 import 'view_cart_controller.dart';
@@ -252,7 +253,7 @@ class _AnimatedCartBodyState extends State<_AnimatedCartBody> {
                   height: 222,
                   decoration: BoxDecoration(color: Color(0xFFE8EBEE), shape: BoxShape.circle),
                 ),
-                Image.asset('assets/images/img_bag.png', width: 195, height: 195, fit: BoxFit.contain),
+                AppImage.asset('assets/images/img_bag.png', width: 195, height: 195, fit: BoxFit.contain),
               ],
             ),
             SizedBox(height: 32),
@@ -307,7 +308,7 @@ class _AnimatedCartBodyState extends State<_AnimatedCartBody> {
                     height: 222,
                     decoration: BoxDecoration(color: Color(0xFFE8EBEE), shape: BoxShape.circle),
                   ),
-                  Image.asset('assets/images/img_bag.png', width: 195, height: 195, fit: BoxFit.contain),
+                  AppImage.asset('assets/images/img_bag.png', width: 195, height: 195, fit: BoxFit.contain),
                 ],
               ),
               SizedBox(height: 32),

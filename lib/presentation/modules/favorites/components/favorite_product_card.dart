@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/domain/enums/wishlist_item_type.dart';
 import 'package:sixam_mart_user/domain/models/response/wishlist_response.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class FavoriteProductCard extends StatelessWidget {
   final WishlistStore store;
@@ -26,17 +27,15 @@ class FavoriteProductCard extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
+                  child: AppImage.network(
                     store.coverPhotoFullUrl ?? '',
                     fit: BoxFit.cover,
                     width: double.infinity,
                     height: double.infinity,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.grey[300],
-                        child: const Icon(Icons.image_not_supported, color: Colors.grey),
-                      );
-                    },
+                    errorWidget: Container(
+                      color: Colors.grey[300],
+                      child: const Icon(Icons.image_not_supported, color: Colors.grey),
+                    ),
                   ),
                 ),
                 Positioned(
@@ -59,14 +58,12 @@ class FavoriteProductCard extends StatelessWidget {
                           child: SizedBox(
                             width: 44,
                             height: 44,
-                            child: Image.network(
+                            child: AppImage.network(
                               store.logoFullUrl,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: Colors.grey[300],
-                                  child: const Icon(Icons.store, color: Colors.grey),
-                                );
-                              },
+                              errorWidget: Container(
+                                color: Colors.grey[300],
+                                child: const Icon(Icons.store, color: Colors.grey),
+                              ),
                             ),
                           ),
                         ),

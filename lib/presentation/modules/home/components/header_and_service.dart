@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class HeaderAndService extends GetView<HomeController> {
   const HeaderAndService({super.key});
@@ -71,7 +72,7 @@ class HeaderAndService extends GetView<HomeController> {
             Container(
               decoration: BoxDecoration(color: AppColors.stateGreyLowest50, borderRadius: BorderRadius.circular(AppCorner.radius8)),
               padding: EdgeInsets.all(12),
-              child: Image.asset(service.image, width: 70, height: 70),
+              child: AppImage.asset(service.image, width: 70, height: 70),
             ),
             SizedBox(height: 6),
             Text(

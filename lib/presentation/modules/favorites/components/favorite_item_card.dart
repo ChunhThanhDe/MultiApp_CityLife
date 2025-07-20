@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/domain/enums/wishlist_item_type.dart';
 import 'package:sixam_mart_user/domain/models/response/wishlist_response.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class FavoriteItemCard extends StatelessWidget {
   final WishlistItem item;
@@ -28,19 +29,17 @@ class FavoriteItemCard extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(6),
-                child: Image.network(
+                child: AppImage.network(
                   item.imageFullUrl,
                   width: 150,
                   height: 150,
                   fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      width: 150,
-                      height: 150,
-                      color: Colors.grey[300],
-                      child: const Icon(Icons.image_not_supported, color: Colors.grey),
-                    );
-                  },
+                  errorWidget: Container(
+                    width: 150,
+                    height: 150,
+                    color: Colors.grey[300],
+                    child: const Icon(Icons.image_not_supported, color: Colors.grey),
+                  ),
                 ),
               ),
               Positioned(

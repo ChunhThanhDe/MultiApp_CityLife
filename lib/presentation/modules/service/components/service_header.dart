@@ -6,6 +6,7 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/service_filter.dart';
 import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class ServiceHeader extends GetView<ServiceController> {
   const ServiceHeader({super.key});
@@ -175,14 +176,13 @@ class ServiceHeader extends GetView<ServiceController> {
                     children: [
                       Center(
                         child: category.image.isNotEmpty
-                            ? Image.network(
+                            ? AppImage.network(
                                 category.image,
                                 width: 40,
                                 height: 40,
-                                errorBuilder: (context, error, stackTrace) =>
-                                    Image.asset(controller.getCategoryImageAsset(category, controller.currentServiceType.value ?? ServiceType.food), width: 40, height: 40),
+                                errorWidget: AppImage.asset(controller.getCategoryImageAsset(category, controller.currentServiceType.value ?? ServiceType.food), width: 40, height: 40),
                               )
-                            : Image.asset(controller.getCategoryImageAsset(category, controller.currentServiceType.value ?? ServiceType.food), width: 40, height: 40),
+                            : AppImage.asset(controller.getCategoryImageAsset(category, controller.currentServiceType.value ?? ServiceType.food), width: 40, height: 40),
                       ),
                       SizedBox(height: 8),
                       Text(category.name, style: AppTextStyles.typographyH12Regular, textAlign: TextAlign.center),

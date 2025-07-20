@@ -4,6 +4,7 @@ import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/response/wishlist_response.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/components/favorites_tab_bar.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 import 'favorites_controller.dart';
 
@@ -85,17 +86,15 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
+                  child: AppImage.network(
                     store.coverPhotoFullUrl ?? store.logoFullUrl,
                     fit: BoxFit.cover,
                     width: double.infinity,
                     height: double.infinity,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: const Color(0xFFE8EBEE),
-                        child: const Icon(Icons.store, size: 40, color: Color(0xFF4A5763)),
-                      );
-                    },
+                    errorWidget: Container(
+                      color: const Color(0xFFE8EBEE),
+                      child: const Icon(Icons.store, size: 40, color: Color(0xFF4A5763)),
+                    ),
                   ),
                 ),
                 Positioned(
@@ -118,14 +117,12 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
                           child: SizedBox(
                             width: 44,
                             height: 44,
-                            child: Image.network(
+                            child: AppImage.network(
                               store.logoFullUrl,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: const Color(0xFFE8EBEE),
-                                  child: const Icon(Icons.store, size: 20, color: Color(0xFF4A5763)),
-                                );
-                              },
+                              errorWidget: Container(
+                                color: const Color(0xFFE8EBEE),
+                                child: const Icon(Icons.store, size: 20, color: Color(0xFF4A5763)),
+                              ),
                             ),
                           ),
                         ),
@@ -222,19 +219,17 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(6),
-                child: Image.network(
+                child: AppImage.network(
                   item.imageFullUrl,
                   width: 150,
                   height: 150,
                   fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      width: 150,
-                      height: 150,
-                      color: const Color(0xFFE8EBEE),
-                      child: const Icon(Icons.image, size: 40, color: Color(0xFF4A5763)),
-                    );
-                  },
+                  errorWidget: Container(
+                    width: 150,
+                    height: 150,
+                    color: const Color(0xFFE8EBEE),
+                    child: const Icon(Icons.image, size: 40, color: Color(0xFF4A5763)),
+                  ),
                 ),
               ),
               Positioned(
