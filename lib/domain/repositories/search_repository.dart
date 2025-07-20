@@ -9,12 +9,11 @@ class SearchApiPath {
 class SearchRepository extends BaseRepository {
   SearchRepository() : super(baseUrl: AppStrings.baseUrl);
 
-  // Search stores and products
-  Future<ApiResult> searchStores({String? query, int? id, int limit = 10, int offset = 0}) async {
+  // Search stores and products with optional query
+  Future<ApiResult> searchStores({String? query}) async {
     final queryParameters = <String, dynamic>{
-      'id': id ?? 3, // Default to module_id 3
-      'limit': limit,
-      'offset': offset,
+      'id': 3, // Hardcoded as per requirements
+      'module_id': 3, // Hardcoded as per requirements
     };
 
     if (query != null && query.isNotEmpty) {
@@ -22,10 +21,5 @@ class SearchRepository extends BaseRepository {
     }
 
     return handleApiRequest(() => dioClient.get(SearchApiPath.searchStores, queryParameters: queryParameters));
-  }
-
-  // Get initial data (recent, top searches) - no query parameter
-  Future<ApiResult> getInitialSearchData({int? id}) async {
-    return searchStores(id: id);
   }
 }

@@ -8,37 +8,12 @@ part '../../../generated/domain/models/response/search_response.g.dart';
 @freezed
 abstract class SearchResponse with _$SearchResponse {
   const factory SearchResponse({
-    SearchItems? items,
     @JsonKey(name: 'top_searches') List<String>? topSearches,
-    @JsonKey(name: 'recent_searches') List<String>? recentSearches,
     @JsonKey(name: 'recent_stores') List<RecentStore>? recentStores,
+    @JsonKey(name: 'items_by_store') List<StoreItemGroup>? itemsByStore,
   }) = _SearchResponse;
 
   factory SearchResponse.fromJson(Map<String, dynamic> json) => _$SearchResponseFromJson(json);
-}
-
-@freezed
-abstract class SearchItems with _$SearchItems {
-  const factory SearchItems({@Default(0) int total, @Default(0) int limit, @Default(0) int offset, @Default([]) List<SearchItem> data}) = _SearchItems;
-
-  factory SearchItems.fromJson(Map<String, dynamic> json) => _$SearchItemsFromJson(json);
-}
-
-@freezed
-abstract class SearchItem with _$SearchItem {
-  const factory SearchItem({
-    @Default(0) int id,
-    @Default('') String name,
-    @JsonKey(name: 'image_url') @Default('') String imageUrl,
-    @Default(0.0) double price,
-    @Default(0.0) double discount,
-    @JsonKey(name: 'final_price') @Default(0.0) double finalPrice,
-    @JsonKey(name: 'avg_rating') @Default(0.0) double avgRating,
-    @JsonKey(name: 'store_id') @Default(0) int storeId,
-    @JsonKey(name: 'module_id') @Default(0) int moduleId,
-  }) = _SearchItem;
-
-  factory SearchItem.fromJson(Map<String, dynamic> json) => _$SearchItemFromJson(json);
 }
 
 @freezed
@@ -52,4 +27,26 @@ abstract class RecentStore with _$RecentStore {
   }) = _RecentStore;
 
   factory RecentStore.fromJson(Map<String, dynamic> json) => _$RecentStoreFromJson(json);
+}
+
+@freezed
+abstract class StoreItemGroup with _$StoreItemGroup {
+  const factory StoreItemGroup({@JsonKey(name: 'store_id') @Default(0) int storeId, @JsonKey(name: 'store_name') @Default('') String storeName, @Default([]) List<Item> items}) = _StoreItemGroup;
+
+  factory StoreItemGroup.fromJson(Map<String, dynamic> json) => _$StoreItemGroupFromJson(json);
+}
+
+@freezed
+abstract class Item with _$Item {
+  const factory Item({
+    @Default(0) int id,
+    @Default('') String name,
+    @JsonKey(name: 'image_url') @Default('') String imageUrl,
+    @Default(0.0) double price,
+    @Default(0.0) double discount,
+    @JsonKey(name: 'final_price') @Default(0.0) double finalPrice,
+    @JsonKey(name: 'avg_rating') @Default(0.0) double avgRating,
+  }) = _Item;
+
+  factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
 }

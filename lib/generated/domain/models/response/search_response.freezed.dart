@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SearchResponse {
 
- SearchItems? get items;@JsonKey(name: 'top_searches') List<String>? get topSearches;@JsonKey(name: 'recent_searches') List<String>? get recentSearches;@JsonKey(name: 'recent_stores') List<RecentStore>? get recentStores;
+@JsonKey(name: 'top_searches') List<String>? get topSearches;@JsonKey(name: 'recent_stores') List<RecentStore>? get recentStores;@JsonKey(name: 'items_by_store') List<StoreItemGroup>? get itemsByStore;
 /// Create a copy of SearchResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $SearchResponseCopyWith<SearchResponse> get copyWith => _$SearchResponseCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchResponse&&(identical(other.items, items) || other.items == items)&&const DeepCollectionEquality().equals(other.topSearches, topSearches)&&const DeepCollectionEquality().equals(other.recentSearches, recentSearches)&&const DeepCollectionEquality().equals(other.recentStores, recentStores));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchResponse&&const DeepCollectionEquality().equals(other.topSearches, topSearches)&&const DeepCollectionEquality().equals(other.recentStores, recentStores)&&const DeepCollectionEquality().equals(other.itemsByStore, itemsByStore));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,items,const DeepCollectionEquality().hash(topSearches),const DeepCollectionEquality().hash(recentSearches),const DeepCollectionEquality().hash(recentStores));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(topSearches),const DeepCollectionEquality().hash(recentStores),const DeepCollectionEquality().hash(itemsByStore));
 
 @override
 String toString() {
-  return 'SearchResponse(items: $items, topSearches: $topSearches, recentSearches: $recentSearches, recentStores: $recentStores)';
+  return 'SearchResponse(topSearches: $topSearches, recentStores: $recentStores, itemsByStore: $itemsByStore)';
 }
 
 
@@ -49,11 +49,11 @@ abstract mixin class $SearchResponseCopyWith<$Res>  {
   factory $SearchResponseCopyWith(SearchResponse value, $Res Function(SearchResponse) _then) = _$SearchResponseCopyWithImpl;
 @useResult
 $Res call({
- SearchItems? items,@JsonKey(name: 'top_searches') List<String>? topSearches,@JsonKey(name: 'recent_searches') List<String>? recentSearches,@JsonKey(name: 'recent_stores') List<RecentStore>? recentStores
+@JsonKey(name: 'top_searches') List<String>? topSearches,@JsonKey(name: 'recent_stores') List<RecentStore>? recentStores,@JsonKey(name: 'items_by_store') List<StoreItemGroup>? itemsByStore
 });
 
 
-$SearchItemsCopyWith<$Res>? get items;
+
 
 }
 /// @nodoc
@@ -66,28 +66,15 @@ class _$SearchResponseCopyWithImpl<$Res>
 
 /// Create a copy of SearchResponse
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? items = freezed,Object? topSearches = freezed,Object? recentSearches = freezed,Object? recentStores = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? topSearches = freezed,Object? recentStores = freezed,Object? itemsByStore = freezed,}) {
   return _then(_self.copyWith(
-items: freezed == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
-as SearchItems?,topSearches: freezed == topSearches ? _self.topSearches : topSearches // ignore: cast_nullable_to_non_nullable
-as List<String>?,recentSearches: freezed == recentSearches ? _self.recentSearches : recentSearches // ignore: cast_nullable_to_non_nullable
+topSearches: freezed == topSearches ? _self.topSearches : topSearches // ignore: cast_nullable_to_non_nullable
 as List<String>?,recentStores: freezed == recentStores ? _self.recentStores : recentStores // ignore: cast_nullable_to_non_nullable
-as List<RecentStore>?,
+as List<RecentStore>?,itemsByStore: freezed == itemsByStore ? _self.itemsByStore : itemsByStore // ignore: cast_nullable_to_non_nullable
+as List<StoreItemGroup>?,
   ));
 }
-/// Create a copy of SearchResponse
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$SearchItemsCopyWith<$Res>? get items {
-    if (_self.items == null) {
-    return null;
-  }
 
-  return $SearchItemsCopyWith<$Res>(_self.items!, (value) {
-    return _then(_self.copyWith(items: value));
-  });
-}
 }
 
 
@@ -95,10 +82,9 @@ $SearchItemsCopyWith<$Res>? get items {
 @JsonSerializable()
 
 class _SearchResponse implements SearchResponse {
-  const _SearchResponse({this.items, @JsonKey(name: 'top_searches') final  List<String>? topSearches, @JsonKey(name: 'recent_searches') final  List<String>? recentSearches, @JsonKey(name: 'recent_stores') final  List<RecentStore>? recentStores}): _topSearches = topSearches,_recentSearches = recentSearches,_recentStores = recentStores;
+  const _SearchResponse({@JsonKey(name: 'top_searches') final  List<String>? topSearches, @JsonKey(name: 'recent_stores') final  List<RecentStore>? recentStores, @JsonKey(name: 'items_by_store') final  List<StoreItemGroup>? itemsByStore}): _topSearches = topSearches,_recentStores = recentStores,_itemsByStore = itemsByStore;
   factory _SearchResponse.fromJson(Map<String, dynamic> json) => _$SearchResponseFromJson(json);
 
-@override final  SearchItems? items;
  final  List<String>? _topSearches;
 @override@JsonKey(name: 'top_searches') List<String>? get topSearches {
   final value = _topSearches;
@@ -108,20 +94,20 @@ class _SearchResponse implements SearchResponse {
   return EqualUnmodifiableListView(value);
 }
 
- final  List<String>? _recentSearches;
-@override@JsonKey(name: 'recent_searches') List<String>? get recentSearches {
-  final value = _recentSearches;
-  if (value == null) return null;
-  if (_recentSearches is EqualUnmodifiableListView) return _recentSearches;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(value);
-}
-
  final  List<RecentStore>? _recentStores;
 @override@JsonKey(name: 'recent_stores') List<RecentStore>? get recentStores {
   final value = _recentStores;
   if (value == null) return null;
   if (_recentStores is EqualUnmodifiableListView) return _recentStores;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
+ final  List<StoreItemGroup>? _itemsByStore;
+@override@JsonKey(name: 'items_by_store') List<StoreItemGroup>? get itemsByStore {
+  final value = _itemsByStore;
+  if (value == null) return null;
+  if (_itemsByStore is EqualUnmodifiableListView) return _itemsByStore;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(value);
 }
@@ -140,16 +126,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchResponse&&(identical(other.items, items) || other.items == items)&&const DeepCollectionEquality().equals(other._topSearches, _topSearches)&&const DeepCollectionEquality().equals(other._recentSearches, _recentSearches)&&const DeepCollectionEquality().equals(other._recentStores, _recentStores));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchResponse&&const DeepCollectionEquality().equals(other._topSearches, _topSearches)&&const DeepCollectionEquality().equals(other._recentStores, _recentStores)&&const DeepCollectionEquality().equals(other._itemsByStore, _itemsByStore));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,items,const DeepCollectionEquality().hash(_topSearches),const DeepCollectionEquality().hash(_recentSearches),const DeepCollectionEquality().hash(_recentStores));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_topSearches),const DeepCollectionEquality().hash(_recentStores),const DeepCollectionEquality().hash(_itemsByStore));
 
 @override
 String toString() {
-  return 'SearchResponse(items: $items, topSearches: $topSearches, recentSearches: $recentSearches, recentStores: $recentStores)';
+  return 'SearchResponse(topSearches: $topSearches, recentStores: $recentStores, itemsByStore: $itemsByStore)';
 }
 
 
@@ -160,11 +146,11 @@ abstract mixin class _$SearchResponseCopyWith<$Res> implements $SearchResponseCo
   factory _$SearchResponseCopyWith(_SearchResponse value, $Res Function(_SearchResponse) _then) = __$SearchResponseCopyWithImpl;
 @override @useResult
 $Res call({
- SearchItems? items,@JsonKey(name: 'top_searches') List<String>? topSearches,@JsonKey(name: 'recent_searches') List<String>? recentSearches,@JsonKey(name: 'recent_stores') List<RecentStore>? recentStores
+@JsonKey(name: 'top_searches') List<String>? topSearches,@JsonKey(name: 'recent_stores') List<RecentStore>? recentStores,@JsonKey(name: 'items_by_store') List<StoreItemGroup>? itemsByStore
 });
 
 
-@override $SearchItemsCopyWith<$Res>? get items;
+
 
 }
 /// @nodoc
@@ -177,330 +163,12 @@ class __$SearchResponseCopyWithImpl<$Res>
 
 /// Create a copy of SearchResponse
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? items = freezed,Object? topSearches = freezed,Object? recentSearches = freezed,Object? recentStores = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? topSearches = freezed,Object? recentStores = freezed,Object? itemsByStore = freezed,}) {
   return _then(_SearchResponse(
-items: freezed == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
-as SearchItems?,topSearches: freezed == topSearches ? _self._topSearches : topSearches // ignore: cast_nullable_to_non_nullable
-as List<String>?,recentSearches: freezed == recentSearches ? _self._recentSearches : recentSearches // ignore: cast_nullable_to_non_nullable
+topSearches: freezed == topSearches ? _self._topSearches : topSearches // ignore: cast_nullable_to_non_nullable
 as List<String>?,recentStores: freezed == recentStores ? _self._recentStores : recentStores // ignore: cast_nullable_to_non_nullable
-as List<RecentStore>?,
-  ));
-}
-
-/// Create a copy of SearchResponse
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$SearchItemsCopyWith<$Res>? get items {
-    if (_self.items == null) {
-    return null;
-  }
-
-  return $SearchItemsCopyWith<$Res>(_self.items!, (value) {
-    return _then(_self.copyWith(items: value));
-  });
-}
-}
-
-
-/// @nodoc
-mixin _$SearchItems {
-
- int get total; int get limit; int get offset; List<SearchItem> get data;
-/// Create a copy of SearchItems
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$SearchItemsCopyWith<SearchItems> get copyWith => _$SearchItemsCopyWithImpl<SearchItems>(this as SearchItems, _$identity);
-
-  /// Serializes this SearchItems to a JSON map.
-  Map<String, dynamic> toJson();
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchItems&&(identical(other.total, total) || other.total == total)&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.offset, offset) || other.offset == offset)&&const DeepCollectionEquality().equals(other.data, data));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,total,limit,offset,const DeepCollectionEquality().hash(data));
-
-@override
-String toString() {
-  return 'SearchItems(total: $total, limit: $limit, offset: $offset, data: $data)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $SearchItemsCopyWith<$Res>  {
-  factory $SearchItemsCopyWith(SearchItems value, $Res Function(SearchItems) _then) = _$SearchItemsCopyWithImpl;
-@useResult
-$Res call({
- int total, int limit, int offset, List<SearchItem> data
-});
-
-
-
-
-}
-/// @nodoc
-class _$SearchItemsCopyWithImpl<$Res>
-    implements $SearchItemsCopyWith<$Res> {
-  _$SearchItemsCopyWithImpl(this._self, this._then);
-
-  final SearchItems _self;
-  final $Res Function(SearchItems) _then;
-
-/// Create a copy of SearchItems
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? total = null,Object? limit = null,Object? offset = null,Object? data = null,}) {
-  return _then(_self.copyWith(
-total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
-as int,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
-as int,offset: null == offset ? _self.offset : offset // ignore: cast_nullable_to_non_nullable
-as int,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as List<SearchItem>,
-  ));
-}
-
-}
-
-
-/// @nodoc
-@JsonSerializable()
-
-class _SearchItems implements SearchItems {
-  const _SearchItems({this.total = 0, this.limit = 0, this.offset = 0, final  List<SearchItem> data = const []}): _data = data;
-  factory _SearchItems.fromJson(Map<String, dynamic> json) => _$SearchItemsFromJson(json);
-
-@override@JsonKey() final  int total;
-@override@JsonKey() final  int limit;
-@override@JsonKey() final  int offset;
- final  List<SearchItem> _data;
-@override@JsonKey() List<SearchItem> get data {
-  if (_data is EqualUnmodifiableListView) return _data;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_data);
-}
-
-
-/// Create a copy of SearchItems
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$SearchItemsCopyWith<_SearchItems> get copyWith => __$SearchItemsCopyWithImpl<_SearchItems>(this, _$identity);
-
-@override
-Map<String, dynamic> toJson() {
-  return _$SearchItemsToJson(this, );
-}
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchItems&&(identical(other.total, total) || other.total == total)&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.offset, offset) || other.offset == offset)&&const DeepCollectionEquality().equals(other._data, _data));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,total,limit,offset,const DeepCollectionEquality().hash(_data));
-
-@override
-String toString() {
-  return 'SearchItems(total: $total, limit: $limit, offset: $offset, data: $data)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$SearchItemsCopyWith<$Res> implements $SearchItemsCopyWith<$Res> {
-  factory _$SearchItemsCopyWith(_SearchItems value, $Res Function(_SearchItems) _then) = __$SearchItemsCopyWithImpl;
-@override @useResult
-$Res call({
- int total, int limit, int offset, List<SearchItem> data
-});
-
-
-
-
-}
-/// @nodoc
-class __$SearchItemsCopyWithImpl<$Res>
-    implements _$SearchItemsCopyWith<$Res> {
-  __$SearchItemsCopyWithImpl(this._self, this._then);
-
-  final _SearchItems _self;
-  final $Res Function(_SearchItems) _then;
-
-/// Create a copy of SearchItems
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? total = null,Object? limit = null,Object? offset = null,Object? data = null,}) {
-  return _then(_SearchItems(
-total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
-as int,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
-as int,offset: null == offset ? _self.offset : offset // ignore: cast_nullable_to_non_nullable
-as int,data: null == data ? _self._data : data // ignore: cast_nullable_to_non_nullable
-as List<SearchItem>,
-  ));
-}
-
-
-}
-
-
-/// @nodoc
-mixin _$SearchItem {
-
- int get id; String get name;@JsonKey(name: 'image_url') String get imageUrl; double get price; double get discount;@JsonKey(name: 'final_price') double get finalPrice;@JsonKey(name: 'avg_rating') double get avgRating;@JsonKey(name: 'store_id') int get storeId;@JsonKey(name: 'module_id') int get moduleId;
-/// Create a copy of SearchItem
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$SearchItemCopyWith<SearchItem> get copyWith => _$SearchItemCopyWithImpl<SearchItem>(this as SearchItem, _$identity);
-
-  /// Serializes this SearchItem to a JSON map.
-  Map<String, dynamic> toJson();
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchItem&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.price, price) || other.price == price)&&(identical(other.discount, discount) || other.discount == discount)&&(identical(other.finalPrice, finalPrice) || other.finalPrice == finalPrice)&&(identical(other.avgRating, avgRating) || other.avgRating == avgRating)&&(identical(other.storeId, storeId) || other.storeId == storeId)&&(identical(other.moduleId, moduleId) || other.moduleId == moduleId));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,id,name,imageUrl,price,discount,finalPrice,avgRating,storeId,moduleId);
-
-@override
-String toString() {
-  return 'SearchItem(id: $id, name: $name, imageUrl: $imageUrl, price: $price, discount: $discount, finalPrice: $finalPrice, avgRating: $avgRating, storeId: $storeId, moduleId: $moduleId)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $SearchItemCopyWith<$Res>  {
-  factory $SearchItemCopyWith(SearchItem value, $Res Function(SearchItem) _then) = _$SearchItemCopyWithImpl;
-@useResult
-$Res call({
- int id, String name,@JsonKey(name: 'image_url') String imageUrl, double price, double discount,@JsonKey(name: 'final_price') double finalPrice,@JsonKey(name: 'avg_rating') double avgRating,@JsonKey(name: 'store_id') int storeId,@JsonKey(name: 'module_id') int moduleId
-});
-
-
-
-
-}
-/// @nodoc
-class _$SearchItemCopyWithImpl<$Res>
-    implements $SearchItemCopyWith<$Res> {
-  _$SearchItemCopyWithImpl(this._self, this._then);
-
-  final SearchItem _self;
-  final $Res Function(SearchItem) _then;
-
-/// Create a copy of SearchItem
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,Object? price = null,Object? discount = null,Object? finalPrice = null,Object? avgRating = null,Object? storeId = null,Object? moduleId = null,}) {
-  return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
-as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
-as double,discount: null == discount ? _self.discount : discount // ignore: cast_nullable_to_non_nullable
-as double,finalPrice: null == finalPrice ? _self.finalPrice : finalPrice // ignore: cast_nullable_to_non_nullable
-as double,avgRating: null == avgRating ? _self.avgRating : avgRating // ignore: cast_nullable_to_non_nullable
-as double,storeId: null == storeId ? _self.storeId : storeId // ignore: cast_nullable_to_non_nullable
-as int,moduleId: null == moduleId ? _self.moduleId : moduleId // ignore: cast_nullable_to_non_nullable
-as int,
-  ));
-}
-
-}
-
-
-/// @nodoc
-@JsonSerializable()
-
-class _SearchItem implements SearchItem {
-  const _SearchItem({this.id = 0, this.name = '', @JsonKey(name: 'image_url') this.imageUrl = '', this.price = 0.0, this.discount = 0.0, @JsonKey(name: 'final_price') this.finalPrice = 0.0, @JsonKey(name: 'avg_rating') this.avgRating = 0.0, @JsonKey(name: 'store_id') this.storeId = 0, @JsonKey(name: 'module_id') this.moduleId = 0});
-  factory _SearchItem.fromJson(Map<String, dynamic> json) => _$SearchItemFromJson(json);
-
-@override@JsonKey() final  int id;
-@override@JsonKey() final  String name;
-@override@JsonKey(name: 'image_url') final  String imageUrl;
-@override@JsonKey() final  double price;
-@override@JsonKey() final  double discount;
-@override@JsonKey(name: 'final_price') final  double finalPrice;
-@override@JsonKey(name: 'avg_rating') final  double avgRating;
-@override@JsonKey(name: 'store_id') final  int storeId;
-@override@JsonKey(name: 'module_id') final  int moduleId;
-
-/// Create a copy of SearchItem
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$SearchItemCopyWith<_SearchItem> get copyWith => __$SearchItemCopyWithImpl<_SearchItem>(this, _$identity);
-
-@override
-Map<String, dynamic> toJson() {
-  return _$SearchItemToJson(this, );
-}
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchItem&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.price, price) || other.price == price)&&(identical(other.discount, discount) || other.discount == discount)&&(identical(other.finalPrice, finalPrice) || other.finalPrice == finalPrice)&&(identical(other.avgRating, avgRating) || other.avgRating == avgRating)&&(identical(other.storeId, storeId) || other.storeId == storeId)&&(identical(other.moduleId, moduleId) || other.moduleId == moduleId));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,id,name,imageUrl,price,discount,finalPrice,avgRating,storeId,moduleId);
-
-@override
-String toString() {
-  return 'SearchItem(id: $id, name: $name, imageUrl: $imageUrl, price: $price, discount: $discount, finalPrice: $finalPrice, avgRating: $avgRating, storeId: $storeId, moduleId: $moduleId)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$SearchItemCopyWith<$Res> implements $SearchItemCopyWith<$Res> {
-  factory _$SearchItemCopyWith(_SearchItem value, $Res Function(_SearchItem) _then) = __$SearchItemCopyWithImpl;
-@override @useResult
-$Res call({
- int id, String name,@JsonKey(name: 'image_url') String imageUrl, double price, double discount,@JsonKey(name: 'final_price') double finalPrice,@JsonKey(name: 'avg_rating') double avgRating,@JsonKey(name: 'store_id') int storeId,@JsonKey(name: 'module_id') int moduleId
-});
-
-
-
-
-}
-/// @nodoc
-class __$SearchItemCopyWithImpl<$Res>
-    implements _$SearchItemCopyWith<$Res> {
-  __$SearchItemCopyWithImpl(this._self, this._then);
-
-  final _SearchItem _self;
-  final $Res Function(_SearchItem) _then;
-
-/// Create a copy of SearchItem
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,Object? price = null,Object? discount = null,Object? finalPrice = null,Object? avgRating = null,Object? storeId = null,Object? moduleId = null,}) {
-  return _then(_SearchItem(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
-as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
-as double,discount: null == discount ? _self.discount : discount // ignore: cast_nullable_to_non_nullable
-as double,finalPrice: null == finalPrice ? _self.finalPrice : finalPrice // ignore: cast_nullable_to_non_nullable
-as double,avgRating: null == avgRating ? _self.avgRating : avgRating // ignore: cast_nullable_to_non_nullable
-as double,storeId: null == storeId ? _self.storeId : storeId // ignore: cast_nullable_to_non_nullable
-as int,moduleId: null == moduleId ? _self.moduleId : moduleId // ignore: cast_nullable_to_non_nullable
-as int,
+as List<RecentStore>?,itemsByStore: freezed == itemsByStore ? _self._itemsByStore : itemsByStore // ignore: cast_nullable_to_non_nullable
+as List<StoreItemGroup>?,
   ));
 }
 
@@ -645,6 +313,302 @@ as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nu
 as String,logoUrl: null == logoUrl ? _self.logoUrl : logoUrl // ignore: cast_nullable_to_non_nullable
 as String,deliveryTime: null == deliveryTime ? _self.deliveryTime : deliveryTime // ignore: cast_nullable_to_non_nullable
 as String,deliveryFee: null == deliveryFee ? _self.deliveryFee : deliveryFee // ignore: cast_nullable_to_non_nullable
+as double,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$StoreItemGroup {
+
+@JsonKey(name: 'store_id') int get storeId;@JsonKey(name: 'store_name') String get storeName; List<Item> get items;
+/// Create a copy of StoreItemGroup
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$StoreItemGroupCopyWith<StoreItemGroup> get copyWith => _$StoreItemGroupCopyWithImpl<StoreItemGroup>(this as StoreItemGroup, _$identity);
+
+  /// Serializes this StoreItemGroup to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StoreItemGroup&&(identical(other.storeId, storeId) || other.storeId == storeId)&&(identical(other.storeName, storeName) || other.storeName == storeName)&&const DeepCollectionEquality().equals(other.items, items));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,storeId,storeName,const DeepCollectionEquality().hash(items));
+
+@override
+String toString() {
+  return 'StoreItemGroup(storeId: $storeId, storeName: $storeName, items: $items)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $StoreItemGroupCopyWith<$Res>  {
+  factory $StoreItemGroupCopyWith(StoreItemGroup value, $Res Function(StoreItemGroup) _then) = _$StoreItemGroupCopyWithImpl;
+@useResult
+$Res call({
+@JsonKey(name: 'store_id') int storeId,@JsonKey(name: 'store_name') String storeName, List<Item> items
+});
+
+
+
+
+}
+/// @nodoc
+class _$StoreItemGroupCopyWithImpl<$Res>
+    implements $StoreItemGroupCopyWith<$Res> {
+  _$StoreItemGroupCopyWithImpl(this._self, this._then);
+
+  final StoreItemGroup _self;
+  final $Res Function(StoreItemGroup) _then;
+
+/// Create a copy of StoreItemGroup
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? storeId = null,Object? storeName = null,Object? items = null,}) {
+  return _then(_self.copyWith(
+storeId: null == storeId ? _self.storeId : storeId // ignore: cast_nullable_to_non_nullable
+as int,storeName: null == storeName ? _self.storeName : storeName // ignore: cast_nullable_to_non_nullable
+as String,items: null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
+as List<Item>,
+  ));
+}
+
+}
+
+
+/// @nodoc
+@JsonSerializable()
+
+class _StoreItemGroup implements StoreItemGroup {
+  const _StoreItemGroup({@JsonKey(name: 'store_id') this.storeId = 0, @JsonKey(name: 'store_name') this.storeName = '', final  List<Item> items = const []}): _items = items;
+  factory _StoreItemGroup.fromJson(Map<String, dynamic> json) => _$StoreItemGroupFromJson(json);
+
+@override@JsonKey(name: 'store_id') final  int storeId;
+@override@JsonKey(name: 'store_name') final  String storeName;
+ final  List<Item> _items;
+@override@JsonKey() List<Item> get items {
+  if (_items is EqualUnmodifiableListView) return _items;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_items);
+}
+
+
+/// Create a copy of StoreItemGroup
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$StoreItemGroupCopyWith<_StoreItemGroup> get copyWith => __$StoreItemGroupCopyWithImpl<_StoreItemGroup>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$StoreItemGroupToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StoreItemGroup&&(identical(other.storeId, storeId) || other.storeId == storeId)&&(identical(other.storeName, storeName) || other.storeName == storeName)&&const DeepCollectionEquality().equals(other._items, _items));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,storeId,storeName,const DeepCollectionEquality().hash(_items));
+
+@override
+String toString() {
+  return 'StoreItemGroup(storeId: $storeId, storeName: $storeName, items: $items)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$StoreItemGroupCopyWith<$Res> implements $StoreItemGroupCopyWith<$Res> {
+  factory _$StoreItemGroupCopyWith(_StoreItemGroup value, $Res Function(_StoreItemGroup) _then) = __$StoreItemGroupCopyWithImpl;
+@override @useResult
+$Res call({
+@JsonKey(name: 'store_id') int storeId,@JsonKey(name: 'store_name') String storeName, List<Item> items
+});
+
+
+
+
+}
+/// @nodoc
+class __$StoreItemGroupCopyWithImpl<$Res>
+    implements _$StoreItemGroupCopyWith<$Res> {
+  __$StoreItemGroupCopyWithImpl(this._self, this._then);
+
+  final _StoreItemGroup _self;
+  final $Res Function(_StoreItemGroup) _then;
+
+/// Create a copy of StoreItemGroup
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? storeId = null,Object? storeName = null,Object? items = null,}) {
+  return _then(_StoreItemGroup(
+storeId: null == storeId ? _self.storeId : storeId // ignore: cast_nullable_to_non_nullable
+as int,storeName: null == storeName ? _self.storeName : storeName // ignore: cast_nullable_to_non_nullable
+as String,items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
+as List<Item>,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$Item {
+
+ int get id; String get name;@JsonKey(name: 'image_url') String get imageUrl; double get price; double get discount;@JsonKey(name: 'final_price') double get finalPrice;@JsonKey(name: 'avg_rating') double get avgRating;
+/// Create a copy of Item
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ItemCopyWith<Item> get copyWith => _$ItemCopyWithImpl<Item>(this as Item, _$identity);
+
+  /// Serializes this Item to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Item&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.price, price) || other.price == price)&&(identical(other.discount, discount) || other.discount == discount)&&(identical(other.finalPrice, finalPrice) || other.finalPrice == finalPrice)&&(identical(other.avgRating, avgRating) || other.avgRating == avgRating));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,name,imageUrl,price,discount,finalPrice,avgRating);
+
+@override
+String toString() {
+  return 'Item(id: $id, name: $name, imageUrl: $imageUrl, price: $price, discount: $discount, finalPrice: $finalPrice, avgRating: $avgRating)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ItemCopyWith<$Res>  {
+  factory $ItemCopyWith(Item value, $Res Function(Item) _then) = _$ItemCopyWithImpl;
+@useResult
+$Res call({
+ int id, String name,@JsonKey(name: 'image_url') String imageUrl, double price, double discount,@JsonKey(name: 'final_price') double finalPrice,@JsonKey(name: 'avg_rating') double avgRating
+});
+
+
+
+
+}
+/// @nodoc
+class _$ItemCopyWithImpl<$Res>
+    implements $ItemCopyWith<$Res> {
+  _$ItemCopyWithImpl(this._self, this._then);
+
+  final Item _self;
+  final $Res Function(Item) _then;
+
+/// Create a copy of Item
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,Object? price = null,Object? discount = null,Object? finalPrice = null,Object? avgRating = null,}) {
+  return _then(_self.copyWith(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as double,discount: null == discount ? _self.discount : discount // ignore: cast_nullable_to_non_nullable
+as double,finalPrice: null == finalPrice ? _self.finalPrice : finalPrice // ignore: cast_nullable_to_non_nullable
+as double,avgRating: null == avgRating ? _self.avgRating : avgRating // ignore: cast_nullable_to_non_nullable
+as double,
+  ));
+}
+
+}
+
+
+/// @nodoc
+@JsonSerializable()
+
+class _Item implements Item {
+  const _Item({this.id = 0, this.name = '', @JsonKey(name: 'image_url') this.imageUrl = '', this.price = 0.0, this.discount = 0.0, @JsonKey(name: 'final_price') this.finalPrice = 0.0, @JsonKey(name: 'avg_rating') this.avgRating = 0.0});
+  factory _Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
+
+@override@JsonKey() final  int id;
+@override@JsonKey() final  String name;
+@override@JsonKey(name: 'image_url') final  String imageUrl;
+@override@JsonKey() final  double price;
+@override@JsonKey() final  double discount;
+@override@JsonKey(name: 'final_price') final  double finalPrice;
+@override@JsonKey(name: 'avg_rating') final  double avgRating;
+
+/// Create a copy of Item
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ItemCopyWith<_Item> get copyWith => __$ItemCopyWithImpl<_Item>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$ItemToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Item&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.price, price) || other.price == price)&&(identical(other.discount, discount) || other.discount == discount)&&(identical(other.finalPrice, finalPrice) || other.finalPrice == finalPrice)&&(identical(other.avgRating, avgRating) || other.avgRating == avgRating));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,name,imageUrl,price,discount,finalPrice,avgRating);
+
+@override
+String toString() {
+  return 'Item(id: $id, name: $name, imageUrl: $imageUrl, price: $price, discount: $discount, finalPrice: $finalPrice, avgRating: $avgRating)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ItemCopyWith<$Res> implements $ItemCopyWith<$Res> {
+  factory _$ItemCopyWith(_Item value, $Res Function(_Item) _then) = __$ItemCopyWithImpl;
+@override @useResult
+$Res call({
+ int id, String name,@JsonKey(name: 'image_url') String imageUrl, double price, double discount,@JsonKey(name: 'final_price') double finalPrice,@JsonKey(name: 'avg_rating') double avgRating
+});
+
+
+
+
+}
+/// @nodoc
+class __$ItemCopyWithImpl<$Res>
+    implements _$ItemCopyWith<$Res> {
+  __$ItemCopyWithImpl(this._self, this._then);
+
+  final _Item _self;
+  final $Res Function(_Item) _then;
+
+/// Create a copy of Item
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,Object? price = null,Object? discount = null,Object? finalPrice = null,Object? avgRating = null,}) {
+  return _then(_Item(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as double,discount: null == discount ? _self.discount : discount // ignore: cast_nullable_to_non_nullable
+as double,finalPrice: null == finalPrice ? _self.finalPrice : finalPrice // ignore: cast_nullable_to_non_nullable
+as double,avgRating: null == avgRating ? _self.avgRating : avgRating // ignore: cast_nullable_to_non_nullable
 as double,
   ));
 }
