@@ -124,7 +124,7 @@ class AppPages {
     GetPage(name: AppRoutes.storeProducts, page: () => const StoreProductsScreen(), binding: StoreProductsBinding()),
     GetPage(
       name: AppRoutes.storeProductDetail,
-      page: () => StoreProductDetailScreen(Get.arguments['productId']),
+      page: () => StoreProductDetailScreen(productId: Get.arguments['productId']),
       binding: StoreProductDetailBinding(),
     ),
   ];

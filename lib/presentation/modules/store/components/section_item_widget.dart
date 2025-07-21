@@ -37,7 +37,8 @@ class SectionItemWidget extends StatelessWidget {
           (item) => ProductItemCard(
             item: item,
             onImageTap: () {
-              Get.toNamed(AppRoutes.storeProductDetail, arguments: {'productId': item.id});
+              // Get.toNamed(AppRoutes.storeProductDetail, arguments: {'productId': item.id});
+              Get.toNamed(AppRoutes.storeProductDetail, arguments: {'productId': 10023});
             },
             onAddTap: () {},
           ),

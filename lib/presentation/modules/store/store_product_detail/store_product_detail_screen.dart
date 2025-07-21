@@ -5,229 +5,301 @@ import 'package:sixam_mart_user/base/base_screen.dart';
 import 'store_product_detail_controller.dart';
 
 class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> {
-  const StoreProductDetailScreen(this.productId, {super.key});
+  const StoreProductDetailScreen({super.key, required this.productId});
+
   final int productId;
 
   @override
   Widget buildScreen(BuildContext context) {
-    return GetX<StoreProductDetailController>(
-      init: StoreProductDetailController(productId),
-      builder: (controller) {
-        if (controller.loading.value) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Obx(() {
+        if (controller.isLoading.value) {
           return const Center(child: CircularProgressIndicator());
         }
         final product = controller.product.value;
         if (product == null) {
-          return const Center(child: Text("No product found"));
+          return const Center(child: Text('Product not found'));
         }
-        return Scaffold(
-          backgroundColor: Colors.white,
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // 1. Store info
-                Row(
-                  children: [
-                    ClipOval(
-                      child: Image.network(
-                        product.storeImageUrl,
-                        width: 36,
-                        height: 36,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Text(product.storeName, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
-                  ],
-                ),
-                const SizedBox(height: 12),
 
-                // 2. Product Name & Price
-                Text(product.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    Text(
-                      "${product.price}đ",
-                      style: const TextStyle(fontSize: 16, color: Colors.deepPurple),
-                    ),
-                    if (product.discount > 0) ...[
-                      const SizedBox(width: 8),
-                      Text(
-                        product.discountType == 'percent' ? '-${product.discount}%' : '-${product.discount}đ',
-                        style: const TextStyle(fontSize: 14, color: Colors.redAccent, decoration: TextDecoration.lineThrough),
-                      ),
-                    ],
-                  ],
-                ),
-                const SizedBox(height: 8),
-
-                // 3. Description
-                if (product.description.isNotEmpty) Text(product.description, style: const TextStyle(fontSize: 15, color: Colors.black87)),
-                const SizedBox(height: 16),
-
-                // 4. Ảnh sản phẩm (imageUrls + gallery)
-                if ((product.imageUrls.isNotEmpty || product.gallery.isNotEmpty))
-                  SizedBox(
-                    height: 180,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        ...product.imageUrls.map(
-                          (e) => Padding(
-                            padding: const EdgeInsets.only(right: 8),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.network(e, height: 180, width: 180, fit: BoxFit.cover),
-                            ),
-                          ),
-                        ),
-                        ...product.gallery.map(
-                          (e) => Padding(
-                            padding: const EdgeInsets.only(right: 8),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.network(e, height: 180, width: 180, fit: BoxFit.cover),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                if (product.imageUrls.isEmpty && product.gallery.isEmpty)
+        return ListView(
+          children: [
+            // Ảnh sản phẩm
+            Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Ảnh đầu tiên
                   Container(
-                    height: 180,
+                    height: 200,
                     width: double.infinity,
-                    color: Colors.grey[200],
-                    child: const Center(child: Icon(Icons.image_not_supported, size: 50, color: Colors.grey)),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(product.imageUrls.firstOrNull ?? ''),
+                      ),
+                    ),
                   ),
-                const SizedBox(height: 20),
-
-                // 5. Variation Groups (Color, Size, ...)
-                if (product.choiceOptions.isNotEmpty) ...[
-                  ...product.choiceOptions.map(
-                    (group) => Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(group.title, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
-                        Wrap(
-                          children: group.options
-                              .map(
-                                (opt) => Padding(
-                                  padding: const EdgeInsets.only(right: 8, bottom: 8),
-                                  child: ChoiceChip(
-                                    label: Text(opt),
-                                    selected: controller.isOptionSelected(group.name, opt),
-                                    onSelected: (selected) {
-                                      controller.selectOption(group.name, opt);
-                                    },
-                                  ),
-                                ),
-                              )
-                              .toList(),
+                  const SizedBox(height: 12),
+                  // Logo + tên store
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: const Color(0xFFE8EBEE)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
                         ),
-                        const SizedBox(height: 12),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Image.network(
+                          product.storeImageUrl,
+                          width: 18,
+                          height: 18,
+                          errorBuilder: (_, __, ___) => const Icon(Icons.store, size: 18),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          product.storeName,
+                          style: const TextStyle(
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                            color: Color(0xFF161A1D),
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ],
-
-                // 6. Variations list + price (tùy chọn)
-                if (product.variations.isNotEmpty) ...[
-                  Text("Cách kết hợp và giá:", style: const TextStyle(fontWeight: FontWeight.w600)),
-                  ...product.variations.map(
-                    (v) => Padding(
-                      padding: const EdgeInsets.only(top: 4, bottom: 2),
-                      child: Text(
-                        "${v.type}: ${v.price}đ",
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                    ),
+              ),
+            ),
+            // Tên sp + giá
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    product.name,
+                    style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 18, color: Color(0xFF161A1D)),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '${product.price / 100.0} ${product.taxType}',
+                    style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF4A5763)),
                   ),
                 ],
-
-                // 7. Add-on (nếu có)
-                if (product.addOns.isNotEmpty) ...[
-                  const SizedBox(height: 16),
-                  Text("Add-ons:", style: const TextStyle(fontWeight: FontWeight.w600)),
-                  ...product.addOns.map((e) => Text("- $e")), // fill lại đúng dạng nếu có add-ons
-                ],
-
-                // 8. Recommendation
-                const SizedBox(height: 20),
-                if (controller.recommendations.isNotEmpty)
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text("Gợi ý cho bạn", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
-                      const SizedBox(height: 12),
-                      SizedBox(
-                        height: 170,
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: controller.recommendations.length,
-                          separatorBuilder: (_, __) => const SizedBox(width: 8),
-                          itemBuilder: (context, i) {
-                            final item = controller.recommendations[i];
-                            return Card(
-                              child: SizedBox(
-                                width: 130,
-                                child: Column(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(6),
-                                      child: Image.network(item.imageUrl, height: 90, width: 130, fit: BoxFit.cover),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(6.0),
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            item.name,
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: const TextStyle(fontWeight: FontWeight.w500),
-                                          ),
-                                          const SizedBox(height: 2),
-                                          Text("${item.price}đ", style: const TextStyle(color: Colors.deepPurple)),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-
-                // 9. Add to cart button
-                const SizedBox(height: 32),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepPurple,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-                      padding: const EdgeInsets.symmetric(vertical: 16),
+              ),
+            ),
+            const SizedBox(height: 16),
+            // Reset recipe button (nếu muốn)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Row(
+                children: [
+                  OutlinedButton.icon(
+                    style: OutlinedButton.styleFrom(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                      side: const BorderSide(color: Color(0xFFE8EBEE)),
+                      backgroundColor: const Color(0xFFF7F8F9),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     ),
                     onPressed: () {},
-                    child: const Text(
-                      "Thêm vào giỏ hàng",
-                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: Colors.white),
+                    icon: const Icon(Icons.refresh, size: 20, color: Color(0xFF5856D7)),
+                    label: const Text(
+                      'Reset to standard recipe',
+                      style: TextStyle(
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                        color: Color(0xFF5856D7),
+                      ),
                     ),
                   ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            // ========== Render variations (Size)
+            _sectionLabel("Size", required: true),
+            ...product.variations.asMap().entries.map(
+              (e) => _optionRadioTile(
+                context,
+                label: e.value.type,
+                subLabel: '${e.value.price / 100.0} ${product.taxType}',
+                group: 'variation',
+                value: e.value.type,
+                selected: controller.selectedOptions['variation'] == e.value.type,
+                onTap: () => controller.selectOption('variation', e.value.type),
+              ),
+            ),
+            _sectionDivider(),
+            // ========== Render choice options (dynamic, từ API)
+            for (final choice in product.choiceOptions) ...[
+              _sectionLabel(choice.title, required: true),
+              ...choice.options.map(
+                (opt) => _optionRadioTile(
+                  context,
+                  label: opt,
+                  group: choice.name,
+                  value: opt,
+                  selected: controller.selectedOptions[choice.name] == opt,
+                  onTap: () => controller.selectOption(choice.name, opt),
                 ),
-                const SizedBox(height: 16),
-              ],
+              ),
+              _sectionDivider(),
+            ],
+            // ========== Các section khác, add-ons, toppings... bạn bổ sung tương tự như choiceOptions
+            // ... (ví dụ Milk, Lemonade, Ice nếu map được vào API)
+
+            // Recommend sản phẩm (gợi ý mua thêm)
+            if (controller.recommendations.isNotEmpty) ...[
+              _sectionLabel('You might also like'),
+              SizedBox(
+                height: 140,
+                child: ListView.separated(
+                  padding: const EdgeInsets.all(12),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: controller.recommendations.length,
+                  itemBuilder: (_, i) {
+                    final item = controller.recommendations[i];
+                    return Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.network(item.imageUrl, width: 70, height: 70, fit: BoxFit.cover),
+                        ),
+                        SizedBox(height: 8),
+                        Text(item.name, style: TextStyle(fontSize: 13, fontFamily: 'Inter'), maxLines: 2),
+                        Text('${item.price / 100.0} ${product.taxType}', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                      ],
+                    );
+                  },
+                  separatorBuilder: (_, __) => SizedBox(width: 12),
+                ),
+              ),
+            ],
+            const SizedBox(height: 32),
+            // Bottom bar đặt hàng...
+          ],
+        );
+      }),
+      bottomNavigationBar: Obx(() {
+        // Hiện nút đặt hàng (Add to cart)
+        return Padding(
+          padding: const EdgeInsets.all(20),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF5856D7),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              minimumSize: const Size.fromHeight(50),
+            ),
+            onPressed: () {
+              // controller.addToCart();
+            },
+            child: const Text(
+              'Add to cart',
+              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 16),
             ),
           ),
         );
-      },
+      }),
+    );
+  }
+
+  Widget _sectionLabel(String text, {bool required = false, String? note}) {
+    return Container(
+      width: double.infinity,
+      color: const Color(0xFFF7F8F9),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+      child: Row(
+        children: [
+          Text(
+            text,
+            style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+          ),
+          if (required)
+            const Text(
+              "  *",
+              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 13, color: Color(0xFF5856D7)),
+            ),
+          const Spacer(),
+          if (note != null)
+            Text(
+              note,
+              style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xFF4A5763)),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _sectionDivider() => Container(height: 1, color: const Color(0xFFE8EBEE), margin: EdgeInsets.zero);
+
+  Widget _optionRadioTile(
+    BuildContext context, {
+    required String label,
+    String? subLabel,
+    required String group,
+    required String value,
+    required bool selected,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
+        child: Row(
+          children: [
+            _customRadio(selected: selected),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                label,
+                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF161A1D)),
+              ),
+            ),
+            if (subLabel != null && subLabel.isNotEmpty)
+              Text(
+                subLabel,
+                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF4A5763)),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _customRadio({required bool selected}) {
+    return Container(
+      width: 24,
+      height: 24,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: selected ? const Color(0xFF5856D7) : const Color(0xFF798A9A),
+          width: 1.5,
+        ),
+      ),
+      child: selected
+          ? Center(
+              child: Container(
+                width: 12,
+                height: 12,
+                decoration: const BoxDecoration(color: Color(0xFF5856D7), shape: BoxShape.circle),
+              ),
+            )
+          : null,
     );
   }
 }
