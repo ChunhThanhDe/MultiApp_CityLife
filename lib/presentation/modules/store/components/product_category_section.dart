@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_card.dart';
-import 'package:sixam_mart_user/presentation/modules/store/store_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
 
 class ProductCategorySection extends StatelessWidget {
@@ -26,7 +28,13 @@ class ProductCategorySection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(title, style: AppTextStyles.typographyH9SemiBold.copyWith(color: AppColors.textGreyHighest950)),
-                Icon(Icons.arrow_forward_ios, size: 16.w, color: AppColors.textGreyDefault500),
+                GestureDetector(
+                  onTap: () {
+                    // Navigate to product list screen
+                    Get.toNamed(AppRoutes.storeProducts);
+                  },
+                  child: Icon(Icons.arrow_forward_ios, size: 16.w, color: AppColors.textGreyDefault500),
+                ),
               ],
             ),
           ),

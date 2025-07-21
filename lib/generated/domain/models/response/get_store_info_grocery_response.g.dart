@@ -84,14 +84,18 @@ Map<String, dynamic> _$GrocerySectionToJson(_GrocerySection instance) =>
 _GroceryItem _$GroceryItemFromJson(Map<String, dynamic> json) => _GroceryItem(
   id: (json['id'] as num).toInt(),
   name: json['name'] as String,
-  price: (json['price'] as num).toInt(),
   imageUrl: json['image_url'] as String,
+  price: (json['price'] as num).toInt(),
+  avgRating: (json['avg_rating'] as num).toDouble(),
+  ratingCount: (json['rating_count'] as num?)?.toInt() ?? 0,
 );
 
 Map<String, dynamic> _$GroceryItemToJson(_GroceryItem instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'price': instance.price,
       'image_url': instance.imageUrl,
+      'price': instance.price,
+      'avg_rating': instance.avgRating,
+      'rating_count': instance.ratingCount,
     };

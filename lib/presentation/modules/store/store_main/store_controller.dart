@@ -25,11 +25,15 @@ class ProductItem {
   final String imageUrl;
   final List<FilterType> categories;
   final List<StoreServiceType> availableServices;
+  final double rating;
+  final int reviewCount;
 
   ProductItem({
     required this.name,
     required this.price,
     required this.imageUrl,
+    required this.rating,
+    required this.reviewCount,
     this.categories = const [FilterType.foods],
     this.availableServices = const [StoreServiceType.inStore],
   });
@@ -112,6 +116,8 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
                       name: e.name,
                       price: e.price.toString(),
                       imageUrl: e.imageUrl,
+                      rating: e.avgRating,
+                      reviewCount: e.ratingCount,
                       categories: [FilterType.foods],
                       availableServices: StoreServiceType.values,
                     ),
@@ -126,6 +132,8 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
                           name: e.name,
                           price: e.price.toString(),
                           imageUrl: e.imageUrl,
+                          rating: e.avgRating,
+                          reviewCount: e.ratingCount,
                           categories: [FilterType.foods],
                           availableServices: StoreServiceType.values,
                         ),
@@ -151,6 +159,8 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
                           name: e.name,
                           price: e.price.toString(),
                           imageUrl: e.imageUrl,
+                          rating: e.avgRating,
+                          reviewCount: e.ratingCount,
                           categories: [FilterType.foods],
                           availableServices: StoreServiceType.values,
                         ),
@@ -173,6 +183,8 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
                           name: e.name,
                           price: e.price.toString(),
                           imageUrl: e.imageUrl,
+                          rating: e.avgRating,
+                          reviewCount: e.ratingCount,
                           categories: [FilterType.foods],
                           availableServices: StoreServiceType.values,
                         ),

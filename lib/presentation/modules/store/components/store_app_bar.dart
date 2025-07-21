@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/store_filter_bottom_sheet.dart';
-import 'package:sixam_mart_user/presentation/modules/store/store_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bottom_sheet.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
@@ -16,28 +16,35 @@ class StoreAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Container(
-        padding: EdgeInsets.only(top: 54.h, left: 24.w, right: 24.w, bottom: 24.h),
-        decoration: BoxDecoration(
-          image: DecorationImage(image: CachedNetworkImageProvider('https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=800'), fit: BoxFit.cover),
-        ),
-        child: Column(
-          children: [
-            Row(
+    return GetBuilder<StoreController>(
+      builder: (controller) {
+        final store = controller.storeInfo.value;
+        if (store == null) return SizedBox();
+
+        return SliverToBoxAdapter(
+          child: Container(
+            padding: EdgeInsets.only(top: 54.h, left: 24.w, right: 24.w, bottom: 24.h),
+            decoration: BoxDecoration(
+              image: DecorationImage(image: CachedNetworkImageProvider(store.coverPhotoUrl), fit: BoxFit.cover),
+            ),
+            child: Column(
               children: [
-                _circularButton(Icon(Icons.arrow_back, color: AppColors.textGreyHighest950), () => Get.back()),
-                Spacer(),
-                _circularButton(Assets.icons.icSearch.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)), _onTapFilter),
-                SizedBox(width: 12.w),
-                _circularButton(Assets.icons.icStore.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)), _onTapStore),
+                Row(
+                  children: [
+                    _circularButton(Icon(Icons.arrow_back, color: AppColors.textGreyHighest950), () => Get.back()),
+                    Spacer(),
+                    _circularButton(Assets.icons.icSearch.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)), _onTapFilter),
+                    SizedBox(width: 12.w),
+                    _circularButton(Assets.icons.icStore.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)), _onTapStore),
+                  ],
+                ),
+                SizedBox(height: 88.h),
+                _buildStoreHeader(),
               ],
             ),
-            SizedBox(height: 88.h),
-            _buildStoreHeader(),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 

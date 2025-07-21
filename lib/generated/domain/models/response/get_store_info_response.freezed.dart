@@ -653,7 +653,7 @@ as List<MenuItem>,
 /// @nodoc
 mixin _$MenuItem {
 
- int get id; String get name;@JsonKey(name: 'image_url') String get imageUrl; int get price;@JsonKey(name: 'avg_rating') double get avgRating;
+ int get id; String get name;@JsonKey(name: 'image_url') String get imageUrl; int get price;@JsonKey(name: 'avg_rating') double get avgRating;@JsonKey(name: 'rating_count') int get ratingCount;
 /// Create a copy of MenuItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -666,16 +666,16 @@ $MenuItemCopyWith<MenuItem> get copyWith => _$MenuItemCopyWithImpl<MenuItem>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MenuItem&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.price, price) || other.price == price)&&(identical(other.avgRating, avgRating) || other.avgRating == avgRating));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MenuItem&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.price, price) || other.price == price)&&(identical(other.avgRating, avgRating) || other.avgRating == avgRating)&&(identical(other.ratingCount, ratingCount) || other.ratingCount == ratingCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,imageUrl,price,avgRating);
+int get hashCode => Object.hash(runtimeType,id,name,imageUrl,price,avgRating,ratingCount);
 
 @override
 String toString() {
-  return 'MenuItem(id: $id, name: $name, imageUrl: $imageUrl, price: $price, avgRating: $avgRating)';
+  return 'MenuItem(id: $id, name: $name, imageUrl: $imageUrl, price: $price, avgRating: $avgRating, ratingCount: $ratingCount)';
 }
 
 
@@ -686,7 +686,7 @@ abstract mixin class $MenuItemCopyWith<$Res>  {
   factory $MenuItemCopyWith(MenuItem value, $Res Function(MenuItem) _then) = _$MenuItemCopyWithImpl;
 @useResult
 $Res call({
- int id, String name,@JsonKey(name: 'image_url') String imageUrl, int price,@JsonKey(name: 'avg_rating') double avgRating
+ int id, String name,@JsonKey(name: 'image_url') String imageUrl, int price,@JsonKey(name: 'avg_rating') double avgRating,@JsonKey(name: 'rating_count') int ratingCount
 });
 
 
@@ -703,14 +703,15 @@ class _$MenuItemCopyWithImpl<$Res>
 
 /// Create a copy of MenuItem
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,Object? price = null,Object? avgRating = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,Object? price = null,Object? avgRating = null,Object? ratingCount = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as int,avgRating: null == avgRating ? _self.avgRating : avgRating // ignore: cast_nullable_to_non_nullable
-as double,
+as double,ratingCount: null == ratingCount ? _self.ratingCount : ratingCount // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
@@ -721,7 +722,7 @@ as double,
 @JsonSerializable()
 
 class _MenuItem implements MenuItem {
-  const _MenuItem({required this.id, required this.name, @JsonKey(name: 'image_url') required this.imageUrl, required this.price, @JsonKey(name: 'avg_rating') required this.avgRating});
+  const _MenuItem({required this.id, required this.name, @JsonKey(name: 'image_url') required this.imageUrl, required this.price, @JsonKey(name: 'avg_rating') required this.avgRating, @JsonKey(name: 'rating_count') this.ratingCount = 0});
   factory _MenuItem.fromJson(Map<String, dynamic> json) => _$MenuItemFromJson(json);
 
 @override final  int id;
@@ -729,6 +730,7 @@ class _MenuItem implements MenuItem {
 @override@JsonKey(name: 'image_url') final  String imageUrl;
 @override final  int price;
 @override@JsonKey(name: 'avg_rating') final  double avgRating;
+@override@JsonKey(name: 'rating_count') final  int ratingCount;
 
 /// Create a copy of MenuItem
 /// with the given fields replaced by the non-null parameter values.
@@ -743,16 +745,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MenuItem&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.price, price) || other.price == price)&&(identical(other.avgRating, avgRating) || other.avgRating == avgRating));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MenuItem&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.price, price) || other.price == price)&&(identical(other.avgRating, avgRating) || other.avgRating == avgRating)&&(identical(other.ratingCount, ratingCount) || other.ratingCount == ratingCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,imageUrl,price,avgRating);
+int get hashCode => Object.hash(runtimeType,id,name,imageUrl,price,avgRating,ratingCount);
 
 @override
 String toString() {
-  return 'MenuItem(id: $id, name: $name, imageUrl: $imageUrl, price: $price, avgRating: $avgRating)';
+  return 'MenuItem(id: $id, name: $name, imageUrl: $imageUrl, price: $price, avgRating: $avgRating, ratingCount: $ratingCount)';
 }
 
 
@@ -763,7 +765,7 @@ abstract mixin class _$MenuItemCopyWith<$Res> implements $MenuItemCopyWith<$Res>
   factory _$MenuItemCopyWith(_MenuItem value, $Res Function(_MenuItem) _then) = __$MenuItemCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name,@JsonKey(name: 'image_url') String imageUrl, int price,@JsonKey(name: 'avg_rating') double avgRating
+ int id, String name,@JsonKey(name: 'image_url') String imageUrl, int price,@JsonKey(name: 'avg_rating') double avgRating,@JsonKey(name: 'rating_count') int ratingCount
 });
 
 
@@ -780,14 +782,15 @@ class __$MenuItemCopyWithImpl<$Res>
 
 /// Create a copy of MenuItem
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,Object? price = null,Object? avgRating = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? imageUrl = null,Object? price = null,Object? avgRating = null,Object? ratingCount = null,}) {
   return _then(_MenuItem(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as int,avgRating: null == avgRating ? _self.avgRating : avgRating // ignore: cast_nullable_to_non_nullable
-as double,
+as double,ratingCount: null == ratingCount ? _self.ratingCount : ratingCount // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 

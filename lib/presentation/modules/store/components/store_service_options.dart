@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/domain/enums/service_type.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
-import 'package:sixam_mart_user/presentation/modules/store/store_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_tabbar.dart';
 
 class StoreServiceOptions extends StatelessWidget {

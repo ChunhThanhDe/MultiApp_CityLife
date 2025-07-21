@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_category_section.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/store_filter_section.dart';
-import 'package:sixam_mart_user/presentation/modules/store/store_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
 
 class StoreProductCategories extends StatelessWidget {

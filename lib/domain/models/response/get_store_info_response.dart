@@ -66,6 +66,7 @@ abstract class MenuItem with _$MenuItem {
     @JsonKey(name: 'image_url') required String imageUrl,
     required int price,
     @JsonKey(name: 'avg_rating') required double avgRating,
+    @JsonKey(name: 'rating_count') @Default(0) int ratingCount,
   }) = _MenuItem;
 
   factory MenuItem.fromJson(Map<String, dynamic> json) => _$MenuItemFromJson(json);

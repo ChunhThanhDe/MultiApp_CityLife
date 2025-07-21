@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
-import 'package:sixam_mart_user/presentation/modules/store/store_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
 
 class StoreFilterSection extends StatelessWidget {
   const StoreFilterSection({super.key});

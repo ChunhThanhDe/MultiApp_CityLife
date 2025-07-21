@@ -65,8 +65,10 @@ abstract class GroceryItem with _$GroceryItem {
   const factory GroceryItem({
     required int id,
     required String name,
-    required int price,
     @JsonKey(name: 'image_url') required String imageUrl,
+    required int price,
+    @JsonKey(name: 'avg_rating') required double avgRating,
+    @JsonKey(name: 'rating_count') @Default(0) int ratingCount,
   }) = _GroceryItem;
 
   factory GroceryItem.fromJson(Map<String, dynamic> json) => _$GroceryItemFromJson(json);

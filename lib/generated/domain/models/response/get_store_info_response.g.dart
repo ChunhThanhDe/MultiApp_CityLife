@@ -88,6 +88,7 @@ _MenuItem _$MenuItemFromJson(Map<String, dynamic> json) => _MenuItem(
   imageUrl: json['image_url'] as String,
   price: (json['price'] as num).toInt(),
   avgRating: (json['avg_rating'] as num).toDouble(),
+  ratingCount: (json['rating_count'] as num?)?.toInt() ?? 0,
 );
 
 Map<String, dynamic> _$MenuItemToJson(_MenuItem instance) => <String, dynamic>{
@@ -96,4 +97,5 @@ Map<String, dynamic> _$MenuItemToJson(_MenuItem instance) => <String, dynamic>{
   'image_url': instance.imageUrl,
   'price': instance.price,
   'avg_rating': instance.avgRating,
+  'rating_count': instance.ratingCount,
 };
