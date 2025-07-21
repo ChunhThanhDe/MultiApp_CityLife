@@ -20,6 +20,7 @@ enum FilterType {
 }
 
 class ProductItem {
+  final int id;
   final String name;
   final String price;
   final String imageUrl;
@@ -29,6 +30,7 @@ class ProductItem {
   final int reviewCount;
 
   ProductItem({
+    required this.id,
     required this.name,
     required this.price,
     required this.imageUrl,
@@ -113,6 +115,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
               _popularItems.value = data.popularItems
                   .map(
                     (e) => ProductItem(
+                      id: e.id,
                       name: e.name,
                       price: e.price.toString(),
                       imageUrl: e.imageUrl,
@@ -129,6 +132,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
                   section.categoryName: section.items
                       .map(
                         (e) => ProductItem(
+                          id: e.id,
                           name: e.name,
                           price: e.price.toString(),
                           imageUrl: e.imageUrl,
@@ -156,6 +160,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
                   section.categoryId.toString(): section.items
                       .map(
                         (e) => ProductItem(
+                          id: e.id,
                           name: e.name,
                           price: e.price.toString(),
                           imageUrl: e.imageUrl,
@@ -180,6 +185,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
                   menu.categoryName: menu.items
                       .map(
                         (e) => ProductItem(
+                          id: e.id,
                           name: e.name,
                           price: e.price.toString(),
                           imageUrl: e.imageUrl,

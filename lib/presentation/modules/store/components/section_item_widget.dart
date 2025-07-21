@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/section_item_card.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
 class SectionItemWidget extends StatelessWidget {
   final String sectionTitle;
@@ -31,7 +33,15 @@ class SectionItemWidget extends StatelessWidget {
             ),
           ),
         ),
-        ...products.map((item) => ProductItemCard(item: item)),
+        ...products.map(
+          (item) => ProductItemCard(
+            item: item,
+            onImageTap: () {
+              Get.toNamed(AppRoutes.storeProductDetail, arguments: {'productId': item.id});
+            },
+            onAddTap: () {},
+          ),
+        ),
       ],
     );
   }
