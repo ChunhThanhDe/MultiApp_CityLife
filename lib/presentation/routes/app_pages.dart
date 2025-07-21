@@ -59,6 +59,8 @@ import 'package:sixam_mart_user/presentation/modules/search/search_binding.dart'
 import 'package:sixam_mart_user/presentation/modules/search/search_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/store/store_product_detail/store_product_detail_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/store/store_product_detail/store_product_detail_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_products/store_products_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_products/store_products_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/wallet/add_fund/add_fund_binding.dart';
@@ -120,5 +122,10 @@ class AppPages {
     GetPage(name: AppRoutes.cartCheckout, page: () => const CartCheckoutScreen(), binding: CartCheckoutBinding()),
     GetPage(name: AppRoutes.cartConfirm, page: () => const CartOrderConfirmScreen(), binding: CartOrderConfirmBinding()),
     GetPage(name: AppRoutes.storeProducts, page: () => const StoreProductsScreen(), binding: StoreProductsBinding()),
+    GetPage(
+      name: AppRoutes.storeProductDetail,
+      page: () => StoreProductDetailScreen(Get.arguments['productId']),
+      binding: StoreProductDetailBinding(),
+    ),
   ];
 }

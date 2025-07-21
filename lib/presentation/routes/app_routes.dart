@@ -30,6 +30,7 @@ class AppRoutes {
   static const String splash = '/splash';
   static const String store = '/store';
   static const String storeProducts = '/store/products';
+  static const String storeProductDetail = '/store/product_detail';
   static const String cart = '/cart';
   static const String cartOrder = '/cart/order';
   static const String cartCheckout = '/cart/checkout';

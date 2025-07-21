@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
+import 'package:sixam_mart_user/domain/models/response/get_store_info_response.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/store_filter_bottom_sheet.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
@@ -49,6 +50,11 @@ class StoreAppBar extends StatelessWidget {
   }
 
   void _onTapStore() {
+    final storeResponse = Get.find<StoreController>().generalResponse.value;
+    if (storeResponse == null) return;
+
+    final store = storeResponse.store; // store: StoreInfo
+
     showAppBottomSheet(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,12 +65,20 @@ class StoreAppBar extends StatelessWidget {
             child: Text.rich(
               TextSpan(
                 children: [
-                  TextSpan(text: 'Starbucks®\n', style: AppTextStyles.typographyH8SemiBold),
                   TextSpan(
-                    text:
-                        'Our story begins in 1971 along the cobblestone streets of Seattle’s historic Pike Place Market. It was here where Starbucks opened its first store, offering fresh-roasted coffee beans, tea and spices from around the world for our customers to take home. Our name was inspired by the classic tale, “Moby-Dick,” evoking the seafaring tradition of the early coffee traders.',
-                    style: AppTextStyles.typographyH11Regular,
+                    text: '${store.name}\n',
+                    style: AppTextStyles.typographyH8SemiBold,
                   ),
+                  if (store.comment != null && store.comment!.isNotEmpty)
+                    TextSpan(
+                      text: store.comment,
+                      style: AppTextStyles.typographyH11Regular,
+                    ),
+                  if (store.comment == null || store.comment!.isEmpty)
+                    TextSpan(
+                      text: 'No description.',
+                      style: AppTextStyles.typographyH11Regular,
+                    ),
                 ],
               ),
               maxLines: 3,
@@ -72,7 +86,7 @@ class StoreAppBar extends StatelessWidget {
             ),
           ),
           _buildActionButton(),
-          _buildStoreInfo(),
+          _buildStoreInfo(store),
           SizedBox(height: 16.h),
         ],
       ),
@@ -96,65 +110,6 @@ class StoreAppBar extends StatelessWidget {
       ),
     );
   }
-
-  // Widget _buildStoreHeader() {
-  //   return ClipRRect(
-  //     borderRadius: BorderRadius.circular(12.r),
-  //     child: BackdropFilter(
-  //       filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-  //       child: Container(
-  //         padding: EdgeInsets.all(16.w),
-  //         color: AppColors.stateBaseWhite.withValues(alpha: 100),
-  //         child: Column(
-  //           crossAxisAlignment: CrossAxisAlignment.start,
-  //           mainAxisAlignment: MainAxisAlignment.start,
-  //           children: [
-  //             Row(
-  //               mainAxisAlignment: MainAxisAlignment.start,
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               children: [
-  //                 ClipOval(
-  //                   child: AppImage.network(
-  //                     'https://upload.wikimedia.org/wikipedia/vi/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/250px-Starbucks_Corporation_Logo_2011.svg.png',
-  //                     width: 56.w,
-  //                     height: 56.w,
-  //                   ),
-  //                 ),
-  //                 SizedBox(width: 16.w),
-  //                 Expanded(
-  //                   child: Column(
-  //                     crossAxisAlignment: CrossAxisAlignment.start,
-  //                     children: [
-  //                       Text('Starbucks®', style: AppTextStyles.typographyH7SemiBold),
-  //                       SizedBox(height: 4.h),
-  //                       Row(
-  //                         children: [
-  //                           Icon(Icons.star, size: 16.w, color: Colors.black),
-  //                           SizedBox(width: 4.w),
-  //                           Text.rich(
-  //                             TextSpan(
-  //                               children: [
-  //                                 TextSpan(text: '4.2 ', style: AppTextStyles.typographyH12SemiBold),
-  //                                 TextSpan(text: '(300+ ratings)', style: AppTextStyles.typographyH12Regular),
-  //                                 TextSpan(text: ' • ', style: AppTextStyles.typographyH12Regular),
-  //                                 TextSpan(text: '2.5 Mile', style: AppTextStyles.typographyH12Regular),
-  //                               ],
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 ),
-  //                 _AnimatedHeartButton(),
-  //               ],
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Widget _buildStoreHeader() {
     return GetBuilder<StoreController>(
@@ -304,39 +259,40 @@ class StoreAppBar extends StatelessWidget {
     );
   }
 
-  Widget _buildStoreInfo() {
+  Widget _buildStoreInfo(StoreInfo store) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
       child: Column(
         children: [
           _buildInfoRow(
             icon: Assets.icons.icLocation.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
-            title: '2216 N 10th Street',
-            subtitle: 'El Centro, CA 92243',
+            title: store.address,
+            // subtitle: '', // Nếu muốn tách tỉnh/thành thì cần parse address thêm
             trailing: Assets.icons.icSync.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
           ),
           SizedBox(height: 16.h),
           _buildInfoRow(
             icon: Assets.icons.icCar.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
             title: 'Delivery Fee',
-            trailing: Text('\$6.99', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
+            trailing: Text('\$${store.services.deliveryFee}', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
           ),
           SizedBox(height: 16.h),
           _buildInfoRow(
             icon: Assets.icons.icClock.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
             title: 'Delivery Time',
-            trailing: Text('20-25 min', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
+            trailing: Text(store.services.deliveryTime, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
           ),
-          SizedBox(height: 16.h),
-          _buildInfoRow(
-            icon: Assets.icons.icLineDirection.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
-            title: 'Today 7:30 AM - 10:30 PM',
-            trailing: Icon(Icons.keyboard_arrow_down, size: 24, color: AppColors.textGreyHigh700),
-          ),
+          // Nếu có thông tin giờ mở cửa thì truyền từ API (ở đây không thấy trường openingTime, có thể cần bổ sung)
+          // SizedBox(height: 16.h),
+          // _buildInfoRow(
+          //   icon: Assets.icons.icLineDirection.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
+          //   title: store.openingTime ?? 'Today 7:30 AM - 10:30 PM',
+          //   trailing: Icon(Icons.keyboard_arrow_down, size: 24, color: AppColors.textGreyHigh700),
+          // ),
           SizedBox(height: 16.h),
           _buildInfoRow(
             icon: Assets.icons.icStar.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
-            title: '4.2 (500+ ratings)',
+            title: '${store.rating} (${store.reviewCount} ratings)',
             trailing: Icon(Icons.keyboard_arrow_right, size: 24, color: AppColors.textGreyDefault500),
           ),
         ],
