@@ -9,31 +9,47 @@ part '../../../generated/domain/models/response/search_response.g.dart';
 abstract class SearchResponse with _$SearchResponse {
   const factory SearchResponse({
     @JsonKey(name: 'top_searches') List<String>? topSearches,
-    @JsonKey(name: 'recent_stores') List<RecentStore>? recentStores,
-    @JsonKey(name: 'items_by_store') List<StoreItemGroup>? itemsByStore,
+    @JsonKey(name: 'recent_searches') List<String>? recentSearches,
+    @JsonKey(name: 'top_categories') List<TopCategories>? topCategories,
+    @JsonKey(name: 'items_by_store') List<ItemByStore>? itemsByStore,
+    @JsonKey(name: 'recent_stores') List<RecentStores>? recentStores,
   }) = _SearchResponse;
 
   factory SearchResponse.fromJson(Map<String, dynamic> json) => _$SearchResponseFromJson(json);
 }
 
 @freezed
-abstract class RecentStore with _$RecentStore {
-  const factory RecentStore({
-    @Default(0) int id,
-    @Default('') String name,
-    @JsonKey(name: 'logo_url') @Default('') String logoUrl,
-    @JsonKey(name: 'delivery_time') @Default('') String deliveryTime,
+abstract class RecentStores with _$RecentStores {
+  const factory RecentStores({
+    @JsonKey(name: 'id') @Default(0) int id,
+    @JsonKey(name: 'name') @Default('') String name,
+    @JsonKey(name: 'logo_url') @Default('') String logo,
+    @JsonKey(name: 'cover_photo_url') @Default('') String coverPhoto,
     @JsonKey(name: 'delivery_fee') @Default(0.0) double deliveryFee,
-  }) = _RecentStore;
+    @JsonKey(name: 'rating') @Default(0.0) double rating,
+    @JsonKey(name: 'delivery_time') @Default('') String deliveryTime,
+  }) = _RecentStores;
 
-  factory RecentStore.fromJson(Map<String, dynamic> json) => _$RecentStoreFromJson(json);
+  factory RecentStores.fromJson(Map<String, dynamic> json) => _$RecentStoresFromJson(json);
 }
 
 @freezed
-abstract class StoreItemGroup with _$StoreItemGroup {
-  const factory StoreItemGroup({@JsonKey(name: 'store_id') @Default(0) int storeId, @JsonKey(name: 'store_name') @Default('') String storeName, @Default([]) List<Item> items}) = _StoreItemGroup;
+abstract class TopCategories with _$TopCategories {
+  const factory TopCategories({
+    @JsonKey(name: 'id') @Default(0) int id,
+    @JsonKey(name: 'name') @Default('') String name,
+    @JsonKey(name: 'image_url') @Default('') String imageUrl,
+    @JsonKey(name: 'items_count') @Default(0) int itemsCount,
+  }) = _TopCategories;
 
-  factory StoreItemGroup.fromJson(Map<String, dynamic> json) => _$StoreItemGroupFromJson(json);
+  factory TopCategories.fromJson(Map<String, dynamic> json) => _$TopCategoriesFromJson(json);
+}
+
+@freezed
+abstract class ItemByStore with _$ItemByStore {
+  const factory ItemByStore({@JsonKey(name: 'store_id') @Default(0) int storeId, @JsonKey(name: 'store_name') @Default('') String storeName, @Default([]) List<Item> items}) = _ItemByStore;
+
+  factory ItemByStore.fromJson(Map<String, dynamic> json) => _$ItemByStoreFromJson(json);
 }
 
 @freezed

@@ -2,14 +2,14 @@ import 'package:json_annotation/json_annotation.dart';
 
 part '../generated/base/base_response.g.dart';
 
-@JsonSerializable()
-class BaseResponse {
-  final bool success;
-  final dynamic data;
+@JsonSerializable(genericArgumentFactories: true)
+class BaseResponse<T> {
+  final bool? success;
+  final T? data;
 
-  BaseResponse({required this.success, required this.data});
+  BaseResponse({this.success, this.data});
 
-  factory BaseResponse.fromJson(Map<String, dynamic> json) => _$BaseResponseFromJson(json);
+  factory BaseResponse.fromJson(Map<String, dynamic> json, T Function(Object? json) fromJsonT) => _$BaseResponseFromJson(json, fromJsonT);
 
-  Map<String, dynamic> toJson() => _$BaseResponseToJson(this);
+  Map<String, dynamic> toJson(Object? Function(T value) toJsonT) => _$BaseResponseToJson(this, toJsonT);
 }

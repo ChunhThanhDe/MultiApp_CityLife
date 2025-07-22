@@ -1,10 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/base/network_exceptions.dart';
 import 'package:sixam_mart_user/domain/models/response/search_response.dart';
 import 'package:sixam_mart_user/domain/repositories/search_repository.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 
 class SearchController extends BaseController {
   final FocusNode focusNode = FocusNode();
@@ -60,10 +63,10 @@ class SearchController extends BaseController {
           isInitialState.value = true;
         case Failure(error: final error):
           final errorMessage = NetworkExceptions.getErrorMessage(error);
-          showSnackBar(errorMessage);
+          showAppSnackBar(title: 'Search', message: errorMessage);
       }
     } catch (e) {
-      showSnackBar('Error loading search data: $e');
+      showAppSnackBar(title: 'Search', message: 'Error loading search data: $e');
     } finally {
       isLoading.value = false;
     }
@@ -83,10 +86,10 @@ class SearchController extends BaseController {
           isInitialState.value = false;
         case Failure(error: final error):
           final errorMessage = NetworkExceptions.getErrorMessage(error);
-          showSnackBar(errorMessage);
+          showAppSnackBar(title: 'Search', message: errorMessage);
       }
     } catch (e) {
-      showSnackBar('Error searching: $e');
+      showAppSnackBar(title: tr(LocaleKeys.base_error_default), type: SnackBarType.error);
     } finally {
       isLoading.value = false;
     }
@@ -103,9 +106,5 @@ class SearchController extends BaseController {
     currentQuery.value = '';
     isInitialState.value = true;
     loadInitialData();
-  }
-
-  void showSnackBar(String message) {
-    Get.snackbar('Search', message, snackPosition: SnackPosition.BOTTOM);
   }
 }

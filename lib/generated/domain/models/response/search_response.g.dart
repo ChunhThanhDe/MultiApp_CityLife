@@ -11,50 +11,78 @@ _SearchResponse _$SearchResponseFromJson(Map<String, dynamic> json) =>
       topSearches: (json['top_searches'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      recentStores: (json['recent_stores'] as List<dynamic>?)
-          ?.map((e) => RecentStore.fromJson(e as Map<String, dynamic>))
+      recentSearches: (json['recent_searches'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      topCategories: (json['top_categories'] as List<dynamic>?)
+          ?.map((e) => TopCategories.fromJson(e as Map<String, dynamic>))
           .toList(),
       itemsByStore: (json['items_by_store'] as List<dynamic>?)
-          ?.map((e) => StoreItemGroup.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => ItemByStore.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      recentStores: (json['recent_stores'] as List<dynamic>?)
+          ?.map((e) => RecentStores.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$SearchResponseToJson(_SearchResponse instance) =>
     <String, dynamic>{
       'top_searches': instance.topSearches,
-      'recent_stores': instance.recentStores,
+      'recent_searches': instance.recentSearches,
+      'top_categories': instance.topCategories,
       'items_by_store': instance.itemsByStore,
+      'recent_stores': instance.recentStores,
     };
 
-_RecentStore _$RecentStoreFromJson(Map<String, dynamic> json) => _RecentStore(
-  id: (json['id'] as num?)?.toInt() ?? 0,
-  name: json['name'] as String? ?? '',
-  logoUrl: json['logo_url'] as String? ?? '',
-  deliveryTime: json['delivery_time'] as String? ?? '',
-  deliveryFee: (json['delivery_fee'] as num?)?.toDouble() ?? 0.0,
-);
+_RecentStores _$RecentStoresFromJson(Map<String, dynamic> json) =>
+    _RecentStores(
+      id: (json['id'] as num?)?.toInt() ?? 0,
+      name: json['name'] as String? ?? '',
+      logo: json['logo_url'] as String? ?? '',
+      coverPhoto: json['cover_photo_url'] as String? ?? '',
+      deliveryFee: (json['delivery_fee'] as num?)?.toDouble() ?? 0.0,
+      rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
+      deliveryTime: json['delivery_time'] as String? ?? '',
+    );
 
-Map<String, dynamic> _$RecentStoreToJson(_RecentStore instance) =>
+Map<String, dynamic> _$RecentStoresToJson(_RecentStores instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'logo_url': instance.logoUrl,
-      'delivery_time': instance.deliveryTime,
+      'logo_url': instance.logo,
+      'cover_photo_url': instance.coverPhoto,
       'delivery_fee': instance.deliveryFee,
+      'rating': instance.rating,
+      'delivery_time': instance.deliveryTime,
     };
 
-_StoreItemGroup _$StoreItemGroupFromJson(Map<String, dynamic> json) =>
-    _StoreItemGroup(
-      storeId: (json['store_id'] as num?)?.toInt() ?? 0,
-      storeName: json['store_name'] as String? ?? '',
-      items:
-          (json['items'] as List<dynamic>?)
-              ?.map((e) => Item.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
+_TopCategories _$TopCategoriesFromJson(Map<String, dynamic> json) =>
+    _TopCategories(
+      id: (json['id'] as num?)?.toInt() ?? 0,
+      name: json['name'] as String? ?? '',
+      imageUrl: json['image_url'] as String? ?? '',
+      itemsCount: (json['items_count'] as num?)?.toInt() ?? 0,
     );
 
-Map<String, dynamic> _$StoreItemGroupToJson(_StoreItemGroup instance) =>
+Map<String, dynamic> _$TopCategoriesToJson(_TopCategories instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'image_url': instance.imageUrl,
+      'items_count': instance.itemsCount,
+    };
+
+_ItemByStore _$ItemByStoreFromJson(Map<String, dynamic> json) => _ItemByStore(
+  storeId: (json['store_id'] as num?)?.toInt() ?? 0,
+  storeName: json['store_name'] as String? ?? '',
+  items:
+      (json['items'] as List<dynamic>?)
+          ?.map((e) => Item.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
+);
+
+Map<String, dynamic> _$ItemByStoreToJson(_ItemByStore instance) =>
     <String, dynamic>{
       'store_id': instance.storeId,
       'store_name': instance.storeName,

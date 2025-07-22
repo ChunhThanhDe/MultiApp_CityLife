@@ -73,6 +73,7 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
             borderRadius: 32,
             onChanged: vm.onSearchChanged,
           ),
+          const SizedBox(height: 24),
           Text(tr(LocaleKeys.address_exploreNearby), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
           Expanded(
             child: ListView.separated(

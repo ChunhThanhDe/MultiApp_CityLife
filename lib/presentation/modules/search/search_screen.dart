@@ -2,11 +2,11 @@ import 'package:flutter/material.dart' hide SearchController;
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/domain/models/response/search_response.dart' as search_response;
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/search/search_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_category_section.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_text_field.dart';
 
 class SearchScreen extends BaseScreen<SearchController> {
@@ -115,10 +115,18 @@ class SearchScreen extends BaseScreen<SearchController> {
         ],
 
         // Recent Stores Section
-        if (searchData.recentStores != null && searchData.recentStores!.isNotEmpty) ...[
-          Text('Recent Stores', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
+        if (searchData.recentSearches != null && searchData.recentSearches!.isNotEmpty) ...[
+          Text('Recent', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
           SizedBox(height: 16),
-          ...searchData.recentStores!.map((store) => _buildRecentStoreItem(store)),
+          ...searchData.recentSearches!.map((store) => _buildSearchItemString(store, Assets.icons.icClock.svg())),
+          SizedBox(height: 32),
+        ],
+
+        // Top Categories Section
+        if (searchData.topCategories != null && searchData.topCategories!.isNotEmpty) ...[
+          Text('Top categories', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
+          SizedBox(height: 16),
+          ...searchData.topCategories!.map((item) => _buildSearchItemString(item.name, AppImage.network(item.imageUrl, width: 20, height: 20))),
         ],
       ],
     );
@@ -173,40 +181,9 @@ class SearchScreen extends BaseScreen<SearchController> {
         padding: EdgeInsets.symmetric(vertical: 12),
         child: Row(
           children: [
-            SizedBox(width: 20, height: 20, child: icon),
-            SizedBox(width: 16),
             Expanded(
               child: Text(title, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildRecentStoreItem(search_response.RecentStore store) {
-    return GestureDetector(
-      onTap: () => controller.onTapSearchItem(store.name),
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 12),
-        child: Row(
-          children: [
-            CircleAvatar(
-              radius: 20,
-              backgroundImage: store.logoUrl.isNotEmpty ? NetworkImage(store.logoUrl) : null,
-              child: store.logoUrl.isEmpty ? Icon(Icons.store, size: 20, color: AppColors.textGreyDefault500) : null,
-            ),
-            SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(store.name, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
-                  if (store.deliveryTime.isNotEmpty) Text(store.deliveryTime, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
-                ],
-              ),
-            ),
-            if (store.deliveryFee > 0) Text('\$${store.deliveryFee.toStringAsFixed(2)}', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
           ],
         ),
       ),
