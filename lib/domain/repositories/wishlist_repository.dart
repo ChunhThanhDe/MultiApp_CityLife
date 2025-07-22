@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_repository.dart';
-import 'package:sixam_mart_user/base/dio_client.dart';
 import 'package:sixam_mart_user/domain/models/request/add_wishlist_request.dart';
 import 'package:sixam_mart_user/domain/models/request/remove_wishlist_request.dart';
 
@@ -13,16 +12,16 @@ class WishlistApiPath {
 
 class WishlistRepository extends BaseRepository {
   Future<ApiResult> getWishlist() async {
-    final headers = getAuthHeader();
-    headers['zoneId'] = '1';
-
+    final headers = {
+      'zoneId': [1],
+    };
     return handleApiRequest(() => dioClient.get(WishlistApiPath.getWishlist, options: Options(headers: headers)));
   }
 
   Future<ApiResult> addWishlist(AddWishlistRequest request) async {
-    final headers = getAuthHeader();
-    headers['zoneId'] = '1';
-
+    final headers = {
+      'zoneId': [1],
+    };
     return handleApiRequest(
       () => dioClient.post(
         WishlistApiPath.addWishlist,
@@ -33,8 +32,9 @@ class WishlistRepository extends BaseRepository {
   }
 
   Future<ApiResult> removeWishlist(RemoveWishlistRequest request) async {
-    final headers = getAuthHeader();
-    headers['zoneId'] = '1';
+    final headers = {
+      'zoneId': [1],
+    };
 
     return handleApiRequest(
       () => dioClient.delete(

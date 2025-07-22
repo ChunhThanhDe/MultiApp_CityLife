@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_repository.dart';
-import 'package:sixam_mart_user/base/dio_client.dart';
 import 'package:sixam_mart_user/domain/enums/service_type.dart';
 
 class ServiceApiPath {
@@ -43,7 +42,7 @@ class ServiceRepository extends BaseRepository {
   // Generic method to get stores/services data
   Future<ApiResult> getServiceData(ServiceType serviceType, {int? zoneId, int? id}) async {
     final config = getServiceConfig(serviceType);
-    final headers = getAuthHeader();
+    final headers = <String, dynamic>{};
     headers['zoneId'] = (zoneId ?? config.defaultZoneId).toString();
     headers['moduleId'] = config.moduleId.toString();
     headers['id'] = (id ?? config.defaultId).toString();

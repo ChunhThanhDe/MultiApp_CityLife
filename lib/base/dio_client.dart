@@ -6,6 +6,7 @@ import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:sixam_mart_user/base/header_interceptor.dart';
 import 'package:sixam_mart_user/services/auth_token_manager.dart';
 
 import '../app/constants/api_const.dart';
@@ -58,6 +59,8 @@ class DioClient {
     }
 
     dio.interceptors.add(ApiConstant.aliceDioAdapter);
+
+    _dio.interceptors.add(HeaderInterceptor(getHeader: () => getAuthHeader()));
 
     _dio.interceptors.add(
       PrettyDioLogger(
