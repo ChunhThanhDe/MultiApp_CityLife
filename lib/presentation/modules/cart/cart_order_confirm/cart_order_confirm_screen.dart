@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 import 'cart_order_confirm_controller.dart';
 
@@ -177,7 +178,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(32), color: Colors.white),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(32),
-            child: Image.asset(imageAsset, width: 32, height: 32, fit: BoxFit.cover),
+            child: AppImage.asset(imageAsset, width: 32, height: 32, fit: BoxFit.cover),
           ),
         ),
         SizedBox(width: 12),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_dialog.dart';
@@ -10,7 +12,7 @@ import 'package:sixam_mart_user/services/auth_service.dart';
 import 'account_controller.dart';
 
 class AccountMenuItem {
-  final IconData icon;
+  final String icon;
   final String title;
   final Widget? trailing;
   final VoidCallback? onClick;
@@ -48,24 +50,24 @@ class AccountScreen extends BaseScreen<AccountController> {
   @override
   Widget buildScreen(BuildContext context) {
     final List<AccountMenuItem> menuItems = [
-      AccountMenuItem(icon: Icons.person_outline, title: 'Manage account', onClick: () => Get.toNamed(AppRoutes.accountManage)),
-      AccountMenuItem(icon: Icons.favorite_border, title: 'Favorites', onClick: () => Get.toNamed(AppRoutes.favorites)),
-      AccountMenuItem(icon: Icons.lock_outline, title: 'Security', onClick: () => Get.toNamed(AppRoutes.accountSecurity)),
-      AccountMenuItem(icon: Icons.payment_outlined, title: 'Payment methods', onClick: () {}),
+      AccountMenuItem(icon: Assets.icons.icPersonOutlined.path, title: 'Manage account', onClick: () => Get.toNamed(AppRoutes.accountManage)),
+      AccountMenuItem(icon: Assets.icons.icHeartOutlined.path, title: 'Favorites', onClick: () => Get.toNamed(AppRoutes.favorites)),
+      AccountMenuItem(icon: Assets.icons.icLockRounded.path, title: 'Security', onClick: () => Get.toNamed(AppRoutes.accountSecurity)),
+      AccountMenuItem(icon: Assets.icons.icWalletOutlined.path, title: 'Payment methods', onClick: () {}),
       AccountMenuItem(
-        icon: Icons.location_on_outlined,
+        icon: Assets.icons.icLocation.path,
         title: 'Address',
         onClick: () {
           Get.toNamed(AppRoutes.address);
         },
       ),
-      AccountMenuItem(icon: Icons.card_giftcard_outlined, title: 'Gift Cards', onClick: () {}),
-      AccountMenuItem(icon: Icons.group_outlined, title: 'Invite friends', onClick: () {}),
-      AccountMenuItem(icon: Icons.local_offer_outlined, title: 'Promotions', onClick: () {}),
-      AccountMenuItem(icon: Icons.notifications_none, title: 'Notification', onClick: () {}),
-      AccountMenuItem(icon: Icons.headphones_outlined, title: 'Help Center', onClick: () {}),
+      AccountMenuItem(icon: Assets.icons.icGift.path, title: 'Gift Cards', onClick: () {}),
+      AccountMenuItem(icon: Assets.icons.icGroup.path, title: 'Invite friends', onClick: () {}),
+      AccountMenuItem(icon: Assets.icons.icPromotion.path, title: 'Promotions', onClick: () {}),
+      AccountMenuItem(icon: Assets.icons.icBell.path, title: 'Notification', onClick: () {}),
+      AccountMenuItem(icon: Assets.icons.icHeadphone.path, title: 'Help Center', onClick: () {}),
       AccountMenuItem(
-        icon: Icons.nightlight_round_outlined,
+        icon: Assets.icons.icMoon.path,
         title: 'Dark Mode',
         trailing: GetBuilder<AccountController>(
           builder: (controller) => Text(controller.currentThemeDisplayName, style: TextStyle(color: Color(0xFF4A5763))),
@@ -73,75 +75,78 @@ class AccountScreen extends BaseScreen<AccountController> {
         onClick: () => controller.showThemeSelection(),
       ),
       AccountMenuItem(
-        icon: Icons.language_outlined,
+        icon: Assets.icons.icLanguage.path,
         title: 'Language',
         trailing: GetBuilder<AccountController>(
           builder: (controller) => Text(controller.currentLanguageDisplayName, style: TextStyle(color: Color(0xFF4A5763))),
         ),
         onClick: () => controller.showLanguageSelection(),
       ),
-      AccountMenuItem(icon: Icons.info_outline, title: 'About App', onClick: () {}),
+      AccountMenuItem(icon: Assets.icons.icInfo.path, title: 'About App', onClick: () {}),
     ];
 
     // Total items: 1 profile card + menu items + 1 sign out section
     final totalItems = 1 + menuItems.length + 1;
 
-    return ListView.builder(
-      padding: EdgeInsets.zero,
-      itemCount: totalItems,
-      itemBuilder: (context, index) {
-        // Profile card at index 0
-        if (index == 0) {
-          return _ProfileCard();
-        }
-        // Menu items
-        else if (index <= menuItems.length) {
-          final menuIndex = index - 1;
-          final item = menuItems[menuIndex];
-          return Column(
-            children: [
-              ListTile(
-                contentPadding: EdgeInsets.symmetric(horizontal: 24),
-                leading: Icon(item.icon, color: Color(0xFF4A5763)),
-                title: Text(
-                  item.title,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
-                ),
-                trailing: item.trailing ?? Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
-                onTap: item.onClick,
-              ),
-              if (menuIndex < menuItems.length - 1) Divider(color: Color(0xFFE8EBEE), indent: 60, height: 0, thickness: 1),
-            ],
-          );
-        }
-        // Sign out section at the last index
-        else {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-            child: Column(
+    return RefreshIndicator(
+      onRefresh: controller.refreshUserInfo,
+      child: ListView.builder(
+        padding: EdgeInsets.zero,
+        itemCount: totalItems,
+        itemBuilder: (context, index) {
+          // Profile card at index 0
+          if (index == 0) {
+            return _ProfileCard();
+          }
+          // Menu items
+          else if (index <= menuItems.length) {
+            final menuIndex = index - 1;
+            final item = menuItems[menuIndex];
+            return Column(
               children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFFFECEB),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-                    minimumSize: Size(double.infinity, 48),
-                    elevation: 0,
-                    foregroundColor: Color(0xFFB80900),
+                ListTile(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 24),
+                  leading: SvgPicture.asset(item.icon, colorFilter: const ColorFilter.mode(Color(0xFF4A5763), BlendMode.srcIn)),
+                  title: Text(
+                    item.title,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
                   ),
-                  onPressed: _showLogoutConfirmation,
-                  child: Text(
-                    "Sign out",
-                    style: TextStyle(color: Color(0xFFB80900), fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
+                  trailing: item.trailing ?? Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
+                  onTap: item.onClick,
                 ),
-                SizedBox(height: 8),
-                Text("v2.380", style: TextStyle(color: Color(0xFF161A1D), fontSize: 12)),
-                SizedBox(height: 8),
+                if (menuIndex < menuItems.length - 1) Divider(color: Color(0xFFE8EBEE), indent: 60, height: 0, thickness: 1),
               ],
-            ),
-          );
-        }
-      },
+            );
+          }
+          // Sign out section at the last index
+          else {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFFFFECEB),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                      minimumSize: Size(double.infinity, 48),
+                      elevation: 0,
+                      foregroundColor: Color(0xFFB80900),
+                    ),
+                    onPressed: _showLogoutConfirmation,
+                    child: Text(
+                      "Sign out",
+                      style: TextStyle(color: Color(0xFFB80900), fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text("v2.380", style: TextStyle(color: Color(0xFF161A1D), fontSize: 12)),
+                  SizedBox(height: 8),
+                ],
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }
@@ -185,7 +190,7 @@ class _ProfileCard extends StatelessWidget {
                 onPressed: () {
                   Get.toNamed(AppRoutes.accountManage);
                 },
-                icon: Icon(Icons.edit, color: Color(0xFF4A5763)),
+                icon: SvgPicture.asset(Assets.icons.icPencil.path),
               ),
             ],
           ),

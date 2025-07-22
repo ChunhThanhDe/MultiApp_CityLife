@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
 
 import 'view_receipt_controller.dart';
@@ -74,7 +75,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
         spacing: 16,
         children: [
           ClipOval(
-            child: Image.network(
+            child: AppImage.network(
               'https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/150px-Starbucks_Corporation_Logo_2011.svg.png',
               width: 64,
               height: 64,
@@ -108,7 +109,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
         spacing: 12,
         children: [
           ClipOval(
-            child: Image.network(
+            child: AppImage.network(
               'https://yt3.googleusercontent.com/c-Z7mIlntSpG6VyQ5ZqaPggqkZRhaySr-H5ZEazFN2iR1pP4eD1UGekwu0y--c4CSVhJJ1A4QT8=s900-c-k-c0x00ffffff-no-rj',
               width: 32,
               height: 32,
@@ -163,7 +164,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ClipOval(child: Image.network(item.image, width: 56, height: 56, fit: BoxFit.cover)),
+                  ClipOval(child: AppImage.network(item.image, width: 56, height: 56, fit: BoxFit.cover)),
                   const SizedBox(width: 16),
                   Expanded(
                     child: Column(

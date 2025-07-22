@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart' hide SearchController;
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/domain/models/response/search_response.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/search/search_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/store/components/product_category_section.dart';
+import 'package:sixam_mart_user/presentation/modules/store/store_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_text_field.dart';
-
-import 'search_controller.dart';
 
 class SearchScreen extends BaseScreen<SearchController> {
   const SearchScreen({super.key});
@@ -66,82 +69,145 @@ class SearchScreen extends BaseScreen<SearchController> {
   Widget buildScreen(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+      body: Obx(() {
+        if (controller.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        }
+
+        if (controller.searchData.value == null) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.search_outlined, size: 64, color: AppColors.textGreyDefault500),
+                SizedBox(height: 16),
+                Text('No data available', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyDefault500)),
+                SizedBox(height: 8),
+                Text('Please try again later', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
+              ],
+            ),
+          );
+        }
+
+        if (controller.isInitialState.value) {
+          return _buildInitialState();
+        } else {
+          return _buildSearchResults();
+        }
+      }),
+    );
+  }
+
+  Widget _buildInitialState() {
+    final searchData = controller.searchData.value!;
+
+    return ListView(
+      padding: EdgeInsets.symmetric(horizontal: 24),
+      children: [
+        SizedBox(height: 24),
+
+        // Top Searches Section
+        if (searchData.topSearches != null && searchData.topSearches!.isNotEmpty) ...[
+          Text('Top searches', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
+          SizedBox(height: 16),
+          ...searchData.topSearches!.map((item) => _buildSearchItemString(item, Assets.icons.icSearch.svg())),
+          SizedBox(height: 32),
+        ],
+
+        // Recent Stores Section
+        if (searchData.recentStores != null && searchData.recentStores!.isNotEmpty) ...[
+          Text('Recent Stores', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
+          SizedBox(height: 16),
+          ...searchData.recentStores!.map((store) => _buildRecentStoreItem(store)),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildSearchResults() {
+    final searchData = controller.searchData.value!;
+
+    if (searchData.itemsByStore == null || searchData.itemsByStore!.isEmpty) {
+      return Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [SizedBox(height: 24), _buildTopSearches(), SizedBox(height: 32), _buildRecentSearches(), SizedBox(height: 32), _buildTopCategories(), SizedBox(height: 24)],
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.search_off_outlined, size: 64, color: AppColors.textGreyDefault500),
+            SizedBox(height: 16),
+            Text('No results found', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyDefault500)),
+            SizedBox(height: 8),
+            Text('Try searching with different keywords', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
+          ],
+        ),
+      );
+    }
+
+    return ListView.builder(
+      itemCount: searchData.itemsByStore!.length,
+      itemBuilder: (context, index) {
+        final storeGroup = searchData.itemsByStore![index];
+        final productItems = storeGroup.items
+            .map(
+              (item) => ProductItem(
+                name: item.name,
+                price: '\$${item.finalPrice.toStringAsFixed(2)}',
+                calories: null, // Search results don't have calorie info
+                imageUrl: item.imageUrl,
+                description: '',
+                categories: [],
+                availableServices: [],
+              ),
+            )
+            .toList();
+
+        return ProductCategorySection(title: storeGroup.storeName, items: productItems);
+      },
+    );
+  }
+
+  Widget _buildSearchItemString(String title, Widget icon) {
+    return GestureDetector(
+      onTap: () => controller.onTapSearchItem(title),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 12),
+        child: Row(
+          children: [
+            SizedBox(width: 20, height: 20, child: icon),
+            SizedBox(width: 16),
+            Expanded(
+              child: Text(title, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildTopSearches() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Top searches', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
-        SizedBox(height: 16),
-        ...controller.topSearches.map((item) => _buildSearchItem(item, Assets.icons.icSearch.svg())),
-      ],
-    );
-  }
-
-  Widget _buildRecentSearches() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Recent', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
-        SizedBox(height: 16),
-        ...controller.recentSearches.map((item) => _buildSearchItem(item, Assets.icons.icClock.svg())),
-      ],
-    );
-  }
-
-  Widget _buildTopCategories() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Top Categories', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
-        SizedBox(height: 16),
-        ...controller.topCategories.map((item) => _buildCategoryItem(item)),
-      ],
-    );
-  }
-
-  Widget _buildSearchItem(SearchItem item, Widget icon) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 12),
-      child: Row(
-        children: [
-          SizedBox(width: 20, height: 20, child: icon),
-          SizedBox(width: 16),
-          Expanded(
-            child: Text(item.title, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCategoryItem(CategoryItem item) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 12),
-      child: Row(
-        children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: AppColors.stateGreyLowest50),
-            child: Center(
-              child: Text(item.title[0], style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
+  Widget _buildRecentStoreItem(RecentStore store) {
+    return GestureDetector(
+      onTap: () => controller.onTapSearchItem(store.name),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 12),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 20,
+              backgroundImage: store.logoUrl.isNotEmpty ? NetworkImage(store.logoUrl) : null,
+              child: store.logoUrl.isEmpty ? Icon(Icons.store, size: 20, color: AppColors.textGreyDefault500) : null,
             ),
-          ),
-          SizedBox(width: 16),
-          Expanded(
-            child: Text(item.title, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
-          ),
-        ],
+            SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(store.name, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+                  if (store.deliveryTime.isNotEmpty) Text(store.deliveryTime, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
+                ],
+              ),
+            ),
+            if (store.deliveryFee > 0) Text('\$${store.deliveryFee.toStringAsFixed(2)}', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
+          ],
+        ),
       ),
     );
   }

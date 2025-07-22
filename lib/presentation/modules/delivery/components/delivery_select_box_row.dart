@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/presentation/modules/delivery/box_delivery/box_delivery_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class SelectBoxRowWidget extends StatelessWidget {
   const SelectBoxRowWidget({super.key});
@@ -57,7 +58,7 @@ class SelectBoxRowWidget extends StatelessWidget {
                       flex: 8,
                       child: Padding(
                         padding: const EdgeInsets.only(right: 12),
-                        child: Image.asset(controller.boxData[i]['img']!, height: 72, fit: BoxFit.contain),
+                        child: AppImage.asset(controller.boxData[i]['img']!, height: 72, fit: BoxFit.contain),
                       ),
                     ),
                   ],

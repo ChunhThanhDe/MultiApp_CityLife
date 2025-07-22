@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 import '../../../shared/animation/animated_step_indicator.dart';
 import 'welcome_controller.dart';
@@ -26,7 +27,7 @@ class WelcomeScreen extends BaseScreen<WelcomeController> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Flexible(child: Image.asset(controller.welcomeModels[index].image, fit: BoxFit.contain)),
+                    Flexible(child: AppImage.asset(controller.welcomeModels[index].image, fit: BoxFit.contain)),
                     const SizedBox(height: 54),
                     AutoSizeText(controller.welcomeModels[index].title, style: AppTextStyles.typographyH6SemiBold, textAlign: TextAlign.center, maxLines: 1),
                     AutoSizeText(

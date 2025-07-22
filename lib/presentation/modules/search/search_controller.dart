@@ -1,47 +1,111 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
-
-class SearchItem {
-  final String title;
-  final String? iconPath;
-
-  SearchItem({required this.title, this.iconPath});
-}
-
-class CategoryItem {
-  final String title;
-  final String iconPath;
-
-  CategoryItem({required this.title, required this.iconPath});
-}
+import 'package:sixam_mart_user/base/network_exceptions.dart';
+import 'package:sixam_mart_user/domain/models/response/search_response.dart';
+import 'package:sixam_mart_user/domain/repositories/search_repository.dart';
 
 class SearchController extends BaseController {
   final FocusNode focusNode = FocusNode();
   final TextEditingController textController = TextEditingController();
+  final SearchRepository _searchRepository = SearchRepository();
 
-  // Mock data for Top searches
-  final List<SearchItem> topSearches = [SearchItem(title: 'Breakfast'), SearchItem(title: 'Coffee'), SearchItem(title: 'Fast Food'), SearchItem(title: 'Drink')];
+  // State variables
+  final Rx<SearchResponse?> searchData = Rx<SearchResponse?>(null);
+  final RxBool isInitialState = true.obs;
+  final RxString currentQuery = ''.obs;
 
-  // Mock data for Recent searches
-  final List<SearchItem> recentSearches = [SearchItem(title: 'Breakfast'), SearchItem(title: 'Coffee'), SearchItem(title: 'Fast Food'), SearchItem(title: 'Drink')];
+  @override
+  void onInit() {
+    super.onInit();
 
-  // Mock data for Top Categories
-  final List<CategoryItem> topCategories = [
-    CategoryItem(title: 'Breakfast', iconPath: 'assets/images/breakfast.png'),
-    CategoryItem(title: 'Coffee', iconPath: 'assets/images/coffee.png'),
-    CategoryItem(title: 'Fast Food', iconPath: 'assets/images/fast_food.png'),
-    CategoryItem(title: 'Drink', iconPath: 'assets/images/drink.png'),
-    CategoryItem(title: 'Pizza', iconPath: 'assets/images/pizza.png'),
-    CategoryItem(title: 'Mexican', iconPath: 'assets/images/mexican.png'),
-    CategoryItem(title: 'Desserts', iconPath: 'assets/images/desserts.png'),
-    CategoryItem(title: 'Seafood', iconPath: 'assets/images/seafood.png'),
-    CategoryItem(title: 'Salads', iconPath: 'assets/images/salads.png'),
-  ];
+    // Load initial data on screen load
+    loadInitialData();
+
+    // Set up debounce for search
+    debounce(currentQuery, (query) {
+      if (query.isEmpty) {
+        loadInitialData();
+      } else {
+        performSearch(query);
+      }
+    }, time: const Duration(milliseconds: 300));
+
+    // Listen to text changes
+    textController.addListener(_onSearchTextChanged);
+  }
 
   @override
   void onClose() {
     focusNode.dispose();
     textController.dispose();
     super.onClose();
+  }
+
+  void _onSearchTextChanged() {
+    final query = textController.text.trim();
+    currentQuery.value = query;
+  }
+
+  Future<void> loadInitialData() async {
+    isLoading.value = true;
+    try {
+      final result = await _searchRepository.searchStores();
+
+      switch (result) {
+        case Success(response: final response):
+          final searchResponse = SearchResponse.fromJson(response.data);
+          searchData.value = searchResponse;
+          isInitialState.value = true;
+        case Failure(error: final error):
+          final errorMessage = NetworkExceptions.getErrorMessage(error);
+          showSnackBar(errorMessage);
+      }
+    } catch (e) {
+      showSnackBar('Error loading search data: $e');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> performSearch(String query) async {
+    if (query.isEmpty) return;
+
+    isLoading.value = true;
+    try {
+      final result = await _searchRepository.searchStores(query: query);
+
+      switch (result) {
+        case Success(response: final response):
+          final searchResponse = SearchResponse.fromJson(response.data);
+          searchData.value = searchResponse;
+          isInitialState.value = false;
+        case Failure(error: final error):
+          final errorMessage = NetworkExceptions.getErrorMessage(error);
+          showSnackBar(errorMessage);
+      }
+    } catch (e) {
+      showSnackBar('Error searching: $e');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  void onTapSearchItem(String query) {
+    textController.text = query;
+    currentQuery.value = query;
+    performSearch(query);
+  }
+
+  void clearSearch() {
+    textController.clear();
+    currentQuery.value = '';
+    isInitialState.value = true;
+    loadInitialData();
+  }
+
+  void showSnackBar(String message) {
+    Get.snackbar('Search', message, snackPosition: SnackPosition.BOTTOM);
   }
 }

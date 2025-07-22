@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:sixam_mart_user/app/constants/app_strings.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/dio_client.dart';
 import 'package:sixam_mart_user/base/network_exceptions.dart';
@@ -9,7 +10,7 @@ class BaseRepository {
   final BaseOptions? options;
   final List<Interceptor>? interceptors;
 
-  BaseRepository({required this.baseUrl, this.options, this.interceptors}) {
+  BaseRepository({this.baseUrl = AppStrings.baseUrl, this.options, this.interceptors}) {
     dioClient = DioClient(Dio(options), baseUrl: baseUrl, interceptors: interceptors);
   }
 

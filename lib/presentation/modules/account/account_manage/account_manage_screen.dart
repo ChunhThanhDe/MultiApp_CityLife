@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 
 import 'account_manage_controller.dart';
@@ -41,7 +42,7 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                           child: CircleAvatar(
                             radius: 71.5,
                             backgroundColor: Color(0xFF5856D7),
-                            backgroundImage: controller.avatarPath.value.isEmpty ? AssetImage('assets/images/img_avatar_default.png') : FileImage(File(controller.avatarPath.value)) as ImageProvider,
+                            backgroundImage: controller.avatarPath.value.isEmpty ? Assets.images.imgAvatarDefault.provider() : FileImage(File(controller.avatarPath.value)) as ImageProvider,
                           ),
                         ),
                         Positioned(
@@ -110,33 +111,39 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                     Obx(
                       () => Row(
                         children: [
-                          _BirthdayDropdown(
-                            items: List.generate(12, (i) => (i + 1).toString().padLeft(2, '0')),
-                            value: controller.month.value,
-                            onChanged: (v) => controller.month.value = v!,
-                            width: 100,
-                            hint: "MM",
+                          Expanded(
+                            child: _BirthdayDropdown(
+                              items: List.generate(12, (i) => (i + 1).toString().padLeft(2, '0')),
+                              value: controller.month.value,
+                              onChanged: (v) => controller.month.value = v!,
+                              hint: "MM",
+                            ),
                           ),
                           SizedBox(width: 10),
-                          _BirthdayDropdown(
-                            items: List.generate(31, (i) => (i + 1).toString().padLeft(2, '0')),
-                            value: controller.day.value,
-                            onChanged: (v) => controller.day.value = v!,
-                            width: 100,
-                            hint: "DD",
+                          Expanded(
+                            child: _BirthdayDropdown(
+                              items: List.generate(31, (i) => (i + 1).toString().padLeft(2, '0')),
+                              value: controller.day.value,
+                              onChanged: (v) => controller.day.value = v!,
+                              hint: "DD",
+                            ),
                           ),
                           SizedBox(width: 10),
-                          _BirthdayDropdown(
-                            items: List.generate(100, (i) => (DateTime.now().year - i).toString()),
-                            value: controller.year.value,
-                            onChanged: (v) => controller.year.value = v!,
-                            width: 120,
-                            hint: "YYYY",
+                          Expanded(
+                            child: _BirthdayDropdown(
+                              items: List.generate(100, (i) => (DateTime.now().year - i).toString()),
+                              value: controller.year.value,
+                              onChanged: (v) => controller.year.value = v!,
+                              hint: "YYYY",
+                            ),
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 16),
+                    Divider(color: Color(0xFFE8EBEE), thickness: 1),
+                    const SizedBox(height: 16),
+
                     // Email
                     _InputTextField(
                       label: "Email address",
@@ -227,27 +234,31 @@ class _BirthdayDropdown extends StatelessWidget {
   final List<String> items;
   final String value;
   final void Function(String?)? onChanged;
-  final double width;
   final String hint;
 
-  const _BirthdayDropdown({required this.items, required this.value, required this.onChanged, required this.width, required this.hint});
+  const _BirthdayDropdown({required this.items, required this.value, required this.onChanged, required this.hint});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: 48,
-      decoration: BoxDecoration(color: Color(0xFFF7F8F9), borderRadius: BorderRadius.circular(6)),
-      padding: EdgeInsets.symmetric(horizontal: 12),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          isExpanded: true,
-          value: value,
-          onChanged: onChanged,
-          style: TextStyle(fontSize: 14, color: Color(0xFF161A1D)),
-          items: items.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          decoration: BoxDecoration(color: Color(0xFFF7F8F9), borderRadius: BorderRadius.circular(6)),
+          padding: EdgeInsets.symmetric(horizontal: 12),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              isExpanded: true,
+              value: value,
+              onChanged: onChanged,
+              style: TextStyle(fontSize: 14, color: Color(0xFF161A1D)),
+              items: items.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
+            ),
+          ),
         ),
-      ),
+        SizedBox(height: 8),
+        Text(hint, style: TextStyle(fontSize: 12, color: Color(0xFF798A9A))),
+      ],
     );
   }
 }

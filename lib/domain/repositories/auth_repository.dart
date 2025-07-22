@@ -1,4 +1,3 @@
-import 'package:sixam_mart_user/app/constants/app_strings.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_repository.dart';
 import 'package:sixam_mart_user/domain/models/request/sign_in_request.dart';
@@ -10,8 +9,6 @@ class AuthApiPath {
 }
 
 class AuthRepository extends BaseRepository {
-  AuthRepository() : super(baseUrl: AppStrings.baseUrl);
-
   Future<ApiResult> signUp(SignUpRequest request) async {
     final Map<String, dynamic> requestData = request.toJson();
 

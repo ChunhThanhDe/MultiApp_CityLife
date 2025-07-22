@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:sixam_mart_user/app/constants/app_strings.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_repository.dart';
 import 'package:sixam_mart_user/base/dio_client.dart';
@@ -25,8 +24,6 @@ class ServiceConfig {
 }
 
 class ServiceRepository extends BaseRepository {
-  ServiceRepository() : super(baseUrl: AppStrings.baseUrl);
-
   // Service configurations map - much cleaner than the previous approach
   static const Map<ServiceType, ServiceConfig> serviceConfigs = {
     ServiceType.food: ServiceConfig(moduleId: 3, apiPath: ServiceApiPath.getFastFoodStores),
