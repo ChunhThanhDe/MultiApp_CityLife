@@ -2,11 +2,11 @@ import 'package:flutter/material.dart' hide SearchController;
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/domain/models/response/search_response.dart';
+import 'package:sixam_mart_user/domain/models/response/search_response.dart' as search_response;
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/search/search_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_category_section.dart';
-import 'package:sixam_mart_user/presentation/modules/store/store_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_text_field.dart';
 
 class SearchScreen extends BaseScreen<SearchController> {
@@ -150,10 +150,11 @@ class SearchScreen extends BaseScreen<SearchController> {
             .map(
               (item) => ProductItem(
                 name: item.name,
+                id: item.id,
                 price: '\$${item.finalPrice.toStringAsFixed(2)}',
-                calories: null, // Search results don't have calorie info
+                rating: item.avgRating,
                 imageUrl: item.imageUrl,
-                description: '',
+                reviewCount: 0,
                 categories: [],
                 availableServices: [],
               ),
@@ -183,7 +184,7 @@ class SearchScreen extends BaseScreen<SearchController> {
     );
   }
 
-  Widget _buildRecentStoreItem(RecentStore store) {
+  Widget _buildRecentStoreItem(search_response.RecentStore store) {
     return GestureDetector(
       onTap: () => controller.onTapSearchItem(store.name),
       child: Container(
