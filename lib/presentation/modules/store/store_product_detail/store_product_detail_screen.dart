@@ -1,88 +1,183 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/store/components/product_card.dart';
+import 'package:sixam_mart_user/presentation/modules/store/components/product_nutritiion_section.dart';
+import 'package:sixam_mart_user/presentation/modules/store/components/product_option_group_section.dart';
+import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
 
 import 'store_product_detail_controller.dart';
 
 class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> {
+  final int productId;
   const StoreProductDetailScreen({super.key, required this.productId});
 
-  final int productId;
+  @override
+  PreferredSizeWidget? buildAppBar(BuildContext context) {
+    final controller = Get.find<StoreProductDetailController>();
+    final product = controller.product.value;
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Colors.white,
+      automaticallyImplyLeading: false,
+      toolbarHeight: 56,
+      titleSpacing: 0,
+      title: Row(
+        children: [
+          const SizedBox(width: 8),
+          IconButton(
+            icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF161A1D), size: 20),
+            onPressed: () => Get.back(),
+            splashRadius: 24,
+          ),
+          const SizedBox(width: 4),
+          Expanded(
+            child: Text(
+              product?.storeName ?? '',
+              style: const TextStyle(
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w700,
+                fontSize: 18,
+                color: Color(0xFF161A1D),
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.favorite, color: Color(0xFF5856D7), size: 22),
+            onPressed: () {},
+            splashRadius: 24,
+          ),
+          const SizedBox(width: 8),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget? buildBottomNavigationBar(BuildContext context) {
+    return Obx(() {
+      final price = controller.product.value?.price;
+      final priceText = price != null ? "\$${price.toStringAsFixed(2)}" : "";
+
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+        child: SizedBox(
+          height: 48,
+          width: double.infinity,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              elevation: 0,
+              backgroundColor: const Color(0xFF5856D7),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(24),
+              ),
+            ),
+            onPressed: () {
+              // controller.addToCart();
+            },
+            child: Text(
+              'Add to cart${priceText.isNotEmpty ? " • $priceText" : ""}',
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 15,
+                color: Colors.white,
+                fontFamily: 'Inter',
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+  }
 
   @override
   Widget buildScreen(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Obx(() {
-        if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
-        }
+    return GetX<StoreProductDetailController>(
+      init: StoreProductDetailController(productId),
+      builder: (controller) {
+        final isLoading = controller.isLoading.value;
         final product = controller.product.value;
+
+        if (isLoading) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
         if (product == null) {
-          return const Center(child: Text('Product not found'));
+          return const Scaffold(
+            body: Center(child: Text('Product not found')),
+          );
         }
 
         return ListView(
           children: [
             // Ảnh sản phẩm
             Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+              child: Stack(
                 children: [
-                  // Ảnh đầu tiên
                   Container(
-                    height: 200,
+                    height: 230,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage(product.imageUrls.firstOrNull ?? ''),
+                        image: NetworkImage(product.storeImageUrl),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 12),
-                  // Logo + tên store
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: const Color(0xFFE8EBEE)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
+                  // Dùng Align để luôn căn giữa ở dưới cùng ảnh
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 180),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: const Color(0xFFE8EBEE)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.07),
+                              blurRadius: 6,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.network(
-                          product.storeImageUrl,
-                          width: 18,
-                          height: 18,
-                          errorBuilder: (_, __, ___) => const Icon(Icons.store, size: 18),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.network(
+                              product.storeImageUrl,
+                              width: 24,
+                              height: 24,
+                              errorBuilder: (_, __, ___) => const Icon(Icons.store, size: 24),
+                            ),
+                            const SizedBox(width: 8),
+                            Flexible(
+                              child: Text(
+                                product.storeName,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                  color: Color(0xFF161A1D),
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(width: 6),
-                        Text(
-                          product.storeName,
-                          style: const TextStyle(
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14,
-                            color: Color(0xFF161A1D),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
+
             // Tên sp + giá
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -91,133 +186,134 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                 children: [
                   Text(
                     product.name,
-                    style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 18, color: Color(0xFF161A1D)),
+                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: Color(0xFF161A1D)),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '${product.price / 100.0} ${product.taxType}',
-                    style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF4A5763)),
+                    '${product.price} ${product.taxType}',
+                    style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF4A5763)),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 16),
-            // Reset recipe button (nếu muốn)
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Row(
-                children: [
-                  OutlinedButton.icon(
-                    style: OutlinedButton.styleFrom(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-                      side: const BorderSide(color: Color(0xFFE8EBEE)),
-                      backgroundColor: const Color(0xFFF7F8F9),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    ),
-                    onPressed: () {},
-                    icon: const Icon(Icons.refresh, size: 20, color: Color(0xFF5856D7)),
-                    label: const Text(
-                      'Reset to standard recipe',
-                      style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14,
-                        color: Color(0xFF5856D7),
-                      ),
-                    ),
+              child: GestureDetector(
+                onTap: () {
+                  // TODO: handle reset
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF7F8F9),
+                    borderRadius: BorderRadius.circular(20), // pill shape
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            // ========== Render variations (Size)
-            _sectionLabel("Size", required: true),
-            ...product.variations.asMap().entries.map(
-              (e) => _optionRadioTile(
-                context,
-                label: e.value.type,
-                subLabel: '${e.value.price / 100.0} ${product.taxType}',
-                group: 'variation',
-                value: e.value.type,
-                selected: controller.selectedOptions['variation'] == e.value.type,
-                onTap: () => controller.selectOption('variation', e.value.type),
-              ),
-            ),
-            _sectionDivider(),
-            // ========== Render choice options (dynamic, từ API)
-            for (final choice in product.choiceOptions) ...[
-              _sectionLabel(choice.title, required: true),
-              ...choice.options.map(
-                (opt) => _optionRadioTile(
-                  context,
-                  label: opt,
-                  group: choice.name,
-                  value: opt,
-                  selected: controller.selectedOptions[choice.name] == opt,
-                  onTap: () => controller.selectOption(choice.name, opt),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Reset to standard recipe',
+                        style: const TextStyle(
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          color: Color(0xFF161A1D),
+                        ),
+                      ),
+                      const Spacer(),
+                      Icon(
+                        Icons.refresh,
+                        size: 18,
+                        color: Color(0xFFB5B9C2), // màu icon gần #E8EBEE hoặc màu xám nhạt
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              _sectionDivider(),
+            ),
+
+            const SizedBox(height: 20),
+            // ========== Render variations (Size)
+            if (product.variations.isNotEmpty) ...[
+              OptionGroupSection(
+                title: "Size",
+                requiredField: true,
+                options: product.variations
+                    .map(
+                      (v) => OptionItem(
+                        label: v.type,
+                        value: v.type,
+                        subLabel: "${v.price / 100.0} ${product.taxType}",
+                      ),
+                    )
+                    .toList(),
+                selectedValue: controller.selectedOptions["variation"], // chỉ lấy String
+                onSelected: (val) => controller.selectOption("variation", val),
+              ),
             ],
-            // ========== Các section khác, add-ons, toppings... bạn bổ sung tương tự như choiceOptions
-            // ... (ví dụ Milk, Lemonade, Ice nếu map được vào API)
+
+            _sectionDivider(),
+            if (product.choiceOptions.isNotEmpty) ...[
+              // Render choice_options
+              for (final choice in product.choiceOptions)
+                OptionGroupSection(
+                  title: choice.title,
+                  requiredField: true,
+                  options: choice.options.map((opt) => OptionItem(label: opt, value: opt)).toList(),
+                  selectedValue: controller.selectedOptions[choice.name], // chỉ lấy String
+                  onSelected: (val) => controller.selectOption(choice.name, val),
+                ),
+            ],
 
             // Recommend sản phẩm (gợi ý mua thêm)
             if (controller.recommendations.isNotEmpty) ...[
               _sectionLabel('You might also like'),
               SizedBox(
-                height: 140,
+                height: 200.w,
                 child: ListView.separated(
-                  padding: const EdgeInsets.all(12),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
                   scrollDirection: Axis.horizontal,
                   itemCount: controller.recommendations.length,
                   itemBuilder: (_, i) {
                     final item = controller.recommendations[i];
-                    return Column(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.network(item.imageUrl, width: 70, height: 70, fit: BoxFit.cover),
-                        ),
-                        SizedBox(height: 8),
-                        Text(item.name, style: TextStyle(fontSize: 13, fontFamily: 'Inter'), maxLines: 2),
-                        Text('${item.price / 100.0} ${product.taxType}', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                      ],
+
+                    final productItem = ProductItem(
+                      id: item.id,
+                      name: item.name,
+                      price: (item.price / 100.0).toStringAsFixed(2),
+                      imageUrl: item.imageUrl,
+                      rating: 123, //
+                      reviewCount: 123, // Tương tự
+                    );
+
+                    return ProductCard(
+                      item: productItem,
                     );
                   },
-                  separatorBuilder: (_, __) => SizedBox(width: 12),
+                  separatorBuilder: (_, _) => SizedBox(width: 12.w),
                 ),
               ),
+
+              if (product.nutritions.isNotEmpty) ...[
+                ProductNutritionSection(
+                  details: product.description,
+                  ingredients: product.nutritions.toString(),
+                  nutritions: product.nutritions,
+                ),
+              ],
             ],
+
             const SizedBox(height: 32),
-            // Bottom bar đặt hàng...
           ],
         );
-      }),
-      bottomNavigationBar: Obx(() {
-        // Hiện nút đặt hàng (Add to cart)
-        return Padding(
-          padding: const EdgeInsets.all(20),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF5856D7),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-              minimumSize: const Size.fromHeight(50),
-            ),
-            onPressed: () {
-              // controller.addToCart();
-            },
-            child: const Text(
-              'Add to cart',
-              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 16),
-            ),
-          ),
-        );
-      }),
+      },
     );
   }
 
-  Widget _sectionLabel(String text, {bool required = false, String? note}) {
+  // Các helper UI function giữ nguyên như cũ
+  static Widget _sectionLabel(String text, {bool required = false, String? note}) {
     return Container(
       width: double.infinity,
       color: const Color(0xFFF7F8F9),
@@ -226,80 +322,23 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
         children: [
           Text(
             text,
-            style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
           ),
           if (required)
             const Text(
               "  *",
-              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 13, color: Color(0xFF5856D7)),
+              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13, color: Color(0xFF5856D7)),
             ),
           const Spacer(),
           if (note != null)
             Text(
               note,
-              style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xFF4A5763)),
+              style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xFF4A5763)),
             ),
         ],
       ),
     );
   }
 
-  Widget _sectionDivider() => Container(height: 1, color: const Color(0xFFE8EBEE), margin: EdgeInsets.zero);
-
-  Widget _optionRadioTile(
-    BuildContext context, {
-    required String label,
-    String? subLabel,
-    required String group,
-    required String value,
-    required bool selected,
-    required VoidCallback onTap,
-  }) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
-        child: Row(
-          children: [
-            _customRadio(selected: selected),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                label,
-                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF161A1D)),
-              ),
-            ),
-            if (subLabel != null && subLabel.isNotEmpty)
-              Text(
-                subLabel,
-                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF4A5763)),
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _customRadio({required bool selected}) {
-    return Container(
-      width: 24,
-      height: 24,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: selected ? const Color(0xFF5856D7) : const Color(0xFF798A9A),
-          width: 1.5,
-        ),
-      ),
-      child: selected
-          ? Center(
-              child: Container(
-                width: 12,
-                height: 12,
-                decoration: const BoxDecoration(color: Color(0xFF5856D7), shape: BoxShape.circle),
-              ),
-            )
-          : null,
-    );
-  }
+  static Widget _sectionDivider() => Container(height: 1, color: const Color(0xFFE8EBEE), margin: EdgeInsets.zero);
 }

@@ -33,7 +33,7 @@ _ProductDetail _$ProductDetailFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       description: json['description'] as String,
       imageUrls: (json['image_url'] as List<dynamic>)
-          .map((e) => e as String)
+          .map((e) => ImageUrl.fromJson(e as Map<String, dynamic>))
           .toList(),
       gallery: (json['gallery'] as List<dynamic>)
           .map((e) => e as String)
@@ -64,7 +64,9 @@ _ProductDetail _$ProductDetailFromJson(Map<String, dynamic> json) =>
           .map((e) => e as String)
           .toList(),
       foodVariations: json['food_variations'] as List<dynamic>,
-      nutritions: json['nutritions'] as List<dynamic>,
+      nutritions: (json['nutritions'] as List<dynamic>)
+          .map((e) => Nutrition.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$ProductDetailToJson(_ProductDetail instance) =>
@@ -141,3 +143,19 @@ Map<String, dynamic> _$ProductRecommendationToJson(
   'image_url': instance.imageUrl,
   'price': instance.price,
 };
+
+_ImageUrl _$ImageUrlFromJson(Map<String, dynamic> json) =>
+    _ImageUrl(img: json['img'] as String, storage: json['storage'] as String);
+
+Map<String, dynamic> _$ImageUrlToJson(_ImageUrl instance) => <String, dynamic>{
+  'img': instance.img,
+  'storage': instance.storage,
+};
+
+_Nutrition _$NutritionFromJson(Map<String, dynamic> json) => _Nutrition(
+  id: (json['id'] as num).toInt(),
+  nutrition: json['nutrition'] as String,
+);
+
+Map<String, dynamic> _$NutritionToJson(_Nutrition instance) =>
+    <String, dynamic>{'id': instance.id, 'nutrition': instance.nutrition};

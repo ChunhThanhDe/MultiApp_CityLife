@@ -179,7 +179,8 @@ $ProductDetailCopyWith<$Res> get item {
 /// @nodoc
 mixin _$ProductDetail {
 
- int get id;@JsonKey(name: 'store_id') int get storeId;@JsonKey(name: 'store_name') String get storeName;@JsonKey(name: 'store_image_url') String get storeImageUrl; String get name; String get description;@JsonKey(name: 'image_url') List<String> get imageUrls; List<String> get gallery; int get price; int get tax;@JsonKey(name: 'tax_type') String get taxType; int get discount;@JsonKey(name: 'discount_type') String get discountType; bool get veg; int get stock;@JsonKey(name: 'unit_id') int get unitId;@JsonKey(name: 'order_count') int get orderCount;@JsonKey(name: 'avg_rating') double get avgRating;@JsonKey(name: 'rating_count') int get ratingCount; String get slug; bool get recommended; bool get organic;@JsonKey(name: 'maximum_cart_quantity') int? get maximumCartQuantity;@JsonKey(name: 'add_ons') List<dynamic> get addOns; List<Variation> get variations;@JsonKey(name: 'choice_options') List<ChoiceOption> get choiceOptions; List<String> get attributes;@JsonKey(name: 'food_variations') List<dynamic> get foodVariations; List<dynamic> get nutritions;
+ int get id;@JsonKey(name: 'store_id') int get storeId;@JsonKey(name: 'store_name') String get storeName;@JsonKey(name: 'store_image_url') String get storeImageUrl; String get name; String get description;// SỬA 1: ImageUrl object
+@JsonKey(name: 'image_url') List<ImageUrl> get imageUrls; List<String> get gallery; int get price; int get tax;@JsonKey(name: 'tax_type') String get taxType; int get discount;@JsonKey(name: 'discount_type') String get discountType; bool get veg; int get stock;@JsonKey(name: 'unit_id') int get unitId;@JsonKey(name: 'order_count') int get orderCount;@JsonKey(name: 'avg_rating') double get avgRating;@JsonKey(name: 'rating_count') int get ratingCount; String get slug; bool get recommended; bool get organic;@JsonKey(name: 'maximum_cart_quantity') int? get maximumCartQuantity;@JsonKey(name: 'add_ons') List<dynamic> get addOns; List<Variation> get variations;@JsonKey(name: 'choice_options') List<ChoiceOption> get choiceOptions; List<String> get attributes;@JsonKey(name: 'food_variations') List<dynamic> get foodVariations; List<Nutrition> get nutritions;
 /// Create a copy of ProductDetail
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -212,7 +213,7 @@ abstract mixin class $ProductDetailCopyWith<$Res>  {
   factory $ProductDetailCopyWith(ProductDetail value, $Res Function(ProductDetail) _then) = _$ProductDetailCopyWithImpl;
 @useResult
 $Res call({
- int id,@JsonKey(name: 'store_id') int storeId,@JsonKey(name: 'store_name') String storeName,@JsonKey(name: 'store_image_url') String storeImageUrl, String name, String description,@JsonKey(name: 'image_url') List<String> imageUrls, List<String> gallery, int price, int tax,@JsonKey(name: 'tax_type') String taxType, int discount,@JsonKey(name: 'discount_type') String discountType, bool veg, int stock,@JsonKey(name: 'unit_id') int unitId,@JsonKey(name: 'order_count') int orderCount,@JsonKey(name: 'avg_rating') double avgRating,@JsonKey(name: 'rating_count') int ratingCount, String slug, bool recommended, bool organic,@JsonKey(name: 'maximum_cart_quantity') int? maximumCartQuantity,@JsonKey(name: 'add_ons') List<dynamic> addOns, List<Variation> variations,@JsonKey(name: 'choice_options') List<ChoiceOption> choiceOptions, List<String> attributes,@JsonKey(name: 'food_variations') List<dynamic> foodVariations, List<dynamic> nutritions
+ int id,@JsonKey(name: 'store_id') int storeId,@JsonKey(name: 'store_name') String storeName,@JsonKey(name: 'store_image_url') String storeImageUrl, String name, String description,@JsonKey(name: 'image_url') List<ImageUrl> imageUrls, List<String> gallery, int price, int tax,@JsonKey(name: 'tax_type') String taxType, int discount,@JsonKey(name: 'discount_type') String discountType, bool veg, int stock,@JsonKey(name: 'unit_id') int unitId,@JsonKey(name: 'order_count') int orderCount,@JsonKey(name: 'avg_rating') double avgRating,@JsonKey(name: 'rating_count') int ratingCount, String slug, bool recommended, bool organic,@JsonKey(name: 'maximum_cart_quantity') int? maximumCartQuantity,@JsonKey(name: 'add_ons') List<dynamic> addOns, List<Variation> variations,@JsonKey(name: 'choice_options') List<ChoiceOption> choiceOptions, List<String> attributes,@JsonKey(name: 'food_variations') List<dynamic> foodVariations, List<Nutrition> nutritions
 });
 
 
@@ -238,7 +239,7 @@ as String,storeImageUrl: null == storeImageUrl ? _self.storeImageUrl : storeImag
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,imageUrls: null == imageUrls ? _self.imageUrls : imageUrls // ignore: cast_nullable_to_non_nullable
-as List<String>,gallery: null == gallery ? _self.gallery : gallery // ignore: cast_nullable_to_non_nullable
+as List<ImageUrl>,gallery: null == gallery ? _self.gallery : gallery // ignore: cast_nullable_to_non_nullable
 as List<String>,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as int,tax: null == tax ? _self.tax : tax // ignore: cast_nullable_to_non_nullable
 as int,taxType: null == taxType ? _self.taxType : taxType // ignore: cast_nullable_to_non_nullable
@@ -260,7 +261,7 @@ as List<Variation>,choiceOptions: null == choiceOptions ? _self.choiceOptions : 
 as List<ChoiceOption>,attributes: null == attributes ? _self.attributes : attributes // ignore: cast_nullable_to_non_nullable
 as List<String>,foodVariations: null == foodVariations ? _self.foodVariations : foodVariations // ignore: cast_nullable_to_non_nullable
 as List<dynamic>,nutritions: null == nutritions ? _self.nutritions : nutritions // ignore: cast_nullable_to_non_nullable
-as List<dynamic>,
+as List<Nutrition>,
   ));
 }
 
@@ -271,7 +272,7 @@ as List<dynamic>,
 @JsonSerializable()
 
 class _ProductDetail implements ProductDetail {
-  const _ProductDetail({required this.id, @JsonKey(name: 'store_id') required this.storeId, @JsonKey(name: 'store_name') required this.storeName, @JsonKey(name: 'store_image_url') required this.storeImageUrl, required this.name, required this.description, @JsonKey(name: 'image_url') required final  List<String> imageUrls, required final  List<String> gallery, required this.price, required this.tax, @JsonKey(name: 'tax_type') required this.taxType, required this.discount, @JsonKey(name: 'discount_type') required this.discountType, required this.veg, required this.stock, @JsonKey(name: 'unit_id') required this.unitId, @JsonKey(name: 'order_count') required this.orderCount, @JsonKey(name: 'avg_rating') required this.avgRating, @JsonKey(name: 'rating_count') required this.ratingCount, required this.slug, required this.recommended, required this.organic, @JsonKey(name: 'maximum_cart_quantity') this.maximumCartQuantity, @JsonKey(name: 'add_ons') required final  List<dynamic> addOns, required final  List<Variation> variations, @JsonKey(name: 'choice_options') required final  List<ChoiceOption> choiceOptions, required final  List<String> attributes, @JsonKey(name: 'food_variations') required final  List<dynamic> foodVariations, required final  List<dynamic> nutritions}): _imageUrls = imageUrls,_gallery = gallery,_addOns = addOns,_variations = variations,_choiceOptions = choiceOptions,_attributes = attributes,_foodVariations = foodVariations,_nutritions = nutritions;
+  const _ProductDetail({required this.id, @JsonKey(name: 'store_id') required this.storeId, @JsonKey(name: 'store_name') required this.storeName, @JsonKey(name: 'store_image_url') required this.storeImageUrl, required this.name, required this.description, @JsonKey(name: 'image_url') required final  List<ImageUrl> imageUrls, required final  List<String> gallery, required this.price, required this.tax, @JsonKey(name: 'tax_type') required this.taxType, required this.discount, @JsonKey(name: 'discount_type') required this.discountType, required this.veg, required this.stock, @JsonKey(name: 'unit_id') required this.unitId, @JsonKey(name: 'order_count') required this.orderCount, @JsonKey(name: 'avg_rating') required this.avgRating, @JsonKey(name: 'rating_count') required this.ratingCount, required this.slug, required this.recommended, required this.organic, @JsonKey(name: 'maximum_cart_quantity') this.maximumCartQuantity, @JsonKey(name: 'add_ons') required final  List<dynamic> addOns, required final  List<Variation> variations, @JsonKey(name: 'choice_options') required final  List<ChoiceOption> choiceOptions, required final  List<String> attributes, @JsonKey(name: 'food_variations') required final  List<dynamic> foodVariations, required final  List<Nutrition> nutritions}): _imageUrls = imageUrls,_gallery = gallery,_addOns = addOns,_variations = variations,_choiceOptions = choiceOptions,_attributes = attributes,_foodVariations = foodVariations,_nutritions = nutritions;
   factory _ProductDetail.fromJson(Map<String, dynamic> json) => _$ProductDetailFromJson(json);
 
 @override final  int id;
@@ -280,8 +281,10 @@ class _ProductDetail implements ProductDetail {
 @override@JsonKey(name: 'store_image_url') final  String storeImageUrl;
 @override final  String name;
 @override final  String description;
- final  List<String> _imageUrls;
-@override@JsonKey(name: 'image_url') List<String> get imageUrls {
+// SỬA 1: ImageUrl object
+ final  List<ImageUrl> _imageUrls;
+// SỬA 1: ImageUrl object
+@override@JsonKey(name: 'image_url') List<ImageUrl> get imageUrls {
   if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_imageUrls);
@@ -344,8 +347,8 @@ class _ProductDetail implements ProductDetail {
   return EqualUnmodifiableListView(_foodVariations);
 }
 
- final  List<dynamic> _nutritions;
-@override List<dynamic> get nutritions {
+ final  List<Nutrition> _nutritions;
+@override List<Nutrition> get nutritions {
   if (_nutritions is EqualUnmodifiableListView) return _nutritions;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_nutritions);
@@ -385,7 +388,7 @@ abstract mixin class _$ProductDetailCopyWith<$Res> implements $ProductDetailCopy
   factory _$ProductDetailCopyWith(_ProductDetail value, $Res Function(_ProductDetail) _then) = __$ProductDetailCopyWithImpl;
 @override @useResult
 $Res call({
- int id,@JsonKey(name: 'store_id') int storeId,@JsonKey(name: 'store_name') String storeName,@JsonKey(name: 'store_image_url') String storeImageUrl, String name, String description,@JsonKey(name: 'image_url') List<String> imageUrls, List<String> gallery, int price, int tax,@JsonKey(name: 'tax_type') String taxType, int discount,@JsonKey(name: 'discount_type') String discountType, bool veg, int stock,@JsonKey(name: 'unit_id') int unitId,@JsonKey(name: 'order_count') int orderCount,@JsonKey(name: 'avg_rating') double avgRating,@JsonKey(name: 'rating_count') int ratingCount, String slug, bool recommended, bool organic,@JsonKey(name: 'maximum_cart_quantity') int? maximumCartQuantity,@JsonKey(name: 'add_ons') List<dynamic> addOns, List<Variation> variations,@JsonKey(name: 'choice_options') List<ChoiceOption> choiceOptions, List<String> attributes,@JsonKey(name: 'food_variations') List<dynamic> foodVariations, List<dynamic> nutritions
+ int id,@JsonKey(name: 'store_id') int storeId,@JsonKey(name: 'store_name') String storeName,@JsonKey(name: 'store_image_url') String storeImageUrl, String name, String description,@JsonKey(name: 'image_url') List<ImageUrl> imageUrls, List<String> gallery, int price, int tax,@JsonKey(name: 'tax_type') String taxType, int discount,@JsonKey(name: 'discount_type') String discountType, bool veg, int stock,@JsonKey(name: 'unit_id') int unitId,@JsonKey(name: 'order_count') int orderCount,@JsonKey(name: 'avg_rating') double avgRating,@JsonKey(name: 'rating_count') int ratingCount, String slug, bool recommended, bool organic,@JsonKey(name: 'maximum_cart_quantity') int? maximumCartQuantity,@JsonKey(name: 'add_ons') List<dynamic> addOns, List<Variation> variations,@JsonKey(name: 'choice_options') List<ChoiceOption> choiceOptions, List<String> attributes,@JsonKey(name: 'food_variations') List<dynamic> foodVariations, List<Nutrition> nutritions
 });
 
 
@@ -411,7 +414,7 @@ as String,storeImageUrl: null == storeImageUrl ? _self.storeImageUrl : storeImag
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,imageUrls: null == imageUrls ? _self._imageUrls : imageUrls // ignore: cast_nullable_to_non_nullable
-as List<String>,gallery: null == gallery ? _self._gallery : gallery // ignore: cast_nullable_to_non_nullable
+as List<ImageUrl>,gallery: null == gallery ? _self._gallery : gallery // ignore: cast_nullable_to_non_nullable
 as List<String>,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as int,tax: null == tax ? _self.tax : tax // ignore: cast_nullable_to_non_nullable
 as int,taxType: null == taxType ? _self.taxType : taxType // ignore: cast_nullable_to_non_nullable
@@ -433,7 +436,7 @@ as List<Variation>,choiceOptions: null == choiceOptions ? _self._choiceOptions :
 as List<ChoiceOption>,attributes: null == attributes ? _self._attributes : attributes // ignore: cast_nullable_to_non_nullable
 as List<String>,foodVariations: null == foodVariations ? _self._foodVariations : foodVariations // ignore: cast_nullable_to_non_nullable
 as List<dynamic>,nutritions: null == nutritions ? _self._nutritions : nutritions // ignore: cast_nullable_to_non_nullable
-as List<dynamic>,
+as List<Nutrition>,
   ));
 }
 
@@ -857,6 +860,278 @@ as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nu
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as int,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$ImageUrl {
+
+ String get img; String get storage;
+/// Create a copy of ImageUrl
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ImageUrlCopyWith<ImageUrl> get copyWith => _$ImageUrlCopyWithImpl<ImageUrl>(this as ImageUrl, _$identity);
+
+  /// Serializes this ImageUrl to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ImageUrl&&(identical(other.img, img) || other.img == img)&&(identical(other.storage, storage) || other.storage == storage));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,img,storage);
+
+@override
+String toString() {
+  return 'ImageUrl(img: $img, storage: $storage)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ImageUrlCopyWith<$Res>  {
+  factory $ImageUrlCopyWith(ImageUrl value, $Res Function(ImageUrl) _then) = _$ImageUrlCopyWithImpl;
+@useResult
+$Res call({
+ String img, String storage
+});
+
+
+
+
+}
+/// @nodoc
+class _$ImageUrlCopyWithImpl<$Res>
+    implements $ImageUrlCopyWith<$Res> {
+  _$ImageUrlCopyWithImpl(this._self, this._then);
+
+  final ImageUrl _self;
+  final $Res Function(ImageUrl) _then;
+
+/// Create a copy of ImageUrl
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? img = null,Object? storage = null,}) {
+  return _then(_self.copyWith(
+img: null == img ? _self.img : img // ignore: cast_nullable_to_non_nullable
+as String,storage: null == storage ? _self.storage : storage // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// @nodoc
+@JsonSerializable()
+
+class _ImageUrl implements ImageUrl {
+  const _ImageUrl({required this.img, required this.storage});
+  factory _ImageUrl.fromJson(Map<String, dynamic> json) => _$ImageUrlFromJson(json);
+
+@override final  String img;
+@override final  String storage;
+
+/// Create a copy of ImageUrl
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ImageUrlCopyWith<_ImageUrl> get copyWith => __$ImageUrlCopyWithImpl<_ImageUrl>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$ImageUrlToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ImageUrl&&(identical(other.img, img) || other.img == img)&&(identical(other.storage, storage) || other.storage == storage));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,img,storage);
+
+@override
+String toString() {
+  return 'ImageUrl(img: $img, storage: $storage)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ImageUrlCopyWith<$Res> implements $ImageUrlCopyWith<$Res> {
+  factory _$ImageUrlCopyWith(_ImageUrl value, $Res Function(_ImageUrl) _then) = __$ImageUrlCopyWithImpl;
+@override @useResult
+$Res call({
+ String img, String storage
+});
+
+
+
+
+}
+/// @nodoc
+class __$ImageUrlCopyWithImpl<$Res>
+    implements _$ImageUrlCopyWith<$Res> {
+  __$ImageUrlCopyWithImpl(this._self, this._then);
+
+  final _ImageUrl _self;
+  final $Res Function(_ImageUrl) _then;
+
+/// Create a copy of ImageUrl
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? img = null,Object? storage = null,}) {
+  return _then(_ImageUrl(
+img: null == img ? _self.img : img // ignore: cast_nullable_to_non_nullable
+as String,storage: null == storage ? _self.storage : storage // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$Nutrition {
+
+ int get id; String get nutrition;
+/// Create a copy of Nutrition
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$NutritionCopyWith<Nutrition> get copyWith => _$NutritionCopyWithImpl<Nutrition>(this as Nutrition, _$identity);
+
+  /// Serializes this Nutrition to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Nutrition&&(identical(other.id, id) || other.id == id)&&(identical(other.nutrition, nutrition) || other.nutrition == nutrition));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,nutrition);
+
+@override
+String toString() {
+  return 'Nutrition(id: $id, nutrition: $nutrition)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $NutritionCopyWith<$Res>  {
+  factory $NutritionCopyWith(Nutrition value, $Res Function(Nutrition) _then) = _$NutritionCopyWithImpl;
+@useResult
+$Res call({
+ int id, String nutrition
+});
+
+
+
+
+}
+/// @nodoc
+class _$NutritionCopyWithImpl<$Res>
+    implements $NutritionCopyWith<$Res> {
+  _$NutritionCopyWithImpl(this._self, this._then);
+
+  final Nutrition _self;
+  final $Res Function(Nutrition) _then;
+
+/// Create a copy of Nutrition
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? nutrition = null,}) {
+  return _then(_self.copyWith(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,nutrition: null == nutrition ? _self.nutrition : nutrition // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// @nodoc
+@JsonSerializable()
+
+class _Nutrition implements Nutrition {
+  const _Nutrition({required this.id, required this.nutrition});
+  factory _Nutrition.fromJson(Map<String, dynamic> json) => _$NutritionFromJson(json);
+
+@override final  int id;
+@override final  String nutrition;
+
+/// Create a copy of Nutrition
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$NutritionCopyWith<_Nutrition> get copyWith => __$NutritionCopyWithImpl<_Nutrition>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$NutritionToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Nutrition&&(identical(other.id, id) || other.id == id)&&(identical(other.nutrition, nutrition) || other.nutrition == nutrition));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,nutrition);
+
+@override
+String toString() {
+  return 'Nutrition(id: $id, nutrition: $nutrition)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$NutritionCopyWith<$Res> implements $NutritionCopyWith<$Res> {
+  factory _$NutritionCopyWith(_Nutrition value, $Res Function(_Nutrition) _then) = __$NutritionCopyWithImpl;
+@override @useResult
+$Res call({
+ int id, String nutrition
+});
+
+
+
+
+}
+/// @nodoc
+class __$NutritionCopyWithImpl<$Res>
+    implements _$NutritionCopyWith<$Res> {
+  __$NutritionCopyWithImpl(this._self, this._then);
+
+  final _Nutrition _self;
+  final $Res Function(_Nutrition) _then;
+
+/// Create a copy of Nutrition
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? nutrition = null,}) {
+  return _then(_Nutrition(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,nutrition: null == nutrition ? _self.nutrition : nutrition // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

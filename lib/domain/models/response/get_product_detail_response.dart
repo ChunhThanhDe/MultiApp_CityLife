@@ -25,7 +25,8 @@ abstract class ProductDetail with _$ProductDetail {
     @JsonKey(name: 'store_image_url') required String storeImageUrl,
     required String name,
     required String description,
-    @JsonKey(name: 'image_url') required List<String> imageUrls,
+    // SỬA 1: ImageUrl object
+    @JsonKey(name: 'image_url') required List<ImageUrl> imageUrls,
     required List<String> gallery,
     required int price,
     required int tax,
@@ -47,7 +48,7 @@ abstract class ProductDetail with _$ProductDetail {
     @JsonKey(name: 'choice_options') required List<ChoiceOption> choiceOptions,
     required List<String> attributes,
     @JsonKey(name: 'food_variations') required List<dynamic> foodVariations,
-    required List<dynamic> nutritions,
+    required List<Nutrition> nutritions,
   }) = _ProductDetail;
 
   factory ProductDetail.fromJson(Map<String, dynamic> json) => _$ProductDetailFromJson(json);
@@ -58,6 +59,7 @@ abstract class Variation with _$Variation {
   const factory Variation({
     required String type,
     required int price,
+    // Nếu có thêm stock, thêm luôn: required int stock,
   }) = _Variation;
 
   factory Variation.fromJson(Map<String, dynamic> json) => _$VariationFromJson(json);
@@ -84,4 +86,26 @@ abstract class ProductRecommendation with _$ProductRecommendation {
   }) = _ProductRecommendation;
 
   factory ProductRecommendation.fromJson(Map<String, dynamic> json) => _$ProductRecommendationFromJson(json);
+}
+
+// IMAGE URL MODEL ĐÚNG KIỂU
+@freezed
+abstract class ImageUrl with _$ImageUrl {
+  const factory ImageUrl({
+    required String img,
+    required String storage,
+  }) = _ImageUrl;
+
+  factory ImageUrl.fromJson(Map<String, dynamic> json) => _$ImageUrlFromJson(json);
+}
+
+// NUTRITION MODEL
+@freezed
+abstract class Nutrition with _$Nutrition {
+  const factory Nutrition({
+    required int id,
+    required String nutrition,
+  }) = _Nutrition;
+
+  factory Nutrition.fromJson(Map<String, dynamic> json) => _$NutritionFromJson(json);
 }
