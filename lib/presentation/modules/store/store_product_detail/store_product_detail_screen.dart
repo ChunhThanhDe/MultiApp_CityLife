@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_card.dart';
+import 'package:sixam_mart_user/presentation/modules/store/components/product_detail_appbar.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_nutritiion_section.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_option_group_section.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
@@ -15,44 +16,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    final controller = Get.find<StoreProductDetailController>();
-    final product = controller.product.value;
-    return AppBar(
-      elevation: 0,
-      backgroundColor: Colors.white,
-      automaticallyImplyLeading: false,
-      toolbarHeight: 56,
-      titleSpacing: 0,
-      title: Row(
-        children: [
-          const SizedBox(width: 8),
-          IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF161A1D), size: 20),
-            onPressed: () => Get.back(),
-            splashRadius: 24,
-          ),
-          const SizedBox(width: 4),
-          Expanded(
-            child: Text(
-              product?.storeName ?? '',
-              style: const TextStyle(
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w700,
-                fontSize: 18,
-                color: Color(0xFF161A1D),
-              ),
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          IconButton(
-            icon: const Icon(Icons.favorite, color: Color(0xFF5856D7), size: 22),
-            onPressed: () {},
-            splashRadius: 24,
-          ),
-          const SizedBox(width: 8),
-        ],
-      ),
-    );
+    return StoreDetailAppBar();
   }
 
   @override

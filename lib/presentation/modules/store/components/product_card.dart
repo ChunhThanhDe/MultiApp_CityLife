@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 
@@ -25,12 +27,20 @@ ProductCard
         children: [
           Stack(
             children: [
-              Container(
-                height: 120.h,
-                decoration: BoxDecoration(color: AppColors.stateGreyLowest50, borderRadius: BorderRadius.circular(12.r)),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12.r),
-                  child: AppImage.network(item.imageUrl, width: 120.w, height: 120.h),
+              GestureDetector(
+                onTap: () {
+                  Get.toNamed(AppRoutes.storeProductDetail, arguments: {'productId': 10023});
+                },
+                child: Container(
+                  height: 120.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.stateGreyLowest50,
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12.r),
+                    child: AppImage.network(item.imageUrl, width: 120.w, height: 120.h),
+                  ),
                 ),
               ),
               Positioned(
@@ -54,6 +64,7 @@ ProductCard
               ),
             ],
           ),
+
           SizedBox(height: 8.h),
           Text(
             item.name,
