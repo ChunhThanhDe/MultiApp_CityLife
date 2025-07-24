@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/response/get_orders_history_response.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/components/cart_completed_order_section.dart';
@@ -33,6 +34,16 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
     }
   }
 
+  String formatOrderTime(DateTime? dateTime) {
+    if (dateTime == null) return '-';
+    final now = DateTime.now();
+    if (dateTime.year == now.year && dateTime.month == now.month && dateTime.day == now.day) {
+      return 'Today ${DateFormat('h:mm a').format(dateTime)}';
+    } else {
+      return DateFormat('MMM d, yyyy h:mm a').format(dateTime);
+    }
+  }
+
   @override
   Widget buildScreen(BuildContext context) {
     return Obx(() {
@@ -40,52 +51,68 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
         return const Center(child: CircularProgressIndicator());
       }
       if (controller.error.value.isNotEmpty) {
-        return Center(child: Text('Error: \\${controller.error.value}'));
+        return Center(child: Text('Error: ${controller.error.value}'));
       }
       final runningOrders = controller.runningOrders;
       if (runningOrders.isEmpty) {
         return const Center(child: Text('No running orders.'));
       }
-      // Separate in-progress and completed orders
       final inProgressOrders = runningOrders.where((o) => o.orderStatus != OrderStatus.delivered).toList();
       final completedOrders = runningOrders.where((o) => o.orderStatus == OrderStatus.delivered).toList();
-      return ListView(
-        children: [
-          if (inProgressOrders.isNotEmpty) ...[
-            ...inProgressOrders.map(
-              (order) => InProgressOrderCard(
-                label: order.orderStatus?.vi ?? '-',
-                time: order.createdAt != null ? order.createdAt.toString() : '-',
-                brandLogo: AppImageProvider.network(order.store?.logoFullUrl ?? ''),
-                brandName: order.store?.name ?? '-',
-                subtitle: ' ${order.detailsCount ?? 0} items',
-                price: ' ${order.orderAmount?.toStringAsFixed(2) ?? '-'}',
-                progressStep: getOrderProgressStep(order.orderStatus),
-                totalStep: 4,
-              ),
-            ),
-            const SizedBox(height: 16),
-            const Divider(height: 1),
-          ],
-          if (completedOrders.isNotEmpty) ...[
-            CompletedOrderSection(
-              date: completedOrders.first.createdAt != null ? completedOrders.first.createdAt.toString() : '-',
-              status: 'Completed',
-              orders: completedOrders
-                  .map(
-                    (order) => OrderListItem(
-                      brandLogo: AppImageProvider.network(order.store?.logoFullUrl ?? ''),
-                      brandName: order.store?.name ?? '-',
-                      subtitle: ' ${order.detailsCount ?? 0} items',
-                      price: ' ${order.orderAmount?.toStringAsFixed(2) ?? '-'}',
-                    ),
-                  )
-                  .toList(),
-            ),
-            const SizedBox(height: 16),
-            const Divider(height: 1),
-          ],
-        ],
+      return RefreshIndicator(
+        onRefresh: controller.refreshOrders,
+        child: NotificationListener<ScrollNotification>(
+          onNotification: (ScrollNotification scrollInfo) {
+            if (!controller.isLoadingMore.value && controller.hasMore && scrollInfo.metrics.pixels >= scrollInfo.metrics.maxScrollExtent - 200) {
+              controller.loadMoreOrders();
+            }
+            return false;
+          },
+          child: ListView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            children: [
+              if (inProgressOrders.isNotEmpty) ...[
+                ...inProgressOrders.map(
+                  (order) => InProgressOrderCard(
+                    label: order.orderStatus?.vi ?? '-',
+                    time: formatOrderTime(order.createdAt),
+                    brandLogo: AppImageProvider.network(order.store?.logoFullUrl ?? ''),
+                    brandName: order.store?.name ?? '-',
+                    subtitle: ' ${order.detailsCount ?? 0} items',
+                    price: '\$${order.orderAmount?.toStringAsFixed(2) ?? '-'}',
+                    progressStep: getOrderProgressStep(order.orderStatus),
+                    totalStep: 4,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const Divider(height: 1),
+              ],
+              if (completedOrders.isNotEmpty) ...[
+                CompletedOrderSection(
+                  date: formatOrderTime(completedOrders.first.createdAt),
+                  status: 'Completed',
+                  orders: completedOrders
+                      .map(
+                        (order) => OrderListItem(
+                          brandLogo: AppImageProvider.network(order.store?.logoFullUrl ?? ''),
+                          brandName: order.store?.name ?? '-',
+                          subtitle: ' ${order.detailsCount ?? 0} items',
+                          price: '\$${order.orderAmount?.toStringAsFixed(2) ?? '-'}',
+                        ),
+                      )
+                      .toList(),
+                ),
+                const SizedBox(height: 16),
+                const Divider(height: 1),
+              ],
+              if (controller.isLoadingMore.value)
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+            ],
+          ),
+        ),
       );
     });
   }

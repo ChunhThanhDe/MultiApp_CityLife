@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_repository.dart';
 import 'package:sixam_mart_user/domain/models/request/cart_models.dart';
@@ -24,7 +25,14 @@ class CartRepository extends BaseRepository {
       requestData.remove('add_on_ids');
       requestData.remove('add_on_qtys');
     }
-    return handleApiRequest(() => dioClient.post(CartApiPath.addToCart, data: jsonEncode(requestData)));
+    final headers = {'moduleId': '1'};
+    return handleApiRequest(
+      () => dioClient.post(
+        CartApiPath.addToCart,
+        data: jsonEncode(requestData),
+        options: Options(headers: headers),
+      ),
+    );
   }
 
   Future<ApiResult> updateCart(UpdateCartRequest request) async {
