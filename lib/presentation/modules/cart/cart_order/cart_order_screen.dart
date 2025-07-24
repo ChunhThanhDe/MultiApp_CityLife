@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/components/cart_completed_order_section.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/components/cart_in_progress_order_card.dart';
@@ -17,59 +18,58 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    return ListView(
-      children: [
-        // In-progress Order Section
-        InProgressOrderCard(
-          label: "Heading your way",
-          time: "Today 7:35 AM",
-          brandLogo: AppImageProvider.asset('assets/images/starbucks.png'),
-          brandName: "Starbucks®",
-          subtitle: "4 items",
-          price: "\$35.87",
-          progressStep: 3,
-          totalStep: 4,
-        ),
-        SizedBox(height: 16),
-        Divider(height: 1),
-        // Another In-progress Order
-        InProgressOrderCard(
-          label: "Heading your way",
-          time: "Today 7:35 AM",
-          brandLogo: AppImageProvider.asset('assets/images/starbucks.png'),
-          brandName: "Starbucks®",
-          subtitle: "4 items",
-          price: "\$35.87",
-          progressStep: 3,
-          totalStep: 4,
-        ),
-        SizedBox(height: 16),
-        Divider(height: 1),
-
-        // Completed Orders Section
-        CompletedOrderSection(
-          date: "Sep 18, 2023 7:30 AM",
-          status: "Completed",
-          orders: [
-            OrderListItem(brandLogo: AppImageProvider.asset('assets/images/starbucks.png'), brandName: "Starbucks®", subtitle: "4 items", price: "\$14.32"),
-            OrderListItem(brandLogo: AppImageProvider.asset('assets/images/starbucks.png'), brandName: "Starbucks®", subtitle: "4 items", price: "\$14.32"),
-            OrderListItem(brandLogo: AppImageProvider.asset('assets/images/mcdonalds.png'), brandName: "McDonald's", subtitle: "2 items", price: "\$21.55"),
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return const Center(child: CircularProgressIndicator());
+      }
+      if (controller.error.value.isNotEmpty) {
+        return Center(child: Text('Error: \\${controller.error.value}'));
+      }
+      final runningOrders = controller.runningOrders;
+      if (runningOrders.isEmpty) {
+        return const Center(child: Text('No running orders.'));
+      }
+      // Separate in-progress and completed orders
+      final inProgressOrders = runningOrders.where((o) => o.orderStatus?.toLowerCase() != 'completed').toList();
+      final completedOrders = runningOrders.where((o) => o.orderStatus?.toLowerCase() == 'completed').toList();
+      return ListView(
+        children: [
+          if (inProgressOrders.isNotEmpty) ...[
+            ...inProgressOrders.map(
+              (order) => InProgressOrderCard(
+                label: order.orderStatus?.capitalizeFirst ?? '-',
+                time: order.createdAt != null ? order.createdAt.toString() : '-',
+                brandLogo: AppImageProvider.network(order.store?.logoFullUrl ?? ''),
+                brandName: order.store?.name ?? '-',
+                subtitle: ' ${order.detailsCount ?? 0} items',
+                price: ' ${order.orderAmount?.toStringAsFixed(2) ?? '-'}',
+                progressStep: 3, // TODO: Map status to step
+                totalStep: 4,
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Divider(height: 1),
           ],
-        ),
-        SizedBox(height: 16),
-        Divider(height: 1),
-
-        // Another Completed Orders Section
-        CompletedOrderSection(
-          date: "Sep 18, 2023 7:30 AM",
-          status: "Completed",
-          orders: [
-            OrderListItem(brandLogo: AppImageProvider.asset('assets/images/starbucks.png'), brandName: "Starbucks®", subtitle: "4 items", price: "\$14.32"),
-            OrderListItem(brandLogo: AppImageProvider.asset('assets/images/mcdonalds.png'), brandName: "McDonald's", subtitle: "2 items", price: "\$21.55"),
+          if (completedOrders.isNotEmpty) ...[
+            CompletedOrderSection(
+              date: completedOrders.first.createdAt != null ? completedOrders.first.createdAt.toString() : '-',
+              status: 'Completed',
+              orders: completedOrders
+                  .map(
+                    (order) => OrderListItem(
+                      brandLogo: AppImageProvider.network(order.store?.logoFullUrl ?? ''),
+                      brandName: order.store?.name ?? '-',
+                      subtitle: ' ${order.detailsCount ?? 0} items',
+                      price: ' ${order.orderAmount?.toStringAsFixed(2) ?? '-'}',
+                    ),
+                  )
+                  .toList(),
+            ),
+            const SizedBox(height: 16),
+            const Divider(height: 1),
           ],
-        ),
-        SizedBox(height: 16),
-      ],
-    );
+        ],
+      );
+    });
   }
 }
