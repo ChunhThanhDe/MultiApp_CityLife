@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/domain/models/response/get_orders_history_response.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/components/cart_completed_order_section.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/components/cart_in_progress_order_card.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
@@ -14,6 +15,22 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return BasicAppBar(title: 'Orders');
+  }
+
+  int getOrderProgressStep(OrderStatus? status) {
+    switch (status) {
+      case OrderStatus.pending:
+      case OrderStatus.confirmed:
+        return 1;
+      case OrderStatus.preparing:
+        return 2;
+      case OrderStatus.picked_up:
+        return 3;
+      case OrderStatus.delivered:
+        return 4;
+      default:
+        return 1;
+    }
   }
 
   @override
@@ -30,20 +47,20 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
         return const Center(child: Text('No running orders.'));
       }
       // Separate in-progress and completed orders
-      final inProgressOrders = runningOrders.where((o) => o.orderStatus?.toLowerCase() != 'completed').toList();
-      final completedOrders = runningOrders.where((o) => o.orderStatus?.toLowerCase() == 'completed').toList();
+      final inProgressOrders = runningOrders.where((o) => o.orderStatus != OrderStatus.delivered).toList();
+      final completedOrders = runningOrders.where((o) => o.orderStatus == OrderStatus.delivered).toList();
       return ListView(
         children: [
           if (inProgressOrders.isNotEmpty) ...[
             ...inProgressOrders.map(
               (order) => InProgressOrderCard(
-                label: order.orderStatus?.capitalizeFirst ?? '-',
+                label: order.orderStatus?.vi ?? '-',
                 time: order.createdAt != null ? order.createdAt.toString() : '-',
                 brandLogo: AppImageProvider.network(order.store?.logoFullUrl ?? ''),
                 brandName: order.store?.name ?? '-',
                 subtitle: ' ${order.detailsCount ?? 0} items',
                 price: ' ${order.orderAmount?.toStringAsFixed(2) ?? '-'}',
-                progressStep: 3, // TODO: Map status to step
+                progressStep: getOrderProgressStep(order.orderStatus),
                 totalStep: 4,
               ),
             ),

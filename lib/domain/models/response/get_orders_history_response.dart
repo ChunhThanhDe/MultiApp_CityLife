@@ -17,6 +17,16 @@ abstract class GetOrdersHistoryResponse with _$GetOrdersHistoryResponse {
   factory GetOrdersHistoryResponse.fromJson(Map<String, dynamic> json) => _$GetOrdersHistoryResponseFromJson(json);
 }
 
+class OrderStatusConverter implements JsonConverter<OrderStatus, String?> {
+  const OrderStatusConverter();
+
+  @override
+  OrderStatus fromJson(String? json) => orderStatusFromString(json);
+
+  @override
+  String toJson(OrderStatus object) => object.en;
+}
+
 @freezed
 abstract class Order with _$Order {
   const factory Order({
@@ -26,7 +36,7 @@ abstract class Order with _$Order {
     @JsonKey(name: "coupon_discount_amount") int? couponDiscountAmount,
     @JsonKey(name: "coupon_discount_title") String? couponDiscountTitle,
     @JsonKey(name: "payment_status") String? paymentStatus,
-    @JsonKey(name: "order_status") String? orderStatus,
+    @OrderStatusConverter() @JsonKey(name: "order_status") OrderStatus? orderStatus,
     @JsonKey(name: "total_tax_amount") double? totalTaxAmount,
     @JsonKey(name: "payment_method") String? paymentMethod,
     @JsonKey(name: "transaction_reference") dynamic transactionReference,
@@ -104,6 +114,76 @@ abstract class Order with _$Order {
   }) = _Order;
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
+}
+
+// Order status enum with Vietnamese translations as comments
+enum OrderStatus {
+  pending, // Chờ xử lý
+  accepted, // Đã được cửa hàng chấp nhận
+  confirmed, // Cửa hàng xác nhận đang chuẩn bị
+  preparing, // Đang chuẩn bị
+  processing, // Đơn đang được xử lý/giao
+  handover, // Giao cho shipper
+  picked_up, // Đã được shipper lấy hàng
+  delivered, // Giao hàng thành công
+  canceled, // Đơn hàng bị hủy
+  failed, // Giao hàng thất bại
+}
+
+OrderStatus orderStatusFromString(String? status) {
+  switch (status?.toLowerCase()) {
+    case 'pending':
+      return OrderStatus.pending;
+    case 'accepted':
+      return OrderStatus.accepted;
+    case 'confirmed':
+      return OrderStatus.confirmed;
+    case 'preparing':
+      return OrderStatus.preparing;
+    case 'processing':
+      return OrderStatus.processing;
+    case 'handover':
+      return OrderStatus.handover;
+    case 'picked_up':
+      return OrderStatus.picked_up;
+    case 'delivered':
+      return OrderStatus.delivered;
+    case 'canceled':
+      return OrderStatus.canceled;
+    case 'failed':
+      return OrderStatus.failed;
+    default:
+      return OrderStatus.pending;
+  }
+}
+
+extension OrderStatusExtension on OrderStatus {
+  String get vi {
+    switch (this) {
+      case OrderStatus.pending:
+        return 'Chờ xử lý';
+      case OrderStatus.accepted:
+        return 'Đã được cửa hàng chấp nhận';
+      case OrderStatus.confirmed:
+        return 'Cửa hàng xác nhận đang chuẩn bị';
+      case OrderStatus.preparing:
+        return 'Đang chuẩn bị';
+      case OrderStatus.processing:
+        return 'Đơn đang được xử lý/giao';
+      case OrderStatus.handover:
+        return 'Giao cho shipper';
+      case OrderStatus.picked_up:
+        return 'Đã được shipper lấy hàng';
+      case OrderStatus.delivered:
+        return 'Giao hàng thành công';
+      case OrderStatus.canceled:
+        return 'Đơn hàng bị hủy';
+      case OrderStatus.failed:
+        return 'Giao hàng thất bại';
+    }
+  }
+
+  String get en => toString().split('.').last;
 }
 
 @freezed

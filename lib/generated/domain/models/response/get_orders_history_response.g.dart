@@ -33,7 +33,9 @@ _Order _$OrderFromJson(Map<String, dynamic> json) => _Order(
   couponDiscountAmount: (json['coupon_discount_amount'] as num?)?.toInt(),
   couponDiscountTitle: json['coupon_discount_title'] as String?,
   paymentStatus: json['payment_status'] as String?,
-  orderStatus: json['order_status'] as String?,
+  orderStatus: const OrderStatusConverter().fromJson(
+    json['order_status'] as String?,
+  ),
   totalTaxAmount: (json['total_tax_amount'] as num?)?.toDouble(),
   paymentMethod: json['payment_method'] as String?,
   transactionReference: json['transaction_reference'],
@@ -141,7 +143,10 @@ Map<String, dynamic> _$OrderToJson(_Order instance) => <String, dynamic>{
   'coupon_discount_amount': instance.couponDiscountAmount,
   'coupon_discount_title': instance.couponDiscountTitle,
   'payment_status': instance.paymentStatus,
-  'order_status': instance.orderStatus,
+  'order_status': _$JsonConverterToJson<String?, OrderStatus>(
+    instance.orderStatus,
+    const OrderStatusConverter().toJson,
+  ),
   'total_tax_amount': instance.totalTaxAmount,
   'payment_method': instance.paymentMethod,
   'transaction_reference': instance.transactionReference,
@@ -217,6 +222,11 @@ Map<String, dynamic> _$OrderToJson(_Order instance) => <String, dynamic>{
   'storage': instance.storage,
   'module': instance.module,
 };
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) => value == null ? null : toJson(value);
 
 _DeliveryAddress _$DeliveryAddressFromJson(Map<String, dynamic> json) =>
     _DeliveryAddress(
