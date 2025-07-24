@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/domain/models/request/cart_models.dart';
+import 'package:sixam_mart_user/domain/models/response/get_cart_list_response.dart';
 import 'package:sixam_mart_user/domain/models/response/get_product_detail_response.dart';
 import 'package:sixam_mart_user/domain/repositories/cart_repository.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
@@ -10,7 +11,7 @@ class CartService extends GetxService {
 
   // Reactive state variables for new store-grouped structure
   final storesInCart = <StoreInCart>[].obs;
-  final cartSummary = Rxn<CartSummary>();
+  final cartSummary = Rxn<GetCartListSummary>();
   final isLoading = false.obs;
 
   CartService(this._cartRepository);
@@ -30,8 +31,8 @@ class CartService extends GetxService {
       switch (result) {
         case Success(:final response):
           if (response.statusCode == 200) {
-            final cartResponse = CartResponse.fromJson(response.data);
-            storesInCart.value = cartResponse.stores;
+            final cartResponse = GetCartListResponse.fromJson(response.data);
+            storesInCart.value = cartResponse.stores?.map((e) => StoreInCart.fromJson(e.toJson())).toList() ?? [];
             cartSummary.value = cartResponse.summary;
           } else {
             showAppSnackBar(title: 'Failed to fetch cart items. Please try again.', type: SnackBarType.error);

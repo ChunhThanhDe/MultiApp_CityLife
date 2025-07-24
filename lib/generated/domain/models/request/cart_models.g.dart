@@ -122,27 +122,3 @@ Map<String, dynamic> _$StoreInCartToJson(_StoreInCart instance) =>
       'store_total_items': instance.storeTotalItems,
       'store_total_price': instance.storeTotalPrice,
     };
-
-_CartSummary _$CartSummaryFromJson(Map<String, dynamic> json) => _CartSummary(
-  totalStores: (json['total_stores'] as num).toInt(),
-  totalItems: (json['total_items'] as num).toInt(),
-  totalPrice: (json['total_price'] as num).toDouble(),
-);
-
-Map<String, dynamic> _$CartSummaryToJson(_CartSummary instance) =>
-    <String, dynamic>{
-      'total_stores': instance.totalStores,
-      'total_items': instance.totalItems,
-      'total_price': instance.totalPrice,
-    };
-
-_CartResponse _$CartResponseFromJson(Map<String, dynamic> json) =>
-    _CartResponse(
-      stores: (json['stores'] as List<dynamic>)
-          .map((e) => StoreInCart.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      summary: CartSummary.fromJson(json['summary'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$CartResponseToJson(_CartResponse instance) =>
-    <String, dynamic>{'stores': instance.stores, 'summary': instance.summary};

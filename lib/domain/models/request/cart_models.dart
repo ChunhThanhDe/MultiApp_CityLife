@@ -84,21 +84,3 @@ abstract class StoreInCart with _$StoreInCart {
 
   factory StoreInCart.fromJson(Map<String, dynamic> json) => _$StoreInCartFromJson(json);
 }
-
-@freezed
-abstract class CartSummary with _$CartSummary {
-  const factory CartSummary({
-    @JsonKey(name: 'total_stores') required int totalStores,
-    @JsonKey(name: 'total_items') required int totalItems,
-    @JsonKey(name: 'total_price') required double totalPrice,
-  }) = _CartSummary;
-
-  factory CartSummary.fromJson(Map<String, dynamic> json) => _$CartSummaryFromJson(json);
-}
-
-@freezed
-abstract class CartResponse with _$CartResponse {
-  const factory CartResponse({required List<StoreInCart> stores, required CartSummary summary}) = _CartResponse;
-
-  factory CartResponse.fromJson(Map<String, dynamic> json) => _$CartResponseFromJson(json);
-}
