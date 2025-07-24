@@ -53,17 +53,17 @@ _ProductDetail _$ProductDetailFromJson(Map<String, dynamic> json) =>
       recommended: json['recommended'] as bool,
       organic: json['organic'] as bool,
       maximumCartQuantity: (json['maximum_cart_quantity'] as num?)?.toInt(),
-      addOns: json['add_ons'] as List<dynamic>,
+      addOns: json['add_ons'] as List<dynamic>?,
       variations: (json['variations'] as List<dynamic>)
           .map((e) => Variation.fromJson(e as Map<String, dynamic>))
           .toList(),
-      choiceOptions: (json['choice_options'] as List<dynamic>)
-          .map((e) => ChoiceOption.fromJson(e as Map<String, dynamic>))
+      choiceOptions: (json['choice_options'] as List<dynamic>?)
+          ?.map((e) => ChoiceOption.fromJson(e as Map<String, dynamic>))
           .toList(),
-      attributes: (json['attributes'] as List<dynamic>)
-          .map((e) => e as String)
+      attributes: (json['attributes'] as List<dynamic>?)
+          ?.map((e) => e as String)
           .toList(),
-      foodVariations: json['food_variations'] as List<dynamic>,
+      foodVariations: json['food_variations'] as List<dynamic>?,
       nutritions: (json['nutritions'] as List<dynamic>)
           .map((e) => Nutrition.fromJson(e as Map<String, dynamic>))
           .toList(),

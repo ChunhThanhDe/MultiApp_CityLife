@@ -34,21 +34,14 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
             style: ElevatedButton.styleFrom(
               elevation: 0,
               backgroundColor: const Color(0xFF5856D7),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(24),
-              ),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
             ),
             onPressed: () {
-              // controller.addToCart();
+              controller.addToCart();
             },
             child: Text(
               'Add to cart${priceText.isNotEmpty ? " • $priceText" : ""}',
-              style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 15,
-                color: Colors.white,
-                fontFamily: 'Inter',
-              ),
+              style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 15, color: Colors.white, fontFamily: 'Inter'),
             ),
           ),
         ),
@@ -65,14 +58,10 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
         final product = controller.product.value;
 
         if (isLoading) {
-          return const Scaffold(
-            body: Center(child: CircularProgressIndicator()),
-          );
+          return const Scaffold(body: Center(child: CircularProgressIndicator()));
         }
         if (product == null) {
-          return const Scaffold(
-            body: Center(child: Text('Product not found')),
-          );
+          return const Scaffold(body: Center(child: Text('Product not found')));
         }
 
         return ListView(
@@ -87,10 +76,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(product.storeImageUrl),
-                      ),
+                      image: DecorationImage(fit: BoxFit.cover, image: NetworkImage(product.storeImageUrl)),
                     ),
                   ),
                   // Dùng Align để luôn căn giữa ở dưới cùng ảnh
@@ -104,32 +90,17 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(color: const Color(0xFFE8EBEE)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.07),
-                              blurRadius: 6,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
+                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.07), blurRadius: 6, offset: const Offset(0, 2))],
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Image.network(
-                              product.storeImageUrl,
-                              width: 24,
-                              height: 24,
-                              errorBuilder: (_, __, ___) => const Icon(Icons.store, size: 24),
-                            ),
+                            Image.network(product.storeImageUrl, width: 24, height: 24, errorBuilder: (_, __, ___) => const Icon(Icons.store, size: 24)),
                             const SizedBox(width: 8),
                             Flexible(
                               child: Text(
                                 product.storeName,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 15,
-                                  color: Color(0xFF161A1D),
-                                ),
+                                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: Color(0xFF161A1D)),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -179,12 +150,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                     children: [
                       Text(
                         'Reset to standard recipe',
-                        style: const TextStyle(
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          color: Color(0xFF161A1D),
-                        ),
+                        style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 14, color: Color(0xFF161A1D)),
                       ),
                       const Spacer(),
                       Icon(
@@ -204,24 +170,16 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
               OptionGroupSection(
                 title: "Size",
                 requiredField: true,
-                options: product.variations
-                    .map(
-                      (v) => OptionItem(
-                        label: v.type,
-                        value: v.type,
-                        subLabel: "${v.price / 100.0} ${product.taxType}",
-                      ),
-                    )
-                    .toList(),
+                options: product.variations.map((v) => OptionItem(label: v.type, value: v.type, subLabel: "${v.price / 100.0} ${product.taxType}")).toList(),
                 selectedValue: controller.selectedOptions["variation"], // chỉ lấy String
                 onSelected: (val) => controller.selectOption("variation", val),
               ),
             ],
 
             _sectionDivider(),
-            if (product.choiceOptions.isNotEmpty) ...[
+            if (product.choiceOptions != null && product.choiceOptions!.isNotEmpty) ...[
               // Render choice_options
-              for (final choice in product.choiceOptions)
+              for (final choice in product.choiceOptions!)
                 OptionGroupSection(
                   title: choice.title,
                   requiredField: true,
@@ -229,6 +187,43 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                   selectedValue: controller.selectedOptions[choice.name], // chỉ lấy String
                   onSelected: (val) => controller.selectOption(choice.name, val),
                 ),
+            ],
+
+            // Add-on selection
+            if (product.addOns != null && product.addOns!.isNotEmpty) ...[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 12),
+                    const Text(
+                      'Add-ons',
+                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: Color(0xFF161A1D)),
+                    ),
+                    const SizedBox(height: 8),
+                    ...(product.addOns ?? []).map<Widget>((addOn) {
+                      // Assume addOn is a Map with id, name, price
+                      final addOnId = addOn['id'] as int;
+                      final addOnName = addOn['name']?.toString() ?? '';
+                      final addOnPrice = addOn['price']?.toString() ?? '';
+                      final isSelected = controller.selectedAddOns.containsKey(addOnId);
+                      final qty = controller.selectedAddOns[addOnId] ?? 1;
+                      return Row(
+                        children: [
+                          Checkbox(value: isSelected, onChanged: (_) => controller.toggleAddOn(addOnId)),
+                          Expanded(child: Text('$addOnName (+$addOnPrice)', style: const TextStyle(fontSize: 15))),
+                          if (isSelected) ...[
+                            IconButton(icon: const Icon(Icons.remove, size: 18), onPressed: () => controller.changeAddOnQty(addOnId, qty - 1)),
+                            Text('$qty', style: const TextStyle(fontSize: 15)),
+                            IconButton(icon: const Icon(Icons.add, size: 18), onPressed: () => controller.changeAddOnQty(addOnId, qty + 1)),
+                          ],
+                        ],
+                      );
+                    }),
+                  ],
+                ),
+              ),
             ],
 
             // Recommend sản phẩm (gợi ý mua thêm)
@@ -252,21 +247,13 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                       reviewCount: 123, // Tương tự
                     );
 
-                    return ProductCard(
-                      item: productItem,
-                    );
+                    return ProductCard(item: productItem);
                   },
                   separatorBuilder: (_, _) => SizedBox(width: 12.w),
                 ),
               ),
 
-              if (product.nutritions.isNotEmpty) ...[
-                ProductNutritionSection(
-                  details: product.description,
-                  ingredients: product.nutritions.toString(),
-                  nutritions: product.nutritions,
-                ),
-              ],
+              if (product.nutritions.isNotEmpty) ...[ProductNutritionSection(details: product.description, ingredients: product.nutritions.toString(), nutritions: product.nutritions)],
             ],
 
             const SizedBox(height: 32),

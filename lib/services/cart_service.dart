@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/domain/models/request/cart_models.dart';
+import 'package:sixam_mart_user/domain/models/response/get_product_detail_response.dart';
 import 'package:sixam_mart_user/domain/repositories/cart_repository.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 
@@ -204,5 +205,37 @@ class CartService extends GetxService {
       items.addAll(store.items);
     }
     return items;
+  }
+
+  Future<void> addProductToCart({required ProductDetail product, required Map<String, String> selectedOptions, required Map<int, int> selectedAddOns, int quantity = 1}) async {
+    // Build variations from selectedOptions
+    final variations = <CartVariation>[];
+    if (product.variations.isNotEmpty && selectedOptions['variation'] != null) {
+      final selected = selectedOptions['variation'];
+      final v = product.variations.firstWhereOrNull((e) => e.type == selected);
+      if (v != null) {
+        variations.add(CartVariation(name: 'size', values: {'label': v.type}));
+      }
+    }
+    if (product.choiceOptions != null && product.choiceOptions!.isNotEmpty) {
+      for (final choice in product.choiceOptions!) {
+        final selected = selectedOptions[choice.name];
+        if (selected != null) {
+          variations.add(CartVariation(name: choice.name, values: {'label': selected}));
+        }
+      }
+    }
+    // Add-ons
+    final addOnIds = selectedAddOns.keys.toList();
+    final addOnQtys = selectedAddOns.values.toList();
+    // Use product.price as default, or selected variation price if available
+    double price = product.price.toDouble();
+    if (product.variations.isNotEmpty && selectedOptions['variation'] != null) {
+      final selected = selectedOptions['variation'];
+      final v = product.variations.firstWhereOrNull((e) => e.type == selected);
+      if (v != null) price = v.price.toDouble();
+    }
+    final request = AddToCartRequest(itemId: product.id, model: 'Item', price: price, quantity: quantity, variation: variations, addOnIds: addOnIds, addOnQtys: addOnQtys);
+    await addItemToCart(request);
   }
 }

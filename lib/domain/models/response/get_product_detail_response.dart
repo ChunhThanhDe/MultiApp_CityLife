@@ -7,11 +7,7 @@ part '../../../generated/domain/models/response/get_product_detail_response.g.da
 
 @freezed
 abstract class ProductDetailResponse with _$ProductDetailResponse {
-  const factory ProductDetailResponse({
-    required String type,
-    required ProductDetail item,
-    required List<ProductRecommendation> recommendations,
-  }) = _ProductDetailResponse;
+  const factory ProductDetailResponse({required String type, required ProductDetail item, required List<ProductRecommendation> recommendations}) = _ProductDetailResponse;
 
   factory ProductDetailResponse.fromJson(Map<String, dynamic> json) => _$ProductDetailResponseFromJson(json);
 }
@@ -43,11 +39,11 @@ abstract class ProductDetail with _$ProductDetail {
     required bool recommended,
     required bool organic,
     @JsonKey(name: 'maximum_cart_quantity') int? maximumCartQuantity,
-    @JsonKey(name: 'add_ons') required List<dynamic> addOns,
+    @JsonKey(name: 'add_ons') List<dynamic>? addOns,
     required List<Variation> variations,
-    @JsonKey(name: 'choice_options') required List<ChoiceOption> choiceOptions,
-    required List<String> attributes,
-    @JsonKey(name: 'food_variations') required List<dynamic> foodVariations,
+    @JsonKey(name: 'choice_options') List<ChoiceOption>? choiceOptions,
+    List<String>? attributes,
+    @JsonKey(name: 'food_variations') List<dynamic>? foodVariations,
     required List<Nutrition> nutritions,
   }) = _ProductDetail;
 
@@ -67,23 +63,14 @@ abstract class Variation with _$Variation {
 
 @freezed
 abstract class ChoiceOption with _$ChoiceOption {
-  const factory ChoiceOption({
-    required String name,
-    required String title,
-    required List<String> options,
-  }) = _ChoiceOption;
+  const factory ChoiceOption({required String name, required String title, required List<String> options}) = _ChoiceOption;
 
   factory ChoiceOption.fromJson(Map<String, dynamic> json) => _$ChoiceOptionFromJson(json);
 }
 
 @freezed
 abstract class ProductRecommendation with _$ProductRecommendation {
-  const factory ProductRecommendation({
-    required int id,
-    required String name,
-    @JsonKey(name: 'image_url') required String imageUrl,
-    required int price,
-  }) = _ProductRecommendation;
+  const factory ProductRecommendation({required int id, required String name, @JsonKey(name: 'image_url') required String imageUrl, required int price}) = _ProductRecommendation;
 
   factory ProductRecommendation.fromJson(Map<String, dynamic> json) => _$ProductRecommendationFromJson(json);
 }
@@ -91,10 +78,7 @@ abstract class ProductRecommendation with _$ProductRecommendation {
 // IMAGE URL MODEL ĐÚNG KIỂU
 @freezed
 abstract class ImageUrl with _$ImageUrl {
-  const factory ImageUrl({
-    required String img,
-    required String storage,
-  }) = _ImageUrl;
+  const factory ImageUrl({required String img, required String storage}) = _ImageUrl;
 
   factory ImageUrl.fromJson(Map<String, dynamic> json) => _$ImageUrlFromJson(json);
 }
@@ -102,10 +86,7 @@ abstract class ImageUrl with _$ImageUrl {
 // NUTRITION MODEL
 @freezed
 abstract class Nutrition with _$Nutrition {
-  const factory Nutrition({
-    required int id,
-    required String nutrition,
-  }) = _Nutrition;
+  const factory Nutrition({required int id, required String nutrition}) = _Nutrition;
 
   factory Nutrition.fromJson(Map<String, dynamic> json) => _$NutritionFromJson(json);
 }

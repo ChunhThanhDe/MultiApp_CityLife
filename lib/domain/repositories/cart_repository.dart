@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_repository.dart';
 import 'package:sixam_mart_user/domain/models/request/cart_models.dart';
@@ -17,7 +19,12 @@ class CartRepository extends BaseRepository {
 
   Future<ApiResult> addToCart(AddToCartRequest request) async {
     final Map<String, dynamic> requestData = request.toJson();
-    return handleApiRequest(() => dioClient.post(CartApiPath.addToCart, data: requestData));
+    // Remove add_on_ids and add_on_qtys if empty or null
+    if (requestData['add_on_ids'] == null || (requestData['add_on_ids'] is List && (requestData['add_on_ids'] as List).isEmpty)) {
+      requestData.remove('add_on_ids');
+      requestData.remove('add_on_qtys');
+    }
+    return handleApiRequest(() => dioClient.post(CartApiPath.addToCart, data: jsonEncode(requestData)));
   }
 
   Future<ApiResult> updateCart(UpdateCartRequest request) async {
