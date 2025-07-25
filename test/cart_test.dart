@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sixam_mart_user/domain/models/response/cart/cart_models.dart';
-import 'package:sixam_mart_user/domain/models/response/cart/get_cart_list_response.dart';
+import 'package:sixam_mart_user/domain/models/request/cart/add_to_cart_request.dart';
+import 'package:sixam_mart_user/domain/models/request/cart/remvove_cart_request.dart';
+import 'package:sixam_mart_user/domain/models/request/cart/update_cart_request.dart';
+import 'package:sixam_mart_user/domain/models/response/get_cart_list_response.dart';
 
 void main() {
   group('Cart Models Tests', () {
@@ -11,17 +13,14 @@ void main() {
         price: 10.99,
         quantity: 2,
         variation: [
-          CartVariation(
-            name: 'Size',
-            values: {'size': 'Large'},
-          ),
+          CartVariation(name: 'Size', values: {'size': 'Large'}),
         ],
         addOnIds: [1, 2],
         addOnQtys: [1, 1],
       );
 
       final json = request.toJson();
-      
+
       expect(json['item_id'], 1);
       expect(json['model'], 'Item');
       expect(json['price'], 10.99);
@@ -32,13 +31,10 @@ void main() {
     });
 
     test('UpdateCartRequest should create valid JSON', () {
-      final request = UpdateCartRequest(
-        cartId: 1,
-        quantity: 3,
-      );
+      final request = UpdateCartRequest(cartId: 1, quantity: 3);
 
       final json = request.toJson();
-      
+
       expect(json['cart_id'], 1);
       expect(json['quantity'], 3);
     });
@@ -47,19 +43,12 @@ void main() {
       final request = RemoveFromCartRequest(cartId: 1);
 
       final json = request.toJson();
-      
+
       expect(json['cart_id'], 1);
     });
 
     test('GetCartListItem should handle null values', () {
-      final item = GetCartListItem(
-        cartId: 1,
-        itemId: 1,
-        itemName: 'Test Item',
-        itemImage: null,
-        itemPrice: 10.99,
-        itemQuantity: 2,
-      );
+      final item = GetCartListItem(cartId: 1, itemId: 1, itemName: 'Test Item', itemImage: null, itemPrice: 10.99, itemQuantity: 2);
 
       expect(item.cartId, 1);
       expect(item.itemName, 'Test Item');

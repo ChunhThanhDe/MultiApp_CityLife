@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../../domain/models/request/sign_in_request.dart';
+part of '../../../../../domain/models/request/authentication/sign_in_request.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

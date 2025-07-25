@@ -2,11 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/domain/models/response/cart/get_cart_list_response.dart';
+import 'package:sixam_mart_user/domain/models/response/get_cart_list_response.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_list_view.dart';
 
 import 'view_cart_controller.dart';
+
+// Data model for organizing cart items by type
+class CartDisplayItem {
+  final GetCartListStore? store;
+  final GetCartListItem? item;
+  final CartDisplayType type;
+
+  CartDisplayItem({this.store, this.item, required this.type});
+}
+
+enum CartDisplayType { storeHeader, cartItem, cartSummary }
 
 class ViewCartScreen extends BaseScreen<ViewCartController> {
   const ViewCartScreen({super.key});
@@ -45,11 +57,105 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
       }
 
       if (controller.shouldShowCartContent) {
-        return _CartContentView(controller: controller);
+        return _buildCartListView();
       }
 
       return const SizedBox.shrink();
     });
+  }
+
+  Widget _buildCartListView() {
+    return Obx(() {
+      final displayItems = _organizeCartItems(controller.storesInCart);
+
+      return AppListView<CartDisplayItem>(
+        items: displayItems,
+        itemBuilder: _buildCartItem,
+        onRefresh: controller.refreshCart,
+        onLoadMore: controller.loadMoreCart,
+        isLoading: controller.isLoading.value,
+        isLoadingMore: controller.isLoadingMore.value,
+        hasMore: controller.hasMore,
+        errorMessage: controller.error.value.isNotEmpty ? controller.error.value : null,
+        onRetry: () => controller.refreshCart(),
+        emptyTitle: 'Your cart is empty',
+        emptySubtitle: 'Add some items to your cart to get started.',
+        physics: const AlwaysScrollableScrollPhysics(),
+        useCustomScrollView: true,
+        footerSlivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Column(
+              children: [
+                const Spacer(),
+                _CartSummarySection(controller: controller),
+              ],
+            ),
+          ),
+        ],
+      );
+    });
+  }
+
+  List<CartDisplayItem> _organizeCartItems(List<GetCartListStore> stores) {
+    List<CartDisplayItem> displayItems = [];
+
+    for (final store in stores) {
+      // Add store header
+      displayItems.add(CartDisplayItem(store: store, type: CartDisplayType.storeHeader));
+
+      // Add store items
+      if (store.items != null) {
+        for (final item in store.items!) {
+          displayItems.add(CartDisplayItem(item: item, store: store, type: CartDisplayType.cartItem));
+        }
+      }
+    }
+
+    return displayItems;
+  }
+
+  Widget _buildCartItem(BuildContext context, CartDisplayItem displayItem, int index) {
+    switch (displayItem.type) {
+      case CartDisplayType.storeHeader:
+        return _StoreHeader(store: displayItem.store!, onClearAll: () => controller.clearStoreItems(displayItem.store!.storeId ?? 0));
+      case CartDisplayType.cartItem:
+        final displayItems = _organizeCartItems(controller.storesInCart);
+        final isLastItemInStore = _isLastItemInStore(displayItems, index);
+        final isLastStore = _isLastStore(displayItems, index);
+
+        return Column(
+          children: [
+            _CartProductItem(item: displayItem.item!, controller: controller),
+            if (isLastItemInStore && !isLastStore) const Divider(height: 0, color: Color(0xFFE8EBEE), indent: 24, endIndent: 24),
+          ],
+        );
+      case CartDisplayType.cartSummary:
+        return _CartSummarySection(controller: controller);
+    }
+  }
+
+  bool _isLastItemInStore(List<CartDisplayItem> displayItems, int currentIndex) {
+    if (currentIndex >= displayItems.length - 1) return true;
+
+    final currentItem = displayItems[currentIndex];
+    final nextItem = displayItems[currentIndex + 1];
+
+    // If current item is a cart item and next item is a store header, then current is last in store
+    return currentItem.type == CartDisplayType.cartItem && nextItem.type == CartDisplayType.storeHeader;
+  }
+
+  bool _isLastStore(List<CartDisplayItem> displayItems, int currentIndex) {
+    final currentItem = displayItems[currentIndex];
+    if (currentItem.store == null) return true;
+
+    // Check if this is the last store by looking for any store headers after this item
+    for (int i = currentIndex + 1; i < displayItems.length; i++) {
+      if (displayItems[i].type == CartDisplayType.storeHeader) {
+        return false;
+      }
+    }
+    return true;
   }
 }
 
@@ -96,72 +202,6 @@ class _EmptyCartState extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-// Cart content view with items
-class _CartContentView extends StatelessWidget {
-  final ViewCartController controller;
-
-  const _CartContentView({required this.controller});
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () => RefreshIndicator(
-        onRefresh: controller.refreshCart,
-        child: CustomScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          slivers: [
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final store = controller.storesInCart[index];
-                    return Column(
-                      children: [
-                        _StoreSection(store: store, controller: controller),
-                        if (index < controller.storesInCart.length - 1)
-                          const Divider(height: 0, color: Color(0xFFE8EBEE), indent: 24, endIndent: 24),
-                      ],
-                    );
-                  },
-                  childCount: controller.storesInCart.length,
-                ),
-              ),
-            ),
-            SliverFillRemaining(
-              hasScrollBody: false,
-              child: Column(
-                children: [
-                  const Spacer(),
-                  _CartSummarySection(controller: controller),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// Store section with header and items
-class _StoreSection extends StatelessWidget {
-  final GetCartListStore store;
-  final ViewCartController controller;
-
-  const _StoreSection({required this.store, required this.controller});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _StoreHeader(store: store, onClearAll: () => controller.clearStoreItems(store.storeId ?? 0)),
-        ...(store.items?.map((item) => _CartProductItem(item: item, controller: controller)) ?? []),
-      ],
     );
   }
 }

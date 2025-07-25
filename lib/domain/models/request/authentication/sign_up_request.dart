@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../base/base_request.dart';
+import '../../../../base/base_request.dart';
 
-part '../../../generated/domain/models/request/sign_up_request.g.dart';
+part '../../../../generated/domain/models/request/authentication/sign_up_request.g.dart';
 
 @JsonSerializable()
 class SignUpRequest extends BaseRequest {

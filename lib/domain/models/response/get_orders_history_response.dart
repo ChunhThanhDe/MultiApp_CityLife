@@ -1,4 +1,4 @@
-// ignore_for_file: invalid_annotation_target
+// ignore_for_file: invalid_annotation_target, constant_identifier_names
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -355,7 +355,6 @@ abstract class Store with _$Store {
     @JsonKey(name: "slug") String? slug,
     @JsonKey(name: "maximum_shipping_charge") dynamic maximumShippingCharge,
     @JsonKey(name: "cutlery") bool? cutlery,
-    @JsonKey(name: "meta_title") dynamic metaTitle,
     @JsonKey(name: "meta_description") dynamic metaDescription,
     @JsonKey(name: "meta_image") dynamic metaImage,
     @JsonKey(name: "announcement") int? announcement,

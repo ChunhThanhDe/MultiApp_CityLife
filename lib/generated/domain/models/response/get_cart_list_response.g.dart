@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../../../domain/models/response/cart/get_cart_list_response.dart';
+part of '../../../../domain/models/response/get_cart_list_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

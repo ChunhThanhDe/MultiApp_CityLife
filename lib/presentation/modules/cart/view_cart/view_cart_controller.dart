@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
-import 'package:sixam_mart_user/domain/models/response/cart/cart_models.dart';
-import 'package:sixam_mart_user/domain/models/response/cart/get_cart_list_response.dart';
+import 'package:sixam_mart_user/domain/models/response/get_cart_list_response.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/services/cart_service.dart';
 
@@ -15,16 +14,29 @@ class ViewCartController extends BaseController {
   double get totalPrice => _cartService.totalPrice;
   bool get isCartLoading => _cartService.isLoading.value;
 
+  // AppListView compatibility properties
+  final RxBool isLoadingMore = false.obs;
+  final RxString error = ''.obs;
+  bool get hasMore => false; // Cart items are not paginated
+
   // Cart operations
   Future<void> refreshCart() async {
     try {
+      error.value = '';
       await _cartService.fetchCartList();
       // Small delay to ensure smooth animation completion on Android
       await Future.delayed(const Duration(milliseconds: 300));
     } catch (e) {
+      error.value = e.toString();
       // Error is already handled in CartService
       rethrow;
     }
+  }
+
+  // Load more method for AppListView compatibility (no-op for cart)
+  Future<void> loadMoreCart() async {
+    // Cart items are not paginated, so this is a no-op
+    return;
   }
 
   Future<void> updateItemQuantity(int cartId, int quantity) => _cartService.updateItemQuantity(cartId, quantity);
@@ -50,13 +62,13 @@ class ViewCartController extends BaseController {
   void navigateBack() => Get.back();
 
   // Item quantity operations with validation
-  void incrementItemQuantity(CartItem item) {
+  void incrementItemQuantity(GetCartListItem item) {
     if (item.cartId != null && item.itemQuantity != null) {
       updateItemQuantity(item.cartId!, item.itemQuantity! + 1);
     }
   }
 
-  void decrementItemQuantity(CartItem item) {
+  void decrementItemQuantity(GetCartListItem item) {
     if (item.cartId != null && item.itemQuantity != null) {
       if (item.itemQuantity! > 1) {
         updateItemQuantity(item.cartId!, item.itemQuantity! - 1);

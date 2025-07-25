@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
-import 'package:sixam_mart_user/domain/models/response/cart/cart_models.dart';
-import 'package:sixam_mart_user/domain/models/response/cart/get_cart_list_response.dart';
+import 'package:sixam_mart_user/domain/models/request/cart/add_to_cart_request.dart';
+import 'package:sixam_mart_user/domain/models/request/cart/remvove_cart_request.dart';
+import 'package:sixam_mart_user/domain/models/request/cart/update_cart_request.dart';
+import 'package:sixam_mart_user/domain/models/response/get_cart_list_response.dart';
 import 'package:sixam_mart_user/domain/models/response/get_product_detail_response.dart';
 import 'package:sixam_mart_user/domain/repositories/cart_repository.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
@@ -55,7 +57,7 @@ class CartService extends GetxService {
       isLoading.value = true;
 
       // Check if an identical item already exists in any store
-      CartItem? existingItem;
+      GetCartListItem? existingItem;
       for (final store in storesInCart) {
         if (store.items != null) {
           existingItem = store.items!.firstWhereOrNull((item) => item.itemId == request.itemId && _areVariationsEqual(item.itemVariation ?? [], request.variation));
@@ -209,8 +211,8 @@ class CartService extends GetxService {
   bool get isNotEmpty => storesInCart.isNotEmpty;
 
   /// Gets all cart items across all stores
-  List<CartItem> get allCartItems {
-    final items = <CartItem>[];
+  List<GetCartListItem> get allCartItems {
+    final items = <GetCartListItem>[];
     for (final store in storesInCart) {
       if (store.items != null) {
         items.addAll(store.items!);
