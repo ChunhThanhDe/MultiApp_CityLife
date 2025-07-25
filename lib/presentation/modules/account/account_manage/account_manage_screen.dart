@@ -114,8 +114,8 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                           Expanded(
                             child: _BirthdayDropdown(
                               items: List.generate(12, (i) => (i + 1).toString().padLeft(2, '0')),
-                              value: controller.month.value,
-                              onChanged: (v) => controller.month.value = v!,
+                              value: controller.selectedMonth.value,
+                              onChanged: (v) => controller.selectedMonth.value = v!,
                               hint: "MM",
                             ),
                           ),
@@ -123,8 +123,8 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                           Expanded(
                             child: _BirthdayDropdown(
                               items: List.generate(31, (i) => (i + 1).toString().padLeft(2, '0')),
-                              value: controller.day.value,
-                              onChanged: (v) => controller.day.value = v!,
+                              value: controller.selectedDay.value,
+                              onChanged: (v) => controller.selectedDay.value = v!,
                               hint: "DD",
                             ),
                           ),
@@ -132,8 +132,8 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                           Expanded(
                             child: _BirthdayDropdown(
                               items: List.generate(100, (i) => (DateTime.now().year - i).toString()),
-                              value: controller.year.value,
-                              onChanged: (v) => controller.year.value = v!,
+                              value: controller.selectedYear.value,
+                              onChanged: (v) => controller.selectedYear.value = v!,
                               hint: "YYYY",
                             ),
                           ),
@@ -149,7 +149,11 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                       label: "Email address",
                       controller: controller.emailController,
                       required: true,
-                      validator: (v) => (v == null || v.isEmpty) ? "Please enter your email" : null,
+                      validator: (v) {
+                        if (v == null || v.isEmpty) return "Please enter your email";
+                        if (!GetUtils.isEmail(v)) return "Please enter a valid email address";
+                        return null;
+                      },
                       suffix: Icon(Icons.check, color: Color(0xFF4A5763)),
                     ),
                     // Phone
@@ -157,23 +161,39 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                       label: "Phone number",
                       controller: controller.phoneController,
                       required: true,
-                      validator: (v) => (v == null || v.isEmpty) ? "Please enter your phone number" : null,
+                      validator: (v) {
+                        if (v == null || v.isEmpty) return "Please enter your phone number";
+                        if (!GetUtils.isPhoneNumber(v)) return "Please enter a valid phone number";
+                        return null;
+                      },
                     ),
                     const SizedBox(height: 24),
                     // Update button
                     SizedBox(
                       width: double.infinity,
                       height: 48,
-                      child: ElevatedButton(
-                        onPressed: controller.updateInfo,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF5856D7),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-                          elevation: 0,
-                        ),
-                        child: Text(
-                          "Update",
-                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16),
+                      child: Obx(
+                        () => ElevatedButton(
+                          onPressed: controller.isLoading.value ? null : controller.updateInfo,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF5856D7),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                            elevation: 0,
+                            disabledBackgroundColor: Color(0xFF5856D7).withOpacity(0.6),
+                          ),
+                          child: controller.isLoading.value
+                              ? SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                  ),
+                                )
+                              : Text(
+                                  "Update",
+                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16),
+                                ),
                         ),
                       ),
                     ),
