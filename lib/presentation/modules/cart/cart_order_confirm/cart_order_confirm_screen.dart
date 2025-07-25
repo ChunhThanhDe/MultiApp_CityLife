@@ -18,6 +18,34 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
   @override
   Widget buildScreen(BuildContext context) {
     return Obx(() {
+      // Show loading state
+      if (controller.isLoading.value) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+
+      // Show error state
+      if (controller.error.value.isNotEmpty) {
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Error: ${controller.error.value}',
+                style: TextStyle(color: Colors.red),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () => controller.onInit(),
+                child: Text('Retry'),
+              ),
+            ],
+          ),
+        );
+      }
+
       final stepData = controller.stepsData[controller.step.value];
       return Column(
         children: [
@@ -81,15 +109,15 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                   // Address Section
                   Padding(padding: const EdgeInsets.symmetric(vertical: 8.0), child: sectionTitle('Address')),
                   cellItem(
-                    iconAsset: 'assets/icons/ic_home.svg', // Replace with your asset
-                    title: 'My Home',
-                    subtitle: '2216 N 10th St, Apt 0, El Centro, CA 92243',
+                    iconAsset: 'assets/icons/ic_home.svg',
+                    title: controller.contactPersonName,
+                    subtitle: controller.deliveryAddress,
                   ),
                   dividerLine(),
                   cellItem(
-                    iconAsset: 'assets/icons/ic_box_package_courier_hands.svg', // Replace with your asset
-                    title: 'Hand it to me',
-                    subtitle: 'Please Hand it to me',
+                    iconAsset: 'assets/icons/ic_box_package_courier_hands.svg',
+                    title: controller.deliveryInstruction,
+                    subtitle: controller.orderNote,
                   ),
 
                   // Divider
@@ -97,21 +125,29 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
 
                   // Order Details Section
                   Padding(padding: const EdgeInsets.symmetric(vertical: 8.0), child: sectionTitle('Order Details')),
-                  // Starbucks item
-                  orderDetailItem(
-                    imageAsset: 'assets/images/starbucks.png', // Replace with your asset
-                    title: 'Starbucks®',
-                    subtitle: '4 items',
-                    price: 14.32,
-                  ),
-                  dividerLine(),
-                  // Walmart item
-                  orderDetailItem(
-                    imageAsset: 'assets/images/mcdonalds.png', // Replace with your asset
-                    title: 'mcdonalds',
-                    subtitle: '11 items',
-                    price: 21.55,
-                  ),
+                  
+                  // Display store information
+                  if (controller.orderData.value?.store != null)
+                    orderDetailItem(
+                      imageAsset: 'assets/images/store_placeholder.png', // Default store image
+                      title: controller.orderData.value!.store!.name ?? 'Store',
+                      subtitle: controller.deliveryTime,
+                      price: controller.orderData.value!.orderAmount?.toDouble() ?? 0.0,
+                    ),
+
+                  // Display order items from controller
+                  ...controller.orderItems.map((item) => Column(
+                    children: [
+                      if (controller.orderItems.indexOf(item) > 0 || controller.orderData.value?.store != null) 
+                        dividerLine(),
+                      orderDetailItem(
+                        imageAsset: item.imageAsset,
+                        title: item.title,
+                        subtitle: item.subtitle,
+                        price: item.price,
+                      ),
+                    ],
+                  )).toList(),
 
                   SizedBox(height: 32),
                 ],

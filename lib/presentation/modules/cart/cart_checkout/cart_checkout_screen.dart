@@ -148,7 +148,12 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                 ),
                 onPressed: () {
-                  Get.toNamed(AppRoutes.cartConfirm);
+                  // For testing purposes, using sample order tracking data
+                  // In a real app, these would come from the actual order creation response
+                  Get.toNamed(AppRoutes.cartConfirm, arguments: {
+                    'orderId': 100047, // Sample order ID from the API documentation
+                    'contactNumber': '+8801234567890', // Sample contact number
+                  });
                 },
                 child: Text(
                   "Order Now",

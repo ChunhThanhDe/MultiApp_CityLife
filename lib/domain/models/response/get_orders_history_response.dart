@@ -103,6 +103,8 @@ abstract class Order with _$Order {
     @JsonKey(name: "extra_packaging_amount") int? extraPackagingAmount,
     @JsonKey(name: "ref_bonus_amount") int? refBonusAmount,
     @JsonKey(name: "details_count") int? detailsCount,
+    @JsonKey(name: "min_delivery_time") int? minDeliveryTime,
+    @JsonKey(name: "max_delivery_time") int? maxDeliveryTime,
     @JsonKey(name: "store") Store? store,
     @JsonKey(name: "delivery_man") dynamic deliveryMan,
     @JsonKey(name: "module_type") String? moduleType,

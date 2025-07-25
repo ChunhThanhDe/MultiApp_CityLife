@@ -122,6 +122,8 @@ _Order _$OrderFromJson(Map<String, dynamic> json) => _Order(
   extraPackagingAmount: (json['extra_packaging_amount'] as num?)?.toInt(),
   refBonusAmount: (json['ref_bonus_amount'] as num?)?.toInt(),
   detailsCount: (json['details_count'] as num?)?.toInt(),
+  minDeliveryTime: (json['min_delivery_time'] as num?)?.toInt(),
+  maxDeliveryTime: (json['max_delivery_time'] as num?)?.toInt(),
   store: json['store'] == null
       ? null
       : Store.fromJson(json['store'] as Map<String, dynamic>),
@@ -213,6 +215,8 @@ Map<String, dynamic> _$OrderToJson(_Order instance) => <String, dynamic>{
   'extra_packaging_amount': instance.extraPackagingAmount,
   'ref_bonus_amount': instance.refBonusAmount,
   'details_count': instance.detailsCount,
+  'min_delivery_time': instance.minDeliveryTime,
+  'max_delivery_time': instance.maxDeliveryTime,
   'store': instance.store,
   'delivery_man': instance.deliveryMan,
   'module_type': instance.moduleType,
