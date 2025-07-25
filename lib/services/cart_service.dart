@@ -32,8 +32,9 @@ class CartService extends GetxService {
         case Success(:final response):
           if (response.statusCode == 200) {
             final cartResponse = GetCartListResponse.fromJson(response.data);
+
             storesInCart.clear();
-            storesInCart.addAll(cartResponse.stores?.map((e) => GetCartListStore.fromJson(e.toJson())) ?? []);
+            storesInCart.addAll(cartResponse.stores ?? []);
             cartSummary.value = cartResponse.summary;
           } else {
             showAppSnackBar(title: 'Failed to fetch cart items. Please try again.', type: SnackBarType.error);

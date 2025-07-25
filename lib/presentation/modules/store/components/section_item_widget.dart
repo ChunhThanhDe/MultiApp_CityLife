@@ -9,11 +9,7 @@ class SectionItemWidget extends StatelessWidget {
   final String sectionTitle;
   final List<ProductItem> products;
 
-  const SectionItemWidget({
-    super.key,
-    required this.sectionTitle,
-    required this.products,
-  });
+  const SectionItemWidget({super.key, required this.sectionTitle, required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -26,19 +22,14 @@ class SectionItemWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
           child: Text(
             sectionTitle,
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF161A1D),
-            ),
+            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
           ),
         ),
         ...products.map(
           (item) => ProductItemCard(
             item: item,
             onImageTap: () {
-              // Get.toNamed(AppRoutes.storeProductDetail, arguments: {'productId': item.id});
-              Get.toNamed(AppRoutes.storeProductDetail, arguments: {'productId': 10023});
+              Get.toNamed(AppRoutes.storeProductDetail, arguments: {'productId': item.id});
             },
             onAddTap: () {},
           ),

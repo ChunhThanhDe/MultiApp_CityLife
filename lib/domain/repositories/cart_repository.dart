@@ -9,8 +9,8 @@ class CartApiPath {
   static const String getCartList = '/api/v1/customer/cart/list-by-stores';
   static const String addToCart = '/api/v1/customer/cart/add';
   static const String updateCart = '/api/v1/customer/cart/update';
-  static const String removeFromCart = '/api/v1/customer/cart/remove';
-  static const String clearCart = '/api/v1/customer/cart/clear-cart';
+  static const String removeFromCart = '/api/v1/customer/cart/remove-item';
+  static const String clearCart = '/api/v1/customer/cart/remove';
 }
 
 class CartRepository extends BaseRepository {
@@ -42,10 +42,10 @@ class CartRepository extends BaseRepository {
 
   Future<ApiResult> removeFromCart(RemoveFromCartRequest request) async {
     final Map<String, dynamic> requestData = request.toJson();
-    return handleApiRequest(() => dioClient.post(CartApiPath.removeFromCart, data: requestData));
+    return handleApiRequest(() => dioClient.delete(CartApiPath.removeFromCart, data: requestData));
   }
 
   Future<ApiResult> clearCart() async {
-    return handleApiRequest(() => dioClient.post(CartApiPath.clearCart));
+    return handleApiRequest(() => dioClient.delete(CartApiPath.clearCart));
   }
 }

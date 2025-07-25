@@ -29,14 +29,11 @@ ProductCard
             children: [
               GestureDetector(
                 onTap: () {
-                  Get.toNamed(AppRoutes.storeProductDetail, arguments: {'productId': 10023});
+                  Get.toNamed(AppRoutes.storeProductDetail, arguments: {'productId': item.id});
                 },
                 child: Container(
                   height: 120.h,
-                  decoration: BoxDecoration(
-                    color: AppColors.stateGreyLowest50,
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
+                  decoration: BoxDecoration(color: AppColors.stateGreyLowest50, borderRadius: BorderRadius.circular(12.r)),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12.r),
                     child: AppImage.network(item.imageUrl, width: 120.w, height: 120.h),
