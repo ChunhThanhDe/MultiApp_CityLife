@@ -335,6 +335,7 @@ const _$StorageKeyEnumMap = {
   StorageKey.COVER_PHOTO: 'cover_photo',
   StorageKey.LOGO: 'logo',
   StorageKey.THUMBNAIL: 'thumbnail',
+  StorageKey.ICON: 'icon',
 };
 
 const _$ValueEnumMap = {Value.PUBLIC: 'public'};

@@ -7,8 +7,19 @@ import 'package:sixam_mart_user/presentation/modules/cart/components/cart_comple
 import 'package:sixam_mart_user/presentation/modules/cart/components/cart_in_progress_order_card.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_list_view.dart';
 
 import 'cart_order_controller.dart';
+
+// Data model for organizing orders by type
+class OrderDisplayItem {
+  final Order order;
+  final OrderDisplayType type;
+
+  OrderDisplayItem({required this.order, required this.type});
+}
+
+enum OrderDisplayType { inProgress, completed }
 
 class CartOrderScreen extends BaseScreen<CartOrderController> {
   const CartOrderScreen({super.key});
@@ -44,75 +55,110 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
     }
   }
 
+  List<OrderDisplayItem> _organizeOrders(List<Order> orders) {
+    List<OrderDisplayItem> displayItems = [];
+
+    // Add in-progress orders first
+    final inProgressOrders = orders.where((o) => o.orderStatus != OrderStatus.delivered).toList();
+    for (final order in inProgressOrders) {
+      displayItems.add(OrderDisplayItem(order: order, type: OrderDisplayType.inProgress));
+    }
+
+    // Add completed orders
+    final completedOrders = orders.where((o) => o.orderStatus == OrderStatus.delivered).toList();
+    for (final order in completedOrders) {
+      displayItems.add(OrderDisplayItem(order: order, type: OrderDisplayType.completed));
+    }
+
+    return displayItems;
+  }
+
+  Widget _buildOrderItem(BuildContext context, OrderDisplayItem item, int index) {
+    final order = item.order;
+
+    if (item.type == OrderDisplayType.inProgress) {
+      return Column(
+        children: [
+          InProgressOrderCard(
+            label: order.orderStatus?.vi ?? '-',
+            time: formatOrderTime(order.createdAt),
+            brandLogo: AppImageProvider.network(order.store?.logoFullUrl ?? ''),
+            brandName: order.store?.name ?? '-',
+            subtitle: ' ${order.detailsCount ?? 0} items',
+            price: '\$${order.orderAmount?.toStringAsFixed(2) ?? '-'}',
+            progressStep: getOrderProgressStep(order.orderStatus),
+            totalStep: 4,
+          ),
+          const SizedBox(height: 16),
+          const Divider(height: 1),
+        ],
+      );
+    } else {
+      // For completed orders, we need to group them
+      final displayItems = _organizeOrders(controller.runningOrders);
+      final completedOrders = displayItems.where((item) => item.type == OrderDisplayType.completed).map((item) => item.order).toList();
+
+      // Only show the completed section for the first completed order
+      final isFirstCompleted = displayItems.where((item) => item.type == OrderDisplayType.completed).toList().indexOf(item) == 0;
+
+      if (isFirstCompleted && completedOrders.isNotEmpty) {
+        return Column(
+          children: [
+            CompletedOrderSection(
+              date: formatOrderTime(completedOrders.first.createdAt),
+              status: 'Completed',
+              orders: completedOrders
+                  .map(
+                    (order) => OrderListItem(
+                      brandLogo: AppImageProvider.network(order.store?.logoFullUrl ?? ''),
+                      brandName: order.store?.name ?? '-',
+                      subtitle: ' ${order.detailsCount ?? 0} items',
+                      price: '\$${order.orderAmount?.toStringAsFixed(2) ?? '-'}',
+                    ),
+                  )
+                  .toList(),
+            ),
+            const SizedBox(height: 16),
+            const Divider(height: 1),
+          ],
+        );
+      } else {
+        return const SizedBox.shrink(); // Hide other completed orders as they're shown in the section
+      }
+    }
+  }
+
   @override
   Widget buildScreen(BuildContext context) {
     return Obx(() {
-      if (controller.isLoading.value) {
-        return const Center(child: CircularProgressIndicator());
+      final displayItems = _organizeOrders(controller.runningOrders);
+
+      // Filter out duplicate completed orders (keep only the first one for the section)
+      final filteredItems = <OrderDisplayItem>[];
+      bool hasAddedCompletedSection = false;
+
+      for (final item in displayItems) {
+        if (item.type == OrderDisplayType.inProgress) {
+          filteredItems.add(item);
+        } else if (item.type == OrderDisplayType.completed && !hasAddedCompletedSection) {
+          filteredItems.add(item);
+          hasAddedCompletedSection = true;
+        }
       }
-      if (controller.error.value.isNotEmpty) {
-        return Center(child: Text('Error: ${controller.error.value}'));
-      }
-      final runningOrders = controller.runningOrders;
-      if (runningOrders.isEmpty) {
-        return const Center(child: Text('No running orders.'));
-      }
-      final inProgressOrders = runningOrders.where((o) => o.orderStatus != OrderStatus.delivered).toList();
-      final completedOrders = runningOrders.where((o) => o.orderStatus == OrderStatus.delivered).toList();
-      return RefreshIndicator(
+
+      return AppListView<OrderDisplayItem>(
+        items: filteredItems,
+        itemBuilder: _buildOrderItem,
         onRefresh: controller.refreshOrders,
-        child: NotificationListener<ScrollNotification>(
-          onNotification: (ScrollNotification scrollInfo) {
-            if (!controller.isLoadingMore.value && controller.hasMore && scrollInfo.metrics.pixels >= scrollInfo.metrics.maxScrollExtent - 200) {
-              controller.loadMoreOrders();
-            }
-            return false;
-          },
-          child: ListView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            children: [
-              if (inProgressOrders.isNotEmpty) ...[
-                ...inProgressOrders.map(
-                  (order) => InProgressOrderCard(
-                    label: order.orderStatus?.vi ?? '-',
-                    time: formatOrderTime(order.createdAt),
-                    brandLogo: AppImageProvider.network(order.store?.logoFullUrl ?? ''),
-                    brandName: order.store?.name ?? '-',
-                    subtitle: ' ${order.detailsCount ?? 0} items',
-                    price: '\$${order.orderAmount?.toStringAsFixed(2) ?? '-'}',
-                    progressStep: getOrderProgressStep(order.orderStatus),
-                    totalStep: 4,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                const Divider(height: 1),
-              ],
-              if (completedOrders.isNotEmpty) ...[
-                CompletedOrderSection(
-                  date: formatOrderTime(completedOrders.first.createdAt),
-                  status: 'Completed',
-                  orders: completedOrders
-                      .map(
-                        (order) => OrderListItem(
-                          brandLogo: AppImageProvider.network(order.store?.logoFullUrl ?? ''),
-                          brandName: order.store?.name ?? '-',
-                          subtitle: ' ${order.detailsCount ?? 0} items',
-                          price: '\$${order.orderAmount?.toStringAsFixed(2) ?? '-'}',
-                        ),
-                      )
-                      .toList(),
-                ),
-                const SizedBox(height: 16),
-                const Divider(height: 1),
-              ],
-              if (controller.isLoadingMore.value)
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  child: Center(child: CircularProgressIndicator()),
-                ),
-            ],
-          ),
-        ),
+        onLoadMore: controller.loadMoreOrders,
+        isLoading: controller.isLoading.value,
+        isLoadingMore: controller.isLoadingMore.value,
+        hasMore: controller.hasMore,
+        errorMessage: controller.error.value.isNotEmpty ? controller.error.value : null,
+        onRetry: () => controller.refreshOrders(),
+        emptyTitle: 'No Orders',
+        emptySubtitle: 'You don\'t have any orders yet.',
+        physics: const AlwaysScrollableScrollPhysics(),
       );
     });
   }

@@ -259,9 +259,11 @@ enum StorageKey {
   LOGO,
   @JsonValue("thumbnail")
   THUMBNAIL,
+  @JsonValue("icon")
+  ICON,
 }
 
-final storageKeyValues = EnumValues({"cover_photo": StorageKey.COVER_PHOTO, "logo": StorageKey.LOGO, "thumbnail": StorageKey.THUMBNAIL});
+final storageKeyValues = EnumValues({"cover_photo": StorageKey.COVER_PHOTO, "logo": StorageKey.LOGO, "thumbnail": StorageKey.THUMBNAIL, "icon": StorageKey.ICON});
 
 enum Value {
   @JsonValue("public")

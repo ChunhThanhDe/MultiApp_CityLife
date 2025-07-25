@@ -8,8 +8,7 @@ class CartOrderController extends BaseController {
   final OrderRepository _orderRepository = OrderRepository();
 
   final RxList<Order> runningOrders = <Order>[].obs;
-  @override
-  final RxBool isLoading = false.obs;
+
   final RxBool isLoadingMore = false.obs;
   final RxString error = ''.obs;
   final int limit = 10;
@@ -46,9 +45,12 @@ class CartOrderController extends BaseController {
       final response = GetOrdersHistoryResponse.fromJson(result.response.data);
       final newOrders = response.orders ?? [];
       if (refresh) {
-        runningOrders.value = newOrders;
+        runningOrders.value = List<Order>.from(newOrders);
       } else {
-        runningOrders.addAll(newOrders);
+        // Create a new modifiable list by combining existing and new orders
+        final updatedOrders = List<Order>.from(runningOrders);
+        updatedOrders.addAll(newOrders);
+        runningOrders.value = updatedOrders;
       }
       hasMore = newOrders.length == limit;
     } else if (result is Failure) {
