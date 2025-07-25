@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
-import 'package:sixam_mart_user/domain/models/request/cart_models.dart';
-import 'package:sixam_mart_user/domain/models/response/get_cart_list_response.dart';
+import 'package:sixam_mart_user/domain/models/response/cart/cart_models.dart';
+import 'package:sixam_mart_user/domain/models/response/cart/get_cart_list_response.dart';
 import 'package:sixam_mart_user/domain/models/response/get_product_detail_response.dart';
 import 'package:sixam_mart_user/domain/repositories/cart_repository.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
@@ -10,7 +10,7 @@ class CartService extends GetxService {
   final CartRepository _cartRepository;
 
   // Reactive state variables for new store-grouped structure
-  final storesInCart = <StoreInCart>[].obs;
+  final storesInCart = <GetCartListStore>[].obs;
   final cartSummary = Rxn<GetCartListSummary>();
   final isLoading = false.obs;
 
@@ -32,7 +32,8 @@ class CartService extends GetxService {
         case Success(:final response):
           if (response.statusCode == 200) {
             final cartResponse = GetCartListResponse.fromJson(response.data);
-            storesInCart.value = cartResponse.stores?.map((e) => StoreInCart.fromJson(e.toJson())).toList() ?? [];
+            storesInCart.clear();
+            storesInCart.addAll(cartResponse.stores?.map((e) => GetCartListStore.fromJson(e.toJson())) ?? []);
             cartSummary.value = cartResponse.summary;
           } else {
             showAppSnackBar(title: 'Failed to fetch cart items. Please try again.', type: SnackBarType.error);
@@ -55,14 +56,16 @@ class CartService extends GetxService {
       // Check if an identical item already exists in any store
       CartItem? existingItem;
       for (final store in storesInCart) {
-        existingItem = store.items.firstWhereOrNull((item) => item.itemId == request.itemId && _areVariationsEqual(item.itemVariation, request.variation));
-        if (existingItem != null) break;
+        if (store.items != null) {
+          existingItem = store.items!.firstWhereOrNull((item) => item.itemId == request.itemId && _areVariationsEqual(item.itemVariation ?? [], request.variation));
+          if (existingItem != null) break;
+        }
       }
 
       if (existingItem != null) {
         // If item exists, update quantity instead
-        final newQuantity = existingItem.itemQuantity + request.quantity;
-        await updateItemQuantity(existingItem.cartId, newQuantity);
+        final newQuantity = (existingItem.itemQuantity ?? 0) + request.quantity;
+        await updateItemQuantity(existingItem.cartId ?? 0, newQuantity);
       } else {
         // If item doesn't exist, add new item
         final result = await _cartRepository.addToCart(request);
@@ -170,7 +173,7 @@ class CartService extends GetxService {
   }
 
   /// Checks if two variation lists are equal
-  bool _areVariationsEqual(List<ItemVariation> variations1, List<CartVariation> variations2) {
+  bool _areVariationsEqual(List<GetCartListItemVariation> variations1, List<CartVariation> variations2) {
     if (variations1.length != variations2.length) return false;
 
     for (int i = 0; i < variations1.length; i++) {
@@ -178,7 +181,12 @@ class CartService extends GetxService {
       final var2 = variations2[i];
 
       if (var1.name != var2.name) return false;
-      if (var1.values.label != var2.values['label']) return false;
+
+      // Handle the values comparison more safely
+      final var1Values = var1.values?.isNotEmpty == true ? var1.values!.first.label : null;
+      final var2Values = var2.values['label'];
+
+      if (var1Values != var2Values) return false;
     }
 
     return true;
@@ -203,7 +211,9 @@ class CartService extends GetxService {
   List<CartItem> get allCartItems {
     final items = <CartItem>[];
     for (final store in storesInCart) {
-      items.addAll(store.items);
+      if (store.items != null) {
+        items.addAll(store.items!);
+      }
     }
     return items;
   }

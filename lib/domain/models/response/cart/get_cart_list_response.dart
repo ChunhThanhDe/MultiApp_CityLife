@@ -2,8 +2,8 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part '../../../generated/domain/models/response/get_cart_list_response.freezed.dart';
-part '../../../generated/domain/models/response/get_cart_list_response.g.dart';
+part '../../../../generated/domain/models/response/cart/get_cart_list_response.freezed.dart';
+part '../../../../generated/domain/models/response/cart/get_cart_list_response.g.dart';
 
 @freezed
 abstract class GetCartListResponse with _$GetCartListResponse {
