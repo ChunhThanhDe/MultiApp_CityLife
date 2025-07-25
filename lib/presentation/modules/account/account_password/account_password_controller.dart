@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
+import 'package:sixam_mart_user/domain/models/request/change_password_request.dart';
+import 'package:sixam_mart_user/domain/repositories/user_repository.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 
 class AccountPasswordController extends BaseController {
+  final UserRepository _userRepository = Get.find<UserRepository>();
+
   // Password visibility toggles
   final showOldPassword = false.obs;
   final showNewPassword = false.obs;
@@ -30,14 +36,70 @@ class AccountPasswordController extends BaseController {
   }
 
   // Change password handler
-  void onChangePassword() {
-    if (formKey.currentState?.validate() ?? false) {
-      // Call your API or logic here
-      Get.snackbar("Success", "Your password has been changed.", snackPosition: SnackPosition.BOTTOM);
-      // Optionally, clear the fields
-      oldController.clear();
-      newController.clear();
-      confirmController.clear();
+  void onChangePassword() async {
+    if (!(formKey.currentState?.validate() ?? false)) {
+      return;
+    }
+
+    try {
+      isLoading.value = true;
+
+      final request = ChangePasswordRequest(
+        oldPassword: oldController.text.trim(),
+        password: newController.text.trim(),
+        confirmPassword: confirmController.text.trim(),
+      );
+
+      final ApiResult result = await _userRepository.changePassword(request);
+
+      switch (result) {
+        case Success(:final response):
+          if (response.statusCode == 200) {
+            showAppSnackBar(
+              title: "Success",
+              message: "Your password has been changed successfully.",
+              type: SnackBarType.success,
+            );
+            // Clear the fields after successful change
+            oldController.clear();
+            newController.clear();
+            confirmController.clear();
+            // Navigate back to previous screen
+            Get.back();
+          } else {
+            showAppSnackBar(
+              title: "Error",
+              message: "Failed to change password. Please try again.",
+              type: SnackBarType.error,
+            );
+          }
+          break;
+
+        case Failure(:final error):
+          String errorMessage = "Failed to change password. Please try again.";
+          
+          // Handle specific error cases
+          if (error.toString().contains('old_password')) {
+            errorMessage = "Current password is incorrect.";
+          } else if (error.toString().contains('password')) {
+            errorMessage = "New password does not meet requirements.";
+          }
+
+          showAppSnackBar(
+            title: "Error",
+            message: errorMessage,
+            type: SnackBarType.error,
+          );
+          break;
+      }
+    } catch (e) {
+      showAppSnackBar(
+        title: "Error",
+        message: "An unexpected error occurred. Please try again.",
+        type: SnackBarType.error,
+      );
+    } finally {
+      isLoading.value = false;
     }
   }
 

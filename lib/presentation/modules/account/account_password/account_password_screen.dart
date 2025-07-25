@@ -98,17 +98,29 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
             children: [
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: controller.onChangePassword,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF5856D7),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-                    padding: EdgeInsets.symmetric(vertical: 12),
-                    elevation: 0,
-                  ),
-                  child: const Text(
-                    "Change password",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
+                child: Obx(
+                  () => ElevatedButton(
+                    onPressed: controller.isLoading.value ? null : controller.onChangePassword,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF5856D7),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      elevation: 0,
+                      disabledBackgroundColor: Color(0xFF5856D7).withOpacity(0.6),
+                    ),
+                    child: controller.isLoading.value
+                        ? SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                            ),
+                          )
+                        : const Text(
+                            "Change password",
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
+                          ),
                   ),
                 ),
               ),
