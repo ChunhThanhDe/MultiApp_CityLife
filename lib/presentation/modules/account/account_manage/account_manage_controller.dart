@@ -86,7 +86,6 @@ class AccountManageController extends BaseController {
 
       if (success) {
         _showSuccessMessage();
-        Get.back();
       } else {
         _showErrorMessage('Failed to update profile. Please try again.');
       }
