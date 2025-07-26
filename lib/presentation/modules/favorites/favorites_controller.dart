@@ -41,8 +41,12 @@ class FavoritesController extends BaseController {
           final data = response.data;
           if (data != null) {
             final wishlistResponse = WishlistResponse.fromJson(data);
-            wishlistItems.value = wishlistResponse.item;
-            storeList.value = wishlistResponse.store;
+            if (wishlistResponse.item != null) {
+              wishlistItems.value = wishlistResponse.item!;
+            }
+            if (wishlistResponse.store != null) {
+              storeList.value = wishlistResponse.store!;
+            }
           }
         case Failure(:final error):
           log('Error fetching wishlist: $error', name: 'FavoritesController');

@@ -489,32 +489,6 @@ class _AnimatedActionButtonState extends State<_AnimatedActionButton> with Singl
   }
 }
 
-// Individual action button
-class _ActionButton extends StatelessWidget {
-  final IconData icon;
-  final Color color;
-  final VoidCallback? onPressed;
-
-  const _ActionButton({required this.icon, required this.color, this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        width: 28,
-        height: 28,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(32),
-          border: Border.all(color: const Color(0xFFE8EBEE)),
-        ),
-        child: Icon(icon, color: color, size: 20),
-      ),
-    );
-  }
-}
-
 // Cart summary section
 class _CartSummarySection extends StatelessWidget {
   final ViewCartController controller;

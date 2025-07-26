@@ -59,7 +59,7 @@ class FavoriteProductCard extends StatelessWidget {
                             width: 44,
                             height: 44,
                             child: AppImage.network(
-                              store.logoFullUrl,
+                              store.logoFullUrl ?? '',
                               errorWidget: Container(
                                 color: Colors.grey[300],
                                 child: const Icon(Icons.store, color: Colors.grey),
@@ -83,7 +83,7 @@ class FavoriteProductCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    store.name,
+                    store.name ?? 'Unknown Store',
                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -95,7 +95,10 @@ class FavoriteProductCard extends StatelessWidget {
                       onFavoriteTap ??
                       () {
                         // Remove from wishlist
-                        controller.removeFromWishlist(WishlistItemType.store, store.id);
+                        final storeId = store.id;
+                        if (storeId != null) {
+                          controller.removeFromWishlist(WishlistItemType.store, storeId);
+                        }
                       },
                   child: AnimatedSwitcher(
                     duration: const Duration(milliseconds: 250),
