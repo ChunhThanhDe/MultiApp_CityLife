@@ -61,47 +61,34 @@ class CartService extends GetxService {
 
   /// Updates the quantity of an item in the cart with optimistic updates
   Future<void> updateItemQuantity(int cartId, int newQuantity) async {
-    print('🛒 CartService.updateItemQuantity: cartId=$cartId, newQuantity=$newQuantity');
-    
     if (newQuantity <= 0) {
-      print('🛒 Quantity <= 0, calling removeItem instead');
       await removeItem(cartId);
       return;
     }
 
-    // Optimistic update: Update UI immediately
-    print('🛒 Performing optimistic update...');
     _updateItemQuantityOptimistic(cartId, newQuantity);
 
     try {
-      print('🛒 Making API call to update cart...');
       final request = UpdateCartRequest(cartId: cartId, quantity: newQuantity);
       final result = await _cartRepository.updateCart(request);
-      print('🛒 API call completed: ${result.runtimeType}');
-      
+
       // Only refresh if API call failed to restore correct state
       if (result is! Success || result.response.statusCode != 200) {
-        print('🛒 API call failed, refreshing cart from server...');
         await fetchCartList();
-      } else {
-        print('🛒 API call successful, keeping optimistic update');
       }
     } catch (e) {
-      print('🛒 API call failed: $e');
-      // Refresh on error to restore correct state
       await fetchCartList();
     }
   }
 
   /// Removes an item from the cart with optimistic updates
   Future<void> removeItem(int cartId) async {
-    // Optimistic update: Remove item from UI immediately
     _removeItemOptimistic(cartId);
 
     try {
       final request = RemoveFromCartRequest(cartId: cartId);
       final result = await _cartRepository.removeFromCart(request);
-      
+
       // Only refresh if API call failed to restore correct state
       if (result is! Success || result.response.statusCode != 200) {
         await fetchCartList();
@@ -119,10 +106,7 @@ class CartService extends GetxService {
       return;
     }
 
-    final cartIds = store.items!
-        .where((item) => item.cartId != null)
-        .map((item) => item.cartId!)
-        .toList();
+    final cartIds = store.items!.where((item) => item.cartId != null).map((item) => item.cartId!).toList();
 
     // Optimistic update: Remove all items from this store immediately
     _clearStoreItemsOptimistic(storeId);
@@ -132,7 +116,7 @@ class CartService extends GetxService {
         final request = RemoveFromCartRequest(cartId: cartId);
         await _cartRepository.removeFromCart(request);
       }
-      
+
       // Always refresh to get accurate data from server
       await fetchCartList();
     } catch (e) {
@@ -146,7 +130,7 @@ class CartService extends GetxService {
     try {
       isLoading.value = true;
       final result = await _cartRepository.clearCart();
-      
+
       if (result is Success && result.response.statusCode == 200) {
         fetchCartList();
       }
@@ -165,19 +149,16 @@ class CartService extends GetxService {
         final itemIndex = store.items!.indexWhere((item) => item.cartId == cartId);
         if (itemIndex != -1) {
           final originalItem = store.items![itemIndex];
-          final updatedItem = originalItem.copyWith(
-            itemQuantity: newQuantity,
-            itemTotalPrice: (originalItem.itemPrice ?? 0.0) * newQuantity,
-          );
-          
+          final updatedItem = originalItem.copyWith(itemQuantity: newQuantity, itemTotalPrice: (originalItem.itemPrice ?? 0.0) * newQuantity);
+
           // Create a new list with the updated item
           final updatedItems = List<GetCartListItem>.from(store.items!);
           updatedItems[itemIndex] = updatedItem;
-          
+
           // Create a new store with the updated items list
           final updatedStore = store.copyWith(items: updatedItems);
           storesInCart[storeIndex] = updatedStore;
-          
+
           _updateCartSummaryOptimistic();
           storesInCart.refresh();
           return;
@@ -192,12 +173,12 @@ class CartService extends GetxService {
       final store = storesInCart[storeIndex];
       if (store.items != null) {
         final updatedItems = store.items!.where((item) => item.cartId != cartId).toList();
-        
+
         // Only update if the item was actually removed
         if (updatedItems.length != store.items!.length) {
           final updatedStore = store.copyWith(items: updatedItems);
           storesInCart[storeIndex] = updatedStore;
-          
+
           _updateCartSummaryOptimistic();
           storesInCart.refresh();
           return;
@@ -213,7 +194,7 @@ class CartService extends GetxService {
       final store = storesInCart[storeIndex];
       final updatedStore = store.copyWith(items: <GetCartListItem>[]);
       storesInCart[storeIndex] = updatedStore;
-      
+
       _updateCartSummaryOptimistic();
       storesInCart.refresh();
     }
@@ -235,22 +216,14 @@ class CartService extends GetxService {
       }
     }
 
-    cartSummary.value = GetCartListSummary(
-      totalPrice: totalPrice,
-      totalItems: totalItems,
-    );
+    cartSummary.value = GetCartListSummary(totalPrice: totalPrice, totalItems: totalItems);
   }
 
   /// Adds a product to cart with variations and add-ons
-  Future<void> addProductToCart({
-    required ProductDetail product,
-    required Map<String, String> selectedOptions,
-    required Map<int, int> selectedAddOns,
-    int quantity = 1,
-  }) async {
+  Future<void> addProductToCart({required ProductDetail product, required Map<String, String> selectedOptions, required Map<int, int> selectedAddOns, int quantity = 1}) async {
     // Build variations from selectedOptions
     final variations = <CartVariation>[];
-    
+
     if (product.variations.isNotEmpty && selectedOptions['variation'] != null) {
       final selected = selectedOptions['variation'];
       final v = product.variations.firstWhereOrNull((e) => e.type == selected);
@@ -258,7 +231,7 @@ class CartService extends GetxService {
         variations.add(CartVariation(name: 'size', values: {'label': v.type}));
       }
     }
-    
+
     if (product.choiceOptions != null && product.choiceOptions!.isNotEmpty) {
       for (final choice in product.choiceOptions!) {
         final selected = selectedOptions[choice.name];
@@ -267,11 +240,11 @@ class CartService extends GetxService {
         }
       }
     }
-    
+
     // Add-ons
     final addOnIds = selectedAddOns.keys.toList();
     final addOnQtys = selectedAddOns.values.toList();
-    
+
     // Use product.price as default, or selected variation price if available
     double price = product.price.toDouble();
     if (product.variations.isNotEmpty && selectedOptions['variation'] != null) {
@@ -279,17 +252,9 @@ class CartService extends GetxService {
       final v = product.variations.firstWhereOrNull((e) => e.type == selected);
       if (v != null) price = v.price.toDouble();
     }
-    
-    final request = AddToCartRequest(
-      itemId: product.id,
-      model: 'Item',
-      price: price,
-      quantity: quantity,
-      variation: variations,
-      addOnIds: addOnIds,
-      addOnQtys: addOnQtys,
-    );
-    
+
+    final request = AddToCartRequest(itemId: product.id, model: 'Item', price: price, quantity: quantity, variation: variations, addOnIds: addOnIds, addOnQtys: addOnQtys);
+
     await addItemToCart(request);
   }
 

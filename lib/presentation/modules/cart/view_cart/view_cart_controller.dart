@@ -47,23 +47,15 @@ class ViewCartController extends BaseController {
   }
 
   Future<void> updateItemQuantity(int cartId, int quantity) async {
-    print('🔄 UPDATE QUANTITY: cartId=$cartId, newQuantity=$quantity');
-    
     try {
-      // Provide haptic feedback for better UX
-      HapticFeedback.lightImpact();
       await _cartService.updateItemQuantity(cartId, quantity);
-      print('✅ UPDATE QUANTITY SUCCESS');
     } catch (e) {
-      print('❌ UPDATE QUANTITY ERROR: $e');
       error.value = 'Failed to update item quantity. Please try again.';
     }
   }
 
   Future<void> removeItem(int cartId) async {
     try {
-      // Provide haptic feedback for delete action
-      HapticFeedback.mediumImpact();
       await _cartService.removeItem(cartId);
     } catch (e) {
       error.value = 'Failed to remove item. Please try again.';
@@ -87,24 +79,18 @@ class ViewCartController extends BaseController {
 
   // Item quantity operations with validation
   void incrementItemQuantity(GetCartListItem item) {
-    print('🔼 INCREMENT: cartId=${item.cartId}, currentQuantity=${item.itemQuantity}');
     if (item.cartId != null && item.itemQuantity != null) {
       updateItemQuantity(item.cartId!, item.itemQuantity! + 1);
-    } else {
-      print('❌ INCREMENT FAILED: cartId or quantity is null');
     }
   }
 
   void decrementItemQuantity(GetCartListItem item) {
-    print('🔽 DECREMENT: cartId=${item.cartId}, currentQuantity=${item.itemQuantity}');
     if (item.cartId != null && item.itemQuantity != null) {
       if (item.itemQuantity! > 1) {
         updateItemQuantity(item.cartId!, item.itemQuantity! - 1);
       } else {
         removeItem(item.cartId!);
       }
-    } else {
-      print('❌ DECREMENT FAILED: cartId or quantity is null');
     }
   }
 }
