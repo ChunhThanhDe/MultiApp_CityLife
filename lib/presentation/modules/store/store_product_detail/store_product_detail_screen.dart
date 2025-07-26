@@ -153,11 +153,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                         style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 14, color: Color(0xFF161A1D)),
                       ),
                       const Spacer(),
-                      Icon(
-                        Icons.refresh,
-                        size: 18,
-                        color: Color(0xFFB5B9C2), // màu icon gần #E8EBEE hoặc màu xám nhạt
-                      ),
+                      Icon(Icons.refresh, size: 18, color: Color(0xFFB5B9C2)),
                     ],
                   ),
                 ),
@@ -177,9 +173,9 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
             ],
 
             _sectionDivider(),
-            if (product.choiceOptions != null && product.choiceOptions!.isNotEmpty) ...[
+            if (product.choiceOptions.isNotEmpty) ...[
               // Render choice_options
-              for (final choice in product.choiceOptions!)
+              for (final choice in product.choiceOptions)
                 OptionGroupSection(
                   title: choice.title,
                   requiredField: true,
@@ -190,7 +186,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
             ],
 
             // Add-on selection
-            if (product.addOns != null && product.addOns!.isNotEmpty) ...[
+            if (product.addOns.isNotEmpty) ...[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
@@ -202,7 +198,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                       style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: Color(0xFF161A1D)),
                     ),
                     const SizedBox(height: 8),
-                    ...(product.addOns ?? []).map<Widget>((addOn) {
+                    ...(product.addOns).map<Widget>((addOn) {
                       // Assume addOn is a Map with id, name, price
                       final addOnId = addOn['id'] as int;
                       final addOnName = addOn['name']?.toString() ?? '';

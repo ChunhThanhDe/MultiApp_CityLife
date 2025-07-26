@@ -7,12 +7,7 @@ import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 
-class
-/// The `ProductCard` class is a Flutter widget that represents a card used to display product
-/// information in a store application. It takes a `ProductItem` object as a parameter and
-/// displays the product's image, name, and price in a visually appealing layout.
-ProductCard
-    extends StatelessWidget {
+class ProductCard extends StatelessWidget {
   final ProductItem item;
 
   const ProductCard({super.key, required this.item});

@@ -9,11 +9,15 @@ part of '../../../../domain/models/response/get_product_detail_response.dart';
 _ProductDetailResponse _$ProductDetailResponseFromJson(
   Map<String, dynamic> json,
 ) => _ProductDetailResponse(
-  type: json['type'] as String,
+  type: json['type'] as String? ?? '',
   item: ProductDetail.fromJson(json['item'] as Map<String, dynamic>),
-  recommendations: (json['recommendations'] as List<dynamic>)
-      .map((e) => ProductRecommendation.fromJson(e as Map<String, dynamic>))
-      .toList(),
+  recommendations:
+      (json['recommendations'] as List<dynamic>?)
+          ?.map(
+            (e) => ProductRecommendation.fromJson(e as Map<String, dynamic>),
+          )
+          .toList() ??
+      const [],
 );
 
 Map<String, dynamic> _$ProductDetailResponseToJson(
@@ -26,47 +30,60 @@ Map<String, dynamic> _$ProductDetailResponseToJson(
 
 _ProductDetail _$ProductDetailFromJson(Map<String, dynamic> json) =>
     _ProductDetail(
-      id: (json['id'] as num).toInt(),
-      storeId: (json['store_id'] as num).toInt(),
-      storeName: json['store_name'] as String,
-      storeImageUrl: json['store_image_url'] as String,
-      name: json['name'] as String,
-      description: json['description'] as String,
-      imageUrls: (json['image_url'] as List<dynamic>)
-          .map((e) => ImageUrl.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      gallery: (json['gallery'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-      price: (json['price'] as num).toInt(),
-      tax: (json['tax'] as num).toInt(),
-      taxType: json['tax_type'] as String,
-      discount: (json['discount'] as num).toInt(),
-      discountType: json['discount_type'] as String,
-      veg: json['veg'] as bool,
-      stock: (json['stock'] as num).toInt(),
-      unitId: (json['unit_id'] as num).toInt(),
-      orderCount: (json['order_count'] as num).toInt(),
-      avgRating: (json['avg_rating'] as num).toDouble(),
-      ratingCount: (json['rating_count'] as num).toInt(),
-      slug: json['slug'] as String,
-      recommended: json['recommended'] as bool,
-      organic: json['organic'] as bool,
+      id: (json['id'] as num?)?.toInt() ?? 0,
+      storeId: (json['store_id'] as num?)?.toInt() ?? 0,
+      storeName: json['store_name'] as String? ?? '',
+      storeImageUrl: json['store_image_url'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      imageUrls:
+          (json['image_url'] as List<dynamic>?)
+              ?.map((e) => ImageUrl.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      gallery:
+          (json['gallery'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      price: (json['price'] as num?)?.toInt() ?? 0,
+      tax: (json['tax'] as num?)?.toInt() ?? 0,
+      taxType: json['tax_type'] as String? ?? '',
+      discount: (json['discount'] as num?)?.toInt() ?? 0,
+      discountType: json['discount_type'] as String? ?? '',
+      veg: json['veg'] as bool? ?? false,
+      stock: (json['stock'] as num?)?.toInt() ?? 0,
+      unitId: (json['unit_id'] as num?)?.toInt() ?? 0,
+      orderCount: (json['order_count'] as num?)?.toInt() ?? 0,
+      avgRating: (json['avg_rating'] as num?)?.toDouble() ?? 0.0,
+      ratingCount: (json['rating_count'] as num?)?.toInt() ?? 0,
+      slug: json['slug'] as String? ?? '',
+      recommended: json['recommended'] as bool? ?? false,
+      organic: json['organic'] as bool? ?? false,
       maximumCartQuantity: (json['maximum_cart_quantity'] as num?)?.toInt(),
-      addOns: json['add_ons'] as List<dynamic>?,
-      variations: (json['variations'] as List<dynamic>)
-          .map((e) => Variation.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      choiceOptions: (json['choice_options'] as List<dynamic>?)
-          ?.map((e) => ChoiceOption.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      attributes: (json['attributes'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      foodVariations: json['food_variations'] as List<dynamic>?,
-      nutritions: (json['nutritions'] as List<dynamic>)
-          .map((e) => Nutrition.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      addOns: json['add_ons'] as List<dynamic>? ?? const [],
+      variations:
+          (json['variations'] as List<dynamic>?)
+              ?.map((e) => Variation.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      choiceOptions:
+          (json['choice_options'] as List<dynamic>?)
+              ?.map((e) => ChoiceOption.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      attributes:
+          (json['attributes'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      foodVariations: json['food_variations'] as List<dynamic>? ?? const [],
+      nutritions:
+          (json['nutritions'] as List<dynamic>?)
+              ?.map((e) => Nutrition.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      isFavorite: json['is_favorite'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$ProductDetailToJson(_ProductDetail instance) =>
@@ -100,11 +117,12 @@ Map<String, dynamic> _$ProductDetailToJson(_ProductDetail instance) =>
       'attributes': instance.attributes,
       'food_variations': instance.foodVariations,
       'nutritions': instance.nutritions,
+      'is_favorite': instance.isFavorite,
     };
 
 _Variation _$VariationFromJson(Map<String, dynamic> json) => _Variation(
-  type: json['type'] as String,
-  price: (json['price'] as num).toInt(),
+  type: json['type'] as String? ?? '',
+  price: (json['price'] as num?)?.toInt() ?? 0,
 );
 
 Map<String, dynamic> _$VariationToJson(_Variation instance) =>
@@ -112,11 +130,13 @@ Map<String, dynamic> _$VariationToJson(_Variation instance) =>
 
 _ChoiceOption _$ChoiceOptionFromJson(Map<String, dynamic> json) =>
     _ChoiceOption(
-      name: json['name'] as String,
-      title: json['title'] as String,
-      options: (json['options'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
+      name: json['name'] as String? ?? '',
+      title: json['title'] as String? ?? '',
+      options:
+          (json['options'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$ChoiceOptionToJson(_ChoiceOption instance) =>
@@ -129,10 +149,10 @@ Map<String, dynamic> _$ChoiceOptionToJson(_ChoiceOption instance) =>
 _ProductRecommendation _$ProductRecommendationFromJson(
   Map<String, dynamic> json,
 ) => _ProductRecommendation(
-  id: (json['id'] as num).toInt(),
-  name: json['name'] as String,
-  imageUrl: json['image_url'] as String,
-  price: (json['price'] as num).toInt(),
+  id: (json['id'] as num?)?.toInt() ?? 0,
+  name: json['name'] as String? ?? '',
+  imageUrl: json['image_url'] as String? ?? '',
+  price: (json['price'] as num?)?.toInt() ?? 0,
 );
 
 Map<String, dynamic> _$ProductRecommendationToJson(
@@ -144,8 +164,10 @@ Map<String, dynamic> _$ProductRecommendationToJson(
   'price': instance.price,
 };
 
-_ImageUrl _$ImageUrlFromJson(Map<String, dynamic> json) =>
-    _ImageUrl(img: json['img'] as String, storage: json['storage'] as String);
+_ImageUrl _$ImageUrlFromJson(Map<String, dynamic> json) => _ImageUrl(
+  img: json['img'] as String? ?? '',
+  storage: json['storage'] as String? ?? '',
+);
 
 Map<String, dynamic> _$ImageUrlToJson(_ImageUrl instance) => <String, dynamic>{
   'img': instance.img,
@@ -153,8 +175,8 @@ Map<String, dynamic> _$ImageUrlToJson(_ImageUrl instance) => <String, dynamic>{
 };
 
 _Nutrition _$NutritionFromJson(Map<String, dynamic> json) => _Nutrition(
-  id: (json['id'] as num).toInt(),
-  nutrition: json['nutrition'] as String,
+  id: (json['id'] as num?)?.toInt() ?? 0,
+  nutrition: json['nutrition'] as String? ?? '',
 );
 
 Map<String, dynamic> _$NutritionToJson(_Nutrition instance) =>

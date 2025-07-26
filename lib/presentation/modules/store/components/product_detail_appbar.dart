@@ -28,18 +28,15 @@ class StoreDetailAppBar extends StatelessWidget implements PreferredSizeWidget {
             Expanded(
               child: Text(
                 product?.storeName ?? '',
-                style: const TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w700,
-                  fontSize: 18,
-                  color: Color(0xFF161A1D),
-                ),
+                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w700, fontSize: 18, color: Color(0xFF161A1D)),
                 overflow: TextOverflow.ellipsis,
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.favorite, color: Color(0xFF5856D7), size: 22),
-              onPressed: () {},
+              icon: Icon(product?.isFavorite == true ? Icons.favorite : Icons.favorite_border, color: product?.isFavorite == true ? Color(0xFF5856D7) : Color(0xFFB7B7B7), size: 22),
+              onPressed: () {
+                // You can add your toggle logic here if needed.
+              },
               splashRadius: 24,
             ),
             const SizedBox(width: 8),

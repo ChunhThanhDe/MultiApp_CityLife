@@ -91,10 +91,10 @@ $StoreDetailCopyWith<$Res> get store {
 @JsonSerializable()
 
 class _StoreInfoFoodResponse implements StoreInfoFoodResponse {
-  const _StoreInfoFoodResponse({required this.store, @JsonKey(name: 'popular_items') required final  List<ProductItem> popularItems, required final  List<Section> sections}): _popularItems = popularItems,_sections = sections;
+  const _StoreInfoFoodResponse({this.store = const StoreDetail(), @JsonKey(name: 'popular_items') final  List<ProductItem> popularItems = const [], final  List<Section> sections = const []}): _popularItems = popularItems,_sections = sections;
   factory _StoreInfoFoodResponse.fromJson(Map<String, dynamic> json) => _$StoreInfoFoodResponseFromJson(json);
 
-@override final  StoreDetail store;
+@override@JsonKey() final  StoreDetail store;
  final  List<ProductItem> _popularItems;
 @override@JsonKey(name: 'popular_items') List<ProductItem> get popularItems {
   if (_popularItems is EqualUnmodifiableListView) return _popularItems;
@@ -103,7 +103,7 @@ class _StoreInfoFoodResponse implements StoreInfoFoodResponse {
 }
 
  final  List<Section> _sections;
-@override List<Section> get sections {
+@override@JsonKey() List<Section> get sections {
   if (_sections is EqualUnmodifiableListView) return _sections;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_sections);
@@ -264,16 +264,16 @@ $StoreServicesCopyWith<$Res> get services {
 @JsonSerializable()
 
 class _StoreDetail implements StoreDetail {
-  const _StoreDetail({required this.id, required this.name, @JsonKey(name: 'logo_url') required this.logoUrl, @JsonKey(name: 'cover_photo_url') required this.coverPhotoUrl, required this.rating, @JsonKey(name: 'review_count') required this.reviewCount, required this.services});
+  const _StoreDetail({this.id = 0, this.name = '', @JsonKey(name: 'logo_url') this.logoUrl = '', @JsonKey(name: 'cover_photo_url') this.coverPhotoUrl = '', this.rating = 0.0, @JsonKey(name: 'review_count') this.reviewCount = 0, this.services = const StoreServices()});
   factory _StoreDetail.fromJson(Map<String, dynamic> json) => _$StoreDetailFromJson(json);
 
-@override final  int id;
-@override final  String name;
+@override@JsonKey() final  int id;
+@override@JsonKey() final  String name;
 @override@JsonKey(name: 'logo_url') final  String logoUrl;
 @override@JsonKey(name: 'cover_photo_url') final  String coverPhotoUrl;
-@override final  double rating;
+@override@JsonKey() final  double rating;
 @override@JsonKey(name: 'review_count') final  int reviewCount;
-@override final  StoreServices services;
+@override@JsonKey() final  StoreServices services;
 
 /// Create a copy of StoreDetail
 /// with the given fields replaced by the non-null parameter values.
@@ -420,11 +420,11 @@ as bool,
 @JsonSerializable()
 
 class _StoreServices implements StoreServices {
-  const _StoreServices({@JsonKey(name: 'in_store') required this.inStore, required this.delivery, @JsonKey(name: 'drive_thru') required this.driveThru});
+  const _StoreServices({@JsonKey(name: 'in_store') this.inStore = false, this.delivery = false, @JsonKey(name: 'drive_thru') this.driveThru = false});
   factory _StoreServices.fromJson(Map<String, dynamic> json) => _$StoreServicesFromJson(json);
 
 @override@JsonKey(name: 'in_store') final  bool inStore;
-@override final  bool delivery;
+@override@JsonKey() final  bool delivery;
 @override@JsonKey(name: 'drive_thru') final  bool driveThru;
 
 /// Create a copy of StoreServices
@@ -562,13 +562,13 @@ as int,
 @JsonSerializable()
 
 class _ProductItem implements ProductItem {
-  const _ProductItem({required this.id, required this.name, @JsonKey(name: 'image_url') required this.imageUrl, required this.price, @JsonKey(name: 'avg_rating') required this.avgRating, @JsonKey(name: 'rating_count') this.ratingCount = 0});
+  const _ProductItem({this.id = 0, this.name = '', @JsonKey(name: 'image_url') this.imageUrl = '', this.price = 0, @JsonKey(name: 'avg_rating') this.avgRating = 0.0, @JsonKey(name: 'rating_count') this.ratingCount = 0});
   factory _ProductItem.fromJson(Map<String, dynamic> json) => _$ProductItemFromJson(json);
 
-@override final  int id;
-@override final  String name;
+@override@JsonKey() final  int id;
+@override@JsonKey() final  String name;
 @override@JsonKey(name: 'image_url') final  String imageUrl;
-@override final  int price;
+@override@JsonKey() final  int price;
 @override@JsonKey(name: 'avg_rating') final  double avgRating;
 @override@JsonKey(name: 'rating_count') final  int ratingCount;
 
@@ -707,13 +707,13 @@ as List<ProductItem>,
 @JsonSerializable()
 
 class _Section implements Section {
-  const _Section({@JsonKey(name: 'category_id') required this.categoryId, @JsonKey(name: 'category_name') required this.categoryName, required final  List<ProductItem> items}): _items = items;
+  const _Section({@JsonKey(name: 'category_id') this.categoryId = 0, @JsonKey(name: 'category_name') this.categoryName = '', final  List<ProductItem> items = const []}): _items = items;
   factory _Section.fromJson(Map<String, dynamic> json) => _$SectionFromJson(json);
 
 @override@JsonKey(name: 'category_id') final  int categoryId;
 @override@JsonKey(name: 'category_name') final  String categoryName;
  final  List<ProductItem> _items;
-@override List<ProductItem> get items {
+@override@JsonKey() List<ProductItem> get items {
   if (_items is EqualUnmodifiableListView) return _items;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_items);
