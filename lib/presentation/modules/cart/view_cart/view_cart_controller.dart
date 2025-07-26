@@ -7,6 +7,15 @@ import 'package:sixam_mart_user/services/cart_service.dart';
 class ViewCartController extends BaseController {
   final CartService _cartService = Get.find<CartService>();
 
+  @override
+  void onInit() {
+    super.onInit();
+    // Ensure cart data is loaded when screen is initialized
+    if (storesInCart.isEmpty && !isCartLoading) {
+      refreshCart();
+    }
+  }
+
   // Cart data getters (delegated to CartService)
   List<GetCartListStore> get storesInCart => _cartService.storesInCart;
   bool get isEmpty => _cartService.isEmpty;
@@ -24,12 +33,9 @@ class ViewCartController extends BaseController {
     try {
       error.value = '';
       await _cartService.fetchCartList();
-      // Small delay to ensure smooth animation completion on Android
-      await Future.delayed(const Duration(milliseconds: 300));
     } catch (e) {
-      error.value = e.toString();
-      // Error is already handled in CartService
-      rethrow;
+      error.value = 'Failed to load cart. Please try again.';
+      // Don't rethrow to prevent additional error handling
     }
   }
 
@@ -39,20 +45,36 @@ class ViewCartController extends BaseController {
     return;
   }
 
-  Future<void> updateItemQuantity(int cartId, int quantity) => _cartService.updateItemQuantity(cartId, quantity);
+  Future<void> updateItemQuantity(int cartId, int quantity) async {
+    try {
+      await _cartService.updateItemQuantity(cartId, quantity);
+    } catch (e) {
+      error.value = 'Failed to update item quantity. Please try again.';
+    }
+  }
 
-  Future<void> removeItem(int cartId) => _cartService.removeItem(cartId);
+  Future<void> removeItem(int cartId) async {
+    try {
+      await _cartService.removeItem(cartId);
+    } catch (e) {
+      error.value = 'Failed to remove item. Please try again.';
+    }
+  }
 
   Future<void> clearStoreItems(int storeId) async {
-    // Get all items for the specific store
-    final store = storesInCart.firstWhereOrNull((s) => s.storeId == storeId);
-    if (store != null && store.items != null) {
-      // Remove all items from this store
-      for (final item in store.items!) {
-        if (item.cartId != null) {
-          await removeItem(item.cartId!);
+    try {
+      // Get all items for the specific store
+      final store = storesInCart.firstWhereOrNull((s) => s.storeId == storeId);
+      if (store != null && store.items != null) {
+        // Remove all items from this store
+        for (final item in store.items!) {
+          if (item.cartId != null) {
+            await _cartService.removeItem(item.cartId!);
+          }
         }
       }
+    } catch (e) {
+      error.value = 'Failed to clear store items. Please try again.';
     }
   }
 
@@ -77,9 +99,4 @@ class ViewCartController extends BaseController {
       }
     }
   }
-
-  // UI helper methods
-  bool get shouldShowEmptyState => isEmpty;
-  bool get shouldShowCartContent => isNotEmpty;
-  bool get shouldShowLoadingState => isCartLoading;
 }

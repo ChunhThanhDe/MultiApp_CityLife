@@ -46,25 +46,18 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
   }
 
   @override
-  Widget buildScreen(BuildContext context) {
+  Widget? buildBottomNavigationBar(BuildContext context) {
     return Obx(() {
-      if (controller.shouldShowLoadingState) {
-        return const _LoadingCartState();
+      final displayItems = _organizeCartItems(controller.storesInCart);
+      if (displayItems.isEmpty) {
+        return SizedBox.shrink();
       }
-
-      if (controller.shouldShowEmptyState) {
-        return _EmptyCartState(onStartShopping: controller.navigateBack);
-      }
-
-      if (controller.shouldShowCartContent) {
-        return _buildCartListView();
-      }
-
-      return const SizedBox.shrink();
+      return _CartSummarySection(controller: controller);
     });
   }
 
-  Widget _buildCartListView() {
+  @override
+  Widget buildScreen(BuildContext context) {
     return Obx(() {
       final displayItems = _organizeCartItems(controller.storesInCart);
 
@@ -73,26 +66,16 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
         itemBuilder: _buildCartItem,
         onRefresh: controller.refreshCart,
         onLoadMore: controller.loadMoreCart,
-        isLoading: controller.isLoading.value,
+        isLoading: controller.isCartLoading,
         isLoadingMore: controller.isLoadingMore.value,
         hasMore: controller.hasMore,
         errorMessage: controller.error.value.isNotEmpty ? controller.error.value : null,
-        onRetry: () => controller.refreshCart(),
+        onRetry: controller.refreshCart,
+        emptyWidget: _EmptyCartState(onStartShopping: controller.navigateBack),
         emptyTitle: 'Your cart is empty',
         emptySubtitle: 'Add some items to your cart to get started.',
         physics: const AlwaysScrollableScrollPhysics(),
         useCustomScrollView: true,
-        footerSlivers: [
-          SliverFillRemaining(
-            hasScrollBody: false,
-            child: Column(
-              children: [
-                const Spacer(),
-                _CartSummarySection(controller: controller),
-              ],
-            ),
-          ),
-        ],
       );
     });
   }
@@ -159,25 +142,6 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
   }
 }
 
-// Loading state widget
-class _LoadingCartState extends StatelessWidget {
-  const _LoadingCartState();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _CartEmptyIllustration(),
-          SizedBox(height: 32),
-          _EmptyStateContent(title: "Add items to start a cart", subtitle: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", buttonText: "Start shopping"),
-        ],
-      ),
-    );
-  }
-}
-
 // Empty cart state widget
 class _EmptyCartState extends StatelessWidget {
   final VoidCallback onStartShopping;
@@ -186,20 +150,13 @@ class _EmptyCartState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () => Get.find<ViewCartController>().refreshCart(),
-      child: ListView(
-        physics: const AlwaysScrollableScrollPhysics(),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: MediaQuery.of(context).size.height * 0.15),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const _CartEmptyIllustration(),
-              const SizedBox(height: 32),
-              _EmptyStateContent(title: "Your cart is empty", subtitle: "Add some items to your cart to get started.", buttonText: "Start shopping", onPressed: onStartShopping),
-            ],
-          ),
+          const _CartEmptyIllustration(),
+          const SizedBox(height: 32),
+          _EmptyStateContent(title: "Your cart is empty", subtitle: "Add some items to your cart to get started.", buttonText: "Start shopping", onPressed: onStartShopping),
         ],
       ),
     );
@@ -453,6 +410,7 @@ class _CartSummarySection extends StatelessWidget {
         color: Colors.white,
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             children: [
