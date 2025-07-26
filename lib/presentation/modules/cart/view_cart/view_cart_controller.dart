@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/domain/models/response/get_cart_list_response.dart';
@@ -11,17 +12,17 @@ class ViewCartController extends BaseController {
   void onInit() {
     super.onInit();
     // Ensure cart data is loaded when screen is initialized
-    if (storesInCart.isEmpty && !isCartLoading) {
+    if (storesInCart.isEmpty && !isCartLoading.value) {
       refreshCart();
     }
   }
 
-  // Cart data getters (delegated to CartService)
-  List<GetCartListStore> get storesInCart => _cartService.storesInCart;
+  // Cart data getters (delegated to CartService with reactive binding)
+  RxList<GetCartListStore> get storesInCart => _cartService.storesInCart;
   bool get isEmpty => _cartService.isEmpty;
   bool get isNotEmpty => _cartService.isNotEmpty;
   double get totalPrice => _cartService.totalPrice;
-  bool get isCartLoading => _cartService.isLoading.value;
+  RxBool get isCartLoading => _cartService.isLoading;
 
   // AppListView compatibility properties
   final RxBool isLoadingMore = false.obs;
@@ -46,15 +47,23 @@ class ViewCartController extends BaseController {
   }
 
   Future<void> updateItemQuantity(int cartId, int quantity) async {
+    print('🔄 UPDATE QUANTITY: cartId=$cartId, newQuantity=$quantity');
+    
     try {
+      // Provide haptic feedback for better UX
+      HapticFeedback.lightImpact();
       await _cartService.updateItemQuantity(cartId, quantity);
+      print('✅ UPDATE QUANTITY SUCCESS');
     } catch (e) {
+      print('❌ UPDATE QUANTITY ERROR: $e');
       error.value = 'Failed to update item quantity. Please try again.';
     }
   }
 
   Future<void> removeItem(int cartId) async {
     try {
+      // Provide haptic feedback for delete action
+      HapticFeedback.mediumImpact();
       await _cartService.removeItem(cartId);
     } catch (e) {
       error.value = 'Failed to remove item. Please try again.';
@@ -63,16 +72,9 @@ class ViewCartController extends BaseController {
 
   Future<void> clearStoreItems(int storeId) async {
     try {
-      // Get all items for the specific store
-      final store = storesInCart.firstWhereOrNull((s) => s.storeId == storeId);
-      if (store != null && store.items != null) {
-        // Remove all items from this store
-        for (final item in store.items!) {
-          if (item.cartId != null) {
-            await _cartService.removeItem(item.cartId!);
-          }
-        }
-      }
+      // Provide haptic feedback for clear action
+      HapticFeedback.heavyImpact();
+      await _cartService.clearStoreItems(storeId);
     } catch (e) {
       error.value = 'Failed to clear store items. Please try again.';
     }
@@ -85,18 +87,24 @@ class ViewCartController extends BaseController {
 
   // Item quantity operations with validation
   void incrementItemQuantity(GetCartListItem item) {
+    print('🔼 INCREMENT: cartId=${item.cartId}, currentQuantity=${item.itemQuantity}');
     if (item.cartId != null && item.itemQuantity != null) {
       updateItemQuantity(item.cartId!, item.itemQuantity! + 1);
+    } else {
+      print('❌ INCREMENT FAILED: cartId or quantity is null');
     }
   }
 
   void decrementItemQuantity(GetCartListItem item) {
+    print('🔽 DECREMENT: cartId=${item.cartId}, currentQuantity=${item.itemQuantity}');
     if (item.cartId != null && item.itemQuantity != null) {
       if (item.itemQuantity! > 1) {
         updateItemQuantity(item.cartId!, item.itemQuantity! - 1);
       } else {
         removeItem(item.cartId!);
       }
+    } else {
+      print('❌ DECREMENT FAILED: cartId or quantity is null');
     }
   }
 }

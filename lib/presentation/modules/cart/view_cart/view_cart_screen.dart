@@ -66,7 +66,7 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
         itemBuilder: _buildCartItem,
         onRefresh: controller.refreshCart,
         onLoadMore: controller.loadMoreCart,
-        isLoading: controller.isCartLoading,
+        isLoading: controller.isCartLoading.value,
         isLoadingMore: controller.isLoadingMore.value,
         hasMore: controller.hasMore,
         errorMessage: controller.error.value.isNotEmpty ? controller.error.value : null,
@@ -107,11 +107,15 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
         final isLastItemInStore = _isLastItemInStore(displayItems, index);
         final isLastStore = _isLastStore(displayItems, index);
 
-        return Column(
-          children: [
-            _CartProductItem(item: displayItem.item!, controller: controller),
-            if (isLastItemInStore && !isLastStore) const Divider(height: 0, color: Color(0xFFE8EBEE), indent: 24, endIndent: 24),
-          ],
+        return AnimatedSize(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          child: Column(
+            children: [
+              _CartProductItem(item: displayItem.item!, controller: controller),
+              if (isLastItemInStore && !isLastStore) const Divider(height: 0, color: Color(0xFFE8EBEE), indent: 24, endIndent: 24),
+            ],
+          ),
         );
       case CartDisplayType.cartSummary:
         return _CartSummarySection(controller: controller);
@@ -214,7 +218,7 @@ class _StoreHeader extends StatelessWidget {
   }
 }
 
-// Cart product item widget
+// Cart product item widget with animation
 class _CartProductItem extends StatelessWidget {
   final GetCartListItem item;
   final ViewCartController controller;
@@ -223,7 +227,9 @@ class _CartProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeInOut,
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       color: Colors.white,
       child: Row(
@@ -301,7 +307,7 @@ class _ProductDetails extends StatelessWidget {
   }
 }
 
-// Quantity controls widget
+// Quantity controls widget with animation and loading state
 class _QuantityControls extends StatelessWidget {
   final GetCartListItem item;
   final ViewCartController controller;
@@ -310,33 +316,87 @@ class _QuantityControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 150),
       height: 28,
       decoration: BoxDecoration(color: const Color(0xFFF7F8F9), borderRadius: BorderRadius.circular(32)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          IconButton(
-            icon: const Icon(Icons.remove, size: 18, color: Color(0xFF161A1D)),
-            onPressed: () => controller.decrementItemQuantity(item),
-            splashRadius: 20,
+          _QuantityButton(icon: Icons.remove, onPressed: () => controller.decrementItemQuantity(item), enabled: true),
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 200),
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              return ScaleTransition(scale: animation, child: child);
+            },
+            child: Text(
+              '${item.itemQuantity ?? 0}',
+              key: ValueKey(item.itemQuantity),
+              style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xFF161A1D)),
+            ),
           ),
-          Text(
-            '${item.itemQuantity ?? 0}',
-            style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xFF161A1D)),
-          ),
-          IconButton(
-            icon: const Icon(Icons.add, size: 18, color: Color(0xFF161A1D)),
-            onPressed: () => controller.incrementItemQuantity(item),
-            splashRadius: 20,
-          ),
+          _QuantityButton(icon: Icons.add, onPressed: () => controller.incrementItemQuantity(item), enabled: true),
         ],
       ),
     );
   }
 }
 
-// Action buttons (favorite and delete)
+// Individual quantity button with animation
+class _QuantityButton extends StatefulWidget {
+  final IconData icon;
+  final VoidCallback? onPressed;
+  final bool enabled;
+
+  const _QuantityButton({required this.icon, required this.onPressed, this.enabled = true});
+
+  @override
+  State<_QuantityButton> createState() => _QuantityButtonState();
+}
+
+class _QuantityButtonState extends State<_QuantityButton> with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(duration: const Duration(milliseconds: 100), vsync: this);
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.9).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _scaleAnimation,
+      builder: (context, child) {
+        return Transform.scale(
+          scale: _scaleAnimation.value,
+          child: IconButton(
+            icon: Icon(widget.icon, size: 18, color: widget.enabled ? const Color(0xFF161A1D) : const Color(0xFFBBBBBB)),
+            onPressed: widget.enabled
+                ? () {
+                    _animationController.forward().then((_) {
+                      _animationController.reverse();
+                    });
+                    widget.onPressed?.call();
+                  }
+                : null,
+            splashRadius: 20,
+          ),
+        );
+      },
+    );
+  }
+}
+
+// Action buttons (favorite and delete) with animation
 class _ActionButtons extends StatelessWidget {
   final GetCartListItem item;
   final ViewCartController controller;
@@ -347,7 +407,7 @@ class _ActionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        _ActionButton(
+        _AnimatedActionButton(
           icon: Icons.favorite_border,
           color: Color(0xFF5856D7),
           onPressed: () {
@@ -355,7 +415,7 @@ class _ActionButtons extends StatelessWidget {
           },
         ),
         const SizedBox(width: 8),
-        _ActionButton(
+        _AnimatedActionButton(
           icon: Icons.delete_outline,
           color: Color(0xFFE53E3E),
           onPressed: () {
@@ -365,6 +425,66 @@ class _ActionButtons extends StatelessWidget {
           },
         ),
       ],
+    );
+  }
+}
+
+// Animated action button for delete with visual feedback
+class _AnimatedActionButton extends StatefulWidget {
+  final IconData icon;
+  final Color color;
+  final VoidCallback? onPressed;
+
+  const _AnimatedActionButton({required this.icon, required this.color, this.onPressed});
+
+  @override
+  State<_AnimatedActionButton> createState() => _AnimatedActionButtonState();
+}
+
+class _AnimatedActionButtonState extends State<_AnimatedActionButton> with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(duration: const Duration(milliseconds: 150), vsync: this);
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.8).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _scaleAnimation,
+      builder: (context, child) {
+        return Transform.scale(
+          scale: _scaleAnimation.value,
+          child: GestureDetector(
+            onTap: () {
+              _animationController.forward().then((_) {
+                _animationController.reverse();
+              });
+              widget.onPressed?.call();
+            },
+            child: Container(
+              width: 28,
+              height: 28,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(32),
+                border: Border.all(color: const Color(0xFFE8EBEE)),
+              ),
+              child: Icon(widget.icon, color: widget.color, size: 20),
+            ),
+          ),
+        );
+      },
     );
   }
 }
