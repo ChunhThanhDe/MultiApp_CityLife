@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
+import 'package:sixam_mart_user/domain/models/response/get_checkout_summary_response.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/cart_checkout/cart_checkout_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
-
-import 'cart_checkout_controller.dart';
 
 class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   const CartCheckoutScreen({super.key});
@@ -17,155 +16,45 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    // For demo: Just use asset or Icon
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return const Center(child: CircularProgressIndicator());
+      }
 
-    Widget arrowRight = Icon(Icons.arrow_forward_ios_rounded, size: 20, color: Color(0xFF4A5763));
+      final checkoutData = controller.checkoutSummary.value;
+      if (checkoutData == null) {
+        return const Center(child: Text('Failed to load checkout data'));
+      }
 
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          // Address Section
-          sectionCard(
-            children: [
-              cellItem(icon: SvgPicture.asset('assets/icons/ic_home.svg'), title: "My Home", subtitle: "2216 N 10th St, Apt 0, El Centro, CA 92243", onTap: () {}),
-              divider(60),
-              cellItem(icon: SvgPicture.asset('assets/icons/ic_box_package_courier_hands.svg'), title: "Hand it to me", subtitle: "Please Hand it to me", onTap: () {}),
-            ],
-          ),
+      return SingleChildScrollView(
+        child: Column(
+          children: [
+            // Address Section
+            _buildAddressSection(checkoutData),
+            _buildDivider(),
 
-          dividerSpace(),
+            // Delivery Options Section
+            _buildDeliveryOptionsSection(checkoutData),
+            _buildDivider(),
 
-          // Delivery Options
-          sectionLabel("Delivery Options"),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              children: [
-                deliveryOption(selected: false, icon: SvgPicture.asset('assets/icons/ic_priority.svg'), title: "Priority", subtitle: "5-10 min(s) Delivered directly to you", label: "\$5.99"),
-                SizedBox(height: 16),
-                deliveryOption(selected: false, icon: SvgPicture.asset('assets/icons/ic_schedule.svg'), title: "Schedule", subtitle: "Select a time", trailing: arrowRight),
-                SizedBox(height: 16),
-                deliveryOption(selected: true, icon: SvgPicture.asset('assets/icons/ic_standard.svg'), title: "Standard", subtitle: "10-25 min(s) Delivered"),
-              ],
-            ),
-          ),
+            // Order Details Section
+            _buildOrderDetailsSection(checkoutData),
+            _buildDivider(),
 
-          dividerSpace(),
+            // Promocode Section
+            _buildPromocodeSection(checkoutData),
+            _buildDivider(),
 
-          // Order Details
-          sectionLabel("Order Details"),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              children: [
-                orderGroupItem(logo: "assets/images/starbucks.png", name: "Starbucks®", detail: "4 items", amount: "\$14.32"),
-                SizedBox(height: 8),
-                orderGroupItem(logo: "assets/images/mcdonalds.png", name: "Walmart", detail: "11 items", amount: "\$21.55"),
-              ],
-            ),
-          ),
+            // Price Summary Section
+            _buildPriceSummarySection(checkoutData),
+            _buildDivider(),
 
-          dividerSpace(),
-
-          // Promocode
-          sectionLabel("Promocode"),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Row(
-              children: [
-                // Icon + Hint Text (giả lập textfield flatformless)
-                Icon(Icons.sell_outlined, color: Color(0xFF798A9A), size: 18),
-                SizedBox(width: 8),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      // mở dialog hoặc bottomsheet nhập code thực sự nếu muốn
-                    },
-                    child: Text(
-                      "Enter Code",
-                      style: TextStyle(fontFamily: 'Inter', color: Color(0xFF798A9A), fontWeight: FontWeight.w400, fontSize: 16),
-                    ),
-                  ),
-                ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    foregroundColor: Color(0xFF5856D7),
-                    minimumSize: Size(0, 32),
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-                    textStyle: TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                  onPressed: () {},
-                  child: Text("Apply"),
-                ),
-              ],
-            ),
-          ),
-
-          divider(),
-
-          // Price Summary
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-            child: Column(
-              children: [
-                priceRow("Subtotal:", "\$35.87"),
-                priceRow("Delivery Fee:", "\$8.99"),
-                priceRow("Taxes & Estimated Fees:", "\$0.00"),
-                priceRow("Discount:", "\$0.00"),
-                SizedBox(height: 6),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Total:",
-                      style: TextStyle(color: Color(0xFF161A1D), fontWeight: FontWeight.w500, fontSize: 20, fontFamily: 'Inter'),
-                    ),
-                    Text(
-                      "\$35.87",
-                      style: TextStyle(color: Color(0xFF161A1D), fontWeight: FontWeight.w500, fontSize: 20, fontFamily: 'Inter'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-
-          dividerSpace(),
-
-          // Payment Section
-          sectionLabel("Payment"),
-          Padding(padding: const EdgeInsets.symmetric(horizontal: 24), child: paymentItem()),
-
-          // Button
-          Padding(
-            padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
-            child: SizedBox(
-              width: double.infinity,
-              height: 48,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF5856D7),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-                ),
-                onPressed: () {
-                  // For testing purposes, using sample order tracking data
-                  // In a real app, these would come from the actual order creation response
-                  Get.toNamed(AppRoutes.cartConfirm, arguments: {
-                    'orderId': 100047, // Sample order ID from the API documentation
-                    'contactNumber': '+8801234567890', // Sample contact number
-                  });
-                },
-                child: Text(
-                  "Order Now",
-                  style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Inter', fontWeight: FontWeight.w500),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: 20),
-        ],
-      ),
-    );
+            // Payment Section
+            _buildPaymentSection(checkoutData),
+          ],
+        ),
+      );
+    });
   }
 
   // Helper widgets for section structure
@@ -353,4 +242,255 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
       ],
     ),
   );
+
+  Widget _buildAddressSection(GetCheckoutSummaryResponse checkoutData) {
+    final selectedAddress = controller.selectedAddress ?? checkoutData.defaultAddress;
+
+    return sectionCard(
+      children: [
+        cellItem(
+          icon: SvgPicture.asset('assets/icons/ic_home.svg'),
+          title: selectedAddress?.addressType ?? "Address",
+          subtitle: selectedAddress?.address ?? "No address selected",
+          onTap: () => _showAddressSelection(checkoutData.addresses ?? []),
+        ),
+        divider(60),
+        cellItem(icon: SvgPicture.asset('assets/icons/ic_box_package_courier_hands.svg'), title: "Hand it to me", subtitle: "Please Hand it to me", onTap: () {}),
+      ],
+    );
+  }
+
+  Widget _buildDeliveryOptionsSection(GetCheckoutSummaryResponse checkoutData) {
+    return Column(
+      children: [
+        sectionLabel("Delivery Options"),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            children: (checkoutData.deliveryOptions ?? []).map((option) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Obx(
+                  () => GestureDetector(
+                    onTap: () => controller.selectDeliveryOption(option.key ?? ''),
+                    child: deliveryOption(
+                      selected: controller.selectedDeliveryOption.value == option.key,
+                      icon: _getDeliveryIcon(option.key ?? ''),
+                      title: option.label ?? '',
+                      subtitle: option.desc ?? '',
+                      label: option.fee != null ? "\$${option.fee!.toStringAsFixed(2)}" : null,
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildOrderDetailsSection(GetCheckoutSummaryResponse checkoutData) {
+    return Column(
+      children: [
+        sectionLabel("Order Details"),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            children: (checkoutData.cart ?? []).map((store) {
+              final itemCount = store.items?.length ?? 0;
+              final storeTotal = store.items?.fold<double>(0.0, (sum, item) => sum + ((item.itemPrice ?? 0.0) * (item.itemQuantity ?? 1))) ?? 0.0;
+
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: orderGroupItem(
+                  logo: store.storeLogo ?? "assets/images/default_store.png",
+                  name: store.storeName ?? "Store",
+                  detail: "$itemCount items",
+                  amount: "\$${storeTotal.toStringAsFixed(2)}",
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPromocodeSection(GetCheckoutSummaryResponse checkoutData) {
+    return Column(
+      children: [
+        sectionLabel("Promocode"),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Row(
+            children: [
+              Icon(Icons.sell_outlined, color: Color(0xFF798A9A), size: 18),
+              SizedBox(width: 8),
+              Expanded(
+                child: GestureDetector(
+                  onTap: () => _showPromocodeDialog(checkoutData.availableCoupons ?? []),
+                  child: Obx(
+                    () => Text(
+                      controller.promoCode.value.isEmpty ? "Enter Code" : controller.promoCode.value,
+                      style: TextStyle(fontFamily: 'Inter', color: controller.promoCode.value.isEmpty ? Color(0xFF798A9A) : Color(0xFF161A1D), fontWeight: FontWeight.w400, fontSize: 16),
+                    ),
+                  ),
+                ),
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: Color(0xFF5856D7),
+                  minimumSize: Size(0, 32),
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                  textStyle: TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                onPressed: () => _showPromocodeDialog(checkoutData.availableCoupons ?? []),
+                child: Text("Apply"),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPriceSummarySection(GetCheckoutSummaryResponse checkoutData) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+      child: Obx(
+        () => Column(
+          children: [
+            priceRow("Subtotal:", "\$${(checkoutData.subtotal ?? 0.0).toStringAsFixed(2)}"),
+            priceRow("Delivery Fee:", "\$${controller.selectedDeliveryFee.toStringAsFixed(2)}"),
+            priceRow("Taxes & Estimated Fees:", "\$${(checkoutData.tax ?? 0.0).toStringAsFixed(2)}"),
+            priceRow("Discount:", "-\$${(checkoutData.discount ?? 0.0).toStringAsFixed(2)}"),
+            SizedBox(height: 6),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Total:",
+                  style: TextStyle(color: Color(0xFF161A1D), fontWeight: FontWeight.w500, fontSize: 20, fontFamily: 'Inter'),
+                ),
+                Text(
+                  "\$${controller.calculatedTotal.toStringAsFixed(2)}",
+                  style: TextStyle(color: Color(0xFF161A1D), fontWeight: FontWeight.w500, fontSize: 20, fontFamily: 'Inter'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPaymentSection(GetCheckoutSummaryResponse checkoutData) {
+    return Column(
+      children: [
+        sectionLabel("Payment"),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            children: (checkoutData.paymentMethods ?? []).map((method) {
+              return Obx(
+                () => GestureDetector(
+                  onTap: () => controller.selectPaymentMethod(method.key ?? ''),
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 12),
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: controller.selectedPaymentMethod.value == method.key ? Color(0xFF5856D7) : Color(0xFFE5E7EB)),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(_getPaymentIcon(method.key ?? ''), color: controller.selectedPaymentMethod.value == method.key ? Color(0xFF5856D7) : Color(0xFF798A9A)),
+                        SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            method.label ?? '',
+                            style: TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
+                          ),
+                        ),
+                        if (controller.selectedPaymentMethod.value == method.key) Icon(Icons.check_circle, color: Color(0xFF5856D7)),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+        // Order Button
+        Padding(
+          padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
+          child: SizedBox(
+            width: double.infinity,
+            height: 48,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF5856D7),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+              ),
+              onPressed: () {
+                // For testing purposes, using sample order tracking data
+                // In a real app, these would come from the actual order creation response
+                Get.toNamed(
+                  '/cart-confirm',
+                  arguments: {
+                    'orderId': 100047, // Sample order ID from the API documentation
+                    'contactNumber': '+8801234567890', // Sample contact number
+                  },
+                );
+              },
+              child: Text(
+                "Order Now",
+                style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Inter', fontWeight: FontWeight.w500),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDivider() {
+    return dividerSpace();
+  }
+
+  // Helper methods
+  Widget _getDeliveryIcon(String key) {
+    switch (key) {
+      case 'priority':
+        return SvgPicture.asset('assets/icons/ic_priority.svg');
+      case 'schedule':
+        return SvgPicture.asset('assets/icons/ic_schedule.svg');
+      case 'standard':
+      default:
+        return SvgPicture.asset('assets/icons/ic_standard.svg');
+    }
+  }
+
+  IconData _getPaymentIcon(String key) {
+    switch (key) {
+      case 'credit_card':
+        return Icons.credit_card;
+      case 'digital_wallet':
+        return Icons.account_balance_wallet;
+      case 'cash_on_delivery':
+      default:
+        return Icons.money;
+    }
+  }
+
+  void _showAddressSelection(List<CheckoutAddress> addresses) {
+    // TODO: Implement address selection dialog
+    Get.snackbar('Info', 'Address selection dialog would open here');
+  }
+
+  void _showPromocodeDialog(List<AvailableCoupon> coupons) {
+    // TODO: Implement promocode dialog
+    Get.snackbar('Info', 'Promocode dialog would open here');
+  }
 }

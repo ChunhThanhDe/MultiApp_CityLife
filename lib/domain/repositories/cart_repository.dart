@@ -13,6 +13,7 @@ class CartApiPath {
   static const String updateCart = '/api/v1/customer/cart/update';
   static const String removeFromCart = '/api/v1/customer/cart/remove-item';
   static const String clearCart = '/api/v1/customer/cart/remove';
+  static const String getCheckoutSummary = '/api/v1/customer/checkout/summary';
 }
 
 class CartRepository extends BaseRepository {
@@ -49,5 +50,9 @@ class CartRepository extends BaseRepository {
 
   Future<ApiResult> clearCart() async {
     return handleApiRequest(() => dioClient.delete(CartApiPath.clearCart));
+  }
+
+  Future<ApiResult> getCheckoutSummary() async {
+    return handleApiRequest(() => dioClient.get(CartApiPath.getCheckoutSummary));
   }
 }
