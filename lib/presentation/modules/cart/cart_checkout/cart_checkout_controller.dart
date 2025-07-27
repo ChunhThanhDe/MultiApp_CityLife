@@ -7,9 +7,11 @@ import 'package:sixam_mart_user/domain/models/response/get_checkout_summary_resp
 import 'package:sixam_mart_user/domain/repositories/cart_repository.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
+import 'package:sixam_mart_user/services/cart_service.dart';
 
 class CartCheckoutController extends BaseController {
   final CartRepository _cartRepository = Get.find<CartRepository>();
+  final CartService _cartService = Get.find<CartService>();
 
   final Rx<GetCheckoutSummaryResponse?> checkoutSummary = Rx<GetCheckoutSummaryResponse?>(null);
   final RxString selectedDeliveryOption = RxString('Standard'); // Default to 'Standard'
@@ -147,6 +149,9 @@ class CartCheckoutController extends BaseController {
           if (responseData != null && responseData['orders'] != null && responseData['orders'].isNotEmpty) {
             final orderId = responseData['orders'][0]['id'];
             final contactNumber = selectedAddress?.contactPersonNumber ?? '';
+
+            // Refresh cart list to update UI (cart should be empty after successful order)
+            await _cartService.fetchCartList();
 
             // Navigate to order confirmation screen
             Get.offAndToNamed(AppRoutes.cartConfirm, arguments: {'orderId': orderId, 'contactNumber': contactNumber});
