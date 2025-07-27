@@ -98,7 +98,7 @@ Map<String, dynamic> _$CheckoutAddressToJson(_CheckoutAddress instance) =>
 
 _DeliveryOption _$DeliveryOptionFromJson(Map<String, dynamic> json) =>
     _DeliveryOption(
-      key: json['key'] as String?,
+      key: (json['key'] as num?)?.toInt(),
       label: json['label'] as String?,
       fee: (json['fee'] as num?)?.toDouble(),
       desc: json['desc'] as String?,

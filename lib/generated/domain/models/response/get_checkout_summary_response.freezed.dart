@@ -453,7 +453,7 @@ as String?,
 /// @nodoc
 mixin _$DeliveryOption {
 
-@JsonKey(name: "key") String? get key;@JsonKey(name: "label") String? get label;@JsonKey(name: "fee") double? get fee;@JsonKey(name: "desc") String? get desc;
+@JsonKey(name: "key") int? get key;@JsonKey(name: "label") String? get label;@JsonKey(name: "fee") double? get fee;@JsonKey(name: "desc") String? get desc;
 /// Create a copy of DeliveryOption
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -486,7 +486,7 @@ abstract mixin class $DeliveryOptionCopyWith<$Res>  {
   factory $DeliveryOptionCopyWith(DeliveryOption value, $Res Function(DeliveryOption) _then) = _$DeliveryOptionCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "key") String? key,@JsonKey(name: "label") String? label,@JsonKey(name: "fee") double? fee,@JsonKey(name: "desc") String? desc
+@JsonKey(name: "key") int? key,@JsonKey(name: "label") String? label,@JsonKey(name: "fee") double? fee,@JsonKey(name: "desc") String? desc
 });
 
 
@@ -506,7 +506,7 @@ class _$DeliveryOptionCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? key = freezed,Object? label = freezed,Object? fee = freezed,Object? desc = freezed,}) {
   return _then(_self.copyWith(
 key: freezed == key ? _self.key : key // ignore: cast_nullable_to_non_nullable
-as String?,label: freezed == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as int?,label: freezed == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
 as String?,fee: freezed == fee ? _self.fee : fee // ignore: cast_nullable_to_non_nullable
 as double?,desc: freezed == desc ? _self.desc : desc // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -523,7 +523,7 @@ class _DeliveryOption implements DeliveryOption {
   const _DeliveryOption({@JsonKey(name: "key") this.key, @JsonKey(name: "label") this.label, @JsonKey(name: "fee") this.fee, @JsonKey(name: "desc") this.desc});
   factory _DeliveryOption.fromJson(Map<String, dynamic> json) => _$DeliveryOptionFromJson(json);
 
-@override@JsonKey(name: "key") final  String? key;
+@override@JsonKey(name: "key") final  int? key;
 @override@JsonKey(name: "label") final  String? label;
 @override@JsonKey(name: "fee") final  double? fee;
 @override@JsonKey(name: "desc") final  String? desc;
@@ -561,7 +561,7 @@ abstract mixin class _$DeliveryOptionCopyWith<$Res> implements $DeliveryOptionCo
   factory _$DeliveryOptionCopyWith(_DeliveryOption value, $Res Function(_DeliveryOption) _then) = __$DeliveryOptionCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "key") String? key,@JsonKey(name: "label") String? label,@JsonKey(name: "fee") double? fee,@JsonKey(name: "desc") String? desc
+@JsonKey(name: "key") int? key,@JsonKey(name: "label") String? label,@JsonKey(name: "fee") double? fee,@JsonKey(name: "desc") String? desc
 });
 
 
@@ -581,7 +581,7 @@ class __$DeliveryOptionCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? key = freezed,Object? label = freezed,Object? fee = freezed,Object? desc = freezed,}) {
   return _then(_DeliveryOption(
 key: freezed == key ? _self.key : key // ignore: cast_nullable_to_non_nullable
-as String?,label: freezed == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as int?,label: freezed == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
 as String?,fee: freezed == fee ? _self.fee : fee // ignore: cast_nullable_to_non_nullable
 as double?,desc: freezed == desc ? _self.desc : desc // ignore: cast_nullable_to_non_nullable
 as String?,

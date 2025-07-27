@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part '../../../../generated/domain/models/request/cart/order_now_request.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class OrderNowRequest {
   final String selectedDeliveryOption;
   final int selectedAddressId;

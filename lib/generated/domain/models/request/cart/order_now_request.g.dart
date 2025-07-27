@@ -8,16 +8,16 @@ part of '../../../../../domain/models/request/cart/order_now_request.dart';
 
 OrderNowRequest _$OrderNowRequestFromJson(Map<String, dynamic> json) =>
     OrderNowRequest(
-      selectedDeliveryOption: json['selectedDeliveryOption'] as String,
-      selectedAddressId: (json['selectedAddressId'] as num).toInt(),
-      appliedCoupon: json['appliedCoupon'] as String,
-      paymentMethod: json['paymentMethod'] as String,
+      selectedDeliveryOption: json['selected_delivery_option'] as String,
+      selectedAddressId: (json['selected_address_id'] as num).toInt(),
+      appliedCoupon: json['applied_coupon'] as String,
+      paymentMethod: json['payment_method'] as String,
     );
 
 Map<String, dynamic> _$OrderNowRequestToJson(OrderNowRequest instance) =>
     <String, dynamic>{
-      'selectedDeliveryOption': instance.selectedDeliveryOption,
-      'selectedAddressId': instance.selectedAddressId,
-      'appliedCoupon': instance.appliedCoupon,
-      'paymentMethod': instance.paymentMethod,
+      'selected_delivery_option': instance.selectedDeliveryOption,
+      'selected_address_id': instance.selectedAddressId,
+      'applied_coupon': instance.appliedCoupon,
+      'payment_method': instance.paymentMethod,
     };

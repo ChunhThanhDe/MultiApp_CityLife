@@ -50,32 +50,21 @@ abstract class CheckoutAddress with _$CheckoutAddress {
 
 @freezed
 abstract class DeliveryOption with _$DeliveryOption {
-  const factory DeliveryOption({
-    @JsonKey(name: "key") String? key,
-    @JsonKey(name: "label") String? label,
-    @JsonKey(name: "fee") double? fee,
-    @JsonKey(name: "desc") String? desc,
-  }) = _DeliveryOption;
+  const factory DeliveryOption({@JsonKey(name: "key") int? key, @JsonKey(name: "label") String? label, @JsonKey(name: "fee") double? fee, @JsonKey(name: "desc") String? desc}) = _DeliveryOption;
 
   factory DeliveryOption.fromJson(Map<String, dynamic> json) => _$DeliveryOptionFromJson(json);
 }
 
 @freezed
 abstract class PaymentMethod with _$PaymentMethod {
-  const factory PaymentMethod({
-    @JsonKey(name: "key") String? key,
-    @JsonKey(name: "label") String? label,
-  }) = _PaymentMethod;
+  const factory PaymentMethod({@JsonKey(name: "key") String? key, @JsonKey(name: "label") String? label}) = _PaymentMethod;
 
   factory PaymentMethod.fromJson(Map<String, dynamic> json) => _$PaymentMethodFromJson(json);
 }
 
 @freezed
 abstract class AvailableCoupon with _$AvailableCoupon {
-  const factory AvailableCoupon({
-    @JsonKey(name: "code") String? code,
-    @JsonKey(name: "desc") String? desc,
-  }) = _AvailableCoupon;
+  const factory AvailableCoupon({@JsonKey(name: "code") String? code, @JsonKey(name: "desc") String? desc}) = _AvailableCoupon;
 
   factory AvailableCoupon.fromJson(Map<String, dynamic> json) => _$AvailableCouponFromJson(json);
 }
@@ -150,31 +139,23 @@ abstract class CheckoutCartItemCategory with _$CheckoutCartItemCategory {
 
 @freezed
 abstract class CheckoutCartItemVariation with _$CheckoutCartItemVariation {
-  const factory CheckoutCartItemVariation({
-    @JsonKey(name: "name") String? name,
-    @JsonKey(name: "values") List<CheckoutCartItemValue>? values,
-    @JsonKey(name: "type") String? type,
-  }) = _CheckoutCartItemVariation;
+  const factory CheckoutCartItemVariation({@JsonKey(name: "name") String? name, @JsonKey(name: "values") List<CheckoutCartItemValue>? values, @JsonKey(name: "type") String? type}) =
+      _CheckoutCartItemVariation;
 
   factory CheckoutCartItemVariation.fromJson(Map<String, dynamic> json) => _$CheckoutCartItemVariationFromJson(json);
 }
 
 @freezed
 abstract class CheckoutCartItemValue with _$CheckoutCartItemValue {
-  const factory CheckoutCartItemValue({
-    @JsonKey(name: "label") String? label,
-  }) = _CheckoutCartItemValue;
+  const factory CheckoutCartItemValue({@JsonKey(name: "label") String? label}) = _CheckoutCartItemValue;
 
   factory CheckoutCartItemValue.fromJson(Map<String, dynamic> json) => _$CheckoutCartItemValueFromJson(json);
 }
 
 @freezed
 abstract class CheckoutCartSummary with _$CheckoutCartSummary {
-  const factory CheckoutCartSummary({
-    @JsonKey(name: "total_stores") int? totalStores,
-    @JsonKey(name: "total_items") int? totalItems,
-    @JsonKey(name: "total_price") double? totalPrice,
-  }) = _CheckoutCartSummary;
+  const factory CheckoutCartSummary({@JsonKey(name: "total_stores") int? totalStores, @JsonKey(name: "total_items") int? totalItems, @JsonKey(name: "total_price") double? totalPrice}) =
+      _CheckoutCartSummary;
 
   factory CheckoutCartSummary.fromJson(Map<String, dynamic> json) => _$CheckoutCartSummaryFromJson(json);
 }

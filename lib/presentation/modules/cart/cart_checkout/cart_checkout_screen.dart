@@ -272,10 +272,10 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                 padding: const EdgeInsets.only(bottom: 16),
                 child: Obx(
                   () => GestureDetector(
-                    onTap: () => controller.selectDeliveryOption(option.key ?? ''),
+                    onTap: () => controller.selectDeliveryOption(option.label ?? 'Standard'),
                     child: deliveryOption(
-                      selected: controller.selectedDeliveryOption.value == option.key,
-                      icon: _getDeliveryIcon(option.key ?? ''),
+                      selected: controller.selectedDeliveryOption.value == option.label,
+                      icon: _getDeliveryIcon(option.key ?? 1),
                       title: option.label ?? '',
                       subtitle: option.desc ?? '',
                       label: option.fee != null ? "\$${option.fee!.toStringAsFixed(2)}" : null,
@@ -461,13 +461,13 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   }
 
   // Helper methods
-  Widget _getDeliveryIcon(String key) {
+  Widget _getDeliveryIcon(int key) {
     switch (key) {
-      case 'priority':
+      case 2:
         return SvgPicture.asset('assets/icons/ic_priority.svg');
-      case 'schedule':
+      case 3:
         return SvgPicture.asset('assets/icons/ic_schedule.svg');
-      case 'standard':
+      case 1:
       default:
         return SvgPicture.asset('assets/icons/ic_standard.svg');
     }

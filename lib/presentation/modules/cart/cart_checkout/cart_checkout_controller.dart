@@ -12,7 +12,7 @@ class CartCheckoutController extends BaseController {
   final CartRepository _cartRepository = Get.find<CartRepository>();
 
   final Rx<GetCheckoutSummaryResponse?> checkoutSummary = Rx<GetCheckoutSummaryResponse?>(null);
-  final RxString selectedDeliveryOption = RxString('standard');
+  final RxString selectedDeliveryOption = RxString('Standard'); // Default to 'Standard'
   final RxString selectedPaymentMethod = RxString('cash_on_delivery');
   final RxInt selectedAddressId = RxInt(0);
   final RxString promoCode = RxString('');
@@ -45,9 +45,12 @@ class CartCheckoutController extends BaseController {
 
           // Set default delivery option to standard
           if (checkoutSummary.value?.deliveryOptions?.isNotEmpty == true) {
-            final standardOption = checkoutSummary.value!.deliveryOptions!.firstWhereOrNull((option) => option.key == 'standard');
+            final standardOption = checkoutSummary.value!.deliveryOptions!.firstWhereOrNull((option) => option.key == 1);
             if (standardOption != null) {
-              selectedDeliveryOption.value = standardOption.key!;
+              selectedDeliveryOption.value = standardOption.label ?? 'Standard';
+            } else {
+              // If standard option not found, use the first available option
+              selectedDeliveryOption.value = checkoutSummary.value!.deliveryOptions!.first.label ?? 'Standard';
             }
           }
 
@@ -59,8 +62,8 @@ class CartCheckoutController extends BaseController {
     });
   }
 
-  void selectDeliveryOption(String optionKey) {
-    selectedDeliveryOption.value = optionKey;
+  void selectDeliveryOption(String optionLabel) {
+    selectedDeliveryOption.value = optionLabel;
   }
 
   void selectPaymentMethod(String methodKey) {
@@ -79,7 +82,7 @@ class CartCheckoutController extends BaseController {
   double get selectedDeliveryFee {
     if (checkoutSummary.value?.deliveryOptions == null) return 0.0;
 
-    final selectedOption = checkoutSummary.value!.deliveryOptions!.firstWhereOrNull((option) => option.key == selectedDeliveryOption.value);
+    final selectedOption = checkoutSummary.value!.deliveryOptions!.firstWhereOrNull((option) => option.label == selectedDeliveryOption.value);
 
     return selectedOption?.fee ?? 0.0;
   }
@@ -101,7 +104,7 @@ class CartCheckoutController extends BaseController {
   DeliveryOption? get selectedDeliveryOptionData {
     if (checkoutSummary.value?.deliveryOptions == null) return null;
 
-    return checkoutSummary.value!.deliveryOptions!.firstWhereOrNull((option) => option.key == selectedDeliveryOption.value);
+    return checkoutSummary.value!.deliveryOptions!.firstWhereOrNull((option) => option.label == selectedDeliveryOption.value);
   }
 
   PaymentMethod? get selectedPaymentMethodData {
