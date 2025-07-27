@@ -7,7 +7,7 @@ part '../../../generated/domain/models/response/get_product_detail_response.g.da
 
 @freezed
 abstract class ProductDetailResponse with _$ProductDetailResponse {
-  const factory ProductDetailResponse({required String type, required ProductDetail item, required List<ProductRecommendation> recommendations}) = _ProductDetailResponse;
+  const factory ProductDetailResponse({@Default('') String type, required ProductDetail item, @Default([]) List<ProductRecommendation> recommendations}) = _ProductDetailResponse;
 
   factory ProductDetailResponse.fromJson(Map<String, dynamic> json) => _$ProductDetailResponseFromJson(json);
 }
@@ -15,36 +15,37 @@ abstract class ProductDetailResponse with _$ProductDetailResponse {
 @freezed
 abstract class ProductDetail with _$ProductDetail {
   const factory ProductDetail({
-    required int id,
-    @JsonKey(name: 'store_id') required int storeId,
-    @JsonKey(name: 'store_name') required String storeName,
-    @JsonKey(name: 'store_image_url') required String storeImageUrl,
-    required String name,
-    required String description,
-    // SỬA 1: ImageUrl object
-    @JsonKey(name: 'image_url') required List<ImageUrl> imageUrls,
-    required List<String> gallery,
-    required int price,
-    required int tax,
-    @JsonKey(name: 'tax_type') required String taxType,
-    required int discount,
-    @JsonKey(name: 'discount_type') required String discountType,
-    required bool veg,
-    required int stock,
-    @JsonKey(name: 'unit_id') required int unitId,
-    @JsonKey(name: 'order_count') required int orderCount,
-    @JsonKey(name: 'avg_rating') required double avgRating,
-    @JsonKey(name: 'rating_count') required int ratingCount,
-    required String slug,
-    required bool recommended,
-    required bool organic,
+    @Default(0) int id,
+    @JsonKey(name: 'store_id') @Default(0) int storeId,
+    @JsonKey(name: 'store_name') @Default('') String storeName,
+    @JsonKey(name: 'store_image_url') @Default('') String storeImageUrl,
+    @Default('') String name,
+    @Default('') String description,
+    // Chuẩn hóa image_url (nếu bạn vẫn nhận được List<ImageUrl>)
+    @JsonKey(name: 'image_url') @Default([]) List<ImageUrl> imageUrls,
+    @Default([]) List<String> gallery,
+    @Default(0) int price,
+    @Default(0) int tax,
+    @JsonKey(name: 'tax_type') @Default('') String taxType,
+    @Default(0) int discount,
+    @JsonKey(name: 'discount_type') @Default('') String discountType,
+    @Default(false) bool veg,
+    @Default(0) int stock,
+    @JsonKey(name: 'unit_id') @Default(0) int unitId,
+    @JsonKey(name: 'order_count') @Default(0) int orderCount,
+    @JsonKey(name: 'avg_rating') @Default(0.0) double avgRating,
+    @JsonKey(name: 'rating_count') @Default(0) int ratingCount,
+    @Default('') String slug,
+    @Default(false) bool recommended,
+    @Default(false) bool organic,
     @JsonKey(name: 'maximum_cart_quantity') int? maximumCartQuantity,
-    @JsonKey(name: 'add_ons') List<dynamic>? addOns,
-    required List<Variation> variations,
-    @JsonKey(name: 'choice_options') List<ChoiceOption>? choiceOptions,
-    List<String>? attributes,
-    @JsonKey(name: 'food_variations') List<dynamic>? foodVariations,
-    required List<Nutrition> nutritions,
+    @JsonKey(name: 'add_ons') @Default([]) List<dynamic> addOns,
+    @Default([]) List<Variation> variations,
+    @JsonKey(name: 'choice_options') @Default([]) List<ChoiceOption> choiceOptions,
+    @Default([]) List<String> attributes,
+    @JsonKey(name: 'food_variations') @Default([]) List<dynamic> foodVariations,
+    @Default([]) List<Nutrition> nutritions,
+    @JsonKey(name: 'is_favorite') @Default(false) bool isFavorite,
   }) = _ProductDetail;
 
   factory ProductDetail.fromJson(Map<String, dynamic> json) => _$ProductDetailFromJson(json);
@@ -53,9 +54,9 @@ abstract class ProductDetail with _$ProductDetail {
 @freezed
 abstract class Variation with _$Variation {
   const factory Variation({
-    required String type,
-    required int price,
-    // Nếu có thêm stock, thêm luôn: required int stock,
+    @Default('') String type,
+    @Default(0) int price,
+    // Nếu có stock, thêm luôn: @Default(0) int stock,
   }) = _Variation;
 
   factory Variation.fromJson(Map<String, dynamic> json) => _$VariationFromJson(json);
@@ -63,30 +64,28 @@ abstract class Variation with _$Variation {
 
 @freezed
 abstract class ChoiceOption with _$ChoiceOption {
-  const factory ChoiceOption({required String name, required String title, required List<String> options}) = _ChoiceOption;
+  const factory ChoiceOption({@Default('') String name, @Default('') String title, @Default([]) List<String> options}) = _ChoiceOption;
 
   factory ChoiceOption.fromJson(Map<String, dynamic> json) => _$ChoiceOptionFromJson(json);
 }
 
 @freezed
 abstract class ProductRecommendation with _$ProductRecommendation {
-  const factory ProductRecommendation({required int id, required String name, @JsonKey(name: 'image_url') required String imageUrl, required int price}) = _ProductRecommendation;
+  const factory ProductRecommendation({@Default(0) int id, @Default('') String name, @JsonKey(name: 'image_url') @Default('') String imageUrl, @Default(0) int price}) = _ProductRecommendation;
 
   factory ProductRecommendation.fromJson(Map<String, dynamic> json) => _$ProductRecommendationFromJson(json);
 }
 
-// IMAGE URL MODEL ĐÚNG KIỂU
 @freezed
 abstract class ImageUrl with _$ImageUrl {
-  const factory ImageUrl({required String img, required String storage}) = _ImageUrl;
+  const factory ImageUrl({@Default('') String img, @Default('') String storage}) = _ImageUrl;
 
   factory ImageUrl.fromJson(Map<String, dynamic> json) => _$ImageUrlFromJson(json);
 }
 
-// NUTRITION MODEL
 @freezed
 abstract class Nutrition with _$Nutrition {
-  const factory Nutrition({required int id, required String nutrition}) = _Nutrition;
+  const factory Nutrition({@Default(0) int id, @Default('') String nutrition}) = _Nutrition;
 
   factory Nutrition.fromJson(Map<String, dynamic> json) => _$NutritionFromJson(json);
 }

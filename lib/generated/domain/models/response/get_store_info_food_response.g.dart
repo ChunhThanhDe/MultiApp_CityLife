@@ -9,13 +9,19 @@ part of '../../../../domain/models/response/get_store_info_food_response.dart';
 _StoreInfoFoodResponse _$StoreInfoFoodResponseFromJson(
   Map<String, dynamic> json,
 ) => _StoreInfoFoodResponse(
-  store: StoreDetail.fromJson(json['store'] as Map<String, dynamic>),
-  popularItems: (json['popular_items'] as List<dynamic>)
-      .map((e) => ProductItem.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  sections: (json['sections'] as List<dynamic>)
-      .map((e) => Section.fromJson(e as Map<String, dynamic>))
-      .toList(),
+  store: json['store'] == null
+      ? const StoreDetail()
+      : StoreDetail.fromJson(json['store'] as Map<String, dynamic>),
+  popularItems:
+      (json['popular_items'] as List<dynamic>?)
+          ?.map((e) => ProductItem.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
+  sections:
+      (json['sections'] as List<dynamic>?)
+          ?.map((e) => Section.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
 );
 
 Map<String, dynamic> _$StoreInfoFoodResponseToJson(
@@ -27,13 +33,15 @@ Map<String, dynamic> _$StoreInfoFoodResponseToJson(
 };
 
 _StoreDetail _$StoreDetailFromJson(Map<String, dynamic> json) => _StoreDetail(
-  id: (json['id'] as num).toInt(),
-  name: json['name'] as String,
-  logoUrl: json['logo_url'] as String,
-  coverPhotoUrl: json['cover_photo_url'] as String,
-  rating: (json['rating'] as num).toDouble(),
-  reviewCount: (json['review_count'] as num).toInt(),
-  services: StoreServices.fromJson(json['services'] as Map<String, dynamic>),
+  id: (json['id'] as num?)?.toInt() ?? 0,
+  name: json['name'] as String? ?? '',
+  logoUrl: json['logo_url'] as String? ?? '',
+  coverPhotoUrl: json['cover_photo_url'] as String? ?? '',
+  rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
+  reviewCount: (json['review_count'] as num?)?.toInt() ?? 0,
+  services: json['services'] == null
+      ? const StoreServices()
+      : StoreServices.fromJson(json['services'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$StoreDetailToJson(_StoreDetail instance) =>
@@ -49,9 +57,9 @@ Map<String, dynamic> _$StoreDetailToJson(_StoreDetail instance) =>
 
 _StoreServices _$StoreServicesFromJson(Map<String, dynamic> json) =>
     _StoreServices(
-      inStore: json['in_store'] as bool,
-      delivery: json['delivery'] as bool,
-      driveThru: json['drive_thru'] as bool,
+      inStore: json['in_store'] as bool? ?? false,
+      delivery: json['delivery'] as bool? ?? false,
+      driveThru: json['drive_thru'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$StoreServicesToJson(_StoreServices instance) =>
@@ -62,11 +70,11 @@ Map<String, dynamic> _$StoreServicesToJson(_StoreServices instance) =>
     };
 
 _ProductItem _$ProductItemFromJson(Map<String, dynamic> json) => _ProductItem(
-  id: (json['id'] as num).toInt(),
-  name: json['name'] as String,
-  imageUrl: json['image_url'] as String,
-  price: (json['price'] as num).toInt(),
-  avgRating: (json['avg_rating'] as num).toDouble(),
+  id: (json['id'] as num?)?.toInt() ?? 0,
+  name: json['name'] as String? ?? '',
+  imageUrl: json['image_url'] as String? ?? '',
+  price: (json['price'] as num?)?.toInt() ?? 0,
+  avgRating: (json['avg_rating'] as num?)?.toDouble() ?? 0.0,
   ratingCount: (json['rating_count'] as num?)?.toInt() ?? 0,
 );
 
@@ -81,11 +89,13 @@ Map<String, dynamic> _$ProductItemToJson(_ProductItem instance) =>
     };
 
 _Section _$SectionFromJson(Map<String, dynamic> json) => _Section(
-  categoryId: (json['category_id'] as num).toInt(),
-  categoryName: json['category_name'] as String,
-  items: (json['items'] as List<dynamic>)
-      .map((e) => ProductItem.fromJson(e as Map<String, dynamic>))
-      .toList(),
+  categoryId: (json['category_id'] as num?)?.toInt() ?? 0,
+  categoryName: json['category_name'] as String? ?? '',
+  items:
+      (json['items'] as List<dynamic>?)
+          ?.map((e) => ProductItem.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
 );
 
 Map<String, dynamic> _$SectionToJson(_Section instance) => <String, dynamic>{

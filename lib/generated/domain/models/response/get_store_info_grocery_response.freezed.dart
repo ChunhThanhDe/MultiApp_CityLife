@@ -91,19 +91,19 @@ $GroceryStoreCopyWith<$Res> get store {
 @JsonSerializable()
 
 class _StoreInfoGroceryResponse implements StoreInfoGroceryResponse {
-  const _StoreInfoGroceryResponse({required this.store, required final  List<GroceryCategory> categories, required final  List<GrocerySection> sections}): _categories = categories,_sections = sections;
+  const _StoreInfoGroceryResponse({this.store = const GroceryStore(), final  List<GroceryCategory> categories = const [], final  List<GrocerySection> sections = const []}): _categories = categories,_sections = sections;
   factory _StoreInfoGroceryResponse.fromJson(Map<String, dynamic> json) => _$StoreInfoGroceryResponseFromJson(json);
 
-@override final  GroceryStore store;
+@override@JsonKey() final  GroceryStore store;
  final  List<GroceryCategory> _categories;
-@override List<GroceryCategory> get categories {
+@override@JsonKey() List<GroceryCategory> get categories {
   if (_categories is EqualUnmodifiableListView) return _categories;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_categories);
 }
 
  final  List<GrocerySection> _sections;
-@override List<GrocerySection> get sections {
+@override@JsonKey() List<GrocerySection> get sections {
   if (_sections is EqualUnmodifiableListView) return _sections;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_sections);
@@ -262,14 +262,14 @@ $GroceryRatingCopyWith<$Res> get rating {
 @JsonSerializable()
 
 class _GroceryStore implements GroceryStore {
-  const _GroceryStore({required this.id, required this.name, @JsonKey(name: 'logo_url') required this.logoUrl, @JsonKey(name: 'cover_photo_url') required this.coverPhotoUrl, required this.rating});
+  const _GroceryStore({this.id = 0, this.name = '', @JsonKey(name: 'logo_url') this.logoUrl = '', @JsonKey(name: 'cover_photo_url') this.coverPhotoUrl = '', this.rating = const GroceryRating()});
   factory _GroceryStore.fromJson(Map<String, dynamic> json) => _$GroceryStoreFromJson(json);
 
-@override final  int id;
-@override final  String name;
+@override@JsonKey() final  int id;
+@override@JsonKey() final  String name;
 @override@JsonKey(name: 'logo_url') final  String logoUrl;
 @override@JsonKey(name: 'cover_photo_url') final  String coverPhotoUrl;
-@override final  GroceryRating rating;
+@override@JsonKey() final  GroceryRating rating;
 
 /// Create a copy of GroceryStore
 /// with the given fields replaced by the non-null parameter values.
@@ -413,11 +413,11 @@ as bool,
 @JsonSerializable()
 
 class _GroceryRating implements GroceryRating {
-  const _GroceryRating({required this.delivery, required this.pickup});
+  const _GroceryRating({this.delivery = false, this.pickup = false});
   factory _GroceryRating.fromJson(Map<String, dynamic> json) => _$GroceryRatingFromJson(json);
 
-@override final  bool delivery;
-@override final  bool pickup;
+@override@JsonKey() final  bool delivery;
+@override@JsonKey() final  bool pickup;
 
 /// Create a copy of GroceryRating
 /// with the given fields replaced by the non-null parameter values.
@@ -550,11 +550,11 @@ as String,
 @JsonSerializable()
 
 class _GroceryCategory implements GroceryCategory {
-  const _GroceryCategory({required this.id, required this.name, @JsonKey(name: 'image_url') required this.imageUrl});
+  const _GroceryCategory({this.id = 0, this.name = '', @JsonKey(name: 'image_url') this.imageUrl = ''});
   factory _GroceryCategory.fromJson(Map<String, dynamic> json) => _$GroceryCategoryFromJson(json);
 
-@override final  int id;
-@override final  String name;
+@override@JsonKey() final  int id;
+@override@JsonKey() final  String name;
 @override@JsonKey(name: 'image_url') final  String imageUrl;
 
 /// Create a copy of GroceryCategory
@@ -688,12 +688,12 @@ as List<GroceryItem>,
 @JsonSerializable()
 
 class _GrocerySection implements GrocerySection {
-  const _GrocerySection({@JsonKey(name: 'category_id') required this.categoryId, required final  List<GroceryItem> items}): _items = items;
+  const _GrocerySection({@JsonKey(name: 'category_id') this.categoryId = 0, final  List<GroceryItem> items = const []}): _items = items;
   factory _GrocerySection.fromJson(Map<String, dynamic> json) => _$GrocerySectionFromJson(json);
 
 @override@JsonKey(name: 'category_id') final  int categoryId;
  final  List<GroceryItem> _items;
-@override List<GroceryItem> get items {
+@override@JsonKey() List<GroceryItem> get items {
   if (_items is EqualUnmodifiableListView) return _items;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_items);
@@ -834,13 +834,13 @@ as int,
 @JsonSerializable()
 
 class _GroceryItem implements GroceryItem {
-  const _GroceryItem({required this.id, required this.name, @JsonKey(name: 'image_url') required this.imageUrl, required this.price, @JsonKey(name: 'avg_rating') required this.avgRating, @JsonKey(name: 'rating_count') this.ratingCount = 0});
+  const _GroceryItem({this.id = 0, this.name = '', @JsonKey(name: 'image_url') this.imageUrl = '', this.price = 0, @JsonKey(name: 'avg_rating') this.avgRating = 0.0, @JsonKey(name: 'rating_count') this.ratingCount = 0});
   factory _GroceryItem.fromJson(Map<String, dynamic> json) => _$GroceryItemFromJson(json);
 
-@override final  int id;
-@override final  String name;
+@override@JsonKey() final  int id;
+@override@JsonKey() final  String name;
 @override@JsonKey(name: 'image_url') final  String imageUrl;
-@override final  int price;
+@override@JsonKey() final  int price;
 @override@JsonKey(name: 'avg_rating') final  double avgRating;
 @override@JsonKey(name: 'rating_count') final  int ratingCount;
 

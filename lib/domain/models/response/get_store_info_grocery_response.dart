@@ -8,9 +8,9 @@ part '../../../generated/domain/models/response/get_store_info_grocery_response.
 @freezed
 abstract class StoreInfoGroceryResponse with _$StoreInfoGroceryResponse {
   const factory StoreInfoGroceryResponse({
-    required GroceryStore store,
-    required List<GroceryCategory> categories,
-    required List<GrocerySection> sections,
+    @Default(GroceryStore()) GroceryStore store,
+    @Default([]) List<GroceryCategory> categories,
+    @Default([]) List<GrocerySection> sections,
   }) = _StoreInfoGroceryResponse;
 
   factory StoreInfoGroceryResponse.fromJson(Map<String, dynamic> json) => _$StoreInfoGroceryResponseFromJson(json);
@@ -19,11 +19,11 @@ abstract class StoreInfoGroceryResponse with _$StoreInfoGroceryResponse {
 @freezed
 abstract class GroceryStore with _$GroceryStore {
   const factory GroceryStore({
-    required int id,
-    required String name,
-    @JsonKey(name: 'logo_url') required String logoUrl,
-    @JsonKey(name: 'cover_photo_url') required String coverPhotoUrl,
-    required GroceryRating rating,
+    @Default(0) int id,
+    @Default('') String name,
+    @JsonKey(name: 'logo_url') @Default('') String logoUrl,
+    @JsonKey(name: 'cover_photo_url') @Default('') String coverPhotoUrl,
+    @Default(GroceryRating()) GroceryRating rating,
   }) = _GroceryStore;
 
   factory GroceryStore.fromJson(Map<String, dynamic> json) => _$GroceryStoreFromJson(json);
@@ -32,8 +32,8 @@ abstract class GroceryStore with _$GroceryStore {
 @freezed
 abstract class GroceryRating with _$GroceryRating {
   const factory GroceryRating({
-    required bool delivery,
-    required bool pickup,
+    @Default(false) bool delivery,
+    @Default(false) bool pickup,
   }) = _GroceryRating;
 
   factory GroceryRating.fromJson(Map<String, dynamic> json) => _$GroceryRatingFromJson(json);
@@ -42,9 +42,9 @@ abstract class GroceryRating with _$GroceryRating {
 @freezed
 abstract class GroceryCategory with _$GroceryCategory {
   const factory GroceryCategory({
-    required int id,
-    required String name,
-    @JsonKey(name: 'image_url') required String imageUrl,
+    @Default(0) int id,
+    @Default('') String name,
+    @JsonKey(name: 'image_url') @Default('') String imageUrl,
   }) = _GroceryCategory;
 
   factory GroceryCategory.fromJson(Map<String, dynamic> json) => _$GroceryCategoryFromJson(json);
@@ -53,8 +53,8 @@ abstract class GroceryCategory with _$GroceryCategory {
 @freezed
 abstract class GrocerySection with _$GrocerySection {
   const factory GrocerySection({
-    @JsonKey(name: 'category_id') required int categoryId,
-    required List<GroceryItem> items,
+    @JsonKey(name: 'category_id') @Default(0) int categoryId,
+    @Default([]) List<GroceryItem> items,
   }) = _GrocerySection;
 
   factory GrocerySection.fromJson(Map<String, dynamic> json) => _$GrocerySectionFromJson(json);
@@ -63,11 +63,11 @@ abstract class GrocerySection with _$GrocerySection {
 @freezed
 abstract class GroceryItem with _$GroceryItem {
   const factory GroceryItem({
-    required int id,
-    required String name,
-    @JsonKey(name: 'image_url') required String imageUrl,
-    required int price,
-    @JsonKey(name: 'avg_rating') required double avgRating,
+    @Default(0) int id,
+    @Default('') String name,
+    @JsonKey(name: 'image_url') @Default('') String imageUrl,
+    @Default(0) int price,
+    @JsonKey(name: 'avg_rating') @Default(0.0) double avgRating,
     @JsonKey(name: 'rating_count') @Default(0) int ratingCount,
   }) = _GroceryItem;
 
