@@ -428,25 +428,26 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
           child: SizedBox(
             width: double.infinity,
             height: 48,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF5856D7),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-              ),
-              onPressed: () {
-                // For testing purposes, using sample order tracking data
-                // In a real app, these would come from the actual order creation response
-                Get.toNamed(
-                  '/cart-confirm',
-                  arguments: {
-                    'orderId': 100047, // Sample order ID from the API documentation
-                    'contactNumber': '+8801234567890', // Sample contact number
-                  },
-                );
-              },
-              child: Text(
-                "Order Now",
-                style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Inter', fontWeight: FontWeight.w500),
+            child: Obx(
+              () => ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF5856D7),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                ),
+                onPressed: controller.isLoading.value ? null : () => controller.orderNow(),
+                child: controller.isLoading.value
+                    ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                        ),
+                      )
+                    : Text(
+                        "Order Now",
+                        style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Inter', fontWeight: FontWeight.w500),
+                      ),
               ),
             ),
           ),
