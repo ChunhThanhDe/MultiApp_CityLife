@@ -12,6 +12,8 @@ class StoreDetailAppBar extends StatelessWidget implements PreferredSizeWidget {
       final product = controller.product.value;
       return AppBar(
         elevation: 0,
+        scrolledUnderElevation: 0,
+        shadowColor: Colors.transparent,
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         toolbarHeight: 56,

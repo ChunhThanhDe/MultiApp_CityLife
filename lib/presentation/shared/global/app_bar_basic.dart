@@ -34,6 +34,8 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
+      shadowColor: Colors.transparent,
+      scrolledUnderElevation: 0,
       backgroundColor: Colors.white,
       iconTheme: const IconThemeData(color: Color(0xFF161A1D)),
       title: Text(
