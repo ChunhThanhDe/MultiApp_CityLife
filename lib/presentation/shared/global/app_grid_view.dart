@@ -178,26 +178,13 @@ class AppGridView<T> extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Assets.icons.icError.svg(
-              width: 64,
-              height: 64,
-              colorFilter: ColorFilter.mode(
-                AppColors.stateGreyDefault500,
-                BlendMode.srcIn,
-              ),
-            ),
+            Assets.icons.icError.svg(width: 64, height: 64, colorFilter: ColorFilter.mode(AppColors.stateGreyDefault500, BlendMode.srcIn)),
             const SizedBox(height: 16),
-            Text(
-              'Something went wrong',
-              style: AppTextStyles.typographyH7Medium,
-              textAlign: TextAlign.center,
-            ),
+            Text('Something went wrong', style: AppTextStyles.typographyH7Medium, textAlign: TextAlign.center),
             const SizedBox(height: 8),
             Text(
               errorMessage ?? 'An error occurred',
-              style: AppTextStyles.typographyH11Regular.copyWith(
-                color: AppColors.stateGreyDefault500,
-              ),
+              style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.stateGreyDefault500),
               textAlign: TextAlign.center,
             ),
             if (onRetry != null) ...[
@@ -224,28 +211,21 @@ class AppGridView<T> extends StatelessWidget {
       slivers.add(SliverToBoxAdapter(child: errorContent));
       slivers.addAll(footerSlivers);
 
-      Widget customScrollView = CustomScrollView(
-        controller: scrollController,
-        physics: const AlwaysScrollableScrollPhysics(),
-        slivers: slivers,
-      );
+      Widget customScrollView = CustomScrollView(controller: scrollController, physics: const AlwaysScrollableScrollPhysics(), slivers: slivers);
 
       if (onRefresh != null) {
-        customScrollView = RefreshIndicator(
-          onRefresh: onRefresh!,
-          child: customScrollView,
-        );
+        customScrollView = RefreshIndicator(onRefresh: onRefresh!, child: customScrollView);
       }
 
       return customScrollView;
     } else {
-      return RefreshIndicator(
-        onRefresh: onRefresh ?? () async {},
-        child: ListView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          children: [errorContent],
-        ),
-      );
+      Widget listView = ListView(physics: const AlwaysScrollableScrollPhysics(), children: [errorContent]);
+
+      if (onRefresh != null) {
+        listView = RefreshIndicator(onRefresh: onRefresh!, child: listView);
+      }
+
+      return listView;
     }
   }
 
@@ -260,27 +240,13 @@ class AppGridView<T> extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            emptyIcon ??
-                Assets.icons.icInfo.svg(
-                  width: 64,
-                  height: 64,
-                  colorFilter: ColorFilter.mode(
-                    AppColors.stateGreyDefault500,
-                    BlendMode.srcIn,
-                  ),
-                ),
+            emptyIcon ?? Assets.icons.icInfo.svg(width: 64, height: 64, colorFilter: ColorFilter.mode(AppColors.stateGreyDefault500, BlendMode.srcIn)),
             const SizedBox(height: 16),
-            Text(
-              emptyTitle,
-              style: AppTextStyles.typographyH7Medium,
-              textAlign: TextAlign.center,
-            ),
+            Text(emptyTitle, style: AppTextStyles.typographyH7Medium, textAlign: TextAlign.center),
             const SizedBox(height: 8),
             Text(
               emptySubtitle,
-              style: AppTextStyles.typographyH11Regular.copyWith(
-                color: AppColors.stateGreyDefault500,
-              ),
+              style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.stateGreyDefault500),
               textAlign: TextAlign.center,
             ),
           ],
@@ -294,63 +260,43 @@ class AppGridView<T> extends StatelessWidget {
       slivers.add(SliverToBoxAdapter(child: emptyContent));
       slivers.addAll(footerSlivers);
 
-      Widget customScrollView = CustomScrollView(
-        controller: scrollController,
-        physics: const AlwaysScrollableScrollPhysics(),
-        slivers: slivers,
-      );
+      Widget customScrollView = CustomScrollView(controller: scrollController, physics: const AlwaysScrollableScrollPhysics(), slivers: slivers);
 
       if (onRefresh != null) {
-        customScrollView = RefreshIndicator(
-          onRefresh: onRefresh!,
-          child: customScrollView,
-        );
+        customScrollView = RefreshIndicator(onRefresh: onRefresh!, child: customScrollView);
       }
 
       return customScrollView;
     } else {
-      return RefreshIndicator(
-        onRefresh: onRefresh ?? () async {},
-        child: ListView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          children: [emptyContent],
-        ),
-      );
+      Widget listView = ListView(physics: const AlwaysScrollableScrollPhysics(), children: [emptyContent]);
+
+      if (onRefresh != null) {
+        listView = RefreshIndicator(onRefresh: onRefresh!, child: listView);
+      }
+
+      return listView;
     }
   }
 
   Widget _buildGridView(BuildContext context) {
     Widget gridView = GridView.builder(
       controller: scrollController,
-      physics: disableScrolling 
-          ? const NeverScrollableScrollPhysics() 
-          : (physics ?? const AlwaysScrollableScrollPhysics()),
+      physics: disableScrolling ? const NeverScrollableScrollPhysics() : (physics ?? const AlwaysScrollableScrollPhysics()),
       padding: padding,
       shrinkWrap: shrinkWrap,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
-        childAspectRatio: childAspectRatio,
-        crossAxisSpacing: crossAxisSpacing,
-        mainAxisSpacing: mainAxisSpacing,
-      ),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: crossAxisCount, childAspectRatio: childAspectRatio, crossAxisSpacing: crossAxisSpacing, mainAxisSpacing: mainAxisSpacing),
       itemCount: _getItemCount(),
       itemBuilder: _buildItem,
     );
 
     // Wrap with NotificationListener for load more functionality
     if (onLoadMore != null && !disableScrolling) {
-      gridView = NotificationListener<ScrollNotification>(
-        onNotification: _handleScrollNotification,
-        child: gridView,
-      );
+      gridView = NotificationListener<ScrollNotification>(onNotification: _handleScrollNotification, child: gridView);
     }
 
     // Wrap with RefreshIndicator if onRefresh is provided and scrolling is enabled
     if (onRefresh != null && !disableScrolling) {
-      gridView = RefreshIndicator(
-        onRefresh: onRefresh!,
-        child: gridView,
-      );
+      gridView = RefreshIndicator(onRefresh: onRefresh!, child: gridView);
     }
 
     return gridView;
@@ -364,12 +310,7 @@ class AppGridView<T> extends StatelessWidget {
 
     // Add padding if specified
     if (padding != null) {
-      slivers.add(
-        SliverPadding(
-          padding: padding!,
-          sliver: _buildSliverGrid(),
-        ),
-      );
+      slivers.add(SliverPadding(padding: padding!, sliver: _buildSliverGrid()));
     } else {
       slivers.add(_buildSliverGrid());
     }
@@ -384,27 +325,19 @@ class AppGridView<T> extends StatelessWidget {
 
     Widget customScrollView = CustomScrollView(
       controller: scrollController,
-      physics: disableScrolling 
-          ? const NeverScrollableScrollPhysics() 
-          : (physics ?? const AlwaysScrollableScrollPhysics()),
+      physics: disableScrolling ? const NeverScrollableScrollPhysics() : (physics ?? const AlwaysScrollableScrollPhysics()),
       shrinkWrap: shrinkWrap,
       slivers: slivers,
     );
 
     // Wrap with NotificationListener for load more functionality
     if (onLoadMore != null && !disableScrolling) {
-      customScrollView = NotificationListener<ScrollNotification>(
-        onNotification: _handleScrollNotification,
-        child: customScrollView,
-      );
+      customScrollView = NotificationListener<ScrollNotification>(onNotification: _handleScrollNotification, child: customScrollView);
     }
 
     // Wrap with RefreshIndicator if onRefresh is provided and scrolling is enabled
     if (onRefresh != null && !disableScrolling) {
-      customScrollView = RefreshIndicator(
-        onRefresh: onRefresh!,
-        child: customScrollView,
-      );
+      customScrollView = RefreshIndicator(onRefresh: onRefresh!, child: customScrollView);
     }
 
     return customScrollView;
@@ -412,12 +345,7 @@ class AppGridView<T> extends StatelessWidget {
 
   Widget _buildSliverGrid() {
     return SliverGrid.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
-        childAspectRatio: childAspectRatio,
-        crossAxisSpacing: crossAxisSpacing,
-        mainAxisSpacing: mainAxisSpacing,
-      ),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: crossAxisCount, childAspectRatio: childAspectRatio, crossAxisSpacing: crossAxisSpacing, mainAxisSpacing: mainAxisSpacing),
       itemCount: items.length,
       itemBuilder: (context, index) => itemBuilder(context, items[index], index),
     );
@@ -471,8 +399,7 @@ class AppGridView<T> extends StatelessWidget {
     }
 
     // Check if user scrolled near the bottom
-    if (scrollInfo.metrics.pixels >= 
-        scrollInfo.metrics.maxScrollExtent - loadMoreThreshold) {
+    if (scrollInfo.metrics.pixels >= scrollInfo.metrics.maxScrollExtent - loadMoreThreshold) {
       onLoadMore!();
     }
 

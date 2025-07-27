@@ -202,37 +202,42 @@ class AppListView<T> extends StatelessWidget {
 
       return customScrollView;
     } else {
-      return RefreshIndicator(
-        onRefresh: onRefresh ?? () async {},
-        child: ListView(physics: const AlwaysScrollableScrollPhysics(), children: [errorContent]),
-      );
+      Widget listView = ListView(physics: const AlwaysScrollableScrollPhysics(), children: [errorContent]);
+
+      if (onRefresh != null) {
+        listView = RefreshIndicator(onRefresh: onRefresh!, child: listView);
+      }
+
+      return listView;
     }
   }
 
   Widget _buildEmptyState(BuildContext context) {
-    if (emptyWidget != null) {
-      return emptyWidget!;
-    }
+    Widget emptyContent;
 
-    Widget emptyContent = SizedBox(
-      height: MediaQuery.of(context).size.height * 0.6,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            emptyIcon ?? Assets.icons.icInfo.svg(width: 64, height: 64, colorFilter: ColorFilter.mode(AppColors.stateGreyDefault500, BlendMode.srcIn)),
-            const SizedBox(height: 16),
-            Text(emptyTitle, style: AppTextStyles.typographyH7Medium, textAlign: TextAlign.center),
-            const SizedBox(height: 8),
-            Text(
-              emptySubtitle,
-              style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.stateGreyDefault500),
-              textAlign: TextAlign.center,
-            ),
-          ],
+    if (emptyWidget != null) {
+      emptyContent = emptyWidget!;
+    } else {
+      emptyContent = SizedBox(
+        height: MediaQuery.of(context).size.height * 0.6,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              emptyIcon ?? Assets.icons.icInfo.svg(width: 64, height: 64, colorFilter: ColorFilter.mode(AppColors.stateGreyDefault500, BlendMode.srcIn)),
+              const SizedBox(height: 16),
+              Text(emptyTitle, style: AppTextStyles.typographyH7Medium, textAlign: TextAlign.center),
+              const SizedBox(height: 8),
+              Text(
+                emptySubtitle,
+                style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.stateGreyDefault500),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }
 
     if (useCustomScrollView) {
       List<Widget> slivers = [];
@@ -248,10 +253,13 @@ class AppListView<T> extends StatelessWidget {
 
       return customScrollView;
     } else {
-      return RefreshIndicator(
-        onRefresh: onRefresh ?? () async {},
-        child: ListView(physics: const AlwaysScrollableScrollPhysics(), children: [emptyContent]),
-      );
+      Widget listView = ListView(physics: const AlwaysScrollableScrollPhysics(), children: [emptyContent]);
+
+      if (onRefresh != null) {
+        listView = RefreshIndicator(onRefresh: onRefresh!, child: listView);
+      }
+
+      return listView;
     }
   }
 
