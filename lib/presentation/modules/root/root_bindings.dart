@@ -3,6 +3,7 @@ import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/cart_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/service_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/setting_repository.dart';
+import 'package:sixam_mart_user/domain/repositories/store_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/user_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/wishlist_repository.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account/account_controller.dart';
@@ -23,6 +24,7 @@ class RootBindings extends Bindings {
     Get.lazyPut(() => UserRepository());
     Get.lazyPut(() => WishlistRepository());
     Get.lazyPut(() => CartRepository());
+    Get.lazyPut(() => StoreRepository());
 
     // Initialize CartService with permanent persistence for cart functionality
     Get.put(CartService(Get.find()), permanent: true);

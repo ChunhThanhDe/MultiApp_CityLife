@@ -18,34 +18,46 @@ class HomeScreen extends BaseScreen<HomeController> {
   @override
   Widget buildScreen(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: controller.refreshData,
+      onRefresh: controller.getStoreData,
       child: Obx(() {
         // Build the complete list of slivers
         List<Widget> slivers = [HeaderAndService(), SliverBox(child: Divider(height: 1, color: AppColors.stateGreyLowest50))];
 
         // Add dynamic banner sections from API
-        final subsections = controller.offerSubsections;
+        final dynamicSections = controller.dynamicSections;
 
-        for (int index = 0; index < subsections.length; index++) {
-          final subsection = subsections[index];
-          final bannerType = _getBannerTypeForIndex(index);
-
-          // Add spacing and divider before each section (except first)
-          if (index > 0) {
-            slivers.addAll([SliverBox(height: 16), SliverBox(child: SectionBreakDivider()), SliverBox(height: 16)]);
-          } else {
-            slivers.add(SliverBox(height: 16));
-          }
-
-          // Add the banner widget
+        // If no data available, show empty state
+        if (dynamicSections.isEmpty) {
           slivers.add(
-            UnifiedBannerWidget(
-              sectionTitle: subsection.title,
-              items: controller.getBannerItemsForSubsection(index, bannerType: bannerType),
-              bannerType: bannerType,
-              showArrowIcon: bannerType != BannerType.bannerFloatingLogo,
+            SliverFillRemaining(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.store_outlined, size: 64, color: AppColors.textGreyDefault500),
+                    SizedBox(height: 16),
+                    Text('No data available', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyDefault500)),
+                    SizedBox(height: 8),
+                    Text('Please try again later', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
+                  ],
+                ),
+              ),
             ),
           );
+          return CustomScrollView(slivers: slivers);
+        }
+
+        // Add dynamic sections from API
+        for (int index = 0; index < dynamicSections.length; index++) {
+          final section = dynamicSections[index];
+
+          // Add section widget
+          slivers.add(UnifiedBannerWidget(sectionTitle: section.title, items: section.items, bannerType: section.bannerType, showArrowIcon: section.showArrowIcon));
+
+          // Add spacing and divider after each section (except last)
+          if (index < dynamicSections.length - 1) {
+            slivers.addAll([SliverBox(height: 16), SliverBox(child: SectionBreakDivider()), SliverBox(height: 16)]);
+          }
         }
 
         // Add final spacing
@@ -54,21 +66,5 @@ class HomeScreen extends BaseScreen<HomeController> {
         return CustomScrollView(slivers: slivers);
       }),
     );
-  }
-
-  // Determine banner type based on index to create variety
-  BannerType _getBannerTypeForIndex(int index) {
-    switch (index % 4) {
-      case 0:
-        return BannerType.bannerFloatingLogo;
-      case 1:
-        return BannerType.brandLogoName;
-      case 2:
-        return BannerType.bannerDiscount;
-      case 3:
-        return BannerType.bannerSingleImage;
-      default:
-        return BannerType.brandLogoName;
-    }
   }
 }

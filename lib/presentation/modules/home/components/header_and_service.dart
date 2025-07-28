@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
+import 'package:sixam_mart_user/domain/models/response/get_store_general_data.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
@@ -57,26 +58,26 @@ class HeaderAndService extends GetView<HomeController> {
   Widget _buildService() {
     return SizedBox(
       height: 150,
-      child: ListView.builder(itemCount: controller.services.length, itemBuilder: (context, index) => _buildServiceItem(controller.services[index], index), scrollDirection: Axis.horizontal),
+      child: ListView.builder(itemCount: controller.serviceData.length, itemBuilder: (context, index) => _buildServiceItem(controller.serviceData[index], index), scrollDirection: Axis.horizontal),
     );
   }
 
-  Padding _buildServiceItem(Service service, int index) {
+  Padding _buildServiceItem(ServiceEntity service, int index) {
     return Padding(
-      padding: EdgeInsets.only(right: index == controller.services.length - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
+      padding: EdgeInsets.only(right: index == controller.serviceData.length - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
       child: GestureDetector(
-        onTap: () => controller.navigateToServiceWithType(service.serviceType),
+        onTap: () => controller.navigateToServiceWithType(service.moduleType ?? ''),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               decoration: BoxDecoration(color: AppColors.stateGreyLowest50, borderRadius: BorderRadius.circular(AppCorner.radius8)),
               padding: EdgeInsets.all(12),
-              child: AppImage.asset(service.image, width: 70, height: 70),
+              child: AppImage.asset(service.iconFullUrl ?? '', width: 70, height: 70),
             ),
             SizedBox(height: 6),
             Text(
-              service.title,
+              service.moduleName ?? '',
               style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
               textAlign: TextAlign.center,
             ),
