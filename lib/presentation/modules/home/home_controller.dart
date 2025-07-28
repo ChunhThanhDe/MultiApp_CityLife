@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
-import 'package:sixam_mart_user/domain/enums/service_type.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_general_data.dart';
 import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart';
 import 'package:sixam_mart_user/domain/repositories/store_repository.dart';
@@ -72,11 +71,6 @@ class HomeController extends BaseController {
   // Example method showing how to use ServiceDataUtils in home controller
   List<ServiceSection> processServiceDataForHome(GetStoresResponse? data) {
     return ServiceDataUtils.processServiceData(data);
-  }
-
-  // Example method to get categories with assets
-  List<Category> getCategoriesWithAssets(GetStoresResponse? data, ServiceType serviceType) {
-    return ServiceDataUtils.getCategoriesWithAssets(data, serviceType);
   }
 
   // Example method to get auto-detected sections

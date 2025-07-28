@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/cart_repository.dart';
-import 'package:sixam_mart_user/domain/repositories/service_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/setting_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/store_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/user_repository.dart';
@@ -19,7 +18,6 @@ class RootBindings extends Bindings {
   void dependencies() {
     // Initialize repositories needed for root screen and its children
     Get.lazyPut(() => AuthRepository());
-    Get.lazyPut(() => ServiceRepository());
     Get.lazyPut(() => SettingRepository());
     Get.lazyPut(() => UserRepository());
     Get.lazyPut(() => WishlistRepository());

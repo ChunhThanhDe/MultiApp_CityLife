@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
-import 'package:sixam_mart_user/domain/enums/service_type.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/service_filter.dart';
 import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
@@ -40,7 +39,7 @@ class ServiceHeader extends GetView<ServiceController> {
         () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(controller.currentServiceType.value?.name ?? '', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textBaseWhite)),
+            Text(controller.currentServiceType.value ?? '', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textBaseWhite)),
             Assets.icons.icBell.svg(width: 24, height: 24, colorFilter: ColorFilter.mode(AppColors.textBaseWhite, BlendMode.srcIn)),
           ],
         ),
@@ -174,16 +173,7 @@ class ServiceHeader extends GetView<ServiceController> {
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Column(
                     children: [
-                      Center(
-                        child: category.image.isNotEmpty
-                            ? AppImage.network(
-                                category.image,
-                                width: 40,
-                                height: 40,
-                                errorWidget: AppImage.asset(controller.getCategoryImageAsset(category, controller.currentServiceType.value ?? ServiceType.food), width: 40, height: 40),
-                              )
-                            : AppImage.asset(controller.getCategoryImageAsset(category, controller.currentServiceType.value ?? ServiceType.food), width: 40, height: 40),
-                      ),
+                      Center(child: category.image.isNotEmpty ? AppImage.network(category.image, width: 40, height: 40) : AppImage.asset(Assets.images.imgFood.path, width: 40, height: 40)),
                       SizedBox(height: 8),
                       Text(category.name, style: AppTextStyles.typographyH12Regular, textAlign: TextAlign.center),
                     ],

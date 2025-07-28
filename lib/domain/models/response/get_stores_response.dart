@@ -45,6 +45,7 @@ abstract class Store with _$Store {
     required double rating,
     @JsonKey(name: 'delivery_time') required String deliveryTime,
     @JsonKey(name: 'distance_km') double? distanceKm,
+    @JsonKey(name: 'delivery_fee') double? deliveryFee,
     int? status,
   }) = _Store;
 

@@ -80,6 +80,7 @@ _Store _$StoreFromJson(Map<String, dynamic> json) => _Store(
   rating: (json['rating'] as num).toDouble(),
   deliveryTime: json['delivery_time'] as String,
   distanceKm: (json['distance_km'] as num?)?.toDouble(),
+  deliveryFee: (json['delivery_fee'] as num?)?.toDouble(),
   status: (json['status'] as num?)?.toInt(),
 );
 
@@ -91,6 +92,7 @@ Map<String, dynamic> _$StoreToJson(_Store instance) => <String, dynamic>{
   'rating': instance.rating,
   'delivery_time': instance.deliveryTime,
   'distance_km': instance.distanceKm,
+  'delivery_fee': instance.deliveryFee,
   'status': instance.status,
 };
 

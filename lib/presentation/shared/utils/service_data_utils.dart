@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/domain/enums/service_type.dart';
 import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart';
-import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/unified_banner_widget.dart';
 
@@ -144,7 +142,7 @@ class ServiceDataUtils {
       title: store.name,
       imageUrl: store.coverPhoto,
       logoUrl: store.logo,
-      deliveryFee: _shouldShowDeliveryFee(bannerType) && store.distanceKm != null ? _calculateDeliveryFee(store.distanceKm!) : null,
+      deliveryFee: _shouldShowDeliveryFee(bannerType) && store.distanceKm != null ? store.deliveryFee : null,
       isVerified: _shouldShowVerification(bannerType) ? store.rating > 4.0 : null,
       time: _shouldShowTime(bannerType) ? store.deliveryTime : null,
       onTap: () => Get.toNamed(AppRoutes.store),
@@ -167,15 +165,6 @@ class ServiceDataUtils {
   static bool _shouldShowVerification(BannerType bannerType) => bannerType == BannerType.bannerDiscount;
   static bool _shouldShowTime(BannerType bannerType) => bannerType == BannerType.bannerDiscount;
   static bool _shouldShowTitle(BannerType bannerType) => bannerType != BannerType.bannerSingleImage;
-
-  /// Smart delivery fee calculation based on distance
-  static double _calculateDeliveryFee(double distanceKm) {
-    // Smart calculation: closer = cheaper
-    if (distanceKm <= 1.0) return 1.99;
-    if (distanceKm <= 3.0) return 2.99;
-    if (distanceKm <= 5.0) return 3.99;
-    return distanceKm * 0.8; // Dynamic rate for longer distances
-  }
 
   static List<ServiceSection> getDynamicSectionsFromMap(Map<String, dynamic>? data) {
     if (data == null) return [];
@@ -210,36 +199,9 @@ class ServiceDataUtils {
     return data?.categories ?? [];
   }
 
-  /// Dynamic category assets based on service type
-  static String getCategoryImageAsset(Category category, ServiceType serviceType) {
-    switch (serviceType) {
-      case ServiceType.food:
-        return Assets.images.imgFood.path;
-      case ServiceType.grocery:
-        return Assets.images.imgGrocery.path;
-      case ServiceType.delivery:
-        return Assets.images.imgDelivery.path;
-      case ServiceType.laundry:
-        return Assets.images.imgLaundry.path;
-      case ServiceType.ticket:
-        return Assets.images.imgTicketPlane.path;
-      case ServiceType.cleaning:
-        return Assets.images.imgCleaning.path;
-      default:
-        return Assets.images.imgFood.path;
-    }
-  }
-
   /// Process any GetStoresResponse data and return dynamic sections
   /// This is the main entry point for other controllers
   static List<ServiceSection> processServiceData(GetStoresResponse? data) {
     return getDynamicSections(data);
-  }
-
-  /// Get categories with dynamic assets
-  static List<Category> getCategoriesWithAssets(GetStoresResponse? data, ServiceType serviceType) {
-    final categories = getCategories(data);
-    // You can add asset processing logic here if needed
-    return categories;
   }
 }
