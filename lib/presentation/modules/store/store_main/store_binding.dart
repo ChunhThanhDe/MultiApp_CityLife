@@ -7,6 +7,6 @@ class StoreBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<StoreRepository>(() => StoreRepository());
-    Get.lazyPut(() => StoreController(storeType: StoreType.food, storeId: 3));
+    Get.lazyPut<StoreController>(() => StoreController(storeId: Get.arguments['storeId'], storeType: Get.arguments['storeType'] as StoreType));
   }
 }
