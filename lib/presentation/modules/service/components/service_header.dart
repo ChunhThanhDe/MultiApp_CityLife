@@ -173,7 +173,7 @@ class ServiceHeader extends GetView<ServiceController> {
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Column(
                     children: [
-                      Center(child: category.image.isNotEmpty ? AppImage.network(category.image, width: 40, height: 40) : AppImage.asset(Assets.images.imgFood.path, width: 40, height: 40)),
+                      AppImage.network(category.image, width: 40, height: 40, fit: BoxFit.cover),
                       SizedBox(height: 8),
                       Text(category.name, style: AppTextStyles.typographyH12Regular, textAlign: TextAlign.center),
                     ],

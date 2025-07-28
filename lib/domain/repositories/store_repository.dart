@@ -14,17 +14,42 @@ class StoreApiPath {
 
 enum StoreType { food, grocery, general, reviews }
 
+class StoreQueryParameters {
+  final String? delivery;
+  final int? minPrice;
+  final int? maxPrice;
+  final int? rating;
+  final int? under30;
+  final int? offers;
+  final List<int>? categoryIds;
+  final int? limit;
+  final int? offset;
+
+  StoreQueryParameters({this.delivery, this.minPrice, this.maxPrice, this.rating, this.under30, this.offers, this.categoryIds, this.limit, this.offset});
+
+  Map<String, dynamic> toJson() {
+    return {'delivery': delivery, 'min_price': minPrice, 'max_price': maxPrice, 'rating': rating, 'under_30': under30, 'offers': offers, 'category_ids': categoryIds, 'limit': limit, 'offset': offset};
+  }
+}
+
 class StoreRepository extends BaseRepository {
   StoreRepository() : super(baseUrl: AppStrings.baseUrl);
 
-  Future<ApiResult> getStoreData(String service, {int? zoneId, int? id, int? moduleId}) async {
+  Future<ApiResult> getStoreData(String service, {int? zoneId, int? id, int? moduleId, StoreQueryParameters? queryParameters}) async {
     final headers = <String, dynamic>{'zoneId': (zoneId ?? 1).toString(), 'moduleId': (moduleId ?? 1).toString(), 'id': (id ?? 1).toString()};
-    return handleApiRequest(() => dioClient.get(StoreApiPath.getStoreDataByService(service), options: Options(headers: headers)));
+    final queryParams = queryParameters?.toJson();
+    return handleApiRequest(
+      () => dioClient.get(
+        StoreApiPath.getStoreDataByService(service),
+        queryParameters: queryParams,
+        options: Options(headers: headers),
+      ),
+    );
   }
 
   Future<ApiResult> getStoreGeneralData(int userId) async {
     final body = <String, dynamic>{'id': userId};
-    return handleApiRequest(() => dioClient.post(StoreApiPath.getStoreGeneralData, data: body));
+    return handleApiRequest(() => dioClient.get(StoreApiPath.getStoreGeneralData, queryParameters: body));
   }
 
   Future<ApiResult> getStoreDetail({

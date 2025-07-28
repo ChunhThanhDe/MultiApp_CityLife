@@ -31,16 +31,16 @@ class ServiceDataUtils {
   ServiceDataUtils._();
 
   /// Auto-detect all sections from API response dynamically
-  static List<SectionMetadata> getAutoDetectedSections(GetStoresResponse? data) {
+  static List<SectionMetadata> getAutoDetectedSections(Map<String, dynamic>? data) {
     if (data == null) return [];
 
     final sections = <SectionMetadata>[];
 
     // Dynamically extract all List fields from the response
-    final sectionMap = _extractListFieldsFromResponse(data);
+    final sectionMap = data.entries.toList();
 
     // Auto-detect sections that have data
-    for (final entry in sectionMap.entries) {
+    for (final entry in sectionMap) {
       if (entry.value.isNotEmpty) {
         final displayTitle = _generateDisplayTitle(entry.key);
         final dataType = entry.value.first.runtimeType;
@@ -52,21 +52,9 @@ class ServiceDataUtils {
     return sections;
   }
 
-  /// Dynamically extract all List fields from GetStoresResponse
-  static Map<String, List<dynamic>> _extractListFieldsFromResponse(GetStoresResponse data) {
-    return data.toListFieldsMap();
-  }
-
   /// Auto-generate display title from field name - completely generic
   static String _generateDisplayTitle(String fieldName) {
-    // Convert camelCase to Title Case automatically
-    return fieldName
-        .replaceAllMapped(RegExp(r'([A-Z])'), (match) => ' ${match.group(1)}')
-        .split(' ')
-        .where((word) => word.isNotEmpty)
-        .map((word) => word[0].toUpperCase() + word.substring(1).toLowerCase())
-        .join(' ')
-        .trim();
+    return fieldName.replaceAll('_', ' ').split(' ').map((word) => word.isEmpty ? '' : word[0].toUpperCase() + word.substring(1).toLowerCase()).join(' ');
   }
 
   /// Automatically determine banner type based on data structure analysis
@@ -74,7 +62,7 @@ class ServiceDataUtils {
     final firstItem = section.data.first;
 
     // Smart analysis of data structure to determine optimal banner type
-    if (firstItem is Store) {
+    if (firstItem is StoreBanner) {
       final store = firstItem;
 
       // Priority 1: Rich data with delivery info → bannerDiscount
@@ -106,13 +94,13 @@ class ServiceDataUtils {
   }
 
   /// Helper: Check if store has rich delivery data
-  static bool _hasRichDeliveryData(Store store) {
-    return store.distanceKm != null && store.deliveryTime.isNotEmpty && store.rating > 0;
+  static bool _hasRichDeliveryData(StoreBanner store) {
+    return store.distanceKm != null && store.deliveryTime?.isNotEmpty == true && store.rating != null && store.rating! > 0;
   }
 
   /// Helper: Check if store has logo data
-  static bool _hasLogoData(Store store) {
-    return store.logo.isNotEmpty && store.coverPhoto.isNotEmpty;
+  static bool _hasLogoData(StoreBanner store) {
+    return store.logo?.isNotEmpty == true && store.coverPhoto?.isNotEmpty == true;
   }
 
   /// Helper: Check if product has rich data
@@ -125,7 +113,7 @@ class ServiceDataUtils {
     final bannerType = _determineBannerType(section);
 
     return section.data.map<BannerItem>((item) {
-      if (item is Store) {
+      if (item is StoreBanner) {
         return _createStoreBasedBannerItem(item, bannerType);
       } else if (item is Product) {
         return _createProductBasedBannerItem(item, bannerType);
@@ -137,13 +125,13 @@ class ServiceDataUtils {
   }
 
   /// Create banner item for stores with smart property mapping
-  static BannerItem _createStoreBasedBannerItem(Store store, BannerType bannerType) {
+  static BannerItem _createStoreBasedBannerItem(StoreBanner store, BannerType bannerType) {
     return BannerItem(
-      title: store.name,
-      imageUrl: store.coverPhoto,
-      logoUrl: store.logo,
+      title: store.name ?? '',
+      imageUrl: store.coverPhoto ?? '',
+      logoUrl: store.logo ?? '',
       deliveryFee: _shouldShowDeliveryFee(bannerType) && store.distanceKm != null ? store.deliveryFee : null,
-      isVerified: _shouldShowVerification(bannerType) ? store.rating > 4.0 : null,
+      isVerified: _shouldShowVerification(bannerType) ? store.rating != null && store.rating! > 4.0 : null,
       time: _shouldShowTime(bannerType) ? store.deliveryTime : null,
       onTap: () => Get.toNamed(AppRoutes.store),
     );
@@ -184,7 +172,7 @@ class ServiceDataUtils {
 
   /// Generate completely dynamic sections
   static List<ServiceSection> getDynamicSections(GetStoresResponse? data) {
-    final detectedSections = getAutoDetectedSections(data);
+    final detectedSections = getAutoDetectedSections(data?.data);
 
     return detectedSections.map((section) {
       final bannerType = _determineBannerType(section);

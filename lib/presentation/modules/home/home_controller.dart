@@ -5,6 +5,7 @@ import 'package:sixam_mart_user/domain/models/response/get_store_general_data.da
 import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart';
 import 'package:sixam_mart_user/domain/repositories/store_repository.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/utils/service_data_utils.dart';
 
 class HomeController extends BaseController {
@@ -64,8 +65,8 @@ class HomeController extends BaseController {
     rootController.changeTab(RootTab.service);
 
     // Get ServiceController and load data for specific service type
-    // final serviceController = Get.find<ServiceController>();
-    // serviceController.loadServiceTypeData(serviceType);
+    final serviceController = Get.find<ServiceController>();
+    serviceController.loadServiceTypeData(serviceType);
   }
 
   // Example method showing how to use ServiceDataUtils in home controller
@@ -74,7 +75,7 @@ class HomeController extends BaseController {
   }
 
   // Example method to get auto-detected sections
-  List<SectionMetadata> getAutoDetectedSections(GetStoresResponse? data) {
+  List<SectionMetadata> getAutoDetectedSections(Map<String, dynamic>? data) {
     return ServiceDataUtils.getAutoDetectedSections(data);
   }
 

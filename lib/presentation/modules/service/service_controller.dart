@@ -15,11 +15,12 @@ class ServiceController extends BaseController {
   @override
   void onReady() {
     super.onReady();
-    loadServiceTypeData('food');
+    loadServiceTypeData('fast_food1');
   }
 
-  final Rx<GetStoresResponse?> currentData = Rx<GetStoresResponse?>(null);
-  final Rx<String?> currentServiceType = Rx<String?>('food');
+  final RxList<Category> categories = RxList<Category>([]);
+  final RxList<ServiceSection> dynamicSections = RxList<ServiceSection>([]);
+  final RxString currentServiceType = RxString('fast_food1');
 
   // Method to load data for specific service type
   void loadServiceTypeData(String serviceType) async {
@@ -38,29 +39,23 @@ class ServiceController extends BaseController {
             showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
             return;
           }
-          final storesData = GetStoresResponse.fromJson(response.data);
-          currentData.value = storesData;
+          final responseData = GetStoresResponse.fromJson(response.data);
+          if (responseData.categories?.isNotEmpty == true) {
+            categories.clear();
+            categories.addAll(responseData.categories ?? []);
+          }
+          if (responseData.data?.isNotEmpty == true) {
+            dynamicSections.clear();
+            dynamicSections.addAll(ServiceDataUtils.getDynamicSections(responseData));
+          }
         case Failure(:final error):
           showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
       }
     });
   }
 
-  // Auto-detect all sections from API response dynamically
-  List<SectionMetadata> get autoDetectedSections {
-    return ServiceDataUtils.getAutoDetectedSections(currentData.value);
-  }
-
-  // Generate completely dynamic sections
-  List<ServiceSection> get dynamicSections {
-    return ServiceDataUtils.getDynamicSections(currentData.value);
-  }
-
-  // Categories from API data with dynamic assets based on service type
-  List<Category> get categories => ServiceDataUtils.getCategories(currentData.value);
-
   Future<void> refreshData() async {
-    final serviceType = currentServiceType.value ?? 'food';
+    final serviceType = currentServiceType.value;
     loadServiceTypeData(serviceType);
   }
 }

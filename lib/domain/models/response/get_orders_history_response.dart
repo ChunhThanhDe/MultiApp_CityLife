@@ -89,25 +89,25 @@ extension OrderStatusExtension on OrderStatus {
   String get vi {
     switch (this) {
       case OrderStatus.pending:
-        return 'Chờ xử lý';
+        return 'Waiting for confirmation';
       case OrderStatus.accepted:
-        return 'Đã được cửa hàng chấp nhận';
+        return 'Accepted by store';
       case OrderStatus.confirmed:
-        return 'Cửa hàng xác nhận đang chuẩn bị';
+        return 'Store confirmed';
       case OrderStatus.preparing:
-        return 'Đang chuẩn bị';
+        return 'Preparing your order';
       case OrderStatus.processing:
-        return 'Đơn đang được xử lý/giao';
+        return 'Processing your order';
       case OrderStatus.handover:
-        return 'Giao cho shipper';
+        return 'Handover to shipper';
       case OrderStatus.picked_up:
-        return 'Đã được shipper lấy hàng';
+        return 'Picked up by shipper';
       case OrderStatus.delivered:
-        return 'Giao hàng thành công';
+        return 'Delivered';
       case OrderStatus.canceled:
-        return 'Đơn hàng bị hủy';
+        return 'Canceled';
       case OrderStatus.failed:
-        return 'Giao hàng thất bại';
+        return 'Failed';
     }
   }
 
