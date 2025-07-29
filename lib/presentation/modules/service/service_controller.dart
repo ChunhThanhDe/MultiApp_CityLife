@@ -7,7 +7,7 @@ import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart'
 import 'package:sixam_mart_user/domain/repositories/store_repository.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_overlay.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
-import 'package:sixam_mart_user/presentation/shared/utils/service_data_utils.dart';
+import 'package:sixam_mart_user/presentation/shared/utils/banner_data_utils.dart';
 
 class ServiceController extends BaseController {
   final StoreRepository _storeRepository = Get.find<StoreRepository>();
@@ -19,7 +19,7 @@ class ServiceController extends BaseController {
   }
 
   final RxList<Category> categories = RxList<Category>([]);
-  final RxList<ServiceSection> dynamicSections = RxList<ServiceSection>([]);
+  final RxList<BannerSection> dynamicSections = RxList<BannerSection>([]);
   final RxString currentServiceType = RxString('fast_food1');
 
   // Method to load data for specific service type
@@ -46,7 +46,7 @@ class ServiceController extends BaseController {
           }
           if (responseData.data?.isNotEmpty == true) {
             dynamicSections.clear();
-            dynamicSections.addAll(ServiceDataUtils.getDynamicSections(responseData));
+            dynamicSections.addAll(BannerDataUtils.getBannerSections(responseData.data));
           }
         case Failure(:final error):
           showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);

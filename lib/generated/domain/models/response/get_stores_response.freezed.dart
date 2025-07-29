@@ -307,7 +307,7 @@ as String,
 /// @nodoc
 mixin _$StoreBanner {
 
- int get id; String? get name; String? get logo; String? get coverPhoto; double? get rating; String? get deliveryTime; double? get distanceKm; double? get deliveryFee; int? get status;
+ int get id; String? get name; String? get logo; String? get coverPhoto; double? get rating; String? get deliveryTime; double? get distanceKm; double? get deliveryFee; int get status; String? get image;
 /// Create a copy of StoreBanner
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -320,16 +320,16 @@ $StoreBannerCopyWith<StoreBanner> get copyWith => _$StoreBannerCopyWithImpl<Stor
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StoreBanner&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.coverPhoto, coverPhoto) || other.coverPhoto == coverPhoto)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.deliveryTime, deliveryTime) || other.deliveryTime == deliveryTime)&&(identical(other.distanceKm, distanceKm) || other.distanceKm == distanceKm)&&(identical(other.deliveryFee, deliveryFee) || other.deliveryFee == deliveryFee)&&(identical(other.status, status) || other.status == status));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StoreBanner&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.coverPhoto, coverPhoto) || other.coverPhoto == coverPhoto)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.deliveryTime, deliveryTime) || other.deliveryTime == deliveryTime)&&(identical(other.distanceKm, distanceKm) || other.distanceKm == distanceKm)&&(identical(other.deliveryFee, deliveryFee) || other.deliveryFee == deliveryFee)&&(identical(other.status, status) || other.status == status)&&(identical(other.image, image) || other.image == image));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,logo,coverPhoto,rating,deliveryTime,distanceKm,deliveryFee,status);
+int get hashCode => Object.hash(runtimeType,id,name,logo,coverPhoto,rating,deliveryTime,distanceKm,deliveryFee,status,image);
 
 @override
 String toString() {
-  return 'StoreBanner(id: $id, name: $name, logo: $logo, coverPhoto: $coverPhoto, rating: $rating, deliveryTime: $deliveryTime, distanceKm: $distanceKm, deliveryFee: $deliveryFee, status: $status)';
+  return 'StoreBanner(id: $id, name: $name, logo: $logo, coverPhoto: $coverPhoto, rating: $rating, deliveryTime: $deliveryTime, distanceKm: $distanceKm, deliveryFee: $deliveryFee, status: $status, image: $image)';
 }
 
 
@@ -340,7 +340,7 @@ abstract mixin class $StoreBannerCopyWith<$Res>  {
   factory $StoreBannerCopyWith(StoreBanner value, $Res Function(StoreBanner) _then) = _$StoreBannerCopyWithImpl;
 @useResult
 $Res call({
- int id, String? name, String? logo, String? coverPhoto, double? rating, String? deliveryTime, double? distanceKm, double? deliveryFee, int? status
+ int id, String? name, String? logo, String? coverPhoto, double? rating, String? deliveryTime, double? distanceKm, double? deliveryFee, int status, String? image
 });
 
 
@@ -357,7 +357,7 @@ class _$StoreBannerCopyWithImpl<$Res>
 
 /// Create a copy of StoreBanner
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = freezed,Object? logo = freezed,Object? coverPhoto = freezed,Object? rating = freezed,Object? deliveryTime = freezed,Object? distanceKm = freezed,Object? deliveryFee = freezed,Object? status = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = freezed,Object? logo = freezed,Object? coverPhoto = freezed,Object? rating = freezed,Object? deliveryTime = freezed,Object? distanceKm = freezed,Object? deliveryFee = freezed,Object? status = null,Object? image = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -367,8 +367,9 @@ as String?,rating: freezed == rating ? _self.rating : rating // ignore: cast_nul
 as double?,deliveryTime: freezed == deliveryTime ? _self.deliveryTime : deliveryTime // ignore: cast_nullable_to_non_nullable
 as String?,distanceKm: freezed == distanceKm ? _self.distanceKm : distanceKm // ignore: cast_nullable_to_non_nullable
 as double?,deliveryFee: freezed == deliveryFee ? _self.deliveryFee : deliveryFee // ignore: cast_nullable_to_non_nullable
-as double?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as int?,
+as double?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as int,image: freezed == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -379,7 +380,7 @@ as int?,
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _StoreBanner implements StoreBanner {
-  const _StoreBanner({required this.id, this.name, this.logo, this.coverPhoto, this.rating, this.deliveryTime, this.distanceKm, this.deliveryFee, this.status});
+  const _StoreBanner({required this.id, this.name, this.logo, this.coverPhoto, this.rating, this.deliveryTime, this.distanceKm, this.deliveryFee, this.status = 1, this.image});
   factory _StoreBanner.fromJson(Map<String, dynamic> json) => _$StoreBannerFromJson(json);
 
 @override final  int id;
@@ -390,7 +391,8 @@ class _StoreBanner implements StoreBanner {
 @override final  String? deliveryTime;
 @override final  double? distanceKm;
 @override final  double? deliveryFee;
-@override final  int? status;
+@override@JsonKey() final  int status;
+@override final  String? image;
 
 /// Create a copy of StoreBanner
 /// with the given fields replaced by the non-null parameter values.
@@ -405,16 +407,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StoreBanner&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.coverPhoto, coverPhoto) || other.coverPhoto == coverPhoto)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.deliveryTime, deliveryTime) || other.deliveryTime == deliveryTime)&&(identical(other.distanceKm, distanceKm) || other.distanceKm == distanceKm)&&(identical(other.deliveryFee, deliveryFee) || other.deliveryFee == deliveryFee)&&(identical(other.status, status) || other.status == status));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StoreBanner&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.coverPhoto, coverPhoto) || other.coverPhoto == coverPhoto)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.deliveryTime, deliveryTime) || other.deliveryTime == deliveryTime)&&(identical(other.distanceKm, distanceKm) || other.distanceKm == distanceKm)&&(identical(other.deliveryFee, deliveryFee) || other.deliveryFee == deliveryFee)&&(identical(other.status, status) || other.status == status)&&(identical(other.image, image) || other.image == image));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,logo,coverPhoto,rating,deliveryTime,distanceKm,deliveryFee,status);
+int get hashCode => Object.hash(runtimeType,id,name,logo,coverPhoto,rating,deliveryTime,distanceKm,deliveryFee,status,image);
 
 @override
 String toString() {
-  return 'StoreBanner(id: $id, name: $name, logo: $logo, coverPhoto: $coverPhoto, rating: $rating, deliveryTime: $deliveryTime, distanceKm: $distanceKm, deliveryFee: $deliveryFee, status: $status)';
+  return 'StoreBanner(id: $id, name: $name, logo: $logo, coverPhoto: $coverPhoto, rating: $rating, deliveryTime: $deliveryTime, distanceKm: $distanceKm, deliveryFee: $deliveryFee, status: $status, image: $image)';
 }
 
 
@@ -425,7 +427,7 @@ abstract mixin class _$StoreBannerCopyWith<$Res> implements $StoreBannerCopyWith
   factory _$StoreBannerCopyWith(_StoreBanner value, $Res Function(_StoreBanner) _then) = __$StoreBannerCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String? name, String? logo, String? coverPhoto, double? rating, String? deliveryTime, double? distanceKm, double? deliveryFee, int? status
+ int id, String? name, String? logo, String? coverPhoto, double? rating, String? deliveryTime, double? distanceKm, double? deliveryFee, int status, String? image
 });
 
 
@@ -442,7 +444,7 @@ class __$StoreBannerCopyWithImpl<$Res>
 
 /// Create a copy of StoreBanner
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = freezed,Object? logo = freezed,Object? coverPhoto = freezed,Object? rating = freezed,Object? deliveryTime = freezed,Object? distanceKm = freezed,Object? deliveryFee = freezed,Object? status = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = freezed,Object? logo = freezed,Object? coverPhoto = freezed,Object? rating = freezed,Object? deliveryTime = freezed,Object? distanceKm = freezed,Object? deliveryFee = freezed,Object? status = null,Object? image = freezed,}) {
   return _then(_StoreBanner(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -452,150 +454,9 @@ as String?,rating: freezed == rating ? _self.rating : rating // ignore: cast_nul
 as double?,deliveryTime: freezed == deliveryTime ? _self.deliveryTime : deliveryTime // ignore: cast_nullable_to_non_nullable
 as String?,distanceKm: freezed == distanceKm ? _self.distanceKm : distanceKm // ignore: cast_nullable_to_non_nullable
 as double?,deliveryFee: freezed == deliveryFee ? _self.deliveryFee : deliveryFee // ignore: cast_nullable_to_non_nullable
-as double?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as int?,
-  ));
-}
-
-
-}
-
-
-/// @nodoc
-mixin _$Product {
-
- int get id; String? get name; String get image;@JsonKey(name: 'distance_km') double? get distanceKm;
-/// Create a copy of Product
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$ProductCopyWith<Product> get copyWith => _$ProductCopyWithImpl<Product>(this as Product, _$identity);
-
-  /// Serializes this Product to a JSON map.
-  Map<String, dynamic> toJson();
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Product&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.image, image) || other.image == image)&&(identical(other.distanceKm, distanceKm) || other.distanceKm == distanceKm));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,id,name,image,distanceKm);
-
-@override
-String toString() {
-  return 'Product(id: $id, name: $name, image: $image, distanceKm: $distanceKm)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $ProductCopyWith<$Res>  {
-  factory $ProductCopyWith(Product value, $Res Function(Product) _then) = _$ProductCopyWithImpl;
-@useResult
-$Res call({
- int id, String? name, String image,@JsonKey(name: 'distance_km') double? distanceKm
-});
-
-
-
-
-}
-/// @nodoc
-class _$ProductCopyWithImpl<$Res>
-    implements $ProductCopyWith<$Res> {
-  _$ProductCopyWithImpl(this._self, this._then);
-
-  final Product _self;
-  final $Res Function(Product) _then;
-
-/// Create a copy of Product
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = freezed,Object? image = null,Object? distanceKm = freezed,}) {
-  return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String?,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
-as String,distanceKm: freezed == distanceKm ? _self.distanceKm : distanceKm // ignore: cast_nullable_to_non_nullable
-as double?,
-  ));
-}
-
-}
-
-
-/// @nodoc
-@JsonSerializable()
-
-class _Product implements Product {
-  const _Product({required this.id, this.name, required this.image, @JsonKey(name: 'distance_km') this.distanceKm});
-  factory _Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
-
-@override final  int id;
-@override final  String? name;
-@override final  String image;
-@override@JsonKey(name: 'distance_km') final  double? distanceKm;
-
-/// Create a copy of Product
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$ProductCopyWith<_Product> get copyWith => __$ProductCopyWithImpl<_Product>(this, _$identity);
-
-@override
-Map<String, dynamic> toJson() {
-  return _$ProductToJson(this, );
-}
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Product&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.image, image) || other.image == image)&&(identical(other.distanceKm, distanceKm) || other.distanceKm == distanceKm));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,id,name,image,distanceKm);
-
-@override
-String toString() {
-  return 'Product(id: $id, name: $name, image: $image, distanceKm: $distanceKm)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
-  factory _$ProductCopyWith(_Product value, $Res Function(_Product) _then) = __$ProductCopyWithImpl;
-@override @useResult
-$Res call({
- int id, String? name, String image,@JsonKey(name: 'distance_km') double? distanceKm
-});
-
-
-
-
-}
-/// @nodoc
-class __$ProductCopyWithImpl<$Res>
-    implements _$ProductCopyWith<$Res> {
-  __$ProductCopyWithImpl(this._self, this._then);
-
-  final _Product _self;
-  final $Res Function(_Product) _then;
-
-/// Create a copy of Product
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = freezed,Object? image = null,Object? distanceKm = freezed,}) {
-  return _then(_Product(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String?,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
-as String,distanceKm: freezed == distanceKm ? _self.distanceKm : distanceKm // ignore: cast_nullable_to_non_nullable
-as double?,
+as double?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as int,image: freezed == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

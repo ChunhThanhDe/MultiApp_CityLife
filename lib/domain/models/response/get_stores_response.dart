@@ -22,15 +22,18 @@ abstract class Category with _$Category {
 @freezed
 abstract class StoreBanner with _$StoreBanner {
   @JsonSerializable(fieldRename: FieldRename.snake)
-  const factory StoreBanner({required int id, String? name, String? logo, String? coverPhoto, double? rating, String? deliveryTime, double? distanceKm, double? deliveryFee, int? status}) =
-      _StoreBanner;
+  const factory StoreBanner({
+    required int id,
+    String? name,
+    String? logo,
+    String? coverPhoto,
+    double? rating,
+    String? deliveryTime,
+    double? distanceKm,
+    double? deliveryFee,
+    @Default(1) int status,
+    String? image,
+  }) = _StoreBanner;
 
   factory StoreBanner.fromJson(Map<String, dynamic> json) => _$StoreBannerFromJson(json);
-}
-
-@freezed
-abstract class Product with _$Product {
-  const factory Product({required int id, String? name, required String image, @JsonKey(name: 'distance_km') double? distanceKm}) = _Product;
-
-  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
 }

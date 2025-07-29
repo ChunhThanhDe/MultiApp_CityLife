@@ -38,7 +38,8 @@ _StoreBanner _$StoreBannerFromJson(Map<String, dynamic> json) => _StoreBanner(
   deliveryTime: json['delivery_time'] as String?,
   distanceKm: (json['distance_km'] as num?)?.toDouble(),
   deliveryFee: (json['delivery_fee'] as num?)?.toDouble(),
-  status: (json['status'] as num?)?.toInt(),
+  status: (json['status'] as num?)?.toInt() ?? 1,
+  image: json['image'] as String?,
 );
 
 Map<String, dynamic> _$StoreBannerToJson(_StoreBanner instance) =>
@@ -52,18 +53,5 @@ Map<String, dynamic> _$StoreBannerToJson(_StoreBanner instance) =>
       'distance_km': instance.distanceKm,
       'delivery_fee': instance.deliveryFee,
       'status': instance.status,
+      'image': instance.image,
     };
-
-_Product _$ProductFromJson(Map<String, dynamic> json) => _Product(
-  id: (json['id'] as num).toInt(),
-  name: json['name'] as String?,
-  image: json['image'] as String,
-  distanceKm: (json['distance_km'] as num?)?.toDouble(),
-);
-
-Map<String, dynamic> _$ProductToJson(_Product instance) => <String, dynamic>{
-  'id': instance.id,
-  'name': instance.name,
-  'image': instance.image,
-  'distance_km': instance.distanceKm,
-};

@@ -2,11 +2,10 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_general_data.dart';
-import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart';
 import 'package:sixam_mart_user/domain/repositories/store_repository.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
-import 'package:sixam_mart_user/presentation/shared/utils/service_data_utils.dart';
+import 'package:sixam_mart_user/presentation/shared/utils/banner_data_utils.dart';
 
 class HomeController extends BaseController {
   final StoreRepository _storeRepository = Get.find<StoreRepository>();
@@ -18,7 +17,7 @@ class HomeController extends BaseController {
   }
 
   final RxList<ServiceEntity> serviceData = RxList<ServiceEntity>([]);
-  final RxList<ServiceSection> dynamicSections = RxList<ServiceSection>([]);
+  final RxList<BannerSection> dynamicSections = RxList<BannerSection>([]);
 
   Future<void> getStoreData() async {
     // await safeExecute(() async {
@@ -34,7 +33,7 @@ class HomeController extends BaseController {
         // Process banner data if available
         if (responseData.data != null && responseData.data is Map<String, dynamic>) {
           dynamicSections.clear();
-          dynamicSections.addAll(ServiceDataUtils.getDynamicSectionsFromMap(responseData.data));
+          dynamicSections.addAll(BannerDataUtils.getBannerSections(responseData.data));
         }
       case Failure():
     }
@@ -67,20 +66,5 @@ class HomeController extends BaseController {
     // Get ServiceController and load data for specific service type
     final serviceController = Get.find<ServiceController>();
     serviceController.loadServiceTypeData(serviceType);
-  }
-
-  // Example method showing how to use ServiceDataUtils in home controller
-  List<ServiceSection> processServiceDataForHome(GetStoresResponse? data) {
-    return ServiceDataUtils.processServiceData(data);
-  }
-
-  // Example method to get auto-detected sections
-  List<SectionMetadata> getAutoDetectedSections(Map<String, dynamic>? data) {
-    return ServiceDataUtils.getAutoDetectedSections(data);
-  }
-
-  // Example method to get dynamic sections
-  List<ServiceSection> getDynamicSections(GetStoresResponse? data) {
-    return ServiceDataUtils.getDynamicSections(data);
   }
 }
