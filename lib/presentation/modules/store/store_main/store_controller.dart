@@ -51,7 +51,6 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
 
   StoreController({required this.storeType, required this.storeId});
 
-  /// State
   @override
   final RxBool isLoading = true.obs;
   FilterType _selectedFilter = FilterType.all;
@@ -172,6 +171,33 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
 
               print('🛒 [Grocery] Controller categories: ${_categories.keys}');
               break;
+            case StoreType.general:
+              final data = StoreInfoResponse.fromJson(response.data);
+              generalResponse.value = data;
+
+              _categories.value = {
+                for (var menu in data.menu)
+                  menu.categoryName: menu.items
+                      .map(
+                        (e) => ProductItem(
+                          id: e.id,
+                          name: e.name,
+                          price: e.price.toString(),
+                          imageUrl: e.imageUrl,
+                          rating: e.avgRating,
+                          reviewCount: e.ratingCount,
+                          categories: [FilterType.foods],
+                          availableServices: StoreServiceType.values,
+                        ),
+                      )
+                      .toList(),
+              };
+
+              print('🛍️ [General] Controller categories: ${_categories.keys}');
+              break;
+
+            case StoreType.reviews:
+              return;
           }
           break;
 
