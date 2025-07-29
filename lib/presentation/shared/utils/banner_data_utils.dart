@@ -15,21 +15,24 @@ class BannerSection {
   const BannerSection({required this.title, required this.items, required this.bannerType, this.showArrowIcon = true, this.onTapItem, this.onTapTitle});
 }
 
-/// Utility class for service data processing with improved banner type detection
-/// Based on Figma design analysis and StoreBanner field characteristics
 class BannerDataUtils {
   BannerDataUtils._();
 
   static List<BannerSection> getBannerSections(Map<String, dynamic>? data) {
-    if (data == null) return [];
-    return data.entries.map((entry) {
+    if (data == null || data.isEmpty) return [];
+    List<BannerSection> sections = [];
+    for (var entry in data.entries) {
+      if (entry.value == null || entry.value.isEmpty) continue;
       final items = entry.value as List<dynamic>;
-      return BannerSection(title: _getTitleFormattedName(entry.key), items: items.map((item) => StoreBanner.fromJson(item)).toList(), bannerType: _getBannerType(StoreBanner.fromJson(items.first)));
-    }).toList();
+      sections.add(
+        BannerSection(title: _getTitleFormattedName(entry.key), items: items.map((item) => StoreBanner.fromJson(item)).toList(), bannerType: _getBannerType(StoreBanner.fromJson(items.first))),
+      );
+    }
+    return sections;
   }
 
   static String _getTitleFormattedName(String title) {
-    return title.split(' ').map((word) => word.isNotEmpty ? word[0].toUpperCase() + word.substring(1) : '').join(' ');
+    return title.split('_').map((word) => word.isNotEmpty ? word[0].toUpperCase() + word.substring(1) : '').join(' ');
   }
 
   static BannerType _getBannerType(StoreBanner storeBanner) {

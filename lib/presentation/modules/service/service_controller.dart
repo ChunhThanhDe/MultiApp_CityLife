@@ -30,28 +30,26 @@ class ServiceController extends BaseController {
 
   // Clean service data loading
   Future<void> _loadServiceData(String serviceType) async {
-    await safeExecute(() async {
-      final result = await _storeRepository.getStoreData(serviceType);
-      switch (result) {
-        case Success(:final response):
-          if (response.statusCode != 200) {
-            final errorResponse = ErrorResponse.fromJson(response.data);
-            showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
-            return;
-          }
-          final responseData = GetStoresResponse.fromJson(response.data);
-          if (responseData.categories?.isNotEmpty == true) {
-            categories.clear();
-            categories.addAll(responseData.categories ?? []);
-          }
-          if (responseData.data?.isNotEmpty == true) {
-            dynamicSections.clear();
-            dynamicSections.addAll(BannerDataUtils.getBannerSections(responseData.data));
-          }
-        case Failure(:final error):
-          showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
-      }
-    });
+    final result = await _storeRepository.getStoreData(serviceType);
+    switch (result) {
+      case Success(:final response):
+        if (response.statusCode != 200) {
+          final errorResponse = ErrorResponse.fromJson(response.data);
+          showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
+          return;
+        }
+        final responseData = GetStoresResponse.fromJson(response.data);
+        if (responseData.categories?.isNotEmpty == true) {
+          categories.clear();
+          categories.addAll(responseData.categories ?? []);
+        }
+        if (responseData.data?.isNotEmpty == true) {
+          dynamicSections.clear();
+          dynamicSections.addAll(BannerDataUtils.getBannerSections(responseData.data));
+        }
+      case Failure(:final error):
+        showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
+    }
   }
 
   Future<void> refreshData() async {
