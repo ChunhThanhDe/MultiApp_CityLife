@@ -10,6 +10,7 @@ class InProgressOrderCard extends StatelessWidget {
   final String price;
   final int progressStep;
   final int totalStep;
+  final VoidCallback? onTap;
 
   const InProgressOrderCard({
     super.key,
@@ -21,6 +22,7 @@ class InProgressOrderCard extends StatelessWidget {
     required this.price,
     required this.progressStep,
     required this.totalStep,
+    this.onTap,
   });
 
   @override
@@ -44,27 +46,30 @@ class InProgressOrderCard extends StatelessWidget {
           ),
         ),
         // Order cell
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          child: Row(
-            children: [
-              CircleAvatar(backgroundImage: brandLogo, radius: 16),
-              SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      brandName,
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
-                    ),
-                    Text(subtitle, style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
-                  ],
+        GestureDetector(
+          onTap: onTap,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            child: Row(
+              children: [
+                CircleAvatar(backgroundImage: brandLogo, radius: 16),
+                SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        brandName,
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+                      ),
+                      Text(subtitle, style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                    ],
+                  ),
                 ),
-              ),
-              Text(price, style: TextStyle(fontSize: 14, color: Color(0xFF4A5763))),
-              Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
-            ],
+                Text(price, style: TextStyle(fontSize: 14, color: Color(0xFF4A5763))),
+                Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
+              ],
+            ),
           ),
         ),
         // Progress stepper

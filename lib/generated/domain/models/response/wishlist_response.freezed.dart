@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$WishlistResponse {
 
- List<WishlistItem> get item; List<WishlistStore> get store;
+@JsonKey(name: "item") List<WishlistItem>? get item;@JsonKey(name: "store") List<WishlistStore>? get store;
 /// Create a copy of WishlistResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $WishlistResponseCopyWith<$Res>  {
   factory $WishlistResponseCopyWith(WishlistResponse value, $Res Function(WishlistResponse) _then) = _$WishlistResponseCopyWithImpl;
 @useResult
 $Res call({
- List<WishlistItem> item, List<WishlistStore> store
+@JsonKey(name: "item") List<WishlistItem>? item,@JsonKey(name: "store") List<WishlistStore>? store
 });
 
 
@@ -66,11 +66,11 @@ class _$WishlistResponseCopyWithImpl<$Res>
 
 /// Create a copy of WishlistResponse
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? item = null,Object? store = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? item = freezed,Object? store = freezed,}) {
   return _then(_self.copyWith(
-item: null == item ? _self.item : item // ignore: cast_nullable_to_non_nullable
-as List<WishlistItem>,store: null == store ? _self.store : store // ignore: cast_nullable_to_non_nullable
-as List<WishlistStore>,
+item: freezed == item ? _self.item : item // ignore: cast_nullable_to_non_nullable
+as List<WishlistItem>?,store: freezed == store ? _self.store : store // ignore: cast_nullable_to_non_nullable
+as List<WishlistStore>?,
   ));
 }
 
@@ -81,21 +81,25 @@ as List<WishlistStore>,
 @JsonSerializable()
 
 class _WishlistResponse implements WishlistResponse {
-  const _WishlistResponse({required final  List<WishlistItem> item, required final  List<WishlistStore> store}): _item = item,_store = store;
+  const _WishlistResponse({@JsonKey(name: "item") final  List<WishlistItem>? item, @JsonKey(name: "store") final  List<WishlistStore>? store}): _item = item,_store = store;
   factory _WishlistResponse.fromJson(Map<String, dynamic> json) => _$WishlistResponseFromJson(json);
 
- final  List<WishlistItem> _item;
-@override List<WishlistItem> get item {
+ final  List<WishlistItem>? _item;
+@override@JsonKey(name: "item") List<WishlistItem>? get item {
+  final value = _item;
+  if (value == null) return null;
   if (_item is EqualUnmodifiableListView) return _item;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_item);
+  return EqualUnmodifiableListView(value);
 }
 
- final  List<WishlistStore> _store;
-@override List<WishlistStore> get store {
+ final  List<WishlistStore>? _store;
+@override@JsonKey(name: "store") List<WishlistStore>? get store {
+  final value = _store;
+  if (value == null) return null;
   if (_store is EqualUnmodifiableListView) return _store;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_store);
+  return EqualUnmodifiableListView(value);
 }
 
 
@@ -132,7 +136,7 @@ abstract mixin class _$WishlistResponseCopyWith<$Res> implements $WishlistRespon
   factory _$WishlistResponseCopyWith(_WishlistResponse value, $Res Function(_WishlistResponse) _then) = __$WishlistResponseCopyWithImpl;
 @override @useResult
 $Res call({
- List<WishlistItem> item, List<WishlistStore> store
+@JsonKey(name: "item") List<WishlistItem>? item,@JsonKey(name: "store") List<WishlistStore>? store
 });
 
 
@@ -149,22 +153,29 @@ class __$WishlistResponseCopyWithImpl<$Res>
 
 /// Create a copy of WishlistResponse
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? item = null,Object? store = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? item = freezed,Object? store = freezed,}) {
   return _then(_WishlistResponse(
-item: null == item ? _self._item : item // ignore: cast_nullable_to_non_nullable
-as List<WishlistItem>,store: null == store ? _self._store : store // ignore: cast_nullable_to_non_nullable
-as List<WishlistStore>,
+item: freezed == item ? _self._item : item // ignore: cast_nullable_to_non_nullable
+as List<WishlistItem>?,store: freezed == store ? _self._store : store // ignore: cast_nullable_to_non_nullable
+as List<WishlistStore>?,
   ));
 }
 
 
 }
 
+WishlistItem _$WishlistItemFromJson(
+  Map<String, dynamic> json
+) {
+    return _WistlistItem.fromJson(
+      json
+    );
+}
 
 /// @nodoc
 mixin _$WishlistItem {
 
- int get id; String get name; double get price;@JsonKey(name: 'image_full_url') String get imageFullUrl; String? get description;@JsonKey(name: 'avg_rating') double? get avgRating;@JsonKey(name: 'rating_count') int? get ratingCount;
+@JsonKey(name: "id") int? get id;@JsonKey(name: "name") String? get name;@JsonKey(name: "price") int? get price;@JsonKey(name: "image_full_url") String? get imageFullUrl;@JsonKey(name: "store_name") String? get storeName;
 /// Create a copy of WishlistItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -177,16 +188,16 @@ $WishlistItemCopyWith<WishlistItem> get copyWith => _$WishlistItemCopyWithImpl<W
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WishlistItem&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.imageFullUrl, imageFullUrl) || other.imageFullUrl == imageFullUrl)&&(identical(other.description, description) || other.description == description)&&(identical(other.avgRating, avgRating) || other.avgRating == avgRating)&&(identical(other.ratingCount, ratingCount) || other.ratingCount == ratingCount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WishlistItem&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.imageFullUrl, imageFullUrl) || other.imageFullUrl == imageFullUrl)&&(identical(other.storeName, storeName) || other.storeName == storeName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,price,imageFullUrl,description,avgRating,ratingCount);
+int get hashCode => Object.hash(runtimeType,id,name,price,imageFullUrl,storeName);
 
 @override
 String toString() {
-  return 'WishlistItem(id: $id, name: $name, price: $price, imageFullUrl: $imageFullUrl, description: $description, avgRating: $avgRating, ratingCount: $ratingCount)';
+  return 'WishlistItem(id: $id, name: $name, price: $price, imageFullUrl: $imageFullUrl, storeName: $storeName)';
 }
 
 
@@ -197,7 +208,7 @@ abstract mixin class $WishlistItemCopyWith<$Res>  {
   factory $WishlistItemCopyWith(WishlistItem value, $Res Function(WishlistItem) _then) = _$WishlistItemCopyWithImpl;
 @useResult
 $Res call({
- int id, String name, double price,@JsonKey(name: 'image_full_url') String imageFullUrl, String? description,@JsonKey(name: 'avg_rating') double? avgRating,@JsonKey(name: 'rating_count') int? ratingCount
+@JsonKey(name: "id") int? id,@JsonKey(name: "name") String? name,@JsonKey(name: "price") int? price,@JsonKey(name: "image_full_url") String? imageFullUrl,@JsonKey(name: "store_name") String? storeName
 });
 
 
@@ -214,16 +225,14 @@ class _$WishlistItemCopyWithImpl<$Res>
 
 /// Create a copy of WishlistItem
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? price = null,Object? imageFullUrl = null,Object? description = freezed,Object? avgRating = freezed,Object? ratingCount = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = freezed,Object? price = freezed,Object? imageFullUrl = freezed,Object? storeName = freezed,}) {
   return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
-as double,imageFullUrl: null == imageFullUrl ? _self.imageFullUrl : imageFullUrl // ignore: cast_nullable_to_non_nullable
-as String,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String?,avgRating: freezed == avgRating ? _self.avgRating : avgRating // ignore: cast_nullable_to_non_nullable
-as double?,ratingCount: freezed == ratingCount ? _self.ratingCount : ratingCount // ignore: cast_nullable_to_non_nullable
-as int?,
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as int?,imageFullUrl: freezed == imageFullUrl ? _self.imageFullUrl : imageFullUrl // ignore: cast_nullable_to_non_nullable
+as String?,storeName: freezed == storeName ? _self.storeName : storeName // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -233,52 +242,50 @@ as int?,
 /// @nodoc
 @JsonSerializable()
 
-class _WishlistItem implements WishlistItem {
-  const _WishlistItem({required this.id, required this.name, required this.price, @JsonKey(name: 'image_full_url') required this.imageFullUrl, this.description, @JsonKey(name: 'avg_rating') this.avgRating, @JsonKey(name: 'rating_count') this.ratingCount});
-  factory _WishlistItem.fromJson(Map<String, dynamic> json) => _$WishlistItemFromJson(json);
+class _WistlistItem implements WishlistItem {
+  const _WistlistItem({@JsonKey(name: "id") this.id, @JsonKey(name: "name") this.name, @JsonKey(name: "price") this.price, @JsonKey(name: "image_full_url") this.imageFullUrl, @JsonKey(name: "store_name") this.storeName});
+  factory _WistlistItem.fromJson(Map<String, dynamic> json) => _$WistlistItemFromJson(json);
 
-@override final  int id;
-@override final  String name;
-@override final  double price;
-@override@JsonKey(name: 'image_full_url') final  String imageFullUrl;
-@override final  String? description;
-@override@JsonKey(name: 'avg_rating') final  double? avgRating;
-@override@JsonKey(name: 'rating_count') final  int? ratingCount;
+@override@JsonKey(name: "id") final  int? id;
+@override@JsonKey(name: "name") final  String? name;
+@override@JsonKey(name: "price") final  int? price;
+@override@JsonKey(name: "image_full_url") final  String? imageFullUrl;
+@override@JsonKey(name: "store_name") final  String? storeName;
 
 /// Create a copy of WishlistItem
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$WishlistItemCopyWith<_WishlistItem> get copyWith => __$WishlistItemCopyWithImpl<_WishlistItem>(this, _$identity);
+_$WistlistItemCopyWith<_WistlistItem> get copyWith => __$WistlistItemCopyWithImpl<_WistlistItem>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$WishlistItemToJson(this, );
+  return _$WistlistItemToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WishlistItem&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.imageFullUrl, imageFullUrl) || other.imageFullUrl == imageFullUrl)&&(identical(other.description, description) || other.description == description)&&(identical(other.avgRating, avgRating) || other.avgRating == avgRating)&&(identical(other.ratingCount, ratingCount) || other.ratingCount == ratingCount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WistlistItem&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.imageFullUrl, imageFullUrl) || other.imageFullUrl == imageFullUrl)&&(identical(other.storeName, storeName) || other.storeName == storeName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,price,imageFullUrl,description,avgRating,ratingCount);
+int get hashCode => Object.hash(runtimeType,id,name,price,imageFullUrl,storeName);
 
 @override
 String toString() {
-  return 'WishlistItem(id: $id, name: $name, price: $price, imageFullUrl: $imageFullUrl, description: $description, avgRating: $avgRating, ratingCount: $ratingCount)';
+  return 'WishlistItem(id: $id, name: $name, price: $price, imageFullUrl: $imageFullUrl, storeName: $storeName)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$WishlistItemCopyWith<$Res> implements $WishlistItemCopyWith<$Res> {
-  factory _$WishlistItemCopyWith(_WishlistItem value, $Res Function(_WishlistItem) _then) = __$WishlistItemCopyWithImpl;
+abstract mixin class _$WistlistItemCopyWith<$Res> implements $WishlistItemCopyWith<$Res> {
+  factory _$WistlistItemCopyWith(_WistlistItem value, $Res Function(_WistlistItem) _then) = __$WistlistItemCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name, double price,@JsonKey(name: 'image_full_url') String imageFullUrl, String? description,@JsonKey(name: 'avg_rating') double? avgRating,@JsonKey(name: 'rating_count') int? ratingCount
+@JsonKey(name: "id") int? id,@JsonKey(name: "name") String? name,@JsonKey(name: "price") int? price,@JsonKey(name: "image_full_url") String? imageFullUrl,@JsonKey(name: "store_name") String? storeName
 });
 
 
@@ -286,25 +293,23 @@ $Res call({
 
 }
 /// @nodoc
-class __$WishlistItemCopyWithImpl<$Res>
-    implements _$WishlistItemCopyWith<$Res> {
-  __$WishlistItemCopyWithImpl(this._self, this._then);
+class __$WistlistItemCopyWithImpl<$Res>
+    implements _$WistlistItemCopyWith<$Res> {
+  __$WistlistItemCopyWithImpl(this._self, this._then);
 
-  final _WishlistItem _self;
-  final $Res Function(_WishlistItem) _then;
+  final _WistlistItem _self;
+  final $Res Function(_WistlistItem) _then;
 
 /// Create a copy of WishlistItem
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? price = null,Object? imageFullUrl = null,Object? description = freezed,Object? avgRating = freezed,Object? ratingCount = freezed,}) {
-  return _then(_WishlistItem(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
-as double,imageFullUrl: null == imageFullUrl ? _self.imageFullUrl : imageFullUrl // ignore: cast_nullable_to_non_nullable
-as String,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String?,avgRating: freezed == avgRating ? _self.avgRating : avgRating // ignore: cast_nullable_to_non_nullable
-as double?,ratingCount: freezed == ratingCount ? _self.ratingCount : ratingCount // ignore: cast_nullable_to_non_nullable
-as int?,
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = freezed,Object? price = freezed,Object? imageFullUrl = freezed,Object? storeName = freezed,}) {
+  return _then(_WistlistItem(
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as int?,imageFullUrl: freezed == imageFullUrl ? _self.imageFullUrl : imageFullUrl // ignore: cast_nullable_to_non_nullable
+as String?,storeName: freezed == storeName ? _self.storeName : storeName // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -315,7 +320,7 @@ as int?,
 /// @nodoc
 mixin _$WishlistStore {
 
- int get id; String get name;@JsonKey(name: 'logo_full_url') String get logoFullUrl;@JsonKey(name: 'cover_photo_full_url') String? get coverPhotoFullUrl;@JsonKey(name: 'avg_rating') double? get avgRating;@JsonKey(name: 'rating_count') int? get ratingCount;@JsonKey(name: 'delivery_time') String? get deliveryTime;@JsonKey(name: 'minimum_order') double? get minimumOrder;@JsonKey(name: 'minimum_shipping_charge') double? get minimumShippingCharge;
+@JsonKey(name: "id") int? get id;@JsonKey(name: "name") String? get name;@JsonKey(name: "address") String? get address;@JsonKey(name: "minimum_shipping_charge") int? get minimumShippingCharge;@JsonKey(name: "delivery_time") String? get deliveryTime;@JsonKey(name: "avg_rating") int? get avgRating;@JsonKey(name: "rating_count") int? get ratingCount;@JsonKey(name: "logo_full_url") String? get logoFullUrl;@JsonKey(name: "cover_photo_full_url") String? get coverPhotoFullUrl;
 /// Create a copy of WishlistStore
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -328,16 +333,16 @@ $WishlistStoreCopyWith<WishlistStore> get copyWith => _$WishlistStoreCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WishlistStore&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logoFullUrl, logoFullUrl) || other.logoFullUrl == logoFullUrl)&&(identical(other.coverPhotoFullUrl, coverPhotoFullUrl) || other.coverPhotoFullUrl == coverPhotoFullUrl)&&(identical(other.avgRating, avgRating) || other.avgRating == avgRating)&&(identical(other.ratingCount, ratingCount) || other.ratingCount == ratingCount)&&(identical(other.deliveryTime, deliveryTime) || other.deliveryTime == deliveryTime)&&(identical(other.minimumOrder, minimumOrder) || other.minimumOrder == minimumOrder)&&(identical(other.minimumShippingCharge, minimumShippingCharge) || other.minimumShippingCharge == minimumShippingCharge));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WishlistStore&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.address, address) || other.address == address)&&(identical(other.minimumShippingCharge, minimumShippingCharge) || other.minimumShippingCharge == minimumShippingCharge)&&(identical(other.deliveryTime, deliveryTime) || other.deliveryTime == deliveryTime)&&(identical(other.avgRating, avgRating) || other.avgRating == avgRating)&&(identical(other.ratingCount, ratingCount) || other.ratingCount == ratingCount)&&(identical(other.logoFullUrl, logoFullUrl) || other.logoFullUrl == logoFullUrl)&&(identical(other.coverPhotoFullUrl, coverPhotoFullUrl) || other.coverPhotoFullUrl == coverPhotoFullUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,logoFullUrl,coverPhotoFullUrl,avgRating,ratingCount,deliveryTime,minimumOrder,minimumShippingCharge);
+int get hashCode => Object.hash(runtimeType,id,name,address,minimumShippingCharge,deliveryTime,avgRating,ratingCount,logoFullUrl,coverPhotoFullUrl);
 
 @override
 String toString() {
-  return 'WishlistStore(id: $id, name: $name, logoFullUrl: $logoFullUrl, coverPhotoFullUrl: $coverPhotoFullUrl, avgRating: $avgRating, ratingCount: $ratingCount, deliveryTime: $deliveryTime, minimumOrder: $minimumOrder, minimumShippingCharge: $minimumShippingCharge)';
+  return 'WishlistStore(id: $id, name: $name, address: $address, minimumShippingCharge: $minimumShippingCharge, deliveryTime: $deliveryTime, avgRating: $avgRating, ratingCount: $ratingCount, logoFullUrl: $logoFullUrl, coverPhotoFullUrl: $coverPhotoFullUrl)';
 }
 
 
@@ -348,7 +353,7 @@ abstract mixin class $WishlistStoreCopyWith<$Res>  {
   factory $WishlistStoreCopyWith(WishlistStore value, $Res Function(WishlistStore) _then) = _$WishlistStoreCopyWithImpl;
 @useResult
 $Res call({
- int id, String name,@JsonKey(name: 'logo_full_url') String logoFullUrl,@JsonKey(name: 'cover_photo_full_url') String? coverPhotoFullUrl,@JsonKey(name: 'avg_rating') double? avgRating,@JsonKey(name: 'rating_count') int? ratingCount,@JsonKey(name: 'delivery_time') String? deliveryTime,@JsonKey(name: 'minimum_order') double? minimumOrder,@JsonKey(name: 'minimum_shipping_charge') double? minimumShippingCharge
+@JsonKey(name: "id") int? id,@JsonKey(name: "name") String? name,@JsonKey(name: "address") String? address,@JsonKey(name: "minimum_shipping_charge") int? minimumShippingCharge,@JsonKey(name: "delivery_time") String? deliveryTime,@JsonKey(name: "avg_rating") int? avgRating,@JsonKey(name: "rating_count") int? ratingCount,@JsonKey(name: "logo_full_url") String? logoFullUrl,@JsonKey(name: "cover_photo_full_url") String? coverPhotoFullUrl
 });
 
 
@@ -365,18 +370,18 @@ class _$WishlistStoreCopyWithImpl<$Res>
 
 /// Create a copy of WishlistStore
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? logoFullUrl = null,Object? coverPhotoFullUrl = freezed,Object? avgRating = freezed,Object? ratingCount = freezed,Object? deliveryTime = freezed,Object? minimumOrder = freezed,Object? minimumShippingCharge = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = freezed,Object? address = freezed,Object? minimumShippingCharge = freezed,Object? deliveryTime = freezed,Object? avgRating = freezed,Object? ratingCount = freezed,Object? logoFullUrl = freezed,Object? coverPhotoFullUrl = freezed,}) {
   return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,logoFullUrl: null == logoFullUrl ? _self.logoFullUrl : logoFullUrl // ignore: cast_nullable_to_non_nullable
-as String,coverPhotoFullUrl: freezed == coverPhotoFullUrl ? _self.coverPhotoFullUrl : coverPhotoFullUrl // ignore: cast_nullable_to_non_nullable
-as String?,avgRating: freezed == avgRating ? _self.avgRating : avgRating // ignore: cast_nullable_to_non_nullable
-as double?,ratingCount: freezed == ratingCount ? _self.ratingCount : ratingCount // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as String?,minimumShippingCharge: freezed == minimumShippingCharge ? _self.minimumShippingCharge : minimumShippingCharge // ignore: cast_nullable_to_non_nullable
 as int?,deliveryTime: freezed == deliveryTime ? _self.deliveryTime : deliveryTime // ignore: cast_nullable_to_non_nullable
-as String?,minimumOrder: freezed == minimumOrder ? _self.minimumOrder : minimumOrder // ignore: cast_nullable_to_non_nullable
-as double?,minimumShippingCharge: freezed == minimumShippingCharge ? _self.minimumShippingCharge : minimumShippingCharge // ignore: cast_nullable_to_non_nullable
-as double?,
+as String?,avgRating: freezed == avgRating ? _self.avgRating : avgRating // ignore: cast_nullable_to_non_nullable
+as int?,ratingCount: freezed == ratingCount ? _self.ratingCount : ratingCount // ignore: cast_nullable_to_non_nullable
+as int?,logoFullUrl: freezed == logoFullUrl ? _self.logoFullUrl : logoFullUrl // ignore: cast_nullable_to_non_nullable
+as String?,coverPhotoFullUrl: freezed == coverPhotoFullUrl ? _self.coverPhotoFullUrl : coverPhotoFullUrl // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -387,18 +392,18 @@ as double?,
 @JsonSerializable()
 
 class _WishlistStore implements WishlistStore {
-  const _WishlistStore({required this.id, required this.name, @JsonKey(name: 'logo_full_url') required this.logoFullUrl, @JsonKey(name: 'cover_photo_full_url') this.coverPhotoFullUrl, @JsonKey(name: 'avg_rating') this.avgRating, @JsonKey(name: 'rating_count') this.ratingCount, @JsonKey(name: 'delivery_time') this.deliveryTime, @JsonKey(name: 'minimum_order') this.minimumOrder, @JsonKey(name: 'minimum_shipping_charge') this.minimumShippingCharge});
+  const _WishlistStore({@JsonKey(name: "id") this.id, @JsonKey(name: "name") this.name, @JsonKey(name: "address") this.address, @JsonKey(name: "minimum_shipping_charge") this.minimumShippingCharge, @JsonKey(name: "delivery_time") this.deliveryTime, @JsonKey(name: "avg_rating") this.avgRating, @JsonKey(name: "rating_count") this.ratingCount, @JsonKey(name: "logo_full_url") this.logoFullUrl, @JsonKey(name: "cover_photo_full_url") this.coverPhotoFullUrl});
   factory _WishlistStore.fromJson(Map<String, dynamic> json) => _$WishlistStoreFromJson(json);
 
-@override final  int id;
-@override final  String name;
-@override@JsonKey(name: 'logo_full_url') final  String logoFullUrl;
-@override@JsonKey(name: 'cover_photo_full_url') final  String? coverPhotoFullUrl;
-@override@JsonKey(name: 'avg_rating') final  double? avgRating;
-@override@JsonKey(name: 'rating_count') final  int? ratingCount;
-@override@JsonKey(name: 'delivery_time') final  String? deliveryTime;
-@override@JsonKey(name: 'minimum_order') final  double? minimumOrder;
-@override@JsonKey(name: 'minimum_shipping_charge') final  double? minimumShippingCharge;
+@override@JsonKey(name: "id") final  int? id;
+@override@JsonKey(name: "name") final  String? name;
+@override@JsonKey(name: "address") final  String? address;
+@override@JsonKey(name: "minimum_shipping_charge") final  int? minimumShippingCharge;
+@override@JsonKey(name: "delivery_time") final  String? deliveryTime;
+@override@JsonKey(name: "avg_rating") final  int? avgRating;
+@override@JsonKey(name: "rating_count") final  int? ratingCount;
+@override@JsonKey(name: "logo_full_url") final  String? logoFullUrl;
+@override@JsonKey(name: "cover_photo_full_url") final  String? coverPhotoFullUrl;
 
 /// Create a copy of WishlistStore
 /// with the given fields replaced by the non-null parameter values.
@@ -413,16 +418,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WishlistStore&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logoFullUrl, logoFullUrl) || other.logoFullUrl == logoFullUrl)&&(identical(other.coverPhotoFullUrl, coverPhotoFullUrl) || other.coverPhotoFullUrl == coverPhotoFullUrl)&&(identical(other.avgRating, avgRating) || other.avgRating == avgRating)&&(identical(other.ratingCount, ratingCount) || other.ratingCount == ratingCount)&&(identical(other.deliveryTime, deliveryTime) || other.deliveryTime == deliveryTime)&&(identical(other.minimumOrder, minimumOrder) || other.minimumOrder == minimumOrder)&&(identical(other.minimumShippingCharge, minimumShippingCharge) || other.minimumShippingCharge == minimumShippingCharge));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WishlistStore&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.address, address) || other.address == address)&&(identical(other.minimumShippingCharge, minimumShippingCharge) || other.minimumShippingCharge == minimumShippingCharge)&&(identical(other.deliveryTime, deliveryTime) || other.deliveryTime == deliveryTime)&&(identical(other.avgRating, avgRating) || other.avgRating == avgRating)&&(identical(other.ratingCount, ratingCount) || other.ratingCount == ratingCount)&&(identical(other.logoFullUrl, logoFullUrl) || other.logoFullUrl == logoFullUrl)&&(identical(other.coverPhotoFullUrl, coverPhotoFullUrl) || other.coverPhotoFullUrl == coverPhotoFullUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,logoFullUrl,coverPhotoFullUrl,avgRating,ratingCount,deliveryTime,minimumOrder,minimumShippingCharge);
+int get hashCode => Object.hash(runtimeType,id,name,address,minimumShippingCharge,deliveryTime,avgRating,ratingCount,logoFullUrl,coverPhotoFullUrl);
 
 @override
 String toString() {
-  return 'WishlistStore(id: $id, name: $name, logoFullUrl: $logoFullUrl, coverPhotoFullUrl: $coverPhotoFullUrl, avgRating: $avgRating, ratingCount: $ratingCount, deliveryTime: $deliveryTime, minimumOrder: $minimumOrder, minimumShippingCharge: $minimumShippingCharge)';
+  return 'WishlistStore(id: $id, name: $name, address: $address, minimumShippingCharge: $minimumShippingCharge, deliveryTime: $deliveryTime, avgRating: $avgRating, ratingCount: $ratingCount, logoFullUrl: $logoFullUrl, coverPhotoFullUrl: $coverPhotoFullUrl)';
 }
 
 
@@ -433,7 +438,7 @@ abstract mixin class _$WishlistStoreCopyWith<$Res> implements $WishlistStoreCopy
   factory _$WishlistStoreCopyWith(_WishlistStore value, $Res Function(_WishlistStore) _then) = __$WishlistStoreCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name,@JsonKey(name: 'logo_full_url') String logoFullUrl,@JsonKey(name: 'cover_photo_full_url') String? coverPhotoFullUrl,@JsonKey(name: 'avg_rating') double? avgRating,@JsonKey(name: 'rating_count') int? ratingCount,@JsonKey(name: 'delivery_time') String? deliveryTime,@JsonKey(name: 'minimum_order') double? minimumOrder,@JsonKey(name: 'minimum_shipping_charge') double? minimumShippingCharge
+@JsonKey(name: "id") int? id,@JsonKey(name: "name") String? name,@JsonKey(name: "address") String? address,@JsonKey(name: "minimum_shipping_charge") int? minimumShippingCharge,@JsonKey(name: "delivery_time") String? deliveryTime,@JsonKey(name: "avg_rating") int? avgRating,@JsonKey(name: "rating_count") int? ratingCount,@JsonKey(name: "logo_full_url") String? logoFullUrl,@JsonKey(name: "cover_photo_full_url") String? coverPhotoFullUrl
 });
 
 
@@ -450,18 +455,18 @@ class __$WishlistStoreCopyWithImpl<$Res>
 
 /// Create a copy of WishlistStore
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? logoFullUrl = null,Object? coverPhotoFullUrl = freezed,Object? avgRating = freezed,Object? ratingCount = freezed,Object? deliveryTime = freezed,Object? minimumOrder = freezed,Object? minimumShippingCharge = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = freezed,Object? address = freezed,Object? minimumShippingCharge = freezed,Object? deliveryTime = freezed,Object? avgRating = freezed,Object? ratingCount = freezed,Object? logoFullUrl = freezed,Object? coverPhotoFullUrl = freezed,}) {
   return _then(_WishlistStore(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,logoFullUrl: null == logoFullUrl ? _self.logoFullUrl : logoFullUrl // ignore: cast_nullable_to_non_nullable
-as String,coverPhotoFullUrl: freezed == coverPhotoFullUrl ? _self.coverPhotoFullUrl : coverPhotoFullUrl // ignore: cast_nullable_to_non_nullable
-as String?,avgRating: freezed == avgRating ? _self.avgRating : avgRating // ignore: cast_nullable_to_non_nullable
-as double?,ratingCount: freezed == ratingCount ? _self.ratingCount : ratingCount // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as String?,minimumShippingCharge: freezed == minimumShippingCharge ? _self.minimumShippingCharge : minimumShippingCharge // ignore: cast_nullable_to_non_nullable
 as int?,deliveryTime: freezed == deliveryTime ? _self.deliveryTime : deliveryTime // ignore: cast_nullable_to_non_nullable
-as String?,minimumOrder: freezed == minimumOrder ? _self.minimumOrder : minimumOrder // ignore: cast_nullable_to_non_nullable
-as double?,minimumShippingCharge: freezed == minimumShippingCharge ? _self.minimumShippingCharge : minimumShippingCharge // ignore: cast_nullable_to_non_nullable
-as double?,
+as String?,avgRating: freezed == avgRating ? _self.avgRating : avgRating // ignore: cast_nullable_to_non_nullable
+as int?,ratingCount: freezed == ratingCount ? _self.ratingCount : ratingCount // ignore: cast_nullable_to_non_nullable
+as int?,logoFullUrl: freezed == logoFullUrl ? _self.logoFullUrl : logoFullUrl // ignore: cast_nullable_to_non_nullable
+as String?,coverPhotoFullUrl: freezed == coverPhotoFullUrl ? _self.coverPhotoFullUrl : coverPhotoFullUrl // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

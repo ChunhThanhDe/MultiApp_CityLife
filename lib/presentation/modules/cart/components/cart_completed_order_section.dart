@@ -35,32 +35,43 @@ class OrderListItem extends StatelessWidget {
   final String brandName;
   final String subtitle;
   final String price;
+  final VoidCallback? onTap;
 
-  const OrderListItem({super.key, required this.brandLogo, required this.brandName, required this.subtitle, required this.price});
+  const OrderListItem({
+    super.key, 
+    required this.brandLogo, 
+    required this.brandName, 
+    required this.subtitle, 
+    required this.price,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      child: Row(
-        children: [
-          CircleAvatar(backgroundImage: brandLogo, radius: 16),
-          SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  brandName,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
-                ),
-                Text(subtitle, style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
-              ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        child: Row(
+          children: [
+            CircleAvatar(backgroundImage: brandLogo, radius: 16),
+            SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    brandName,
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+                  ),
+                  Text(subtitle, style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                ],
+              ),
             ),
-          ),
-          Text(price, style: TextStyle(fontSize: 14, color: Color(0xFF4A5763))),
-          Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
-        ],
+            Text(price, style: TextStyle(fontSize: 14, color: Color(0xFF4A5763))),
+            Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
+          ],
+        ),
       ),
     );
   }

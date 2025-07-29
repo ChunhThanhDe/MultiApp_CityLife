@@ -1,7 +1,7 @@
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_repository.dart';
-import 'package:sixam_mart_user/domain/models/request/sign_in_request.dart';
-import 'package:sixam_mart_user/domain/models/request/sign_up_request.dart';
+import 'package:sixam_mart_user/domain/models/request/authentication/sign_in_request.dart';
+import 'package:sixam_mart_user/domain/models/request/authentication/sign_up_request.dart';
 
 class AuthApiPath {
   static const String login = '/api/v1/auth/login';

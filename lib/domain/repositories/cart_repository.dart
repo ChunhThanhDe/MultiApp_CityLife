@@ -3,7 +3,10 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_repository.dart';
-import 'package:sixam_mart_user/domain/models/response/cart/cart_models.dart';
+import 'package:sixam_mart_user/domain/models/request/cart/add_to_cart_request.dart';
+import 'package:sixam_mart_user/domain/models/request/cart/remvove_cart_request.dart';
+import 'package:sixam_mart_user/domain/models/request/cart/update_cart_request.dart';
+import 'package:sixam_mart_user/domain/models/request/cart/order_now_request.dart';
 
 class CartApiPath {
   static const String getCartList = '/api/v1/customer/cart/list-by-stores';
@@ -11,6 +14,8 @@ class CartApiPath {
   static const String updateCart = '/api/v1/customer/cart/update';
   static const String removeFromCart = '/api/v1/customer/cart/remove-item';
   static const String clearCart = '/api/v1/customer/cart/remove';
+  static const String getCheckoutSummary = '/api/v1/customer/checkout/summary';
+  static const String orderNow = '/api/v1/customer/checkout/order-now';
 }
 
 class CartRepository extends BaseRepository {
@@ -47,5 +52,18 @@ class CartRepository extends BaseRepository {
 
   Future<ApiResult> clearCart() async {
     return handleApiRequest(() => dioClient.delete(CartApiPath.clearCart));
+  }
+
+  Future<ApiResult> getCheckoutSummary() async {
+    return handleApiRequest(() => dioClient.get(CartApiPath.getCheckoutSummary));
+  }
+
+  Future<ApiResult> orderNow(OrderNowRequest request) async {
+    return handleApiRequest(
+      () => dioClient.post(
+        CartApiPath.orderNow,
+        data: request.toJson(),
+      ),
+    );
   }
 }

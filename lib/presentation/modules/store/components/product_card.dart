@@ -5,7 +5,6 @@ import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
-import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductItem item;
@@ -48,7 +47,7 @@ class ProductCard extends StatelessWidget {
                   ),
                   child: GestureDetector(
                     onTap: () {
-                      showAppSnackBar(title: 'Add to cart');
+                      Get.toNamed(AppRoutes.storeProductDetail, arguments: {'productId': item.id});
                     },
                     child: Icon(Icons.add, size: 20.w),
                   ),

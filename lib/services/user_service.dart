@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app_provider.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
+import 'package:sixam_mart_user/domain/models/request/update_profile_request.dart';
 import 'package:sixam_mart_user/domain/models/response/get_user_info_response.dart';
 import 'package:sixam_mart_user/domain/repositories/user_repository.dart';
 import 'package:sixam_mart_user/services/auth_token_manager.dart';
@@ -55,6 +56,34 @@ class UserService {
   /// Load user info from storage
   static Future<void> loadUserInfoFromStorage() async {
     await _appProvider.loadUserInfoFromStorage();
+  }
+
+  /// Update user profile
+  static Future<bool> updateProfile(UpdateProfileRequest request, {String? imagePath}) async {
+    try {
+      log('Updating user profile', name: 'UserService');
+
+      final ApiResult result = await _userRepository.updateProfile(request, imagePath: imagePath);
+
+      switch (result) {
+        case Success(:final response):
+          if (response.statusCode == 200) {
+            log('Successfully updated user profile', name: 'UserService');
+            // Refresh user info after successful update
+            await fetchAndUpdateUserInfo();
+            return true;
+          } else {
+            log('Failed to update user profile: Invalid response', name: 'UserService');
+            return false;
+          }
+        case Failure(:final error):
+          log('Failed to update user profile: $error', name: 'UserService');
+          return false;
+      }
+    } catch (e) {
+      log('Error updating user profile: $e', name: 'UserService');
+      return false;
+    }
   }
 
   /// Clear all user data and tokens

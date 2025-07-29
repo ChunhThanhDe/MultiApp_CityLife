@@ -2,21 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 
-/// A reusable ListView widget that provides common functionality:
+/// A reusable GridView widget that provides common functionality:
 /// - Pull to refresh
 /// - Load more (infinite scroll)
 /// - Empty data state
 /// - Error state
 /// - Loading state
-/// - Support for both ListView and CustomScrollView (slivers)
+/// - Support for both GridView and CustomScrollView (slivers)
+/// - Configurable grid layout (crossAxisCount, aspectRatio, spacing)
 ///
 /// This widget is designed to be used across multiple screens in the app
 /// to maintain consistency and reduce code duplication.
-class AppListView<T> extends StatelessWidget {
+class AppGridView<T> extends StatelessWidget {
   /// List of items to display
   final List<T> items;
 
-  /// Builder function for each item in the list
+  /// Builder function for each item in the grid
   final Widget Function(BuildContext context, T item, int index) itemBuilder;
 
   /// Function called when user pulls to refresh
@@ -25,10 +26,10 @@ class AppListView<T> extends StatelessWidget {
   /// Function called when user scrolls near the bottom to load more items
   final Future<void> Function()? onLoadMore;
 
-  /// Whether the list is currently loading initial data
+  /// Whether the grid is currently loading initial data
   final bool isLoading;
 
-  /// Whether the list is currently loading more data
+  /// Whether the grid is currently loading more data
   final bool isLoadingMore;
 
   /// Whether there are more items to load
@@ -52,20 +53,26 @@ class AppListView<T> extends StatelessWidget {
   /// Custom load more widget
   final Widget? loadMoreWidget;
 
-  /// Scroll controller for the list
+  /// Scroll controller for the grid
   final ScrollController? scrollController;
 
   /// Physics for the scroll view
   final ScrollPhysics? physics;
 
-  /// Padding for the list
+  /// Padding for the grid
   final EdgeInsetsGeometry? padding;
 
-  /// Separator builder for items
-  final Widget Function(BuildContext context, int index)? separatorBuilder;
+  /// Number of columns in the grid
+  final int crossAxisCount;
 
-  /// Whether to show separators between items
-  final bool showSeparator;
+  /// Aspect ratio for grid items (width/height)
+  final double childAspectRatio;
+
+  /// Spacing between columns
+  final double crossAxisSpacing;
+
+  /// Spacing between rows
+  final double mainAxisSpacing;
 
   /// Threshold for triggering load more (distance from bottom)
   final double loadMoreThreshold;
@@ -79,16 +86,22 @@ class AppListView<T> extends StatelessWidget {
   /// Empty state icon
   final Widget? emptyIcon;
 
-  /// Whether to use CustomScrollView with slivers instead of ListView
+  /// Whether to use CustomScrollView with slivers instead of GridView
   final bool useCustomScrollView;
 
-  /// Additional slivers to add before the list items (only used when useCustomScrollView is true)
+  /// Additional slivers to add before the grid items (only used when useCustomScrollView is true)
   final List<Widget> headerSlivers;
 
-  /// Additional slivers to add after the list items (only used when useCustomScrollView is true)
+  /// Additional slivers to add after the grid items (only used when useCustomScrollView is true)
   final List<Widget> footerSlivers;
 
-  const AppListView({
+  /// Whether to shrink wrap the grid view
+  final bool shrinkWrap;
+
+  /// Whether to disable scrolling (useful when used inside another scrollable widget)
+  final bool disableScrolling;
+
+  const AppGridView({
     super.key,
     required this.items,
     required this.itemBuilder,
@@ -106,8 +119,10 @@ class AppListView<T> extends StatelessWidget {
     this.scrollController,
     this.physics,
     this.padding,
-    this.separatorBuilder,
-    this.showSeparator = false,
+    this.crossAxisCount = 2,
+    this.childAspectRatio = 1.0,
+    this.crossAxisSpacing = 16.0,
+    this.mainAxisSpacing = 16.0,
     this.loadMoreThreshold = 200.0,
     this.emptyTitle = 'No Data',
     this.emptySubtitle = 'There are no items to display',
@@ -115,6 +130,8 @@ class AppListView<T> extends StatelessWidget {
     this.useCustomScrollView = false,
     this.headerSlivers = const [],
     this.footerSlivers = const [],
+    this.shrinkWrap = false,
+    this.disableScrolling = false,
   });
 
   @override
@@ -134,11 +151,11 @@ class AppListView<T> extends StatelessWidget {
       return _buildEmptyState(context);
     }
 
-    // Show list with data
+    // Show grid with data
     if (useCustomScrollView) {
       return _buildCustomScrollView(context);
     } else {
-      return _buildListView(context);
+      return _buildGridView(context);
     }
   }
 
@@ -213,31 +230,29 @@ class AppListView<T> extends StatelessWidget {
   }
 
   Widget _buildEmptyState(BuildContext context) {
-    Widget emptyContent;
-
     if (emptyWidget != null) {
-      emptyContent = emptyWidget!;
-    } else {
-      emptyContent = SizedBox(
-        height: MediaQuery.of(context).size.height * 0.6,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              emptyIcon ?? Assets.icons.icInfo.svg(width: 64, height: 64, colorFilter: ColorFilter.mode(AppColors.stateGreyDefault500, BlendMode.srcIn)),
-              const SizedBox(height: 16),
-              Text(emptyTitle, style: AppTextStyles.typographyH7Medium, textAlign: TextAlign.center),
-              const SizedBox(height: 8),
-              Text(
-                emptySubtitle,
-                style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.stateGreyDefault500),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
-      );
+      return emptyWidget!;
     }
+
+    Widget emptyContent = SizedBox(
+      height: MediaQuery.of(context).size.height * 0.6,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            emptyIcon ?? Assets.icons.icInfo.svg(width: 64, height: 64, colorFilter: ColorFilter.mode(AppColors.stateGreyDefault500, BlendMode.srcIn)),
+            const SizedBox(height: 16),
+            Text(emptyTitle, style: AppTextStyles.typographyH7Medium, textAlign: TextAlign.center),
+            const SizedBox(height: 8),
+            Text(
+              emptySubtitle,
+              style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.stateGreyDefault500),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
 
     if (useCustomScrollView) {
       List<Widget> slivers = [];
@@ -263,33 +278,28 @@ class AppListView<T> extends StatelessWidget {
     }
   }
 
-  Widget _buildListView(BuildContext context) {
-    Widget listView;
-
-    if (showSeparator && separatorBuilder != null) {
-      listView = ListView.separated(
-        controller: scrollController,
-        physics: physics ?? const AlwaysScrollableScrollPhysics(),
-        padding: padding,
-        itemCount: _getItemCount(),
-        itemBuilder: _buildItem,
-        separatorBuilder: separatorBuilder!,
-      );
-    } else {
-      listView = ListView.builder(controller: scrollController, physics: physics ?? const AlwaysScrollableScrollPhysics(), padding: padding, itemCount: _getItemCount(), itemBuilder: _buildItem);
-    }
+  Widget _buildGridView(BuildContext context) {
+    Widget gridView = GridView.builder(
+      controller: scrollController,
+      physics: disableScrolling ? const NeverScrollableScrollPhysics() : (physics ?? const AlwaysScrollableScrollPhysics()),
+      padding: padding,
+      shrinkWrap: shrinkWrap,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: crossAxisCount, childAspectRatio: childAspectRatio, crossAxisSpacing: crossAxisSpacing, mainAxisSpacing: mainAxisSpacing),
+      itemCount: _getItemCount(),
+      itemBuilder: _buildItem,
+    );
 
     // Wrap with NotificationListener for load more functionality
-    if (onLoadMore != null) {
-      listView = NotificationListener<ScrollNotification>(onNotification: _handleScrollNotification, child: listView);
+    if (onLoadMore != null && !disableScrolling) {
+      gridView = NotificationListener<ScrollNotification>(onNotification: _handleScrollNotification, child: gridView);
     }
 
-    // Wrap with RefreshIndicator if onRefresh is provided
-    if (onRefresh != null) {
-      listView = RefreshIndicator(onRefresh: onRefresh!, child: listView);
+    // Wrap with RefreshIndicator if onRefresh is provided and scrolling is enabled
+    if (onRefresh != null && !disableScrolling) {
+      gridView = RefreshIndicator(onRefresh: onRefresh!, child: gridView);
     }
 
-    return listView;
+    return gridView;
   }
 
   Widget _buildCustomScrollView(BuildContext context) {
@@ -300,9 +310,9 @@ class AppListView<T> extends StatelessWidget {
 
     // Add padding if specified
     if (padding != null) {
-      slivers.add(SliverPadding(padding: padding!, sliver: _buildSliverList()));
+      slivers.add(SliverPadding(padding: padding!, sliver: _buildSliverGrid()));
     } else {
-      slivers.add(_buildSliverList());
+      slivers.add(_buildSliverGrid());
     }
 
     // Add load more indicator if needed
@@ -313,27 +323,32 @@ class AppListView<T> extends StatelessWidget {
     // Add footer slivers
     slivers.addAll(footerSlivers);
 
-    Widget customScrollView = CustomScrollView(controller: scrollController, physics: physics ?? const AlwaysScrollableScrollPhysics(), slivers: slivers);
+    Widget customScrollView = CustomScrollView(
+      controller: scrollController,
+      physics: disableScrolling ? const NeverScrollableScrollPhysics() : (physics ?? const AlwaysScrollableScrollPhysics()),
+      shrinkWrap: shrinkWrap,
+      slivers: slivers,
+    );
 
     // Wrap with NotificationListener for load more functionality
-    if (onLoadMore != null) {
+    if (onLoadMore != null && !disableScrolling) {
       customScrollView = NotificationListener<ScrollNotification>(onNotification: _handleScrollNotification, child: customScrollView);
     }
 
-    // Wrap with RefreshIndicator if onRefresh is provided
-    if (onRefresh != null) {
+    // Wrap with RefreshIndicator if onRefresh is provided and scrolling is enabled
+    if (onRefresh != null && !disableScrolling) {
       customScrollView = RefreshIndicator(onRefresh: onRefresh!, child: customScrollView);
     }
 
     return customScrollView;
   }
 
-  Widget _buildSliverList() {
-    if (showSeparator && separatorBuilder != null) {
-      return SliverList.separated(itemCount: items.length, itemBuilder: (context, index) => itemBuilder(context, items[index], index), separatorBuilder: separatorBuilder!);
-    } else {
-      return SliverList.builder(itemCount: items.length, itemBuilder: (context, index) => itemBuilder(context, items[index], index));
-    }
+  Widget _buildSliverGrid() {
+    return SliverGrid.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: crossAxisCount, childAspectRatio: childAspectRatio, crossAxisSpacing: crossAxisSpacing, mainAxisSpacing: mainAxisSpacing),
+      itemCount: items.length,
+      itemBuilder: (context, index) => itemBuilder(context, items[index], index),
+    );
   }
 
   int _getItemCount() {

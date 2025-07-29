@@ -7,7 +7,7 @@ import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/base/error_response.dart';
 import 'package:sixam_mart_user/base/network_exceptions.dart';
-import 'package:sixam_mart_user/domain/models/request/sign_up_request.dart';
+import 'package:sixam_mart_user/domain/models/request/authentication/sign_up_request.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/accept_tos.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_overlay.dart';

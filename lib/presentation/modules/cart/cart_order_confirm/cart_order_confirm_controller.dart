@@ -26,8 +26,6 @@ class CartOrderConfirmController extends BaseController {
 
   final step = 0.obs;
   final orderData = Rxn<Order>();
-  @override
-  final isLoading = false.obs;
   final error = ''.obs;
 
   Timer? _timer;
@@ -115,25 +113,6 @@ class CartOrderConfirmController extends BaseController {
         break;
       default:
         step.value = 0;
-    }
-  }
-
-  void _updateStepDataWithRealTime(Order order) {
-    final deliveryTime = _formatDeliveryTime(order);
-
-    // Update all steps with the real delivery time
-    for (int i = 0; i < stepsData.length; i++) {
-      stepsData[i] = OrderStepData(iconAsset: stepsData[i].iconAsset, title: stepsData[i].title, subtitle: deliveryTime);
-    }
-  }
-
-  String _formatDeliveryTime(Order order) {
-    if (order.minDeliveryTime != null && order.maxDeliveryTime != null) {
-      return "Arrives between ${order.minDeliveryTime}–${order.maxDeliveryTime} min";
-    } else if (order.store?.deliveryTime != null) {
-      return "Arrives in ${order.store!.deliveryTime}";
-    } else {
-      return "Arrives between 30–60 min";
     }
   }
 

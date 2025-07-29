@@ -2,11 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/domain/models/response/cart/get_cart_list_response.dart';
+import 'package:sixam_mart_user/domain/models/response/get_cart_list_response.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_list_view.dart';
 
 import 'view_cart_controller.dart';
+
+// Data model for organizing cart items by type
+class CartDisplayItem {
+  final GetCartListStore? store;
+  final GetCartListItem? item;
+  final CartDisplayType type;
+
+  CartDisplayItem({this.store, this.item, required this.type});
+}
+
+enum CartDisplayType { storeHeader, cartItem, cartSummary }
 
 class ViewCartScreen extends BaseScreen<ViewCartController> {
   const ViewCartScreen({super.key});
@@ -34,41 +46,103 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
   }
 
   @override
-  Widget buildScreen(BuildContext context) {
+  Widget? buildBottomNavigationBar(BuildContext context) {
     return Obx(() {
-      if (controller.shouldShowLoadingState) {
-        return const _LoadingCartState();
+      final displayItems = _organizeCartItems(controller.storesInCart);
+      if (displayItems.isEmpty) {
+        return SizedBox.shrink();
       }
-
-      if (controller.shouldShowEmptyState) {
-        return _EmptyCartState(onStartShopping: controller.navigateBack);
-      }
-
-      if (controller.shouldShowCartContent) {
-        return _CartContentView(controller: controller);
-      }
-
-      return const SizedBox.shrink();
+      return _CartSummarySection(controller: controller);
     });
   }
-}
-
-// Loading state widget
-class _LoadingCartState extends StatelessWidget {
-  const _LoadingCartState();
 
   @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _CartEmptyIllustration(),
-          SizedBox(height: 32),
-          _EmptyStateContent(title: "Add items to start a cart", subtitle: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", buttonText: "Start shopping"),
-        ],
-      ),
-    );
+  Widget buildScreen(BuildContext context) {
+    return Obx(() {
+      final displayItems = _organizeCartItems(controller.storesInCart);
+
+      return AppListView<CartDisplayItem>(
+        items: displayItems,
+        itemBuilder: _buildCartItem,
+        onRefresh: controller.refreshCart,
+        onLoadMore: controller.loadMoreCart,
+        isLoading: controller.isCartLoading.value,
+        isLoadingMore: controller.isLoadingMore.value,
+        hasMore: controller.hasMore,
+        errorMessage: controller.error.value.isNotEmpty ? controller.error.value : null,
+        onRetry: controller.refreshCart,
+        emptyWidget: _EmptyCartState(onStartShopping: controller.navigateBack),
+        emptyTitle: 'Your cart is empty',
+        emptySubtitle: 'Add some items to your cart to get started.',
+        physics: const AlwaysScrollableScrollPhysics(),
+        useCustomScrollView: true,
+      );
+    });
+  }
+
+  List<CartDisplayItem> _organizeCartItems(List<GetCartListStore> stores) {
+    List<CartDisplayItem> displayItems = [];
+
+    for (final store in stores) {
+      // Add store header
+      displayItems.add(CartDisplayItem(store: store, type: CartDisplayType.storeHeader));
+
+      // Add store items
+      if (store.items != null) {
+        for (final item in store.items!) {
+          displayItems.add(CartDisplayItem(item: item, store: store, type: CartDisplayType.cartItem));
+        }
+      }
+    }
+
+    return displayItems;
+  }
+
+  Widget _buildCartItem(BuildContext context, CartDisplayItem displayItem, int index) {
+    switch (displayItem.type) {
+      case CartDisplayType.storeHeader:
+        return _StoreHeader(store: displayItem.store!, onClearAll: () => controller.clearStoreItems(displayItem.store!.storeId ?? 0));
+      case CartDisplayType.cartItem:
+        final displayItems = _organizeCartItems(controller.storesInCart);
+        final isLastItemInStore = _isLastItemInStore(displayItems, index);
+        final isLastStore = _isLastStore(displayItems, index);
+
+        return AnimatedSize(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          child: Column(
+            children: [
+              _CartProductItem(item: displayItem.item!, controller: controller),
+              if (isLastItemInStore && !isLastStore) const Divider(height: 0, color: Color(0xFFE8EBEE), indent: 24, endIndent: 24),
+            ],
+          ),
+        );
+      case CartDisplayType.cartSummary:
+        return _CartSummarySection(controller: controller);
+    }
+  }
+
+  bool _isLastItemInStore(List<CartDisplayItem> displayItems, int currentIndex) {
+    if (currentIndex >= displayItems.length - 1) return true;
+
+    final currentItem = displayItems[currentIndex];
+    final nextItem = displayItems[currentIndex + 1];
+
+    // If current item is a cart item and next item is a store header, then current is last in store
+    return currentItem.type == CartDisplayType.cartItem && nextItem.type == CartDisplayType.storeHeader;
+  }
+
+  bool _isLastStore(List<CartDisplayItem> displayItems, int currentIndex) {
+    final currentItem = displayItems[currentIndex];
+    if (currentItem.store == null) return true;
+
+    // Check if this is the last store by looking for any store headers after this item
+    for (int i = currentIndex + 1; i < displayItems.length; i++) {
+      if (displayItems[i].type == CartDisplayType.storeHeader) {
+        return false;
+      }
+    }
+    return true;
   }
 }
 
@@ -80,88 +154,15 @@ class _EmptyCartState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () => Get.find<ViewCartController>().refreshCart(),
-      child: ListView(
-        physics: const AlwaysScrollableScrollPhysics(),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: MediaQuery.of(context).size.height * 0.15),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const _CartEmptyIllustration(),
-              const SizedBox(height: 32),
-              _EmptyStateContent(title: "Your cart is empty", subtitle: "Add some items to your cart to get started.", buttonText: "Start shopping", onPressed: onStartShopping),
-            ],
-          ),
+          const _CartEmptyIllustration(),
+          const SizedBox(height: 32),
+          _EmptyStateContent(title: "Your cart is empty", subtitle: "Add some items to your cart to get started.", buttonText: "Start shopping", onPressed: onStartShopping),
         ],
       ),
-    );
-  }
-}
-
-// Cart content view with items
-class _CartContentView extends StatelessWidget {
-  final ViewCartController controller;
-
-  const _CartContentView({required this.controller});
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () => RefreshIndicator(
-        onRefresh: controller.refreshCart,
-        child: CustomScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          slivers: [
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final store = controller.storesInCart[index];
-                    return Column(
-                      children: [
-                        _StoreSection(store: store, controller: controller),
-                        if (index < controller.storesInCart.length - 1)
-                          const Divider(height: 0, color: Color(0xFFE8EBEE), indent: 24, endIndent: 24),
-                      ],
-                    );
-                  },
-                  childCount: controller.storesInCart.length,
-                ),
-              ),
-            ),
-            SliverFillRemaining(
-              hasScrollBody: false,
-              child: Column(
-                children: [
-                  const Spacer(),
-                  _CartSummarySection(controller: controller),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// Store section with header and items
-class _StoreSection extends StatelessWidget {
-  final GetCartListStore store;
-  final ViewCartController controller;
-
-  const _StoreSection({required this.store, required this.controller});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _StoreHeader(store: store, onClearAll: () => controller.clearStoreItems(store.storeId ?? 0)),
-        ...(store.items?.map((item) => _CartProductItem(item: item, controller: controller)) ?? []),
-      ],
     );
   }
 }
@@ -217,7 +218,7 @@ class _StoreHeader extends StatelessWidget {
   }
 }
 
-// Cart product item widget
+// Cart product item widget with animation
 class _CartProductItem extends StatelessWidget {
   final GetCartListItem item;
   final ViewCartController controller;
@@ -226,7 +227,9 @@ class _CartProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeInOut,
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       color: Colors.white,
       child: Row(
@@ -304,7 +307,7 @@ class _ProductDetails extends StatelessWidget {
   }
 }
 
-// Quantity controls widget
+// Quantity controls widget with animation and loading state
 class _QuantityControls extends StatelessWidget {
   final GetCartListItem item;
   final ViewCartController controller;
@@ -313,33 +316,87 @@ class _QuantityControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 150),
       height: 28,
       decoration: BoxDecoration(color: const Color(0xFFF7F8F9), borderRadius: BorderRadius.circular(32)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          IconButton(
-            icon: const Icon(Icons.remove, size: 18, color: Color(0xFF161A1D)),
-            onPressed: () => controller.decrementItemQuantity(item),
-            splashRadius: 20,
+          _QuantityButton(icon: Icons.remove, onPressed: () => controller.decrementItemQuantity(item), enabled: true),
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 200),
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              return ScaleTransition(scale: animation, child: child);
+            },
+            child: Text(
+              '${item.itemQuantity ?? 0}',
+              key: ValueKey(item.itemQuantity),
+              style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xFF161A1D)),
+            ),
           ),
-          Text(
-            '${item.itemQuantity ?? 0}',
-            style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xFF161A1D)),
-          ),
-          IconButton(
-            icon: const Icon(Icons.add, size: 18, color: Color(0xFF161A1D)),
-            onPressed: () => controller.incrementItemQuantity(item),
-            splashRadius: 20,
-          ),
+          _QuantityButton(icon: Icons.add, onPressed: () => controller.incrementItemQuantity(item), enabled: true),
         ],
       ),
     );
   }
 }
 
-// Action buttons (favorite and delete)
+// Individual quantity button with animation
+class _QuantityButton extends StatefulWidget {
+  final IconData icon;
+  final VoidCallback? onPressed;
+  final bool enabled;
+
+  const _QuantityButton({required this.icon, required this.onPressed, this.enabled = true});
+
+  @override
+  State<_QuantityButton> createState() => _QuantityButtonState();
+}
+
+class _QuantityButtonState extends State<_QuantityButton> with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(duration: const Duration(milliseconds: 100), vsync: this);
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.9).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _scaleAnimation,
+      builder: (context, child) {
+        return Transform.scale(
+          scale: _scaleAnimation.value,
+          child: IconButton(
+            icon: Icon(widget.icon, size: 18, color: widget.enabled ? const Color(0xFF161A1D) : const Color(0xFFBBBBBB)),
+            onPressed: widget.enabled
+                ? () {
+                    _animationController.forward().then((_) {
+                      _animationController.reverse();
+                    });
+                    widget.onPressed?.call();
+                  }
+                : null,
+            splashRadius: 20,
+          ),
+        );
+      },
+    );
+  }
+}
+
+// Action buttons (favorite and delete) with animation
 class _ActionButtons extends StatelessWidget {
   final GetCartListItem item;
   final ViewCartController controller;
@@ -350,7 +407,7 @@ class _ActionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        _ActionButton(
+        _AnimatedActionButton(
           icon: Icons.favorite_border,
           color: Color(0xFF5856D7),
           onPressed: () {
@@ -358,7 +415,7 @@ class _ActionButtons extends StatelessWidget {
           },
         ),
         const SizedBox(width: 8),
-        _ActionButton(
+        _AnimatedActionButton(
           icon: Icons.delete_outline,
           color: Color(0xFFE53E3E),
           onPressed: () {
@@ -372,28 +429,62 @@ class _ActionButtons extends StatelessWidget {
   }
 }
 
-// Individual action button
-class _ActionButton extends StatelessWidget {
+// Animated action button for delete with visual feedback
+class _AnimatedActionButton extends StatefulWidget {
   final IconData icon;
   final Color color;
   final VoidCallback? onPressed;
 
-  const _ActionButton({required this.icon, required this.color, this.onPressed});
+  const _AnimatedActionButton({required this.icon, required this.color, this.onPressed});
+
+  @override
+  State<_AnimatedActionButton> createState() => _AnimatedActionButtonState();
+}
+
+class _AnimatedActionButtonState extends State<_AnimatedActionButton> with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(duration: const Duration(milliseconds: 150), vsync: this);
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.8).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        width: 28,
-        height: 28,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(32),
-          border: Border.all(color: const Color(0xFFE8EBEE)),
-        ),
-        child: Icon(icon, color: color, size: 20),
-      ),
+    return AnimatedBuilder(
+      animation: _scaleAnimation,
+      builder: (context, child) {
+        return Transform.scale(
+          scale: _scaleAnimation.value,
+          child: GestureDetector(
+            onTap: () {
+              _animationController.forward().then((_) {
+                _animationController.reverse();
+              });
+              widget.onPressed?.call();
+            },
+            child: Container(
+              width: 28,
+              height: 28,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(32),
+                border: Border.all(color: const Color(0xFFE8EBEE)),
+              ),
+              child: Icon(widget.icon, color: widget.color, size: 20),
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -413,6 +504,7 @@ class _CartSummarySection extends StatelessWidget {
         color: Colors.white,
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             children: [

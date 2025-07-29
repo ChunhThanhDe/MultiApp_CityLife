@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/response/wishlist_response.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/components/favorites_tab_bar.dart';
+import 'package:sixam_mart_user/presentation/modules/favorites/favorites_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_grid_view.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
-import 'favorites_controller.dart';
-
+/// Example implementation of FavoritesScreen using AppGridView
+/// This demonstrates how to use the new AppGridView component
 class FavoritesScreen extends BaseScreen<FavoritesController> {
   const FavoritesScreen({super.key});
 
@@ -23,17 +26,10 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
         _buildTabBar(),
         Expanded(
           child: Obx(() {
-            if (controller.isLoadingWishlist.value) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
-            // Lấy data theo tab
             if (controller.currentTab.value == FavoritesTab.store) {
-              // Hiển thị store
-              return _buildStoreGrid(controller.storeList);
+              return _buildStoreGrid();
             } else {
-              // Hiển thị items
-              return _buildItemGrid(controller.wishlistItems);
+              return _buildItemGrid();
             }
           }),
         ),
@@ -41,41 +37,47 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
     );
   }
 
-  Widget _buildStoreGrid(List<WishlistStore> stores) {
-    if (stores.isEmpty) {
-      return _buildEmptyState(title: "No favorite stores", subtitle: "You haven't added any stores to your favorites yet.", icon: Icons.store_outlined);
-    }
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: GridView.builder(
-        padding: const EdgeInsets.only(top: 12, bottom: 12),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 183 / 220, crossAxisSpacing: 16, mainAxisSpacing: 16),
-        itemCount: stores.length,
-        itemBuilder: (_, i) => _buildStoreCard(stores[i]),
-      ),
+  Widget _buildStoreGrid() {
+    return AppGridView<WishlistStore>(
+      items: controller.storeList,
+      itemBuilder: (context, store, index) => _buildStoreCard(store),
+      isLoading: controller.isLoadingWishlist.value,
+      onRefresh: () => controller.fetchWishlistData(),
+      crossAxisCount: 2,
+      childAspectRatio: 183 / 220,
+      crossAxisSpacing: 16,
+      mainAxisSpacing: 16,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      emptyTitle: "No favorite stores",
+      emptySubtitle: "You haven't added any stores to your favorites yet.",
+      emptyIcon: Icon(Icons.store_outlined, size: 64, color: AppColors.stateGreyDefault500),
     );
   }
 
-  Widget _buildItemGrid(List<WishlistItem> items) {
-    if (items.isEmpty) {
-      return _buildEmptyState(title: "No favorite items", subtitle: "You haven't added any items to your favorites yet.", icon: Icons.favorite_outline);
-    }
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: GridView.builder(
-        padding: const EdgeInsets.only(top: 12, bottom: 12),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 183 / 233, crossAxisSpacing: 16, mainAxisSpacing: 16),
-        itemCount: items.length,
-        itemBuilder: (_, i) => Obx(() => _buildItemCard(items[i])),
-      ),
+  Widget _buildItemGrid() {
+    return AppGridView<WishlistItem>(
+      items: controller.wishlistItems,
+      itemBuilder: (context, item, index) => Obx(() => _buildItemCard(item)),
+      isLoading: controller.isLoadingWishlist.value,
+      onRefresh: () => controller.fetchWishlistData(),
+      crossAxisCount: 2,
+      childAspectRatio: 183 / 233,
+      crossAxisSpacing: 16,
+      mainAxisSpacing: 16,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      emptyTitle: "No favorite items",
+      emptySubtitle: "You haven't added any items to your favorites yet.",
+      emptyIcon: Icon(Icons.favorite_outline, size: 64, color: AppColors.stateGreyDefault500),
     );
   }
 
   Widget _buildStoreCard(WishlistStore store) {
     return Container(
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [BoxShadow(color: AppColors.shadowSm5, blurRadius: 4, offset: const Offset(0, 2))],
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,15 +87,15 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
             child: Stack(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
                   child: AppImage.network(
-                    store.coverPhotoFullUrl ?? store.logoFullUrl,
+                    store.coverPhotoFullUrl ?? store.logoFullUrl ?? '',
                     fit: BoxFit.cover,
                     width: double.infinity,
                     height: double.infinity,
                     errorWidget: Container(
-                      color: const Color(0xFFE8EBEE),
-                      child: const Icon(Icons.store, size: 40, color: Color(0xFF4A5763)),
+                      color: AppColors.stateGreyLowest50,
+                      child: Icon(Icons.store, size: 40, color: AppColors.stateGreyDefault500),
                     ),
                   ),
                 ),
@@ -107,7 +109,7 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
                       color: Colors.white,
                       border: Border.all(color: Colors.white, width: 2),
                       shape: BoxShape.circle,
-                      boxShadow: [BoxShadow(color: Color(0x14000000), blurRadius: 6, offset: Offset(0, 2))],
+                      boxShadow: [BoxShadow(color: AppColors.shadowSm5, blurRadius: 6, offset: const Offset(0, 2))],
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(2),
@@ -118,10 +120,10 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
                             width: 44,
                             height: 44,
                             child: AppImage.network(
-                              store.logoFullUrl,
+                              store.logoFullUrl ?? '',
                               errorWidget: Container(
-                                color: const Color(0xFFE8EBEE),
-                                child: const Icon(Icons.store, size: 20, color: Color(0xFF4A5763)),
+                                color: AppColors.stateGreyLowest50,
+                                child: Icon(Icons.store, size: 20, color: AppColors.stateGreyDefault500),
                               ),
                             ),
                           ),
@@ -141,8 +143,8 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
               children: [
                 Expanded(
                   child: Text(
-                    store.name,
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
+                    store.name ?? 'Unknown Store',
+                    style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -150,14 +152,14 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
                 const SizedBox(width: 6),
                 Obx(
                   () => GestureDetector(
-                    onTap: () => controller.toggleFavoriteStore(store.name),
+                    onTap: () => controller.toggleFavoriteStore(store.name ?? ''),
                     child: AnimatedSwitcher(
                       duration: const Duration(milliseconds: 250),
                       transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
                       child: Icon(
-                        !controller.isStoreFavorited(store.name) ? Icons.favorite : Icons.favorite_border,
-                        key: ValueKey(controller.isStoreFavorited(store.name)),
-                        color: Color(0xFF5856D7),
+                        !controller.isStoreFavorited(store.name ?? '') ? Icons.favorite : Icons.favorite_border,
+                        key: ValueKey(controller.isStoreFavorited(store.name ?? '')),
+                        color: AppColors.stateBrandDefault500,
                         size: 24,
                       ),
                     ),
@@ -174,26 +176,23 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
                 const SizedBox(height: 2),
                 Text(
                   "\$0 Delivery fee",
-                  style: TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
+                  style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 2),
                 Row(
                   children: [
-                    Text(
-                      "${store.avgRating ?? 0}★",
-                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF4A5763)),
-                    ),
+                    Text("${store.avgRating ?? 0}★", style: AppTextStyles.typographyH11Medium.copyWith(color: AppColors.textGreyDefault500)),
                     const SizedBox(width: 2),
-                    Text("(${store.ratingCount ?? 0})", style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                    Text("(${store.ratingCount ?? 0})", style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
                     const SizedBox(width: 2),
-                    const Text("•", style: TextStyle(fontSize: 12, color: Color(0xFF5856D7))),
+                    Text("•", style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.stateBrandDefault500)),
                     const SizedBox(width: 2),
                     Flexible(
                       child: Text(
                         store.deliveryTime ?? "30-60 min",
-                        style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
+                        style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -210,25 +209,29 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
   }
 
   Widget _buildItemCard(WishlistItem item) {
-    return SizedBox(
-      width: 183,
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [BoxShadow(color: AppColors.shadowSm5, blurRadius: 4, offset: const Offset(0, 2))],
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
                 child: AppImage.network(
-                  item.imageFullUrl,
-                  width: 150,
+                  item.imageFullUrl ?? '',
+                  width: double.infinity,
                   height: 150,
                   fit: BoxFit.cover,
                   errorWidget: Container(
-                    width: 150,
+                    width: double.infinity,
                     height: 150,
-                    color: const Color(0xFFE8EBEE),
-                    child: const Icon(Icons.image, size: 40, color: Color(0xFF4A5763)),
+                    color: AppColors.stateGreyLowest50,
+                    child: Icon(Icons.image, size: 40, color: AppColors.stateGreyDefault500),
                   ),
                 ),
               ),
@@ -236,23 +239,23 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
                 right: 8,
                 bottom: 8,
                 child: GestureDetector(
-                  onTap: () => controller.toggleFavoriteItem(item.name),
+                  onTap: () => controller.toggleFavoriteItem(item.name ?? ''),
                   child: Container(
                     width: 36,
                     height: 36,
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      border: Border.all(color: Color(0xFFE8EBEE), width: 1),
-                      boxShadow: [BoxShadow(color: Color(0x19101214), blurRadius: 8, offset: Offset(0, 4))],
+                      border: Border.all(color: AppColors.stateGreyLowest50, width: 1),
+                      boxShadow: [BoxShadow(color: AppColors.shadowMd10, blurRadius: 8, offset: const Offset(0, 4))],
                       borderRadius: BorderRadius.circular(32),
                     ),
                     child: AnimatedSwitcher(
                       duration: const Duration(milliseconds: 250),
                       transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
                       child: Icon(
-                        !controller.isItemFavorited(item.name) ? Icons.favorite : Icons.favorite_border,
-                        key: ValueKey(controller.isItemFavorited(item.name)),
-                        color: Color(0xFF5856D7),
+                        !controller.isItemFavorited(item.name ?? '') ? Icons.favorite : Icons.favorite_border,
+                        key: ValueKey(controller.isItemFavorited(item.name ?? '')),
+                        color: AppColors.stateBrandDefault500,
                         size: 24,
                       ),
                     ),
@@ -261,73 +264,25 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
               ),
             ],
           ),
-          const SizedBox(height: 8),
-          Text(
-            item.name,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          const SizedBox(height: 2),
-          Text(
-            '\$${item.price.toStringAsFixed(2)}',
-            style: TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildEmptyState({required String title, required String subtitle, required IconData icon}) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                width: 221,
-                height: 222,
-                decoration: BoxDecoration(color: Color(0xFFE8EBEE), shape: BoxShape.circle),
-              ),
-              Icon(icon, size: 80, color: Color(0xFF4A5763)),
-            ],
-          ),
-          SizedBox(height: 32),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            padding: const EdgeInsets.all(8),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
+                  item.name ?? 'Unknown Item',
+                  style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 2),
                 Text(
-                  subtitle,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, color: Color(0xFF4A5763), fontWeight: FontWeight.w400),
+                  '\$${(item.price ?? 0).toStringAsFixed(2)}',
+                  style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
-            ),
-          ),
-          SizedBox(height: 24),
-          ElevatedButton(
-            onPressed: () {
-              Get.back(); // Go back to previous screen
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFF5856D7),
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-            ),
-            child: Text(
-              "Start shopping",
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16),
             ),
           ),
         ],

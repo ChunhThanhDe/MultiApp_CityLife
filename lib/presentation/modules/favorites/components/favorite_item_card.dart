@@ -13,7 +13,9 @@ class FavoriteItemCard extends StatelessWidget {
   const FavoriteItemCard({super.key, required this.item, this.isFavorited = true, this.onFavoriteTap});
 
   String _buildPriceText() {
-    return '\$${item.price.toStringAsFixed(2)}';
+    final price = item.price;
+    if (price == null) return '\$0.00';
+    return '\$${price.toStringAsFixed(2)}';
   }
 
   @override
@@ -30,7 +32,7 @@ class FavoriteItemCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(6),
                 child: AppImage.network(
-                  item.imageFullUrl,
+                  item.imageFullUrl ?? '',
                   width: 150,
                   height: 150,
                   fit: BoxFit.cover,
@@ -50,7 +52,10 @@ class FavoriteItemCard extends StatelessWidget {
                       onFavoriteTap ??
                       () {
                         // Remove from wishlist
-                        controller.removeFromWishlist(WishlistItemType.item, item.id);
+                        final itemId = item.id;
+                        if (itemId != null) {
+                          controller.removeFromWishlist(WishlistItemType.item, itemId);
+                        }
                       },
                   child: Container(
                     width: 36,
@@ -73,7 +78,7 @@ class FavoriteItemCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            item.name,
+            item.name ?? 'Unknown Item',
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

@@ -8,6 +8,7 @@ import 'package:sixam_mart_user/presentation/modules/cart/components/cart_in_pro
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_list_view.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
 import 'cart_order_controller.dart';
 
@@ -32,14 +33,17 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
   int getOrderProgressStep(OrderStatus? status) {
     switch (status) {
       case OrderStatus.pending:
+      case OrderStatus.accepted:
+        return 1; // Step 1 (0-based index 0 + 1 for display)
       case OrderStatus.confirmed:
-        return 1;
       case OrderStatus.preparing:
-        return 2;
+        return 2; // Step 2 (0-based index 1 + 1 for display)
+      case OrderStatus.processing:
+      case OrderStatus.handover:
       case OrderStatus.picked_up:
-        return 3;
+        return 3; // Step 3 (0-based index 2 + 1 for display)
       case OrderStatus.delivered:
-        return 4;
+        return 4; // Step 4 (0-based index 3 + 1 for display)
       default:
         return 1;
     }
@@ -53,6 +57,17 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
     } else {
       return DateFormat('MMM d, yyyy h:mm a').format(dateTime);
     }
+  }
+
+  void _navigateToOrderTracking(Order order) {
+    // Navigate to order tracking screen with order details
+    Get.toNamed(
+      AppRoutes.cartConfirm,
+      arguments: {
+        'orderId': order.id,
+        'contactNumber': order.deliveryAddress?.contactPersonNumber,
+      },
+    );
   }
 
   List<OrderDisplayItem> _organizeOrders(List<Order> orders) {
@@ -88,6 +103,7 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
             price: '\$${order.orderAmount?.toStringAsFixed(2) ?? '-'}',
             progressStep: getOrderProgressStep(order.orderStatus),
             totalStep: 4,
+            onTap: () => _navigateToOrderTracking(order),
           ),
           const SizedBox(height: 16),
           const Divider(height: 1),
@@ -114,6 +130,7 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
                       brandName: order.store?.name ?? '-',
                       subtitle: ' ${order.detailsCount ?? 0} items',
                       price: '\$${order.orderAmount?.toStringAsFixed(2) ?? '-'}',
+                      onTap: () => _navigateToOrderTracking(order),
                     ),
                   )
                   .toList(),
