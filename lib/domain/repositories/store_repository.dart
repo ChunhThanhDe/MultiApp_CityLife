@@ -9,7 +9,7 @@ class StoreApiPath {
   static const String storeReviews = '/api/v1/stores/StoreReview';
 }
 
-enum StoreType { food, grocery, general, reviews }
+enum StoreType { food, grocery }
 
 class StoreRepository extends BaseRepository {
   StoreRepository() : super(baseUrl: AppStrings.baseUrl);
@@ -33,47 +33,13 @@ class StoreRepository extends BaseRepository {
 
     switch (storeType) {
       case StoreType.food:
-        // Sử dụng storeId làm path param
         apiPath = '${StoreApiPath.storeFood}$storeId';
-
-        // Nếu API food có param limit thì giữ lại, không có thì bỏ đi
-        params.addAll({
-          'popular_limit': popularLimit,
-          'category_item_limit': categoryItemLimit,
-          'category_item_offset': categoryItemOffset,
-        });
+        params.addAll({'popular_limit': popularLimit, 'category_item_limit': categoryItemLimit, 'category_item_offset': categoryItemOffset});
         break;
 
       case StoreType.grocery:
         apiPath = StoreApiPath.storeGrocery;
-        params.addAll({
-          'store_id': storeId,
-          'category_limit': categoryLimit,
-          'category_offset': categoryOffset,
-          'category_item_limit': categoryItemLimit,
-          'category_item_offset': categoryItemOffset,
-        });
-        break;
-
-      case StoreType.general:
-        apiPath = StoreApiPath.storeGeneral;
-        params.addAll({
-          'store_id': storeId,
-          'menu_limit': menuLimit,
-          'menu_offset': menuOffset,
-        });
-        if (menuCategoryId != null) {
-          params['menu_category_id'] = menuCategoryId;
-        }
-        break;
-
-      case StoreType.reviews:
-        apiPath = StoreApiPath.storeReviews;
-        params.addAll({
-          'store_id': storeId,
-          'reviews_limit': reviewsLimit,
-          'reviews_offset': reviewsOffset,
-        });
+        params.addAll({'store_id': storeId, 'category_limit': categoryLimit, 'category_offset': categoryOffset, 'category_item_limit': categoryItemLimit, 'category_item_offset': categoryItemOffset});
         break;
     }
 

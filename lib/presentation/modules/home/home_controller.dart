@@ -6,6 +6,7 @@ import 'package:sixam_mart_user/base/network_exceptions.dart';
 import 'package:sixam_mart_user/domain/enums/service_type.dart';
 import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart';
 import 'package:sixam_mart_user/domain/repositories/service_repository.dart';
+import 'package:sixam_mart_user/domain/repositories/store_repository.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
@@ -109,7 +110,7 @@ class HomeController extends BaseController {
           isVerified: store.rating > 4.0,
           time: store.deliveryTime,
           onTap: () {
-            Get.toNamed(AppRoutes.store);
+            Get.toNamed(AppRoutes.store, arguments: {'storeId': store.id, 'storeType': StoreType.food});
           },
         ),
       ),
@@ -127,7 +128,7 @@ class HomeController extends BaseController {
           isVerified: store.rating > 4.0,
           time: store.deliveryTime,
           onTap: () {
-            Get.toNamed(AppRoutes.store);
+            Get.toNamed(AppRoutes.store, arguments: {'storeId': store.id, 'storeType': StoreType.grocery});
           },
         ),
       ),
@@ -197,7 +198,7 @@ class HomeController extends BaseController {
           isVerified: bannerType == BannerType.bannerDiscount ? item.rating > 4.0 : null,
           time: bannerType == BannerType.bannerDiscount ? item.deliveryTime : null,
           onTap: () {
-            Get.toNamed(AppRoutes.store);
+            Get.toNamed(AppRoutes.store, arguments: {'storeId': item.id, 'storeType': StoreType.food});
           },
         );
       } else if (item is Product) {
@@ -205,7 +206,7 @@ class HomeController extends BaseController {
           title: bannerType == BannerType.bannerSingleImage ? '' : (item.name?.isNotEmpty == true ? item.name! : 'Product'),
           imageUrl: item.image,
           onTap: () {
-            // Navigate to product detail
+            Get.toNamed(AppRoutes.storeProductDetail, arguments: {'productId': item.id});
           },
         );
       }

@@ -63,8 +63,6 @@ import 'package:sixam_mart_user/presentation/modules/store/store_main/store_bind
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_product_detail/store_product_detail_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_product_detail/store_product_detail_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/store/store_products/store_products_binding.dart';
-import 'package:sixam_mart_user/presentation/modules/store/store_products/store_products_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/wallet/add_fund/add_fund_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/wallet/add_fund/add_fund_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/wallet/view_receipt/view_receipt_binding.dart';
@@ -118,12 +116,15 @@ class AppPages {
     GetPage(name: AppRoutes.trackingDelivery, page: () => const TrackingDeliveryScreen(), binding: TrackingDeliveryBinding()),
     GetPage(name: AppRoutes.trackDelivery, page: () => const TrackDeliveryScreen(), binding: TrackDeliveryBinding()),
     GetPage(name: AppRoutes.welcome, page: () => const WelcomeScreen(), binding: WelcomeBinding()),
-    GetPage(name: AppRoutes.store, page: () => const StoreScreen(), binding: StoreBinding()),
     GetPage(name: AppRoutes.cart, page: () => const ViewCartScreen(), binding: ViewCartBinding()),
     GetPage(name: AppRoutes.cartOrder, page: () => const CartOrderScreen(), binding: CartOrderBinding()),
     GetPage(name: AppRoutes.cartCheckout, page: () => const CartCheckoutScreen(), binding: CartCheckoutBinding()),
     GetPage(name: AppRoutes.cartConfirm, page: () => const CartOrderConfirmScreen(), binding: CartOrderConfirmBinding()),
-    GetPage(name: AppRoutes.storeProducts, page: () => const StoreProductsScreen(), binding: StoreProductsBinding()),
+    GetPage(
+      name: AppRoutes.store,
+      page: () => StoreScreen(storeId: Get.arguments['storeId'], storeType: Get.arguments['storeType']),
+      binding: StoreBinding(),
+    ),
     GetPage(
       name: AppRoutes.storeProductDetail,
       page: () => StoreProductDetailScreen(productId: Get.arguments['productId']),
