@@ -232,8 +232,8 @@ class CartService extends GetxService {
       }
     }
 
-    if (product.choiceOptions != null && product.choiceOptions!.isNotEmpty) {
-      for (final choice in product.choiceOptions!) {
+    if (product.choiceOptions.isNotEmpty) {
+      for (final choice in product.choiceOptions) {
         final selected = selectedOptions[choice.name];
         if (selected != null) {
           variations.add(CartVariation(name: choice.name, values: {'label': selected}));

@@ -72,8 +72,6 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
         errorMessage: controller.error.value.isNotEmpty ? controller.error.value : null,
         onRetry: controller.refreshCart,
         emptyWidget: _EmptyCartState(onStartShopping: controller.navigateBack),
-        emptyTitle: 'Your cart is empty',
-        emptySubtitle: 'Add some items to your cart to get started.',
         physics: const AlwaysScrollableScrollPhysics(),
         useCustomScrollView: true,
       );

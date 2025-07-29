@@ -57,7 +57,7 @@ class ServiceScreen extends BaseScreen<ServiceController> {
           final section = sections[index];
 
           // Add section widget
-          slivers.add(UnifiedBannerWidget(sectionTitle: section.title, items: section.items, bannerType: section.bannerType, showArrowIcon: section.showArrowIcon));
+          slivers.add(UnifiedBannerWidget(section: section));
 
           // Add spacing and divider after each section (except last)
           if (index < sections.length - 1) {

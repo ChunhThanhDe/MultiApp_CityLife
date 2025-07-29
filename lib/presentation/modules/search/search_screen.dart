@@ -17,8 +17,7 @@ class SearchScreen extends BaseScreen<SearchController> {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
-      leadingWidth: 0,
-      leading: SizedBox.shrink(),
+      leadingWidth: 32,
       title: Hero(
         tag: 'search_bar',
         flightShuttleBuilder: (BuildContext flightContext, Animation<double> animation, HeroFlightDirection flightDirection, BuildContext fromHeroContext, BuildContext toHeroContext) {
