@@ -35,4 +35,5 @@ class AppRoutes {
   static const String cartOrder = '/cart/order';
   static const String cartCheckout = '/cart/checkout';
   static const String cartConfirm = '/cart/confirm';
+  static const String laundryMain = '/laundry_main';
 }

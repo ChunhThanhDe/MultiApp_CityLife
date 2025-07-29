@@ -45,6 +45,8 @@ import 'package:sixam_mart_user/presentation/modules/delivery/tracking_delivery/
 import 'package:sixam_mart_user/presentation/modules/delivery/tracking_delivery/tracking_delivery_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorities_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/laundry/laundry_main/laundry_main_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/laundry/laundry_main/laundry_main_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/onboarding/splash/splash_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/onboarding/splash/splash_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/onboarding/welcome/welcome_binding.dart';
@@ -127,5 +129,6 @@ class AppPages {
       page: () => StoreProductDetailScreen(productId: Get.arguments['productId']),
       binding: StoreProductDetailBinding(),
     ),
+    GetPage(name: AppRoutes.laundryMain, page: () => const LaundryMainScreen(), binding: LaundryMainBinding()),
   ];
 }
