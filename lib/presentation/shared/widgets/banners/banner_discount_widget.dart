@@ -6,7 +6,7 @@ import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/presentation/shared/widgets/banners/delivery_info_widget.dart';
 
 class BannerDiscountWidget extends StatelessWidget {
-  final StoreBanner item;
+  final BannerEntity item;
   final int index;
   final int totalItems;
   final VoidCallback? onTap;
@@ -98,7 +98,7 @@ class BannerDiscountWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [if (_hasValidName()) _buildName(), if (_hasValidRating() && item.rating! > 4.0) _buildVerifiedBadge()],
+      children: [if (_hasValidName()) _buildName(), if (_hasValidRating()) _buildVerifiedBadge()],
     );
   }
 
@@ -125,8 +125,8 @@ class BannerDiscountWidget extends StatelessWidget {
     return DeliveryInfoWidget(item: item);
   }
 
-  bool _hasValidDeliveryFee() => item.deliveryFee != null && item.deliveryFee! > 0;
-  bool _hasValidRating() => item.rating != null && item.rating! > 0;
+  bool _hasValidDeliveryFee() => item.deliveryFee != null;
+  bool _hasValidRating() => item.rating != null;
   bool _hasValidLogo() => item.logo?.trim().isNotEmpty == true;
   bool _hasValidName() => item.name?.trim().isNotEmpty == true;
   bool _hasValidDeliveryTime() => item.deliveryTime?.trim().isNotEmpty == true;

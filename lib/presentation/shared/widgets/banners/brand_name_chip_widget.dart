@@ -4,12 +4,9 @@ import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart'
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class BrandNameChipWidget extends StatelessWidget {
-  final StoreBanner item;
+  final BannerEntity item;
 
-  const BrandNameChipWidget({
-    super.key,
-    required this.item,
-  });
+  const BrandNameChipWidget({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -22,39 +19,21 @@ class BrandNameChipWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: ShapeDecoration(
         color: Colors.white.withValues(alpha: 0.8),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(32),
-        ),
-        shadows: const [
-          BoxShadow(
-            color: Color(0x3D000000),
-            blurRadius: 32,
-            offset: Offset(0, 0),
-            spreadRadius: 0,
-          ),
-        ],
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+        shadows: const [BoxShadow(color: Color(0x3D000000), blurRadius: 32, offset: Offset(0, 0), spreadRadius: 0)],
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         spacing: 8,
-        children: [
-          if (_hasValidLogo()) _buildLogo(),
-          if (_hasValidName()) _buildName(),
-        ],
+        children: [if (_hasValidLogo()) _buildLogo(), if (_hasValidName()) _buildName()],
       ),
     );
   }
 
   Widget _buildLogo() {
-    return ClipOval(
-      child: AppImage.network(
-        item.logo!,
-        width: 24,
-        height: 24,
-      ),
-    );
+    return ClipOval(child: AppImage.network(item.logo!, width: 24, height: 24));
   }
 
   Widget _buildName() {
@@ -64,9 +43,7 @@ class BrandNameChipWidget extends StatelessWidget {
         textAlign: TextAlign.center,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
-        style: AppTextStyles.typographyH11Medium.copyWith(
-          color: AppColors.textGreyHighest950,
-        ),
+        style: AppTextStyles.typographyH11Medium.copyWith(color: AppColors.textGreyHighest950),
       ),
     );
   }

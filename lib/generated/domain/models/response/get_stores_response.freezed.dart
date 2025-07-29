@@ -305,42 +305,42 @@ as String,
 
 
 /// @nodoc
-mixin _$StoreBanner {
+mixin _$BannerEntity {
 
- int get id; String? get name; String? get logo; String? get coverPhoto; double? get rating; String? get deliveryTime; double? get distanceKm; double? get deliveryFee; int get status; String? get image;
-/// Create a copy of StoreBanner
+ int get id; String? get name; String? get logo; String? get coverPhoto; double? get rating; double? get ratingCount; String? get deliveryTime; double? get distanceKm; double? get deliveryFee; int get status; String? get image;
+/// Create a copy of BannerEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$StoreBannerCopyWith<StoreBanner> get copyWith => _$StoreBannerCopyWithImpl<StoreBanner>(this as StoreBanner, _$identity);
+$BannerEntityCopyWith<BannerEntity> get copyWith => _$BannerEntityCopyWithImpl<BannerEntity>(this as BannerEntity, _$identity);
 
-  /// Serializes this StoreBanner to a JSON map.
+  /// Serializes this BannerEntity to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StoreBanner&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.coverPhoto, coverPhoto) || other.coverPhoto == coverPhoto)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.deliveryTime, deliveryTime) || other.deliveryTime == deliveryTime)&&(identical(other.distanceKm, distanceKm) || other.distanceKm == distanceKm)&&(identical(other.deliveryFee, deliveryFee) || other.deliveryFee == deliveryFee)&&(identical(other.status, status) || other.status == status)&&(identical(other.image, image) || other.image == image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BannerEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.coverPhoto, coverPhoto) || other.coverPhoto == coverPhoto)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.ratingCount, ratingCount) || other.ratingCount == ratingCount)&&(identical(other.deliveryTime, deliveryTime) || other.deliveryTime == deliveryTime)&&(identical(other.distanceKm, distanceKm) || other.distanceKm == distanceKm)&&(identical(other.deliveryFee, deliveryFee) || other.deliveryFee == deliveryFee)&&(identical(other.status, status) || other.status == status)&&(identical(other.image, image) || other.image == image));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,logo,coverPhoto,rating,deliveryTime,distanceKm,deliveryFee,status,image);
+int get hashCode => Object.hash(runtimeType,id,name,logo,coverPhoto,rating,ratingCount,deliveryTime,distanceKm,deliveryFee,status,image);
 
 @override
 String toString() {
-  return 'StoreBanner(id: $id, name: $name, logo: $logo, coverPhoto: $coverPhoto, rating: $rating, deliveryTime: $deliveryTime, distanceKm: $distanceKm, deliveryFee: $deliveryFee, status: $status, image: $image)';
+  return 'BannerEntity(id: $id, name: $name, logo: $logo, coverPhoto: $coverPhoto, rating: $rating, ratingCount: $ratingCount, deliveryTime: $deliveryTime, distanceKm: $distanceKm, deliveryFee: $deliveryFee, status: $status, image: $image)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $StoreBannerCopyWith<$Res>  {
-  factory $StoreBannerCopyWith(StoreBanner value, $Res Function(StoreBanner) _then) = _$StoreBannerCopyWithImpl;
+abstract mixin class $BannerEntityCopyWith<$Res>  {
+  factory $BannerEntityCopyWith(BannerEntity value, $Res Function(BannerEntity) _then) = _$BannerEntityCopyWithImpl;
 @useResult
 $Res call({
- int id, String? name, String? logo, String? coverPhoto, double? rating, String? deliveryTime, double? distanceKm, double? deliveryFee, int status, String? image
+ int id, String? name, String? logo, String? coverPhoto, double? rating, double? ratingCount, String? deliveryTime, double? distanceKm, double? deliveryFee, int status, String? image
 });
 
 
@@ -348,22 +348,23 @@ $Res call({
 
 }
 /// @nodoc
-class _$StoreBannerCopyWithImpl<$Res>
-    implements $StoreBannerCopyWith<$Res> {
-  _$StoreBannerCopyWithImpl(this._self, this._then);
+class _$BannerEntityCopyWithImpl<$Res>
+    implements $BannerEntityCopyWith<$Res> {
+  _$BannerEntityCopyWithImpl(this._self, this._then);
 
-  final StoreBanner _self;
-  final $Res Function(StoreBanner) _then;
+  final BannerEntity _self;
+  final $Res Function(BannerEntity) _then;
 
-/// Create a copy of StoreBanner
+/// Create a copy of BannerEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = freezed,Object? logo = freezed,Object? coverPhoto = freezed,Object? rating = freezed,Object? deliveryTime = freezed,Object? distanceKm = freezed,Object? deliveryFee = freezed,Object? status = null,Object? image = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = freezed,Object? logo = freezed,Object? coverPhoto = freezed,Object? rating = freezed,Object? ratingCount = freezed,Object? deliveryTime = freezed,Object? distanceKm = freezed,Object? deliveryFee = freezed,Object? status = null,Object? image = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,logo: freezed == logo ? _self.logo : logo // ignore: cast_nullable_to_non_nullable
 as String?,coverPhoto: freezed == coverPhoto ? _self.coverPhoto : coverPhoto // ignore: cast_nullable_to_non_nullable
 as String?,rating: freezed == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
+as double?,ratingCount: freezed == ratingCount ? _self.ratingCount : ratingCount // ignore: cast_nullable_to_non_nullable
 as double?,deliveryTime: freezed == deliveryTime ? _self.deliveryTime : deliveryTime // ignore: cast_nullable_to_non_nullable
 as String?,distanceKm: freezed == distanceKm ? _self.distanceKm : distanceKm // ignore: cast_nullable_to_non_nullable
 as double?,deliveryFee: freezed == deliveryFee ? _self.deliveryFee : deliveryFee // ignore: cast_nullable_to_non_nullable
@@ -379,55 +380,56 @@ as String?,
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _StoreBanner implements StoreBanner {
-  const _StoreBanner({required this.id, this.name, this.logo, this.coverPhoto, this.rating, this.deliveryTime, this.distanceKm, this.deliveryFee, this.status = 1, this.image});
-  factory _StoreBanner.fromJson(Map<String, dynamic> json) => _$StoreBannerFromJson(json);
+class _BannerEntity implements BannerEntity {
+  const _BannerEntity({required this.id, this.name, this.logo, this.coverPhoto, this.rating, this.ratingCount, this.deliveryTime, this.distanceKm, this.deliveryFee, this.status = 1, this.image});
+  factory _BannerEntity.fromJson(Map<String, dynamic> json) => _$BannerEntityFromJson(json);
 
 @override final  int id;
 @override final  String? name;
 @override final  String? logo;
 @override final  String? coverPhoto;
 @override final  double? rating;
+@override final  double? ratingCount;
 @override final  String? deliveryTime;
 @override final  double? distanceKm;
 @override final  double? deliveryFee;
 @override@JsonKey() final  int status;
 @override final  String? image;
 
-/// Create a copy of StoreBanner
+/// Create a copy of BannerEntity
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$StoreBannerCopyWith<_StoreBanner> get copyWith => __$StoreBannerCopyWithImpl<_StoreBanner>(this, _$identity);
+_$BannerEntityCopyWith<_BannerEntity> get copyWith => __$BannerEntityCopyWithImpl<_BannerEntity>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$StoreBannerToJson(this, );
+  return _$BannerEntityToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StoreBanner&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.coverPhoto, coverPhoto) || other.coverPhoto == coverPhoto)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.deliveryTime, deliveryTime) || other.deliveryTime == deliveryTime)&&(identical(other.distanceKm, distanceKm) || other.distanceKm == distanceKm)&&(identical(other.deliveryFee, deliveryFee) || other.deliveryFee == deliveryFee)&&(identical(other.status, status) || other.status == status)&&(identical(other.image, image) || other.image == image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BannerEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.coverPhoto, coverPhoto) || other.coverPhoto == coverPhoto)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.ratingCount, ratingCount) || other.ratingCount == ratingCount)&&(identical(other.deliveryTime, deliveryTime) || other.deliveryTime == deliveryTime)&&(identical(other.distanceKm, distanceKm) || other.distanceKm == distanceKm)&&(identical(other.deliveryFee, deliveryFee) || other.deliveryFee == deliveryFee)&&(identical(other.status, status) || other.status == status)&&(identical(other.image, image) || other.image == image));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,logo,coverPhoto,rating,deliveryTime,distanceKm,deliveryFee,status,image);
+int get hashCode => Object.hash(runtimeType,id,name,logo,coverPhoto,rating,ratingCount,deliveryTime,distanceKm,deliveryFee,status,image);
 
 @override
 String toString() {
-  return 'StoreBanner(id: $id, name: $name, logo: $logo, coverPhoto: $coverPhoto, rating: $rating, deliveryTime: $deliveryTime, distanceKm: $distanceKm, deliveryFee: $deliveryFee, status: $status, image: $image)';
+  return 'BannerEntity(id: $id, name: $name, logo: $logo, coverPhoto: $coverPhoto, rating: $rating, ratingCount: $ratingCount, deliveryTime: $deliveryTime, distanceKm: $distanceKm, deliveryFee: $deliveryFee, status: $status, image: $image)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$StoreBannerCopyWith<$Res> implements $StoreBannerCopyWith<$Res> {
-  factory _$StoreBannerCopyWith(_StoreBanner value, $Res Function(_StoreBanner) _then) = __$StoreBannerCopyWithImpl;
+abstract mixin class _$BannerEntityCopyWith<$Res> implements $BannerEntityCopyWith<$Res> {
+  factory _$BannerEntityCopyWith(_BannerEntity value, $Res Function(_BannerEntity) _then) = __$BannerEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String? name, String? logo, String? coverPhoto, double? rating, String? deliveryTime, double? distanceKm, double? deliveryFee, int status, String? image
+ int id, String? name, String? logo, String? coverPhoto, double? rating, double? ratingCount, String? deliveryTime, double? distanceKm, double? deliveryFee, int status, String? image
 });
 
 
@@ -435,22 +437,23 @@ $Res call({
 
 }
 /// @nodoc
-class __$StoreBannerCopyWithImpl<$Res>
-    implements _$StoreBannerCopyWith<$Res> {
-  __$StoreBannerCopyWithImpl(this._self, this._then);
+class __$BannerEntityCopyWithImpl<$Res>
+    implements _$BannerEntityCopyWith<$Res> {
+  __$BannerEntityCopyWithImpl(this._self, this._then);
 
-  final _StoreBanner _self;
-  final $Res Function(_StoreBanner) _then;
+  final _BannerEntity _self;
+  final $Res Function(_BannerEntity) _then;
 
-/// Create a copy of StoreBanner
+/// Create a copy of BannerEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = freezed,Object? logo = freezed,Object? coverPhoto = freezed,Object? rating = freezed,Object? deliveryTime = freezed,Object? distanceKm = freezed,Object? deliveryFee = freezed,Object? status = null,Object? image = freezed,}) {
-  return _then(_StoreBanner(
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = freezed,Object? logo = freezed,Object? coverPhoto = freezed,Object? rating = freezed,Object? ratingCount = freezed,Object? deliveryTime = freezed,Object? distanceKm = freezed,Object? deliveryFee = freezed,Object? status = null,Object? image = freezed,}) {
+  return _then(_BannerEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,logo: freezed == logo ? _self.logo : logo // ignore: cast_nullable_to_non_nullable
 as String?,coverPhoto: freezed == coverPhoto ? _self.coverPhoto : coverPhoto // ignore: cast_nullable_to_non_nullable
 as String?,rating: freezed == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
+as double?,ratingCount: freezed == ratingCount ? _self.ratingCount : ratingCount // ignore: cast_nullable_to_non_nullable
 as double?,deliveryTime: freezed == deliveryTime ? _self.deliveryTime : deliveryTime // ignore: cast_nullable_to_non_nullable
 as String?,distanceKm: freezed == distanceKm ? _self.distanceKm : distanceKm // ignore: cast_nullable_to_non_nullable
 as double?,deliveryFee: freezed == deliveryFee ? _self.deliveryFee : deliveryFee // ignore: cast_nullable_to_non_nullable

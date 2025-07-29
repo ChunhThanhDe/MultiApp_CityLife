@@ -4,18 +4,12 @@ import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart'
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class BrandLogoNameWidget extends StatelessWidget {
-  final StoreBanner item;
+  final BannerEntity item;
   final int index;
   final int totalItems;
   final VoidCallback? onTap;
 
-  const BrandLogoNameWidget({
-    super.key,
-    required this.item,
-    required this.index,
-    required this.totalItems,
-    this.onTap,
-  });
+  const BrandLogoNameWidget({super.key, required this.item, required this.index, required this.totalItems, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +22,11 @@ class BrandLogoNameWidget extends StatelessWidget {
       onTap: item.status == 1 ? onTap : null,
       child: Container(
         width: 80,
-        margin: EdgeInsets.only(
-          right: index == totalItems - 1 ? 24 : 16,
-          left: index == 0 ? 24 : 0,
-        ),
+        margin: EdgeInsets.only(right: index == totalItems - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
         child: Column(
           children: [
             _buildImageWithOverlay(),
-            if (_hasValidName()) ...[
-              const SizedBox(height: 4),
-              _buildName(),
-            ],
+            if (_hasValidName()) ...[const SizedBox(height: 4), _buildName()],
           ],
         ),
       ),
@@ -46,37 +34,19 @@ class BrandLogoNameWidget extends StatelessWidget {
   }
 
   Widget _buildImageWithOverlay() {
-    return Stack(
-      children: [
-        _buildImage(),
-        if (item.status != 1) _buildStatusOverlay(),
-      ],
-    );
+    return Stack(children: [_buildImage(), if (item.status != 1) _buildStatusOverlay()]);
   }
 
   Widget _buildImage() {
-    return ClipOval(
-      child: AppImage.network(
-        item.logo ?? item.coverPhoto ?? '',
-        width: 64,
-        height: 64,
-      ),
-    );
+    return ClipOval(child: AppImage.network(item.logo ?? item.coverPhoto ?? '', width: 64, height: 64));
   }
 
   Widget _buildStatusOverlay() {
     return Container(
       width: 64,
       height: 64,
-      decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.6),
-        shape: BoxShape.circle,
-      ),
-      child: Icon(
-        item.status == 0 ? Icons.nightlight_round : Icons.lock,
-        color: Colors.white,
-        size: 20,
-      ),
+      decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.6), shape: BoxShape.circle),
+      child: Icon(item.status == 0 ? Icons.nightlight_round : Icons.lock, color: Colors.white, size: 20),
     );
   }
 
@@ -86,9 +56,7 @@ class BrandLogoNameWidget extends StatelessWidget {
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       textAlign: TextAlign.center,
-      style: AppTextStyles.typographyH12Regular.copyWith(
-        color: AppColors.textBrandDefault500,
-      ),
+      style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBrandDefault500),
     );
   }
 

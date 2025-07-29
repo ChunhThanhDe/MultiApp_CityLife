@@ -20,20 +20,21 @@ abstract class Category with _$Category {
 }
 
 @freezed
-abstract class StoreBanner with _$StoreBanner {
+abstract class BannerEntity with _$BannerEntity {
   @JsonSerializable(fieldRename: FieldRename.snake)
-  const factory StoreBanner({
+  const factory BannerEntity({
     required int id,
     String? name,
     String? logo,
     String? coverPhoto,
     double? rating,
+    double? ratingCount,
     String? deliveryTime,
     double? distanceKm,
     double? deliveryFee,
     @Default(1) int status,
     String? image,
-  }) = _StoreBanner;
+  }) = _BannerEntity;
 
-  factory StoreBanner.fromJson(Map<String, dynamic> json) => _$StoreBannerFromJson(json);
+  factory BannerEntity.fromJson(Map<String, dynamic> json) => _$BannerEntityFromJson(json);
 }

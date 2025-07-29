@@ -29,26 +29,29 @@ Map<String, dynamic> _$CategoryToJson(_Category instance) => <String, dynamic>{
   'image': instance.image,
 };
 
-_StoreBanner _$StoreBannerFromJson(Map<String, dynamic> json) => _StoreBanner(
-  id: (json['id'] as num).toInt(),
-  name: json['name'] as String?,
-  logo: json['logo'] as String?,
-  coverPhoto: json['cover_photo'] as String?,
-  rating: (json['rating'] as num?)?.toDouble(),
-  deliveryTime: json['delivery_time'] as String?,
-  distanceKm: (json['distance_km'] as num?)?.toDouble(),
-  deliveryFee: (json['delivery_fee'] as num?)?.toDouble(),
-  status: (json['status'] as num?)?.toInt() ?? 1,
-  image: json['image'] as String?,
-);
+_BannerEntity _$BannerEntityFromJson(Map<String, dynamic> json) =>
+    _BannerEntity(
+      id: (json['id'] as num).toInt(),
+      name: json['name'] as String?,
+      logo: json['logo'] as String?,
+      coverPhoto: json['cover_photo'] as String?,
+      rating: (json['rating'] as num?)?.toDouble(),
+      ratingCount: (json['rating_count'] as num?)?.toDouble(),
+      deliveryTime: json['delivery_time'] as String?,
+      distanceKm: (json['distance_km'] as num?)?.toDouble(),
+      deliveryFee: (json['delivery_fee'] as num?)?.toDouble(),
+      status: (json['status'] as num?)?.toInt() ?? 1,
+      image: json['image'] as String?,
+    );
 
-Map<String, dynamic> _$StoreBannerToJson(_StoreBanner instance) =>
+Map<String, dynamic> _$BannerEntityToJson(_BannerEntity instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'logo': instance.logo,
       'cover_photo': instance.coverPhoto,
       'rating': instance.rating,
+      'rating_count': instance.ratingCount,
       'delivery_time': instance.deliveryTime,
       'distance_km': instance.distanceKm,
       'delivery_fee': instance.deliveryFee,

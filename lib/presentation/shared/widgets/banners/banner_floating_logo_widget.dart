@@ -6,7 +6,7 @@ import 'package:sixam_mart_user/presentation/shared/widgets/banners/brand_name_c
 import 'package:sixam_mart_user/presentation/shared/widgets/banners/status_overlay_widget.dart';
 
 class BannerFloatingLogoWidget extends StatelessWidget {
-  final StoreBanner item;
+  final BannerEntity item;
   final int index;
   final int totalItems;
   final VoidCallback? onTap;

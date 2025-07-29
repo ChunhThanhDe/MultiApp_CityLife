@@ -7,7 +7,7 @@ import 'package:sixam_mart_user/presentation/shared/widgets/banners/banner_singl
 import 'package:sixam_mart_user/presentation/shared/widgets/banners/brand_logo_name_widget.dart';
 
 class BannerItemFactory {
-  static Widget createBannerItem({required BannerType bannerType, required StoreBanner item, required int index, required int totalItems, VoidCallback? onTap}) {
+  static Widget createBannerItem({required BannerType bannerType, required BannerEntity item, required int index, required int totalItems, VoidCallback? onTap}) {
     switch (bannerType) {
       case BannerType.bannerFloatingLogo:
         return BannerFloatingLogoWidget(item: item, index: index, totalItems: totalItems, onTap: onTap);

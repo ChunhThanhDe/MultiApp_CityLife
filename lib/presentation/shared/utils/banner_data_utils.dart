@@ -6,7 +6,7 @@ enum BannerType { bannerFloatingLogo, brandLogoName, bannerDiscount, bannerSingl
 
 class BannerSection {
   final String title;
-  final List<StoreBanner> items;
+  final List<BannerEntity> items;
   final BannerType bannerType;
   final bool showArrowIcon;
   final VoidCallback? onTapItem;
@@ -25,7 +25,7 @@ class BannerDataUtils {
       if (entry.value == null || entry.value.isEmpty) continue;
       final items = entry.value as List<dynamic>;
       sections.add(
-        BannerSection(title: _getTitleFormattedName(entry.key), items: items.map((item) => StoreBanner.fromJson(item)).toList(), bannerType: _getBannerType(StoreBanner.fromJson(items.first))),
+        BannerSection(title: _getTitleFormattedName(entry.key), items: items.map((item) => BannerEntity.fromJson(item)).toList(), bannerType: _getBannerType(BannerEntity.fromJson(items.first))),
       );
     }
     return sections;
@@ -35,7 +35,7 @@ class BannerDataUtils {
     return title.split('_').map((word) => word.isNotEmpty ? word[0].toUpperCase() + word.substring(1) : '').join(' ');
   }
 
-  static BannerType _getBannerType(StoreBanner storeBanner) {
+  static BannerType _getBannerType(BannerEntity storeBanner) {
     if (_requiredFields([storeBanner.name, storeBanner.logo, storeBanner.coverPhoto])) {
       return BannerType.bannerDiscount;
     }
