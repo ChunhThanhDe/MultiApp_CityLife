@@ -331,63 +331,97 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
               promoController.text = controller.promoCode.value;
             }
 
-            return Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: const Color(0xFFE5E7EB)),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Row(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 12),
-                    child: Icon(Icons.sell_outlined, color: Color(0xFF798A9A), size: 18),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: TextField(
-                      controller: promoController,
-                      decoration: const InputDecoration(
-                        hintText: 'Enter promo code',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(vertical: 12),
-                        hintStyle: TextStyle(fontFamily: 'Inter', color: Color(0xFF798A9A), fontWeight: FontWeight.w400, fontSize: 16),
-                      ),
-                      style: const TextStyle(fontFamily: 'Inter', color: Color(0xFF161A1D), fontWeight: FontWeight.w400, fontSize: 16),
-                      enabled: !controller.isApplyingPromoCode.value,
+            return Row(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 12),
+                  child: Icon(Icons.sell_outlined, color: Color(0xFF798A9A), size: 18),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: TextField(
+                    controller: promoController,
+                    decoration: const InputDecoration(
+                      hintText: 'Enter promo code',
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.symmetric(vertical: 12),
+                      hintStyle: TextStyle(fontFamily: 'Inter', color: Color(0xFF798A9A), fontWeight: FontWeight.w400, fontSize: 16),
                     ),
+                    style: const TextStyle(fontFamily: 'Inter', color: Color(0xFF161A1D), fontWeight: FontWeight.w400, fontSize: 16),
+                    enabled: !controller.isApplyingPromoCode.value,
                   ),
-                  if (controller.promoCode.value.isNotEmpty)
-                    IconButton(
-                      onPressed: controller.isApplyingPromoCode.value
-                          ? null
-                          : () {
-                              promoController.clear();
-                              controller.clearPromoCode();
-                            },
-                      icon: const Icon(Icons.close, color: Color(0xFF798A9A), size: 20),
-                    ),
-                  Container(
-                    margin: const EdgeInsets.all(4),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF5856D7),
-                        foregroundColor: Colors.white,
-                        minimumSize: const Size(0, 40),
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        textStyle: const TextStyle(fontFamily: 'Inter', fontSize: 14, fontWeight: FontWeight.w500),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-                      ),
-                      onPressed: controller.isApplyingPromoCode.value ? null : () => controller.applyPromoCode(promoController.text),
-                      child: controller.isApplyingPromoCode.value
-                          ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)))
-                          : const Text('Apply'),
-                    ),
+                ),
+                if (controller.promoCode.value.isNotEmpty)
+                  IconButton(
+                    onPressed: controller.isApplyingPromoCode.value
+                        ? null
+                        : () {
+                            promoController.clear();
+                            controller.clearPromoCode();
+                          },
+                    icon: const Icon(Icons.close, color: Color(0xFF798A9A), size: 20),
                   ),
-                ],
-              ),
+                Container(
+                  margin: const EdgeInsets.all(4),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF5856D7),
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(0, 40),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      textStyle: const TextStyle(fontFamily: 'Inter', fontSize: 14, fontWeight: FontWeight.w500),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                    ),
+                    onPressed: controller.isApplyingPromoCode.value ? null : () => controller.applyPromoCode(promoController.text),
+                    child: controller.isApplyingPromoCode.value
+                        ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)))
+                        : const Text('Apply'),
+                  ),
+                ),
+              ],
             );
           }),
         ),
+        // Show inline validation messages (only errors)
+        Obx(() {
+          if (controller.promoMessage.value.isNotEmpty && controller.isPromoError.value) {
+            return Padding(
+              padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFEF2F2),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: const Color(0xFFFECACA),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.error_outline,
+                      color: Color(0xFFDC2626),
+                      size: 20,
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        controller.promoMessage.value,
+                        style: const TextStyle(
+                          fontFamily: 'Inter',
+                          color: Color(0xFFDC2626),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+          return const SizedBox.shrink();
+        }),
         // Show applied promo code info
         Obx(() {
           if (controller.promoCode.value.isNotEmpty) {

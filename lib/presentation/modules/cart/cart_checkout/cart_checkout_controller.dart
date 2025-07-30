@@ -22,6 +22,11 @@ class CartCheckoutController extends BaseController {
   final RxInt selectedAddressId = RxInt(0);
   final RxString promoCode = RxString('');
   final RxBool isApplyingPromoCode = RxBool(false);
+  
+  // Inline message states for promo code section
+  final RxString promoMessage = RxString('');
+  final RxBool isPromoError = RxBool(false);
+  final RxBool isPromoSuccess = RxBool(false);
 
   @override
   void onInit() {
@@ -80,15 +85,44 @@ class CartCheckoutController extends BaseController {
     selectedAddressId.value = addressId;
   }
 
+  void _clearPromoMessages() {
+    promoMessage.value = '';
+    isPromoError.value = false;
+    isPromoSuccess.value = false;
+  }
+
+  void _setPromoError(String message) {
+    promoMessage.value = message;
+    isPromoError.value = true;
+    isPromoSuccess.value = false;
+  }
+
+  void _setPromoSuccess(String message) {
+    promoMessage.value = message;
+    isPromoError.value = false;
+    isPromoSuccess.value = true;
+  }
+
   void applyPromoCode(String code) async {
+    _clearPromoMessages();
+    
     if (code.trim().isEmpty) {
-      showAppSnackBar(title: 'Please enter a promo code', type: SnackBarType.error);
+      _setPromoError('Please enter a promo code');
       return;
     }
 
     if (selectedAddressId.value == 0) {
-      showAppSnackBar(title: 'Please select a delivery address first', type: SnackBarType.error);
+      _setPromoError('Please select a delivery address first');
       return;
+    }
+
+    // Validate promo code against available coupons
+    if (availableCoupons.isNotEmpty) {
+      final isValidCoupon = availableCoupons.any((coupon) => coupon.code?.toLowerCase() == code.trim().toLowerCase());
+      if (!isValidCoupon) {
+        _setPromoError('Invalid promo code. Please check and try again.');
+        return;
+      }
     }
 
     await safeExecute(() async {
@@ -109,24 +143,19 @@ class CartCheckoutController extends BaseController {
       switch (result) {
         case Success(response: final response):
           if (response.statusCode != 200) {
-            showAppSnackBar(title: 'Failed to apply promo code', type: SnackBarType.error);
+            _setPromoError('Failed to apply promo code');
             return;
           }
 
           calculatedSummary.value = CheckoutCalculateResponse.fromJson(response.data);
           promoCode.value = code.trim();
 
-          // Show success message with discount amount
-          final discount = calculatedSummary.value!.discount;
-          if (discount > 0) {
-            showAppSnackBar(title: 'Promo code applied! You saved \$${discount.toStringAsFixed(2)}', type: SnackBarType.success);
-          } else {
-            showAppSnackBar(title: 'Promo code applied successfully', type: SnackBarType.success);
-          }
+          // Show simple success message
+          _setPromoSuccess('Promo code "${code.trim()}" applied');
 
         case Failure(error: final error):
           final errorMessage = NetworkExceptions.getErrorMessage(error);
-          showAppSnackBar(title: errorMessage, type: SnackBarType.error);
+          _setPromoError(errorMessage);
           // Clear promo code on error
           promoCode.value = '';
           calculatedSummary.value = null;
@@ -139,7 +168,7 @@ class CartCheckoutController extends BaseController {
   void clearPromoCode() {
     promoCode.value = '';
     calculatedSummary.value = null;
-    showAppSnackBar(title: 'Promo code removed', type: SnackBarType.success);
+    _clearPromoMessages();
   }
 
   double get selectedDeliveryFee {
@@ -209,6 +238,10 @@ class CartCheckoutController extends BaseController {
     if (checkoutSummary.value?.paymentMethods == null) return null;
 
     return checkoutSummary.value!.paymentMethods!.firstWhereOrNull((method) => method.key == selectedPaymentMethod.value);
+  }
+
+  List<AvailableCoupon> get availableCoupons {
+    return checkoutSummary.value?.availableCoupons ?? [];
   }
 
   Future<void> orderNow() async {
