@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 
-import 'laundry_main_controller.dart';
+import 'service_laundry_controller.dart';
 
-class LaundryMainScreen extends BaseScreen<LaundryMainController> {
-  const LaundryMainScreen({super.key});
+class ServiceLaundryScreen extends BaseScreen<ServiceLaundryController> {
+  const ServiceLaundryScreen({super.key});
 
   @override
   Widget buildScreen(BuildContext context) {
@@ -192,7 +192,7 @@ class _LaundryBanner extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(6),
           child: Image.asset(
-            'assets/banner_laundry.jpg', // Bạn nhớ add asset vào pubspec.yaml
+            'assets/images/img_laundry.png', // Using existing laundry image
             width: 382,
             height: 180,
             fit: BoxFit.cover,
@@ -287,7 +287,7 @@ class _LaundryBottomNavBar extends StatelessWidget {
       height: 94,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.9),
+        color: Colors.white.withValues(alpha: 0.9),
         border: Border(top: BorderSide(color: Color(0x0D101214))),
         // backdropFilter không hỗ trợ Flutter, chỉ dùng color
       ),

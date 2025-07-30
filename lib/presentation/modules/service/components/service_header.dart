@@ -167,9 +167,7 @@ class ServiceHeader extends GetView<ServiceController> {
             return Padding(
               padding: EdgeInsets.only(right: index == categories.length - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
               child: GestureDetector(
-                onTap: () {
-                  // Navigate to category page
-                },
+                onTap: () {},
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Column(

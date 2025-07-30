@@ -45,8 +45,6 @@ import 'package:sixam_mart_user/presentation/modules/delivery/tracking_delivery/
 import 'package:sixam_mart_user/presentation/modules/delivery/tracking_delivery/tracking_delivery_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorities_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/laundry/laundry_main/laundry_main_binding.dart';
-import 'package:sixam_mart_user/presentation/modules/laundry/laundry_main/laundry_main_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/onboarding/splash/splash_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/onboarding/splash/splash_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/onboarding/welcome/welcome_binding.dart';
@@ -59,6 +57,8 @@ import 'package:sixam_mart_user/presentation/modules/root/root_bindings.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/search/search_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/search/search_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/service/laundry/service_laundry_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/service/laundry/service_laundry_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_product_detail/store_product_detail_binding.dart';
@@ -130,6 +130,6 @@ class AppPages {
       page: () => StoreProductDetailScreen(productId: Get.arguments['productId']),
       binding: StoreProductDetailBinding(),
     ),
-    GetPage(name: AppRoutes.laundryMain, page: () => const LaundryMainScreen(), binding: LaundryMainBinding()),
+    GetPage(name: AppRoutes.laundryMain, page: () => const ServiceLaundryScreen(), binding: ServiceLaundryBinding()),
   ];
 }

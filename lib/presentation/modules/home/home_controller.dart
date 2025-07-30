@@ -83,6 +83,8 @@ class HomeController extends BaseController {
 
   // Navigation method to handle service type tap
   void navigateToServiceWithType(ServiceType serviceType) {
+    // Special handling for laundry service type
+
     // Get RootController to change tabs
     final rootController = Get.find<RootController>();
 
