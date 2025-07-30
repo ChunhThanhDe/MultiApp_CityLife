@@ -318,39 +318,110 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   }
 
   Widget _buildPromocodeSection(GetCheckoutSummaryResponse checkoutData) {
+    final TextEditingController promoController = TextEditingController();
+
     return Column(
       children: [
         sectionLabel('Promocode'),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Row(
-            children: [
-              const Icon(Icons.sell_outlined, color: Color(0xFF798A9A), size: 18),
-              const SizedBox(width: 8),
-              Expanded(
-                child: GestureDetector(
-                  onTap: () => _showPromocodeDialog(checkoutData.availableCoupons ?? []),
-                  child: Obx(
-                    () => Text(
-                      controller.promoCode.value.isEmpty ? 'Enter Code' : controller.promoCode.value,
-                      style: TextStyle(fontFamily: 'Inter', color: controller.promoCode.value.isEmpty ? const Color(0xFF798A9A) : const Color(0xFF161A1D), fontWeight: FontWeight.w400, fontSize: 16),
+          child: Obx(() {
+            // Update text field when promo code is applied
+            if (controller.promoCode.value.isNotEmpty && promoController.text != controller.promoCode.value) {
+              promoController.text = controller.promoCode.value;
+            }
+
+            return Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: const Color(0xFFE5E7EB)),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 12),
+                    child: Icon(Icons.sell_outlined, color: Color(0xFF798A9A), size: 18),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: TextField(
+                      controller: promoController,
+                      decoration: const InputDecoration(
+                        hintText: 'Enter promo code',
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(vertical: 12),
+                        hintStyle: TextStyle(fontFamily: 'Inter', color: Color(0xFF798A9A), fontWeight: FontWeight.w400, fontSize: 16),
+                      ),
+                      style: const TextStyle(fontFamily: 'Inter', color: Color(0xFF161A1D), fontWeight: FontWeight.w400, fontSize: 16),
+                      enabled: !controller.isApplyingPromoCode.value,
                     ),
                   ),
-                ),
+                  if (controller.promoCode.value.isNotEmpty)
+                    IconButton(
+                      onPressed: controller.isApplyingPromoCode.value
+                          ? null
+                          : () {
+                              promoController.clear();
+                              controller.clearPromoCode();
+                            },
+                      icon: const Icon(Icons.close, color: Color(0xFF798A9A), size: 20),
+                    ),
+                  Container(
+                    margin: const EdgeInsets.all(4),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF5856D7),
+                        foregroundColor: Colors.white,
+                        minimumSize: const Size(0, 40),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        textStyle: const TextStyle(fontFamily: 'Inter', fontSize: 14, fontWeight: FontWeight.w500),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                      ),
+                      onPressed: controller.isApplyingPromoCode.value ? null : () => controller.applyPromoCode(promoController.text),
+                      child: controller.isApplyingPromoCode.value
+                          ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)))
+                          : const Text('Apply'),
+                    ),
+                  ),
+                ],
               ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  foregroundColor: const Color(0xFF5856D7),
-                  minimumSize: const Size(0, 32),
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-                  textStyle: const TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500),
-                ),
-                onPressed: () => _showPromocodeDialog(checkoutData.availableCoupons ?? []),
-                child: const Text('Apply'),
-              ),
-            ],
-          ),
+            );
+          }),
         ),
+        // Show applied promo code info
+        Obx(() {
+          if (controller.promoCode.value.isNotEmpty) {
+            return Padding(
+              padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFEFEFFB),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: const Color(0xFFBEBDEF)),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.check_circle, color: Color(0xFF5856D7), size: 20),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Promo code "${controller.promoCode.value}" applied',
+                        style: const TextStyle(fontFamily: 'Inter', color: Color(0xFF5856D7), fontWeight: FontWeight.w500, fontSize: 14),
+                      ),
+                    ),
+                    if (controller.currentDiscount > 0)
+                      Text(
+                        '-\$${controller.currentDiscount.toStringAsFixed(2)}',
+                        style: const TextStyle(fontFamily: 'Inter', color: Color(0xFF5856D7), fontWeight: FontWeight.w600, fontSize: 14),
+                      ),
+                  ],
+                ),
+              ),
+            );
+          }
+          return const SizedBox.shrink();
+        }),
       ],
     );
   }
@@ -361,10 +432,10 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
       child: Obx(
         () => Column(
           children: [
-            priceRow('Subtotal:', '\$${(checkoutData.subtotal ?? 0.0).toStringAsFixed(2)}'),
+            priceRow('Subtotal:', '\$${controller.currentSubtotal.toStringAsFixed(2)}'),
             priceRow('Delivery Fee:', '\$${controller.selectedDeliveryFee.toStringAsFixed(2)}'),
-            priceRow('Taxes & Estimated Fees:', '\$${(checkoutData.tax ?? 0.0).toStringAsFixed(2)}'),
-            priceRow('Discount:', '-\$${(checkoutData.discount ?? 0.0).toStringAsFixed(2)}'),
+            priceRow('Taxes & Estimated Fees:', '\$${controller.currentTax.toStringAsFixed(2)}'),
+            priceRow('Discount:', '-\$${controller.currentDiscount.toStringAsFixed(2)}'),
             const SizedBox(height: 6),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -436,14 +507,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                 ),
                 onPressed: controller.isLoading.value ? null : () => controller.orderNow(),
                 child: controller.isLoading.value
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                        ),
-                      )
+                    ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)))
                     : const Text(
                         'Order Now',
                         style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Inter', fontWeight: FontWeight.w500),
@@ -488,10 +552,5 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   void _showAddressSelection(List<CheckoutAddress> addresses) {
     // TODO: Implement address selection dialog
     Get.snackbar('Info', 'Address selection dialog would open here');
-  }
-
-  void _showPromocodeDialog(List<AvailableCoupon> coupons) {
-    // TODO: Implement promocode dialog
-    Get.snackbar('Info', 'Promocode dialog would open here');
   }
 }

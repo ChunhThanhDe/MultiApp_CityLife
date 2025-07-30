@@ -15,12 +15,12 @@ class ServiceController extends BaseController {
   @override
   void onReady() {
     super.onReady();
-    loadServiceTypeData('fast_food1');
+    loadServiceTypeData('fast_food');
   }
 
   final RxList<Category> categories = RxList<Category>([]);
   final RxList<BannerSection> dynamicSections = RxList<BannerSection>([]);
-  final RxString currentServiceType = RxString('fast_food1');
+  final RxString currentServiceType = RxString('fast_food');
 
   // Method to load data for specific service type
   void loadServiceTypeData(String serviceType) async {

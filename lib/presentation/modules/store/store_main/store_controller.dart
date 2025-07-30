@@ -20,7 +20,6 @@ enum FilterType {
 }
 
 class ProductItem {
-
   ProductItem({
     required this.id,
     required this.name,
@@ -42,7 +41,6 @@ class ProductItem {
 }
 
 class StoreController extends BaseController with GetSingleTickerProviderStateMixin {
-
   StoreController({required this.storeType, required this.storeId});
   final StoreRepository _storeRepository = Get.find<StoreRepository>();
 
@@ -107,7 +105,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
                     (e) => ProductItem(
                       id: e.id,
                       name: e.name,
-                      price: e.price.toDouble(), // Convert int to double
+                      price: e.price.toDouble(),
                       imageUrl: e.imageUrl,
                       rating: e.avgRating,
                       reviewCount: e.ratingCount,

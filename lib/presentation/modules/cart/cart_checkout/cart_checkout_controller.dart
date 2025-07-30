@@ -2,7 +2,9 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/base/network_exceptions.dart';
+import 'package:sixam_mart_user/domain/models/request/cart/checkout_calculate_request.dart';
 import 'package:sixam_mart_user/domain/models/request/cart/order_now_request.dart';
+import 'package:sixam_mart_user/domain/models/response/checkout_calculate_response.dart';
 import 'package:sixam_mart_user/domain/models/response/get_checkout_summary_response.dart';
 import 'package:sixam_mart_user/domain/repositories/cart_repository.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
@@ -14,10 +16,12 @@ class CartCheckoutController extends BaseController {
   final CartService _cartService = Get.find<CartService>();
 
   final Rx<GetCheckoutSummaryResponse?> checkoutSummary = Rx<GetCheckoutSummaryResponse?>(null);
+  final Rx<CheckoutCalculateResponse?> calculatedSummary = Rx<CheckoutCalculateResponse?>(null);
   final RxString selectedDeliveryOption = RxString('Standard'); // Default to 'Standard'
   final RxString selectedPaymentMethod = RxString('cash_on_delivery');
   final RxInt selectedAddressId = RxInt(0);
   final RxString promoCode = RxString('');
+  final RxBool isApplyingPromoCode = RxBool(false);
 
   @override
   void onInit() {
@@ -76,12 +80,74 @@ class CartCheckoutController extends BaseController {
     selectedAddressId.value = addressId;
   }
 
-  void applyPromoCode(String code) {
-    promoCode.value = code;
-    // TODO: Implement promo code application API call
+  void applyPromoCode(String code) async {
+    if (code.trim().isEmpty) {
+      showAppSnackBar(title: 'Please enter a promo code', type: SnackBarType.error);
+      return;
+    }
+
+    if (selectedAddressId.value == 0) {
+      showAppSnackBar(title: 'Please select a delivery address first', type: SnackBarType.error);
+      return;
+    }
+
+    await safeExecute(() async {
+      isApplyingPromoCode.value = true;
+
+      // Map delivery option to the format expected by API
+      String deliveryOptionForApi = 'standard';
+      if (selectedDeliveryOption.value.toLowerCase().contains('priority')) {
+        deliveryOptionForApi = 'priority';
+      } else if (selectedDeliveryOption.value.toLowerCase().contains('schedule')) {
+        deliveryOptionForApi = 'schedule';
+      }
+
+      final request = CheckoutCalculateRequest(selectedDeliveryOption: deliveryOptionForApi, selectedAddressId: selectedAddressId.value, appliedCoupon: code.trim(), dmTips: 0.0);
+
+      final ApiResult result = await _cartRepository.checkoutCalculate(request);
+
+      switch (result) {
+        case Success(response: final response):
+          if (response.statusCode != 200) {
+            showAppSnackBar(title: 'Failed to apply promo code', type: SnackBarType.error);
+            return;
+          }
+
+          calculatedSummary.value = CheckoutCalculateResponse.fromJson(response.data);
+          promoCode.value = code.trim();
+
+          // Show success message with discount amount
+          final discount = calculatedSummary.value!.discount;
+          if (discount > 0) {
+            showAppSnackBar(title: 'Promo code applied! You saved \$${discount.toStringAsFixed(2)}', type: SnackBarType.success);
+          } else {
+            showAppSnackBar(title: 'Promo code applied successfully', type: SnackBarType.success);
+          }
+
+        case Failure(error: final error):
+          final errorMessage = NetworkExceptions.getErrorMessage(error);
+          showAppSnackBar(title: errorMessage, type: SnackBarType.error);
+          // Clear promo code on error
+          promoCode.value = '';
+          calculatedSummary.value = null;
+      }
+
+      isApplyingPromoCode.value = false;
+    });
+  }
+
+  void clearPromoCode() {
+    promoCode.value = '';
+    calculatedSummary.value = null;
+    showAppSnackBar(title: 'Promo code removed', type: SnackBarType.success);
   }
 
   double get selectedDeliveryFee {
+    // Use calculated summary if available, otherwise use default
+    if (calculatedSummary.value != null) {
+      return calculatedSummary.value!.deliveryFee;
+    }
+
     if (checkoutSummary.value?.deliveryOptions == null) return 0.0;
 
     final selectedOption = checkoutSummary.value!.deliveryOptions!.firstWhereOrNull((option) => option.label == selectedDeliveryOption.value);
@@ -90,11 +156,41 @@ class CartCheckoutController extends BaseController {
   }
 
   double get calculatedTotal {
+    // Use calculated summary if available (when promo code is applied)
+    if (calculatedSummary.value != null) {
+      return calculatedSummary.value!.total;
+    }
+
+    // Otherwise use default calculation
     final subtotal = checkoutSummary.value?.subtotal ?? 0.0;
     final tax = checkoutSummary.value?.tax ?? 0.0;
     final discount = checkoutSummary.value?.discount ?? 0.0;
 
     return subtotal + selectedDeliveryFee + tax - discount;
+  }
+
+  double get currentDiscount {
+    // Use calculated summary if available, otherwise use default
+    if (calculatedSummary.value != null) {
+      return calculatedSummary.value!.discount;
+    }
+    return checkoutSummary.value?.discount ?? 0.0;
+  }
+
+  double get currentSubtotal {
+    // Use calculated summary if available, otherwise use default
+    if (calculatedSummary.value != null) {
+      return calculatedSummary.value!.subtotal;
+    }
+    return checkoutSummary.value?.subtotal ?? 0.0;
+  }
+
+  double get currentTax {
+    // Use calculated summary if available, otherwise use default
+    if (calculatedSummary.value != null) {
+      return calculatedSummary.value!.tax;
+    }
+    return checkoutSummary.value?.tax ?? 0.0;
   }
 
   CheckoutAddress? get selectedAddress {
