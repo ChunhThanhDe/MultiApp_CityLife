@@ -20,7 +20,7 @@ class HeaderAndService extends GetView<HomeController> {
             decoration: BoxDecoration(color: AppColors.stateBrandDefault500),
           ),
           SafeArea(
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [_buildHeader(), SizedBox(height: 24), _buildService()]),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [_buildHeader(), const SizedBox(height: 24), _buildService()]),
           ),
         ],
       ),
@@ -72,10 +72,10 @@ class HeaderAndService extends GetView<HomeController> {
           children: [
             Container(
               decoration: BoxDecoration(color: AppColors.stateGreyLowest50, borderRadius: BorderRadius.circular(AppCorner.radius8)),
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               child: AppImage.network(service.iconFullUrl ?? '', width: 70, height: 70),
             ),
-            SizedBox(height: 6),
+            const SizedBox(height: 6),
             Text(
               service.moduleName ?? '',
               style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),

@@ -28,6 +28,27 @@ import 'package:sixam_mart_user/app/theme/theme.dart';
 /// )
 /// ```
 class AppTabBar extends StatelessWidget {
+
+  /// Creates an [AppTabBar] with the specified properties.
+  ///
+  /// The [listTab] parameter is required and must not be empty.
+  /// The assertion ensures that at least one tab is provided.
+  const AppTabBar({
+    required this.listTab, super.key,
+    this.tabController,
+    this.onTap,
+    this.height = 36,
+    this.borderRadius = 32,
+    this.backgroundColor,
+    this.selectedColor,
+    this.unselectedColor,
+    this.indicatorColor,
+    this.padding,
+    this.labelStyle,
+    this.unselectedLabelStyle,
+    this.isScrollable = false,
+    this.indicatorPadding,
+  }) : assert(listTab.length > 0, 'listTab cannot be empty');
   /// Optional tab controller to manage tab selection state.
   final TabController? tabController;
 
@@ -71,28 +92,6 @@ class AppTabBar extends StatelessWidget {
   /// Padding around the tab indicator.
   final EdgeInsets? indicatorPadding;
 
-  /// Creates an [AppTabBar] with the specified properties.
-  ///
-  /// The [listTab] parameter is required and must not be empty.
-  /// The assertion ensures that at least one tab is provided.
-  const AppTabBar({
-    super.key,
-    this.tabController,
-    required this.listTab,
-    this.onTap,
-    this.height = 36,
-    this.borderRadius = 32,
-    this.backgroundColor,
-    this.selectedColor,
-    this.unselectedColor,
-    this.indicatorColor,
-    this.padding,
-    this.labelStyle,
-    this.unselectedLabelStyle,
-    this.isScrollable = false,
-    this.indicatorPadding,
-  }) : assert(listTab.length > 0, 'listTab cannot be empty');
-
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
@@ -120,7 +119,7 @@ class AppTabBar extends StatelessWidget {
           automaticIndicatorColorAdjustment: false,
           splashFactory: NoSplash.splashFactory,
           overlayColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) => Colors.transparent),
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           tabs: listTab.map((tab) => _buildAccessibleTab(tab)).toList(),
         ),
       ),
@@ -157,9 +156,8 @@ extension AppTabBarFactories on AppTabBar {
   /// );
   /// ```
   static AppTabBar compact({
-    Key? key,
+    required List<Widget> listTab, Key? key,
     TabController? tabController,
-    required List<Widget> listTab,
     Function(int)? onTap,
     Color? backgroundColor,
     Color? selectedColor,
@@ -198,9 +196,8 @@ extension AppTabBarFactories on AppTabBar {
   /// );
   /// ```
   static AppTabBar large({
-    Key? key,
+    required List<Widget> listTab, Key? key,
     TabController? tabController,
-    required List<Widget> listTab,
     Function(int)? onTap,
     Color? backgroundColor,
     Color? selectedColor,

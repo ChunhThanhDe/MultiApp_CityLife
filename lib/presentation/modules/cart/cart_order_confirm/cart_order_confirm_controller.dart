@@ -7,18 +7,18 @@ import 'package:sixam_mart_user/domain/models/response/get_orders_history_respon
 import 'package:sixam_mart_user/domain/repositories/order_repository.dart';
 
 class OrderStepData {
+  OrderStepData({required this.iconAsset, required this.title, required this.subtitle});
   final String iconAsset;
   final String title;
   final String subtitle;
-  OrderStepData({required this.iconAsset, required this.title, required this.subtitle});
 }
 
 class OrderItem {
+  OrderItem({required this.imageAsset, required this.title, required this.subtitle, required this.price});
   final String imageAsset;
   final String title;
   final String subtitle;
   final double price;
-  OrderItem({required this.imageAsset, required this.title, required this.subtitle, required this.price});
 }
 
 class CartOrderConfirmController extends BaseController {
@@ -36,10 +36,10 @@ class CartOrderConfirmController extends BaseController {
 
   // Các trạng thái order step
   final List<OrderStepData> stepsData = [
-    OrderStepData(iconAsset: "assets/icons/ic_basket_shopping_check.svg", title: "Confirming your order", subtitle: "Arrives between 1:20–1:35 PM"),
-    OrderStepData(iconAsset: "assets/icons/ic_basket_preparing.svg", title: "Preparing your order", subtitle: "Arrives between 1:20–1:35 PM"),
-    OrderStepData(iconAsset: "assets/icons/ic_pickup_order.svg", title: "Picking up your order", subtitle: "Arrives between 1:20–1:35 PM"),
-    OrderStepData(iconAsset: "assets/icons/ic_enjoy_order.svg", title: "Enjoy your order", subtitle: "Arrives between 1:28 PM"),
+    OrderStepData(iconAsset: 'assets/icons/ic_basket_shopping_check.svg', title: 'Confirming your order', subtitle: 'Arrives between 1:20–1:35 PM'),
+    OrderStepData(iconAsset: 'assets/icons/ic_basket_preparing.svg', title: 'Preparing your order', subtitle: 'Arrives between 1:20–1:35 PM'),
+    OrderStepData(iconAsset: 'assets/icons/ic_pickup_order.svg', title: 'Picking up your order', subtitle: 'Arrives between 1:20–1:35 PM'),
+    OrderStepData(iconAsset: 'assets/icons/ic_enjoy_order.svg', title: 'Enjoy your order', subtitle: 'Arrives between 1:28 PM'),
   ];
 
   @override
@@ -58,7 +58,7 @@ class CartOrderConfirmController extends BaseController {
   }
 
   void _startDemoTimer() {
-    _timer = Timer.periodic(Duration(seconds: 5), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       if (step.value < stepsData.length - 1) {
         step.value += 1;
       } else {
@@ -124,9 +124,9 @@ class CartOrderConfirmController extends BaseController {
         return store.deliveryTime!;
       }
       // Fallback to default time range
-      return "30-60 min";
+      return '30-60 min';
     }
-    return "30-60 min";
+    return '30-60 min';
   }
 
   String get deliveryAddress {
@@ -134,7 +134,7 @@ class CartOrderConfirmController extends BaseController {
     if (address?.address != null) {
       return address!.address!;
     }
-    return "2216 N 10th St, Apt 0, El Centro, CA 92243";
+    return '2216 N 10th St, Apt 0, El Centro, CA 92243';
   }
 
   String get deliveryInstruction {
@@ -142,7 +142,7 @@ class CartOrderConfirmController extends BaseController {
     if (instruction != null && instruction.toString().isNotEmpty) {
       return instruction.toString();
     }
-    return "Please Hand it to me";
+    return 'Please Hand it to me';
   }
 
   String get contactPersonName {
@@ -150,7 +150,7 @@ class CartOrderConfirmController extends BaseController {
     if (name != null && name.isNotEmpty) {
       return name;
     }
-    return "My Home";
+    return 'My Home';
   }
 
   String get orderNote {
@@ -158,7 +158,7 @@ class CartOrderConfirmController extends BaseController {
     if (note != null && note.isNotEmpty) {
       return note;
     }
-    return "Please Hand it to me";
+    return 'Please Hand it to me';
   }
 
   List<OrderItem> get orderItems {

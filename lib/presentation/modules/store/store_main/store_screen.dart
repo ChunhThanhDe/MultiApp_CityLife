@@ -6,10 +6,10 @@ import 'package:sixam_mart_user/presentation/modules/store/components/store_app_
 import 'package:sixam_mart_user/presentation/modules/store/components/store_product_categories.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/store_service_options.dart';
 
-import 'store_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
 
 class StoreScreen extends BaseScreen<StoreController> {
-  const StoreScreen({super.key, required this.storeId, required this.storeType});
+  const StoreScreen({required this.storeId, required this.storeType, super.key});
   final int storeId;
   final StoreType storeType;
 
@@ -25,7 +25,7 @@ class StoreScreen extends BaseScreen<StoreController> {
           return const Center(child: CircularProgressIndicator());
         }
 
-        return CustomScrollView(slivers: [StoreAppBar(), StoreServiceOptions(), StoreProductCategories()]);
+        return const CustomScrollView(slivers: [StoreAppBar(), StoreServiceOptions(), StoreProductCategories()]);
       },
     );
   }

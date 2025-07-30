@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class AuthHeader extends StatelessWidget {
+  const AuthHeader({required this.title, required this.subtitle, super.key, this.titleMaxLines = 1, this.subtitleMaxLines = 2, this.titleStyle, this.subtitleStyle});
   final String title;
   final String subtitle;
   final int titleMaxLines;
   final int subtitleMaxLines;
   final TextStyle? titleStyle;
   final TextStyle? subtitleStyle;
-  const AuthHeader({super.key, required this.title, required this.subtitle, this.titleMaxLines = 1, this.subtitleMaxLines = 2, this.titleStyle, this.subtitleStyle});
 
   @override
   Widget build(BuildContext context) {

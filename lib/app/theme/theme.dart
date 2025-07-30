@@ -1,4 +1,4 @@
-// ignore_for_file: overridden_fields, unused_element, non_constant_identifier_names
+// ignore_for_file: overridden_fields, unused_element, non_constant_identifier_names, comment_references
 
 /// The all getter and classes with variables and functions statics:
 /// [AppTextStyles], [Shadows], [ColorStyle], [SixMartTheme], [Typography], [AllColors], [Theme], [BrandColor], [Spacing], [Corner], [FontFamily]
@@ -114,9 +114,9 @@ AnimationController? _animationControllerCornerDefault;
 AnimationController? _animationControllerFontFamilyDefault;
 
 class SixMartTheme extends StatefulWidget {
+  const SixMartTheme({required this.child, super.key, this.duration = const Duration(milliseconds: 300)});
   final Widget child;
   final Duration duration;
-  const SixMartTheme({super.key, required this.child, this.duration = const Duration(milliseconds: 300)});
 
   static TypographyTypes typographytypes = TypographyTypes.mode1;
   static void modifyTypography(TypographyTypes type) {
@@ -442,13 +442,13 @@ class _TypographyMode1 extends TypographyDefault {
   @override
   String get fontFamilyFont => FontFamily.fonts;
   @override
-  String get fontWeightRegular400 => "Regular";
+  String get fontWeightRegular400 => 'Regular';
   @override
-  String get fontWeightMedium500 => "Medium";
+  String get fontWeightMedium500 => 'Medium';
   @override
-  String get fontWeightSemiBold600 => "Semi Bold";
+  String get fontWeightSemiBold600 => 'Semi Bold';
   @override
-  String get fontWeightBold700 => "Bold";
+  String get fontWeightBold700 => 'Bold';
   @override
   double get fontSizeH1 => 72;
   @override
@@ -2715,12 +2715,41 @@ class _FontFamilyRobotoMono extends FontFamilyDefault {
 class ColorStyle {
   ColorStyle._();
 
-  static final mcdonaldSMcDrink1 = const Color.fromARGB(255, 255, 255, 255);
-  static final mcdonaldSMcDrink3 = const Color.fromARGB(255, 255, 255, 255);
-  static final mcdonaldSMcDrink2 = const Color.fromARGB(255, 255, 255, 255);
+  static const mcdonaldSMcDrink1 = Color.fromARGB(255, 255, 255, 255);
+  static const mcdonaldSMcDrink3 = Color.fromARGB(255, 255, 255, 255);
+  static const mcdonaldSMcDrink2 = Color.fromARGB(255, 255, 255, 255);
 }
 
 class Style extends TextStyle {
+  factory Style._style(TextStyle textStyle) {
+    return Style._(
+      inherit: textStyle.inherit,
+      color: textStyle.color,
+      backgroundColor: textStyle.backgroundColor,
+      fontSize: textStyle.fontSize,
+      fontWeight: textStyle.fontWeight,
+      fontStyle: textStyle.fontStyle,
+      letterSpacing: textStyle.letterSpacing,
+      wordSpacing: textStyle.wordSpacing,
+      textBaseline: textStyle.textBaseline,
+      height: textStyle.height,
+      leadingDistribution: textStyle.leadingDistribution,
+      locale: textStyle.locale,
+      foreground: textStyle.foreground,
+      background: textStyle.background,
+      shadows: textStyle.shadows,
+      fontFeatures: textStyle.fontFeatures,
+      fontVariations: textStyle.fontVariations,
+      decoration: textStyle.decoration,
+      decorationColor: textStyle.decorationColor,
+      decorationStyle: textStyle.decorationStyle,
+      decorationThickness: textStyle.decorationThickness,
+      debugLabel: textStyle.debugLabel,
+      fontFamily: textStyle.fontFamily,
+      fontFamilyFallback: textStyle.fontFamilyFallback,
+      overflow: textStyle.overflow,
+    );
+  }
   const Style._({
     super.inherit = true,
     super.color,
@@ -2774,37 +2803,7 @@ class Style extends TextStyle {
   }
 
   static FontStyle _parseStringStyle(String parse) {
-    return parse.contains("italic") ? FontStyle.italic : FontStyle.normal;
-  }
-
-  factory Style._style(TextStyle textStyle) {
-    return Style._(
-      inherit: textStyle.inherit,
-      color: textStyle.color,
-      backgroundColor: textStyle.backgroundColor,
-      fontSize: textStyle.fontSize,
-      fontWeight: textStyle.fontWeight,
-      fontStyle: textStyle.fontStyle,
-      letterSpacing: textStyle.letterSpacing,
-      wordSpacing: textStyle.wordSpacing,
-      textBaseline: textStyle.textBaseline,
-      height: textStyle.height,
-      leadingDistribution: textStyle.leadingDistribution,
-      locale: textStyle.locale,
-      foreground: textStyle.foreground,
-      background: textStyle.background,
-      shadows: textStyle.shadows,
-      fontFeatures: textStyle.fontFeatures,
-      fontVariations: textStyle.fontVariations,
-      decoration: textStyle.decoration,
-      decorationColor: textStyle.decorationColor,
-      decorationStyle: textStyle.decorationStyle,
-      decorationThickness: textStyle.decorationThickness,
-      debugLabel: textStyle.debugLabel,
-      fontFamily: textStyle.fontFamily,
-      fontFamilyFallback: textStyle.fontFamilyFallback,
-      overflow: textStyle.overflow,
-    );
+    return parse.contains('italic') ? FontStyle.italic : FontStyle.normal;
   }
 }
 
@@ -3349,67 +3348,67 @@ class Shadow extends BoxShadow {
 class Shadows {
   const Shadows._();
 
-  static final List<Shadow> shadowSm = [Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 4, spreadRadius: 0, blurStyle: BlurStyle.normal)];
+  static final List<Shadow> shadowSm = [Shadow._(color: Theme.shadowSm5, offset: const Offset(0, 1), blurRadius: 4, spreadRadius: 0, blurStyle: BlurStyle.normal)];
 
   static final List<Shadow> shadowMd = [
-    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 4, spreadRadius: 0, blurStyle: BlurStyle.normal),
-    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: const Offset(0, 1), blurRadius: 4, spreadRadius: 0, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: const Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> shadowLg = [
-    Shadow._(color: Theme.shadowMd10, offset: Offset(0, 4), blurRadius: 8, spreadRadius: -2, blurStyle: BlurStyle.normal),
-    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 2), blurRadius: 4, spreadRadius: -2, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowMd10, offset: const Offset(0, 4), blurRadius: 8, spreadRadius: -2, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: const Offset(0, 2), blurRadius: 4, spreadRadius: -2, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> shadowXl = [
-    Shadow._(color: Theme.shadowMd10, offset: Offset(0, 12), blurRadius: 16, spreadRadius: -6, blurStyle: BlurStyle.normal),
-    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 2), blurRadius: 4, spreadRadius: -2, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowMd10, offset: const Offset(0, 12), blurRadius: 16, spreadRadius: -6, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: const Offset(0, 2), blurRadius: 4, spreadRadius: -2, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> shadow2xl = [
-    Shadow._(color: Theme.shadowMd10, offset: Offset(0, 18), blurRadius: 24, spreadRadius: -6, blurStyle: BlurStyle.normal),
-    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 6), blurRadius: 8, spreadRadius: -4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowMd10, offset: const Offset(0, 18), blurRadius: 24, spreadRadius: -6, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: const Offset(0, 6), blurRadius: 8, spreadRadius: -4, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> shadow3xl = [
-    Shadow._(color: Theme.shadowXl30, offset: Offset(0, 24), blurRadius: 48, spreadRadius: -10, blurStyle: BlurStyle.normal),
-    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 6), blurRadius: 8, spreadRadius: -4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowXl30, offset: const Offset(0, 24), blurRadius: 48, spreadRadius: -10, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: const Offset(0, 6), blurRadius: 8, spreadRadius: -4, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> focusBrand = [
-    Shadow._(color: Theme.stateBrandDefault500, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
-    Shadow._(color: Theme.alphaWhite80, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
-    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.stateBrandDefault500, offset: const Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.alphaWhite80, offset: const Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: const Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> focusGray = [
-    Shadow._(color: Theme.stateGreyHighest900, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
-    Shadow._(color: Theme.alphaWhite80, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
-    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.stateGreyHighest900, offset: const Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.alphaWhite80, offset: const Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: const Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> focusSuccess = [
-    Shadow._(color: Theme.stateSuccessDefault500, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
-    Shadow._(color: Theme.alphaWhite80, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
-    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.stateSuccessDefault500, offset: const Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.alphaWhite80, offset: const Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: const Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> focusWarning = [
-    Shadow._(color: Theme.stateWarningDefault500, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
-    Shadow._(color: Theme.alphaWhite80, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
-    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.stateWarningDefault500, offset: const Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.alphaWhite80, offset: const Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: const Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> focusInformation = [
-    Shadow._(color: Theme.stateInformationDefault500, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
-    Shadow._(color: Theme.alphaWhite80, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
-    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.stateInformationDefault500, offset: const Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.alphaWhite80, offset: const Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: const Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
   ];
 
   static final List<Shadow> focusDanger = [
-    Shadow._(color: Theme.stateDangerDefault500, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
-    Shadow._(color: Theme.alphaWhite80, offset: Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
-    Shadow._(color: Theme.shadowSm5, offset: Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.stateDangerDefault500, offset: const Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.alphaWhite80, offset: const Offset(0, 0), blurRadius: 0, spreadRadius: 4, blurStyle: BlurStyle.normal),
+    Shadow._(color: Theme.shadowSm5, offset: const Offset(0, 1), blurRadius: 2, spreadRadius: 0, blurStyle: BlurStyle.normal),
   ];
 }
 

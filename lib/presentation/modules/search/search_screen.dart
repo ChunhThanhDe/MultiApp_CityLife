@@ -28,7 +28,7 @@ class SearchScreen extends BaseScreen<SearchController> {
                 color: Colors.transparent,
                 child: Container(
                   height: 48,
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(24),
@@ -52,7 +52,7 @@ class SearchScreen extends BaseScreen<SearchController> {
           child: AppTextField(
             borderRadius: 24,
             isRequired: false,
-            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             prefixIcon: Padding(padding: const EdgeInsets.all(12), child: Assets.icons.icSearch.svg()),
             hintText: 'Search food and stores',
             focusNode: controller.focusNode,
@@ -70,7 +70,7 @@ class SearchScreen extends BaseScreen<SearchController> {
       backgroundColor: Colors.white,
       body: Obx(() {
         if (controller.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
 
         if (controller.searchData.value == null) {
@@ -79,9 +79,9 @@ class SearchScreen extends BaseScreen<SearchController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.search_outlined, size: 64, color: AppColors.textGreyDefault500),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text('No data available', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyDefault500)),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text('Please try again later', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
               ],
             ),
@@ -101,30 +101,30 @@ class SearchScreen extends BaseScreen<SearchController> {
     final searchData = controller.searchData.value!;
 
     return ListView(
-      padding: EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       children: [
-        SizedBox(height: 24),
+        const SizedBox(height: 24),
 
         // Top Searches Section
         if (searchData.topSearches != null && searchData.topSearches!.isNotEmpty) ...[
           Text('Top searches', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           ...searchData.topSearches!.map((item) => _buildSearchItemString(item, Assets.icons.icSearch.svg())),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
         ],
 
         // Recent Stores Section
         if (searchData.recentSearches != null && searchData.recentSearches!.isNotEmpty) ...[
           Text('Recent', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           ...searchData.recentSearches!.map((store) => _buildSearchItemString(store, Assets.icons.icClock.svg())),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
         ],
 
         // Top Categories Section
         if (searchData.topCategories != null && searchData.topCategories!.isNotEmpty) ...[
           Text('Top categories', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           ...searchData.topCategories!.map((item) => _buildSearchItemString(item.name, AppImage.network(item.imageUrl, width: 20, height: 20))),
         ],
       ],
@@ -140,9 +140,9 @@ class SearchScreen extends BaseScreen<SearchController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.search_off_outlined, size: 64, color: AppColors.textGreyDefault500),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text('No results found', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyDefault500)),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text('Try searching with different keywords', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
           ],
         ),
@@ -166,7 +166,7 @@ class SearchScreen extends BaseScreen<SearchController> {
     return GestureDetector(
       onTap: () => controller.onTapSearchItem(title),
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(vertical: 12),
         child: Row(
           children: [
             Expanded(

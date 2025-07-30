@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/data/app_storage.dart';
 
 class LanguageOption {
-  final Locale locale;
-  final String displayName;
 
   LanguageOption({required this.locale, required this.displayName});
+  final Locale locale;
+  final String displayName;
 }
 
 class LanguageManager extends GetxController {
@@ -16,7 +16,7 @@ class LanguageManager extends GetxController {
   }
 
   Locale getSelectedLanguage() {
-    String localeCode = AppStorage.getString(SharedPreferencesKeys.localeCode) ?? Get.deviceLocale!.languageCode;
+    final String localeCode = AppStorage.getString(SharedPreferencesKeys.localeCode) ?? Get.deviceLocale!.languageCode;
     return Locale(localeCode);
   }
 

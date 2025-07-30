@@ -11,7 +11,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(title: 'Checkout');
+    return const BasicAppBar(title: 'Checkout');
   }
 
   @override
@@ -63,10 +63,10 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
 
   Widget divider([double leftPad = 0]) => Padding(
     padding: EdgeInsets.only(left: leftPad),
-    child: Divider(height: 1, color: Color(0xFFE8EBEE)),
+    child: const Divider(height: 1, color: Color(0xFFE8EBEE)),
   );
 
-  Widget dividerSpace() => Container(width: double.infinity, height: 6, color: Color(0xFFF7F8F9));
+  Widget dividerSpace() => Container(width: double.infinity, height: 6, color: const Color(0xFFF7F8F9));
 
   Widget sectionLabel(String label) => Padding(
     padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
@@ -74,7 +74,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
       children: [
         Text(
           label,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Color(0xFF161A1D), fontFamily: 'Inter'),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Color(0xFF161A1D), fontFamily: 'Inter'),
         ),
       ],
     ),
@@ -88,12 +88,12 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   }) => InkWell(
     onTap: onTap,
     child: Container(
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
       height: 50,
       child: Row(
         children: [
           SizedBox(width: 24, height: 24, child: icon),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,16 +101,16 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+                  style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
                 ),
                 Text(
                   subtitle,
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xFF4A5763)),
+                  style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xFF4A5763)),
                 ),
               ],
             ),
           ),
-          Icon(Icons.arrow_forward_ios_rounded, size: 20, color: Color(0xFF4A5763)),
+          const Icon(Icons.arrow_forward_ios_rounded, size: 20, color: Color(0xFF4A5763)),
         ],
       ),
     ),
@@ -125,26 +125,26 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
     Widget? trailing,
   }) => Container(
     decoration: BoxDecoration(
-      color: selected ? Color(0xFFEFEFFB) : Colors.white,
-      border: Border.all(color: selected ? Color(0xFFBEBDEF) : Color(0x1A101214), width: 1),
+      color: selected ? const Color(0xFFEFEFFB) : Colors.white,
+      border: Border.all(color: selected ? const Color(0xFFBEBDEF) : const Color(0x1A101214), width: 1),
       borderRadius: BorderRadius.circular(6),
     ),
-    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
     child: Row(
       children: [
         SizedBox(width: 24, height: 24, child: icon),
-        SizedBox(width: 12),
+        const SizedBox(width: 12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 title,
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
               ),
               Text(
                 subtitle,
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xFF4A5763)),
+                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xFF4A5763)),
               ),
             ],
           ),
@@ -152,18 +152,18 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
         if (label != null)
           Text(
             label,
-            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF4A5763)),
+            style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF4A5763)),
           ),
         if (trailing != null) trailing,
-        if (selected) Icon(Icons.check_circle, color: Color(0xFF242290), size: 24),
+        if (selected) const Icon(Icons.check_circle, color: Color(0xFF242290), size: 24),
       ],
     ),
   );
 
   Widget orderGroupItem({required String logo, required String name, required String detail, required String amount}) => Container(
     height: 66,
-    margin: EdgeInsets.only(bottom: 8),
-    padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+    margin: const EdgeInsets.only(bottom: 8),
+    padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
     child: Row(
       children: [
         // Sử dụng CircleAvatar với child là SvgPicture.asset
@@ -176,7 +176,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
             height: 32,
           ),
         ),
-        SizedBox(width: 12),
+        const SizedBox(width: 12),
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -184,20 +184,20 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
             children: [
               Text(
                 name,
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
               ),
               Text(
                 detail,
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xFF4A5763)),
+                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xFF4A5763)),
               ),
             ],
           ),
         ),
         Text(
           amount,
-          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF4A5763)),
+          style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF4A5763)),
         ),
-        Icon(Icons.keyboard_arrow_down_rounded, color: Color(0xFF4A5763)),
+        const Icon(Icons.keyboard_arrow_down_rounded, color: Color(0xFF4A5763)),
       ],
     ),
   );
@@ -208,37 +208,37 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
       children: [
         Text(
           left,
-          style: TextStyle(color: Color(0xFF4A5763), fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w400),
+          style: const TextStyle(color: Color(0xFF4A5763), fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w400),
         ),
         Text(
           right,
-          style: TextStyle(color: Color(0xFF4A5763), fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w400),
+          style: const TextStyle(color: Color(0xFF4A5763), fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w400),
         ),
       ],
     ),
   );
 
   Widget paymentItem() => Container(
-    padding: EdgeInsets.symmetric(vertical: 4),
+    padding: const EdgeInsets.symmetric(vertical: 4),
     child: Row(
       children: [
         Container(
           width: 42,
           height: 28,
-          decoration: BoxDecoration(color: Color(0xFF1434CB), borderRadius: BorderRadius.circular(4)),
+          decoration: BoxDecoration(color: const Color(0xFF1434CB), borderRadius: BorderRadius.circular(4)),
           alignment: Alignment.center,
-          child: Text(
-            "VISA",
+          child: const Text(
+            'VISA',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15, letterSpacing: 1.2, fontFamily: 'Inter'),
           ),
         ),
-        SizedBox(width: 12),
-        Text(
-          "Visa ••••5290",
+        const SizedBox(width: 12),
+        const Text(
+          'Visa ••••5290',
           style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
         ),
-        Spacer(),
-        Icon(Icons.arrow_forward_ios_rounded, size: 20, color: Color(0xFF4A5763)),
+        const Spacer(),
+        const Icon(Icons.arrow_forward_ios_rounded, size: 20, color: Color(0xFF4A5763)),
       ],
     ),
   );
@@ -250,12 +250,12 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
       children: [
         cellItem(
           icon: SvgPicture.asset('assets/icons/ic_home.svg'),
-          title: selectedAddress?.addressType ?? "Address",
-          subtitle: selectedAddress?.address ?? "No address selected",
+          title: selectedAddress?.addressType ?? 'Address',
+          subtitle: selectedAddress?.address ?? 'No address selected',
           onTap: () => _showAddressSelection(checkoutData.addresses ?? []),
         ),
         divider(60),
-        cellItem(icon: SvgPicture.asset('assets/icons/ic_box_package_courier_hands.svg'), title: "Hand it to me", subtitle: "Please Hand it to me", onTap: () {}),
+        cellItem(icon: SvgPicture.asset('assets/icons/ic_box_package_courier_hands.svg'), title: 'Hand it to me', subtitle: 'Please Hand it to me', onTap: () {}),
       ],
     );
   }
@@ -263,7 +263,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   Widget _buildDeliveryOptionsSection(GetCheckoutSummaryResponse checkoutData) {
     return Column(
       children: [
-        sectionLabel("Delivery Options"),
+        sectionLabel('Delivery Options'),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
@@ -278,7 +278,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                       icon: _getDeliveryIcon(option.key ?? 1),
                       title: option.label ?? '',
                       subtitle: option.desc ?? '',
-                      label: option.fee != null ? "\$${option.fee!.toStringAsFixed(2)}" : null,
+                      label: option.fee != null ? '\$${option.fee!.toStringAsFixed(2)}' : null,
                     ),
                   ),
                 ),
@@ -293,7 +293,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   Widget _buildOrderDetailsSection(GetCheckoutSummaryResponse checkoutData) {
     return Column(
       children: [
-        sectionLabel("Order Details"),
+        sectionLabel('Order Details'),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
@@ -304,10 +304,10 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 8),
                 child: orderGroupItem(
-                  logo: store.storeLogo ?? "assets/images/default_store.png",
-                  name: store.storeName ?? "Store",
-                  detail: "$itemCount items",
-                  amount: "\$${storeTotal.toStringAsFixed(2)}",
+                  logo: store.storeLogo ?? 'assets/images/default_store.png',
+                  name: store.storeName ?? 'Store',
+                  detail: '$itemCount items',
+                  amount: '\$${storeTotal.toStringAsFixed(2)}',
                 ),
               );
             }).toList(),
@@ -320,33 +320,33 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   Widget _buildPromocodeSection(GetCheckoutSummaryResponse checkoutData) {
     return Column(
       children: [
-        sectionLabel("Promocode"),
+        sectionLabel('Promocode'),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Row(
             children: [
-              Icon(Icons.sell_outlined, color: Color(0xFF798A9A), size: 18),
-              SizedBox(width: 8),
+              const Icon(Icons.sell_outlined, color: Color(0xFF798A9A), size: 18),
+              const SizedBox(width: 8),
               Expanded(
                 child: GestureDetector(
                   onTap: () => _showPromocodeDialog(checkoutData.availableCoupons ?? []),
                   child: Obx(
                     () => Text(
-                      controller.promoCode.value.isEmpty ? "Enter Code" : controller.promoCode.value,
-                      style: TextStyle(fontFamily: 'Inter', color: controller.promoCode.value.isEmpty ? Color(0xFF798A9A) : Color(0xFF161A1D), fontWeight: FontWeight.w400, fontSize: 16),
+                      controller.promoCode.value.isEmpty ? 'Enter Code' : controller.promoCode.value,
+                      style: TextStyle(fontFamily: 'Inter', color: controller.promoCode.value.isEmpty ? const Color(0xFF798A9A) : const Color(0xFF161A1D), fontWeight: FontWeight.w400, fontSize: 16),
                     ),
                   ),
                 ),
               ),
               TextButton(
                 style: TextButton.styleFrom(
-                  foregroundColor: Color(0xFF5856D7),
-                  minimumSize: Size(0, 32),
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-                  textStyle: TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500),
+                  foregroundColor: const Color(0xFF5856D7),
+                  minimumSize: const Size(0, 32),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                  textStyle: const TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500),
                 ),
                 onPressed: () => _showPromocodeDialog(checkoutData.availableCoupons ?? []),
-                child: Text("Apply"),
+                child: const Text('Apply'),
               ),
             ],
           ),
@@ -361,21 +361,21 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
       child: Obx(
         () => Column(
           children: [
-            priceRow("Subtotal:", "\$${(checkoutData.subtotal ?? 0.0).toStringAsFixed(2)}"),
-            priceRow("Delivery Fee:", "\$${controller.selectedDeliveryFee.toStringAsFixed(2)}"),
-            priceRow("Taxes & Estimated Fees:", "\$${(checkoutData.tax ?? 0.0).toStringAsFixed(2)}"),
-            priceRow("Discount:", "-\$${(checkoutData.discount ?? 0.0).toStringAsFixed(2)}"),
-            SizedBox(height: 6),
+            priceRow('Subtotal:', '\$${(checkoutData.subtotal ?? 0.0).toStringAsFixed(2)}'),
+            priceRow('Delivery Fee:', '\$${controller.selectedDeliveryFee.toStringAsFixed(2)}'),
+            priceRow('Taxes & Estimated Fees:', '\$${(checkoutData.tax ?? 0.0).toStringAsFixed(2)}'),
+            priceRow('Discount:', '-\$${(checkoutData.discount ?? 0.0).toStringAsFixed(2)}'),
+            const SizedBox(height: 6),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "Total:",
+                const Text(
+                  'Total:',
                   style: TextStyle(color: Color(0xFF161A1D), fontWeight: FontWeight.w500, fontSize: 20, fontFamily: 'Inter'),
                 ),
                 Text(
-                  "\$${controller.calculatedTotal.toStringAsFixed(2)}",
-                  style: TextStyle(color: Color(0xFF161A1D), fontWeight: FontWeight.w500, fontSize: 20, fontFamily: 'Inter'),
+                  '\$${controller.calculatedTotal.toStringAsFixed(2)}',
+                  style: const TextStyle(color: Color(0xFF161A1D), fontWeight: FontWeight.w500, fontSize: 20, fontFamily: 'Inter'),
                 ),
               ],
             ),
@@ -388,7 +388,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   Widget _buildPaymentSection(GetCheckoutSummaryResponse checkoutData) {
     return Column(
       children: [
-        sectionLabel("Payment"),
+        sectionLabel('Payment'),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
@@ -400,20 +400,20 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                     margin: const EdgeInsets.only(bottom: 12),
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      border: Border.all(color: controller.selectedPaymentMethod.value == method.key ? Color(0xFF5856D7) : Color(0xFFE5E7EB)),
+                      border: Border.all(color: controller.selectedPaymentMethod.value == method.key ? const Color(0xFF5856D7) : const Color(0xFFE5E7EB)),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
                       children: [
-                        Icon(_getPaymentIcon(method.key ?? ''), color: controller.selectedPaymentMethod.value == method.key ? Color(0xFF5856D7) : Color(0xFF798A9A)),
-                        SizedBox(width: 12),
+                        Icon(_getPaymentIcon(method.key ?? ''), color: controller.selectedPaymentMethod.value == method.key ? const Color(0xFF5856D7) : const Color(0xFF798A9A)),
+                        const SizedBox(width: 12),
                         Expanded(
                           child: Text(
                             method.label ?? '',
-                            style: TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
+                            style: const TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
                           ),
                         ),
-                        if (controller.selectedPaymentMethod.value == method.key) Icon(Icons.check_circle, color: Color(0xFF5856D7)),
+                        if (controller.selectedPaymentMethod.value == method.key) const Icon(Icons.check_circle, color: Color(0xFF5856D7)),
                       ],
                     ),
                   ),
@@ -431,12 +431,12 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
             child: Obx(
               () => ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF5856D7),
+                  backgroundColor: const Color(0xFF5856D7),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                 ),
                 onPressed: controller.isLoading.value ? null : () => controller.orderNow(),
                 child: controller.isLoading.value
-                    ? SizedBox(
+                    ? const SizedBox(
                         width: 20,
                         height: 20,
                         child: CircularProgressIndicator(
@@ -444,8 +444,8 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                           valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                         ),
                       )
-                    : Text(
-                        "Order Now",
+                    : const Text(
+                        'Order Now',
                         style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Inter', fontWeight: FontWeight.w500),
                       ),
               ),

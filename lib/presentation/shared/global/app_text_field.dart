@@ -3,6 +3,28 @@ import 'package:sixam_mart_user/app/theme/theme.dart';
 
 /// A customizable text field with optional label, prefix/suffix icons, and validation.
 class AppTextField extends StatelessWidget {
+
+  const AppTextField({
+    super.key,
+    this.label,
+    this.isRequired = true,
+    this.controller,
+    this.hintText,
+    this.keyboardType,
+    this.onChanged,
+    this.validator,
+    this.focusNode,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.borderRadius,
+    this.textStyle,
+    this.hintStyle,
+    this.labelStyle,
+    this.obscureText = false,
+    this.contentPadding,
+    this.helperText,
+    this.autofocus = false,
+  });
   /// The label displayed above the text field.
   final String? label;
 
@@ -56,28 +78,6 @@ class AppTextField extends StatelessWidget {
 
   /// Whether to automatically focus the text field when the widget is built.
   final bool autofocus;
-
-  const AppTextField({
-    super.key,
-    this.label,
-    this.isRequired = true,
-    this.controller,
-    this.hintText,
-    this.keyboardType,
-    this.onChanged,
-    this.validator,
-    this.focusNode,
-    this.prefixIcon,
-    this.suffixIcon,
-    this.borderRadius,
-    this.textStyle,
-    this.hintStyle,
-    this.labelStyle,
-    this.obscureText = false,
-    this.contentPadding,
-    this.helperText,
-    this.autofocus = false,
-  });
 
   @override
   Widget build(BuildContext context) {

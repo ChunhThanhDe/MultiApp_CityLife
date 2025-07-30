@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class SliverBox extends StatelessWidget {
+  const SliverBox({super.key, this.height, this.width, this.child});
   final double? height;
   final double? width;
   final Widget? child;
-  const SliverBox({super.key, this.height, this.width, this.child});
 
   @override
   Widget build(BuildContext context) {

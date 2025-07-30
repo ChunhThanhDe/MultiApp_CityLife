@@ -7,7 +7,7 @@ import 'package:sixam_mart_user/domain/models/response/get_cart_list_response.da
 void main() {
   group('Cart Models Tests', () {
     test('AddToCartRequest should create valid JSON', () {
-      final request = AddToCartRequest(
+      const request = AddToCartRequest(
         itemId: 1,
         model: 'Item',
         price: 10.99,
@@ -31,7 +31,7 @@ void main() {
     });
 
     test('UpdateCartRequest should create valid JSON', () {
-      final request = UpdateCartRequest(cartId: 1, quantity: 3);
+      const request = UpdateCartRequest(cartId: 1, quantity: 3);
 
       final json = request.toJson();
 
@@ -40,7 +40,7 @@ void main() {
     });
 
     test('RemoveFromCartRequest should create valid JSON', () {
-      final request = RemoveFromCartRequest(cartId: 1);
+      const request = RemoveFromCartRequest(cartId: 1);
 
       final json = request.toJson();
 
@@ -48,7 +48,7 @@ void main() {
     });
 
     test('GetCartListItem should handle null values', () {
-      final item = GetCartListItem(cartId: 1, itemId: 1, itemName: 'Test Item', itemImage: null, itemPrice: 10.99, itemQuantity: 2);
+      const item = GetCartListItem(cartId: 1, itemId: 1, itemName: 'Test Item', itemImage: null, itemPrice: 10.99, itemQuantity: 2);
 
       expect(item.cartId, 1);
       expect(item.itemName, 'Test Item');

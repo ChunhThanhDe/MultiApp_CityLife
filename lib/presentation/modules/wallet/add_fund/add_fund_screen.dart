@@ -10,7 +10,7 @@ import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bottom_sheet.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
 
-import 'add_fund_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/wallet/add_fund/add_fund_controller.dart';
 
 class AddFundScreen extends BaseScreen<AddFundController> {
   const AddFundScreen({super.key});
@@ -109,7 +109,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
                     padding: const EdgeInsets.only(left: 12, right: 4),
                     child: Text('\$', style: AppTextStyles.typographyH7SemiBold.copyWith(color: hasValue ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500)),
                   ),
-                  prefixIconConstraints: BoxConstraints(minWidth: 16),
+                  prefixIconConstraints: const BoxConstraints(minWidth: 16),
                   filled: !isFilled,
                   fillColor: !isFilled ? Colors.transparent : null,
                   border: isFilled

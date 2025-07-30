@@ -7,7 +7,7 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
 
-import 'confirm_address_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/address/confirm_address/confirm_address_controller.dart';
 
 class ConfirmAddressScreen extends BaseScreen<ConfirmAddressController> {
   const ConfirmAddressScreen({super.key});
@@ -79,7 +79,7 @@ class ConfirmAddressScreen extends BaseScreen<ConfirmAddressController> {
           decoration: ShapeDecoration(
             color: AppColors.stateBaseWhite,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-            shadows: [
+            shadows: const [
               BoxShadow(color: Color(0x19101214), blurRadius: 16, offset: Offset(0, 12), spreadRadius: -6),
               BoxShadow(color: Color(0x0C101214), blurRadius: 4, offset: Offset(0, 2), spreadRadius: -2),
             ],

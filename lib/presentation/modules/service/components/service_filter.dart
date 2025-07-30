@@ -16,13 +16,13 @@ class _FilterScreenState extends State<FilterScreen> {
 
   // Price values (0: $, 1: $$, 2: $$$, 3: $$$$, 4: $$$$$)
   RangeValues priceRange = const RangeValues(0, 2);
-  static const priceLabels = ["\$", "\$\$", "\$\$\$", "\$\$\$\$", "\$\$\$\$\$"];
+  static const priceLabels = ['\$', '\$\$', '\$\$\$', '\$\$\$\$', '\$\$\$\$\$'];
 
   // Rating values (0: 2+, 1: 2.5+, 2: 4+, 3: 4.5+, 4: 5)
   double ratingValue = 2;
   static const ratingMarks = [2.0, 2.5, 4.0, 4.5, 5.0];
 
-  String selectedDelivery = "Delivery";
+  String selectedDelivery = 'Delivery';
 
   bool under30Min = false;
   bool offers = false;
@@ -43,7 +43,7 @@ class _FilterScreenState extends State<FilterScreen> {
           Container(
             width: 48,
             height: 4,
-            decoration: BoxDecoration(color: Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(99)),
+            decoration: BoxDecoration(color: const Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(99)),
           ),
           const SizedBox(height: 16),
           // Header
@@ -62,12 +62,12 @@ class _FilterScreenState extends State<FilterScreen> {
                       // Reset all filter values
                       priceRange = const RangeValues(0, 2);
                       ratingValue = 2;
-                      selectedDelivery = "Delivery";
+                      selectedDelivery = 'Delivery';
                       under30Min = false;
                       offers = false;
                     });
                   },
-                  style: TextButton.styleFrom(foregroundColor: Color(0xFF798A9A), padding: EdgeInsets.zero, minimumSize: Size(0, 0)),
+                  style: TextButton.styleFrom(foregroundColor: const Color(0xFF798A9A), padding: EdgeInsets.zero, minimumSize: const Size(0, 0)),
                   child: const Text('Clear all', style: TextStyle(fontSize: 14)),
                 ),
               ],
@@ -84,47 +84,47 @@ class _FilterScreenState extends State<FilterScreen> {
                     expanded: deliveryExpanded,
                     onTap: () => setState(() => deliveryExpanded = !deliveryExpanded),
                     icon: SvgPicture.asset('assets/icons/ic_car_black.svg', width: 24, height: 24),
-                    title: "Delivery",
+                    title: 'Delivery',
                     children: deliveryExpanded
                         ? [
                             _SelectOption(
-                              label: "In store",
-                              selected: selectedDelivery == "In store",
+                              label: 'In store',
+                              selected: selectedDelivery == 'In store',
                               onTap: () {
                                 setState(() {
-                                  selectedDelivery = "In store";
+                                  selectedDelivery = 'In store';
                                 });
                               },
                             ),
                             _SelectOption(
-                              label: "Delivery",
-                              selected: selectedDelivery == "Delivery",
+                              label: 'Delivery',
+                              selected: selectedDelivery == 'Delivery',
                               onTap: () {
                                 setState(() {
-                                  selectedDelivery = "Delivery";
+                                  selectedDelivery = 'Delivery';
                                 });
                               },
                             ),
                             _SelectOption(
-                              label: "Drive thru",
-                              selected: selectedDelivery == "Drive thru",
+                              label: 'Drive thru',
+                              selected: selectedDelivery == 'Drive thru',
                               onTap: () {
                                 setState(() {
-                                  selectedDelivery = "Drive thru";
+                                  selectedDelivery = 'Drive thru';
                                 });
                               },
                             ),
                           ]
                         : [],
                   ),
-                  _DividerLine(),
+                  const _DividerLine(),
 
                   // PRICE (expandable with slider)
                   _ExpandableSection(
                     expanded: priceExpanded,
                     onTap: () => setState(() => priceExpanded = !priceExpanded),
                     icon: SvgPicture.asset('assets/icons/ic_dollar.svg', width: 24, height: 24),
-                    title: "Price",
+                    title: 'Price',
                     showClear: priceExpanded,
                     onClear: () {
                       setState(() {
@@ -154,14 +154,14 @@ class _FilterScreenState extends State<FilterScreen> {
                           ]
                         : [],
                   ),
-                  _DividerLine(),
+                  const _DividerLine(),
 
                   // RATING (expandable with slider)
                   _ExpandableSection(
                     expanded: ratingExpanded,
                     onTap: () => setState(() => ratingExpanded = !ratingExpanded),
                     icon: SvgPicture.asset('assets/icons/ic_star.svg', width: 24, height: 24),
-                    title: "Rating",
+                    title: 'Rating',
                     children: ratingExpanded
                         ? [
                             Padding(
@@ -174,17 +174,17 @@ class _FilterScreenState extends State<FilterScreen> {
                           ]
                         : [],
                   ),
-                  _DividerLine(),
+                  const _DividerLine(),
 
                   // Under 30 min
                   _CheckableCell(
                     icon: SvgPicture.asset('assets/icons/ic_clock_time.svg', width: 24, height: 24),
-                    title: "Under 30 min",
+                    title: 'Under 30 min',
                     checked: under30Min,
                     onChanged: (val) => setState(() => under30Min = val),
                   ),
-                  _DividerLine(),
-                  _CheckableCell(icon: SvgPicture.asset('assets/icons/ic_sale.svg', width: 24, height: 24), title: "Offers", checked: offers, onChanged: (val) => setState(() => offers = val)),
+                  const _DividerLine(),
+                  _CheckableCell(icon: SvgPicture.asset('assets/icons/ic_sale.svg', width: 24, height: 24), title: 'Offers', checked: offers, onChanged: (val) => setState(() => offers = val)),
 
                   const SizedBox(height: 16),
                 ],
@@ -200,7 +200,7 @@ class _FilterScreenState extends State<FilterScreen> {
               height: 48,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF5856D7),
+                  backgroundColor: const Color(0xFF5856D7),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                   elevation: 0,
                 ),
@@ -217,7 +217,7 @@ class _FilterScreenState extends State<FilterScreen> {
           Container(
             width: 134,
             height: 5,
-            decoration: BoxDecoration(color: Color(0xFF161A1D), borderRadius: BorderRadius.circular(100)),
+            decoration: BoxDecoration(color: const Color(0xFF161A1D), borderRadius: BorderRadius.circular(100)),
           ),
           const SizedBox(height: 16),
         ],
@@ -228,6 +228,8 @@ class _FilterScreenState extends State<FilterScreen> {
 
 // Section expandable cell
 class _ExpandableSection extends StatelessWidget {
+
+  const _ExpandableSection({required this.expanded, required this.onTap, required this.icon, required this.title, this.showClear = false, this.onClear, this.children = const []});
   final bool expanded;
   final VoidCallback onTap;
   final Widget icon;
@@ -235,8 +237,6 @@ class _ExpandableSection extends StatelessWidget {
   final bool showClear;
   final VoidCallback? onClear;
   final List<Widget> children;
-
-  const _ExpandableSection({required this.expanded, required this.onTap, required this.icon, required this.title, this.showClear = false, this.onClear, this.children = const []});
 
   @override
   Widget build(BuildContext context) {
@@ -260,9 +260,9 @@ class _ExpandableSection extends StatelessWidget {
                 ),
                 if (showClear && onClear != null)
                   TextButton(
-                    style: TextButton.styleFrom(foregroundColor: Color(0xFF798A9A), padding: EdgeInsets.zero, minimumSize: Size(0, 0)),
+                    style: TextButton.styleFrom(foregroundColor: const Color(0xFF798A9A), padding: EdgeInsets.zero, minimumSize: const Size(0, 0)),
                     onPressed: onClear,
-                    child: const Text("Clear", style: TextStyle(fontSize: 14)),
+                    child: const Text('Clear', style: TextStyle(fontSize: 14)),
                   ),
                 arrowIcon(expanded),
               ],
@@ -281,16 +281,12 @@ class _DividerLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(margin: EdgeInsets.only(left: 56), height: 1, color: Color(0xFFE8EBEE));
+    return Container(margin: const EdgeInsets.only(left: 56), height: 1, color: const Color(0xFFE8EBEE));
   }
 }
 
 // Widget chọn lựa option nhỏ (ví dụ: Delivery method)
 class _SelectOption extends StatelessWidget {
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
-  final bool enabled;
   const _SelectOption({
     required this.label,
     required this.selected,
@@ -298,6 +294,10 @@ class _SelectOption extends StatelessWidget {
     // ignore: unused_element_parameter
     this.enabled = true,
   });
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -313,10 +313,10 @@ class _SelectOption extends StatelessWidget {
               Expanded(
                 child: Text(
                   label,
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: selected ? Color(0xFF161A1D) : Color(0xFF798A9A)),
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: selected ? const Color(0xFF161A1D) : const Color(0xFF798A9A)),
                 ),
               ),
-              if (selected) Icon(Icons.check, color: Color(0xFF161A1D), size: 22),
+              if (selected) const Icon(Icons.check, color: Color(0xFF161A1D), size: 22),
             ],
           ),
         ),
@@ -327,14 +327,14 @@ class _SelectOption extends StatelessWidget {
 
 // --- Price: Custom Range Slider với các label đô la
 class _CustomRangeSlider extends StatelessWidget {
+
+  const _CustomRangeSlider({required this.range, required this.min, required this.max, required this.divisions, required this.labels, required this.onChanged});
   final RangeValues range;
   final double min;
   final double max;
   final int divisions;
   final List<String> labels;
   final ValueChanged<RangeValues> onChanged;
-
-  const _CustomRangeSlider({required this.range, required this.min, required this.max, required this.divisions, required this.labels, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -355,10 +355,10 @@ class _CustomRangeSlider extends StatelessWidget {
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
             trackHeight: 8,
-            activeTrackColor: Color(0xFF5856D7),
-            inactiveTrackColor: Color(0xFFE8EBEE),
+            activeTrackColor: const Color(0xFF5856D7),
+            inactiveTrackColor: const Color(0xFFE8EBEE),
             thumbColor: Colors.white,
-            overlayColor: Color(0x205856D7),
+            overlayColor: const Color(0x205856D7),
             // rangeThumbShape: _CustomRangeThumbShape(),
             // rangeTrackShape: const _CustomRangeTrackShape(),
             overlayShape: SliderComponentShape.noOverlay,
@@ -371,18 +371,18 @@ class _CustomRangeSlider extends StatelessWidget {
 }
 
 class _CustomMarkSlider extends StatelessWidget {
+
+  const _CustomMarkSlider({required this.value, required this.marks, required this.onChanged});
   final double value;
   final List<double> marks;
   final ValueChanged<double> onChanged;
-
-  const _CustomMarkSlider({required this.value, required this.marks, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     final labelWidgets = marks
         .map(
           (m) => Text(
-            m == m.toInt() ? "${m.toInt()}+" : "${m.toStringAsFixed(1)}+",
+            m == m.toInt() ? '${m.toInt()}+' : '${m.toStringAsFixed(1)}+',
             style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xFF161A1D)),
           ),
         )
@@ -395,10 +395,10 @@ class _CustomMarkSlider extends StatelessWidget {
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
             trackHeight: 8,
-            activeTrackColor: Color(0xFF5856D7),
-            inactiveTrackColor: Color(0xFFE8EBEE),
+            activeTrackColor: const Color(0xFF5856D7),
+            inactiveTrackColor: const Color(0xFFE8EBEE),
             thumbColor: Colors.white,
-            overlayColor: Color(0x205856D7),
+            overlayColor: const Color(0x205856D7),
             // thumbShape: _CustomThumbShape(),
             // trackShape: const _CustomTrackShape(),
             overlayShape: SliderComponentShape.noOverlay,
@@ -411,12 +411,12 @@ class _CustomMarkSlider extends StatelessWidget {
 }
 
 class _CheckableCell extends StatelessWidget {
+
+  const _CheckableCell({required this.icon, required this.title, required this.checked, required this.onChanged});
   final Widget icon;
   final String title;
   final bool checked;
   final ValueChanged<bool> onChanged;
-
-  const _CheckableCell({required this.icon, required this.title, required this.checked, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {

@@ -6,12 +6,12 @@ import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/presentation/shared/widgets/banners/delivery_info_widget.dart';
 
 class BannerDiscountWidget extends StatelessWidget {
+
+  const BannerDiscountWidget({required this.item, required this.index, required this.totalItems, super.key, this.onTap});
   final BannerEntity item;
   final int index;
   final int totalItems;
   final VoidCallback? onTap;
-
-  const BannerDiscountWidget({super.key, required this.item, required this.index, required this.totalItems, this.onTap});
 
   @override
   Widget build(BuildContext context) {

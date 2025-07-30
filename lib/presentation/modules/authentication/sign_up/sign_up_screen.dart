@@ -13,7 +13,7 @@ import 'package:sixam_mart_user/presentation/modules/authentication/components/p
 import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_text_field.dart';
 
-import 'sign_up_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign_up_controller.dart';
 
 class SignUpScreen extends BaseScreen<SignUpController> {
   const SignUpScreen({super.key});
@@ -37,7 +37,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
             SizedBox(height: 16.h),
             _buildToggleSignUpMethodButton(),
             SizedBox(height: 80.h),
-            AuthBottomSection(isSignIn: false),
+            const AuthBottomSection(isSignIn: false),
           ],
         ),
       ),

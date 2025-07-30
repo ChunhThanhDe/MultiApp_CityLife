@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProductDetailResponse {
 
- String get type; ProductDetail get item; List<ProductRecommendation> get recommendations;
+ ProductDetail get item; String get type; List<ProductRecommendation> get recommendations;
 /// Create a copy of ProductDetailResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $ProductDetailResponseCopyWith<ProductDetailResponse> get copyWith => _$ProductD
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductDetailResponse&&(identical(other.type, type) || other.type == type)&&(identical(other.item, item) || other.item == item)&&const DeepCollectionEquality().equals(other.recommendations, recommendations));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductDetailResponse&&(identical(other.item, item) || other.item == item)&&(identical(other.type, type) || other.type == type)&&const DeepCollectionEquality().equals(other.recommendations, recommendations));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,type,item,const DeepCollectionEquality().hash(recommendations));
+int get hashCode => Object.hash(runtimeType,item,type,const DeepCollectionEquality().hash(recommendations));
 
 @override
 String toString() {
-  return 'ProductDetailResponse(type: $type, item: $item, recommendations: $recommendations)';
+  return 'ProductDetailResponse(item: $item, type: $type, recommendations: $recommendations)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $ProductDetailResponseCopyWith<$Res>  {
   factory $ProductDetailResponseCopyWith(ProductDetailResponse value, $Res Function(ProductDetailResponse) _then) = _$ProductDetailResponseCopyWithImpl;
 @useResult
 $Res call({
- String type, ProductDetail item, List<ProductRecommendation> recommendations
+ ProductDetail item, String type, List<ProductRecommendation> recommendations
 });
 
 
@@ -66,11 +66,11 @@ class _$ProductDetailResponseCopyWithImpl<$Res>
 
 /// Create a copy of ProductDetailResponse
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? type = null,Object? item = null,Object? recommendations = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? item = null,Object? type = null,Object? recommendations = null,}) {
   return _then(_self.copyWith(
-type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as String,item: null == item ? _self.item : item // ignore: cast_nullable_to_non_nullable
-as ProductDetail,recommendations: null == recommendations ? _self.recommendations : recommendations // ignore: cast_nullable_to_non_nullable
+item: null == item ? _self.item : item // ignore: cast_nullable_to_non_nullable
+as ProductDetail,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,recommendations: null == recommendations ? _self.recommendations : recommendations // ignore: cast_nullable_to_non_nullable
 as List<ProductRecommendation>,
   ));
 }
@@ -91,11 +91,11 @@ $ProductDetailCopyWith<$Res> get item {
 @JsonSerializable()
 
 class _ProductDetailResponse implements ProductDetailResponse {
-  const _ProductDetailResponse({this.type = '', required this.item, final  List<ProductRecommendation> recommendations = const []}): _recommendations = recommendations;
+  const _ProductDetailResponse({required this.item, this.type = '', final  List<ProductRecommendation> recommendations = const []}): _recommendations = recommendations;
   factory _ProductDetailResponse.fromJson(Map<String, dynamic> json) => _$ProductDetailResponseFromJson(json);
 
-@override@JsonKey() final  String type;
 @override final  ProductDetail item;
+@override@JsonKey() final  String type;
  final  List<ProductRecommendation> _recommendations;
 @override@JsonKey() List<ProductRecommendation> get recommendations {
   if (_recommendations is EqualUnmodifiableListView) return _recommendations;
@@ -117,16 +117,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductDetailResponse&&(identical(other.type, type) || other.type == type)&&(identical(other.item, item) || other.item == item)&&const DeepCollectionEquality().equals(other._recommendations, _recommendations));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductDetailResponse&&(identical(other.item, item) || other.item == item)&&(identical(other.type, type) || other.type == type)&&const DeepCollectionEquality().equals(other._recommendations, _recommendations));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,type,item,const DeepCollectionEquality().hash(_recommendations));
+int get hashCode => Object.hash(runtimeType,item,type,const DeepCollectionEquality().hash(_recommendations));
 
 @override
 String toString() {
-  return 'ProductDetailResponse(type: $type, item: $item, recommendations: $recommendations)';
+  return 'ProductDetailResponse(item: $item, type: $type, recommendations: $recommendations)';
 }
 
 
@@ -137,7 +137,7 @@ abstract mixin class _$ProductDetailResponseCopyWith<$Res> implements $ProductDe
   factory _$ProductDetailResponseCopyWith(_ProductDetailResponse value, $Res Function(_ProductDetailResponse) _then) = __$ProductDetailResponseCopyWithImpl;
 @override @useResult
 $Res call({
- String type, ProductDetail item, List<ProductRecommendation> recommendations
+ ProductDetail item, String type, List<ProductRecommendation> recommendations
 });
 
 
@@ -154,11 +154,11 @@ class __$ProductDetailResponseCopyWithImpl<$Res>
 
 /// Create a copy of ProductDetailResponse
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? type = null,Object? item = null,Object? recommendations = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? item = null,Object? type = null,Object? recommendations = null,}) {
   return _then(_ProductDetailResponse(
-type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as String,item: null == item ? _self.item : item // ignore: cast_nullable_to_non_nullable
-as ProductDetail,recommendations: null == recommendations ? _self._recommendations : recommendations // ignore: cast_nullable_to_non_nullable
+item: null == item ? _self.item : item // ignore: cast_nullable_to_non_nullable
+as ProductDetail,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,recommendations: null == recommendations ? _self._recommendations : recommendations // ignore: cast_nullable_to_non_nullable
 as List<ProductRecommendation>,
   ));
 }

@@ -91,9 +91,9 @@ class _FilterCategoriesList extends StatelessWidget {
 }
 
 class _FilterItem extends StatelessWidget {
-  final String title;
 
   const _FilterItem(this.title);
+  final String title;
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/domain/repositories/wishlist_repository.dart';
 
-import 'favorites_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/favorites/favorites_controller.dart';
 
 class FavoritesBinding extends Bindings {
   @override

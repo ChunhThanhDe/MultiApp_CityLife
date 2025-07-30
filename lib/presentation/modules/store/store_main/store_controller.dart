@@ -20,14 +20,6 @@ enum FilterType {
 }
 
 class ProductItem {
-  final int id;
-  final String name;
-  final double price;
-  final String imageUrl;
-  final List<FilterType> categories;
-  final List<StoreServiceType> availableServices;
-  final double rating;
-  final int reviewCount;
 
   ProductItem({
     required this.id,
@@ -39,17 +31,25 @@ class ProductItem {
     this.categories = const [FilterType.foods],
     this.availableServices = const [StoreServiceType.inStore],
   });
+  final int id;
+  final String name;
+  final double price;
+  final String imageUrl;
+  final List<FilterType> categories;
+  final List<StoreServiceType> availableServices;
+  final double rating;
+  final int reviewCount;
 }
 
 class StoreController extends BaseController with GetSingleTickerProviderStateMixin {
+
+  StoreController({required this.storeType, required this.storeId});
   final StoreRepository _storeRepository = Get.find<StoreRepository>();
 
   late TabController serviceTabController;
 
   final StoreType storeType;
   final int storeId;
-
-  StoreController({required this.storeType, required this.storeId});
   FilterType _selectedFilter = FilterType.all;
   StoreServiceType _selectedService = StoreServiceType.inStore;
 
@@ -118,7 +118,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
                   .toList();
 
               _categories.value = {
-                for (var section in data.sections)
+                for (final section in data.sections)
                   section.categoryName: section.items
                       .map(
                         (e) => ProductItem(
@@ -141,7 +141,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
               groceryResponse.value = data;
 
               _categories.value = {
-                for (var section in data.sections)
+                for (final section in data.sections)
                   section.categoryId.toString(): section.items
                       .map(
                         (e) => ProductItem(
@@ -163,7 +163,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
               generalResponse.value = data;
 
               _categories.value = {
-                for (var menu in data.menu)
+                for (final menu in data.menu)
                   menu.categoryName: menu.items
                       .map(
                         (e) => ProductItem(

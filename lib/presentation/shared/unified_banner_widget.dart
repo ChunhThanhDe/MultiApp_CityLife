@@ -12,9 +12,9 @@ import 'package:sixam_mart_user/presentation/shared/widgets/banners/banner_item_
 /// - Open/Closed: Extensible through the factory pattern for new banner types
 /// - Dependency Inversion: Depends on abstractions (BannerSection) not concrete implementations
 class UnifiedBannerWidget extends StatelessWidget {
-  final BannerSection section;
 
-  const UnifiedBannerWidget({super.key, required this.section});
+  const UnifiedBannerWidget({required this.section, super.key});
+  final BannerSection section;
 
   @override
   Widget build(BuildContext context) {

@@ -31,6 +31,17 @@ import 'package:sixam_mart_user/app/theme/theme.dart';
 /// This will display the text "Hello World, Flutter is awesome!" with
 /// the words "Hello" and "Flutter" highlighted in red.
 class HighlightedText extends StatelessWidget {
+
+  /// Creates a new HighlightedText widget.
+  const HighlightedText({
+    required this.text, required this.highlights, super.key,
+    this.highlightStyle,
+    this.normalTextStyle,
+    this.onTapHighlight,
+    this.textAlign = TextAlign.start,
+    this.maxLines,
+    this.overflow,
+  });
   /// The text to be displayed.
   final String text;
 
@@ -51,19 +62,6 @@ class HighlightedText extends StatelessWidget {
 
   final TextOverflow? overflow;
 
-  /// Creates a new HighlightedText widget.
-  const HighlightedText({
-    super.key,
-    required this.text,
-    required this.highlights,
-    this.highlightStyle,
-    this.normalTextStyle,
-    this.onTapHighlight,
-    this.textAlign = TextAlign.start,
-    this.maxLines,
-    this.overflow,
-  });
-
   /// The default text style for the non-highlighted portions of the text.
   static TextStyle normalTextStyleDefault = AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700);
 
@@ -80,7 +78,7 @@ class HighlightedText extends StatelessWidget {
     final List<Match> allMatches = [];
 
     // Find all matches for each highlight
-    for (var highlight in highlights) {
+    for (final highlight in highlights) {
       final RegExp regex = RegExp(RegExp.escape(highlight), caseSensitive: false);
       allMatches.addAll(regex.allMatches(text));
     }

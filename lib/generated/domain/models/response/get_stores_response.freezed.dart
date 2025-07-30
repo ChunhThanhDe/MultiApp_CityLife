@@ -307,7 +307,7 @@ as String,
 /// @nodoc
 mixin _$BannerEntity {
 
- int get id; String? get name; String? get logo; String? get coverPhoto; double? get rating; double? get ratingCount; String? get deliveryTime; double? get distanceKm; double? get deliveryFee; int get status; String? get image;
+ int get id; String? get name; String? get logo; String? get coverPhoto; double? get rating; int? get reviewCount; String? get deliveryTime; double? get distanceKm; double? get deliveryFee; int get status; String? get image;
 /// Create a copy of BannerEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -320,16 +320,16 @@ $BannerEntityCopyWith<BannerEntity> get copyWith => _$BannerEntityCopyWithImpl<B
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BannerEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.coverPhoto, coverPhoto) || other.coverPhoto == coverPhoto)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.ratingCount, ratingCount) || other.ratingCount == ratingCount)&&(identical(other.deliveryTime, deliveryTime) || other.deliveryTime == deliveryTime)&&(identical(other.distanceKm, distanceKm) || other.distanceKm == distanceKm)&&(identical(other.deliveryFee, deliveryFee) || other.deliveryFee == deliveryFee)&&(identical(other.status, status) || other.status == status)&&(identical(other.image, image) || other.image == image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BannerEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.coverPhoto, coverPhoto) || other.coverPhoto == coverPhoto)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.reviewCount, reviewCount) || other.reviewCount == reviewCount)&&(identical(other.deliveryTime, deliveryTime) || other.deliveryTime == deliveryTime)&&(identical(other.distanceKm, distanceKm) || other.distanceKm == distanceKm)&&(identical(other.deliveryFee, deliveryFee) || other.deliveryFee == deliveryFee)&&(identical(other.status, status) || other.status == status)&&(identical(other.image, image) || other.image == image));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,logo,coverPhoto,rating,ratingCount,deliveryTime,distanceKm,deliveryFee,status,image);
+int get hashCode => Object.hash(runtimeType,id,name,logo,coverPhoto,rating,reviewCount,deliveryTime,distanceKm,deliveryFee,status,image);
 
 @override
 String toString() {
-  return 'BannerEntity(id: $id, name: $name, logo: $logo, coverPhoto: $coverPhoto, rating: $rating, ratingCount: $ratingCount, deliveryTime: $deliveryTime, distanceKm: $distanceKm, deliveryFee: $deliveryFee, status: $status, image: $image)';
+  return 'BannerEntity(id: $id, name: $name, logo: $logo, coverPhoto: $coverPhoto, rating: $rating, reviewCount: $reviewCount, deliveryTime: $deliveryTime, distanceKm: $distanceKm, deliveryFee: $deliveryFee, status: $status, image: $image)';
 }
 
 
@@ -340,7 +340,7 @@ abstract mixin class $BannerEntityCopyWith<$Res>  {
   factory $BannerEntityCopyWith(BannerEntity value, $Res Function(BannerEntity) _then) = _$BannerEntityCopyWithImpl;
 @useResult
 $Res call({
- int id, String? name, String? logo, String? coverPhoto, double? rating, double? ratingCount, String? deliveryTime, double? distanceKm, double? deliveryFee, int status, String? image
+ int id, String? name, String? logo, String? coverPhoto, double? rating, int? reviewCount, String? deliveryTime, double? distanceKm, double? deliveryFee, int status, String? image
 });
 
 
@@ -357,15 +357,15 @@ class _$BannerEntityCopyWithImpl<$Res>
 
 /// Create a copy of BannerEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = freezed,Object? logo = freezed,Object? coverPhoto = freezed,Object? rating = freezed,Object? ratingCount = freezed,Object? deliveryTime = freezed,Object? distanceKm = freezed,Object? deliveryFee = freezed,Object? status = null,Object? image = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = freezed,Object? logo = freezed,Object? coverPhoto = freezed,Object? rating = freezed,Object? reviewCount = freezed,Object? deliveryTime = freezed,Object? distanceKm = freezed,Object? deliveryFee = freezed,Object? status = null,Object? image = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,logo: freezed == logo ? _self.logo : logo // ignore: cast_nullable_to_non_nullable
 as String?,coverPhoto: freezed == coverPhoto ? _self.coverPhoto : coverPhoto // ignore: cast_nullable_to_non_nullable
 as String?,rating: freezed == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
-as double?,ratingCount: freezed == ratingCount ? _self.ratingCount : ratingCount // ignore: cast_nullable_to_non_nullable
-as double?,deliveryTime: freezed == deliveryTime ? _self.deliveryTime : deliveryTime // ignore: cast_nullable_to_non_nullable
+as double?,reviewCount: freezed == reviewCount ? _self.reviewCount : reviewCount // ignore: cast_nullable_to_non_nullable
+as int?,deliveryTime: freezed == deliveryTime ? _self.deliveryTime : deliveryTime // ignore: cast_nullable_to_non_nullable
 as String?,distanceKm: freezed == distanceKm ? _self.distanceKm : distanceKm // ignore: cast_nullable_to_non_nullable
 as double?,deliveryFee: freezed == deliveryFee ? _self.deliveryFee : deliveryFee // ignore: cast_nullable_to_non_nullable
 as double?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
@@ -381,7 +381,7 @@ as String?,
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _BannerEntity implements BannerEntity {
-  const _BannerEntity({required this.id, this.name, this.logo, this.coverPhoto, this.rating, this.ratingCount, this.deliveryTime, this.distanceKm, this.deliveryFee, this.status = 1, this.image});
+  const _BannerEntity({required this.id, this.name, this.logo, this.coverPhoto, this.rating, this.reviewCount, this.deliveryTime, this.distanceKm, this.deliveryFee, this.status = 1, this.image});
   factory _BannerEntity.fromJson(Map<String, dynamic> json) => _$BannerEntityFromJson(json);
 
 @override final  int id;
@@ -389,7 +389,7 @@ class _BannerEntity implements BannerEntity {
 @override final  String? logo;
 @override final  String? coverPhoto;
 @override final  double? rating;
-@override final  double? ratingCount;
+@override final  int? reviewCount;
 @override final  String? deliveryTime;
 @override final  double? distanceKm;
 @override final  double? deliveryFee;
@@ -409,16 +409,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BannerEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.coverPhoto, coverPhoto) || other.coverPhoto == coverPhoto)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.ratingCount, ratingCount) || other.ratingCount == ratingCount)&&(identical(other.deliveryTime, deliveryTime) || other.deliveryTime == deliveryTime)&&(identical(other.distanceKm, distanceKm) || other.distanceKm == distanceKm)&&(identical(other.deliveryFee, deliveryFee) || other.deliveryFee == deliveryFee)&&(identical(other.status, status) || other.status == status)&&(identical(other.image, image) || other.image == image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BannerEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logo, logo) || other.logo == logo)&&(identical(other.coverPhoto, coverPhoto) || other.coverPhoto == coverPhoto)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.reviewCount, reviewCount) || other.reviewCount == reviewCount)&&(identical(other.deliveryTime, deliveryTime) || other.deliveryTime == deliveryTime)&&(identical(other.distanceKm, distanceKm) || other.distanceKm == distanceKm)&&(identical(other.deliveryFee, deliveryFee) || other.deliveryFee == deliveryFee)&&(identical(other.status, status) || other.status == status)&&(identical(other.image, image) || other.image == image));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,logo,coverPhoto,rating,ratingCount,deliveryTime,distanceKm,deliveryFee,status,image);
+int get hashCode => Object.hash(runtimeType,id,name,logo,coverPhoto,rating,reviewCount,deliveryTime,distanceKm,deliveryFee,status,image);
 
 @override
 String toString() {
-  return 'BannerEntity(id: $id, name: $name, logo: $logo, coverPhoto: $coverPhoto, rating: $rating, ratingCount: $ratingCount, deliveryTime: $deliveryTime, distanceKm: $distanceKm, deliveryFee: $deliveryFee, status: $status, image: $image)';
+  return 'BannerEntity(id: $id, name: $name, logo: $logo, coverPhoto: $coverPhoto, rating: $rating, reviewCount: $reviewCount, deliveryTime: $deliveryTime, distanceKm: $distanceKm, deliveryFee: $deliveryFee, status: $status, image: $image)';
 }
 
 
@@ -429,7 +429,7 @@ abstract mixin class _$BannerEntityCopyWith<$Res> implements $BannerEntityCopyWi
   factory _$BannerEntityCopyWith(_BannerEntity value, $Res Function(_BannerEntity) _then) = __$BannerEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String? name, String? logo, String? coverPhoto, double? rating, double? ratingCount, String? deliveryTime, double? distanceKm, double? deliveryFee, int status, String? image
+ int id, String? name, String? logo, String? coverPhoto, double? rating, int? reviewCount, String? deliveryTime, double? distanceKm, double? deliveryFee, int status, String? image
 });
 
 
@@ -446,15 +446,15 @@ class __$BannerEntityCopyWithImpl<$Res>
 
 /// Create a copy of BannerEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = freezed,Object? logo = freezed,Object? coverPhoto = freezed,Object? rating = freezed,Object? ratingCount = freezed,Object? deliveryTime = freezed,Object? distanceKm = freezed,Object? deliveryFee = freezed,Object? status = null,Object? image = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = freezed,Object? logo = freezed,Object? coverPhoto = freezed,Object? rating = freezed,Object? reviewCount = freezed,Object? deliveryTime = freezed,Object? distanceKm = freezed,Object? deliveryFee = freezed,Object? status = null,Object? image = freezed,}) {
   return _then(_BannerEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,logo: freezed == logo ? _self.logo : logo // ignore: cast_nullable_to_non_nullable
 as String?,coverPhoto: freezed == coverPhoto ? _self.coverPhoto : coverPhoto // ignore: cast_nullable_to_non_nullable
 as String?,rating: freezed == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
-as double?,ratingCount: freezed == ratingCount ? _self.ratingCount : ratingCount // ignore: cast_nullable_to_non_nullable
-as double?,deliveryTime: freezed == deliveryTime ? _self.deliveryTime : deliveryTime // ignore: cast_nullable_to_non_nullable
+as double?,reviewCount: freezed == reviewCount ? _self.reviewCount : reviewCount // ignore: cast_nullable_to_non_nullable
+as int?,deliveryTime: freezed == deliveryTime ? _self.deliveryTime : deliveryTime // ignore: cast_nullable_to_non_nullable
 as String?,distanceKm: freezed == distanceKm ? _self.distanceKm : distanceKm // ignore: cast_nullable_to_non_nullable
 as double?,deliveryFee: freezed == deliveryFee ? _self.deliveryFee : deliveryFee // ignore: cast_nullable_to_non_nullable
 as double?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable

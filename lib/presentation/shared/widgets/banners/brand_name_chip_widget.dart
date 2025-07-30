@@ -4,9 +4,9 @@ import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart'
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class BrandNameChipWidget extends StatelessWidget {
-  final BannerEntity item;
 
-  const BrandNameChipWidget({super.key, required this.item});
+  const BrandNameChipWidget({required this.item, super.key});
+  final BannerEntity item;
 
   @override
   Widget build(BuildContext context) {

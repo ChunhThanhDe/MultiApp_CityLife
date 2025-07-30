@@ -1,3 +1,5 @@
+// ignore_for_file: comment_references
+
 import 'dart:async';
 import 'dart:developer' as dev;
 import 'dart:io';
@@ -47,17 +49,17 @@ enum ImageLoadingState {
 /// This class combines the loading state with retry count information
 /// to provide comprehensive status tracking for image loading operations.
 class ImageState {
-  /// The current loading state of the image.
-  final ImageLoadingState state;
-
-  /// The number of retry attempts made so far.
-  final int retryCount;
-
   /// Creates an [ImageState] with the specified state and retry count.
   ///
   /// [state] The current loading state.
   /// [retryCount] The number of retries attempted (defaults to 0).
   const ImageState({required this.state, this.retryCount = 0});
+
+  /// The current loading state of the image.
+  final ImageLoadingState state;
+
+  /// The number of retry attempts made so far.
+  final int retryCount;
 }
 
 /// Internal constants used by the image loading system.
@@ -108,36 +110,6 @@ class _ImageConstants {
 /// Image(image: provider)
 /// ```
 class AppImageProvider extends ImageProvider<AppImageProvider> {
-  /// The path or URL of the image to load.
-  final String? imagePath;
-
-  /// The source type of the image (network, asset, or file).
-  final ImageSource? source;
-
-  /// An existing image provider to wrap with retry functionality.
-  final ImageProvider? imageProvider;
-
-  /// Maximum number of retry attempts for failed loads.
-  final int maxRetries;
-
-  /// Initial delay between retry attempts.
-  final Duration retryDelay;
-
-  /// Maximum delay between retry attempts.
-  final Duration maxRetryDelay;
-
-  /// Multiplier for exponential backoff calculation.
-  final double backoffFactor;
-
-  /// Asset path for fallback image when loading fails.
-  final String? errorImageAsset;
-
-  /// Whether to use caching for network images.
-  final bool useCache;
-
-  /// Notifier for image loading state changes.
-  final ValueNotifier<ImageState> stateNotifier;
-
   /// Private constructor for internal use by factory methods.
   AppImageProvider._({
     this.imagePath,
@@ -287,6 +259,36 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
     );
   }
 
+  /// The path or URL of the image to load.
+  final String? imagePath;
+
+  /// The source type of the image (network, asset, or file).
+  final ImageSource? source;
+
+  /// An existing image provider to wrap with retry functionality.
+  final ImageProvider? imageProvider;
+
+  /// Maximum number of retry attempts for failed loads.
+  final int maxRetries;
+
+  /// Initial delay between retry attempts.
+  final Duration retryDelay;
+
+  /// Maximum delay between retry attempts.
+  final Duration maxRetryDelay;
+
+  /// Multiplier for exponential backoff calculation.
+  final double backoffFactor;
+
+  /// Asset path for fallback image when loading fails.
+  final String? errorImageAsset;
+
+  /// Whether to use caching for network images.
+  final bool useCache;
+
+  /// Notifier for image loading state changes.
+  final ValueNotifier<ImageState> stateNotifier;
+
   /// Current retry attempt counter.
   int _currentRetry = 0;
 
@@ -319,7 +321,7 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
     while (_currentRetry <= maxRetries) {
       try {
         // Use the provider's own loadImage method
-        final ImageConfiguration config = ImageConfiguration();
+        const ImageConfiguration config = ImageConfiguration();
         final ImageStreamCompleter completer = provider.loadImage(provider.obtainKey(config) as dynamic, decode);
 
         // Create a completer to convert the stream to a codec
@@ -419,7 +421,7 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
   }
 
   Future<ui.Codec> _loadProviderImage(ImageProvider provider, Future<ui.Codec> Function(ImmutableBuffer buffer, {ui.TargetImageSize Function(int, int)? getTargetSize}) decode) async {
-    final config = ImageConfiguration();
+    const config = ImageConfiguration();
     final completer = Completer<ui.Codec>();
     late final ImageStreamListener listener;
 
@@ -531,7 +533,7 @@ Widget _buildErrorImage(double? width, double? height) {
     width: width,
     color: Colors.grey[300],
     height: height,
-    child: Icon(Icons.broken_image, size: 50, color: Colors.grey),
+    child: const Icon(Icons.broken_image, size: 50, color: Colors.grey),
   );
 }
 
@@ -562,54 +564,6 @@ Widget _buildErrorImage(double? width, double? height) {
 /// )
 /// ```
 class AppImage extends StatefulWidget {
-  /// The path or URL of the image to load.
-  final String? imagePath;
-
-  /// The source type of the image (network, asset, or file).
-  final ImageSource? source;
-
-  /// An existing image provider to use instead of creating one from path/source.
-  final ImageProvider? imageProvider;
-
-  /// Maximum number of retry attempts for failed loads.
-  final int maxRetries;
-
-  /// Initial delay between retry attempts.
-  final Duration retryDelay;
-
-  /// Maximum delay between retry attempts with exponential backoff.
-  final Duration maxRetryDelay;
-
-  /// Multiplier for exponential backoff calculation.
-  final double backoffFactor;
-
-  /// Widget to display while the image is loading.
-  final Widget? placeholder;
-
-  /// Widget to display when image loading fails (if no error asset is provided).
-  final Widget? errorWidget;
-
-  /// How the image should be inscribed into the available space.
-  final BoxFit fit;
-
-  /// Width of the image widget. If null, uses intrinsic width.
-  final double? width;
-
-  /// Height of the image widget. If null, uses intrinsic height.
-  final double? height;
-
-  /// Whether to use caching for network images.
-  final bool useCache;
-
-  /// Alternative text for accessibility (screen readers).
-  final String? altText;
-
-  /// Duration of the fade-in animation when image loads.
-  final Duration fadeInDuration;
-
-  /// Optional external state notifier for monitoring loading state.
-  final ValueNotifier<ImageState>? stateNotifier;
-
   /// Private constructor for internal use by factory methods.
   ///
   /// This constructor contains the core logic and validation for creating
@@ -862,6 +816,54 @@ class AppImage extends StatefulWidget {
       stateNotifier: stateNotifier,
     );
   }
+
+  /// The path or URL of the image to load.
+  final String? imagePath;
+
+  /// The source type of the image (network, asset, or file).
+  final ImageSource? source;
+
+  /// An existing image provider to use instead of creating one from path/source.
+  final ImageProvider? imageProvider;
+
+  /// Maximum number of retry attempts for failed loads.
+  final int maxRetries;
+
+  /// Initial delay between retry attempts.
+  final Duration retryDelay;
+
+  /// Maximum delay between retry attempts with exponential backoff.
+  final Duration maxRetryDelay;
+
+  /// Multiplier for exponential backoff calculation.
+  final double backoffFactor;
+
+  /// Widget to display while the image is loading.
+  final Widget? placeholder;
+
+  /// Widget to display when image loading fails (if no error asset is provided).
+  final Widget? errorWidget;
+
+  /// How the image should be inscribed into the available space.
+  final BoxFit fit;
+
+  /// Width of the image widget. If null, uses intrinsic width.
+  final double? width;
+
+  /// Height of the image widget. If null, uses intrinsic height.
+  final double? height;
+
+  /// Whether to use caching for network images.
+  final bool useCache;
+
+  /// Alternative text for accessibility (screen readers).
+  final String? altText;
+
+  /// Duration of the fade-in animation when image loads.
+  final Duration fadeInDuration;
+
+  /// Optional external state notifier for monitoring loading state.
+  final ValueNotifier<ImageState>? stateNotifier;
 
   @override
   State<AppImage> createState() => _AppImageState();

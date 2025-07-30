@@ -5,14 +5,14 @@ import 'package:sixam_mart_user/base/dio_client.dart';
 import 'package:sixam_mart_user/base/network_exceptions.dart';
 
 class BaseRepository {
-  late DioClient dioClient;
-  final String baseUrl;
-  final BaseOptions? options;
-  final List<Interceptor>? interceptors;
 
   BaseRepository({this.baseUrl = AppStrings.baseUrl, this.options, this.interceptors}) {
     dioClient = DioClient(Dio(options), baseUrl: baseUrl, interceptors: interceptors);
   }
+  late DioClient dioClient;
+  final String baseUrl;
+  final BaseOptions? options;
+  final List<Interceptor>? interceptors;
 
   Future<ApiResult> handleApiRequest<T>(Future<Response<T>> Function() request) async {
     try {

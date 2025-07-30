@@ -7,9 +7,9 @@ import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class ProductCard extends StatelessWidget {
-  final ProductItem item;
 
-  const ProductCard({super.key, required this.item});
+  const ProductCard({required this.item, super.key});
+  final ProductItem item;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class ProductCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: AppColors.stateBaseWhite,
                     shape: BoxShape.circle,
-                    boxShadow: [BoxShadow(color: AppColors.shadowSm5, blurRadius: 4, offset: Offset(0, 2))],
+                    boxShadow: [BoxShadow(color: AppColors.shadowSm5, blurRadius: 4, offset: const Offset(0, 2))],
                   ),
                   child: GestureDetector(
                     onTap: () {

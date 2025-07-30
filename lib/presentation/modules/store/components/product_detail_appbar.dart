@@ -35,7 +35,7 @@ class StoreDetailAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
             IconButton(
-              icon: Icon(product?.isFavorite == true ? Icons.favorite : Icons.favorite_border, color: product?.isFavorite == true ? Color(0xFF5856D7) : Color(0xFFB7B7B7), size: 22),
+              icon: Icon(product?.isFavorite == true ? Icons.favorite : Icons.favorite_border, color: product?.isFavorite == true ? const Color(0xFF5856D7) : const Color(0xFFB7B7B7), size: 22),
               onPressed: () {
                 // You can add your toggle logic here if needed.
               },

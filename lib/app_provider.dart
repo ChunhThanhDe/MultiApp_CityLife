@@ -6,15 +6,15 @@ import 'package:sixam_mart_user/app/data/app_storage.dart';
 import 'package:sixam_mart_user/domain/models/response/get_user_info_response.dart';
 
 class AppProvider {
-  static final AppProvider _instance = AppProvider._internal();
 
   factory AppProvider() {
     return _instance;
   }
 
   AppProvider._internal();
+  static final AppProvider _instance = AppProvider._internal();
 
-  final Rx<UserInfo> userInfo = UserInfo().obs;
+  final Rx<UserInfo> userInfo = const UserInfo().obs;
 
   void updateUserInfo(UserInfo userInfo) {
     this.userInfo.value = userInfo;

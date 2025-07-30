@@ -103,7 +103,7 @@ class AppPages {
       binding: SearchBinding(),
       middlewares: [AuthMiddleware()],
       transition: Transition.fadeIn,
-      transitionDuration: Duration(milliseconds: 300),
+      transitionDuration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     ),
     GetPage(name: AppRoutes.payment, page: () => const PaymentScreen(), binding: PaymentBinding(), middlewares: [AuthMiddleware()]),

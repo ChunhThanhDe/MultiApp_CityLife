@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'app_navigator.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_navigator.dart';
 
 /// Displays a loading overlay while executing an asynchronous operation.
 ///
@@ -65,7 +65,7 @@ class AppLoadingOverlay {
     if (isShowLoading) {
       createHighlightOverlay(child: child);
     }
-    Stopwatch stopwatch = Stopwatch()..start();
+    final Stopwatch stopwatch = Stopwatch()..start();
     final result = await future;
     stopwatch.stop();
     if (stopwatch.elapsedMilliseconds < 200) {

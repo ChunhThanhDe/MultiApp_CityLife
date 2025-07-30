@@ -4,12 +4,12 @@ import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart'
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class BannerSingleImageWidget extends StatelessWidget {
+
+  const BannerSingleImageWidget({required this.item, required this.index, required this.totalItems, super.key, this.onTap});
   final BannerEntity item;
   final int index;
   final int totalItems;
   final VoidCallback? onTap;
-
-  const BannerSingleImageWidget({super.key, required this.item, required this.index, required this.totalItems, this.onTap});
 
   @override
   Widget build(BuildContext context) {

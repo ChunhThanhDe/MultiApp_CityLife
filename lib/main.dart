@@ -14,7 +14,7 @@ import 'package:sixam_mart_user/di.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_navigator.dart';
 
-import 'app/constants/api_const.dart';
+import 'package:sixam_mart_user/app/constants/api_const.dart';
 
 void main() async {
   runZonedGuarded(

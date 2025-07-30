@@ -7,7 +7,7 @@ import 'package:sixam_mart_user/presentation/modules/service/components/service_
 import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
 import 'package:sixam_mart_user/presentation/shared/unified_banner_widget.dart';
 
-import 'service_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
 
 class ServiceScreen extends BaseScreen<ServiceController> {
   const ServiceScreen({super.key});
@@ -24,11 +24,11 @@ class ServiceScreen extends BaseScreen<ServiceController> {
         final sections = controller.dynamicSections;
 
         // Build dynamic sections based on API data
-        List<Widget> slivers = [
+        final List<Widget> slivers = [
           // Service header section
-          ServiceHeader(),
+          const ServiceHeader(),
           SliverBox(child: Divider(color: AppColors.stateGreyLowestHover100, height: 1)),
-          SliverBox(height: 16),
+          const SliverBox(height: 16),
         ];
 
         // If no data available, show empty state
@@ -40,9 +40,9 @@ class ServiceScreen extends BaseScreen<ServiceController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.store_outlined, size: 64, color: AppColors.textGreyDefault500),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text('No data available', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyDefault500)),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text('Please try again later', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
                   ],
                 ),
@@ -61,12 +61,12 @@ class ServiceScreen extends BaseScreen<ServiceController> {
 
           // Add spacing and divider after each section (except last)
           if (index < sections.length - 1) {
-            slivers.addAll([SliverBox(height: 16), SliverBox(child: SectionBreakDivider()), SliverBox(height: 16)]);
+            slivers.addAll([const SliverBox(height: 16), const SliverBox(child: SectionBreakDivider()), const SliverBox(height: 16)]);
           }
         }
 
         // Add final spacing
-        slivers.add(SliverBox(height: 32));
+        slivers.add(const SliverBox(height: 32));
 
         return CustomScrollView(slivers: slivers);
       }),

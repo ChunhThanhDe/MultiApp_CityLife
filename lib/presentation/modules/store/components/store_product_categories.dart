@@ -14,13 +14,13 @@ class StoreProductCategories extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<StoreController>(
       builder: (controller) {
-        List<Widget> categoryWidgets = [
+        final List<Widget> categoryWidgets = [
           ProductCategorySection(title: 'Popular Items', items: controller.popularItems),
           SectionBreakDivider(color: AppColors.stateGreyLowestHover100, height: 1),
-          StoreFilterSection(),
+          const StoreFilterSection(),
         ];
 
-        Map<String, List<ProductItem>> filteredCategories = controller.filteredCategories;
+        final Map<String, List<ProductItem>> filteredCategories = controller.filteredCategories;
 
         // Add categories with filtered items
         filteredCategories.forEach((categoryTitle, items) {

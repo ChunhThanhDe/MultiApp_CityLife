@@ -28,7 +28,7 @@ abstract class BannerEntity with _$BannerEntity {
     String? logo,
     String? coverPhoto,
     double? rating,
-    double? ratingCount,
+    int? reviewCount,
     String? deliveryTime,
     double? distanceKm,
     double? deliveryFee,

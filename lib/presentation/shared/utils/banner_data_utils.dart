@@ -5,14 +5,14 @@ import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart'
 enum BannerType { bannerFloatingLogo, brandLogoName, bannerDiscount, bannerSingleImage }
 
 class BannerSection {
+
+  const BannerSection({required this.title, required this.items, required this.bannerType, this.showArrowIcon = true, this.onTapItem, this.onTapTitle});
   final String title;
   final List<BannerEntity> items;
   final BannerType bannerType;
   final bool showArrowIcon;
   final VoidCallback? onTapItem;
   final VoidCallback? onTapTitle;
-
-  const BannerSection({required this.title, required this.items, required this.bannerType, this.showArrowIcon = true, this.onTapItem, this.onTapTitle});
 }
 
 class BannerDataUtils {
@@ -20,8 +20,8 @@ class BannerDataUtils {
 
   static List<BannerSection> getBannerSections(Map<String, dynamic>? data) {
     if (data == null || data.isEmpty) return [];
-    List<BannerSection> sections = [];
-    for (var entry in data.entries) {
+    final List<BannerSection> sections = [];
+    for (final entry in data.entries) {
       if (entry.value == null || entry.value.isEmpty) continue;
       final items = entry.value as List<dynamic>;
       sections.add(

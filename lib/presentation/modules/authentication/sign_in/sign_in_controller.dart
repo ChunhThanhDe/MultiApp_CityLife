@@ -18,10 +18,9 @@ enum LoginMethod {
   email('Email', 'email'),
   phone('Phone', 'phone');
 
+  const LoginMethod(this.label, this.fieldType);
   final String label;
   final String fieldType;
-
-  const LoginMethod(this.label, this.fieldType);
 }
 
 class SignInController extends BaseController {

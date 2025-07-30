@@ -71,7 +71,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
               Text(vm.searchItem.address, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
             ],
           ),
-          Spacer(),
+          const Spacer(),
           Assets.icons.icPencil.svg(),
         ],
       ),
@@ -93,7 +93,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
                 myLocationButtonEnabled: false,
                 mapToolbarEnabled: false,
                 mapType: MapType.normal,
-                initialCameraPosition: vm.googlePlex,
+                initialCameraPosition: AddressDetailsController.googlePlex,
                 style: mapStyle,
                 onMapCreated: (GoogleMapController mapController) {
                   vm.mapController.complete(mapController);
@@ -288,7 +288,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: AppButton(
-        onTap: () => Get.toNamed('${AppRoutes.address}${AppRoutes.confirmAddress}', arguments: vm.googlePlex.target),
+        onTap: () => Get.toNamed('${AppRoutes.address}${AppRoutes.confirmAddress}', arguments: AddressDetailsController.googlePlex.target),
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Text(tr(LocaleKeys.address_details_saveAddress), style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white)),

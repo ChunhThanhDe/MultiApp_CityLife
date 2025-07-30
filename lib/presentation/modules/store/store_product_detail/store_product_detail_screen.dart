@@ -9,22 +9,22 @@ import 'package:sixam_mart_user/presentation/modules/store/components/product_op
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
-import 'store_product_detail_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/store/store_product_detail/store_product_detail_controller.dart';
 
 class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> {
+  const StoreProductDetailScreen({required this.productId, super.key});
   final int productId;
-  const StoreProductDetailScreen({super.key, required this.productId});
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return StoreDetailAppBar();
+    return const StoreDetailAppBar();
   }
 
   @override
   Widget? buildBottomNavigationBar(BuildContext context) {
     return Obx(() {
       final price = controller.product.value?.price;
-      final priceText = price != null ? "\$${price.toStringAsFixed(2)}" : "";
+      final priceText = price != null ? '\$${price.toStringAsFixed(2)}' : '';
 
       return Padding(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
@@ -144,14 +144,14 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                     color: const Color(0xFFF7F8F9),
                     borderRadius: BorderRadius.circular(20), // pill shape
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
                         'Reset to standard recipe',
-                        style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 14, color: Color(0xFF161A1D)),
+                        style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 14, color: Color(0xFF161A1D)),
                       ),
-                      const Spacer(),
+                      Spacer(),
                       Icon(Icons.refresh, size: 18, color: Color(0xFFB5B9C2)),
                     ],
                   ),
@@ -163,11 +163,11 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
             // ========== Render variations (Size)
             if (product.variations.isNotEmpty) ...[
               OptionGroupSection(
-                title: "Size",
+                title: 'Size',
                 requiredField: true,
-                options: product.variations.map((v) => OptionItem(label: v.type, value: v.type, subLabel: "${v.price / 100.0} ${product.taxType}")).toList(),
-                selectedValue: controller.selectedOptions["variation"], // chỉ lấy String
-                onSelected: (val) => controller.selectOption("variation", val),
+                options: product.variations.map((v) => OptionItem(label: v.type, value: v.type, subLabel: '${v.price / 100.0} ${product.taxType}')).toList(),
+                selectedValue: controller.selectedOptions['variation'], // chỉ lấy String
+                onSelected: (val) => controller.selectOption('variation', val),
               ),
             ],
 
@@ -197,7 +197,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                       style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: Color(0xFF161A1D)),
                     ),
                     const SizedBox(height: 8),
-                    ...(product.addOns).map<Widget>((addOn) {
+                    ...product.addOns.map<Widget>((addOn) {
                       // Assume addOn is a Map with id, name, price
                       final addOnId = addOn['id'] as int;
                       final addOnName = addOn['name']?.toString() ?? '';
@@ -236,7 +236,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                     final productItem = ProductItem(
                       id: item.id,
                       name: item.name,
-                      price: (item.price / 100.0),
+                      price: item.price / 100.0,
                       imageUrl: item.imageUrl,
                       rating: 123.0, //
                       reviewCount: 123, // Tương tự
@@ -272,7 +272,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
           ),
           if (required)
             const Text(
-              "  *",
+              '  *',
               style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13, color: Color(0xFF5856D7)),
             ),
           const Spacer(),

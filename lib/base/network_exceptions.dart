@@ -54,7 +54,7 @@ sealed class NetworkExceptions with _$NetworkExceptions {
       log('ErrorResponse.fromJson error: $e', name: 'NetworkExceptions');
     }
 
-    int statusCode = response?.statusCode ?? 0;
+    final int statusCode = response?.statusCode ?? 0;
     switch (statusCode) {
       case 400:
         return const NetworkExceptions.badRequest();

@@ -6,7 +6,7 @@ import 'package:sixam_mart_user/presentation/modules/delivery/components/deliver
 import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_travel_history_section.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 
-import 'track_delivery_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/track_delivery/track_delivery_controller.dart';
 
 class TrackDeliveryScreen extends BaseScreen<TrackDeliveryController> {
   const TrackDeliveryScreen({super.key});
@@ -32,17 +32,17 @@ class TrackDeliveryScreen extends BaseScreen<TrackDeliveryController> {
                   () => TrackingProgress(
                     steps: controller.steps,
                     progressPercent: controller.progressPercent.value, // double
-                    leftDate: "Jan 12, 2025",
-                    leftPlace: "Mississauga, ON CA",
-                    rightDate: "Jan 28, 2025",
-                    rightPlace: "WINNIPEG, MB CA",
+                    leftDate: 'Jan 12, 2025',
+                    leftPlace: 'Mississauga, ON CA',
+                    rightDate: 'Jan 28, 2025',
+                    rightPlace: 'WINNIPEG, MB CA',
                   ),
                 ),
                 // Travel History
                 Obx(() => TravelHistorySection(travelData: controller.travelHistory.value)),
 
                 // Bottom Home Indicator
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
               ],
             ),
           ),

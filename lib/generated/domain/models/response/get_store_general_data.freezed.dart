@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GetStoreGeneralData {
 
-@JsonKey(name: "success") bool? get success;@JsonKey(name: "services") Services? get services;@JsonKey(name: "data") dynamic get data;
+@JsonKey(name: 'success') bool? get success;@JsonKey(name: 'services') Services? get services;@JsonKey(name: 'data') dynamic get data;
 /// Create a copy of GetStoreGeneralData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $GetStoreGeneralDataCopyWith<$Res>  {
   factory $GetStoreGeneralDataCopyWith(GetStoreGeneralData value, $Res Function(GetStoreGeneralData) _then) = _$GetStoreGeneralDataCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "success") bool? success,@JsonKey(name: "services") Services? services,@JsonKey(name: "data") dynamic data
+@JsonKey(name: 'success') bool? success,@JsonKey(name: 'services') Services? services,@JsonKey(name: 'data') dynamic data
 });
 
 
@@ -94,12 +94,12 @@ $ServicesCopyWith<$Res>? get services {
 @JsonSerializable()
 
 class _GetStoreGeneralData implements GetStoreGeneralData {
-  const _GetStoreGeneralData({@JsonKey(name: "success") this.success, @JsonKey(name: "services") this.services, @JsonKey(name: "data") this.data});
+  const _GetStoreGeneralData({@JsonKey(name: 'success') this.success, @JsonKey(name: 'services') this.services, @JsonKey(name: 'data') this.data});
   factory _GetStoreGeneralData.fromJson(Map<String, dynamic> json) => _$GetStoreGeneralDataFromJson(json);
 
-@override@JsonKey(name: "success") final  bool? success;
-@override@JsonKey(name: "services") final  Services? services;
-@override@JsonKey(name: "data") final  dynamic data;
+@override@JsonKey(name: 'success') final  bool? success;
+@override@JsonKey(name: 'services') final  Services? services;
+@override@JsonKey(name: 'data') final  dynamic data;
 
 /// Create a copy of GetStoreGeneralData
 /// with the given fields replaced by the non-null parameter values.
@@ -134,7 +134,7 @@ abstract mixin class _$GetStoreGeneralDataCopyWith<$Res> implements $GetStoreGen
   factory _$GetStoreGeneralDataCopyWith(_GetStoreGeneralData value, $Res Function(_GetStoreGeneralData) _then) = __$GetStoreGeneralDataCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "success") bool? success,@JsonKey(name: "services") Services? services,@JsonKey(name: "data") dynamic data
+@JsonKey(name: 'success') bool? success,@JsonKey(name: 'services') Services? services,@JsonKey(name: 'data') dynamic data
 });
 
 
@@ -179,7 +179,7 @@ $ServicesCopyWith<$Res>? get services {
 /// @nodoc
 mixin _$Services {
 
-@JsonKey(name: "data") List<ServiceEntity>? get data;
+@JsonKey(name: 'data') List<ServiceEntity>? get data;
 /// Create a copy of Services
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -212,7 +212,7 @@ abstract mixin class $ServicesCopyWith<$Res>  {
   factory $ServicesCopyWith(Services value, $Res Function(Services) _then) = _$ServicesCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "data") List<ServiceEntity>? data
+@JsonKey(name: 'data') List<ServiceEntity>? data
 });
 
 
@@ -243,11 +243,11 @@ as List<ServiceEntity>?,
 @JsonSerializable()
 
 class _Services implements Services {
-  const _Services({@JsonKey(name: "data") final  List<ServiceEntity>? data}): _data = data;
+  const _Services({@JsonKey(name: 'data') final  List<ServiceEntity>? data}): _data = data;
   factory _Services.fromJson(Map<String, dynamic> json) => _$ServicesFromJson(json);
 
  final  List<ServiceEntity>? _data;
-@override@JsonKey(name: "data") List<ServiceEntity>? get data {
+@override@JsonKey(name: 'data') List<ServiceEntity>? get data {
   final value = _data;
   if (value == null) return null;
   if (_data is EqualUnmodifiableListView) return _data;
@@ -289,7 +289,7 @@ abstract mixin class _$ServicesCopyWith<$Res> implements $ServicesCopyWith<$Res>
   factory _$ServicesCopyWith(_Services value, $Res Function(_Services) _then) = __$ServicesCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "data") List<ServiceEntity>? data
+@JsonKey(name: 'data') List<ServiceEntity>? data
 });
 
 
@@ -320,7 +320,7 @@ as List<ServiceEntity>?,
 /// @nodoc
 mixin _$ServiceEntity {
 
-@JsonKey(name: "id") int? get id;@JsonKey(name: "module_name") String? get moduleName;@JsonKey(name: "thumbnail") String? get thumbnail;@JsonKey(name: "icon") String? get icon;@JsonKey(name: "module_type") String? get moduleType;@JsonKey(name: "icon_full_url") String? get iconFullUrl;@JsonKey(name: "thumbnail_full_url") String? get thumbnailFullUrl;
+@JsonKey(name: 'id') int? get id;@JsonKey(name: 'module_name') String? get moduleName;@JsonKey(name: 'thumbnail') String? get thumbnail;@JsonKey(name: 'icon') String? get icon;@JsonKey(name: 'module_type') String? get moduleType;@JsonKey(name: 'icon_full_url') String? get iconFullUrl;@JsonKey(name: 'thumbnail_full_url') String? get thumbnailFullUrl;
 /// Create a copy of ServiceEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -353,7 +353,7 @@ abstract mixin class $ServiceEntityCopyWith<$Res>  {
   factory $ServiceEntityCopyWith(ServiceEntity value, $Res Function(ServiceEntity) _then) = _$ServiceEntityCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "id") int? id,@JsonKey(name: "module_name") String? moduleName,@JsonKey(name: "thumbnail") String? thumbnail,@JsonKey(name: "icon") String? icon,@JsonKey(name: "module_type") String? moduleType,@JsonKey(name: "icon_full_url") String? iconFullUrl,@JsonKey(name: "thumbnail_full_url") String? thumbnailFullUrl
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'module_name') String? moduleName,@JsonKey(name: 'thumbnail') String? thumbnail,@JsonKey(name: 'icon') String? icon,@JsonKey(name: 'module_type') String? moduleType,@JsonKey(name: 'icon_full_url') String? iconFullUrl,@JsonKey(name: 'thumbnail_full_url') String? thumbnailFullUrl
 });
 
 
@@ -390,16 +390,16 @@ as String?,
 @JsonSerializable()
 
 class _ServiceEntity implements ServiceEntity {
-  const _ServiceEntity({@JsonKey(name: "id") this.id, @JsonKey(name: "module_name") this.moduleName, @JsonKey(name: "thumbnail") this.thumbnail, @JsonKey(name: "icon") this.icon, @JsonKey(name: "module_type") this.moduleType, @JsonKey(name: "icon_full_url") this.iconFullUrl, @JsonKey(name: "thumbnail_full_url") this.thumbnailFullUrl});
+  const _ServiceEntity({@JsonKey(name: 'id') this.id, @JsonKey(name: 'module_name') this.moduleName, @JsonKey(name: 'thumbnail') this.thumbnail, @JsonKey(name: 'icon') this.icon, @JsonKey(name: 'module_type') this.moduleType, @JsonKey(name: 'icon_full_url') this.iconFullUrl, @JsonKey(name: 'thumbnail_full_url') this.thumbnailFullUrl});
   factory _ServiceEntity.fromJson(Map<String, dynamic> json) => _$ServiceEntityFromJson(json);
 
-@override@JsonKey(name: "id") final  int? id;
-@override@JsonKey(name: "module_name") final  String? moduleName;
-@override@JsonKey(name: "thumbnail") final  String? thumbnail;
-@override@JsonKey(name: "icon") final  String? icon;
-@override@JsonKey(name: "module_type") final  String? moduleType;
-@override@JsonKey(name: "icon_full_url") final  String? iconFullUrl;
-@override@JsonKey(name: "thumbnail_full_url") final  String? thumbnailFullUrl;
+@override@JsonKey(name: 'id') final  int? id;
+@override@JsonKey(name: 'module_name') final  String? moduleName;
+@override@JsonKey(name: 'thumbnail') final  String? thumbnail;
+@override@JsonKey(name: 'icon') final  String? icon;
+@override@JsonKey(name: 'module_type') final  String? moduleType;
+@override@JsonKey(name: 'icon_full_url') final  String? iconFullUrl;
+@override@JsonKey(name: 'thumbnail_full_url') final  String? thumbnailFullUrl;
 
 /// Create a copy of ServiceEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -434,7 +434,7 @@ abstract mixin class _$ServiceEntityCopyWith<$Res> implements $ServiceEntityCopy
   factory _$ServiceEntityCopyWith(_ServiceEntity value, $Res Function(_ServiceEntity) _then) = __$ServiceEntityCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "id") int? id,@JsonKey(name: "module_name") String? moduleName,@JsonKey(name: "thumbnail") String? thumbnail,@JsonKey(name: "icon") String? icon,@JsonKey(name: "module_type") String? moduleType,@JsonKey(name: "icon_full_url") String? iconFullUrl,@JsonKey(name: "thumbnail_full_url") String? thumbnailFullUrl
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'module_name') String? moduleName,@JsonKey(name: 'thumbnail') String? thumbnail,@JsonKey(name: 'icon') String? icon,@JsonKey(name: 'module_type') String? moduleType,@JsonKey(name: 'icon_full_url') String? iconFullUrl,@JsonKey(name: 'thumbnail_full_url') String? thumbnailFullUrl
 });
 
 

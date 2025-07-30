@@ -8,11 +8,11 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
 class WelcomeModel {
+
+  WelcomeModel({required this.title, required this.description, required this.image});
   final String title;
   final String description;
   final String image;
-
-  WelcomeModel({required this.title, required this.description, required this.image});
 }
 
 class WelcomeController extends BaseController {

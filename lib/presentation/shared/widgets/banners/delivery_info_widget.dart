@@ -3,9 +3,9 @@ import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart';
 
 class DeliveryInfoWidget extends StatelessWidget {
-  final BannerEntity item;
 
-  const DeliveryInfoWidget({super.key, required this.item});
+  const DeliveryInfoWidget({required this.item, super.key});
+  final BannerEntity item;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class DeliveryInfoWidget extends StatelessWidget {
 
     // Rating count
     if (_hasValidRatingCount()) {
-      infoWidgets.add(Text('(${item.ratingCount})', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)));
+      infoWidgets.add(Text('(${item.reviewCount})', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)));
     }
 
     // Delivery time
@@ -35,6 +35,6 @@ class DeliveryInfoWidget extends StatelessWidget {
   }
 
   bool _hasValidRating() => item.rating != null;
-  bool _hasValidRatingCount() => item.ratingCount != null;
+  bool _hasValidRatingCount() => item.reviewCount != null;
   bool _hasValidDeliveryTime() => item.deliveryTime?.trim().isNotEmpty == true;
 }

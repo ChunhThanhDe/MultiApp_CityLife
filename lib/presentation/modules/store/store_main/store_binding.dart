@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/domain/repositories/store_repository.dart';
 
-import 'store_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
 
 class StoreBinding extends Bindings {
   @override

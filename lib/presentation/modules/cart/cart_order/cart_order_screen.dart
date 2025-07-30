@@ -10,14 +10,14 @@ import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_list_view.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
-import 'cart_order_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/cart_order/cart_order_controller.dart';
 
 // Data model for organizing orders by type
 class OrderDisplayItem {
-  final Order order;
-  final OrderDisplayType type;
 
   OrderDisplayItem({required this.order, required this.type});
+  final Order order;
+  final OrderDisplayType type;
 }
 
 enum OrderDisplayType { inProgress, completed }
@@ -27,7 +27,7 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(title: 'Orders');
+    return const BasicAppBar(title: 'Orders');
   }
 
   int getOrderProgressStep(OrderStatus? status) {
@@ -71,7 +71,7 @@ class CartOrderScreen extends BaseScreen<CartOrderController> {
   }
 
   List<OrderDisplayItem> _organizeOrders(List<Order> orders) {
-    List<OrderDisplayItem> displayItems = [];
+    final List<OrderDisplayItem> displayItems = [];
 
     // Add in-progress orders first
     final inProgressOrders = orders.where((o) => o.orderStatus != OrderStatus.delivered).toList();

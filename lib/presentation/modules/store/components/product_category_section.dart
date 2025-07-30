@@ -8,10 +8,10 @@ import 'package:sixam_mart_user/presentation/modules/store/store_products/store_
 import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
 
 class ProductCategorySection extends StatelessWidget {
+
+  const ProductCategorySection({required this.title, required this.items, super.key});
   final String title;
   final List<ProductItem> items;
-
-  const ProductCategorySection({super.key, required this.title, required this.items});
 
   @override
   Widget build(BuildContext context) {

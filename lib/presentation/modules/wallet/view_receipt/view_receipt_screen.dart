@@ -6,7 +6,7 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
 
-import 'view_receipt_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/wallet/view_receipt/view_receipt_controller.dart';
 
 typedef ReceiptAction = ({SvgGenImage icon, String label, VoidCallback onTap});
 
@@ -60,14 +60,14 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
   }
 
   Padding _dividerSection() {
-    return Padding(padding: const EdgeInsets.symmetric(vertical: 16), child: const SectionBreakDivider());
+    return const Padding(padding: EdgeInsets.symmetric(vertical: 16), child: SectionBreakDivider());
   }
 
   Container _buildBrandInfo() {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      decoration: BoxDecoration(color: const Color(0xFF006241)),
+      decoration: const BoxDecoration(color: Color(0xFF006241)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -154,9 +154,9 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
             itemCount: vm.items.length,
             separatorBuilder: (context, index) => Column(
               children: [
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Divider(height: 1, color: AppColors.stateGreyLowestHover100),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
               ],
             ),
             itemBuilder: (context, index) {

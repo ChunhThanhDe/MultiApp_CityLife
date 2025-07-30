@@ -6,10 +6,10 @@ import 'package:sixam_mart_user/presentation/modules/favorites/favorites_control
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class FavoriteProductCard extends StatelessWidget {
+
+  const FavoriteProductCard({required this.store, super.key, this.onFavoriteTap});
   final WishlistStore store;
   final VoidCallback? onFavoriteTap;
-
-  const FavoriteProductCard({super.key, required this.store, this.onFavoriteTap});
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +117,7 @@ class FavoriteProductCard extends StatelessWidget {
               children: [
                 const SizedBox(height: 2),
                 Text(
-                  "\$${store.minimumShippingCharge ?? 0} Delivery fee",
+                  '\$${store.minimumShippingCharge ?? 0} Delivery fee',
                   style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -126,13 +126,13 @@ class FavoriteProductCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "${store.avgRating ?? 0}★",
+                      '${store.avgRating ?? 0}★',
                       style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF4A5763)),
                     ),
                     const SizedBox(width: 2),
-                    Text("(${store.ratingCount ?? 0})", style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                    Text('(${store.ratingCount ?? 0})', style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
                     const SizedBox(width: 2),
-                    const Text("•", style: TextStyle(fontSize: 12, color: Color(0xFF5856D7))),
+                    const Text('•', style: TextStyle(fontSize: 12, color: Color(0xFF5856D7))),
                     const SizedBox(width: 2),
                     Flexible(
                       child: Text(

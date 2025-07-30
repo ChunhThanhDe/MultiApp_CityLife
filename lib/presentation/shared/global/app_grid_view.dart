@@ -14,6 +14,37 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 /// This widget is designed to be used across multiple screens in the app
 /// to maintain consistency and reduce code duplication.
 class AppGridView<T> extends StatelessWidget {
+
+  const AppGridView({
+    required this.items, required this.itemBuilder, super.key,
+    this.onRefresh,
+    this.onLoadMore,
+    this.isLoading = false,
+    this.isLoadingMore = false,
+    this.hasMore = true,
+    this.errorMessage,
+    this.onRetry,
+    this.emptyWidget,
+    this.errorWidget,
+    this.loadingWidget,
+    this.loadMoreWidget,
+    this.scrollController,
+    this.physics,
+    this.padding,
+    this.crossAxisCount = 2,
+    this.childAspectRatio = 1.0,
+    this.crossAxisSpacing = 16.0,
+    this.mainAxisSpacing = 16.0,
+    this.loadMoreThreshold = 200.0,
+    this.emptyTitle = 'No Data',
+    this.emptySubtitle = 'There are no items to display',
+    this.emptyIcon,
+    this.useCustomScrollView = false,
+    this.headerSlivers = const [],
+    this.footerSlivers = const [],
+    this.shrinkWrap = false,
+    this.disableScrolling = false,
+  });
   /// List of items to display
   final List<T> items;
 
@@ -101,39 +132,6 @@ class AppGridView<T> extends StatelessWidget {
   /// Whether to disable scrolling (useful when used inside another scrollable widget)
   final bool disableScrolling;
 
-  const AppGridView({
-    super.key,
-    required this.items,
-    required this.itemBuilder,
-    this.onRefresh,
-    this.onLoadMore,
-    this.isLoading = false,
-    this.isLoadingMore = false,
-    this.hasMore = true,
-    this.errorMessage,
-    this.onRetry,
-    this.emptyWidget,
-    this.errorWidget,
-    this.loadingWidget,
-    this.loadMoreWidget,
-    this.scrollController,
-    this.physics,
-    this.padding,
-    this.crossAxisCount = 2,
-    this.childAspectRatio = 1.0,
-    this.crossAxisSpacing = 16.0,
-    this.mainAxisSpacing = 16.0,
-    this.loadMoreThreshold = 200.0,
-    this.emptyTitle = 'No Data',
-    this.emptySubtitle = 'There are no items to display',
-    this.emptyIcon,
-    this.useCustomScrollView = false,
-    this.headerSlivers = const [],
-    this.footerSlivers = const [],
-    this.shrinkWrap = false,
-    this.disableScrolling = false,
-  });
-
   @override
   Widget build(BuildContext context) {
     // Show loading state for initial load
@@ -172,7 +170,7 @@ class AppGridView<T> extends StatelessWidget {
       return errorWidget!;
     }
 
-    Widget errorContent = SizedBox(
+    final Widget errorContent = SizedBox(
       height: MediaQuery.of(context).size.height * 0.6,
       child: Center(
         child: Column(
@@ -206,7 +204,7 @@ class AppGridView<T> extends StatelessWidget {
     );
 
     if (useCustomScrollView) {
-      List<Widget> slivers = [];
+      final List<Widget> slivers = [];
       slivers.addAll(headerSlivers);
       slivers.add(SliverToBoxAdapter(child: errorContent));
       slivers.addAll(footerSlivers);
@@ -234,7 +232,7 @@ class AppGridView<T> extends StatelessWidget {
       return emptyWidget!;
     }
 
-    Widget emptyContent = SizedBox(
+    final Widget emptyContent = SizedBox(
       height: MediaQuery.of(context).size.height * 0.6,
       child: Center(
         child: Column(
@@ -255,7 +253,7 @@ class AppGridView<T> extends StatelessWidget {
     );
 
     if (useCustomScrollView) {
-      List<Widget> slivers = [];
+      final List<Widget> slivers = [];
       slivers.addAll(headerSlivers);
       slivers.add(SliverToBoxAdapter(child: emptyContent));
       slivers.addAll(footerSlivers);
@@ -303,7 +301,7 @@ class AppGridView<T> extends StatelessWidget {
   }
 
   Widget _buildCustomScrollView(BuildContext context) {
-    List<Widget> slivers = [];
+    final List<Widget> slivers = [];
 
     // Add header slivers
     slivers.addAll(headerSlivers);

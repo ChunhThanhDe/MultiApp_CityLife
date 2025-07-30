@@ -4,12 +4,11 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/shared/utils/banner_data_utils.dart';
 
 class BannerHeaderWidget extends StatelessWidget {
-  final BannerSection section;
 
   const BannerHeaderWidget({
-    super.key,
-    required this.section,
+    required this.section, super.key,
   });
+  final BannerSection section;
 
   @override
   Widget build(BuildContext context) {

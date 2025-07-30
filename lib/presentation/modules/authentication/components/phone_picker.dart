@@ -10,7 +10,7 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_text_field.dart';
 
 class PhonePicker extends StatelessWidget {
-  const PhonePicker({super.key, required this.inputController, required this.onChanged, required this.countryDialCode, this.errorText, this.validator});
+  const PhonePicker({required this.inputController, required this.onChanged, required this.countryDialCode, super.key, this.errorText, this.validator});
 
   final TextEditingController inputController;
   final Function(CountryCode) onChanged;
@@ -48,7 +48,7 @@ class PhonePicker extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(6),
-                  border: Border.all(color: Color(0xFFE8EBEE)),
+                  border: Border.all(color: const Color(0xFFE8EBEE)),
                 ),
                 child: CountryCodePicker(
                   onChanged: (CountryCode countryCode) {
@@ -56,7 +56,7 @@ class PhonePicker extends StatelessWidget {
                   },
                   textStyle: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
                   initialSelection: countryDialCode,
-                  favorite: ['+1', '+91'],
+                  favorite: const ['+1', '+91'],
                   showDropDownButton: true,
                   showFlagMain: false,
                   builder: (CountryCode? countryCode) {
@@ -74,7 +74,7 @@ class PhonePicker extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               Expanded(
                 child: SizedBox(
                   // height: 75.h,

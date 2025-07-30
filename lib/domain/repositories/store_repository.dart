@@ -15,6 +15,8 @@ class StoreApiPath {
 enum StoreType { food, grocery, general, reviews }
 
 class StoreQueryParameters {
+
+  StoreQueryParameters({this.delivery, this.minPrice, this.maxPrice, this.rating, this.under30, this.offers, this.categoryIds, this.limit, this.offset});
   final String? delivery;
   final int? minPrice;
   final int? maxPrice;
@@ -24,8 +26,6 @@ class StoreQueryParameters {
   final List<int>? categoryIds;
   final int? limit;
   final int? offset;
-
-  StoreQueryParameters({this.delivery, this.minPrice, this.maxPrice, this.rating, this.under30, this.offers, this.categoryIds, this.limit, this.offset});
 
   Map<String, dynamic> toJson() {
     return {'delivery': delivery, 'min_price': minPrice, 'max_price': maxPrice, 'rating': rating, 'under_30': under30, 'offers': offers, 'category_ids': categoryIds, 'limit': limit, 'offset': offset};

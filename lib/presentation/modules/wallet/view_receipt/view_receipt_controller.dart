@@ -2,16 +2,16 @@ import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/wallet/wallet_controller.dart';
 
 class ItemInfo {
+
+  ItemInfo({required this.name, required this.price, required this.image});
   final String name;
   final double price;
   final String image;
-
-  ItemInfo({required this.name, required this.price, required this.image});
 }
 
 class ViewReceiptController extends BaseController {
-  final Transaction transaction;
   ViewReceiptController({required this.transaction});
+  final Transaction transaction;
   final items = [
     ItemInfo(
       name: 'Summer-Berry Starbucks Refreshers® Beverage',

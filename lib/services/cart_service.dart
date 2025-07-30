@@ -8,14 +8,14 @@ import 'package:sixam_mart_user/domain/models/response/get_product_detail_respon
 import 'package:sixam_mart_user/domain/repositories/cart_repository.dart';
 
 class CartService extends GetxService {
+
+  CartService(this._cartRepository);
   final CartRepository _cartRepository;
 
   // Reactive state variables for new store-grouped structure
   final storesInCart = <GetCartListStore>[].obs;
   final cartSummary = Rxn<GetCartListSummary>();
   final isLoading = false.obs;
-
-  CartService(this._cartRepository);
 
   @override
   void onInit() {

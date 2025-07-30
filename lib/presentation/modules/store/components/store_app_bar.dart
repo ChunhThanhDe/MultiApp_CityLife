@@ -20,7 +20,7 @@ class StoreAppBar extends StatelessWidget {
     return GetBuilder<StoreController>(
       builder: (controller) {
         final store = controller.storeInfo.value;
-        if (store == null) return SizedBox();
+        if (store == null) return const SizedBox();
 
         return SliverToBoxAdapter(
           child: Container(
@@ -33,7 +33,7 @@ class StoreAppBar extends StatelessWidget {
                 Row(
                   children: [
                     _circularButton(Icon(Icons.arrow_back, color: AppColors.textGreyHighest950), () => Get.back()),
-                    Spacer(),
+                    const Spacer(),
                     _circularButton(Assets.icons.icSearch.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)), _onTapFilter),
                     SizedBox(width: 12.w),
                     _circularButton(Assets.icons.icStore.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)), _onTapStore),
@@ -115,7 +115,7 @@ class StoreAppBar extends StatelessWidget {
     return GetBuilder<StoreController>(
       builder: (controller) {
         final store = controller.storeInfo.value;
-        if (store == null) return SizedBox();
+        if (store == null) return const SizedBox();
 
         return ClipRRect(
           borderRadius: BorderRadius.circular(12.r),
@@ -178,7 +178,7 @@ class StoreAppBar extends StatelessWidget {
               Expanded(
                 child: _actionButton(
                   text: 'Add to favorites',
-                  icon: Assets.icons.icHeartOutlined.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(Colors.red, BlendMode.srcIn)),
+                  icon: Assets.icons.icHeartOutlined.svg(width: 24.w, height: 24.w, colorFilter: const ColorFilter.mode(Colors.red, BlendMode.srcIn)),
                   backgroundColor: AppColors.stateDangerLowest50,
                   borderColor: AppColors.stateDangerLowestHover100,
                   textColor: AppColors.stateDangerHigh700,
@@ -189,7 +189,7 @@ class StoreAppBar extends StatelessWidget {
               Expanded(
                 child: _actionButton(
                   text: 'Search the store',
-                  icon: Assets.icons.icSearch.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(Colors.blue, BlendMode.srcIn)),
+                  icon: Assets.icons.icSearch.svg(width: 24.w, height: 24.w, colorFilter: const ColorFilter.mode(Colors.blue, BlendMode.srcIn)),
                   backgroundColor: AppColors.stateBrandLowest50,
                   borderColor: AppColors.stateBrandLowestHover100,
                   textColor: AppColors.stateBrandHigh700,
@@ -204,7 +204,7 @@ class StoreAppBar extends StatelessWidget {
               Expanded(
                 child: _actionButton(
                   text: 'Share a friend',
-                  icon: Assets.icons.icSync.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(Colors.green, BlendMode.srcIn)),
+                  icon: Assets.icons.icSync.svg(width: 24.w, height: 24.w, colorFilter: const ColorFilter.mode(Colors.green, BlendMode.srcIn)),
                   backgroundColor: AppColors.stateSuccessLowest50,
                   borderColor: AppColors.stateSuccessLowestHover100,
                   textColor: AppColors.stateSuccessHigh700,
@@ -337,7 +337,7 @@ class _AnimatedHeartButtonState extends State<_AnimatedHeartButton> with SingleT
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(duration: Duration(milliseconds: 400), vsync: this);
+    _animationController = AnimationController(duration: const Duration(milliseconds: 400), vsync: this);
 
     _scaleAnimation = Tween<double>(begin: 1.0, end: 1.15).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOutBack));
   }
@@ -354,7 +354,7 @@ class _AnimatedHeartButtonState extends State<_AnimatedHeartButton> with SingleT
     });
 
     _animationController.forward().then((_) {
-      Future.delayed(Duration(milliseconds: 100), () {
+      Future.delayed(const Duration(milliseconds: 100), () {
         _animationController.reverse();
       });
     });
@@ -370,13 +370,13 @@ class _AnimatedHeartButtonState extends State<_AnimatedHeartButton> with SingleT
           return Transform.scale(
             scale: _scaleAnimation.value,
             child: AnimatedSwitcher(
-              duration: Duration(milliseconds: 200),
+              duration: const Duration(milliseconds: 200),
               transitionBuilder: (Widget child, Animation<double> animation) {
                 return ScaleTransition(scale: animation, child: child);
               },
               child: isFavorite
-                  ? Assets.icons.icHeartFilled.svg(key: ValueKey('filled'), width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.stateBrandDefault500, BlendMode.srcIn))
-                  : Assets.icons.icHeartOutlined.svg(key: ValueKey('outlined'), width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
+                  ? Assets.icons.icHeartFilled.svg(key: const ValueKey('filled'), width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.stateBrandDefault500, BlendMode.srcIn))
+                  : Assets.icons.icHeartOutlined.svg(key: const ValueKey('outlined'), width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
             ),
           );
         },

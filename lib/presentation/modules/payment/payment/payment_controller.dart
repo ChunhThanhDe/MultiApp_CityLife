@@ -6,6 +6,17 @@ import 'package:sixam_mart_user/app/data/app_storage.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 
 class PaymentController extends BaseController {
+
+  PaymentController() {
+    loadScannedCard();
+    // Listen for changes in all controllers
+    cardNumberController.addListener(validate);
+    expDateController.addListener(validate);
+    cvvController.addListener(validate);
+    zipController.addListener(validate);
+    // Listen for selectedCountry changes
+    ever(selectedCountry, (_) => validate());
+  }
   // Card form controllers
   final cardNumberController = TextEditingController();
   final expDateController = TextEditingController();
@@ -21,23 +32,12 @@ class PaymentController extends BaseController {
   // Button enable/disable
   final isValid = false.obs;
 
-  PaymentController() {
-    loadScannedCard();
-    // Listen for changes in all controllers
-    cardNumberController.addListener(validate);
-    expDateController.addListener(validate);
-    cvvController.addListener(validate);
-    zipController.addListener(validate);
-    // Listen for selectedCountry changes
-    ever(selectedCountry, (_) => validate());
-  }
-
   void loadScannedCard() {
     final raw = AppStorage.getString('scanned_card_info');
     if (raw != null && raw.isNotEmpty) {
       try {
         final data = jsonDecode(raw);
-        cardNumberController.text = (data['number'] ?? '').replaceAllMapped(RegExp(r".{4}"), (m) => "${m.group(0)} ");
+        cardNumberController.text = (data['number'] ?? '').replaceAllMapped(RegExp(r'.{4}'), (m) => '${m.group(0)} ');
         expDateController.text = data['expiry'] ?? '';
       } catch (_) {}
     }
@@ -64,6 +64,6 @@ class PaymentController extends BaseController {
   }
 
   void onSave() {
-    Get.snackbar("Success", "Your card has been added.", snackPosition: SnackPosition.BOTTOM);
+    Get.snackbar('Success', 'Your card has been added.', snackPosition: SnackPosition.BOTTOM);
   }
 }

@@ -2,16 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/domain/models/response/get_product_detail_response.dart';
 
 class ProductNutritionSection extends StatelessWidget {
+
+  const ProductNutritionSection({
+    required this.details, required this.ingredients, required this.nutritions, super.key,
+  });
   final String details;
   final String ingredients;
   final List<Nutrition>? nutritions;
-
-  const ProductNutritionSection({
-    super.key,
-    required this.details,
-    required this.ingredients,
-    required this.nutritions,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +19,7 @@ class ProductNutritionSection extends StatelessWidget {
         children: [
           // Details
           const Text(
-            "Details",
+            'Details',
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 16,
@@ -41,7 +38,7 @@ class ProductNutritionSection extends StatelessWidget {
           const SizedBox(height: 16),
           // Ingredients
           const Text(
-            "Ingredients",
+            'Ingredients',
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 16,
@@ -65,7 +62,7 @@ class ProductNutritionSection extends StatelessWidget {
               decoration: BoxDecoration(
                 color: const Color(0xFFF7F8F9),
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Color(0xFFE8EBEE)),
+                border: Border.all(color: const Color(0xFFE8EBEE)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +71,7 @@ class ProductNutritionSection extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                     child: Text(
-                      "Nutrition Facts",
+                      'Nutrition Facts',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 16,

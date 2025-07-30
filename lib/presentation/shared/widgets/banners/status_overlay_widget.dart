@@ -3,13 +3,13 @@ import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart';
 
 class StatusOverlayWidget extends StatelessWidget {
+
+  const StatusOverlayWidget({required this.item, required this.index, required this.totalItems, required this.height, required this.width, super.key});
   final BannerEntity item;
   final int index;
   final int totalItems;
   final double height;
   final double width;
-
-  const StatusOverlayWidget({super.key, required this.item, required this.index, required this.totalItems, required this.height, required this.width});
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import 'package:sixam_mart_user/presentation/modules/account/account_passkeys/ac
 import 'package:sixam_mart_user/presentation/modules/account/account_password/account_password_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account_security/account_security_controller.dart';
 
-import 'account_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account/account_controller.dart';
 
 class AccountBinding extends Bindings {
   @override
