@@ -15,12 +15,12 @@ class ServiceController extends BaseController {
   @override
   void onReady() {
     super.onReady();
-    loadServiceTypeData('fast_food');
+    loadServiceTypeData(currentServiceType.value);
   }
 
   final RxList<Category> categories = RxList<Category>([]);
   final RxList<BannerSection> dynamicSections = RxList<BannerSection>([]);
-  final RxString currentServiceType = RxString('fast_food');
+  final RxString currentServiceType = RxString('food');
 
   // Method to load data for specific service type
   void loadServiceTypeData(String serviceType) async {
@@ -45,7 +45,7 @@ class ServiceController extends BaseController {
         }
         if (responseData.data?.isNotEmpty == true) {
           dynamicSections.clear();
-          dynamicSections.addAll(BannerDataUtils.getBannerSections(responseData.data));
+          dynamicSections.addAll(BannerDataUtils.getBannerSections(responseData.data, serviceType: serviceType));
         }
       case Failure(:final error):
         showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);

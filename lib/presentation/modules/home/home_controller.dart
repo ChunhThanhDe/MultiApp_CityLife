@@ -21,7 +21,7 @@ class HomeController extends BaseController {
 
   Future<void> getStoreData() async {
     // await safeExecute(() async {
-    final result = await _storeRepository.getStoreGeneralData(appProvider.userInfo.value.id);
+    final result = await _storeRepository.getHomeData(appProvider.userInfo.value.id);
     switch (result) {
       case Success(:final response):
         final responseData = GetStoreGeneralData.fromJson(response.data);
@@ -33,7 +33,7 @@ class HomeController extends BaseController {
         // Process banner data if available
         if (responseData.data != null && responseData.data is Map<String, dynamic>) {
           dynamicSections.clear();
-          dynamicSections.addAll(BannerDataUtils.getBannerSections(responseData.data));
+          dynamicSections.addAll(BannerDataUtils.getBannerSections(responseData.data, serviceType: 'fast_food'));
         }
       case Failure():
     }

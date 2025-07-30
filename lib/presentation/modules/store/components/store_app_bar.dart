@@ -26,7 +26,7 @@ class StoreAppBar extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.only(top: 54.h, left: 24.w, right: 24.w, bottom: 24.h),
             decoration: BoxDecoration(
-              image: DecorationImage(image: CachedNetworkImageProvider(store.coverPhotoUrl), fit: BoxFit.cover),
+              image: DecorationImage(image: CachedNetworkImageProvider(store.coverPhotoUrl ?? ''), fit: BoxFit.cover),
             ),
             child: Column(
               children: [
@@ -65,20 +65,9 @@ class StoreAppBar extends StatelessWidget {
             child: Text.rich(
               TextSpan(
                 children: [
-                  TextSpan(
-                    text: '${store.name}\n',
-                    style: AppTextStyles.typographyH8SemiBold,
-                  ),
-                  if (store.comment != null && store.comment!.isNotEmpty)
-                    TextSpan(
-                      text: store.comment,
-                      style: AppTextStyles.typographyH11Regular,
-                    ),
-                  if (store.comment == null || store.comment!.isEmpty)
-                    TextSpan(
-                      text: 'No description.',
-                      style: AppTextStyles.typographyH11Regular,
-                    ),
+                  TextSpan(text: '${store.name}\n', style: AppTextStyles.typographyH8SemiBold),
+                  if (store.comment != null && store.comment!.isNotEmpty) TextSpan(text: store.comment, style: AppTextStyles.typographyH11Regular),
+                  if (store.comment == null || store.comment!.isEmpty) TextSpan(text: 'No description.', style: AppTextStyles.typographyH11Regular),
                 ],
               ),
               maxLines: 3,
@@ -128,18 +117,14 @@ class StoreAppBar extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ClipOval(
-                    child: AppImage.network(
-                      store.logoUrl,
-                      width: 56.w,
-                      height: 56.w,
-                    ),
+                    child: AppImage.network(store.logoUrl ?? '', width: 56.w, height: 56.w),
                   ),
                   SizedBox(width: 16.w),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(store.name, style: AppTextStyles.typographyH7SemiBold),
+                        Text(store.name ?? '', style: AppTextStyles.typographyH7SemiBold),
                         SizedBox(height: 4.h),
                         Row(
                           children: [

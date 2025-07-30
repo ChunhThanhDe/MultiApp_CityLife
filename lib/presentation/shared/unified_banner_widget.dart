@@ -12,7 +12,6 @@ import 'package:sixam_mart_user/presentation/shared/widgets/banners/banner_item_
 /// - Open/Closed: Extensible through the factory pattern for new banner types
 /// - Dependency Inversion: Depends on abstractions (BannerSection) not concrete implementations
 class UnifiedBannerWidget extends StatelessWidget {
-
   const UnifiedBannerWidget({required this.section, super.key});
   final BannerSection section;
 
@@ -37,7 +36,14 @@ class UnifiedBannerWidget extends StatelessWidget {
       child: Row(
         children: List.generate(
           section.items.length,
-          (index) => BannerItemFactory.createBannerItem(bannerType: section.bannerType, item: section.items[index], index: index, totalItems: section.items.length, onTap: section.onTapItem),
+          (index) => BannerItemFactory.createBannerItem(
+            bannerType: section.bannerType,
+            item: section.items[index],
+            index: index,
+            totalItems: section.items.length,
+            onTap: section.onTapItem,
+            serviceType: section.serviceType,
+          ),
         ),
       ),
     );

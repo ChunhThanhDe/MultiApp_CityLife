@@ -5,27 +5,32 @@ import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart'
 enum BannerType { bannerFloatingLogo, brandLogoName, bannerDiscount, bannerSingleImage }
 
 class BannerSection {
-
-  const BannerSection({required this.title, required this.items, required this.bannerType, this.showArrowIcon = true, this.onTapItem, this.onTapTitle});
+  const BannerSection({required this.title, required this.items, required this.bannerType, this.showArrowIcon = true, this.onTapItem, this.onTapTitle, this.serviceType});
   final String title;
   final List<BannerEntity> items;
   final BannerType bannerType;
   final bool showArrowIcon;
   final VoidCallback? onTapItem;
   final VoidCallback? onTapTitle;
+  final String? serviceType;
 }
 
 class BannerDataUtils {
   BannerDataUtils._();
 
-  static List<BannerSection> getBannerSections(Map<String, dynamic>? data) {
+  static List<BannerSection> getBannerSections(Map<String, dynamic>? data, {String? serviceType}) {
     if (data == null || data.isEmpty) return [];
     final List<BannerSection> sections = [];
     for (final entry in data.entries) {
       if (entry.value == null || entry.value.isEmpty) continue;
       final items = entry.value as List<dynamic>;
       sections.add(
-        BannerSection(title: _getTitleFormattedName(entry.key), items: items.map((item) => BannerEntity.fromJson(item)).toList(), bannerType: _getBannerType(BannerEntity.fromJson(items.first))),
+        BannerSection(
+          title: _getTitleFormattedName(entry.key),
+          items: items.map((item) => BannerEntity.fromJson(item)).toList(),
+          bannerType: _getBannerType(BannerEntity.fromJson(items.first)),
+          serviceType: serviceType,
+        ),
       );
     }
     return sections;
