@@ -56,9 +56,11 @@ class HeaderAndService extends GetView<HomeController> {
   }
 
   Widget _buildService() {
-    return SizedBox(
-      height: 150,
-      child: ListView.builder(itemCount: controller.serviceData.length, itemBuilder: (context, index) => _buildServiceItem(controller.serviceData[index], index), scrollDirection: Axis.horizontal),
+    return Obx(
+      () => SizedBox(
+        height: 150,
+        child: ListView.builder(itemCount: controller.serviceData.length, itemBuilder: (context, index) => _buildServiceItem(controller.serviceData[index], index), scrollDirection: Axis.horizontal),
+      ),
     );
   }
 

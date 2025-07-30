@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 import 'package:sixam_mart_user/base/base_request.dart';
 
 part '../../../../generated/domain/models/request/authentication/sign_in_request.g.dart';
@@ -10,14 +9,12 @@ enum SignInType {
   google('google'),
   facebook('facebook');
 
-  final String value;
-
   const SignInType(this.value);
+  final String value;
 }
 
 @JsonSerializable()
 class SignInRequest extends BaseRequest {
-
   SignInRequest({required this.loginType, required this.emailOrPhone, required this.fieldType, required this.password});
 
   factory SignInRequest.fromJson(Map<String, dynamic> json) => _$SignInRequestFromJson(json);

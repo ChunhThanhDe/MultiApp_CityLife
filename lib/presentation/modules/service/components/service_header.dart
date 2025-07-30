@@ -47,7 +47,7 @@ class ServiceHeader extends GetView<ServiceController> {
         () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(controller.currentServiceType.value ?? '', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textBaseWhite)),
+            Text(controller.currentServiceType.value, style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textBaseWhite)),
             Assets.icons.icBell.svg(width: 24, height: 24, colorFilter: ColorFilter.mode(AppColors.textBaseWhite, BlendMode.srcIn)),
           ],
         ),

@@ -4,6 +4,6 @@ enum StoreServiceType {
   delivery('Delivery'),
   driveThru('Drive thru');
 
-  final String label;
   const StoreServiceType(this.label);
+  final String label;
 }

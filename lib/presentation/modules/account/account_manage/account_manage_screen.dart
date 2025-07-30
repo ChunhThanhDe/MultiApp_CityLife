@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
-import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
-
 import 'package:sixam_mart_user/presentation/modules/account/account_manage/account_manage_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 
 class AccountManageScreen extends BaseScreen<AccountManageController> {
   const AccountManageScreen({super.key});
@@ -179,17 +178,10 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                             backgroundColor: const Color(0xFF5856D7),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                             elevation: 0,
-                            disabledBackgroundColor: const Color(0xFF5856D7).withOpacity(0.6),
+                            disabledBackgroundColor: const Color(0xFF5856D7).withValues(alpha: 0.6),
                           ),
                           child: controller.isLoading.value
-                              ? const SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                                  ),
-                                )
+                              ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)))
                               : const Text(
                                   'Update',
                                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16),
@@ -210,7 +202,6 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
 }
 
 class _InputTextField extends StatelessWidget {
-
   const _InputTextField({required this.label, required this.controller, this.required = false, this.suffix, this.validator});
   final String label;
   final TextEditingController controller;
@@ -251,7 +242,6 @@ class _InputTextField extends StatelessWidget {
 }
 
 class _BirthdayDropdown extends StatelessWidget {
-
   const _BirthdayDropdown({required this.items, required this.value, required this.onChanged, required this.hint});
   final List<String> items;
   final String value;

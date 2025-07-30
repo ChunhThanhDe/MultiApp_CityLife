@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account_password/account_password_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/account/components/password_input.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
-
-import 'package:sixam_mart_user/presentation/modules/account/account_password/account_password_controller.dart';
 
 class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
   const AccountPasswordScreen({super.key});
@@ -106,17 +105,10 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       elevation: 0,
-                      disabledBackgroundColor: const Color(0xFF5856D7).withOpacity(0.6),
+                      disabledBackgroundColor: const Color(0xFF5856D7).withValues(alpha: 0.6),
                     ),
                     child: controller.isLoading.value
-                        ? const SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                            ),
-                          )
+                        ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)))
                         : const Text(
                             'Change password',
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
