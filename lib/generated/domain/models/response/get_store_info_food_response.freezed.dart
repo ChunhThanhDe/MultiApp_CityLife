@@ -493,7 +493,7 @@ as bool,
 /// @nodoc
 mixin _$ProductItem {
 
- int get id; String get name;@JsonKey(name: 'image_url') String get imageUrl; int get price;@JsonKey(name: 'avg_rating') double get avgRating;@JsonKey(name: 'rating_count') int get ratingCount;
+ int get id; String get name;@JsonKey(name: 'image_url') String get imageUrl; double get price;@JsonKey(name: 'avg_rating') double get avgRating;@JsonKey(name: 'rating_count') int get ratingCount;
 /// Create a copy of ProductItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -526,7 +526,7 @@ abstract mixin class $ProductItemCopyWith<$Res>  {
   factory $ProductItemCopyWith(ProductItem value, $Res Function(ProductItem) _then) = _$ProductItemCopyWithImpl;
 @useResult
 $Res call({
- int id, String name,@JsonKey(name: 'image_url') String imageUrl, int price,@JsonKey(name: 'avg_rating') double avgRating,@JsonKey(name: 'rating_count') int ratingCount
+ int id, String name,@JsonKey(name: 'image_url') String imageUrl, double price,@JsonKey(name: 'avg_rating') double avgRating,@JsonKey(name: 'rating_count') int ratingCount
 });
 
 
@@ -549,7 +549,7 @@ id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
-as int,avgRating: null == avgRating ? _self.avgRating : avgRating // ignore: cast_nullable_to_non_nullable
+as double,avgRating: null == avgRating ? _self.avgRating : avgRating // ignore: cast_nullable_to_non_nullable
 as double,ratingCount: null == ratingCount ? _self.ratingCount : ratingCount // ignore: cast_nullable_to_non_nullable
 as int,
   ));
@@ -562,13 +562,13 @@ as int,
 @JsonSerializable()
 
 class _ProductItem implements ProductItem {
-  const _ProductItem({this.id = 0, this.name = '', @JsonKey(name: 'image_url') this.imageUrl = '', this.price = 0, @JsonKey(name: 'avg_rating') this.avgRating = 0.0, @JsonKey(name: 'rating_count') this.ratingCount = 0});
+  const _ProductItem({this.id = 0, this.name = '', @JsonKey(name: 'image_url') this.imageUrl = '', this.price = 0.0, @JsonKey(name: 'avg_rating') this.avgRating = 0.0, @JsonKey(name: 'rating_count') this.ratingCount = 0});
   factory _ProductItem.fromJson(Map<String, dynamic> json) => _$ProductItemFromJson(json);
 
 @override@JsonKey() final  int id;
 @override@JsonKey() final  String name;
 @override@JsonKey(name: 'image_url') final  String imageUrl;
-@override@JsonKey() final  int price;
+@override@JsonKey() final  double price;
 @override@JsonKey(name: 'avg_rating') final  double avgRating;
 @override@JsonKey(name: 'rating_count') final  int ratingCount;
 
@@ -605,7 +605,7 @@ abstract mixin class _$ProductItemCopyWith<$Res> implements $ProductItemCopyWith
   factory _$ProductItemCopyWith(_ProductItem value, $Res Function(_ProductItem) _then) = __$ProductItemCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name,@JsonKey(name: 'image_url') String imageUrl, int price,@JsonKey(name: 'avg_rating') double avgRating,@JsonKey(name: 'rating_count') int ratingCount
+ int id, String name,@JsonKey(name: 'image_url') String imageUrl, double price,@JsonKey(name: 'avg_rating') double avgRating,@JsonKey(name: 'rating_count') int ratingCount
 });
 
 
@@ -628,7 +628,7 @@ id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
-as int,avgRating: null == avgRating ? _self.avgRating : avgRating // ignore: cast_nullable_to_non_nullable
+as double,avgRating: null == avgRating ? _self.avgRating : avgRating // ignore: cast_nullable_to_non_nullable
 as double,ratingCount: null == ratingCount ? _self.ratingCount : ratingCount // ignore: cast_nullable_to_non_nullable
 as int,
   ));

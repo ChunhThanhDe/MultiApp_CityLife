@@ -64,7 +64,7 @@ class ProductCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           SizedBox(height: 4.h),
-          Text(item.price, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
+          Text('\$${item.price.toStringAsFixed(2)}', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
         ],
       ),
     );

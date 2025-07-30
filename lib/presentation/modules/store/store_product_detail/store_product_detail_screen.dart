@@ -7,6 +7,7 @@ import 'package:sixam_mart_user/presentation/modules/store/components/product_de
 import 'package:sixam_mart_user/presentation/modules/store/components/product_nutritiion_section.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_option_group_section.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 import 'store_product_detail_controller.dart';
 
@@ -74,10 +75,8 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                   Container(
                     height: 230,
                     width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      image: DecorationImage(fit: BoxFit.cover, image: NetworkImage(product.storeImageUrl)),
-                    ),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
+                    child: AppImage.network(product.storeImageUrl, fit: BoxFit.cover),
                   ),
                   // Dùng Align để luôn căn giữa ở dưới cùng ảnh
                   Align(
@@ -90,12 +89,12 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(color: const Color(0xFFE8EBEE)),
-                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.07), blurRadius: 6, offset: const Offset(0, 2))],
+                          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.07), blurRadius: 6, offset: const Offset(0, 2))],
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Image.network(product.storeImageUrl, width: 24, height: 24, errorBuilder: (_, __, ___) => const Icon(Icons.store, size: 24)),
+                            AppImage.network(product.storeImageUrl, width: 24, height: 24),
                             const SizedBox(width: 8),
                             Flexible(
                               child: Text(
@@ -237,9 +236,9 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                     final productItem = ProductItem(
                       id: item.id,
                       name: item.name,
-                      price: (item.price / 100.0).toStringAsFixed(2),
+                      price: (item.price / 100.0),
                       imageUrl: item.imageUrl,
-                      rating: 123, //
+                      rating: 123.0, //
                       reviewCount: 123, // Tương tự
                     );
 

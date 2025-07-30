@@ -22,7 +22,7 @@ enum FilterType {
 class ProductItem {
   final int id;
   final String name;
-  final String price;
+  final double price;
   final String imageUrl;
   final List<FilterType> categories;
   final List<StoreServiceType> availableServices;
@@ -50,9 +50,6 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
   final int storeId;
 
   StoreController({required this.storeType, required this.storeId});
-
-  @override
-  final RxBool isLoading = true.obs;
   FilterType _selectedFilter = FilterType.all;
   StoreServiceType _selectedService = StoreServiceType.inStore;
 
@@ -75,7 +72,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
   @override
   void onInit() {
     super.onInit();
-    serviceTabController = TabController(length: 3, vsync: this);
+    serviceTabController = TabController(length: StoreServiceType.values.length, vsync: this);
     loadStoreDetail();
 
     serviceTabController.addListener(() {
@@ -105,15 +102,12 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
               foodResponse.value = data;
               storeInfo.value = data.store;
 
-              print('🍔 [Food] API sections: ${data.sections.length}');
-              print('🍔 [Food] API popular items: ${data.popularItems.length}');
-
               _popularItems.value = data.popularItems
                   .map(
                     (e) => ProductItem(
                       id: e.id,
                       name: e.name,
-                      price: e.price.toString(),
+                      price: e.price.toDouble(), // Convert int to double
                       imageUrl: e.imageUrl,
                       rating: e.avgRating,
                       reviewCount: e.ratingCount,
@@ -130,7 +124,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
                         (e) => ProductItem(
                           id: e.id,
                           name: e.name,
-                          price: e.price.toString(),
+                          price: e.price.toDouble(), // Convert int to double
                           imageUrl: e.imageUrl,
                           rating: e.avgRating,
                           reviewCount: e.ratingCount,
@@ -140,11 +134,6 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
                       )
                       .toList(),
               };
-
-              // Gán thông tin store vào storeInfo
-
-              print('🍔 [Food] Controller popularItems.length: ${_popularItems.length}');
-              print('🍔 [Food] Controller categories: ${_categories.keys}');
               break;
 
             case StoreType.grocery:
@@ -158,7 +147,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
                         (e) => ProductItem(
                           id: e.id,
                           name: e.name,
-                          price: e.price.toString(),
+                          price: e.price.toDouble(), // Convert int to double
                           imageUrl: e.imageUrl,
                           rating: e.avgRating,
                           reviewCount: e.ratingCount,
@@ -168,8 +157,6 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
                       )
                       .toList(),
               };
-
-              print('🛒 [Grocery] Controller categories: ${_categories.keys}');
               break;
             case StoreType.general:
               final data = StoreInfoResponse.fromJson(response.data);
@@ -182,7 +169,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
                         (e) => ProductItem(
                           id: e.id,
                           name: e.name,
-                          price: e.price.toString(),
+                          price: e.price.toDouble(), // Convert int to double
                           imageUrl: e.imageUrl,
                           rating: e.avgRating,
                           reviewCount: e.ratingCount,
@@ -192,8 +179,6 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
                       )
                       .toList(),
               };
-
-              print('🛍️ [General] Controller categories: ${_categories.keys}');
               break;
 
             case StoreType.reviews:
@@ -201,13 +186,12 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
           }
           break;
 
-        case Failure(:final error):
+        case Failure():
           Get.snackbar('Error', 'Load store detail failed');
           break;
       }
     } finally {
       isLoading.value = false;
-      print('🔄 Load complete. isLoading: ${isLoading.value}');
     }
   }
 

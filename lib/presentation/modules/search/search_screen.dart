@@ -154,18 +154,7 @@ class SearchScreen extends BaseScreen<SearchController> {
       itemBuilder: (context, index) {
         final storeGroup = searchData.itemsByStore![index];
         final productItems = storeGroup.items
-            .map(
-              (item) => ProductItem(
-                name: item.name,
-                id: item.id,
-                price: '\$${item.finalPrice.toStringAsFixed(2)}',
-                rating: item.avgRating,
-                imageUrl: item.imageUrl,
-                reviewCount: 0,
-                categories: [],
-                availableServices: [],
-              ),
-            )
+            .map((item) => ProductItem(name: item.name, id: item.id, price: item.finalPrice, rating: item.avgRating, imageUrl: item.imageUrl, reviewCount: 0, categories: [], availableServices: []))
             .toList();
 
         return ProductCategorySection(title: storeGroup.storeName, items: productItems);

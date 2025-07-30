@@ -41,7 +41,7 @@ abstract class ProductItem with _$ProductItem {
     @Default(0) int id,
     @Default('') String name,
     @JsonKey(name: 'image_url') @Default('') String imageUrl,
-    @Default(0) int price,
+    @Default(0.0) double price,
     @JsonKey(name: 'avg_rating') @Default(0.0) double avgRating,
     @JsonKey(name: 'rating_count') @Default(0) int ratingCount,
   }) = _ProductItem;

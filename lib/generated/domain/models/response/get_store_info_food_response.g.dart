@@ -73,7 +73,7 @@ _ProductItem _$ProductItemFromJson(Map<String, dynamic> json) => _ProductItem(
   id: (json['id'] as num?)?.toInt() ?? 0,
   name: json['name'] as String? ?? '',
   imageUrl: json['image_url'] as String? ?? '',
-  price: (json['price'] as num?)?.toInt() ?? 0,
+  price: (json['price'] as num?)?.toDouble() ?? 0.0,
   avgRating: (json['avg_rating'] as num?)?.toDouble() ?? 0.0,
   ratingCount: (json['rating_count'] as num?)?.toInt() ?? 0,
 );
