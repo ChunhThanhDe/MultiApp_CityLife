@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/box_delivery/box_delivery_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/box_delivery/box_delivery_controller.dart';
 
 class LocationBoxWidget extends StatelessWidget {
   final BoxDeliveryController controller;

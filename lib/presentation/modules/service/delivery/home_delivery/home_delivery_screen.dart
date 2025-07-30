@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_item.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_service_card.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_status_card.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_item.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_service_card.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_status_card.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
 import 'home_delivery_controller.dart';

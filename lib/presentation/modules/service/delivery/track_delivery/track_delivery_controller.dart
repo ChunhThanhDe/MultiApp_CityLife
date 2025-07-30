@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_package_information_card.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_tracking_progress.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/components/delivery_travel_history_section.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_package_information_card.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_tracking_progress.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_travel_history_section.dart';
 
 class TrackDeliveryController extends BaseController {
   final RxList<TrackingStep> steps = <TrackingStep>[
