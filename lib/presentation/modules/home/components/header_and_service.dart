@@ -56,17 +56,15 @@ class HeaderAndService extends GetView<HomeController> {
   }
 
   Widget _buildService() {
-    return Obx(
-      () => SizedBox(
-        height: 150,
-        child: ListView.builder(itemCount: controller.serviceData.length, itemBuilder: (context, index) => _buildServiceItem(controller.serviceData[index], index), scrollDirection: Axis.horizontal),
-      ),
+    return SizedBox(
+      height: 150,
+      child: ListView.builder(itemCount: Service.services.length, itemBuilder: (context, index) => _buildServiceItem(Service.services[index], index), scrollDirection: Axis.horizontal),
     );
   }
 
   Padding _buildServiceItem(ServiceEntity service, int index) {
     return Padding(
-      padding: EdgeInsets.only(right: index == controller.serviceData.length - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
+      padding: EdgeInsets.only(right: index == Service.services.length - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
       child: GestureDetector(
         onTap: () => controller.navigateToServiceWithType(service.moduleType ?? ''),
         child: Column(

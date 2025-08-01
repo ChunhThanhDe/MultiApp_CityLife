@@ -31,18 +31,10 @@ import 'package:sixam_mart_user/presentation/modules/cart/cart_order/cart_order_
 import 'package:sixam_mart_user/presentation/modules/cart/cart_order/cart_order_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/cart_order_confirm/cart_order_confirm_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/cart_order_confirm/cart_order_confirm_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/cart_successful/cart_successful_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/cart_successful/cart_successful_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/view_cart/view_cart_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/view_cart/view_cart_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/box_delivery/box_delivery_binding.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/box_delivery/box_delivery_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/delivery_checkout/delivery_checkout_binding.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/delivery_checkout/delivery_checkout_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/home_delivery/home_delivery_binding.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/home_delivery/home_delivery_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/track_delivery/track_delivery_binding.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/track_delivery/track_delivery_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/tracking_delivery/tracking_delivery_binding.dart';
-import 'package:sixam_mart_user/presentation/modules/delivery/tracking_delivery/tracking_delivery_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorities_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/onboarding/splash/splash_binding.dart';
@@ -57,6 +49,18 @@ import 'package:sixam_mart_user/presentation/modules/root/root_bindings.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/search/search_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/search/search_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/box_delivery/box_delivery_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/box_delivery/box_delivery_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/delivery_checkout/delivery_checkout_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/delivery_checkout/delivery_checkout_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/home_delivery/home_delivery_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/home_delivery/home_delivery_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/track_delivery/track_delivery_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/track_delivery/track_delivery_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/tracking_delivery/tracking_delivery_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/tracking_delivery/tracking_delivery_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/service/laundry/service_laundry_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/service/laundry/service_laundry_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_product_detail/store_product_detail_binding.dart';
@@ -116,7 +120,11 @@ class AppPages {
     GetPage(name: AppRoutes.welcome, page: () => const WelcomeScreen(), binding: WelcomeBinding()),
     GetPage(name: AppRoutes.cart, page: () => const ViewCartScreen(), binding: ViewCartBinding()),
     GetPage(name: AppRoutes.cartOrder, page: () => const CartOrderScreen(), binding: CartOrderBinding()),
-    GetPage(name: AppRoutes.cartCheckout, page: () => const CartCheckoutScreen(), binding: CartCheckoutBinding()),
+    GetPage(
+      name: AppRoutes.cartCheckout,
+      page: () => CartCheckoutScreen(serviceCart: Get.arguments['serviceCart']),
+      binding: CartCheckoutBinding(),
+    ),
     GetPage(name: AppRoutes.cartConfirm, page: () => const CartOrderConfirmScreen(), binding: CartOrderConfirmBinding()),
     GetPage(
       name: AppRoutes.store,
@@ -128,5 +136,7 @@ class AppPages {
       page: () => StoreProductDetailScreen(productId: Get.arguments['productId']),
       binding: StoreProductDetailBinding(),
     ),
+    GetPage(name: AppRoutes.laundryMain, page: () => const ServiceLaundryScreen(), binding: ServiceLaundryBinding()),
+    GetPage(name: AppRoutes.cartSuccessful, page: () => const CartSuccessfulScreen(), binding: CartSuccessfulBinding()),
   ];
 }
