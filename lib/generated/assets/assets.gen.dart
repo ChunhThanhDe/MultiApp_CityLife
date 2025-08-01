@@ -27,6 +27,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_back_arrow.svg
   SvgGenImage get icBackArrow => const SvgGenImage('assets/icons/ic_back_arrow.svg');
 
+  /// File path: assets/icons/ic_backpack_modern1.svg
+  SvgGenImage get icBackpackModern1 => const SvgGenImage('assets/icons/ic_backpack_modern1.svg');
+
   /// File path: assets/icons/ic_basket_preparing.svg
   SvgGenImage get icBasketPreparing => const SvgGenImage('assets/icons/ic_basket_preparing.svg');
 
@@ -74,6 +77,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_close.svg
   SvgGenImage get icClose => const SvgGenImage('assets/icons/ic_close.svg');
+
+  /// File path: assets/icons/ic_cloth_hanger1.svg
+  SvgGenImage get icClothHanger1 => const SvgGenImage('assets/icons/ic_cloth_hanger1.svg');
 
   /// File path: assets/icons/ic_courier_hands.svg
   SvgGenImage get icCourierHands => const SvgGenImage('assets/icons/ic_courier_hands.svg');
@@ -161,6 +167,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_invoice.svg
   SvgGenImage get icInvoice => const SvgGenImage('assets/icons/ic_invoice.svg');
+
+  /// File path: assets/icons/ic_iron.svg
+  SvgGenImage get icIron => const SvgGenImage('assets/icons/ic_iron.svg');
 
   /// File path: assets/icons/ic_language.svg
   SvgGenImage get icLanguage => const SvgGenImage('assets/icons/ic_language.svg');
@@ -258,6 +267,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_share.svg
   SvgGenImage get icShare => const SvgGenImage('assets/icons/ic_share.svg');
 
+  /// File path: assets/icons/ic_single_bed1.svg
+  SvgGenImage get icSingleBed1 => const SvgGenImage('assets/icons/ic_single_bed1.svg');
+
+  /// File path: assets/icons/ic_sneakers1.svg
+  SvgGenImage get icSneakers1 => const SvgGenImage('assets/icons/ic_sneakers1.svg');
+
   /// File path: assets/icons/ic_standard.svg
   SvgGenImage get icStandard => const SvgGenImage('assets/icons/ic_standard.svg');
 
@@ -294,6 +309,7 @@ class $AssetsIconsGen {
     icAppleIcon,
     icApplePay,
     icBackArrow,
+    icBackpackModern1,
     icBasketPreparing,
     icBasketShoppingCheck,
     icBell,
@@ -310,6 +326,7 @@ class $AssetsIconsGen {
     icClock,
     icClockTime,
     icClose,
+    icClothHanger1,
     icCourierHands,
     icDeliveryTracking,
     icDollar,
@@ -339,6 +356,7 @@ class $AssetsIconsGen {
     icInfo,
     icInformation,
     icInvoice,
+    icIron,
     icLanguage,
     icLeftArrowChervon,
     icLikeFilled,
@@ -371,6 +389,8 @@ class $AssetsIconsGen {
     icServiceOutlined,
     icSettingsFilter,
     icShare,
+    icSingleBed1,
+    icSneakers1,
     icStandard,
     icStar,
     icStore,
@@ -483,6 +503,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/img_see_more.png
   AssetGenImage get imgSeeMore => const AssetGenImage('assets/images/img_see_more.png');
 
+  /// File path: assets/images/img_single_bed1.png
+  AssetGenImage get imgSingleBed1 => const AssetGenImage('assets/images/img_single_bed1.png');
+
   /// File path: assets/images/img_starbucks.png
   AssetGenImage get imgStarbucks => const AssetGenImage('assets/images/img_starbucks.png');
 
@@ -589,6 +612,7 @@ class $AssetsImagesGen {
     imgMc,
     imgNew,
     imgSeeMore,
+    imgSingleBed1,
     imgStarbucks,
     imgTarget,
     imgTicketPlane,

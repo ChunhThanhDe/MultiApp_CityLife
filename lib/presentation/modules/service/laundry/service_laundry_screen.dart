@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/service/components/category_expandable.dart';
 
 import 'service_laundry_controller.dart';
 
@@ -7,86 +10,87 @@ class ServiceLaundryScreen extends BaseScreen<ServiceLaundryController> {
   const ServiceLaundryScreen({super.key});
 
   @override
-  Widget buildScreen(BuildContext context) {
-    const mainColor = Color(0xFF5856D7);
+  bool get wrapWithSafeArea => false;
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          // Top purple background
-          Container(width: double.infinity, height: 161, color: mainColor),
-          SafeArea(
-            child: Column(
-              children: [
-                // Custom AppBar
-                _LaundryAppBar(),
-                // Scrollable content
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        // Category Tabs
-                        _LaundryCategoryTabs(),
-                        // Banner + Dots + Text
-                        Padding(padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12), child: _LaundryBanner()),
-                        const SizedBox(height: 6),
-                        // Pricing Section
-                        Container(
-                          color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 24),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Pricing title
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+  @override
+  Widget buildScreen(BuildContext context) {
+    return Stack(
+      children: [
+        // Top dynamic background
+        Obx(
+          () => Container(
+            width: double.infinity,
+            height: 150,
+            decoration: BoxDecoration(color: controller.currentBackgroundColor),
+          ),
+        ),
+        SafeArea(
+          child: Column(
+            children: [
+              // Custom AppBar
+              _LaundryAppBar(),
+              // Scrollable content
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      // Category Tabs
+                      _LaundryCategoryTabs(),
+                      // Banner + Dots + Text
+                      Padding(padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12), child: _LaundryBanner()),
+                      const SizedBox(height: 6),
+                      // Pricing Section
+                      Container(
+                        color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 24),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Pricing title
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 24),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Pricing",
+                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
+                                    ),
+                                    SizedBox(height: 4),
+                                    Text("Each item is charged separately", style: TextStyle(fontSize: 14, color: Color(0xFF4A5763))),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 16),
+                              // List of pricing items
+                              GetBuilder<ServiceLaundryController>(
+                                builder: (controller) => ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: controller.itemCategories.length,
+                                  itemBuilder: (context, i) => Column(
                                     children: [
-                                      Text(
-                                        "Pricing",
-                                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
-                                      ),
-                                      SizedBox(height: 4),
-                                      Text("Each item is charged separately", style: TextStyle(fontSize: 14, color: Color(0xFF4A5763))),
+                                      CategoryExpandable(title: controller.itemCategories[i].name, parts: controller.itemCategories[i].items.length, items: controller.itemCategories[i].items),
+                                      if (i < controller.itemCategories.length - 1) _Divider(),
                                     ],
                                   ),
                                 ),
-                                SizedBox(height: 16),
-                                // List of pricing items
-                                Column(
-                                  children: [
-                                    _PricingCell(title: 'Tops', parts: 4),
-                                    _Divider(),
-                                    _PricingCell(title: 'Bottoms', parts: 12),
-                                    _Divider(),
-                                    _PricingCell(title: 'Undergarment', parts: 4),
-                                    _Divider(),
-                                    _PricingCell(title: 'Home Items', parts: 4),
-                                    _Divider(),
-                                    _PricingCell(title: 'Formal', parts: 4),
-                                    _Divider(),
-                                    _PricingCell(title: 'Others', parts: 36),
-                                  ],
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(height: 94), // Space for bottom nav
-                      ],
-                    ),
+                      ),
+                      SizedBox(height: 94), // Space for bottom nav
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          // Bottom NavBar
-          const Align(alignment: Alignment.bottomCenter, child: _LaundryBottomNavBar()),
-        ],
-      ),
+        ),
+        // Bottom NavBar
+      ],
     );
   }
 }
@@ -117,109 +121,149 @@ class _LaundryAppBar extends StatelessWidget {
 }
 
 // Category Tabs
-class _LaundryCategoryTabs extends StatelessWidget {
+class _LaundryCategoryTabs extends GetView<ServiceLaundryController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 110,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.only(left: 24, right: 0, top: 12, bottom: 8),
+      height: 130,
+      child: Obx(() {
+        // Access the reactive variable to make Obx detect changes
+        final selectedIndex = controller.selectedCategoryIndex;
+        return ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.only(left: 24, right: 24, top: 12, bottom: 8),
+          itemCount: ServiceLaundryController.laundryCategories.length,
+          separatorBuilder: (context, index) => const SizedBox(width: 16),
+          itemBuilder: (context, index) {
+            final category = ServiceLaundryController.laundryCategories[index];
+            return _CategoryTab(
+              svgAsset: _getIconAsset(category['icon']),
+              label: category['label'],
+              active: selectedIndex == index,
+              activeColor: category['color'] as Color,
+              onTap: () => controller.selectCategory(index),
+            );
+          },
+        );
+      }),
+    );
+  }
+
+  SvgGenImage _getIconAsset(String iconName) {
+    switch (iconName) {
+      case 'icClothHanger1':
+        return Assets.icons.icClothHanger1;
+      case 'icIron':
+        return Assets.icons.icIron;
+      case 'icSingleBed1':
+        return Assets.icons.icSingleBed1;
+      case 'icBackpackModern1':
+        return Assets.icons.icBackpackModern1;
+      case 'icSneakers1':
+        return Assets.icons.icSneakers1;
+      default:
+        return Assets.icons.icClothHanger1;
+    }
+  }
+}
+
+class _CategoryTab extends StatelessWidget {
+  final SvgGenImage? svgAsset;
+  final String label;
+  final bool active;
+  final Color? activeColor;
+  final VoidCallback? onTap;
+  const _CategoryTab({this.svgAsset, required this.label, this.active = false, this.activeColor, this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
         children: [
-          _CategoryTab(icon: Icons.checkroom, label: "Clothes", active: true),
-          SizedBox(width: 16),
-          _CategoryTab(icon: Icons.iron, label: "Iron"),
-          SizedBox(width: 16),
-          _CategoryTab(icon: Icons.bed_outlined, label: "Home"),
-          SizedBox(width: 16),
-          _CategoryTab(icon: Icons.backpack_outlined, label: "Bogs"),
-          SizedBox(width: 16),
-          _CategoryTab(icon: Icons.sports_esports_outlined, label: "Shoes"),
+          Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(color: Color(0xFFF7F8F9), borderRadius: BorderRadius.circular(8)),
+            child: Center(
+              child: Container(
+                width: 74,
+                height: 74,
+                decoration: BoxDecoration(
+                  color: active ? Colors.white : Color(0xFFF7F8F9),
+                  borderRadius: BorderRadius.circular(6),
+                  boxShadow: [
+                    BoxShadow(color: Color(0x1A101214), offset: Offset(0, 6), blurRadius: 8),
+                    BoxShadow(color: Color(0x1A101214), offset: Offset(0, 18), blurRadius: 24),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: svgAsset!.svg(width: 28, height: 28, colorFilter: ColorFilter.mode(active ? (activeColor ?? Color(0xFF5856D7)) : Color(0xFF161A1D), BlendMode.srcIn)),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 6),
+          Text(
+            label,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: active ? (activeColor ?? Color(0xFF5856D7)) : Color(0xFF161A1D)),
+          ),
         ],
       ),
     );
   }
 }
 
-class _CategoryTab extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final bool active;
-  const _CategoryTab({required this.icon, required this.label, this.active = false});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 80,
-          height: 80,
-          decoration: BoxDecoration(color: Color(0xFFF7F8F9), borderRadius: BorderRadius.circular(8)),
-          child: Center(
-            child: Container(
-              width: 44,
-              height: 44,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(6),
-                boxShadow: [
-                  BoxShadow(color: Color(0x1A101214), offset: Offset(0, 6), blurRadius: 8),
-                  BoxShadow(color: Color(0x1A101214), offset: Offset(0, 18), blurRadius: 24),
-                ],
-              ),
-              child: Icon(icon, size: 28, color: active ? Color(0xFF5856D7) : Color(0xFF161A1D)),
-            ),
-          ),
-        ),
-        SizedBox(height: 6),
-        Text(
-          label,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: active ? Color(0xFF5856D7) : Color(0xFF161A1D)),
-        ),
-      ],
-    );
-  }
-}
-
 // Banner + Dots + Text
-class _LaundryBanner extends StatelessWidget {
+class _LaundryBanner extends GetView<ServiceLaundryController> {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Banner Image (replace with your asset)
-        ClipRRect(
-          borderRadius: BorderRadius.circular(6),
-          child: Image.asset(
-            'assets/images/img_laundry.png', // Using existing laundry image
-            width: 382,
-            height: 180,
-            fit: BoxFit.cover,
+        // Swipeable Banner Images
+        SizedBox(
+          height: 180,
+          child: PageView.builder(
+            onPageChanged: controller.onBannerPageChanged,
+            itemCount: controller.bannerCount,
+            itemBuilder: (context, index) {
+              final banner = ServiceLaundryController.bannerList[index];
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: Image.asset(banner['image'] as String, width: 382, height: 180, fit: BoxFit.cover),
+              );
+            },
           ),
         ),
         SizedBox(height: 8),
-        // Dots
-        Row(mainAxisAlignment: MainAxisAlignment.center, children: [_Dot(active: false), _Dot(active: true), _Dot(active: false), _Dot(active: false)]),
-        SizedBox(height: 8),
-        // Text
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Dry clean or wash?",
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
-              ),
-              SizedBox(height: 4),
-              Text(
-                "Leave the decision to our laundry experts as we have more than 50+ cleaning programs to choose from depending on your fabrics",
-                style: TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
-              ),
-            ],
+        // Dynamic Dots
+        Obx(
+          () => Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(controller.bannerCount, (index) => _Dot(active: controller.selectedBannerIndex == index)),
           ),
         ),
+        SizedBox(height: 8),
+        // Dynamic Text based on current banner
+        Obx(() {
+          final currentBanner = ServiceLaundryController.bannerList[controller.selectedBannerIndex];
+          return Align(
+            alignment: Alignment.centerLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  currentBanner['title'] as String,
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
+                ),
+                SizedBox(height: 4),
+                Text(currentBanner['subtitle'] as String, style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+              ],
+            ),
+          );
+        }),
       ],
     );
   }
@@ -239,108 +283,10 @@ class _Dot extends StatelessWidget {
   }
 }
 
-// Pricing Cell
-class _PricingCell extends StatelessWidget {
-  final String title;
-  final int parts;
-
-  const _PricingCell({required this.title, required this.parts});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 24),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              title,
-              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
-            ),
-          ),
-          Text(
-            "$parts Parts",
-            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF4A5763)),
-          ),
-          Icon(Icons.keyboard_arrow_right_rounded, color: Color(0xFF4A5763)),
-        ],
-      ),
-    );
-  }
-}
-
 // Divider (thin line)
 class _Divider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(margin: const EdgeInsets.only(left: 24), height: 1, color: Color(0xFFE8EBEE));
-  }
-}
-
-// Bottom Navigation Bar
-class _LaundryBottomNavBar extends StatelessWidget {
-  const _LaundryBottomNavBar();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 94,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.9),
-        border: Border(top: BorderSide(color: Color(0x0D101214))),
-        // backdropFilter không hỗ trợ Flutter, chỉ dùng color
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _NavItem(icon: Icons.home, label: "Home"),
-            _NavItem(icon: Icons.miscellaneous_services_rounded, label: "Service", active: true),
-            Stack(
-              children: [
-                _NavItem(icon: Icons.shopping_bag_outlined, label: "Carts"),
-                // Notification dot
-                Positioned(
-                  right: 6,
-                  top: 0,
-                  child: Container(
-                    width: 10,
-                    height: 10,
-                    decoration: BoxDecoration(color: Color(0xFFFF3B30), shape: BoxShape.circle),
-                  ),
-                ),
-              ],
-            ),
-            _NavItem(icon: Icons.account_balance_wallet_outlined, label: "Wallet"),
-            _NavItem(icon: Icons.person_outline, label: "Account"),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _NavItem extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final bool active;
-
-  const _NavItem({required this.icon, required this.label, this.active = false});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, size: 24, color: active ? Color(0xFF5856D7) : Color(0xFF161A1D)),
-        SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: active ? Color(0xFF5856D7) : Color(0xFF161A1D)),
-        ),
-      ],
-    );
   }
 }
