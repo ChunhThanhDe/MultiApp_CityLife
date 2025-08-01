@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/domain/enums/service_type.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/category_expandable.dart';
 import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
 
@@ -34,98 +34,98 @@ class ServiceLaundryController extends ServiceController {
   // Laundry categories with items and pricing
   final List<CategoryOption> itemCategories = [
     CategoryOption(
-      name: "Tops",
+      name: 'Tops',
       items: [
-        ItemOption(name: "Shirt", price: 5.99),
-        ItemOption(name: "Pajama Top", price: 5.99),
-        ItemOption(name: "T-Shirt", price: 5.99),
-        ItemOption(name: "Blouse", price: 5.99),
-        ItemOption(name: "Tunics", price: 5.99),
+        ItemOption(name: 'Shirt', price: 5.99),
+        ItemOption(name: 'Pajama Top', price: 5.99),
+        ItemOption(name: 'T-Shirt', price: 5.99),
+        ItemOption(name: 'Blouse', price: 5.99),
+        ItemOption(name: 'Tunics', price: 5.99),
       ],
     ),
     CategoryOption(
-      name: "Bottoms",
+      name: 'Bottoms',
       items: [
-        ItemOption(name: "Pants", price: 7.99),
-        ItemOption(name: "Shorts", price: 6.49),
-        ItemOption(name: "Jeans", price: 8.99),
-        ItemOption(name: "Skirt", price: 6.99),
-        ItemOption(name: "Leggings", price: 5.49),
-        ItemOption(name: "Pajama Bottom", price: 5.99),
-        ItemOption(name: "Sweatpants", price: 6.99),
-        ItemOption(name: "Dress Pants", price: 9.99),
-        ItemOption(name: "Capris", price: 6.49),
-        ItemOption(name: "Yoga Pants", price: 5.99),
-        ItemOption(name: "Cargo Pants", price: 8.49),
-        ItemOption(name: "Track Pants", price: 6.99),
+        ItemOption(name: 'Pants', price: 7.99),
+        ItemOption(name: 'Shorts', price: 6.49),
+        ItemOption(name: 'Jeans', price: 8.99),
+        ItemOption(name: 'Skirt', price: 6.99),
+        ItemOption(name: 'Leggings', price: 5.49),
+        ItemOption(name: 'Pajama Bottom', price: 5.99),
+        ItemOption(name: 'Sweatpants', price: 6.99),
+        ItemOption(name: 'Dress Pants', price: 9.99),
+        ItemOption(name: 'Capris', price: 6.49),
+        ItemOption(name: 'Yoga Pants', price: 5.99),
+        ItemOption(name: 'Cargo Pants', price: 8.49),
+        ItemOption(name: 'Track Pants', price: 6.99),
       ],
     ),
     CategoryOption(
-      name: "Undergarment",
+      name: 'Undergarment',
       items: [
-        ItemOption(name: "Underwear", price: 3.99),
-        ItemOption(name: "Bra", price: 4.99),
-        ItemOption(name: "Undershirt", price: 3.49),
-        ItemOption(name: "Socks", price: 2.99),
+        ItemOption(name: 'Underwear', price: 3.99),
+        ItemOption(name: 'Bra', price: 4.99),
+        ItemOption(name: 'Undershirt', price: 3.49),
+        ItemOption(name: 'Socks', price: 2.99),
       ],
     ),
     CategoryOption(
-      name: "Home Items",
+      name: 'Home Items',
       items: [
-        ItemOption(name: "Bed Sheet", price: 12.99),
-        ItemOption(name: "Pillow Case", price: 4.99),
-        ItemOption(name: "Towel", price: 6.99),
-        ItemOption(name: "Blanket", price: 15.99),
+        ItemOption(name: 'Bed Sheet', price: 12.99),
+        ItemOption(name: 'Pillow Case', price: 4.99),
+        ItemOption(name: 'Towel', price: 6.99),
+        ItemOption(name: 'Blanket', price: 15.99),
       ],
     ),
     CategoryOption(
-      name: "Formal",
+      name: 'Formal',
       items: [
-        ItemOption(name: "Suit Jacket", price: 18.99),
-        ItemOption(name: "Dress Shirt", price: 8.99),
-        ItemOption(name: "Tie", price: 4.99),
-        ItemOption(name: "Formal Dress", price: 16.99),
+        ItemOption(name: 'Suit Jacket', price: 18.99),
+        ItemOption(name: 'Dress Shirt', price: 8.99),
+        ItemOption(name: 'Tie', price: 4.99),
+        ItemOption(name: 'Formal Dress', price: 16.99),
       ],
     ),
     CategoryOption(
-      name: "Others",
+      name: 'Others',
       items: [
-        ItemOption(name: "Jacket", price: 14.99),
-        ItemOption(name: "Coat", price: 19.99),
-        ItemOption(name: "Sweater", price: 9.99),
-        ItemOption(name: "Hoodie", price: 11.99),
-        ItemOption(name: "Scarf", price: 5.99),
-        ItemOption(name: "Hat", price: 4.99),
-        ItemOption(name: "Gloves", price: 3.99),
-        ItemOption(name: "Belt", price: 3.49),
-        ItemOption(name: "Apron", price: 6.49),
-        ItemOption(name: "Curtains", price: 13.99),
-        ItemOption(name: "Table Cloth", price: 8.99),
-        ItemOption(name: "Rug", price: 16.99),
-        ItemOption(name: "Sleeping Bag", price: 12.99),
-        ItemOption(name: "Backpack", price: 9.99),
-        ItemOption(name: "Purse", price: 7.99),
-        ItemOption(name: "Wallet", price: 4.99),
-        ItemOption(name: "Shoes", price: 11.99),
-        ItemOption(name: "Boots", price: 14.99),
-        ItemOption(name: "Sneakers", price: 10.99),
-        ItemOption(name: "Sandals", price: 7.99),
-        ItemOption(name: "Slippers", price: 5.99),
-        ItemOption(name: "High Heels", price: 12.99),
-        ItemOption(name: "Dress Shoes", price: 13.99),
-        ItemOption(name: "Sports Shoes", price: 11.49),
-        ItemOption(name: "Canvas Shoes", price: 8.99),
-        ItemOption(name: "Flip Flops", price: 4.99),
-        ItemOption(name: "Work Boots", price: 16.99),
-        ItemOption(name: "Rain Boots", price: 9.99),
-        ItemOption(name: "Winter Boots", price: 18.99),
-        ItemOption(name: "Hiking Boots", price: 17.99),
-        ItemOption(name: "Loafers", price: 12.49),
-        ItemOption(name: "Moccasins", price: 10.99),
-        ItemOption(name: "Clogs", price: 8.49),
-        ItemOption(name: "Espadrilles", price: 9.49),
-        ItemOption(name: "Ballet Flats", price: 8.99),
-        ItemOption(name: "Wedges", price: 11.99),
+        ItemOption(name: 'Jacket', price: 14.99),
+        ItemOption(name: 'Coat', price: 19.99),
+        ItemOption(name: 'Sweater', price: 9.99),
+        ItemOption(name: 'Hoodie', price: 11.99),
+        ItemOption(name: 'Scarf', price: 5.99),
+        ItemOption(name: 'Hat', price: 4.99),
+        ItemOption(name: 'Gloves', price: 3.99),
+        ItemOption(name: 'Belt', price: 3.49),
+        ItemOption(name: 'Apron', price: 6.49),
+        ItemOption(name: 'Curtains', price: 13.99),
+        ItemOption(name: 'Table Cloth', price: 8.99),
+        ItemOption(name: 'Rug', price: 16.99),
+        ItemOption(name: 'Sleeping Bag', price: 12.99),
+        ItemOption(name: 'Backpack', price: 9.99),
+        ItemOption(name: 'Purse', price: 7.99),
+        ItemOption(name: 'Wallet', price: 4.99),
+        ItemOption(name: 'Shoes', price: 11.99),
+        ItemOption(name: 'Boots', price: 14.99),
+        ItemOption(name: 'Sneakers', price: 10.99),
+        ItemOption(name: 'Sandals', price: 7.99),
+        ItemOption(name: 'Slippers', price: 5.99),
+        ItemOption(name: 'High Heels', price: 12.99),
+        ItemOption(name: 'Dress Shoes', price: 13.99),
+        ItemOption(name: 'Sports Shoes', price: 11.49),
+        ItemOption(name: 'Canvas Shoes', price: 8.99),
+        ItemOption(name: 'Flip Flops', price: 4.99),
+        ItemOption(name: 'Work Boots', price: 16.99),
+        ItemOption(name: 'Rain Boots', price: 9.99),
+        ItemOption(name: 'Winter Boots', price: 18.99),
+        ItemOption(name: 'Hiking Boots', price: 17.99),
+        ItemOption(name: 'Loafers', price: 12.49),
+        ItemOption(name: 'Moccasins', price: 10.99),
+        ItemOption(name: 'Clogs', price: 8.49),
+        ItemOption(name: 'Espadrilles', price: 9.49),
+        ItemOption(name: 'Ballet Flats', price: 8.99),
+        ItemOption(name: 'Wedges', price: 11.99),
       ],
     ),
   ];
@@ -134,7 +134,7 @@ class ServiceLaundryController extends ServiceController {
   void onReady() {
     super.onReady();
     // Load laundry service data specifically
-    loadServiceTypeData(ServiceType.laundry);
+    loadServiceTypeData(ServiceType.laundry as String);
   }
 
   /// Handle category selection
@@ -165,8 +165,8 @@ class ServiceLaundryController extends ServiceController {
   /// Calculate total cost of all selected items
   double get totalCost {
     double total = 0.0;
-    for (var category in itemCategories) {
-      for (var item in category.items) {
+    for (final category in itemCategories) {
+      for (final item in category.items) {
         total += item.price * item.quantity;
       }
     }
@@ -176,8 +176,8 @@ class ServiceLaundryController extends ServiceController {
   /// Get total number of selected items
   int get totalItemCount {
     int count = 0;
-    for (var category in itemCategories) {
-      for (var item in category.items) {
+    for (final category in itemCategories) {
+      for (final item in category.items) {
         count += item.quantity;
       }
     }

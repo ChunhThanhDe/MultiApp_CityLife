@@ -5,7 +5,7 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/category_expandable.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/estimated_bill_sheet.dart';
 
-import 'service_laundry_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/service/laundry/service_laundry_controller.dart';
 
 class ServiceLaundryScreen extends BaseScreen<ServiceLaundryController> {
   const ServiceLaundryScreen({super.key});
@@ -49,26 +49,26 @@ class ServiceLaundryScreen extends BaseScreen<ServiceLaundryController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // Pricing title
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 24),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 24),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Pricing",
+                                      'Pricing',
                                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
                                     ),
                                     SizedBox(height: 4),
-                                    Text("Each item is charged separately", style: TextStyle(fontSize: 14, color: Color(0xFF4A5763))),
+                                    Text('Each item is charged separately', style: TextStyle(fontSize: 14, color: Color(0xFF4A5763))),
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               // List of pricing items
                               GetBuilder<ServiceLaundryController>(
                                 builder: (controller) => ListView.builder(
                                   shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
+                                  physics: const NeverScrollableScrollPhysics(),
                                   itemCount: controller.itemCategories.length,
                                   itemBuilder: (context, i) => Column(
                                     children: [
@@ -89,7 +89,7 @@ class ServiceLaundryScreen extends BaseScreen<ServiceLaundryController> {
                 ),
               ),
               GetBuilder<ServiceLaundryController>(
-                builder: (controller) => controller.hasSelectedItems ? _EstimatedBillWidget(controller: controller) : SizedBox(height: 10), // Space for bottom nav when no items selected
+                builder: (controller) => controller.hasSelectedItems ? _EstimatedBillWidget(controller: controller) : const SizedBox(height: 10), // Space for bottom nav when no items selected
               ),
             ],
           ),
@@ -110,11 +110,11 @@ class _LaundryAppBar extends StatelessWidget {
       height: 56,
       padding: const EdgeInsets.symmetric(horizontal: 24),
       color: Colors.transparent,
-      child: Row(
+      child: const Row(
         children: [
           Expanded(
             child: Text(
-              "Laundry",
+              'Laundry',
               style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 18, color: Colors.white),
             ),
           ),
@@ -173,12 +173,12 @@ class _LaundryCategoryTabs extends GetView<ServiceLaundryController> {
 }
 
 class _CategoryTab extends StatelessWidget {
+  const _CategoryTab({required this.label, this.svgAsset, this.active = false, this.activeColor, this.onTap});
   final SvgGenImage? svgAsset;
   final String label;
   final bool active;
   final Color? activeColor;
   final VoidCallback? onTap;
-  const _CategoryTab({this.svgAsset, required this.label, this.active = false, this.activeColor, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -189,31 +189,31 @@ class _CategoryTab extends StatelessWidget {
           Container(
             width: 80,
             height: 80,
-            decoration: BoxDecoration(color: Color(0xFFF7F8F9), borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(color: const Color(0xFFF7F8F9), borderRadius: BorderRadius.circular(8)),
             child: Center(
               child: Container(
                 width: 74,
                 height: 74,
                 decoration: BoxDecoration(
-                  color: active ? Colors.white : Color(0xFFF7F8F9),
+                  color: active ? Colors.white : const Color(0xFFF7F8F9),
                   borderRadius: BorderRadius.circular(6),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(color: Color(0x1A101214), offset: Offset(0, 6), blurRadius: 8),
                     BoxShadow(color: Color(0x1A101214), offset: Offset(0, 18), blurRadius: 24),
                   ],
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: svgAsset!.svg(width: 28, height: 28, colorFilter: ColorFilter.mode(active ? (activeColor ?? Color(0xFF5856D7)) : Color(0xFF161A1D), BlendMode.srcIn)),
+                  child: svgAsset!.svg(width: 28, height: 28, colorFilter: ColorFilter.mode(active ? (activeColor ?? const Color(0xFF5856D7)) : const Color(0xFF161A1D), BlendMode.srcIn)),
                 ),
               ),
             ),
           ),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Text(
             label,
             textAlign: TextAlign.center,
-            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: active ? (activeColor ?? Color(0xFF5856D7)) : Color(0xFF161A1D)),
+            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: active ? (activeColor ?? const Color(0xFF5856D7)) : const Color(0xFF161A1D)),
           ),
         ],
       ),
@@ -242,7 +242,7 @@ class _LaundryBanner extends GetView<ServiceLaundryController> {
             },
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         // Dynamic Dots
         Obx(
           () => Row(
@@ -250,7 +250,7 @@ class _LaundryBanner extends GetView<ServiceLaundryController> {
             children: List.generate(controller.bannerCount, (index) => _Dot(active: controller.selectedBannerIndex == index)),
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         // Dynamic Text based on current banner
         Obx(() {
           final currentBanner = ServiceLaundryController.bannerList[controller.selectedBannerIndex];
@@ -261,10 +261,10 @@ class _LaundryBanner extends GetView<ServiceLaundryController> {
               children: [
                 Text(
                   currentBanner['title'] as String,
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
                 ),
-                SizedBox(height: 4),
-                Text(currentBanner['subtitle'] as String, style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                const SizedBox(height: 4),
+                Text(currentBanner['subtitle'] as String, style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
               ],
             ),
           );
@@ -275,15 +275,15 @@ class _LaundryBanner extends GetView<ServiceLaundryController> {
 }
 
 class _Dot extends StatelessWidget {
-  final bool active;
   const _Dot({this.active = false});
+  final bool active;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: active ? 24 : 12,
       height: 4,
       margin: const EdgeInsets.symmetric(horizontal: 2),
-      decoration: BoxDecoration(color: active ? Color(0xFF5856D7) : Color(0x1A101214), borderRadius: BorderRadius.circular(24)),
+      decoration: BoxDecoration(color: active ? const Color(0xFF5856D7) : const Color(0x1A101214), borderRadius: BorderRadius.circular(24)),
     );
   }
 }
@@ -292,14 +292,14 @@ class _Dot extends StatelessWidget {
 class _Divider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(margin: const EdgeInsets.only(left: 24), height: 1, color: Color(0xFFE8EBEE));
+    return Container(margin: const EdgeInsets.only(left: 24), height: 1, color: const Color(0xFFE8EBEE));
   }
 }
 
 class _EstimatedBillWidget extends StatelessWidget {
-  final ServiceLaundryController controller;
 
   const _EstimatedBillWidget({required this.controller});
+  final ServiceLaundryController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -308,8 +308,8 @@ class _EstimatedBillWidget extends StatelessWidget {
       height: 110,
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Color(0xFF101214).withValues(alpha: 0.1), offset: Offset(0, -5), blurRadius: 32, spreadRadius: 0)],
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
+        boxShadow: [BoxShadow(color: const Color(0xFF101214).withValues(alpha: 0.1), offset: const Offset(0, -5), blurRadius: 32, spreadRadius: 0)],
+        borderRadius: const BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
       ),
       child: Column(
         children: [
@@ -317,12 +317,12 @@ class _EstimatedBillWidget extends StatelessWidget {
           Container(
             width: double.infinity,
             height: 12,
-            padding: EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Center(
               child: Container(
                 width: 48,
                 height: 4,
-                decoration: BoxDecoration(color: Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(99)),
+                decoration: BoxDecoration(color: const Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(99)),
               ),
             ),
           ),
@@ -330,8 +330,8 @@ class _EstimatedBillWidget extends StatelessWidget {
           Container(
             width: double.infinity,
             height: 62,
-            margin: EdgeInsets.only(top: 10),
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 4),
+            margin: const EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
             child: Row(
               children: [
                 // Title and subtitle section
@@ -343,14 +343,14 @@ class _EstimatedBillWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // Title
-                        Text(
+                        const Text(
                           'Estimated Bill',
                           style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 20, height: 1.5, color: Color(0xFF161A1D)),
                         ),
                         // Subtitle
                         Text(
                           '\$${controller.totalCost.toStringAsFixed(2)}',
-                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, height: 1.5, color: Color(0xFF161A1D)),
+                          style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, height: 1.5, color: Color(0xFF161A1D)),
                         ),
                       ],
                     ),
@@ -364,13 +364,13 @@ class _EstimatedBillWidget extends StatelessWidget {
                       context: context,
                       isScrollControlled: true,
                       backgroundColor: Colors.transparent,
-                      builder: (context) => ClipRRect(
+                      builder: (context) => const ClipRRect(
                         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
                         child: FractionallySizedBox(heightFactor: 0.85, child: EstimatedBillSheet()),
                       ),
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     'More details',
                     style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, height: 1.43, color: Color(0xFF161A1D)),
                   ),

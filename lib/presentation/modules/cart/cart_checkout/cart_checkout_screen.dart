@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/domain/enums/service_type.dart';
 import 'package:sixam_mart_user/domain/models/response/get_checkout_summary_response.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/cart_checkout/cart_checkout_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/components/time_picker_sheet.dart';
@@ -256,7 +255,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
 
     return sectionCard(
       children: [
-        sectionLabel("Schedules"),
+        sectionLabel('Schedules'),
         cellItem(
           icon: SvgPicture.asset('assets/icons/ic_home.svg'),
           title: selectedAddress?.addressType ?? 'Address',
@@ -285,7 +284,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                     onTap: () => controller.selectDeliveryOption('Priority'),
                     child: deliveryOption(
                       selected: controller.selectedDeliveryOption.value == 'Priority',
-                      icon: Icon(Icons.flash_on, size: 24, color: Color(0xFF4A5763)),
+                      icon: const Icon(Icons.flash_on, size: 24, color: Color(0xFF4A5763)),
                       title: 'Priority',
                       subtitle: '5-10 min(s) Delivered directly to you',
                       label: '\$5.99',
@@ -305,18 +304,18 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                         context: context,
                         isScrollControlled: true,
                         backgroundColor: Colors.transparent,
-                        builder: (context) => ClipRRect(
+                        builder: (context) => const ClipRRect(
                           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-                          child: FractionallySizedBox(heightFactor: 0.82, child: const TimePickerSheet()),
+                          child: FractionallySizedBox(heightFactor: 0.82, child: TimePickerSheet()),
                         ),
                       );
                     },
                     child: deliveryOption(
                       selected: controller.selectedDeliveryOption.value == 'Schedule',
-                      icon: Icon(Icons.schedule, size: 24, color: Color(0xFF4A5763)),
+                      icon: const Icon(Icons.schedule, size: 24, color: Color(0xFF4A5763)),
                       title: 'Schedule',
                       subtitle: 'Select a time',
-                      trailing: Icon(Icons.arrow_forward_ios, size: 16, color: Color(0xFF4A5763)),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Color(0xFF4A5763)),
                     ),
                   ),
                 ),
@@ -329,7 +328,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                     onTap: () => controller.selectDeliveryOption('Standard'),
                     child: deliveryOption(
                       selected: controller.selectedDeliveryOption.value == 'Standard',
-                      icon: Icon(Icons.access_time, size: 24, color: Color(0xFF4A5763)),
+                      icon: const Icon(Icons.access_time, size: 24, color: Color(0xFF4A5763)),
                       title: 'Standard',
                       subtitle: '10-25 min(s) Delivered',
                     ),
@@ -445,27 +444,16 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                 decoration: BoxDecoration(
                   color: const Color(0xFFFEF2F2),
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: const Color(0xFFFECACA),
-                  ),
+                  border: Border.all(color: const Color(0xFFFECACA)),
                 ),
                 child: Row(
                   children: [
-                    const Icon(
-                      Icons.error_outline,
-                      color: Color(0xFFDC2626),
-                      size: 20,
-                    ),
+                    const Icon(Icons.error_outline, color: Color(0xFFDC2626), size: 20),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         controller.promoMessage.value,
-                        style: const TextStyle(
-                          fontFamily: 'Inter',
-                          color: Color(0xFFDC2626),
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                        ),
+                        style: const TextStyle(fontFamily: 'Inter', color: Color(0xFFDC2626), fontWeight: FontWeight.w500, fontSize: 14),
                       ),
                     ),
                   ],
@@ -602,9 +590,9 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                         }
                       },
                 child: controller.isLoading.value
-                    ? SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)))
-                    : Text(
-                        "Order Now",
+                    ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)))
+                    : const Text(
+                        'Order Now',
                         style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Inter', fontWeight: FontWeight.w500),
                       ),
               ),
@@ -697,10 +685,10 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                   // Navigate to service details or show more info
                   Get.snackbar('Info', 'More details for ${serviceCart.title}');
                 },
-                child: Row(
+                child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text(
+                    Text(
                       'More details',
                       style: TextStyle(
                         fontFamily: 'Inter',
@@ -711,8 +699,8 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                         color: Color(0xFF5856D7),
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    SizedBox(width: 20, height: 20, child: const Icon(Icons.arrow_forward_ios, size: 12, color: Color(0xFF5856D7))),
+                    SizedBox(width: 8),
+                    SizedBox(width: 20, height: 20, child: Icon(Icons.arrow_forward_ios, size: 12, color: Color(0xFF5856D7))),
                   ],
                 ),
               ),

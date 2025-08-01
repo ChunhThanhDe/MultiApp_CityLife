@@ -3,19 +3,19 @@ import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_general_data.dart';
 import 'package:sixam_mart_user/domain/repositories/store_repository.dart';
+import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/root/root_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
-import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
-import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
-import 'package:sixam_mart_user/presentation/shared/unified_banner_widget.dart';
+import 'package:sixam_mart_user/presentation/shared/utils/banner_data_utils.dart';
+
+enum ServiceType { food, grocery, delivery, laundry, ticket, cleaning, seeMore }
 
 class Service {
+  Service({required this.title, required this.image, required this.serviceType, required this.description});
   final String title;
   final String image;
   final ServiceType serviceType;
   final String description;
-
-  Service({required this.title, required this.image, required this.serviceType, required this.description});
 
   /// Get service by serviceType from the services list
   static Service? getServiceByType(ServiceType serviceType) {
@@ -96,21 +96,21 @@ class HomeController extends BaseController {
   // ];
 
   Future<void> getFastFoodStores() async {
-    await safeExecute(() async {
-      final result = await _serviceRepository.getServiceData(ServiceType.food);
-      switch (result) {
-        case Success(:final response):
-          if (response.statusCode != 200) {
-            final errorResponse = ErrorResponse.fromJson(response.data);
-            showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
-            return;
-          }
-          final storesData = GetStoresResponse.fromJson(response.data);
-          fastFoodData.value = storesData;
-        case Failure(:final error):
-          showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
-      }
-    });
+    // await safeExecute(() async {
+    //   final result = await _serviceRepository.getServiceData(ServiceType.food);
+    //   switch (result) {
+    //     case Success(:final response):
+    //       if (response.statusCode != 200) {
+    //         final errorResponse = ErrorResponse.fromJson(response.data);
+    //         showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
+    //         return;
+    //       }
+    //       final storesData = GetStoresResponse.fromJson(response.data);
+    //       fastFoodData.value = storesData;
+    //     case Failure(:final error):
+    //       showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
+    //   }
+    // });
   }
 
   Future<void> refreshData() async {
@@ -129,6 +129,6 @@ class HomeController extends BaseController {
 
     // Get ServiceController and load data for specific service type
     final serviceController = Get.find<ServiceController>();
-    serviceController.loadServiceTypeData(serviceType);
+    serviceController.loadServiceTypeData(serviceType.toString());
   }
 }
