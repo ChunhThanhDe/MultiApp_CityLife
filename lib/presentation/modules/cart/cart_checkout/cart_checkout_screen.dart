@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/domain/enums/service_type.dart';
 import 'package:sixam_mart_user/domain/models/response/get_checkout_summary_response.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/cart_checkout/cart_checkout_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/components/time_picker_sheet.dart';
+import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 
 class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
-  const CartCheckoutScreen({super.key});
+  const CartCheckoutScreen({super.key, this.serviceCart});
+  final Service? serviceCart;
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
@@ -29,21 +33,22 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
       return SingleChildScrollView(
         child: Column(
           children: [
+            if (serviceCart != null) _buildServiceHead(serviceCart!),
+
             // Address Section
             _buildAddressSection(checkoutData),
             _buildDivider(),
 
             // Delivery Options Section
-            _buildDeliveryOptionsSection(checkoutData),
+            _buildDeliveryOptionsSection(context, checkoutData),
             _buildDivider(),
 
             // Order Details Section
-            _buildOrderDetailsSection(checkoutData),
+            if (serviceCart != null && serviceCart!.serviceType != ServiceType.laundry) _buildOrderDetailsSection(checkoutData),
             _buildDivider(),
 
             // Promocode Section
-            _buildPromocodeSection(checkoutData),
-            _buildDivider(),
+            if (serviceCart != null && serviceCart!.serviceType != ServiceType.laundry) ...[_buildPromocodeSection(checkoutData), _buildDivider()],
 
             // Price Summary Section
             _buildPriceSummarySection(checkoutData),
@@ -59,7 +64,9 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
 
   // Helper widgets for section structure
 
-  Widget sectionCard({required List<Widget> children}) => Column(children: children);
+  Widget sectionCard({required List<Widget> children}) {
+    return Column(children: children);
+  }
 
   Widget divider([double leftPad = 0]) => Padding(
     padding: EdgeInsets.only(left: leftPad),
@@ -248,6 +255,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
 
     return sectionCard(
       children: [
+        sectionLabel("Schedules"),
         cellItem(
           icon: SvgPicture.asset('assets/icons/ic_home.svg'),
           title: selectedAddress?.addressType ?? "Address",
@@ -260,30 +268,74 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
     );
   }
 
-  Widget _buildDeliveryOptionsSection(GetCheckoutSummaryResponse checkoutData) {
+  Widget _buildDeliveryOptionsSection(BuildContext context, GetCheckoutSummaryResponse checkoutData) {
     return Column(
       children: [
         sectionLabel("Delivery Options"),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
-            children: (checkoutData.deliveryOptions ?? []).map((option) {
-              return Padding(
+            children: [
+              // Priority Option
+              Padding(
                 padding: const EdgeInsets.only(bottom: 16),
                 child: Obx(
                   () => GestureDetector(
-                    onTap: () => controller.selectDeliveryOption(option.label ?? 'Standard'),
+                    onTap: () => controller.selectDeliveryOption('Priority'),
                     child: deliveryOption(
-                      selected: controller.selectedDeliveryOption.value == option.label,
-                      icon: _getDeliveryIcon(option.key ?? 1),
-                      title: option.label ?? '',
-                      subtitle: option.desc ?? '',
-                      label: option.fee != null ? "\$${option.fee!.toStringAsFixed(2)}" : null,
+                      selected: controller.selectedDeliveryOption.value == 'Priority',
+                      icon: Icon(Icons.flash_on, size: 24, color: Color(0xFF4A5763)),
+                      title: 'Priority',
+                      subtitle: '5-10 min(s) Delivered directly to you',
+                      label: '\$5.99',
                     ),
                   ),
                 ),
-              );
-            }).toList(),
+              ),
+              // Schedule Option
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Obx(
+                  () => GestureDetector(
+                    onTap: () {
+                      controller.selectDeliveryOption('Schedule');
+                      // Show time picker dialog
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) => ClipRRect(
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                          child: FractionallySizedBox(heightFactor: 0.82, child: const TimePickerSheet()),
+                        ),
+                      );
+                    },
+                    child: deliveryOption(
+                      selected: controller.selectedDeliveryOption.value == 'Schedule',
+                      icon: Icon(Icons.schedule, size: 24, color: Color(0xFF4A5763)),
+                      title: 'Schedule',
+                      subtitle: 'Select a time',
+                      trailing: Icon(Icons.arrow_forward_ios, size: 16, color: Color(0xFF4A5763)),
+                    ),
+                  ),
+                ),
+              ),
+              // Standard Option
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Obx(
+                  () => GestureDetector(
+                    onTap: () => controller.selectDeliveryOption('Standard'),
+                    child: deliveryOption(
+                      selected: controller.selectedDeliveryOption.value == 'Standard',
+                      icon: Icon(Icons.access_time, size: 24, color: Color(0xFF4A5763)),
+                      title: 'Standard',
+                      subtitle: '10-25 min(s) Delivered',
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ],
@@ -436,14 +488,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                 ),
                 onPressed: controller.isLoading.value ? null : () => controller.orderNow(),
                 child: controller.isLoading.value
-                    ? SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                        ),
-                      )
+                    ? SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)))
                     : Text(
                         "Order Now",
                         style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Inter', fontWeight: FontWeight.w500),
@@ -461,17 +506,6 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   }
 
   // Helper methods
-  Widget _getDeliveryIcon(int key) {
-    switch (key) {
-      case 2:
-        return SvgPicture.asset('assets/icons/ic_priority.svg');
-      case 3:
-        return SvgPicture.asset('assets/icons/ic_schedule.svg');
-      case 1:
-      default:
-        return SvgPicture.asset('assets/icons/ic_standard.svg');
-    }
-  }
 
   IconData _getPaymentIcon(String key) {
     switch (key) {
@@ -493,5 +527,85 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   void _showPromocodeDialog(List<AvailableCoupon> coupons) {
     // TODO: Implement promocode dialog
     Get.snackbar('Info', 'Promocode dialog would open here');
+  }
+
+  Widget _buildServiceHead(Service serviceCart) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Service Icon
+          Container(
+            width: 70,
+            height: 70,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: const Color(0xFFF7F8F9)),
+            child: Center(child: Image.asset(serviceCart.image, width: 50, height: 50, fit: BoxFit.contain)),
+          ),
+          const SizedBox(height: 16),
+
+          // Text and Description Section
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Service Title
+              Text(
+                serviceCart.title,
+                style: const TextStyle(
+                  fontFamily: 'Inter',
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
+                  height: 1.5, // line-height: 30px / font-size: 20px = 1.5
+                  color: Color(0xFF161A1D),
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Service Description
+              Text(
+                serviceCart.description,
+                style: const TextStyle(
+                  fontFamily: 'Inter',
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12,
+                  height: 1.5, // line-height: 18px / font-size: 12px = 1.5
+                  color: Color(0xFF4A5763),
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // More Details Button
+              GestureDetector(
+                onTap: () {
+                  // Navigate to service details or show more info
+                  Get.snackbar('Info', 'More details for ${serviceCart.title}');
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'More details',
+                      style: TextStyle(
+                        fontFamily: 'Inter',
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                        height: 1.43, // line-height: 20px / font-size: 14px ≈ 1.43
+                        color: Color(0xFF5856D7),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    SizedBox(width: 20, height: 20, child: const Icon(Icons.arrow_forward_ios, size: 12, color: Color(0xFF5856D7))),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

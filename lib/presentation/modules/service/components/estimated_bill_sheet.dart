@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sixam_mart_user/domain/enums/service_type.dart';
+import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
 class EstimatedBillSheet extends StatelessWidget {
   const EstimatedBillSheet({super.key});
@@ -35,10 +39,7 @@ class EstimatedBillSheet extends StatelessWidget {
                     style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 20, color: Color(0xFF161A1D)),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () => Navigator.of(context).pop(),
-                  child: Icon(Icons.close, size: 24, color: Colors.grey[700]),
-                ),
+                GestureDetector(onTap: () => Navigator.of(context).pop(), child: Text("close")),
               ],
             ),
           ),
@@ -86,50 +87,56 @@ class EstimatedBillSheet extends StatelessWidget {
                         _BillInfoRow(label: 'Delivery Fee:', value: '\$0.00'),
                         _BillInfoRow(label: 'Taxes & Estimated Fees:', value: '\$0.00'),
                         _BillInfoRow(label: 'Discount:', value: '\$0.00'),
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Total:',
-                              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 20, color: Color(0xFF161A1D)),
-                            ),
-                            Text(
-                              '\$23.94',
-                              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 20, color: Color(0xFF161A1D)),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 12),
-                  // Nút action (floating over)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 48,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all(Color(0xFF5856D7)),
-                          shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32))),
-                          padding: WidgetStateProperty.all(EdgeInsets.symmetric(vertical: 12)),
-                          elevation: WidgetStateProperty.all(0),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          'Continue Order',
-                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 24), // spacing for home indicator
                 ],
               ),
             ),
           ),
+
+          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Total:',
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 20, color: Color(0xFF161A1D)),
+                ),
+                Text(
+                  '\$23.94',
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 20, color: Color(0xFF161A1D)),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
+          // Nút action (floating over)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+            child: SizedBox(
+              width: double.infinity,
+              height: 48,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(Color(0xFF5856D7)),
+                  shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32))),
+                  padding: WidgetStateProperty.all(EdgeInsets.symmetric(vertical: 12)),
+                  elevation: WidgetStateProperty.all(0),
+                ),
+                onPressed: () {
+                  Get.toNamed(AppRoutes.cartCheckout, arguments: {'serviceCart': Service.getServiceByType(ServiceType.laundry)});
+                },
+                child: Text(
+                  'Continue Order',
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 24), // spa
         ],
       ),
     );

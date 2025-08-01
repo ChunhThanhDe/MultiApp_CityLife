@@ -18,8 +18,28 @@ class Service {
   final String title;
   final String image;
   final ServiceType serviceType;
+  final String description;
 
-  const Service({required this.title, required this.image, required this.serviceType});
+  Service({required this.title, required this.image, required this.serviceType, required this.description});
+
+  /// Get service by serviceType from the services list
+  static Service? getServiceByType(ServiceType serviceType) {
+    try {
+      return services.firstWhere((service) => service.serviceType == serviceType);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  static List<Service> services = [
+    Service(title: 'Food', image: Assets.images.imgFood.path, serviceType: ServiceType.food, description: 'Order delicious meals from your favorite restaurants with fast delivery to your doorstep.'),
+    Service(title: 'Grocery', image: Assets.images.imgGrocery.path, serviceType: ServiceType.grocery, description: 'Get fresh groceries and daily essentials delivered quickly to your home.'),
+    Service(title: 'Delivery', image: Assets.images.imgDelivery.path, serviceType: ServiceType.delivery, description: 'Fast and reliable delivery service for all your package and document needs.'),
+    Service(title: 'Laundry', image: Assets.images.imgLaundry.path, serviceType: ServiceType.laundry, description: 'Professional laundry and dry cleaning services with pickup and delivery options.'),
+    Service(title: 'Ticket', image: Assets.images.imgTicketPlane.path, serviceType: ServiceType.ticket, description: 'Book tickets for flights, events, and transportation with ease and convenience.'),
+    Service(title: 'Cleaning', image: Assets.images.imgCleaning.path, serviceType: ServiceType.cleaning, description: 'Professional home and office cleaning services to keep your space spotless.'),
+    Service(title: 'See More', image: Assets.images.imgSeeMore.path, serviceType: ServiceType.seeMore, description: 'Explore additional services and discover new ways we can help you.'),
+  ];
 }
 
 class HomeController extends BaseController {
@@ -49,15 +69,15 @@ class HomeController extends BaseController {
     }
   }
 
-  final List<Service> services = [
-    Service(title: 'Food', image: Assets.images.imgFood.path, serviceType: ServiceType.food),
-    Service(title: 'Grocery', image: Assets.images.imgGrocery.path, serviceType: ServiceType.grocery),
-    Service(title: 'Delivery', image: Assets.images.imgDelivery.path, serviceType: ServiceType.delivery),
-    Service(title: 'Laundry', image: Assets.images.imgLaundry.path, serviceType: ServiceType.laundry),
-    Service(title: 'Ticket', image: Assets.images.imgTicketPlane.path, serviceType: ServiceType.ticket),
-    Service(title: 'Cleaning', image: Assets.images.imgCleaning.path, serviceType: ServiceType.cleaning),
-    Service(title: 'See More', image: Assets.images.imgSeeMore.path, serviceType: ServiceType.seeMore),
-  ];
+  // final List<Service> services = [
+  //   Service(title: 'Food', image: Assets.images.imgFood.path, serviceType: ServiceType.food, description: 'Order delicious meals from your favorite restaurants with fast delivery to your doorstep.'),
+  //   Service(title: 'Grocery', image: Assets.images.imgGrocery.path, serviceType: ServiceType.grocery, description: 'Get fresh groceries and daily essentials delivered quickly to your home.'),
+  //   Service(title: 'Delivery', image: Assets.images.imgDelivery.path, serviceType: ServiceType.delivery, description: 'Fast and reliable delivery service for all your package and document needs.'),
+  //   Service(title: 'Laundry', image: Assets.images.imgLaundry.path, serviceType: ServiceType.laundry, description: 'Professional laundry and dry cleaning services with pickup and delivery options.'),
+  //   Service(title: 'Ticket', image: Assets.images.imgTicketPlane.path, serviceType: ServiceType.ticket, description: 'Book tickets for flights, events, and transportation with ease and convenience.'),
+  //   Service(title: 'Cleaning', image: Assets.images.imgCleaning.path, serviceType: ServiceType.cleaning, description: 'Professional home and office cleaning services to keep your space spotless.'),
+  //   Service(title: 'See More', image: Assets.images.imgSeeMore.path, serviceType: ServiceType.seeMore, description: 'Explore additional services and discover new ways we can help you.'),
+  // ];
 
   Future<void> getFastFoodStores() async {
     await safeExecute(() async {

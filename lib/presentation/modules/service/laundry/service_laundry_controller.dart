@@ -161,4 +161,29 @@ class ServiceLaundryController extends ServiceController {
 
   /// Get total number of banners
   int get bannerCount => bannerList.length;
+
+  /// Calculate total cost of all selected items
+  double get totalCost {
+    double total = 0.0;
+    for (var category in itemCategories) {
+      for (var item in category.items) {
+        total += item.price * item.quantity;
+      }
+    }
+    return total;
+  }
+
+  /// Get total number of selected items
+  int get totalItemCount {
+    int count = 0;
+    for (var category in itemCategories) {
+      for (var item in category.items) {
+        count += item.quantity;
+      }
+    }
+    return count;
+  }
+
+  /// Check if any items are selected
+  bool get hasSelectedItems => totalItemCount > 0;
 }

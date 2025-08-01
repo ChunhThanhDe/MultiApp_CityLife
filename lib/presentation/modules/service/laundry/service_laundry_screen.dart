@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/category_expandable.dart';
+import 'package:sixam_mart_user/presentation/modules/service/components/estimated_bill_sheet.dart';
 
 import 'service_laundry_controller.dart';
 
@@ -81,10 +82,14 @@ class ServiceLaundryScreen extends BaseScreen<ServiceLaundryController> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 94), // Space for bottom nav
+
+                      // Bottom Summary Widget
                     ],
                   ),
                 ),
+              ),
+              GetBuilder<ServiceLaundryController>(
+                builder: (controller) => controller.hasSelectedItems ? _EstimatedBillWidget(controller: controller) : SizedBox(height: 10), // Space for bottom nav when no items selected
               ),
             ],
           ),
@@ -288,5 +293,93 @@ class _Divider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(margin: const EdgeInsets.only(left: 24), height: 1, color: Color(0xFFE8EBEE));
+  }
+}
+
+class _EstimatedBillWidget extends StatelessWidget {
+  final ServiceLaundryController controller;
+
+  const _EstimatedBillWidget({required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 110,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [BoxShadow(color: Color(0xFF101214).withValues(alpha: 0.1), offset: Offset(0, -5), blurRadius: 32, spreadRadius: 0)],
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
+      ),
+      child: Column(
+        children: [
+          // Divider with grabber
+          Container(
+            width: double.infinity,
+            height: 12,
+            padding: EdgeInsets.symmetric(horizontal: 24),
+            child: Center(
+              child: Container(
+                width: 48,
+                height: 4,
+                decoration: BoxDecoration(color: Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(99)),
+              ),
+            ),
+          ),
+          // Cell item with top padding
+          Container(
+            width: double.infinity,
+            height: 62,
+            margin: EdgeInsets.only(top: 10),
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 4),
+            child: Row(
+              children: [
+                // Title and subtitle section
+                Expanded(
+                  child: SizedBox(
+                    height: 54,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // Title
+                        Text(
+                          'Estimated Bill',
+                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 20, height: 1.5, color: Color(0xFF161A1D)),
+                        ),
+                        // Subtitle
+                        Text(
+                          '\$${controller.totalCost.toStringAsFixed(2)}',
+                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, height: 1.5, color: Color(0xFF161A1D)),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                // Label
+                TextButton(
+                  onPressed: () {
+                    // Chỉ cần gọi hàm này ở onTap More Details là được:
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => ClipRRect(
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                        child: FractionallySizedBox(heightFactor: 0.85, child: EstimatedBillSheet()),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'More details',
+                    style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, height: 1.43, color: Color(0xFF161A1D)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

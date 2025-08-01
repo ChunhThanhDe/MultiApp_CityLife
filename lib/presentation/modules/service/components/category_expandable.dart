@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sixam_mart_user/presentation/modules/service/laundry/service_laundry_controller.dart';
 
 class ItemOption {
   final String name;
@@ -29,6 +31,12 @@ class CategoryExpandable extends StatefulWidget {
 class _CategoryExpandableState extends State<CategoryExpandable> {
   bool _expanded = false;
 
+  void _onItemChanged() {
+    setState(() {});
+    // Update the controller to refresh the bottom summary
+    Get.find<ServiceLaundryController>().update();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -55,7 +63,7 @@ class _CategoryExpandableState extends State<CategoryExpandable> {
             ),
           ),
         ),
-        if (_expanded) ...widget.items.map((item) => ItemOptionRow(item: item, onChanged: () => setState(() {}))),
+        if (_expanded) ...widget.items.map((item) => ItemOptionRow(item: item, onChanged: _onItemChanged)),
         Divider(height: 1, color: Color(0xFFE8EBEE)),
       ],
     );
@@ -136,7 +144,7 @@ class _ItemCounter extends StatelessWidget {
             },
             child: Container(
               alignment: Alignment.center,
-              width: 27, // chỉnh width nhỏ cho vừa text
+              width: item.quantity > 0 ? 27 : 75, // chỉnh width nhỏ cho vừa text
               height: 24,
               child: Text(
                 item.quantity > 0 ? "${item.quantity}" : "Add",

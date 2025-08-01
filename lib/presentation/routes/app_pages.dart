@@ -118,7 +118,11 @@ class AppPages {
     GetPage(name: AppRoutes.welcome, page: () => const WelcomeScreen(), binding: WelcomeBinding()),
     GetPage(name: AppRoutes.cart, page: () => const ViewCartScreen(), binding: ViewCartBinding()),
     GetPage(name: AppRoutes.cartOrder, page: () => const CartOrderScreen(), binding: CartOrderBinding()),
-    GetPage(name: AppRoutes.cartCheckout, page: () => const CartCheckoutScreen(), binding: CartCheckoutBinding()),
+    GetPage(
+      name: AppRoutes.cartCheckout,
+      page: () => CartCheckoutScreen(serviceCart: Get.arguments['serviceCart']),
+      binding: CartCheckoutBinding(),
+    ),
     GetPage(name: AppRoutes.cartConfirm, page: () => const CartOrderConfirmScreen(), binding: CartOrderConfirmBinding()),
     GetPage(
       name: AppRoutes.store,
