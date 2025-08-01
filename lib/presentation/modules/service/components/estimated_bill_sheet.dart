@@ -131,7 +131,7 @@ class EstimatedBillSheet extends StatelessWidget {
                 },
                 child: Text(
                   'Continue Order',
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white),
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 18, color: Colors.white),
                 ),
               ),
             ),
@@ -169,7 +169,7 @@ class _SectionGroup extends StatelessWidget {
                 SizedBox(width: 12),
                 Text(
                   title,
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: iconColor),
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 18, color: iconColor),
                 ),
               ],
             ),
@@ -208,12 +208,12 @@ class _SheetItemRow extends StatelessWidget {
               children: [
                 Text(
                   item.name,
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF161A1D)),
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xFF161A1D)),
                 ),
                 SizedBox(height: 2),
                 Text(
                   '\$ ${item.price.toStringAsFixed(2)}',
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xFF4A5763)),
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF4A5763)),
                 ),
               ],
             ),

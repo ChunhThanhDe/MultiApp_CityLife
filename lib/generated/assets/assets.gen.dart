@@ -518,6 +518,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/img_tracking_box.png
   AssetGenImage get imgTrackingBox => const AssetGenImage('assets/images/img_tracking_box.png');
 
+  /// File path: assets/images/img_vector.png
+  AssetGenImage get imgVector => const AssetGenImage('assets/images/img_vector.png');
+
   /// File path: assets/images/img_walgreen.jpg
   AssetGenImage get imgWalgreen => const AssetGenImage('assets/images/img_walgreen.jpg');
 
@@ -617,6 +620,7 @@ class $AssetsImagesGen {
     imgTarget,
     imgTicketPlane,
     imgTrackingBox,
+    imgVector,
     imgWalgreen,
     imgWalletBg,
     imgWalletCard,

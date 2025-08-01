@@ -7,6 +7,7 @@ import 'package:sixam_mart_user/domain/models/response/get_checkout_summary_resp
 import 'package:sixam_mart_user/presentation/modules/cart/cart_checkout/cart_checkout_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/components/time_picker_sheet.dart';
 import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 
 class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
@@ -486,7 +487,15 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                   backgroundColor: Color(0xFF5856D7),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                 ),
-                onPressed: controller.isLoading.value ? null : () => controller.orderNow(),
+                onPressed: controller.isLoading.value
+                    ? null
+                    : () {
+                        if (serviceCart != null && serviceCart!.serviceType == ServiceType.laundry) {
+                          Get.toNamed(AppRoutes.cartSuccessful);
+                        } else {
+                          controller.orderNow();
+                        }
+                      },
                 child: controller.isLoading.value
                     ? SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)))
                     : Text(

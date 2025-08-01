@@ -31,6 +31,8 @@ import 'package:sixam_mart_user/presentation/modules/cart/cart_order/cart_order_
 import 'package:sixam_mart_user/presentation/modules/cart/cart_order/cart_order_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/cart_order_confirm/cart_order_confirm_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/cart_order_confirm/cart_order_confirm_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/cart_successful/cart_successful_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/cart_successful/cart_successful_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/view_cart/view_cart_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/view_cart/view_cart_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_binding.dart';
@@ -135,5 +137,6 @@ class AppPages {
       binding: StoreProductDetailBinding(),
     ),
     GetPage(name: AppRoutes.laundryMain, page: () => const ServiceLaundryScreen(), binding: ServiceLaundryBinding()),
+    GetPage(name: AppRoutes.cartSuccessful, page: () => const CartSuccessfulScreen(), binding: CartSuccessfulBinding()),
   ];
 }
