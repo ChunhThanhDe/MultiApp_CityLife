@@ -4,14 +4,14 @@ import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 
-import 'payment_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/payment/payment/payment_controller.dart';
 
 class PaymentScreen extends BaseScreen<PaymentController> {
   const PaymentScreen({super.key});
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(title: "Add payment card", onBack: () => Get.back());
+    return BasicAppBar(title: 'Add payment card', onBack: () => Get.back());
   }
 
   @override
@@ -32,7 +32,7 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                 child: Column(
                   children: [
                     // Card number
-                    _LabelRow("Card number", required: true),
+                    const _LabelRow('Card number', required: true),
                     const SizedBox(height: 8),
                     _InputBox(
                       child: Row(
@@ -42,7 +42,7 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                               controller: controller.cardNumberController,
                               keyboardType: TextInputType.number,
                               decoration: const InputDecoration(
-                                hintText: "XXXX XXXX XXXX XXXX",
+                                hintText: 'XXXX XXXX XXXX XXXX',
                                 border: InputBorder.none,
                                 isDense: true,
                                 hintStyle: TextStyle(fontSize: 14, color: Color(0xFF798A9A)),
@@ -62,14 +62,14 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              _LabelRow("Exp. date", required: true),
+                              const _LabelRow('Exp. date', required: true),
                               const SizedBox(height: 8),
                               _InputBox(
                                 child: TextFormField(
                                   controller: controller.expDateController,
                                   keyboardType: TextInputType.datetime,
                                   decoration: const InputDecoration(
-                                    hintText: "MM/YY",
+                                    hintText: 'MM/YY',
                                     border: InputBorder.none,
                                     isDense: true,
                                     hintStyle: TextStyle(fontSize: 14, color: Color(0xFF798A9A)),
@@ -85,7 +85,7 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              _LabelRow("CVV", required: true),
+                              const _LabelRow('CVV', required: true),
                               const SizedBox(height: 8),
                               _InputBox(
                                 child: Obx(
@@ -97,7 +97,7 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                                           obscureText: controller.obscureCvv.value,
                                           keyboardType: TextInputType.number,
                                           decoration: const InputDecoration(
-                                            hintText: "CVV",
+                                            hintText: 'CVV',
                                             border: InputBorder.none,
                                             isDense: true,
                                             hintStyle: TextStyle(fontSize: 14, color: Color(0xFF798A9A)),
@@ -128,24 +128,24 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              _LabelRow("Country", required: true),
+                              const _LabelRow('Country', required: true),
                               const SizedBox(height: 8),
                               _InputBox(
                                 child: Obx(
                                   () => DropdownButtonFormField<String>(
                                     value: controller.selectedCountry.value,
                                     isExpanded: true,
-                                    hint: const Text("Country", style: TextStyle(fontSize: 14, color: Color(0xFF798A9A))),
+                                    hint: const Text('Country', style: TextStyle(fontSize: 14, color: Color(0xFF798A9A))),
                                     decoration: const InputDecoration(border: InputBorder.none, isDense: true, contentPadding: EdgeInsets.zero),
                                     icon: const Icon(Icons.keyboard_arrow_down),
                                     items: const [
                                       DropdownMenuItem(
-                                        value: "US",
-                                        child: Row(children: [Icon(Icons.flag, size: 16), SizedBox(width: 8), Text("United States")]),
+                                        value: 'US',
+                                        child: Row(children: [Icon(Icons.flag, size: 16), SizedBox(width: 8), Text('United States')]),
                                       ),
                                       DropdownMenuItem(
-                                        value: "VN",
-                                        child: Row(children: [Icon(Icons.flag, size: 16), SizedBox(width: 8), Text("Vietnam")]),
+                                        value: 'VN',
+                                        child: Row(children: [Icon(Icons.flag, size: 16), SizedBox(width: 8), Text('Vietnam')]),
                                       ),
                                     ],
                                     onChanged: (value) {
@@ -162,14 +162,14 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              _LabelRow("Zip code", required: true),
+                              const _LabelRow('Zip code', required: true),
                               const SizedBox(height: 8),
                               _InputBox(
                                 child: TextFormField(
                                   controller: controller.zipController,
                                   keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
-                                    hintText: "Zip code",
+                                    hintText: 'Zip code',
                                     border: InputBorder.none,
                                     isDense: true,
                                     hintStyle: TextStyle(fontSize: 14, color: Color(0xFF798A9A)),
@@ -184,13 +184,13 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                     ),
                     const SizedBox(height: 16),
                     // Nickname
-                    _LabelRow("Nickname", required: false, optional: true),
+                    const _LabelRow('Nickname', required: false, optional: true),
                     const SizedBox(height: 8),
                     _InputBox(
                       child: TextFormField(
                         controller: controller.nicknameController,
                         decoration: const InputDecoration(
-                          hintText: "E.g. kadirmiye",
+                          hintText: 'E.g. kadirmiye',
                           border: InputBorder.none,
                           isDense: true,
                           hintStyle: TextStyle(fontSize: 14, color: Color(0xFF798A9A)),
@@ -222,7 +222,7 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                       elevation: 0,
                     ),
                     child: const Text(
-                      "Save",
+                      'Save',
                       style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16),
                     ),
                   ),
@@ -231,17 +231,17 @@ class PaymentScreen extends BaseScreen<PaymentController> {
 
               const SizedBox(height: 16),
               // Divider with "or"
-              Row(
+              const Row(
                 children: [
-                  const Expanded(child: Divider(color: Color(0xFFE8EBEE), thickness: 1)),
+                  Expanded(child: Divider(color: Color(0xFFE8EBEE), thickness: 1)),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      "OR",
+                      'OR',
                       style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12, color: Color(0xFF4A5763)),
                     ),
                   ),
-                  const Expanded(child: Divider(color: Color(0xFFE8EBEE), thickness: 1)),
+                  Expanded(child: Divider(color: Color(0xFFE8EBEE), thickness: 1)),
                 ],
               ),
               const SizedBox(height: 16),
@@ -251,7 +251,7 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                 child: OutlinedButton.icon(
                   icon: const Icon(Icons.camera_alt, color: Color(0xFF161A1D)),
                   label: const Text(
-                    "Scan your card",
+                    'Scan your card',
                     style: TextStyle(color: Color(0xFF161A1D), fontWeight: FontWeight.w500, fontSize: 16),
                   ),
                   style: OutlinedButton.styleFrom(
@@ -276,10 +276,10 @@ class PaymentScreen extends BaseScreen<PaymentController> {
 
 // Label with red star (required)
 class _LabelRow extends StatelessWidget {
+  const _LabelRow(this.text, {this.required = false, this.optional = false});
   final String text;
   final bool required;
   final bool optional;
-  const _LabelRow(this.text, {this.required = false, this.optional = false});
 
   @override
   Widget build(BuildContext context) {
@@ -289,8 +289,8 @@ class _LabelRow extends StatelessWidget {
           text,
           style: const TextStyle(fontSize: 14, color: Color(0xFF161A1D), fontWeight: FontWeight.w400),
         ),
-        if (required) const Text(" *", style: TextStyle(fontSize: 14, color: Color(0xFFFF3B30))),
-        if (optional) const Text(" (optional)", style: TextStyle(fontSize: 14, color: Color(0xFF798A9A))),
+        if (required) const Text(' *', style: TextStyle(fontSize: 14, color: Color(0xFFFF3B30))),
+        if (optional) const Text(' (optional)', style: TextStyle(fontSize: 14, color: Color(0xFF798A9A))),
       ],
     );
   }
@@ -298,8 +298,8 @@ class _LabelRow extends StatelessWidget {
 
 // Input box style
 class _InputBox extends StatelessWidget {
-  final Widget child;
   const _InputBox({required this.child});
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {

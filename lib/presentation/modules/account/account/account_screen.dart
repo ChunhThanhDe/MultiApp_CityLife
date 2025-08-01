@@ -9,15 +9,15 @@ import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_dialog.dart';
 import 'package:sixam_mart_user/services/auth_service.dart';
 
-import 'account_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account/account_controller.dart';
 
 class AccountMenuItem {
+
+  const AccountMenuItem({required this.icon, required this.title, this.trailing, this.onClick});
   final String icon;
   final String title;
   final Widget? trailing;
   final VoidCallback? onClick;
-
-  const AccountMenuItem({required this.icon, required this.title, this.trailing, this.onClick});
 }
 
 class AccountScreen extends BaseScreen<AccountController> {
@@ -25,7 +25,7 @@ class AccountScreen extends BaseScreen<AccountController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(title: "Account", isShowBackButton: false);
+    return const BasicAppBar(title: 'Account', isShowBackButton: false);
   }
 
   void _showLogoutConfirmation() {
@@ -70,7 +70,7 @@ class AccountScreen extends BaseScreen<AccountController> {
         icon: Assets.icons.icMoon.path,
         title: 'Dark Mode',
         trailing: GetBuilder<AccountController>(
-          builder: (controller) => Text(controller.currentThemeDisplayName, style: TextStyle(color: Color(0xFF4A5763))),
+          builder: (controller) => Text(controller.currentThemeDisplayName, style: const TextStyle(color: Color(0xFF4A5763))),
         ),
         onClick: () => controller.showThemeSelection(),
       ),
@@ -78,7 +78,7 @@ class AccountScreen extends BaseScreen<AccountController> {
         icon: Assets.icons.icLanguage.path,
         title: 'Language',
         trailing: GetBuilder<AccountController>(
-          builder: (controller) => Text(controller.currentLanguageDisplayName, style: TextStyle(color: Color(0xFF4A5763))),
+          builder: (controller) => Text(controller.currentLanguageDisplayName, style: const TextStyle(color: Color(0xFF4A5763))),
         ),
         onClick: () => controller.showLanguageSelection(),
       ),
@@ -96,7 +96,7 @@ class AccountScreen extends BaseScreen<AccountController> {
         itemBuilder: (context, index) {
           // Profile card at index 0
           if (index == 0) {
-            return _ProfileCard();
+            return const _ProfileCard();
           }
           // Menu items
           else if (index <= menuItems.length) {
@@ -105,16 +105,16 @@ class AccountScreen extends BaseScreen<AccountController> {
             return Column(
               children: [
                 ListTile(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 24),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 24),
                   leading: SvgPicture.asset(item.icon, colorFilter: const ColorFilter.mode(Color(0xFF4A5763), BlendMode.srcIn)),
                   title: Text(
                     item.title,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
                   ),
-                  trailing: item.trailing ?? Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
+                  trailing: item.trailing ?? const Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
                   onTap: item.onClick,
                 ),
-                if (menuIndex < menuItems.length - 1) Divider(color: Color(0xFFE8EBEE), indent: 60, height: 0, thickness: 1),
+                if (menuIndex < menuItems.length - 1) const Divider(color: Color(0xFFE8EBEE), indent: 60, height: 0, thickness: 1),
               ],
             );
           }
@@ -126,21 +126,21 @@ class AccountScreen extends BaseScreen<AccountController> {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFFFFECEB),
+                      backgroundColor: const Color(0xFFFFECEB),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-                      minimumSize: Size(double.infinity, 48),
+                      minimumSize: const Size(double.infinity, 48),
                       elevation: 0,
-                      foregroundColor: Color(0xFFB80900),
+                      foregroundColor: const Color(0xFFB80900),
                     ),
                     onPressed: _showLogoutConfirmation,
-                    child: Text(
-                      "Sign out",
+                    child: const Text(
+                      'Sign out',
                       style: TextStyle(color: Color(0xFFB80900), fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                   ),
-                  SizedBox(height: 8),
-                  Text("v2.380", style: TextStyle(color: Color(0xFF161A1D), fontSize: 12)),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
+                  const Text('v2.380', style: TextStyle(color: Color(0xFF161A1D), fontSize: 12)),
+                  const SizedBox(height: 8),
                 ],
               ),
             );
@@ -163,26 +163,26 @@ class _ProfileCard extends StatelessWidget {
         final userImage = controller.hasUserInfo && controller.currentUserInfo.imageFullUrl.isNotEmpty ? controller.currentUserInfo.imageFullUrl : 'assets/images/img_avatar_default.png';
 
         return Container(
-          color: Color(0xFFF7F8F9),
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          color: const Color(0xFFF7F8F9),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           child: Row(
             children: [
               CircleAvatar(
                 radius: 24,
                 backgroundImage: controller.hasUserInfo && controller.currentUserInfo.imageFullUrl.isNotEmpty ? NetworkImage(userImage) : AssetImage(userImage) as ImageProvider,
-                backgroundColor: Color(0xFF5856D7),
+                backgroundColor: const Color(0xFF5856D7),
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       userName,
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
                     ),
-                    SizedBox(height: 4),
-                    Text(userRefId, style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                    const SizedBox(height: 4),
+                    Text(userRefId, style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
                   ],
                 ),
               ),

@@ -5,10 +5,10 @@ import 'package:sixam_mart_user/base/base_controller.dart';
 enum SearchItemType { history, address, nearby }
 
 class SearchItem {
+  SearchItem({required this.title, required this.address, required this.type});
   final String title;
   final String address;
   final SearchItemType type;
-  SearchItem({required this.title, required this.address, required this.type});
 }
 
 class SearchAddressController extends BaseController {

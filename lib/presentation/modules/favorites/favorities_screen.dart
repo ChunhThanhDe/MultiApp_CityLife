@@ -16,7 +16,7 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(title: "Your Favorites", onBack: () => Get.back());
+    return BasicAppBar(title: 'Your Favorites', onBack: () => Get.back());
   }
 
   @override
@@ -48,7 +48,7 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
       crossAxisSpacing: 16,
       mainAxisSpacing: 16,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      emptyTitle: "No favorite stores",
+      emptyTitle: 'No favorite stores',
       emptySubtitle: "You haven't added any stores to your favorites yet.",
       emptyIcon: Icon(Icons.store_outlined, size: 64, color: AppColors.stateGreyDefault500),
     );
@@ -65,7 +65,7 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
       crossAxisSpacing: 16,
       mainAxisSpacing: 16,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      emptyTitle: "No favorite items",
+      emptyTitle: 'No favorite items',
       emptySubtitle: "You haven't added any items to your favorites yet.",
       emptyIcon: Icon(Icons.favorite_outline, size: 64, color: AppColors.stateGreyDefault500),
     );
@@ -175,7 +175,7 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
               children: [
                 const SizedBox(height: 2),
                 Text(
-                  "\$0 Delivery fee",
+                  '\$0 Delivery fee',
                   style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -183,15 +183,15 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
                 const SizedBox(height: 2),
                 Row(
                   children: [
-                    Text("${store.avgRating ?? 0}★", style: AppTextStyles.typographyH11Medium.copyWith(color: AppColors.textGreyDefault500)),
+                    Text('${store.avgRating ?? 0}★', style: AppTextStyles.typographyH11Medium.copyWith(color: AppColors.textGreyDefault500)),
                     const SizedBox(width: 2),
-                    Text("(${store.ratingCount ?? 0})", style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
+                    Text('(${store.ratingCount ?? 0})', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
                     const SizedBox(width: 2),
-                    Text("•", style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.stateBrandDefault500)),
+                    Text('•', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.stateBrandDefault500)),
                     const SizedBox(width: 2),
                     Flexible(
                       child: Text(
-                        store.deliveryTime ?? "30-60 min",
+                        store.deliveryTime ?? '30-60 min',
                         style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

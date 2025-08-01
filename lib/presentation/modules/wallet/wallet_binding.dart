@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import 'wallet_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/wallet/wallet_controller.dart';
 
 class WalletBinding extends Bindings {
   @override

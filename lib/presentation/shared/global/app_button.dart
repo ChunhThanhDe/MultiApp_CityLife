@@ -25,6 +25,30 @@ import 'package:sixam_mart_user/app/theme/theme.dart';
 /// )
 /// ```
 class AppButton extends StatefulWidget {
+
+  /// Creates an [AppButton] with the specified properties.
+  ///
+  /// The [onTap] and [child] parameters are required.
+  /// All other parameters have sensible defaults.
+  const AppButton({
+    required this.onTap, required this.child, super.key,
+    this.onLongPress,
+    this.duration = const Duration(milliseconds: 100),
+    this.color,
+    this.disabledColor,
+    this.elevation,
+    this.borderRadius,
+    this.shape,
+    this.padding,
+    this.enabled = true,
+    this.loading = false,
+    this.curve = Curves.easeInOut,
+    this.scale = 0.92,
+    this.semanticLabel,
+    this.constraints,
+    this.width,
+    this.height,
+  });
   /// The widget to display inside the button.
   final Widget child;
 
@@ -79,32 +103,6 @@ class AppButton extends StatefulWidget {
   /// Fixed height of the button. If null, uses intrinsic height.
   final double? height;
 
-  /// Creates an [AppButton] with the specified properties.
-  ///
-  /// The [onTap] and [child] parameters are required.
-  /// All other parameters have sensible defaults.
-  const AppButton({
-    super.key,
-    required this.onTap,
-    required this.child,
-    this.onLongPress,
-    this.duration = const Duration(milliseconds: 100),
-    this.color,
-    this.disabledColor,
-    this.elevation,
-    this.borderRadius,
-    this.shape,
-    this.padding,
-    this.enabled = true,
-    this.loading = false,
-    this.curve = Curves.easeInOut,
-    this.scale = 0.92,
-    this.semanticLabel,
-    this.constraints,
-    this.width,
-    this.height,
-  });
-
   @override
   State<AppButton> createState() => _AppButtonState();
 }
@@ -156,7 +154,7 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
     final ShapeBorder effectiveShape = widget.shape ?? RoundedRectangleBorder(borderRadius: effectiveRadius);
     final double effectiveElevation = widget.elevation ?? 0;
 
-    Widget content = widget.loading ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white), strokeWidth: 2.5)) : widget.child;
+    final Widget content = widget.loading ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white), strokeWidth: 2.5)) : widget.child;
 
     // Combine explicit width/height with user-provided constraints
     BoxConstraints effectiveConstraints = widget.constraints ?? const BoxConstraints();

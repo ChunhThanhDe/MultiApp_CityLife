@@ -41,10 +41,10 @@ Future<void> _showModalNotifyPermissionRestricted(String? titleRestricted) async
   showAppDialog(
     child: Column(
       children: [
-        Text('Permission Restricted'),
+        const Text('Permission Restricted'),
         Text(titleRestricted ?? 'This permission is restricted by the system and cannot be changed.'),
         AppButton(
-          child: Text('OK'),
+          child: const Text('OK'),
           onTap: () {
             Get.back();
           },
@@ -58,17 +58,17 @@ Future<void> _showGoToAppSettingsModal(String? titlePermanentlyDenied) async {
   showAppDialog(
     child: Column(
       children: [
-        Text('Permission Required'),
+        const Text('Permission Required'),
         Text(titlePermanentlyDenied ?? 'This permission is required for the app to function properly. Please enable it in settings.'),
         AppButton(
-          child: Text('Open Settings'),
+          child: const Text('Open Settings'),
           onTap: () {
             openAppSettings();
             Get.back();
           },
         ),
         AppButton(
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
           onTap: () {
             Get.back();
           },

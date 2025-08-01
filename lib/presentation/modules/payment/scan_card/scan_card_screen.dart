@@ -6,14 +6,14 @@ import 'package:ml_card_scanner/ml_card_scanner.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 
-import 'scan_card_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/payment/scan_card/scan_card_controller.dart';
 
 class ScanCardScreen extends BaseScreen<ScanCardController> {
   const ScanCardScreen({super.key});
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(title: 'Scan your card');
+    return const BasicAppBar(title: 'Scan your card');
   }
 
   @override
@@ -52,13 +52,13 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
                     child: Column(
                       children: [
                         const Text(
-                          "Scan your card",
+                          'Scan your card',
                           style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Color(0xFF161A1D)),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 4),
                         const Text(
-                          "please make sure the card number is visible.",
+                          'please make sure the card number is visible.',
                           style: TextStyle(fontSize: 14, color: Color(0xFF4A5763), fontWeight: FontWeight.w400),
                           textAlign: TextAlign.center,
                         ),
@@ -66,7 +66,7 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
                         Obx(() {
                           if (controller.isScanning.value) {
                             return const Text(
-                              "Scanning...",
+                              'Scanning...',
                               style: TextStyle(color: Color(0xFF5856D7), fontWeight: FontWeight.w500),
                             );
                           }
@@ -87,7 +87,7 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
                         child: GestureDetector(
                           onTap: controller.restartScan,
                           child: const Text(
-                            "Scan again",
+                            'Scan again',
                             style: TextStyle(color: Color(0xFF5856D7), fontWeight: FontWeight.w500, fontSize: 16, decoration: TextDecoration.underline),
                           ),
                         ),

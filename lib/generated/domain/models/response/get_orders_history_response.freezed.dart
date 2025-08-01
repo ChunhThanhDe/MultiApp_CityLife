@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GetOrdersHistoryResponse {
 
-@JsonKey(name: "total_size") int? get totalSize;@JsonKey(name: "limit") String? get limit;@JsonKey(name: "offset") String? get offset;@JsonKey(name: "orders") List<Order>? get orders;
+@JsonKey(name: 'total_size') int? get totalSize;@JsonKey(name: 'limit') String? get limit;@JsonKey(name: 'offset') String? get offset;@JsonKey(name: 'orders') List<Order>? get orders;
 /// Create a copy of GetOrdersHistoryResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $GetOrdersHistoryResponseCopyWith<$Res>  {
   factory $GetOrdersHistoryResponseCopyWith(GetOrdersHistoryResponse value, $Res Function(GetOrdersHistoryResponse) _then) = _$GetOrdersHistoryResponseCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "total_size") int? totalSize,@JsonKey(name: "limit") String? limit,@JsonKey(name: "offset") String? offset,@JsonKey(name: "orders") List<Order>? orders
+@JsonKey(name: 'total_size') int? totalSize,@JsonKey(name: 'limit') String? limit,@JsonKey(name: 'offset') String? offset,@JsonKey(name: 'orders') List<Order>? orders
 });
 
 
@@ -83,14 +83,14 @@ as List<Order>?,
 @JsonSerializable()
 
 class _GetOrdersHistoryResponse implements GetOrdersHistoryResponse {
-  const _GetOrdersHistoryResponse({@JsonKey(name: "total_size") this.totalSize, @JsonKey(name: "limit") this.limit, @JsonKey(name: "offset") this.offset, @JsonKey(name: "orders") final  List<Order>? orders}): _orders = orders;
+  const _GetOrdersHistoryResponse({@JsonKey(name: 'total_size') this.totalSize, @JsonKey(name: 'limit') this.limit, @JsonKey(name: 'offset') this.offset, @JsonKey(name: 'orders') final  List<Order>? orders}): _orders = orders;
   factory _GetOrdersHistoryResponse.fromJson(Map<String, dynamic> json) => _$GetOrdersHistoryResponseFromJson(json);
 
-@override@JsonKey(name: "total_size") final  int? totalSize;
-@override@JsonKey(name: "limit") final  String? limit;
-@override@JsonKey(name: "offset") final  String? offset;
+@override@JsonKey(name: 'total_size') final  int? totalSize;
+@override@JsonKey(name: 'limit') final  String? limit;
+@override@JsonKey(name: 'offset') final  String? offset;
  final  List<Order>? _orders;
-@override@JsonKey(name: "orders") List<Order>? get orders {
+@override@JsonKey(name: 'orders') List<Order>? get orders {
   final value = _orders;
   if (value == null) return null;
   if (_orders is EqualUnmodifiableListView) return _orders;
@@ -132,7 +132,7 @@ abstract mixin class _$GetOrdersHistoryResponseCopyWith<$Res> implements $GetOrd
   factory _$GetOrdersHistoryResponseCopyWith(_GetOrdersHistoryResponse value, $Res Function(_GetOrdersHistoryResponse) _then) = __$GetOrdersHistoryResponseCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "total_size") int? totalSize,@JsonKey(name: "limit") String? limit,@JsonKey(name: "offset") String? offset,@JsonKey(name: "orders") List<Order>? orders
+@JsonKey(name: 'total_size') int? totalSize,@JsonKey(name: 'limit') String? limit,@JsonKey(name: 'offset') String? offset,@JsonKey(name: 'orders') List<Order>? orders
 });
 
 
@@ -166,7 +166,7 @@ as List<Order>?,
 /// @nodoc
 mixin _$Order {
 
-@JsonKey(name: "id") int? get id;@JsonKey(name: "order_amount") double? get orderAmount;@OrderStatusConverter()@JsonKey(name: "order_status") OrderStatus? get orderStatus;@JsonKey(name: "created_at") DateTime? get createdAt;@JsonKey(name: "delivery_address") DeliveryAddress? get deliveryAddress;@JsonKey(name: "details_count") int? get detailsCount;@JsonKey(name: "store") Store? get store;@JsonKey(name: "delivery_instruction") String? get deliveryInstruction;@JsonKey(name: "order_note") String? get orderNote;
+@JsonKey(name: 'id') int? get id;@JsonKey(name: 'order_amount') double? get orderAmount;@OrderStatusConverter()@JsonKey(name: 'order_status') OrderStatus? get orderStatus;@JsonKey(name: 'created_at') DateTime? get createdAt;@JsonKey(name: 'delivery_address') DeliveryAddress? get deliveryAddress;@JsonKey(name: 'details_count') int? get detailsCount;@JsonKey(name: 'store') Store? get store;@JsonKey(name: 'delivery_instruction') String? get deliveryInstruction;@JsonKey(name: 'order_note') String? get orderNote;
 /// Create a copy of Order
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -199,7 +199,7 @@ abstract mixin class $OrderCopyWith<$Res>  {
   factory $OrderCopyWith(Order value, $Res Function(Order) _then) = _$OrderCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "id") int? id,@JsonKey(name: "order_amount") double? orderAmount,@OrderStatusConverter()@JsonKey(name: "order_status") OrderStatus? orderStatus,@JsonKey(name: "created_at") DateTime? createdAt,@JsonKey(name: "delivery_address") DeliveryAddress? deliveryAddress,@JsonKey(name: "details_count") int? detailsCount,@JsonKey(name: "store") Store? store,@JsonKey(name: "delivery_instruction") String? deliveryInstruction,@JsonKey(name: "order_note") String? orderNote
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'order_amount') double? orderAmount,@OrderStatusConverter()@JsonKey(name: 'order_status') OrderStatus? orderStatus,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'delivery_address') DeliveryAddress? deliveryAddress,@JsonKey(name: 'details_count') int? detailsCount,@JsonKey(name: 'store') Store? store,@JsonKey(name: 'delivery_instruction') String? deliveryInstruction,@JsonKey(name: 'order_note') String? orderNote
 });
 
 
@@ -262,18 +262,18 @@ $StoreCopyWith<$Res>? get store {
 @JsonSerializable()
 
 class _Order implements Order {
-  const _Order({@JsonKey(name: "id") this.id, @JsonKey(name: "order_amount") this.orderAmount, @OrderStatusConverter()@JsonKey(name: "order_status") this.orderStatus, @JsonKey(name: "created_at") this.createdAt, @JsonKey(name: "delivery_address") this.deliveryAddress, @JsonKey(name: "details_count") this.detailsCount, @JsonKey(name: "store") this.store, @JsonKey(name: "delivery_instruction") this.deliveryInstruction, @JsonKey(name: "order_note") this.orderNote});
+  const _Order({@JsonKey(name: 'id') this.id, @JsonKey(name: 'order_amount') this.orderAmount, @OrderStatusConverter()@JsonKey(name: 'order_status') this.orderStatus, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'delivery_address') this.deliveryAddress, @JsonKey(name: 'details_count') this.detailsCount, @JsonKey(name: 'store') this.store, @JsonKey(name: 'delivery_instruction') this.deliveryInstruction, @JsonKey(name: 'order_note') this.orderNote});
   factory _Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
 
-@override@JsonKey(name: "id") final  int? id;
-@override@JsonKey(name: "order_amount") final  double? orderAmount;
-@override@OrderStatusConverter()@JsonKey(name: "order_status") final  OrderStatus? orderStatus;
-@override@JsonKey(name: "created_at") final  DateTime? createdAt;
-@override@JsonKey(name: "delivery_address") final  DeliveryAddress? deliveryAddress;
-@override@JsonKey(name: "details_count") final  int? detailsCount;
-@override@JsonKey(name: "store") final  Store? store;
-@override@JsonKey(name: "delivery_instruction") final  String? deliveryInstruction;
-@override@JsonKey(name: "order_note") final  String? orderNote;
+@override@JsonKey(name: 'id') final  int? id;
+@override@JsonKey(name: 'order_amount') final  double? orderAmount;
+@override@OrderStatusConverter()@JsonKey(name: 'order_status') final  OrderStatus? orderStatus;
+@override@JsonKey(name: 'created_at') final  DateTime? createdAt;
+@override@JsonKey(name: 'delivery_address') final  DeliveryAddress? deliveryAddress;
+@override@JsonKey(name: 'details_count') final  int? detailsCount;
+@override@JsonKey(name: 'store') final  Store? store;
+@override@JsonKey(name: 'delivery_instruction') final  String? deliveryInstruction;
+@override@JsonKey(name: 'order_note') final  String? orderNote;
 
 /// Create a copy of Order
 /// with the given fields replaced by the non-null parameter values.
@@ -308,7 +308,7 @@ abstract mixin class _$OrderCopyWith<$Res> implements $OrderCopyWith<$Res> {
   factory _$OrderCopyWith(_Order value, $Res Function(_Order) _then) = __$OrderCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "id") int? id,@JsonKey(name: "order_amount") double? orderAmount,@OrderStatusConverter()@JsonKey(name: "order_status") OrderStatus? orderStatus,@JsonKey(name: "created_at") DateTime? createdAt,@JsonKey(name: "delivery_address") DeliveryAddress? deliveryAddress,@JsonKey(name: "details_count") int? detailsCount,@JsonKey(name: "store") Store? store,@JsonKey(name: "delivery_instruction") String? deliveryInstruction,@JsonKey(name: "order_note") String? orderNote
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'order_amount') double? orderAmount,@OrderStatusConverter()@JsonKey(name: 'order_status') OrderStatus? orderStatus,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'delivery_address') DeliveryAddress? deliveryAddress,@JsonKey(name: 'details_count') int? detailsCount,@JsonKey(name: 'store') Store? store,@JsonKey(name: 'delivery_instruction') String? deliveryInstruction,@JsonKey(name: 'order_note') String? orderNote
 });
 
 
@@ -371,7 +371,7 @@ $StoreCopyWith<$Res>? get store {
 /// @nodoc
 mixin _$DeliveryAddress {
 
-@JsonKey(name: "contact_person_name") String? get contactPersonName;@JsonKey(name: "contact_person_number") String? get contactPersonNumber;@JsonKey(name: "address") String? get address;
+@JsonKey(name: 'contact_person_name') String? get contactPersonName;@JsonKey(name: 'contact_person_number') String? get contactPersonNumber;@JsonKey(name: 'address') String? get address;
 /// Create a copy of DeliveryAddress
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -404,7 +404,7 @@ abstract mixin class $DeliveryAddressCopyWith<$Res>  {
   factory $DeliveryAddressCopyWith(DeliveryAddress value, $Res Function(DeliveryAddress) _then) = _$DeliveryAddressCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "contact_person_name") String? contactPersonName,@JsonKey(name: "contact_person_number") String? contactPersonNumber,@JsonKey(name: "address") String? address
+@JsonKey(name: 'contact_person_name') String? contactPersonName,@JsonKey(name: 'contact_person_number') String? contactPersonNumber,@JsonKey(name: 'address') String? address
 });
 
 
@@ -437,12 +437,12 @@ as String?,
 @JsonSerializable()
 
 class _DeliveryAddress implements DeliveryAddress {
-  const _DeliveryAddress({@JsonKey(name: "contact_person_name") this.contactPersonName, @JsonKey(name: "contact_person_number") this.contactPersonNumber, @JsonKey(name: "address") this.address});
+  const _DeliveryAddress({@JsonKey(name: 'contact_person_name') this.contactPersonName, @JsonKey(name: 'contact_person_number') this.contactPersonNumber, @JsonKey(name: 'address') this.address});
   factory _DeliveryAddress.fromJson(Map<String, dynamic> json) => _$DeliveryAddressFromJson(json);
 
-@override@JsonKey(name: "contact_person_name") final  String? contactPersonName;
-@override@JsonKey(name: "contact_person_number") final  String? contactPersonNumber;
-@override@JsonKey(name: "address") final  String? address;
+@override@JsonKey(name: 'contact_person_name') final  String? contactPersonName;
+@override@JsonKey(name: 'contact_person_number') final  String? contactPersonNumber;
+@override@JsonKey(name: 'address') final  String? address;
 
 /// Create a copy of DeliveryAddress
 /// with the given fields replaced by the non-null parameter values.
@@ -477,7 +477,7 @@ abstract mixin class _$DeliveryAddressCopyWith<$Res> implements $DeliveryAddress
   factory _$DeliveryAddressCopyWith(_DeliveryAddress value, $Res Function(_DeliveryAddress) _then) = __$DeliveryAddressCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "contact_person_name") String? contactPersonName,@JsonKey(name: "contact_person_number") String? contactPersonNumber,@JsonKey(name: "address") String? address
+@JsonKey(name: 'contact_person_name') String? contactPersonName,@JsonKey(name: 'contact_person_number') String? contactPersonNumber,@JsonKey(name: 'address') String? address
 });
 
 
@@ -510,7 +510,7 @@ as String?,
 /// @nodoc
 mixin _$Store {
 
-@JsonKey(name: "id") int? get id;@JsonKey(name: "name") String? get name;@JsonKey(name: "logo_full_url") String? get logoFullUrl;@JsonKey(name: "cover_photo_full_url") String? get coverPhotoFullUrl;@JsonKey(name: "delivery_time") String? get deliveryTime;
+@JsonKey(name: 'id') int? get id;@JsonKey(name: 'name') String? get name;@JsonKey(name: 'logo_full_url') String? get logoFullUrl;@JsonKey(name: 'cover_photo_full_url') String? get coverPhotoFullUrl;@JsonKey(name: 'delivery_time') String? get deliveryTime;
 /// Create a copy of Store
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -543,7 +543,7 @@ abstract mixin class $StoreCopyWith<$Res>  {
   factory $StoreCopyWith(Store value, $Res Function(Store) _then) = _$StoreCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "id") int? id,@JsonKey(name: "name") String? name,@JsonKey(name: "logo_full_url") String? logoFullUrl,@JsonKey(name: "cover_photo_full_url") String? coverPhotoFullUrl,@JsonKey(name: "delivery_time") String? deliveryTime
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'name') String? name,@JsonKey(name: 'logo_full_url') String? logoFullUrl,@JsonKey(name: 'cover_photo_full_url') String? coverPhotoFullUrl,@JsonKey(name: 'delivery_time') String? deliveryTime
 });
 
 
@@ -578,14 +578,14 @@ as String?,
 @JsonSerializable()
 
 class _Store implements Store {
-  const _Store({@JsonKey(name: "id") this.id, @JsonKey(name: "name") this.name, @JsonKey(name: "logo_full_url") this.logoFullUrl, @JsonKey(name: "cover_photo_full_url") this.coverPhotoFullUrl, @JsonKey(name: "delivery_time") this.deliveryTime});
+  const _Store({@JsonKey(name: 'id') this.id, @JsonKey(name: 'name') this.name, @JsonKey(name: 'logo_full_url') this.logoFullUrl, @JsonKey(name: 'cover_photo_full_url') this.coverPhotoFullUrl, @JsonKey(name: 'delivery_time') this.deliveryTime});
   factory _Store.fromJson(Map<String, dynamic> json) => _$StoreFromJson(json);
 
-@override@JsonKey(name: "id") final  int? id;
-@override@JsonKey(name: "name") final  String? name;
-@override@JsonKey(name: "logo_full_url") final  String? logoFullUrl;
-@override@JsonKey(name: "cover_photo_full_url") final  String? coverPhotoFullUrl;
-@override@JsonKey(name: "delivery_time") final  String? deliveryTime;
+@override@JsonKey(name: 'id') final  int? id;
+@override@JsonKey(name: 'name') final  String? name;
+@override@JsonKey(name: 'logo_full_url') final  String? logoFullUrl;
+@override@JsonKey(name: 'cover_photo_full_url') final  String? coverPhotoFullUrl;
+@override@JsonKey(name: 'delivery_time') final  String? deliveryTime;
 
 /// Create a copy of Store
 /// with the given fields replaced by the non-null parameter values.
@@ -620,7 +620,7 @@ abstract mixin class _$StoreCopyWith<$Res> implements $StoreCopyWith<$Res> {
   factory _$StoreCopyWith(_Store value, $Res Function(_Store) _then) = __$StoreCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "id") int? id,@JsonKey(name: "name") String? name,@JsonKey(name: "logo_full_url") String? logoFullUrl,@JsonKey(name: "cover_photo_full_url") String? coverPhotoFullUrl,@JsonKey(name: "delivery_time") String? deliveryTime
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'name') String? name,@JsonKey(name: 'logo_full_url') String? logoFullUrl,@JsonKey(name: 'cover_photo_full_url') String? coverPhotoFullUrl,@JsonKey(name: 'delivery_time') String? deliveryTime
 });
 
 

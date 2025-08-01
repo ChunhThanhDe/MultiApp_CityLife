@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import 'box_delivery_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/box_delivery/box_delivery_controller.dart';
 
 class BoxDeliveryBinding extends Bindings {
   @override

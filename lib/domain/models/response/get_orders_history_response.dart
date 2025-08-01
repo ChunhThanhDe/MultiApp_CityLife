@@ -8,10 +8,10 @@ part '../../../generated/domain/models/response/get_orders_history_response.g.da
 @freezed
 abstract class GetOrdersHistoryResponse with _$GetOrdersHistoryResponse {
   const factory GetOrdersHistoryResponse({
-    @JsonKey(name: "total_size") int? totalSize,
-    @JsonKey(name: "limit") String? limit,
-    @JsonKey(name: "offset") String? offset,
-    @JsonKey(name: "orders") List<Order>? orders,
+    @JsonKey(name: 'total_size') int? totalSize,
+    @JsonKey(name: 'limit') String? limit,
+    @JsonKey(name: 'offset') String? offset,
+    @JsonKey(name: 'orders') List<Order>? orders,
   }) = _GetOrdersHistoryResponse;
 
   factory GetOrdersHistoryResponse.fromJson(Map<String, dynamic> json) => _$GetOrdersHistoryResponseFromJson(json);
@@ -30,15 +30,15 @@ class OrderStatusConverter implements JsonConverter<OrderStatus, String?> {
 @freezed
 abstract class Order with _$Order {
   const factory Order({
-    @JsonKey(name: "id") int? id,
-    @JsonKey(name: "order_amount") double? orderAmount,
-    @OrderStatusConverter() @JsonKey(name: "order_status") OrderStatus? orderStatus,
-    @JsonKey(name: "created_at") DateTime? createdAt,
-    @JsonKey(name: "delivery_address") DeliveryAddress? deliveryAddress,
-    @JsonKey(name: "details_count") int? detailsCount,
-    @JsonKey(name: "store") Store? store,
-    @JsonKey(name: "delivery_instruction") String? deliveryInstruction,
-    @JsonKey(name: "order_note") String? orderNote,
+    @JsonKey(name: 'id') int? id,
+    @JsonKey(name: 'order_amount') double? orderAmount,
+    @OrderStatusConverter() @JsonKey(name: 'order_status') OrderStatus? orderStatus,
+    @JsonKey(name: 'created_at') DateTime? createdAt,
+    @JsonKey(name: 'delivery_address') DeliveryAddress? deliveryAddress,
+    @JsonKey(name: 'details_count') int? detailsCount,
+    @JsonKey(name: 'store') Store? store,
+    @JsonKey(name: 'delivery_instruction') String? deliveryInstruction,
+    @JsonKey(name: 'order_note') String? orderNote,
   }) = _Order;
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
@@ -89,25 +89,25 @@ extension OrderStatusExtension on OrderStatus {
   String get vi {
     switch (this) {
       case OrderStatus.pending:
-        return 'Chờ xử lý';
+        return 'Waiting for confirmation';
       case OrderStatus.accepted:
-        return 'Đã được cửa hàng chấp nhận';
+        return 'Accepted by store';
       case OrderStatus.confirmed:
-        return 'Cửa hàng xác nhận đang chuẩn bị';
+        return 'Store confirmed';
       case OrderStatus.preparing:
-        return 'Đang chuẩn bị';
+        return 'Preparing your order';
       case OrderStatus.processing:
-        return 'Đơn đang được xử lý/giao';
+        return 'Processing your order';
       case OrderStatus.handover:
-        return 'Giao cho shipper';
+        return 'Handover to shipper';
       case OrderStatus.picked_up:
-        return 'Đã được shipper lấy hàng';
+        return 'Picked up by shipper';
       case OrderStatus.delivered:
-        return 'Giao hàng thành công';
+        return 'Delivered';
       case OrderStatus.canceled:
-        return 'Đơn hàng bị hủy';
+        return 'Canceled';
       case OrderStatus.failed:
-        return 'Giao hàng thất bại';
+        return 'Failed';
     }
   }
 
@@ -117,9 +117,9 @@ extension OrderStatusExtension on OrderStatus {
 @freezed
 abstract class DeliveryAddress with _$DeliveryAddress {
   const factory DeliveryAddress({
-    @JsonKey(name: "contact_person_name") String? contactPersonName,
-    @JsonKey(name: "contact_person_number") String? contactPersonNumber,
-    @JsonKey(name: "address") String? address,
+    @JsonKey(name: 'contact_person_name') String? contactPersonName,
+    @JsonKey(name: 'contact_person_number') String? contactPersonNumber,
+    @JsonKey(name: 'address') String? address,
   }) = _DeliveryAddress;
 
   factory DeliveryAddress.fromJson(Map<String, dynamic> json) => _$DeliveryAddressFromJson(json);
@@ -132,11 +132,11 @@ abstract class DeliveryAddress with _$DeliveryAddress {
 @freezed
 abstract class Store with _$Store {
   const factory Store({
-    @JsonKey(name: "id") int? id,
-    @JsonKey(name: "name") String? name,
-    @JsonKey(name: "logo_full_url") String? logoFullUrl,
-    @JsonKey(name: "cover_photo_full_url") String? coverPhotoFullUrl,
-    @JsonKey(name: "delivery_time") String? deliveryTime,
+    @JsonKey(name: 'id') int? id,
+    @JsonKey(name: 'name') String? name,
+    @JsonKey(name: 'logo_full_url') String? logoFullUrl,
+    @JsonKey(name: 'cover_photo_full_url') String? coverPhotoFullUrl,
+    @JsonKey(name: 'delivery_time') String? deliveryTime,
   }) = _Store;
 
   factory Store.fromJson(Map<String, dynamic> json) => _$StoreFromJson(json);

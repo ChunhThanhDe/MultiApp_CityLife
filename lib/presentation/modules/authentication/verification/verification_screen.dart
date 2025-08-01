@@ -14,7 +14,7 @@ import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/comp
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/accept_tos.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
 
-import 'verification_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/authentication/verification/verification_controller.dart';
 
 class VerificationScreen extends BaseScreen<VerificationController> {
   const VerificationScreen({super.key});
@@ -38,7 +38,7 @@ class VerificationScreen extends BaseScreen<VerificationController> {
           _buildExpiredText(),
           SizedBox(height: 24.h),
           AppButton(
-            onTap: () => Get.to(() => AcceptTos()),
+            onTap: () => Get.to(() => const AcceptTos()),
             width: double.infinity,
             color: AppColors.stateBrandDefault500,
             disabledColor: AppColors.stateBrandDefault500.withValues(alpha: 0.5),
@@ -63,8 +63,8 @@ class VerificationScreen extends BaseScreen<VerificationController> {
               ],
             ),
           ),
-          Spacer(),
-          Center(child: const TermOfService()),
+          const Spacer(),
+          const Center(child: TermOfService()),
           SizedBox(height: 16.h),
           const Divider(color: Color(0xFFE8EBEE), thickness: 1),
           SizedBox(height: 16.h),

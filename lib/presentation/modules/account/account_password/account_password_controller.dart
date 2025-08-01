@@ -56,8 +56,8 @@ class AccountPasswordController extends BaseController {
         case Success(:final response):
           if (response.statusCode == 200) {
             showAppSnackBar(
-              title: "Success",
-              message: "Your password has been changed successfully.",
+              title: 'Success',
+              message: 'Your password has been changed successfully.',
               type: SnackBarType.success,
             );
             // Clear the fields after successful change
@@ -68,25 +68,25 @@ class AccountPasswordController extends BaseController {
             Get.back();
           } else {
             showAppSnackBar(
-              title: "Error",
-              message: "Failed to change password. Please try again.",
+              title: 'Error',
+              message: 'Failed to change password. Please try again.',
               type: SnackBarType.error,
             );
           }
           break;
 
         case Failure(:final error):
-          String errorMessage = "Failed to change password. Please try again.";
+          String errorMessage = 'Failed to change password. Please try again.';
           
           // Handle specific error cases
           if (error.toString().contains('old_password')) {
-            errorMessage = "Current password is incorrect.";
+            errorMessage = 'Current password is incorrect.';
           } else if (error.toString().contains('password')) {
-            errorMessage = "New password does not meet requirements.";
+            errorMessage = 'New password does not meet requirements.';
           }
 
           showAppSnackBar(
-            title: "Error",
+            title: 'Error',
             message: errorMessage,
             type: SnackBarType.error,
           );
@@ -94,8 +94,8 @@ class AccountPasswordController extends BaseController {
       }
     } catch (e) {
       showAppSnackBar(
-        title: "Error",
-        message: "An unexpected error occurred. Please try again.",
+        title: 'Error',
+        message: 'An unexpected error occurred. Please try again.',
         type: SnackBarType.error,
       );
     } finally {
@@ -105,24 +105,24 @@ class AccountPasswordController extends BaseController {
 
   // Validation logic
   String? validateOldPassword(String? value) {
-    if (value == null || value.isEmpty) return "Old password is required";
+    if (value == null || value.isEmpty) return 'Old password is required';
     // Optionally, check with current password if you have the logic
     return null;
   }
 
   String? validateNewPassword(String? value) {
-    if (value == null || value.isEmpty) return "New password is required";
-    if (value.length < 8) return "Password must be at least 8 characters";
-    if (!RegExp(r'(?=.*[A-Z])').hasMatch(value)) return "Must include uppercase letter";
-    if (!RegExp(r'(?=.*[a-z])').hasMatch(value)) return "Must include lowercase letter";
-    if (!RegExp(r'(?=.*[0-9])').hasMatch(value)) return "Must include number";
-    if (!RegExp(r'(?=.*[!@#\$&*~])').hasMatch(value)) return "Must include symbol (!@#\$&*~)";
+    if (value == null || value.isEmpty) return 'New password is required';
+    if (value.length < 8) return 'Password must be at least 8 characters';
+    if (!RegExp(r'(?=.*[A-Z])').hasMatch(value)) return 'Must include uppercase letter';
+    if (!RegExp(r'(?=.*[a-z])').hasMatch(value)) return 'Must include lowercase letter';
+    if (!RegExp(r'(?=.*[0-9])').hasMatch(value)) return 'Must include number';
+    if (!RegExp(r'(?=.*[!@#\$&*~])').hasMatch(value)) return 'Must include symbol (!@#\$&*~)';
     return null;
   }
 
   String? validateConfirmPassword(String? value) {
-    if (value == null || value.isEmpty) return "Please confirm your new password";
-    if (value != newController.text) return "Passwords do not match";
+    if (value == null || value.isEmpty) return 'Please confirm your new password';
+    if (value != newController.text) return 'Passwords do not match';
     return null;
   }
 }

@@ -4,21 +4,21 @@ import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 
-import 'account_security_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account_security/account_security_controller.dart';
 
 class AccountSecurityScreen extends BaseScreen<AccountSecurityController> {
   const AccountSecurityScreen({super.key});
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(title: "Security", onBack: () => Get.back());
+    return BasicAppBar(title: 'Security', onBack: () => Get.back());
   }
 
   @override
   Widget buildScreen(BuildContext context) {
     return Column(
       children: [
-        Container(height: 1, color: Color(0xFFE8EBEE)),
+        Container(height: 1, color: const Color(0xFFE8EBEE)),
         Expanded(
           child: SingleChildScrollView(
             child: Column(
@@ -29,7 +29,7 @@ class AccountSecurityScreen extends BaseScreen<AccountSecurityController> {
                     _SecurityCell(
                       title: 'Password',
                       subtitle: 'Last changed May 28, 2023',
-                      trailing: Icon(Icons.arrow_forward_ios, size: 18, color: Color(0xFF4A5763)),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 18, color: Color(0xFF4A5763)),
                       obfuscated: true,
                       onTap: () {
                         Get.toNamed(AppRoutes.accountPassword);
@@ -39,20 +39,20 @@ class AccountSecurityScreen extends BaseScreen<AccountSecurityController> {
                     _SecurityCell(
                       title: 'Passkeys',
                       subtitle: '3 passkeys created',
-                      trailing: Icon(Icons.arrow_forward_ios, size: 18, color: Color(0xFF4A5763)),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 18, color: Color(0xFF4A5763)),
                       onTap: () {},
                     ),
                     _DividerLine(),
                     _SecurityCell(
                       title: '2-Step Verification',
                       subtitle: 'Add additional security to your account with 2-step verification.',
-                      trailing: Icon(Icons.arrow_forward_ios, size: 18, color: Color(0xFF4A5763)),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 18, color: Color(0xFF4A5763)),
                       onTap: () {},
                     ),
                   ],
                 ),
                 const SizedBox(height: 10),
-                Container(height: 5, color: Color(0xFFE8EBEE)),
+                Container(height: 5, color: const Color(0xFFE8EBEE)),
               ],
             ),
           ),
@@ -64,14 +64,14 @@ class AccountSecurityScreen extends BaseScreen<AccountSecurityController> {
 
 /// Card-like section (background white)
 class _SectionCard extends StatelessWidget {
-  final List<Widget> children;
   const _SectionCard({required this.children});
+  final List<Widget> children;
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
       width: double.infinity,
-      padding: EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Column(children: children),
     );
   }
@@ -79,13 +79,13 @@ class _SectionCard extends StatelessWidget {
 
 /// Security setting row with subtitle and optional trailing widget (arrow)
 class _SecurityCell extends StatelessWidget {
+
+  const _SecurityCell({required this.title, this.subtitle, this.obfuscated = false, this.trailing, this.onTap});
   final String title;
   final String? subtitle;
   final bool obfuscated;
   final Widget? trailing;
   final VoidCallback? onTap;
-
-  const _SecurityCell({required this.title, this.subtitle, this.obfuscated = false, this.trailing, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,7 @@ class _SecurityCell extends StatelessWidget {
         onTap: onTap,
         child: Container(
           height: subtitle == null ? 50 : 68,
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
           child: Row(
             children: [
               Expanded(
@@ -107,10 +107,10 @@ class _SecurityCell extends StatelessWidget {
                       children: [
                         Text(
                           title,
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
                         ),
-                        Spacer(),
-                        if (obfuscated) ...[SizedBox(width: 8), Text("••••••••", style: TextStyle(letterSpacing: 2, fontSize: 18, color: Color(0xFF4A5763)))],
+                        const Spacer(),
+                        if (obfuscated) ...[const SizedBox(width: 8), const Text('••••••••', style: TextStyle(letterSpacing: 2, fontSize: 18, color: Color(0xFF4A5763)))],
                       ],
                     ),
                     if (subtitle != null)
@@ -118,7 +118,7 @@ class _SecurityCell extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 2),
                         child: Text(
                           subtitle!,
-                          style: TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
+                          style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -126,7 +126,7 @@ class _SecurityCell extends StatelessWidget {
                   ],
                 ),
               ),
-              if (trailing != null) ...[SizedBox(width: 12), trailing!],
+              if (trailing != null) ...[const SizedBox(width: 12), trailing!],
             ],
           ),
         ),
@@ -139,37 +139,37 @@ class _SecurityCell extends StatelessWidget {
 class _DividerLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(margin: EdgeInsets.only(left: 24), width: MediaQuery.of(context).size.width - 48, height: 1, color: Color(0xFFE8EBEE));
+    return Container(margin: const EdgeInsets.only(left: 24), width: MediaQuery.of(context).size.width - 48, height: 1, color: const Color(0xFFE8EBEE));
   }
 }
 
 /// Social app connect/disconnect cell
 class SocialConnectCell extends StatelessWidget {
+
+  const SocialConnectCell({required this.icon, required this.label, super.key, this.onDisconnect});
   final Widget icon;
   final String label;
   final VoidCallback? onDisconnect;
-
-  const SocialConnectCell({super.key, required this.icon, required this.label, this.onDisconnect});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 32,
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
       child: Row(
         children: [
           icon,
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           Expanded(
             child: Text(
               label,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
             ),
           ),
           InkWell(
             onTap: onDisconnect,
-            child: Text(
-              "Disconnect",
+            child: const Text(
+              'Disconnect',
               style: TextStyle(color: Color(0xFFFF3B30), fontSize: 14, fontWeight: FontWeight.w400),
             ),
           ),

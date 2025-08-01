@@ -7,15 +7,15 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_list_view.dart';
 
-import 'view_cart_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/view_cart/view_cart_controller.dart';
 
 // Data model for organizing cart items by type
 class CartDisplayItem {
+
+  CartDisplayItem({required this.type, this.store, this.item});
   final GetCartListStore? store;
   final GetCartListItem? item;
   final CartDisplayType type;
-
-  CartDisplayItem({this.store, this.item, required this.type});
 }
 
 enum CartDisplayType { storeHeader, cartItem, cartSummary }
@@ -29,14 +29,14 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
       backgroundColor: Colors.white.withValues(alpha: 0.9),
       elevation: 0.5,
       title: const Text(
-        "View Cart",
+        'View Cart',
         style: TextStyle(color: Color(0xFF161A1D), fontWeight: FontWeight.w500, fontSize: 18),
       ),
       actions: [
         TextButton(
           onPressed: controller.navigateToOrders,
           child: const Text(
-            "Orders",
+            'Orders',
             style: TextStyle(color: Color(0xFF161A1D), fontSize: 14, fontWeight: FontWeight.w400),
           ),
         ),
@@ -50,7 +50,7 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
     return Obx(() {
       final displayItems = _organizeCartItems(controller.storesInCart);
       if (displayItems.isEmpty) {
-        return SizedBox.shrink();
+        return const SizedBox.shrink();
       }
       return _CartSummarySection(controller: controller);
     });
@@ -72,8 +72,6 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
         errorMessage: controller.error.value.isNotEmpty ? controller.error.value : null,
         onRetry: controller.refreshCart,
         emptyWidget: _EmptyCartState(onStartShopping: controller.navigateBack),
-        emptyTitle: 'Your cart is empty',
-        emptySubtitle: 'Add some items to your cart to get started.',
         physics: const AlwaysScrollableScrollPhysics(),
         useCustomScrollView: true,
       );
@@ -81,7 +79,7 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
   }
 
   List<CartDisplayItem> _organizeCartItems(List<GetCartListStore> stores) {
-    List<CartDisplayItem> displayItems = [];
+    final List<CartDisplayItem> displayItems = [];
 
     for (final store in stores) {
       // Add store header
@@ -148,9 +146,9 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
 
 // Empty cart state widget
 class _EmptyCartState extends StatelessWidget {
-  final VoidCallback onStartShopping;
 
   const _EmptyCartState({required this.onStartShopping});
+  final VoidCallback onStartShopping;
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +158,7 @@ class _EmptyCartState extends StatelessWidget {
         children: [
           const _CartEmptyIllustration(),
           const SizedBox(height: 32),
-          _EmptyStateContent(title: "Your cart is empty", subtitle: "Add some items to your cart to get started.", buttonText: "Start shopping", onPressed: onStartShopping),
+          _EmptyStateContent(title: 'Your cart is empty', subtitle: 'Add some items to your cart to get started.', buttonText: 'Start shopping', onPressed: onStartShopping),
         ],
       ),
     );
@@ -169,10 +167,10 @@ class _EmptyCartState extends StatelessWidget {
 
 // Store header widget
 class _StoreHeader extends StatelessWidget {
-  final GetCartListStore store;
-  final VoidCallback onClearAll;
 
   const _StoreHeader({required this.store, required this.onClearAll});
+  final GetCartListStore store;
+  final VoidCallback onClearAll;
 
   @override
   Widget build(BuildContext context) {
@@ -220,10 +218,10 @@ class _StoreHeader extends StatelessWidget {
 
 // Cart product item widget with animation
 class _CartProductItem extends StatelessWidget {
-  final GetCartListItem item;
-  final ViewCartController controller;
 
   const _CartProductItem({required this.item, required this.controller});
+  final GetCartListItem item;
+  final ViewCartController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -248,9 +246,9 @@ class _CartProductItem extends StatelessWidget {
 
 // Product image widget
 class _ProductImage extends StatelessWidget {
-  final String? imageUrl;
 
   const _ProductImage({this.imageUrl});
+  final String? imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -273,10 +271,10 @@ class _ProductImage extends StatelessWidget {
 
 // Product details widget
 class _ProductDetails extends StatelessWidget {
-  final GetCartListItem item;
-  final ViewCartController controller;
 
   const _ProductDetails({required this.item, required this.controller});
+  final GetCartListItem item;
+  final ViewCartController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -309,10 +307,10 @@ class _ProductDetails extends StatelessWidget {
 
 // Quantity controls widget with animation and loading state
 class _QuantityControls extends StatelessWidget {
-  final GetCartListItem item;
-  final ViewCartController controller;
 
   const _QuantityControls({required this.item, required this.controller});
+  final GetCartListItem item;
+  final ViewCartController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -344,11 +342,11 @@ class _QuantityControls extends StatelessWidget {
 
 // Individual quantity button with animation
 class _QuantityButton extends StatefulWidget {
+
+  const _QuantityButton({required this.icon, required this.onPressed, this.enabled = true});
   final IconData icon;
   final VoidCallback? onPressed;
   final bool enabled;
-
-  const _QuantityButton({required this.icon, required this.onPressed, this.enabled = true});
 
   @override
   State<_QuantityButton> createState() => _QuantityButtonState();
@@ -398,10 +396,10 @@ class _QuantityButtonState extends State<_QuantityButton> with SingleTickerProvi
 
 // Action buttons (favorite and delete) with animation
 class _ActionButtons extends StatelessWidget {
-  final GetCartListItem item;
-  final ViewCartController controller;
 
   const _ActionButtons({required this.item, required this.controller});
+  final GetCartListItem item;
+  final ViewCartController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -409,7 +407,7 @@ class _ActionButtons extends StatelessWidget {
       children: [
         _AnimatedActionButton(
           icon: Icons.favorite_border,
-          color: Color(0xFF5856D7),
+          color: const Color(0xFF5856D7),
           onPressed: () {
             // Add to favorites functionality
           },
@@ -417,7 +415,7 @@ class _ActionButtons extends StatelessWidget {
         const SizedBox(width: 8),
         _AnimatedActionButton(
           icon: Icons.delete_outline,
-          color: Color(0xFFE53E3E),
+          color: const Color(0xFFE53E3E),
           onPressed: () {
             if (item.cartId != null) {
               controller.removeItem(item.cartId!);
@@ -431,11 +429,11 @@ class _ActionButtons extends StatelessWidget {
 
 // Animated action button for delete with visual feedback
 class _AnimatedActionButton extends StatefulWidget {
+
+  const _AnimatedActionButton({required this.icon, required this.color, this.onPressed});
   final IconData icon;
   final Color color;
   final VoidCallback? onPressed;
-
-  const _AnimatedActionButton({required this.icon, required this.color, this.onPressed});
 
   @override
   State<_AnimatedActionButton> createState() => _AnimatedActionButtonState();
@@ -491,9 +489,9 @@ class _AnimatedActionButtonState extends State<_AnimatedActionButton> with Singl
 
 // Cart summary section
 class _CartSummarySection extends StatelessWidget {
-  final ViewCartController controller;
 
   const _CartSummarySection({required this.controller});
+  final ViewCartController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -567,12 +565,12 @@ class _CartEmptyIllustration extends StatelessWidget {
 
 // Empty state content
 class _EmptyStateContent extends StatelessWidget {
+
+  const _EmptyStateContent({required this.title, required this.subtitle, required this.buttonText, this.onPressed});
   final String title;
   final String subtitle;
   final String buttonText;
   final VoidCallback? onPressed;
-
-  const _EmptyStateContent({required this.title, required this.subtitle, required this.buttonText, this.onPressed});
 
   @override
   Widget build(BuildContext context) {

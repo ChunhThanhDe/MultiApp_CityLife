@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class LabelWidget extends StatelessWidget {
+
+  const LabelWidget(this.text, {super.key, this.isRequired = false, this.optional = false, this.isBold = false, this.isLarge = false});
   final String text;
   final bool isRequired;
   final bool optional;
   final bool isBold;
   final bool isLarge;
-
-  const LabelWidget(this.text, {super.key, this.isRequired = false, this.optional = false, this.isBold = false, this.isLarge = false});
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +19,14 @@ class LabelWidget extends StatelessWidget {
         ),
         if (isRequired)
           Text(
-            "*",
+            '*',
             style: TextStyle(color: const Color(0xFFFF3B30), fontSize: isLarge ? 18 : 14),
           ),
         if (optional)
           Padding(
             padding: const EdgeInsets.only(left: 6),
             child: Text(
-              "(optional)",
+              '(optional)',
               style: TextStyle(fontSize: isLarge ? 16 : 14, color: const Color(0xFF4A4C4F), fontWeight: FontWeight.w400),
             ),
           ),

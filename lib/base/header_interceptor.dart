@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 
 class HeaderInterceptor extends Interceptor {
-  final Map<dynamic, dynamic> Function() getHeader;
 
   HeaderInterceptor({required this.getHeader});
+  final Map<dynamic, dynamic> Function() getHeader;
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {

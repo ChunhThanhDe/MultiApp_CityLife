@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GetCheckoutSummaryResponse {
 
-@JsonKey(name: "default_address") CheckoutAddress? get defaultAddress;@JsonKey(name: "addresses") List<CheckoutAddress>? get addresses;@JsonKey(name: "delivery_options") List<DeliveryOption>? get deliveryOptions;@JsonKey(name: "payment_methods") List<PaymentMethod>? get paymentMethods;@JsonKey(name: "cards") List<dynamic>? get cards;@JsonKey(name: "available_coupons") List<AvailableCoupon>? get availableCoupons;@JsonKey(name: "cart") List<CheckoutCartStore>? get cart;@JsonKey(name: "cart_summary") CheckoutCartSummary? get cartSummary;@JsonKey(name: "subtotal") double? get subtotal;@JsonKey(name: "delivery_fee") double? get deliveryFee;@JsonKey(name: "tax") double? get tax;@JsonKey(name: "discount") double? get discount;@JsonKey(name: "total") double? get total;
+@JsonKey(name: 'default_address') CheckoutAddress? get defaultAddress;@JsonKey(name: 'addresses') List<CheckoutAddress>? get addresses;@JsonKey(name: 'delivery_options') List<DeliveryOption>? get deliveryOptions;@JsonKey(name: 'payment_methods') List<PaymentMethod>? get paymentMethods;@JsonKey(name: 'cards') List<dynamic>? get cards;@JsonKey(name: 'available_coupons') List<AvailableCoupon>? get availableCoupons;@JsonKey(name: 'cart') List<CheckoutCartStore>? get cart;@JsonKey(name: 'cart_summary') CheckoutCartSummary? get cartSummary;@JsonKey(name: 'subtotal') double? get subtotal;@JsonKey(name: 'delivery_fee') double? get deliveryFee;@JsonKey(name: 'tax') double? get tax;@JsonKey(name: 'discount') double? get discount;@JsonKey(name: 'total') double? get total;
 /// Create a copy of GetCheckoutSummaryResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $GetCheckoutSummaryResponseCopyWith<$Res>  {
   factory $GetCheckoutSummaryResponseCopyWith(GetCheckoutSummaryResponse value, $Res Function(GetCheckoutSummaryResponse) _then) = _$GetCheckoutSummaryResponseCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "default_address") CheckoutAddress? defaultAddress,@JsonKey(name: "addresses") List<CheckoutAddress>? addresses,@JsonKey(name: "delivery_options") List<DeliveryOption>? deliveryOptions,@JsonKey(name: "payment_methods") List<PaymentMethod>? paymentMethods,@JsonKey(name: "cards") List<dynamic>? cards,@JsonKey(name: "available_coupons") List<AvailableCoupon>? availableCoupons,@JsonKey(name: "cart") List<CheckoutCartStore>? cart,@JsonKey(name: "cart_summary") CheckoutCartSummary? cartSummary,@JsonKey(name: "subtotal") double? subtotal,@JsonKey(name: "delivery_fee") double? deliveryFee,@JsonKey(name: "tax") double? tax,@JsonKey(name: "discount") double? discount,@JsonKey(name: "total") double? total
+@JsonKey(name: 'default_address') CheckoutAddress? defaultAddress,@JsonKey(name: 'addresses') List<CheckoutAddress>? addresses,@JsonKey(name: 'delivery_options') List<DeliveryOption>? deliveryOptions,@JsonKey(name: 'payment_methods') List<PaymentMethod>? paymentMethods,@JsonKey(name: 'cards') List<dynamic>? cards,@JsonKey(name: 'available_coupons') List<AvailableCoupon>? availableCoupons,@JsonKey(name: 'cart') List<CheckoutCartStore>? cart,@JsonKey(name: 'cart_summary') CheckoutCartSummary? cartSummary,@JsonKey(name: 'subtotal') double? subtotal,@JsonKey(name: 'delivery_fee') double? deliveryFee,@JsonKey(name: 'tax') double? tax,@JsonKey(name: 'discount') double? discount,@JsonKey(name: 'total') double? total
 });
 
 
@@ -116,12 +116,12 @@ $CheckoutCartSummaryCopyWith<$Res>? get cartSummary {
 @JsonSerializable()
 
 class _GetCheckoutSummaryResponse implements GetCheckoutSummaryResponse {
-  const _GetCheckoutSummaryResponse({@JsonKey(name: "default_address") this.defaultAddress, @JsonKey(name: "addresses") final  List<CheckoutAddress>? addresses, @JsonKey(name: "delivery_options") final  List<DeliveryOption>? deliveryOptions, @JsonKey(name: "payment_methods") final  List<PaymentMethod>? paymentMethods, @JsonKey(name: "cards") final  List<dynamic>? cards, @JsonKey(name: "available_coupons") final  List<AvailableCoupon>? availableCoupons, @JsonKey(name: "cart") final  List<CheckoutCartStore>? cart, @JsonKey(name: "cart_summary") this.cartSummary, @JsonKey(name: "subtotal") this.subtotal, @JsonKey(name: "delivery_fee") this.deliveryFee, @JsonKey(name: "tax") this.tax, @JsonKey(name: "discount") this.discount, @JsonKey(name: "total") this.total}): _addresses = addresses,_deliveryOptions = deliveryOptions,_paymentMethods = paymentMethods,_cards = cards,_availableCoupons = availableCoupons,_cart = cart;
+  const _GetCheckoutSummaryResponse({@JsonKey(name: 'default_address') this.defaultAddress, @JsonKey(name: 'addresses') final  List<CheckoutAddress>? addresses, @JsonKey(name: 'delivery_options') final  List<DeliveryOption>? deliveryOptions, @JsonKey(name: 'payment_methods') final  List<PaymentMethod>? paymentMethods, @JsonKey(name: 'cards') final  List<dynamic>? cards, @JsonKey(name: 'available_coupons') final  List<AvailableCoupon>? availableCoupons, @JsonKey(name: 'cart') final  List<CheckoutCartStore>? cart, @JsonKey(name: 'cart_summary') this.cartSummary, @JsonKey(name: 'subtotal') this.subtotal, @JsonKey(name: 'delivery_fee') this.deliveryFee, @JsonKey(name: 'tax') this.tax, @JsonKey(name: 'discount') this.discount, @JsonKey(name: 'total') this.total}): _addresses = addresses,_deliveryOptions = deliveryOptions,_paymentMethods = paymentMethods,_cards = cards,_availableCoupons = availableCoupons,_cart = cart;
   factory _GetCheckoutSummaryResponse.fromJson(Map<String, dynamic> json) => _$GetCheckoutSummaryResponseFromJson(json);
 
-@override@JsonKey(name: "default_address") final  CheckoutAddress? defaultAddress;
+@override@JsonKey(name: 'default_address') final  CheckoutAddress? defaultAddress;
  final  List<CheckoutAddress>? _addresses;
-@override@JsonKey(name: "addresses") List<CheckoutAddress>? get addresses {
+@override@JsonKey(name: 'addresses') List<CheckoutAddress>? get addresses {
   final value = _addresses;
   if (value == null) return null;
   if (_addresses is EqualUnmodifiableListView) return _addresses;
@@ -130,7 +130,7 @@ class _GetCheckoutSummaryResponse implements GetCheckoutSummaryResponse {
 }
 
  final  List<DeliveryOption>? _deliveryOptions;
-@override@JsonKey(name: "delivery_options") List<DeliveryOption>? get deliveryOptions {
+@override@JsonKey(name: 'delivery_options') List<DeliveryOption>? get deliveryOptions {
   final value = _deliveryOptions;
   if (value == null) return null;
   if (_deliveryOptions is EqualUnmodifiableListView) return _deliveryOptions;
@@ -139,7 +139,7 @@ class _GetCheckoutSummaryResponse implements GetCheckoutSummaryResponse {
 }
 
  final  List<PaymentMethod>? _paymentMethods;
-@override@JsonKey(name: "payment_methods") List<PaymentMethod>? get paymentMethods {
+@override@JsonKey(name: 'payment_methods') List<PaymentMethod>? get paymentMethods {
   final value = _paymentMethods;
   if (value == null) return null;
   if (_paymentMethods is EqualUnmodifiableListView) return _paymentMethods;
@@ -148,7 +148,7 @@ class _GetCheckoutSummaryResponse implements GetCheckoutSummaryResponse {
 }
 
  final  List<dynamic>? _cards;
-@override@JsonKey(name: "cards") List<dynamic>? get cards {
+@override@JsonKey(name: 'cards') List<dynamic>? get cards {
   final value = _cards;
   if (value == null) return null;
   if (_cards is EqualUnmodifiableListView) return _cards;
@@ -157,7 +157,7 @@ class _GetCheckoutSummaryResponse implements GetCheckoutSummaryResponse {
 }
 
  final  List<AvailableCoupon>? _availableCoupons;
-@override@JsonKey(name: "available_coupons") List<AvailableCoupon>? get availableCoupons {
+@override@JsonKey(name: 'available_coupons') List<AvailableCoupon>? get availableCoupons {
   final value = _availableCoupons;
   if (value == null) return null;
   if (_availableCoupons is EqualUnmodifiableListView) return _availableCoupons;
@@ -166,7 +166,7 @@ class _GetCheckoutSummaryResponse implements GetCheckoutSummaryResponse {
 }
 
  final  List<CheckoutCartStore>? _cart;
-@override@JsonKey(name: "cart") List<CheckoutCartStore>? get cart {
+@override@JsonKey(name: 'cart') List<CheckoutCartStore>? get cart {
   final value = _cart;
   if (value == null) return null;
   if (_cart is EqualUnmodifiableListView) return _cart;
@@ -174,12 +174,12 @@ class _GetCheckoutSummaryResponse implements GetCheckoutSummaryResponse {
   return EqualUnmodifiableListView(value);
 }
 
-@override@JsonKey(name: "cart_summary") final  CheckoutCartSummary? cartSummary;
-@override@JsonKey(name: "subtotal") final  double? subtotal;
-@override@JsonKey(name: "delivery_fee") final  double? deliveryFee;
-@override@JsonKey(name: "tax") final  double? tax;
-@override@JsonKey(name: "discount") final  double? discount;
-@override@JsonKey(name: "total") final  double? total;
+@override@JsonKey(name: 'cart_summary') final  CheckoutCartSummary? cartSummary;
+@override@JsonKey(name: 'subtotal') final  double? subtotal;
+@override@JsonKey(name: 'delivery_fee') final  double? deliveryFee;
+@override@JsonKey(name: 'tax') final  double? tax;
+@override@JsonKey(name: 'discount') final  double? discount;
+@override@JsonKey(name: 'total') final  double? total;
 
 /// Create a copy of GetCheckoutSummaryResponse
 /// with the given fields replaced by the non-null parameter values.
@@ -214,7 +214,7 @@ abstract mixin class _$GetCheckoutSummaryResponseCopyWith<$Res> implements $GetC
   factory _$GetCheckoutSummaryResponseCopyWith(_GetCheckoutSummaryResponse value, $Res Function(_GetCheckoutSummaryResponse) _then) = __$GetCheckoutSummaryResponseCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "default_address") CheckoutAddress? defaultAddress,@JsonKey(name: "addresses") List<CheckoutAddress>? addresses,@JsonKey(name: "delivery_options") List<DeliveryOption>? deliveryOptions,@JsonKey(name: "payment_methods") List<PaymentMethod>? paymentMethods,@JsonKey(name: "cards") List<dynamic>? cards,@JsonKey(name: "available_coupons") List<AvailableCoupon>? availableCoupons,@JsonKey(name: "cart") List<CheckoutCartStore>? cart,@JsonKey(name: "cart_summary") CheckoutCartSummary? cartSummary,@JsonKey(name: "subtotal") double? subtotal,@JsonKey(name: "delivery_fee") double? deliveryFee,@JsonKey(name: "tax") double? tax,@JsonKey(name: "discount") double? discount,@JsonKey(name: "total") double? total
+@JsonKey(name: 'default_address') CheckoutAddress? defaultAddress,@JsonKey(name: 'addresses') List<CheckoutAddress>? addresses,@JsonKey(name: 'delivery_options') List<DeliveryOption>? deliveryOptions,@JsonKey(name: 'payment_methods') List<PaymentMethod>? paymentMethods,@JsonKey(name: 'cards') List<dynamic>? cards,@JsonKey(name: 'available_coupons') List<AvailableCoupon>? availableCoupons,@JsonKey(name: 'cart') List<CheckoutCartStore>? cart,@JsonKey(name: 'cart_summary') CheckoutCartSummary? cartSummary,@JsonKey(name: 'subtotal') double? subtotal,@JsonKey(name: 'delivery_fee') double? deliveryFee,@JsonKey(name: 'tax') double? tax,@JsonKey(name: 'discount') double? discount,@JsonKey(name: 'total') double? total
 });
 
 
@@ -281,7 +281,7 @@ $CheckoutCartSummaryCopyWith<$Res>? get cartSummary {
 /// @nodoc
 mixin _$CheckoutAddress {
 
-@JsonKey(name: "id") int? get id;@JsonKey(name: "address_type") String? get addressType;@JsonKey(name: "contact_person_number") String? get contactPersonNumber;@JsonKey(name: "address") String? get address;@JsonKey(name: "latitude") String? get latitude;@JsonKey(name: "longitude") String? get longitude;@JsonKey(name: "user_id") int? get userId;@JsonKey(name: "contact_person_name") String? get contactPersonName;@JsonKey(name: "created_at") String? get createdAt;@JsonKey(name: "updated_at") String? get updatedAt;@JsonKey(name: "zone_id") int? get zoneId;@JsonKey(name: "floor") String? get floor;@JsonKey(name: "road") String? get road;@JsonKey(name: "house") String? get house;
+@JsonKey(name: 'id') int? get id;@JsonKey(name: 'address_type') String? get addressType;@JsonKey(name: 'contact_person_number') String? get contactPersonNumber;@JsonKey(name: 'address') String? get address;@JsonKey(name: 'latitude') String? get latitude;@JsonKey(name: 'longitude') String? get longitude;@JsonKey(name: 'user_id') int? get userId;@JsonKey(name: 'contact_person_name') String? get contactPersonName;@JsonKey(name: 'created_at') String? get createdAt;@JsonKey(name: 'updated_at') String? get updatedAt;@JsonKey(name: 'zone_id') int? get zoneId;@JsonKey(name: 'floor') String? get floor;@JsonKey(name: 'road') String? get road;@JsonKey(name: 'house') String? get house;
 /// Create a copy of CheckoutAddress
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -314,7 +314,7 @@ abstract mixin class $CheckoutAddressCopyWith<$Res>  {
   factory $CheckoutAddressCopyWith(CheckoutAddress value, $Res Function(CheckoutAddress) _then) = _$CheckoutAddressCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "id") int? id,@JsonKey(name: "address_type") String? addressType,@JsonKey(name: "contact_person_number") String? contactPersonNumber,@JsonKey(name: "address") String? address,@JsonKey(name: "latitude") String? latitude,@JsonKey(name: "longitude") String? longitude,@JsonKey(name: "user_id") int? userId,@JsonKey(name: "contact_person_name") String? contactPersonName,@JsonKey(name: "created_at") String? createdAt,@JsonKey(name: "updated_at") String? updatedAt,@JsonKey(name: "zone_id") int? zoneId,@JsonKey(name: "floor") String? floor,@JsonKey(name: "road") String? road,@JsonKey(name: "house") String? house
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'address_type') String? addressType,@JsonKey(name: 'contact_person_number') String? contactPersonNumber,@JsonKey(name: 'address') String? address,@JsonKey(name: 'latitude') String? latitude,@JsonKey(name: 'longitude') String? longitude,@JsonKey(name: 'user_id') int? userId,@JsonKey(name: 'contact_person_name') String? contactPersonName,@JsonKey(name: 'created_at') String? createdAt,@JsonKey(name: 'updated_at') String? updatedAt,@JsonKey(name: 'zone_id') int? zoneId,@JsonKey(name: 'floor') String? floor,@JsonKey(name: 'road') String? road,@JsonKey(name: 'house') String? house
 });
 
 
@@ -358,23 +358,23 @@ as String?,
 @JsonSerializable()
 
 class _CheckoutAddress implements CheckoutAddress {
-  const _CheckoutAddress({@JsonKey(name: "id") this.id, @JsonKey(name: "address_type") this.addressType, @JsonKey(name: "contact_person_number") this.contactPersonNumber, @JsonKey(name: "address") this.address, @JsonKey(name: "latitude") this.latitude, @JsonKey(name: "longitude") this.longitude, @JsonKey(name: "user_id") this.userId, @JsonKey(name: "contact_person_name") this.contactPersonName, @JsonKey(name: "created_at") this.createdAt, @JsonKey(name: "updated_at") this.updatedAt, @JsonKey(name: "zone_id") this.zoneId, @JsonKey(name: "floor") this.floor, @JsonKey(name: "road") this.road, @JsonKey(name: "house") this.house});
+  const _CheckoutAddress({@JsonKey(name: 'id') this.id, @JsonKey(name: 'address_type') this.addressType, @JsonKey(name: 'contact_person_number') this.contactPersonNumber, @JsonKey(name: 'address') this.address, @JsonKey(name: 'latitude') this.latitude, @JsonKey(name: 'longitude') this.longitude, @JsonKey(name: 'user_id') this.userId, @JsonKey(name: 'contact_person_name') this.contactPersonName, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'updated_at') this.updatedAt, @JsonKey(name: 'zone_id') this.zoneId, @JsonKey(name: 'floor') this.floor, @JsonKey(name: 'road') this.road, @JsonKey(name: 'house') this.house});
   factory _CheckoutAddress.fromJson(Map<String, dynamic> json) => _$CheckoutAddressFromJson(json);
 
-@override@JsonKey(name: "id") final  int? id;
-@override@JsonKey(name: "address_type") final  String? addressType;
-@override@JsonKey(name: "contact_person_number") final  String? contactPersonNumber;
-@override@JsonKey(name: "address") final  String? address;
-@override@JsonKey(name: "latitude") final  String? latitude;
-@override@JsonKey(name: "longitude") final  String? longitude;
-@override@JsonKey(name: "user_id") final  int? userId;
-@override@JsonKey(name: "contact_person_name") final  String? contactPersonName;
-@override@JsonKey(name: "created_at") final  String? createdAt;
-@override@JsonKey(name: "updated_at") final  String? updatedAt;
-@override@JsonKey(name: "zone_id") final  int? zoneId;
-@override@JsonKey(name: "floor") final  String? floor;
-@override@JsonKey(name: "road") final  String? road;
-@override@JsonKey(name: "house") final  String? house;
+@override@JsonKey(name: 'id') final  int? id;
+@override@JsonKey(name: 'address_type') final  String? addressType;
+@override@JsonKey(name: 'contact_person_number') final  String? contactPersonNumber;
+@override@JsonKey(name: 'address') final  String? address;
+@override@JsonKey(name: 'latitude') final  String? latitude;
+@override@JsonKey(name: 'longitude') final  String? longitude;
+@override@JsonKey(name: 'user_id') final  int? userId;
+@override@JsonKey(name: 'contact_person_name') final  String? contactPersonName;
+@override@JsonKey(name: 'created_at') final  String? createdAt;
+@override@JsonKey(name: 'updated_at') final  String? updatedAt;
+@override@JsonKey(name: 'zone_id') final  int? zoneId;
+@override@JsonKey(name: 'floor') final  String? floor;
+@override@JsonKey(name: 'road') final  String? road;
+@override@JsonKey(name: 'house') final  String? house;
 
 /// Create a copy of CheckoutAddress
 /// with the given fields replaced by the non-null parameter values.
@@ -409,7 +409,7 @@ abstract mixin class _$CheckoutAddressCopyWith<$Res> implements $CheckoutAddress
   factory _$CheckoutAddressCopyWith(_CheckoutAddress value, $Res Function(_CheckoutAddress) _then) = __$CheckoutAddressCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "id") int? id,@JsonKey(name: "address_type") String? addressType,@JsonKey(name: "contact_person_number") String? contactPersonNumber,@JsonKey(name: "address") String? address,@JsonKey(name: "latitude") String? latitude,@JsonKey(name: "longitude") String? longitude,@JsonKey(name: "user_id") int? userId,@JsonKey(name: "contact_person_name") String? contactPersonName,@JsonKey(name: "created_at") String? createdAt,@JsonKey(name: "updated_at") String? updatedAt,@JsonKey(name: "zone_id") int? zoneId,@JsonKey(name: "floor") String? floor,@JsonKey(name: "road") String? road,@JsonKey(name: "house") String? house
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'address_type') String? addressType,@JsonKey(name: 'contact_person_number') String? contactPersonNumber,@JsonKey(name: 'address') String? address,@JsonKey(name: 'latitude') String? latitude,@JsonKey(name: 'longitude') String? longitude,@JsonKey(name: 'user_id') int? userId,@JsonKey(name: 'contact_person_name') String? contactPersonName,@JsonKey(name: 'created_at') String? createdAt,@JsonKey(name: 'updated_at') String? updatedAt,@JsonKey(name: 'zone_id') int? zoneId,@JsonKey(name: 'floor') String? floor,@JsonKey(name: 'road') String? road,@JsonKey(name: 'house') String? house
 });
 
 
@@ -453,7 +453,7 @@ as String?,
 /// @nodoc
 mixin _$DeliveryOption {
 
-@JsonKey(name: "key") int? get key;@JsonKey(name: "label") String? get label;@JsonKey(name: "fee") double? get fee;@JsonKey(name: "desc") String? get desc;
+@JsonKey(name: 'key') int? get key;@JsonKey(name: 'label') String? get label;@JsonKey(name: 'fee') double? get fee;@JsonKey(name: 'desc') String? get desc;
 /// Create a copy of DeliveryOption
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -486,7 +486,7 @@ abstract mixin class $DeliveryOptionCopyWith<$Res>  {
   factory $DeliveryOptionCopyWith(DeliveryOption value, $Res Function(DeliveryOption) _then) = _$DeliveryOptionCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "key") int? key,@JsonKey(name: "label") String? label,@JsonKey(name: "fee") double? fee,@JsonKey(name: "desc") String? desc
+@JsonKey(name: 'key') int? key,@JsonKey(name: 'label') String? label,@JsonKey(name: 'fee') double? fee,@JsonKey(name: 'desc') String? desc
 });
 
 
@@ -520,13 +520,13 @@ as String?,
 @JsonSerializable()
 
 class _DeliveryOption implements DeliveryOption {
-  const _DeliveryOption({@JsonKey(name: "key") this.key, @JsonKey(name: "label") this.label, @JsonKey(name: "fee") this.fee, @JsonKey(name: "desc") this.desc});
+  const _DeliveryOption({@JsonKey(name: 'key') this.key, @JsonKey(name: 'label') this.label, @JsonKey(name: 'fee') this.fee, @JsonKey(name: 'desc') this.desc});
   factory _DeliveryOption.fromJson(Map<String, dynamic> json) => _$DeliveryOptionFromJson(json);
 
-@override@JsonKey(name: "key") final  int? key;
-@override@JsonKey(name: "label") final  String? label;
-@override@JsonKey(name: "fee") final  double? fee;
-@override@JsonKey(name: "desc") final  String? desc;
+@override@JsonKey(name: 'key') final  int? key;
+@override@JsonKey(name: 'label') final  String? label;
+@override@JsonKey(name: 'fee') final  double? fee;
+@override@JsonKey(name: 'desc') final  String? desc;
 
 /// Create a copy of DeliveryOption
 /// with the given fields replaced by the non-null parameter values.
@@ -561,7 +561,7 @@ abstract mixin class _$DeliveryOptionCopyWith<$Res> implements $DeliveryOptionCo
   factory _$DeliveryOptionCopyWith(_DeliveryOption value, $Res Function(_DeliveryOption) _then) = __$DeliveryOptionCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "key") int? key,@JsonKey(name: "label") String? label,@JsonKey(name: "fee") double? fee,@JsonKey(name: "desc") String? desc
+@JsonKey(name: 'key') int? key,@JsonKey(name: 'label') String? label,@JsonKey(name: 'fee') double? fee,@JsonKey(name: 'desc') String? desc
 });
 
 
@@ -595,7 +595,7 @@ as String?,
 /// @nodoc
 mixin _$PaymentMethod {
 
-@JsonKey(name: "key") String? get key;@JsonKey(name: "label") String? get label;
+@JsonKey(name: 'key') String? get key;@JsonKey(name: 'label') String? get label;
 /// Create a copy of PaymentMethod
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -628,7 +628,7 @@ abstract mixin class $PaymentMethodCopyWith<$Res>  {
   factory $PaymentMethodCopyWith(PaymentMethod value, $Res Function(PaymentMethod) _then) = _$PaymentMethodCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "key") String? key,@JsonKey(name: "label") String? label
+@JsonKey(name: 'key') String? key,@JsonKey(name: 'label') String? label
 });
 
 
@@ -660,11 +660,11 @@ as String?,
 @JsonSerializable()
 
 class _PaymentMethod implements PaymentMethod {
-  const _PaymentMethod({@JsonKey(name: "key") this.key, @JsonKey(name: "label") this.label});
+  const _PaymentMethod({@JsonKey(name: 'key') this.key, @JsonKey(name: 'label') this.label});
   factory _PaymentMethod.fromJson(Map<String, dynamic> json) => _$PaymentMethodFromJson(json);
 
-@override@JsonKey(name: "key") final  String? key;
-@override@JsonKey(name: "label") final  String? label;
+@override@JsonKey(name: 'key') final  String? key;
+@override@JsonKey(name: 'label') final  String? label;
 
 /// Create a copy of PaymentMethod
 /// with the given fields replaced by the non-null parameter values.
@@ -699,7 +699,7 @@ abstract mixin class _$PaymentMethodCopyWith<$Res> implements $PaymentMethodCopy
   factory _$PaymentMethodCopyWith(_PaymentMethod value, $Res Function(_PaymentMethod) _then) = __$PaymentMethodCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "key") String? key,@JsonKey(name: "label") String? label
+@JsonKey(name: 'key') String? key,@JsonKey(name: 'label') String? label
 });
 
 
@@ -731,7 +731,7 @@ as String?,
 /// @nodoc
 mixin _$AvailableCoupon {
 
-@JsonKey(name: "code") String? get code;@JsonKey(name: "desc") String? get desc;
+@JsonKey(name: 'code') String? get code;@JsonKey(name: 'desc') String? get desc;
 /// Create a copy of AvailableCoupon
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -764,7 +764,7 @@ abstract mixin class $AvailableCouponCopyWith<$Res>  {
   factory $AvailableCouponCopyWith(AvailableCoupon value, $Res Function(AvailableCoupon) _then) = _$AvailableCouponCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "code") String? code,@JsonKey(name: "desc") String? desc
+@JsonKey(name: 'code') String? code,@JsonKey(name: 'desc') String? desc
 });
 
 
@@ -796,11 +796,11 @@ as String?,
 @JsonSerializable()
 
 class _AvailableCoupon implements AvailableCoupon {
-  const _AvailableCoupon({@JsonKey(name: "code") this.code, @JsonKey(name: "desc") this.desc});
+  const _AvailableCoupon({@JsonKey(name: 'code') this.code, @JsonKey(name: 'desc') this.desc});
   factory _AvailableCoupon.fromJson(Map<String, dynamic> json) => _$AvailableCouponFromJson(json);
 
-@override@JsonKey(name: "code") final  String? code;
-@override@JsonKey(name: "desc") final  String? desc;
+@override@JsonKey(name: 'code') final  String? code;
+@override@JsonKey(name: 'desc') final  String? desc;
 
 /// Create a copy of AvailableCoupon
 /// with the given fields replaced by the non-null parameter values.
@@ -835,7 +835,7 @@ abstract mixin class _$AvailableCouponCopyWith<$Res> implements $AvailableCoupon
   factory _$AvailableCouponCopyWith(_AvailableCoupon value, $Res Function(_AvailableCoupon) _then) = __$AvailableCouponCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "code") String? code,@JsonKey(name: "desc") String? desc
+@JsonKey(name: 'code') String? code,@JsonKey(name: 'desc') String? desc
 });
 
 
@@ -867,7 +867,7 @@ as String?,
 /// @nodoc
 mixin _$CheckoutCartStore {
 
-@JsonKey(name: "store_id") int? get storeId;@JsonKey(name: "store_name") String? get storeName;@JsonKey(name: "store_logo") String? get storeLogo;@JsonKey(name: "store_address") String? get storeAddress;@JsonKey(name: "store_phone") String? get storePhone;@JsonKey(name: "store_minimum_order") int? get storeMinimumOrder;@JsonKey(name: "store_delivery_time") String? get storeDeliveryTime;@JsonKey(name: "items") List<CheckoutCartItem>? get items;@JsonKey(name: "store_total_items") int? get storeTotalItems;@JsonKey(name: "store_total_price") double? get storeTotalPrice;
+@JsonKey(name: 'store_id') int? get storeId;@JsonKey(name: 'store_name') String? get storeName;@JsonKey(name: 'store_logo') String? get storeLogo;@JsonKey(name: 'store_address') String? get storeAddress;@JsonKey(name: 'store_phone') String? get storePhone;@JsonKey(name: 'store_minimum_order') int? get storeMinimumOrder;@JsonKey(name: 'store_delivery_time') String? get storeDeliveryTime;@JsonKey(name: 'items') List<CheckoutCartItem>? get items;@JsonKey(name: 'store_total_items') int? get storeTotalItems;@JsonKey(name: 'store_total_price') double? get storeTotalPrice;
 /// Create a copy of CheckoutCartStore
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -900,7 +900,7 @@ abstract mixin class $CheckoutCartStoreCopyWith<$Res>  {
   factory $CheckoutCartStoreCopyWith(CheckoutCartStore value, $Res Function(CheckoutCartStore) _then) = _$CheckoutCartStoreCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "store_id") int? storeId,@JsonKey(name: "store_name") String? storeName,@JsonKey(name: "store_logo") String? storeLogo,@JsonKey(name: "store_address") String? storeAddress,@JsonKey(name: "store_phone") String? storePhone,@JsonKey(name: "store_minimum_order") int? storeMinimumOrder,@JsonKey(name: "store_delivery_time") String? storeDeliveryTime,@JsonKey(name: "items") List<CheckoutCartItem>? items,@JsonKey(name: "store_total_items") int? storeTotalItems,@JsonKey(name: "store_total_price") double? storeTotalPrice
+@JsonKey(name: 'store_id') int? storeId,@JsonKey(name: 'store_name') String? storeName,@JsonKey(name: 'store_logo') String? storeLogo,@JsonKey(name: 'store_address') String? storeAddress,@JsonKey(name: 'store_phone') String? storePhone,@JsonKey(name: 'store_minimum_order') int? storeMinimumOrder,@JsonKey(name: 'store_delivery_time') String? storeDeliveryTime,@JsonKey(name: 'items') List<CheckoutCartItem>? items,@JsonKey(name: 'store_total_items') int? storeTotalItems,@JsonKey(name: 'store_total_price') double? storeTotalPrice
 });
 
 
@@ -940,18 +940,18 @@ as double?,
 @JsonSerializable()
 
 class _CheckoutCartStore implements CheckoutCartStore {
-  const _CheckoutCartStore({@JsonKey(name: "store_id") this.storeId, @JsonKey(name: "store_name") this.storeName, @JsonKey(name: "store_logo") this.storeLogo, @JsonKey(name: "store_address") this.storeAddress, @JsonKey(name: "store_phone") this.storePhone, @JsonKey(name: "store_minimum_order") this.storeMinimumOrder, @JsonKey(name: "store_delivery_time") this.storeDeliveryTime, @JsonKey(name: "items") final  List<CheckoutCartItem>? items, @JsonKey(name: "store_total_items") this.storeTotalItems, @JsonKey(name: "store_total_price") this.storeTotalPrice}): _items = items;
+  const _CheckoutCartStore({@JsonKey(name: 'store_id') this.storeId, @JsonKey(name: 'store_name') this.storeName, @JsonKey(name: 'store_logo') this.storeLogo, @JsonKey(name: 'store_address') this.storeAddress, @JsonKey(name: 'store_phone') this.storePhone, @JsonKey(name: 'store_minimum_order') this.storeMinimumOrder, @JsonKey(name: 'store_delivery_time') this.storeDeliveryTime, @JsonKey(name: 'items') final  List<CheckoutCartItem>? items, @JsonKey(name: 'store_total_items') this.storeTotalItems, @JsonKey(name: 'store_total_price') this.storeTotalPrice}): _items = items;
   factory _CheckoutCartStore.fromJson(Map<String, dynamic> json) => _$CheckoutCartStoreFromJson(json);
 
-@override@JsonKey(name: "store_id") final  int? storeId;
-@override@JsonKey(name: "store_name") final  String? storeName;
-@override@JsonKey(name: "store_logo") final  String? storeLogo;
-@override@JsonKey(name: "store_address") final  String? storeAddress;
-@override@JsonKey(name: "store_phone") final  String? storePhone;
-@override@JsonKey(name: "store_minimum_order") final  int? storeMinimumOrder;
-@override@JsonKey(name: "store_delivery_time") final  String? storeDeliveryTime;
+@override@JsonKey(name: 'store_id') final  int? storeId;
+@override@JsonKey(name: 'store_name') final  String? storeName;
+@override@JsonKey(name: 'store_logo') final  String? storeLogo;
+@override@JsonKey(name: 'store_address') final  String? storeAddress;
+@override@JsonKey(name: 'store_phone') final  String? storePhone;
+@override@JsonKey(name: 'store_minimum_order') final  int? storeMinimumOrder;
+@override@JsonKey(name: 'store_delivery_time') final  String? storeDeliveryTime;
  final  List<CheckoutCartItem>? _items;
-@override@JsonKey(name: "items") List<CheckoutCartItem>? get items {
+@override@JsonKey(name: 'items') List<CheckoutCartItem>? get items {
   final value = _items;
   if (value == null) return null;
   if (_items is EqualUnmodifiableListView) return _items;
@@ -959,8 +959,8 @@ class _CheckoutCartStore implements CheckoutCartStore {
   return EqualUnmodifiableListView(value);
 }
 
-@override@JsonKey(name: "store_total_items") final  int? storeTotalItems;
-@override@JsonKey(name: "store_total_price") final  double? storeTotalPrice;
+@override@JsonKey(name: 'store_total_items') final  int? storeTotalItems;
+@override@JsonKey(name: 'store_total_price') final  double? storeTotalPrice;
 
 /// Create a copy of CheckoutCartStore
 /// with the given fields replaced by the non-null parameter values.
@@ -995,7 +995,7 @@ abstract mixin class _$CheckoutCartStoreCopyWith<$Res> implements $CheckoutCartS
   factory _$CheckoutCartStoreCopyWith(_CheckoutCartStore value, $Res Function(_CheckoutCartStore) _then) = __$CheckoutCartStoreCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "store_id") int? storeId,@JsonKey(name: "store_name") String? storeName,@JsonKey(name: "store_logo") String? storeLogo,@JsonKey(name: "store_address") String? storeAddress,@JsonKey(name: "store_phone") String? storePhone,@JsonKey(name: "store_minimum_order") int? storeMinimumOrder,@JsonKey(name: "store_delivery_time") String? storeDeliveryTime,@JsonKey(name: "items") List<CheckoutCartItem>? items,@JsonKey(name: "store_total_items") int? storeTotalItems,@JsonKey(name: "store_total_price") double? storeTotalPrice
+@JsonKey(name: 'store_id') int? storeId,@JsonKey(name: 'store_name') String? storeName,@JsonKey(name: 'store_logo') String? storeLogo,@JsonKey(name: 'store_address') String? storeAddress,@JsonKey(name: 'store_phone') String? storePhone,@JsonKey(name: 'store_minimum_order') int? storeMinimumOrder,@JsonKey(name: 'store_delivery_time') String? storeDeliveryTime,@JsonKey(name: 'items') List<CheckoutCartItem>? items,@JsonKey(name: 'store_total_items') int? storeTotalItems,@JsonKey(name: 'store_total_price') double? storeTotalPrice
 });
 
 
@@ -1035,7 +1035,7 @@ as double?,
 /// @nodoc
 mixin _$CheckoutCartItem {
 
-@JsonKey(name: "cart_id") int? get cartId;@JsonKey(name: "item_id") int? get itemId;@JsonKey(name: "item_type") String? get itemType;@JsonKey(name: "item_name") String? get itemName;@JsonKey(name: "item_image") String? get itemImage;@JsonKey(name: "item_price") double? get itemPrice;@JsonKey(name: "item_original_price") double? get itemOriginalPrice;@JsonKey(name: "item_discount") int? get itemDiscount;@JsonKey(name: "item_discount_type") String? get itemDiscountType;@JsonKey(name: "item_quantity") int? get itemQuantity;@JsonKey(name: "item_total_price") double? get itemTotalPrice;@JsonKey(name: "item_variation") List<CheckoutCartItemVariation>? get itemVariation;@JsonKey(name: "item_add_ons") List<dynamic>? get itemAddOns;@JsonKey(name: "item_add_on_quantities") List<dynamic>? get itemAddOnQuantities;@JsonKey(name: "item_description") String? get itemDescription;@JsonKey(name: "item_category") CheckoutCartItemCategory? get itemCategory;@JsonKey(name: "item_available") int? get itemAvailable;@JsonKey(name: "item_maximum_cart_quantity") dynamic get itemMaximumCartQuantity;@JsonKey(name: "is_favorite") bool? get isFavorite;
+@JsonKey(name: 'cart_id') int? get cartId;@JsonKey(name: 'item_id') int? get itemId;@JsonKey(name: 'item_type') String? get itemType;@JsonKey(name: 'item_name') String? get itemName;@JsonKey(name: 'item_image') String? get itemImage;@JsonKey(name: 'item_price') double? get itemPrice;@JsonKey(name: 'item_original_price') double? get itemOriginalPrice;@JsonKey(name: 'item_discount') int? get itemDiscount;@JsonKey(name: 'item_discount_type') String? get itemDiscountType;@JsonKey(name: 'item_quantity') int? get itemQuantity;@JsonKey(name: 'item_total_price') double? get itemTotalPrice;@JsonKey(name: 'item_variation') List<CheckoutCartItemVariation>? get itemVariation;@JsonKey(name: 'item_add_ons') List<dynamic>? get itemAddOns;@JsonKey(name: 'item_add_on_quantities') List<dynamic>? get itemAddOnQuantities;@JsonKey(name: 'item_description') String? get itemDescription;@JsonKey(name: 'item_category') CheckoutCartItemCategory? get itemCategory;@JsonKey(name: 'item_available') int? get itemAvailable;@JsonKey(name: 'item_maximum_cart_quantity') dynamic get itemMaximumCartQuantity;@JsonKey(name: 'is_favorite') bool? get isFavorite;
 /// Create a copy of CheckoutCartItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1068,7 +1068,7 @@ abstract mixin class $CheckoutCartItemCopyWith<$Res>  {
   factory $CheckoutCartItemCopyWith(CheckoutCartItem value, $Res Function(CheckoutCartItem) _then) = _$CheckoutCartItemCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "cart_id") int? cartId,@JsonKey(name: "item_id") int? itemId,@JsonKey(name: "item_type") String? itemType,@JsonKey(name: "item_name") String? itemName,@JsonKey(name: "item_image") String? itemImage,@JsonKey(name: "item_price") double? itemPrice,@JsonKey(name: "item_original_price") double? itemOriginalPrice,@JsonKey(name: "item_discount") int? itemDiscount,@JsonKey(name: "item_discount_type") String? itemDiscountType,@JsonKey(name: "item_quantity") int? itemQuantity,@JsonKey(name: "item_total_price") double? itemTotalPrice,@JsonKey(name: "item_variation") List<CheckoutCartItemVariation>? itemVariation,@JsonKey(name: "item_add_ons") List<dynamic>? itemAddOns,@JsonKey(name: "item_add_on_quantities") List<dynamic>? itemAddOnQuantities,@JsonKey(name: "item_description") String? itemDescription,@JsonKey(name: "item_category") CheckoutCartItemCategory? itemCategory,@JsonKey(name: "item_available") int? itemAvailable,@JsonKey(name: "item_maximum_cart_quantity") dynamic itemMaximumCartQuantity,@JsonKey(name: "is_favorite") bool? isFavorite
+@JsonKey(name: 'cart_id') int? cartId,@JsonKey(name: 'item_id') int? itemId,@JsonKey(name: 'item_type') String? itemType,@JsonKey(name: 'item_name') String? itemName,@JsonKey(name: 'item_image') String? itemImage,@JsonKey(name: 'item_price') double? itemPrice,@JsonKey(name: 'item_original_price') double? itemOriginalPrice,@JsonKey(name: 'item_discount') int? itemDiscount,@JsonKey(name: 'item_discount_type') String? itemDiscountType,@JsonKey(name: 'item_quantity') int? itemQuantity,@JsonKey(name: 'item_total_price') double? itemTotalPrice,@JsonKey(name: 'item_variation') List<CheckoutCartItemVariation>? itemVariation,@JsonKey(name: 'item_add_ons') List<dynamic>? itemAddOns,@JsonKey(name: 'item_add_on_quantities') List<dynamic>? itemAddOnQuantities,@JsonKey(name: 'item_description') String? itemDescription,@JsonKey(name: 'item_category') CheckoutCartItemCategory? itemCategory,@JsonKey(name: 'item_available') int? itemAvailable,@JsonKey(name: 'item_maximum_cart_quantity') dynamic itemMaximumCartQuantity,@JsonKey(name: 'is_favorite') bool? isFavorite
 });
 
 
@@ -1129,22 +1129,22 @@ $CheckoutCartItemCategoryCopyWith<$Res>? get itemCategory {
 @JsonSerializable()
 
 class _CheckoutCartItem implements CheckoutCartItem {
-  const _CheckoutCartItem({@JsonKey(name: "cart_id") this.cartId, @JsonKey(name: "item_id") this.itemId, @JsonKey(name: "item_type") this.itemType, @JsonKey(name: "item_name") this.itemName, @JsonKey(name: "item_image") this.itemImage, @JsonKey(name: "item_price") this.itemPrice, @JsonKey(name: "item_original_price") this.itemOriginalPrice, @JsonKey(name: "item_discount") this.itemDiscount, @JsonKey(name: "item_discount_type") this.itemDiscountType, @JsonKey(name: "item_quantity") this.itemQuantity, @JsonKey(name: "item_total_price") this.itemTotalPrice, @JsonKey(name: "item_variation") final  List<CheckoutCartItemVariation>? itemVariation, @JsonKey(name: "item_add_ons") final  List<dynamic>? itemAddOns, @JsonKey(name: "item_add_on_quantities") final  List<dynamic>? itemAddOnQuantities, @JsonKey(name: "item_description") this.itemDescription, @JsonKey(name: "item_category") this.itemCategory, @JsonKey(name: "item_available") this.itemAvailable, @JsonKey(name: "item_maximum_cart_quantity") this.itemMaximumCartQuantity, @JsonKey(name: "is_favorite") this.isFavorite}): _itemVariation = itemVariation,_itemAddOns = itemAddOns,_itemAddOnQuantities = itemAddOnQuantities;
+  const _CheckoutCartItem({@JsonKey(name: 'cart_id') this.cartId, @JsonKey(name: 'item_id') this.itemId, @JsonKey(name: 'item_type') this.itemType, @JsonKey(name: 'item_name') this.itemName, @JsonKey(name: 'item_image') this.itemImage, @JsonKey(name: 'item_price') this.itemPrice, @JsonKey(name: 'item_original_price') this.itemOriginalPrice, @JsonKey(name: 'item_discount') this.itemDiscount, @JsonKey(name: 'item_discount_type') this.itemDiscountType, @JsonKey(name: 'item_quantity') this.itemQuantity, @JsonKey(name: 'item_total_price') this.itemTotalPrice, @JsonKey(name: 'item_variation') final  List<CheckoutCartItemVariation>? itemVariation, @JsonKey(name: 'item_add_ons') final  List<dynamic>? itemAddOns, @JsonKey(name: 'item_add_on_quantities') final  List<dynamic>? itemAddOnQuantities, @JsonKey(name: 'item_description') this.itemDescription, @JsonKey(name: 'item_category') this.itemCategory, @JsonKey(name: 'item_available') this.itemAvailable, @JsonKey(name: 'item_maximum_cart_quantity') this.itemMaximumCartQuantity, @JsonKey(name: 'is_favorite') this.isFavorite}): _itemVariation = itemVariation,_itemAddOns = itemAddOns,_itemAddOnQuantities = itemAddOnQuantities;
   factory _CheckoutCartItem.fromJson(Map<String, dynamic> json) => _$CheckoutCartItemFromJson(json);
 
-@override@JsonKey(name: "cart_id") final  int? cartId;
-@override@JsonKey(name: "item_id") final  int? itemId;
-@override@JsonKey(name: "item_type") final  String? itemType;
-@override@JsonKey(name: "item_name") final  String? itemName;
-@override@JsonKey(name: "item_image") final  String? itemImage;
-@override@JsonKey(name: "item_price") final  double? itemPrice;
-@override@JsonKey(name: "item_original_price") final  double? itemOriginalPrice;
-@override@JsonKey(name: "item_discount") final  int? itemDiscount;
-@override@JsonKey(name: "item_discount_type") final  String? itemDiscountType;
-@override@JsonKey(name: "item_quantity") final  int? itemQuantity;
-@override@JsonKey(name: "item_total_price") final  double? itemTotalPrice;
+@override@JsonKey(name: 'cart_id') final  int? cartId;
+@override@JsonKey(name: 'item_id') final  int? itemId;
+@override@JsonKey(name: 'item_type') final  String? itemType;
+@override@JsonKey(name: 'item_name') final  String? itemName;
+@override@JsonKey(name: 'item_image') final  String? itemImage;
+@override@JsonKey(name: 'item_price') final  double? itemPrice;
+@override@JsonKey(name: 'item_original_price') final  double? itemOriginalPrice;
+@override@JsonKey(name: 'item_discount') final  int? itemDiscount;
+@override@JsonKey(name: 'item_discount_type') final  String? itemDiscountType;
+@override@JsonKey(name: 'item_quantity') final  int? itemQuantity;
+@override@JsonKey(name: 'item_total_price') final  double? itemTotalPrice;
  final  List<CheckoutCartItemVariation>? _itemVariation;
-@override@JsonKey(name: "item_variation") List<CheckoutCartItemVariation>? get itemVariation {
+@override@JsonKey(name: 'item_variation') List<CheckoutCartItemVariation>? get itemVariation {
   final value = _itemVariation;
   if (value == null) return null;
   if (_itemVariation is EqualUnmodifiableListView) return _itemVariation;
@@ -1153,7 +1153,7 @@ class _CheckoutCartItem implements CheckoutCartItem {
 }
 
  final  List<dynamic>? _itemAddOns;
-@override@JsonKey(name: "item_add_ons") List<dynamic>? get itemAddOns {
+@override@JsonKey(name: 'item_add_ons') List<dynamic>? get itemAddOns {
   final value = _itemAddOns;
   if (value == null) return null;
   if (_itemAddOns is EqualUnmodifiableListView) return _itemAddOns;
@@ -1162,7 +1162,7 @@ class _CheckoutCartItem implements CheckoutCartItem {
 }
 
  final  List<dynamic>? _itemAddOnQuantities;
-@override@JsonKey(name: "item_add_on_quantities") List<dynamic>? get itemAddOnQuantities {
+@override@JsonKey(name: 'item_add_on_quantities') List<dynamic>? get itemAddOnQuantities {
   final value = _itemAddOnQuantities;
   if (value == null) return null;
   if (_itemAddOnQuantities is EqualUnmodifiableListView) return _itemAddOnQuantities;
@@ -1170,11 +1170,11 @@ class _CheckoutCartItem implements CheckoutCartItem {
   return EqualUnmodifiableListView(value);
 }
 
-@override@JsonKey(name: "item_description") final  String? itemDescription;
-@override@JsonKey(name: "item_category") final  CheckoutCartItemCategory? itemCategory;
-@override@JsonKey(name: "item_available") final  int? itemAvailable;
-@override@JsonKey(name: "item_maximum_cart_quantity") final  dynamic itemMaximumCartQuantity;
-@override@JsonKey(name: "is_favorite") final  bool? isFavorite;
+@override@JsonKey(name: 'item_description') final  String? itemDescription;
+@override@JsonKey(name: 'item_category') final  CheckoutCartItemCategory? itemCategory;
+@override@JsonKey(name: 'item_available') final  int? itemAvailable;
+@override@JsonKey(name: 'item_maximum_cart_quantity') final  dynamic itemMaximumCartQuantity;
+@override@JsonKey(name: 'is_favorite') final  bool? isFavorite;
 
 /// Create a copy of CheckoutCartItem
 /// with the given fields replaced by the non-null parameter values.
@@ -1209,7 +1209,7 @@ abstract mixin class _$CheckoutCartItemCopyWith<$Res> implements $CheckoutCartIt
   factory _$CheckoutCartItemCopyWith(_CheckoutCartItem value, $Res Function(_CheckoutCartItem) _then) = __$CheckoutCartItemCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "cart_id") int? cartId,@JsonKey(name: "item_id") int? itemId,@JsonKey(name: "item_type") String? itemType,@JsonKey(name: "item_name") String? itemName,@JsonKey(name: "item_image") String? itemImage,@JsonKey(name: "item_price") double? itemPrice,@JsonKey(name: "item_original_price") double? itemOriginalPrice,@JsonKey(name: "item_discount") int? itemDiscount,@JsonKey(name: "item_discount_type") String? itemDiscountType,@JsonKey(name: "item_quantity") int? itemQuantity,@JsonKey(name: "item_total_price") double? itemTotalPrice,@JsonKey(name: "item_variation") List<CheckoutCartItemVariation>? itemVariation,@JsonKey(name: "item_add_ons") List<dynamic>? itemAddOns,@JsonKey(name: "item_add_on_quantities") List<dynamic>? itemAddOnQuantities,@JsonKey(name: "item_description") String? itemDescription,@JsonKey(name: "item_category") CheckoutCartItemCategory? itemCategory,@JsonKey(name: "item_available") int? itemAvailable,@JsonKey(name: "item_maximum_cart_quantity") dynamic itemMaximumCartQuantity,@JsonKey(name: "is_favorite") bool? isFavorite
+@JsonKey(name: 'cart_id') int? cartId,@JsonKey(name: 'item_id') int? itemId,@JsonKey(name: 'item_type') String? itemType,@JsonKey(name: 'item_name') String? itemName,@JsonKey(name: 'item_image') String? itemImage,@JsonKey(name: 'item_price') double? itemPrice,@JsonKey(name: 'item_original_price') double? itemOriginalPrice,@JsonKey(name: 'item_discount') int? itemDiscount,@JsonKey(name: 'item_discount_type') String? itemDiscountType,@JsonKey(name: 'item_quantity') int? itemQuantity,@JsonKey(name: 'item_total_price') double? itemTotalPrice,@JsonKey(name: 'item_variation') List<CheckoutCartItemVariation>? itemVariation,@JsonKey(name: 'item_add_ons') List<dynamic>? itemAddOns,@JsonKey(name: 'item_add_on_quantities') List<dynamic>? itemAddOnQuantities,@JsonKey(name: 'item_description') String? itemDescription,@JsonKey(name: 'item_category') CheckoutCartItemCategory? itemCategory,@JsonKey(name: 'item_available') int? itemAvailable,@JsonKey(name: 'item_maximum_cart_quantity') dynamic itemMaximumCartQuantity,@JsonKey(name: 'is_favorite') bool? isFavorite
 });
 
 
@@ -1270,7 +1270,7 @@ $CheckoutCartItemCategoryCopyWith<$Res>? get itemCategory {
 /// @nodoc
 mixin _$CheckoutCartItemCategory {
 
-@JsonKey(name: "id") int? get id;@JsonKey(name: "name") String? get name;@JsonKey(name: "image") String? get image;@JsonKey(name: "parent_id") int? get parentId;@JsonKey(name: "position") int? get position;@JsonKey(name: "status") int? get status;@JsonKey(name: "created_at") String? get createdAt;@JsonKey(name: "updated_at") String? get updatedAt;@JsonKey(name: "priority") int? get priority;@JsonKey(name: "module_id") int? get moduleId;@JsonKey(name: "slug") String? get slug;@JsonKey(name: "featured") int? get featured;@JsonKey(name: "image_full_url") String? get imageFullUrl;@JsonKey(name: "storage") List<dynamic>? get storage;@JsonKey(name: "translations") List<dynamic>? get translations;
+@JsonKey(name: 'id') int? get id;@JsonKey(name: 'name') String? get name;@JsonKey(name: 'image') String? get image;@JsonKey(name: 'parent_id') int? get parentId;@JsonKey(name: 'position') int? get position;@JsonKey(name: 'status') int? get status;@JsonKey(name: 'created_at') String? get createdAt;@JsonKey(name: 'updated_at') String? get updatedAt;@JsonKey(name: 'priority') int? get priority;@JsonKey(name: 'module_id') int? get moduleId;@JsonKey(name: 'slug') String? get slug;@JsonKey(name: 'featured') int? get featured;@JsonKey(name: 'image_full_url') String? get imageFullUrl;@JsonKey(name: 'storage') List<dynamic>? get storage;@JsonKey(name: 'translations') List<dynamic>? get translations;
 /// Create a copy of CheckoutCartItemCategory
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1303,7 +1303,7 @@ abstract mixin class $CheckoutCartItemCategoryCopyWith<$Res>  {
   factory $CheckoutCartItemCategoryCopyWith(CheckoutCartItemCategory value, $Res Function(CheckoutCartItemCategory) _then) = _$CheckoutCartItemCategoryCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "id") int? id,@JsonKey(name: "name") String? name,@JsonKey(name: "image") String? image,@JsonKey(name: "parent_id") int? parentId,@JsonKey(name: "position") int? position,@JsonKey(name: "status") int? status,@JsonKey(name: "created_at") String? createdAt,@JsonKey(name: "updated_at") String? updatedAt,@JsonKey(name: "priority") int? priority,@JsonKey(name: "module_id") int? moduleId,@JsonKey(name: "slug") String? slug,@JsonKey(name: "featured") int? featured,@JsonKey(name: "image_full_url") String? imageFullUrl,@JsonKey(name: "storage") List<dynamic>? storage,@JsonKey(name: "translations") List<dynamic>? translations
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'name') String? name,@JsonKey(name: 'image') String? image,@JsonKey(name: 'parent_id') int? parentId,@JsonKey(name: 'position') int? position,@JsonKey(name: 'status') int? status,@JsonKey(name: 'created_at') String? createdAt,@JsonKey(name: 'updated_at') String? updatedAt,@JsonKey(name: 'priority') int? priority,@JsonKey(name: 'module_id') int? moduleId,@JsonKey(name: 'slug') String? slug,@JsonKey(name: 'featured') int? featured,@JsonKey(name: 'image_full_url') String? imageFullUrl,@JsonKey(name: 'storage') List<dynamic>? storage,@JsonKey(name: 'translations') List<dynamic>? translations
 });
 
 
@@ -1348,24 +1348,24 @@ as List<dynamic>?,
 @JsonSerializable()
 
 class _CheckoutCartItemCategory implements CheckoutCartItemCategory {
-  const _CheckoutCartItemCategory({@JsonKey(name: "id") this.id, @JsonKey(name: "name") this.name, @JsonKey(name: "image") this.image, @JsonKey(name: "parent_id") this.parentId, @JsonKey(name: "position") this.position, @JsonKey(name: "status") this.status, @JsonKey(name: "created_at") this.createdAt, @JsonKey(name: "updated_at") this.updatedAt, @JsonKey(name: "priority") this.priority, @JsonKey(name: "module_id") this.moduleId, @JsonKey(name: "slug") this.slug, @JsonKey(name: "featured") this.featured, @JsonKey(name: "image_full_url") this.imageFullUrl, @JsonKey(name: "storage") final  List<dynamic>? storage, @JsonKey(name: "translations") final  List<dynamic>? translations}): _storage = storage,_translations = translations;
+  const _CheckoutCartItemCategory({@JsonKey(name: 'id') this.id, @JsonKey(name: 'name') this.name, @JsonKey(name: 'image') this.image, @JsonKey(name: 'parent_id') this.parentId, @JsonKey(name: 'position') this.position, @JsonKey(name: 'status') this.status, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'updated_at') this.updatedAt, @JsonKey(name: 'priority') this.priority, @JsonKey(name: 'module_id') this.moduleId, @JsonKey(name: 'slug') this.slug, @JsonKey(name: 'featured') this.featured, @JsonKey(name: 'image_full_url') this.imageFullUrl, @JsonKey(name: 'storage') final  List<dynamic>? storage, @JsonKey(name: 'translations') final  List<dynamic>? translations}): _storage = storage,_translations = translations;
   factory _CheckoutCartItemCategory.fromJson(Map<String, dynamic> json) => _$CheckoutCartItemCategoryFromJson(json);
 
-@override@JsonKey(name: "id") final  int? id;
-@override@JsonKey(name: "name") final  String? name;
-@override@JsonKey(name: "image") final  String? image;
-@override@JsonKey(name: "parent_id") final  int? parentId;
-@override@JsonKey(name: "position") final  int? position;
-@override@JsonKey(name: "status") final  int? status;
-@override@JsonKey(name: "created_at") final  String? createdAt;
-@override@JsonKey(name: "updated_at") final  String? updatedAt;
-@override@JsonKey(name: "priority") final  int? priority;
-@override@JsonKey(name: "module_id") final  int? moduleId;
-@override@JsonKey(name: "slug") final  String? slug;
-@override@JsonKey(name: "featured") final  int? featured;
-@override@JsonKey(name: "image_full_url") final  String? imageFullUrl;
+@override@JsonKey(name: 'id') final  int? id;
+@override@JsonKey(name: 'name') final  String? name;
+@override@JsonKey(name: 'image') final  String? image;
+@override@JsonKey(name: 'parent_id') final  int? parentId;
+@override@JsonKey(name: 'position') final  int? position;
+@override@JsonKey(name: 'status') final  int? status;
+@override@JsonKey(name: 'created_at') final  String? createdAt;
+@override@JsonKey(name: 'updated_at') final  String? updatedAt;
+@override@JsonKey(name: 'priority') final  int? priority;
+@override@JsonKey(name: 'module_id') final  int? moduleId;
+@override@JsonKey(name: 'slug') final  String? slug;
+@override@JsonKey(name: 'featured') final  int? featured;
+@override@JsonKey(name: 'image_full_url') final  String? imageFullUrl;
  final  List<dynamic>? _storage;
-@override@JsonKey(name: "storage") List<dynamic>? get storage {
+@override@JsonKey(name: 'storage') List<dynamic>? get storage {
   final value = _storage;
   if (value == null) return null;
   if (_storage is EqualUnmodifiableListView) return _storage;
@@ -1374,7 +1374,7 @@ class _CheckoutCartItemCategory implements CheckoutCartItemCategory {
 }
 
  final  List<dynamic>? _translations;
-@override@JsonKey(name: "translations") List<dynamic>? get translations {
+@override@JsonKey(name: 'translations') List<dynamic>? get translations {
   final value = _translations;
   if (value == null) return null;
   if (_translations is EqualUnmodifiableListView) return _translations;
@@ -1416,7 +1416,7 @@ abstract mixin class _$CheckoutCartItemCategoryCopyWith<$Res> implements $Checko
   factory _$CheckoutCartItemCategoryCopyWith(_CheckoutCartItemCategory value, $Res Function(_CheckoutCartItemCategory) _then) = __$CheckoutCartItemCategoryCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "id") int? id,@JsonKey(name: "name") String? name,@JsonKey(name: "image") String? image,@JsonKey(name: "parent_id") int? parentId,@JsonKey(name: "position") int? position,@JsonKey(name: "status") int? status,@JsonKey(name: "created_at") String? createdAt,@JsonKey(name: "updated_at") String? updatedAt,@JsonKey(name: "priority") int? priority,@JsonKey(name: "module_id") int? moduleId,@JsonKey(name: "slug") String? slug,@JsonKey(name: "featured") int? featured,@JsonKey(name: "image_full_url") String? imageFullUrl,@JsonKey(name: "storage") List<dynamic>? storage,@JsonKey(name: "translations") List<dynamic>? translations
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'name') String? name,@JsonKey(name: 'image') String? image,@JsonKey(name: 'parent_id') int? parentId,@JsonKey(name: 'position') int? position,@JsonKey(name: 'status') int? status,@JsonKey(name: 'created_at') String? createdAt,@JsonKey(name: 'updated_at') String? updatedAt,@JsonKey(name: 'priority') int? priority,@JsonKey(name: 'module_id') int? moduleId,@JsonKey(name: 'slug') String? slug,@JsonKey(name: 'featured') int? featured,@JsonKey(name: 'image_full_url') String? imageFullUrl,@JsonKey(name: 'storage') List<dynamic>? storage,@JsonKey(name: 'translations') List<dynamic>? translations
 });
 
 
@@ -1461,7 +1461,7 @@ as List<dynamic>?,
 /// @nodoc
 mixin _$CheckoutCartItemVariation {
 
-@JsonKey(name: "name") String? get name;@JsonKey(name: "values") List<CheckoutCartItemValue>? get values;@JsonKey(name: "type") String? get type;
+@JsonKey(name: 'name') String? get name;@JsonKey(name: 'values') List<CheckoutCartItemValue>? get values;@JsonKey(name: 'type') String? get type;
 /// Create a copy of CheckoutCartItemVariation
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1494,7 +1494,7 @@ abstract mixin class $CheckoutCartItemVariationCopyWith<$Res>  {
   factory $CheckoutCartItemVariationCopyWith(CheckoutCartItemVariation value, $Res Function(CheckoutCartItemVariation) _then) = _$CheckoutCartItemVariationCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "name") String? name,@JsonKey(name: "values") List<CheckoutCartItemValue>? values,@JsonKey(name: "type") String? type
+@JsonKey(name: 'name') String? name,@JsonKey(name: 'values') List<CheckoutCartItemValue>? values,@JsonKey(name: 'type') String? type
 });
 
 
@@ -1527,12 +1527,12 @@ as String?,
 @JsonSerializable()
 
 class _CheckoutCartItemVariation implements CheckoutCartItemVariation {
-  const _CheckoutCartItemVariation({@JsonKey(name: "name") this.name, @JsonKey(name: "values") final  List<CheckoutCartItemValue>? values, @JsonKey(name: "type") this.type}): _values = values;
+  const _CheckoutCartItemVariation({@JsonKey(name: 'name') this.name, @JsonKey(name: 'values') final  List<CheckoutCartItemValue>? values, @JsonKey(name: 'type') this.type}): _values = values;
   factory _CheckoutCartItemVariation.fromJson(Map<String, dynamic> json) => _$CheckoutCartItemVariationFromJson(json);
 
-@override@JsonKey(name: "name") final  String? name;
+@override@JsonKey(name: 'name') final  String? name;
  final  List<CheckoutCartItemValue>? _values;
-@override@JsonKey(name: "values") List<CheckoutCartItemValue>? get values {
+@override@JsonKey(name: 'values') List<CheckoutCartItemValue>? get values {
   final value = _values;
   if (value == null) return null;
   if (_values is EqualUnmodifiableListView) return _values;
@@ -1540,7 +1540,7 @@ class _CheckoutCartItemVariation implements CheckoutCartItemVariation {
   return EqualUnmodifiableListView(value);
 }
 
-@override@JsonKey(name: "type") final  String? type;
+@override@JsonKey(name: 'type') final  String? type;
 
 /// Create a copy of CheckoutCartItemVariation
 /// with the given fields replaced by the non-null parameter values.
@@ -1575,7 +1575,7 @@ abstract mixin class _$CheckoutCartItemVariationCopyWith<$Res> implements $Check
   factory _$CheckoutCartItemVariationCopyWith(_CheckoutCartItemVariation value, $Res Function(_CheckoutCartItemVariation) _then) = __$CheckoutCartItemVariationCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "name") String? name,@JsonKey(name: "values") List<CheckoutCartItemValue>? values,@JsonKey(name: "type") String? type
+@JsonKey(name: 'name') String? name,@JsonKey(name: 'values') List<CheckoutCartItemValue>? values,@JsonKey(name: 'type') String? type
 });
 
 
@@ -1608,7 +1608,7 @@ as String?,
 /// @nodoc
 mixin _$CheckoutCartItemValue {
 
-@JsonKey(name: "label") String? get label;
+@JsonKey(name: 'label') String? get label;
 /// Create a copy of CheckoutCartItemValue
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1641,7 +1641,7 @@ abstract mixin class $CheckoutCartItemValueCopyWith<$Res>  {
   factory $CheckoutCartItemValueCopyWith(CheckoutCartItemValue value, $Res Function(CheckoutCartItemValue) _then) = _$CheckoutCartItemValueCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "label") String? label
+@JsonKey(name: 'label') String? label
 });
 
 
@@ -1672,10 +1672,10 @@ as String?,
 @JsonSerializable()
 
 class _CheckoutCartItemValue implements CheckoutCartItemValue {
-  const _CheckoutCartItemValue({@JsonKey(name: "label") this.label});
+  const _CheckoutCartItemValue({@JsonKey(name: 'label') this.label});
   factory _CheckoutCartItemValue.fromJson(Map<String, dynamic> json) => _$CheckoutCartItemValueFromJson(json);
 
-@override@JsonKey(name: "label") final  String? label;
+@override@JsonKey(name: 'label') final  String? label;
 
 /// Create a copy of CheckoutCartItemValue
 /// with the given fields replaced by the non-null parameter values.
@@ -1710,7 +1710,7 @@ abstract mixin class _$CheckoutCartItemValueCopyWith<$Res> implements $CheckoutC
   factory _$CheckoutCartItemValueCopyWith(_CheckoutCartItemValue value, $Res Function(_CheckoutCartItemValue) _then) = __$CheckoutCartItemValueCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "label") String? label
+@JsonKey(name: 'label') String? label
 });
 
 
@@ -1741,7 +1741,7 @@ as String?,
 /// @nodoc
 mixin _$CheckoutCartSummary {
 
-@JsonKey(name: "total_stores") int? get totalStores;@JsonKey(name: "total_items") int? get totalItems;@JsonKey(name: "total_price") double? get totalPrice;
+@JsonKey(name: 'total_stores') int? get totalStores;@JsonKey(name: 'total_items') int? get totalItems;@JsonKey(name: 'total_price') double? get totalPrice;
 /// Create a copy of CheckoutCartSummary
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1774,7 +1774,7 @@ abstract mixin class $CheckoutCartSummaryCopyWith<$Res>  {
   factory $CheckoutCartSummaryCopyWith(CheckoutCartSummary value, $Res Function(CheckoutCartSummary) _then) = _$CheckoutCartSummaryCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "total_stores") int? totalStores,@JsonKey(name: "total_items") int? totalItems,@JsonKey(name: "total_price") double? totalPrice
+@JsonKey(name: 'total_stores') int? totalStores,@JsonKey(name: 'total_items') int? totalItems,@JsonKey(name: 'total_price') double? totalPrice
 });
 
 
@@ -1807,12 +1807,12 @@ as double?,
 @JsonSerializable()
 
 class _CheckoutCartSummary implements CheckoutCartSummary {
-  const _CheckoutCartSummary({@JsonKey(name: "total_stores") this.totalStores, @JsonKey(name: "total_items") this.totalItems, @JsonKey(name: "total_price") this.totalPrice});
+  const _CheckoutCartSummary({@JsonKey(name: 'total_stores') this.totalStores, @JsonKey(name: 'total_items') this.totalItems, @JsonKey(name: 'total_price') this.totalPrice});
   factory _CheckoutCartSummary.fromJson(Map<String, dynamic> json) => _$CheckoutCartSummaryFromJson(json);
 
-@override@JsonKey(name: "total_stores") final  int? totalStores;
-@override@JsonKey(name: "total_items") final  int? totalItems;
-@override@JsonKey(name: "total_price") final  double? totalPrice;
+@override@JsonKey(name: 'total_stores') final  int? totalStores;
+@override@JsonKey(name: 'total_items') final  int? totalItems;
+@override@JsonKey(name: 'total_price') final  double? totalPrice;
 
 /// Create a copy of CheckoutCartSummary
 /// with the given fields replaced by the non-null parameter values.
@@ -1847,7 +1847,7 @@ abstract mixin class _$CheckoutCartSummaryCopyWith<$Res> implements $CheckoutCar
   factory _$CheckoutCartSummaryCopyWith(_CheckoutCartSummary value, $Res Function(_CheckoutCartSummary) _then) = __$CheckoutCartSummaryCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "total_stores") int? totalStores,@JsonKey(name: "total_items") int? totalItems,@JsonKey(name: "total_price") double? totalPrice
+@JsonKey(name: 'total_stores') int? totalStores,@JsonKey(name: 'total_items') int? totalItems,@JsonKey(name: 'total_price') double? totalPrice
 });
 
 

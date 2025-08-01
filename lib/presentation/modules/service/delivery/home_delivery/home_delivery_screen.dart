@@ -6,14 +6,14 @@ import 'package:sixam_mart_user/presentation/modules/service/delivery/components
 import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_status_card.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
-import 'home_delivery_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/home_delivery/home_delivery_controller.dart';
 
 class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
   const HomeDeliveryScreen({super.key});
 
   @override
   @protected
-  Color? get unSafeAreaColor => Color(0xFF5856D7);
+  Color? get unSafeAreaColor => const Color(0xFF5856D7);
 
   @override
   Widget buildScreen(BuildContext context) {
@@ -31,8 +31,8 @@ class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Delivery", style: inter(18, FontWeight.w500, Colors.white)),
-                  Icon(Icons.notifications_none, color: Colors.white, size: 24),
+                  Text('Delivery', style: inter(18, FontWeight.w500, Colors.white)),
+                  const Icon(Icons.notifications_none, color: Colors.white, size: 24),
                 ],
               ),
             ),
@@ -50,7 +50,7 @@ class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
                       onTap: () => Get.toNamed(AppRoutes.boxDelivery),
                     ),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Expanded(
                     child: ServiceCard(
                       svgAsset: 'assets/icons/ic_delivery_tracking.svg',
@@ -76,8 +76,8 @@ class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Recent Delivery", style: inter(18, FontWeight.w500, const Color(0xFF161A1D))),
-                  Icon(Icons.arrow_forward_ios, size: 18, color: Colors.black),
+                  Text('Recent Delivery', style: inter(18, FontWeight.w500, const Color(0xFF161A1D))),
+                  const Icon(Icons.arrow_forward_ios, size: 18, color: Colors.black),
                 ],
               ),
             ),
@@ -86,14 +86,14 @@ class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
               child: Obx(
                 () => ListView.builder(
                   itemCount: controller.deliveries.length,
-                  padding: EdgeInsets.only(top: 8, bottom: 94),
+                  padding: const EdgeInsets.only(top: 8, bottom: 94),
                   itemBuilder: (context, index) {
                     final delivery = controller.deliveries[index];
                     return GestureDetector(
                       onTap: () {
                         controller.selectDelivery(delivery);
                       },
-                      child: DeliveryItem(code: delivery["code"], date: delivery["date"], status: delivery["status"], statusColor: delivery["statusColor"]),
+                      child: DeliveryItem(code: delivery['code'], date: delivery['date'], status: delivery['status'], statusColor: delivery['statusColor']),
                     );
                   },
                 ),

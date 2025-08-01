@@ -104,7 +104,7 @@ class SignUpController extends BaseController {
         return;
       }
 
-      bool isEmailMethod = currentMethod.value == SignUpMethod.email;
+      final bool isEmailMethod = currentMethod.value == SignUpMethod.email;
       isLoading.value = true;
 
       final birthday = _getBirthdayFromInputs();
@@ -129,7 +129,7 @@ class SignUpController extends BaseController {
 
           // Successfully signed up, but don't save tokens yet
           // User must accept TOS first before being fully authenticated
-          Get.offAll(() => AcceptTos());
+          Get.offAll(() => const AcceptTos());
           isLoading.value = false;
 
         case Failure(:final error):

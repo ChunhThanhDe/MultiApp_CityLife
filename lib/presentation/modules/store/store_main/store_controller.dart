@@ -3,9 +3,8 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/domain/enums/service_type.dart';
-import 'package:sixam_mart_user/domain/models/response/get_store_info_food_response.dart';
-import 'package:sixam_mart_user/domain/models/response/get_store_info_grocery_response.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_info_response.dart';
+import 'package:sixam_mart_user/domain/models/response/get_store_infomation_response.dart';
 import 'package:sixam_mart_user/domain/repositories/store_repository.dart';
 
 enum FilterType {
@@ -20,15 +19,6 @@ enum FilterType {
 }
 
 class ProductItem {
-  final int id;
-  final String name;
-  final String price;
-  final String imageUrl;
-  final List<FilterType> categories;
-  final List<StoreServiceType> availableServices;
-  final double rating;
-  final int reviewCount;
-
   ProductItem({
     required this.id,
     required this.name,
@@ -39,21 +29,24 @@ class ProductItem {
     this.categories = const [FilterType.foods],
     this.availableServices = const [StoreServiceType.inStore],
   });
+  final int id;
+  final String name;
+  final double price;
+  final String imageUrl;
+  final List<FilterType> categories;
+  final List<StoreServiceType> availableServices;
+  final double rating;
+  final int reviewCount;
 }
 
 class StoreController extends BaseController with GetSingleTickerProviderStateMixin {
+  StoreController({required this.storeType, required this.storeId});
   final StoreRepository _storeRepository = Get.find<StoreRepository>();
 
   late TabController serviceTabController;
 
-  final StoreType storeType;
+  final String storeType;
   final int storeId;
-
-  StoreController({required this.storeType, required this.storeId});
-
-  /// State
-  @override
-  final RxBool isLoading = true.obs;
   FilterType _selectedFilter = FilterType.all;
   StoreServiceType _selectedService = StoreServiceType.inStore;
 
@@ -61,8 +54,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
   StoreServiceType get selectedService => _selectedService;
 
   /// Responses
-  final Rx<StoreInfoFoodResponse?> foodResponse = Rx<StoreInfoFoodResponse?>(null);
-  final Rx<StoreInfoGroceryResponse?> groceryResponse = Rx<StoreInfoGroceryResponse?>(null);
+  final Rx<StoreInfomationResponse?> storeResponse = Rx<StoreInfomationResponse?>(null);
   final Rx<StoreInfoResponse?> generalResponse = Rx<StoreInfoResponse?>(null);
   final Rx<StoreDetail?> storeInfo = Rx<StoreDetail?>(null);
 
@@ -76,7 +68,7 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
   @override
   void onInit() {
     super.onInit();
-    serviceTabController = TabController(length: 3, vsync: this);
+    serviceTabController = TabController(length: StoreServiceType.values.length, vsync: this);
     loadStoreDetail();
 
     serviceTabController.addListener(() {
@@ -95,93 +87,123 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
   Future<void> loadStoreDetail() async {
     isLoading.value = true;
 
-    final result = await _storeRepository.getStoreDetail(storeId: storeId, storeType: storeType);
+    final result = await _storeRepository.getStoreInformation(storeType, storeId);
 
     try {
       switch (result) {
         case Success(:final response):
-          switch (storeType) {
-            case StoreType.food:
-              final data = StoreInfoFoodResponse.fromJson(response.data);
-              foodResponse.value = data;
+          // Handle merged store information response
+          if (storeType == 'food' || storeType == 'grocery' || storeType == 'pharmacy') {
+            final data = StoreInfomationResponse.fromJson(response.data);
+            storeResponse.value = data;
+
+            // Set store info based on available data
+            if (data.store != null) {
               storeInfo.value = data.store;
+            } else if (data.groceryStore != null) {
+              // Convert GroceryStore to StoreDetail if needed
+              storeInfo.value = StoreDetail(
+                id: data.groceryStore?.id,
+                name: data.groceryStore?.name,
+                logoUrl: data.groceryStore?.logoUrl,
+                coverPhotoUrl: data.groceryStore?.coverPhotoUrl,
+                rating: 0.0, // Default rating for grocery stores
+                reviewCount: 0, // Default review count for grocery stores
+                services: null,
+              );
+            }
 
-              print('🍔 [Food] API sections: ${data.sections.length}');
-              print('🍔 [Food] API popular items: ${data.popularItems.length}');
-
-              _popularItems.value = data.popularItems
+            // Handle popular items (food stores)
+            if (data.popularItems != null) {
+              _popularItems.value = data.popularItems!
                   .map(
                     (e) => ProductItem(
-                      id: e.id,
-                      name: e.name,
-                      price: e.price.toString(),
-                      imageUrl: e.imageUrl,
-                      rating: e.avgRating,
-                      reviewCount: e.ratingCount,
+                      id: e.id ?? 0,
+                      name: e.name ?? '',
+                      price: e.price?.toDouble() ?? 0.0,
+                      imageUrl: e.imageUrl ?? '',
+                      rating: e.avgRating ?? 0.0,
+                      reviewCount: e.ratingCount ?? 0,
                       categories: [FilterType.foods],
                       availableServices: StoreServiceType.values,
                     ),
                   )
                   .toList();
+            }
 
+            // Handle sections (food stores)
+            if (data.sections != null) {
               _categories.value = {
-                for (var section in data.sections)
-                  section.categoryName: section.items
+                for (final section in data.sections!)
+                  section.categoryName ?? 'Unknown': (section.items ?? [])
                       .map(
                         (e) => ProductItem(
-                          id: e.id,
-                          name: e.name,
-                          price: e.price.toString(),
-                          imageUrl: e.imageUrl,
-                          rating: e.avgRating,
-                          reviewCount: e.ratingCount,
+                          id: e.id ?? 0,
+                          name: e.name ?? '',
+                          price: e.price?.toDouble() ?? 0.0,
+                          imageUrl: e.imageUrl ?? '',
+                          rating: e.avgRating ?? 0.0,
+                          reviewCount: e.ratingCount ?? 0,
                           categories: [FilterType.foods],
                           availableServices: StoreServiceType.values,
                         ),
                       )
                       .toList(),
               };
+            }
 
-              // Gán thông tin store vào storeInfo
-
-              print('🍔 [Food] Controller popularItems.length: ${_popularItems.length}');
-              print('🍔 [Food] Controller categories: ${_categories.keys}');
-              break;
-
-            case StoreType.grocery:
-              final data = StoreInfoGroceryResponse.fromJson(response.data);
-              groceryResponse.value = data;
-
+            // Handle grocery sections
+            if (data.grocerySections != null) {
               _categories.value = {
-                for (var section in data.sections)
-                  section.categoryId.toString(): section.items
+                for (final section in data.grocerySections!)
+                  section.categoryId?.toString() ?? 'Unknown': (section.items ?? [])
                       .map(
                         (e) => ProductItem(
-                          id: e.id,
-                          name: e.name,
-                          price: e.price.toString(),
-                          imageUrl: e.imageUrl,
-                          rating: e.avgRating,
-                          reviewCount: e.ratingCount,
+                          id: e.id ?? 0,
+                          name: e.name ?? '',
+                          price: e.price?.toDouble() ?? 0.0,
+                          imageUrl: e.imageUrl ?? '',
+                          rating: e.avgRating ?? 0.0,
+                          reviewCount: e.ratingCount ?? 0,
                           categories: [FilterType.foods],
                           availableServices: StoreServiceType.values,
                         ),
                       )
                       .toList(),
               };
+            }
+          } else if (storeType == 'general') {
+            final data = StoreInfoResponse.fromJson(response.data);
+            generalResponse.value = data;
 
-              print('🛒 [Grocery] Controller categories: ${_categories.keys}');
-              break;
+            _categories.value = {
+              for (final menu in data.menu)
+                menu.categoryName: menu.items
+                    .map(
+                      (e) => ProductItem(
+                        id: e.id,
+                        name: e.name,
+                        price: e.price.toDouble(), // Convert int to double
+                        imageUrl: e.imageUrl,
+                        rating: e.avgRating,
+                        reviewCount: e.ratingCount,
+                        categories: [FilterType.foods],
+                        availableServices: StoreServiceType.values,
+                      ),
+                    )
+                    .toList(),
+            };
+          } else if (storeType == 'reviews') {
+            return;
           }
           break;
 
-        case Failure(:final error):
+        case Failure():
           Get.snackbar('Error', 'Load store detail failed');
           break;
       }
     } finally {
       isLoading.value = false;
-      print('🔄 Load complete. isLoading: ${isLoading.value}');
     }
   }
 

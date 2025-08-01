@@ -8,14 +8,14 @@ import 'package:sixam_mart_user/domain/models/response/get_product_detail_respon
 import 'package:sixam_mart_user/domain/repositories/cart_repository.dart';
 
 class CartService extends GetxService {
+
+  CartService(this._cartRepository);
   final CartRepository _cartRepository;
 
   // Reactive state variables for new store-grouped structure
   final storesInCart = <GetCartListStore>[].obs;
   final cartSummary = Rxn<GetCartListSummary>();
   final isLoading = false.obs;
-
-  CartService(this._cartRepository);
 
   @override
   void onInit() {
@@ -232,8 +232,8 @@ class CartService extends GetxService {
       }
     }
 
-    if (product.choiceOptions != null && product.choiceOptions!.isNotEmpty) {
-      for (final choice in product.choiceOptions!) {
+    if (product.choiceOptions.isNotEmpty) {
+      for (final choice in product.choiceOptions) {
         final selected = selectedOptions[choice.name];
         if (selected != null) {
           variations.add(CartVariation(name: choice.name, values: {'label': selected}));

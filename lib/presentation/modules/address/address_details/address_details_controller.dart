@@ -6,12 +6,11 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
-
-import '../search_address/search_address_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/address/search_address/search_address_controller.dart';
 
 class AddressDetailsController extends BaseController {
-  final SearchItem searchItem;
   AddressDetailsController({required this.searchItem});
+  final SearchItem searchItem;
 
   final TextEditingController buildingNumberController = TextEditingController();
   final TextEditingController buildingNameController = TextEditingController();
@@ -22,7 +21,7 @@ class AddressDetailsController extends BaseController {
 
   final Completer<GoogleMapController> mapController = Completer<GoogleMapController>();
 
-  final CameraPosition googlePlex = CameraPosition(target: LatLng(21.028511, 105.804817), zoom: 14.4746);
+  static const CameraPosition googlePlex = CameraPosition(target: LatLng(21.028511, 105.804817), zoom: 14.4746);
 
   final deliveryOptions = [
     (title: 'Hand it to me', icon: Assets.icons.icCourierHands.svg()),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
-import 'package:sixam_mart_user/domain/enums/service_type.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/service_filter.dart';
 import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
@@ -23,10 +22,18 @@ class ServiceHeader extends GetView<ServiceController> {
             decoration: BoxDecoration(color: AppColors.stateBrandDefault500),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [SizedBox(height: 54), _buildTopBar(), SizedBox(height: 16), _buildSearchBar(context), SizedBox(height: 16), _buildDeliveryAddress(), SizedBox(height: 16)],
+              children: [
+                const SizedBox(height: 54),
+                _buildTopBar(),
+                const SizedBox(height: 16),
+                _buildSearchBar(context),
+                const SizedBox(height: 16),
+                _buildDeliveryAddress(),
+                const SizedBox(height: 16),
+              ],
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           _buildCategories(),
         ],
       ),
@@ -40,7 +47,7 @@ class ServiceHeader extends GetView<ServiceController> {
         () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(controller.currentServiceType.value?.name ?? '', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textBaseWhite)),
+            Text(controller.currentServiceType.value, style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textBaseWhite)),
             Assets.icons.icBell.svg(width: 24, height: 24, colorFilter: ColorFilter.mode(AppColors.textBaseWhite, BlendMode.srcIn)),
           ],
         ),
@@ -65,7 +72,7 @@ class ServiceHeader extends GetView<ServiceController> {
                   color: Colors.transparent,
                   child: Container(
                     height: 48,
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(24),
@@ -88,7 +95,7 @@ class ServiceHeader extends GetView<ServiceController> {
             color: Colors.transparent,
             child: Container(
               height: 48,
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(24),
@@ -107,9 +114,9 @@ class ServiceHeader extends GetView<ServiceController> {
                         isScrollControlled: true,
                         backgroundColor: Colors.transparent,
                         builder: (context) {
-                          return ClipRRect(
+                          return const ClipRRect(
                             borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-                            child: FractionallySizedBox(heightFactor: 0.75, child: const FilterScreen()),
+                            child: FractionallySizedBox(heightFactor: 0.75, child: FilterScreen()),
                           );
                         },
                       );
@@ -131,15 +138,15 @@ class ServiceHeader extends GetView<ServiceController> {
       child: Row(
         children: [
           Assets.icons.icCar.svg(width: 16, height: 16, colorFilter: ColorFilter.mode(AppColors.textBaseWhite, BlendMode.srcIn)),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Text('Deliver', style: AppTextStyles.typographyH11Medium.copyWith(color: AppColors.textBaseWhite)),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Container(
             width: 4,
             height: 4,
             decoration: BoxDecoration(color: AppColors.textBaseWhite, shape: BoxShape.circle),
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Expanded(
             child: Text('2216 N 10th Street, CA 92243', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBaseWhite)),
           ),
@@ -153,7 +160,7 @@ class ServiceHeader extends GetView<ServiceController> {
     return Obx(() {
       final categories = controller.categories;
       if (categories.isEmpty) {
-        return SizedBox.shrink();
+        return const SizedBox.shrink();
       }
 
       return SizedBox(
@@ -172,17 +179,8 @@ class ServiceHeader extends GetView<ServiceController> {
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Column(
                     children: [
-                      Center(
-                        child: category.image.isNotEmpty
-                            ? AppImage.network(
-                                category.image,
-                                width: 40,
-                                height: 40,
-                                errorWidget: AppImage.asset(controller.getCategoryImageAsset(category, controller.currentServiceType.value ?? ServiceType.food), width: 40, height: 40),
-                              )
-                            : AppImage.asset(controller.getCategoryImageAsset(category, controller.currentServiceType.value ?? ServiceType.food), width: 40, height: 40),
-                      ),
-                      SizedBox(height: 8),
+                      AppImage.network(category.image, width: 40, height: 40, fit: BoxFit.cover),
+                      const SizedBox(height: 8),
                       Text(category.name, style: AppTextStyles.typographyH12Regular, textAlign: TextAlign.center),
                     ],
                   ),

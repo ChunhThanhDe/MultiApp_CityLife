@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 
-import 'splash_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/onboarding/splash/splash_controller.dart';
 
 class SplashScreen extends BaseScreen<SplashController> {
   const SplashScreen({super.key});
@@ -16,7 +16,7 @@ class SplashScreen extends BaseScreen<SplashController> {
           const SizedBox(height: 16),
 
           // Loading indicator
-          CircularProgressIndicator(),
+          const CircularProgressIndicator(),
 
           const SizedBox(height: 16),
 

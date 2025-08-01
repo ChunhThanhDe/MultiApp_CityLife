@@ -4,10 +4,10 @@ import 'package:sixam_mart_user/presentation/modules/store/components/section_it
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 
-import 'store_products_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/store/store_products/store_products_controller.dart';
 
 class StoreProductsScreen extends BaseScreen<StoreProductsController> {
-  const StoreProductsScreen({super.key, required this.products, required this.storename});
+  const StoreProductsScreen({required this.products, required this.storename, super.key});
 
   final List<ProductItem> products;
   final String storename;

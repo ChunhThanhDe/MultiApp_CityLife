@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 
 class CompletedOrderSection extends StatelessWidget {
+
+  const CompletedOrderSection({required this.date, required this.status, required this.orders, super.key});
   final String date;
   final String status;
   final List<OrderListItem> orders;
-
-  const CompletedOrderSection({super.key, required this.date, required this.status, required this.orders});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
-          color: Color(0xFFF7F8F9),
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+          color: const Color(0xFFF7F8F9),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
           child: Row(
             children: [
               Expanded(
-                child: Text(date, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
+                child: Text(date, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
               ),
 
-              Text(status, style: TextStyle(fontSize: 14)),
+              Text(status, style: const TextStyle(fontSize: 14)),
             ],
           ),
         ),
@@ -31,45 +31,41 @@ class CompletedOrderSection extends StatelessWidget {
 }
 
 class OrderListItem extends StatelessWidget {
+
+  const OrderListItem({
+    required this.brandLogo, required this.brandName, required this.subtitle, required this.price, super.key,
+    this.onTap,
+  });
   final ImageProvider brandLogo;
   final String brandName;
   final String subtitle;
   final String price;
   final VoidCallback? onTap;
 
-  const OrderListItem({
-    super.key, 
-    required this.brandLogo, 
-    required this.brandName, 
-    required this.subtitle, 
-    required this.price,
-    this.onTap,
-  });
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         child: Row(
           children: [
             CircleAvatar(backgroundImage: brandLogo, radius: 16),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     brandName,
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+                    style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
                   ),
-                  Text(subtitle, style: TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                  Text(subtitle, style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
                 ],
               ),
             ),
-            Text(price, style: TextStyle(fontSize: 14, color: Color(0xFF4A5763))),
-            Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
+            Text(price, style: const TextStyle(fontSize: 14, color: Color(0xFF4A5763))),
+            const Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
           ],
         ),
       ),

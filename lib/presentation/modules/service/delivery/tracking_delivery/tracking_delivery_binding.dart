@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import 'tracking_delivery_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/delivery/tracking_delivery/tracking_delivery_controller.dart';
 
 class TrackingDeliveryBinding extends Bindings {
   @override

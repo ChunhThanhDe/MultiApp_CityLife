@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 
 class OptionGroupSection extends StatelessWidget {
+
+  const OptionGroupSection({
+    required this.title, required this.options, required this.selectedValue, required this.onSelected, super.key,
+    this.requiredField = false,
+  });
   final String title;
   final bool requiredField;
   final List<OptionItem> options;
   final String? selectedValue;
   final ValueChanged<String> onSelected;
-
-  const OptionGroupSection({
-    super.key,
-    required this.title,
-    this.requiredField = false,
-    required this.options,
-    required this.selectedValue,
-    required this.onSelected,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +29,7 @@ class OptionGroupSection extends StatelessWidget {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            color: Color(0xFFF7F8F9),
+            color: const Color(0xFFF7F8F9),
             child: Row(
               children: [
                 Text(
@@ -56,7 +52,7 @@ class OptionGroupSection extends StatelessWidget {
                   ),
                 const Spacer(),
                 const Text(
-                  "Required",
+                  'Required',
                   style: TextStyle(
                     color: Color(0xFF4A5763),
                     fontSize: 13,
@@ -91,25 +87,23 @@ class OptionGroupSection extends StatelessWidget {
 }
 
 class OptionItem {
+
+  OptionItem({required this.label, required this.value, this.subLabel});
   final String label;
   final String value;
   final String? subLabel;
-
-  OptionItem({required this.label, required this.value, this.subLabel});
 }
 
 class _OptionItemCheckboxTile extends StatelessWidget {
+
+  const _OptionItemCheckboxTile({
+    required this.label,
+    required this.checked, required this.onTap, this.subLabel,
+  });
   final String label;
   final String? subLabel;
   final bool checked;
   final VoidCallback onTap;
-
-  const _OptionItemCheckboxTile({
-    required this.label,
-    this.subLabel,
-    required this.checked,
-    required this.onTap,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -155,9 +149,9 @@ class _OptionItemCheckboxTile extends StatelessWidget {
 }
 
 class _CustomCheckbox extends StatelessWidget {
-  final bool checked;
 
   const _CustomCheckbox({required this.checked});
+  final bool checked;
 
   @override
   Widget build(BuildContext context) {
@@ -166,11 +160,11 @@ class _CustomCheckbox extends StatelessWidget {
       height: 24,
       decoration: BoxDecoration(
         border: Border.all(
-          color: checked ? Color(0xFF5856D7) : Color(0xFF798A9A),
+          color: checked ? const Color(0xFF5856D7) : const Color(0xFF798A9A),
           width: 1.5,
         ),
         borderRadius: BorderRadius.circular(4),
-        color: checked ? Color(0xFF5856D7) : Colors.transparent,
+        color: checked ? const Color(0xFF5856D7) : Colors.transparent,
       ),
       child: checked ? const Icon(Icons.check, color: Colors.white, size: 18) : null,
     );

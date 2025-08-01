@@ -9,7 +9,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:sixam_mart_user/base/header_interceptor.dart';
 import 'package:sixam_mart_user/services/auth_token_manager.dart';
 
-import '../app/constants/api_const.dart';
+import 'package:sixam_mart_user/app/constants/api_const.dart';
 
 Map<String, dynamic> getAuthHeader() {
   final Map<String, dynamic> headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
@@ -28,10 +28,6 @@ Map<String, dynamic> getAuthHeader() {
 }
 
 class DioClient {
-  late Dio _dio;
-
-  final String baseUrl;
-  final List<Interceptor>? interceptors;
 
   DioClient(Dio dio, {required this.baseUrl, this.interceptors}) {
     _dio = dio;
@@ -49,7 +45,7 @@ class DioClient {
       ..httpClientAdapter = IOHttpClientAdapter(
         createHttpClient: () {
           final HttpClient client = HttpClient(context: SecurityContext(withTrustedRoots: false));
-          client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+          client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
           return client;
         },
       );
@@ -81,15 +77,19 @@ class DioClient {
     _dio.httpClientAdapter = IOHttpClientAdapter(
       createHttpClient: () {
         final HttpClient client = HttpClient(context: SecurityContext(withTrustedRoots: false));
-        client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+        client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
         return client;
       },
     );
   }
+  late Dio _dio;
+
+  final String baseUrl;
+  final List<Interceptor>? interceptors;
 
   Future<Response> get(String uri, {Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken, ProgressCallback? onReceiveProgress}) async {
     try {
-      var response = await _dio.get(uri, queryParameters: queryParameters, options: options, cancelToken: cancelToken, onReceiveProgress: onReceiveProgress);
+      final response = await _dio.get(uri, queryParameters: queryParameters, options: options, cancelToken: cancelToken, onReceiveProgress: onReceiveProgress);
       return response;
     } on SocketException catch (e) {
       throw SocketException(e.toString());
@@ -137,7 +137,7 @@ class DioClient {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      var response = await _dio.patch(
+      final response = await _dio.patch(
         uri,
         data: data,
         queryParameters: queryParameters,
@@ -164,7 +164,7 @@ class DioClient {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      var response = await _dio.put(
+      final response = await _dio.put(
         uri,
         data: data,
         queryParameters: queryParameters,
@@ -183,7 +183,7 @@ class DioClient {
 
   Future<Response> delete(String uri, {data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken}) async {
     try {
-      var response = await _dio.delete(uri, data: data, queryParameters: queryParameters, options: options, cancelToken: cancelToken);
+      final response = await _dio.delete(uri, data: data, queryParameters: queryParameters, options: options, cancelToken: cancelToken);
       return response;
     } on FormatException catch (_) {
       throw const FormatException('Unable to process the data');

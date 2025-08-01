@@ -8,9 +8,9 @@ import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/components/term_of_service.dart';
 
 class AuthBottomSection extends StatelessWidget {
+  const AuthBottomSection({required this.isSignIn, super.key, this.onTapChange});
   final VoidCallback? onTapChange;
   final bool isSignIn;
-  const AuthBottomSection({super.key, this.onTapChange, required this.isSignIn});
 
   @override
   Widget build(BuildContext context) {

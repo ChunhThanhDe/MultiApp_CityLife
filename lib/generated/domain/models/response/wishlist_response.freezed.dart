@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$WishlistResponse {
 
-@JsonKey(name: "item") List<WishlistItem>? get item;@JsonKey(name: "store") List<WishlistStore>? get store;
+@JsonKey(name: 'item') List<WishlistItem>? get item;@JsonKey(name: 'store') List<WishlistStore>? get store;
 /// Create a copy of WishlistResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $WishlistResponseCopyWith<$Res>  {
   factory $WishlistResponseCopyWith(WishlistResponse value, $Res Function(WishlistResponse) _then) = _$WishlistResponseCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "item") List<WishlistItem>? item,@JsonKey(name: "store") List<WishlistStore>? store
+@JsonKey(name: 'item') List<WishlistItem>? item,@JsonKey(name: 'store') List<WishlistStore>? store
 });
 
 
@@ -81,11 +81,11 @@ as List<WishlistStore>?,
 @JsonSerializable()
 
 class _WishlistResponse implements WishlistResponse {
-  const _WishlistResponse({@JsonKey(name: "item") final  List<WishlistItem>? item, @JsonKey(name: "store") final  List<WishlistStore>? store}): _item = item,_store = store;
+  const _WishlistResponse({@JsonKey(name: 'item') final  List<WishlistItem>? item, @JsonKey(name: 'store') final  List<WishlistStore>? store}): _item = item,_store = store;
   factory _WishlistResponse.fromJson(Map<String, dynamic> json) => _$WishlistResponseFromJson(json);
 
  final  List<WishlistItem>? _item;
-@override@JsonKey(name: "item") List<WishlistItem>? get item {
+@override@JsonKey(name: 'item') List<WishlistItem>? get item {
   final value = _item;
   if (value == null) return null;
   if (_item is EqualUnmodifiableListView) return _item;
@@ -94,7 +94,7 @@ class _WishlistResponse implements WishlistResponse {
 }
 
  final  List<WishlistStore>? _store;
-@override@JsonKey(name: "store") List<WishlistStore>? get store {
+@override@JsonKey(name: 'store') List<WishlistStore>? get store {
   final value = _store;
   if (value == null) return null;
   if (_store is EqualUnmodifiableListView) return _store;
@@ -136,7 +136,7 @@ abstract mixin class _$WishlistResponseCopyWith<$Res> implements $WishlistRespon
   factory _$WishlistResponseCopyWith(_WishlistResponse value, $Res Function(_WishlistResponse) _then) = __$WishlistResponseCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "item") List<WishlistItem>? item,@JsonKey(name: "store") List<WishlistStore>? store
+@JsonKey(name: 'item') List<WishlistItem>? item,@JsonKey(name: 'store') List<WishlistStore>? store
 });
 
 
@@ -175,7 +175,7 @@ WishlistItem _$WishlistItemFromJson(
 /// @nodoc
 mixin _$WishlistItem {
 
-@JsonKey(name: "id") int? get id;@JsonKey(name: "name") String? get name;@JsonKey(name: "price") int? get price;@JsonKey(name: "image_full_url") String? get imageFullUrl;@JsonKey(name: "store_name") String? get storeName;
+@JsonKey(name: 'id') int? get id;@JsonKey(name: 'name') String? get name;@JsonKey(name: 'price') int? get price;@JsonKey(name: 'image_full_url') String? get imageFullUrl;@JsonKey(name: 'store_name') String? get storeName;
 /// Create a copy of WishlistItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -208,7 +208,7 @@ abstract mixin class $WishlistItemCopyWith<$Res>  {
   factory $WishlistItemCopyWith(WishlistItem value, $Res Function(WishlistItem) _then) = _$WishlistItemCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "id") int? id,@JsonKey(name: "name") String? name,@JsonKey(name: "price") int? price,@JsonKey(name: "image_full_url") String? imageFullUrl,@JsonKey(name: "store_name") String? storeName
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'name') String? name,@JsonKey(name: 'price') int? price,@JsonKey(name: 'image_full_url') String? imageFullUrl,@JsonKey(name: 'store_name') String? storeName
 });
 
 
@@ -243,14 +243,14 @@ as String?,
 @JsonSerializable()
 
 class _WistlistItem implements WishlistItem {
-  const _WistlistItem({@JsonKey(name: "id") this.id, @JsonKey(name: "name") this.name, @JsonKey(name: "price") this.price, @JsonKey(name: "image_full_url") this.imageFullUrl, @JsonKey(name: "store_name") this.storeName});
+  const _WistlistItem({@JsonKey(name: 'id') this.id, @JsonKey(name: 'name') this.name, @JsonKey(name: 'price') this.price, @JsonKey(name: 'image_full_url') this.imageFullUrl, @JsonKey(name: 'store_name') this.storeName});
   factory _WistlistItem.fromJson(Map<String, dynamic> json) => _$WistlistItemFromJson(json);
 
-@override@JsonKey(name: "id") final  int? id;
-@override@JsonKey(name: "name") final  String? name;
-@override@JsonKey(name: "price") final  int? price;
-@override@JsonKey(name: "image_full_url") final  String? imageFullUrl;
-@override@JsonKey(name: "store_name") final  String? storeName;
+@override@JsonKey(name: 'id') final  int? id;
+@override@JsonKey(name: 'name') final  String? name;
+@override@JsonKey(name: 'price') final  int? price;
+@override@JsonKey(name: 'image_full_url') final  String? imageFullUrl;
+@override@JsonKey(name: 'store_name') final  String? storeName;
 
 /// Create a copy of WishlistItem
 /// with the given fields replaced by the non-null parameter values.
@@ -285,7 +285,7 @@ abstract mixin class _$WistlistItemCopyWith<$Res> implements $WishlistItemCopyWi
   factory _$WistlistItemCopyWith(_WistlistItem value, $Res Function(_WistlistItem) _then) = __$WistlistItemCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "id") int? id,@JsonKey(name: "name") String? name,@JsonKey(name: "price") int? price,@JsonKey(name: "image_full_url") String? imageFullUrl,@JsonKey(name: "store_name") String? storeName
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'name') String? name,@JsonKey(name: 'price') int? price,@JsonKey(name: 'image_full_url') String? imageFullUrl,@JsonKey(name: 'store_name') String? storeName
 });
 
 
@@ -320,7 +320,7 @@ as String?,
 /// @nodoc
 mixin _$WishlistStore {
 
-@JsonKey(name: "id") int? get id;@JsonKey(name: "name") String? get name;@JsonKey(name: "address") String? get address;@JsonKey(name: "minimum_shipping_charge") int? get minimumShippingCharge;@JsonKey(name: "delivery_time") String? get deliveryTime;@JsonKey(name: "avg_rating") int? get avgRating;@JsonKey(name: "rating_count") int? get ratingCount;@JsonKey(name: "logo_full_url") String? get logoFullUrl;@JsonKey(name: "cover_photo_full_url") String? get coverPhotoFullUrl;
+@JsonKey(name: 'id') int? get id;@JsonKey(name: 'name') String? get name;@JsonKey(name: 'address') String? get address;@JsonKey(name: 'minimum_shipping_charge') int? get minimumShippingCharge;@JsonKey(name: 'delivery_time') String? get deliveryTime;@JsonKey(name: 'avg_rating') int? get avgRating;@JsonKey(name: 'rating_count') int? get ratingCount;@JsonKey(name: 'logo_full_url') String? get logoFullUrl;@JsonKey(name: 'cover_photo_full_url') String? get coverPhotoFullUrl;
 /// Create a copy of WishlistStore
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -353,7 +353,7 @@ abstract mixin class $WishlistStoreCopyWith<$Res>  {
   factory $WishlistStoreCopyWith(WishlistStore value, $Res Function(WishlistStore) _then) = _$WishlistStoreCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "id") int? id,@JsonKey(name: "name") String? name,@JsonKey(name: "address") String? address,@JsonKey(name: "minimum_shipping_charge") int? minimumShippingCharge,@JsonKey(name: "delivery_time") String? deliveryTime,@JsonKey(name: "avg_rating") int? avgRating,@JsonKey(name: "rating_count") int? ratingCount,@JsonKey(name: "logo_full_url") String? logoFullUrl,@JsonKey(name: "cover_photo_full_url") String? coverPhotoFullUrl
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'name') String? name,@JsonKey(name: 'address') String? address,@JsonKey(name: 'minimum_shipping_charge') int? minimumShippingCharge,@JsonKey(name: 'delivery_time') String? deliveryTime,@JsonKey(name: 'avg_rating') int? avgRating,@JsonKey(name: 'rating_count') int? ratingCount,@JsonKey(name: 'logo_full_url') String? logoFullUrl,@JsonKey(name: 'cover_photo_full_url') String? coverPhotoFullUrl
 });
 
 
@@ -392,18 +392,18 @@ as String?,
 @JsonSerializable()
 
 class _WishlistStore implements WishlistStore {
-  const _WishlistStore({@JsonKey(name: "id") this.id, @JsonKey(name: "name") this.name, @JsonKey(name: "address") this.address, @JsonKey(name: "minimum_shipping_charge") this.minimumShippingCharge, @JsonKey(name: "delivery_time") this.deliveryTime, @JsonKey(name: "avg_rating") this.avgRating, @JsonKey(name: "rating_count") this.ratingCount, @JsonKey(name: "logo_full_url") this.logoFullUrl, @JsonKey(name: "cover_photo_full_url") this.coverPhotoFullUrl});
+  const _WishlistStore({@JsonKey(name: 'id') this.id, @JsonKey(name: 'name') this.name, @JsonKey(name: 'address') this.address, @JsonKey(name: 'minimum_shipping_charge') this.minimumShippingCharge, @JsonKey(name: 'delivery_time') this.deliveryTime, @JsonKey(name: 'avg_rating') this.avgRating, @JsonKey(name: 'rating_count') this.ratingCount, @JsonKey(name: 'logo_full_url') this.logoFullUrl, @JsonKey(name: 'cover_photo_full_url') this.coverPhotoFullUrl});
   factory _WishlistStore.fromJson(Map<String, dynamic> json) => _$WishlistStoreFromJson(json);
 
-@override@JsonKey(name: "id") final  int? id;
-@override@JsonKey(name: "name") final  String? name;
-@override@JsonKey(name: "address") final  String? address;
-@override@JsonKey(name: "minimum_shipping_charge") final  int? minimumShippingCharge;
-@override@JsonKey(name: "delivery_time") final  String? deliveryTime;
-@override@JsonKey(name: "avg_rating") final  int? avgRating;
-@override@JsonKey(name: "rating_count") final  int? ratingCount;
-@override@JsonKey(name: "logo_full_url") final  String? logoFullUrl;
-@override@JsonKey(name: "cover_photo_full_url") final  String? coverPhotoFullUrl;
+@override@JsonKey(name: 'id') final  int? id;
+@override@JsonKey(name: 'name') final  String? name;
+@override@JsonKey(name: 'address') final  String? address;
+@override@JsonKey(name: 'minimum_shipping_charge') final  int? minimumShippingCharge;
+@override@JsonKey(name: 'delivery_time') final  String? deliveryTime;
+@override@JsonKey(name: 'avg_rating') final  int? avgRating;
+@override@JsonKey(name: 'rating_count') final  int? ratingCount;
+@override@JsonKey(name: 'logo_full_url') final  String? logoFullUrl;
+@override@JsonKey(name: 'cover_photo_full_url') final  String? coverPhotoFullUrl;
 
 /// Create a copy of WishlistStore
 /// with the given fields replaced by the non-null parameter values.
@@ -438,7 +438,7 @@ abstract mixin class _$WishlistStoreCopyWith<$Res> implements $WishlistStoreCopy
   factory _$WishlistStoreCopyWith(_WishlistStore value, $Res Function(_WishlistStore) _then) = __$WishlistStoreCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "id") int? id,@JsonKey(name: "name") String? name,@JsonKey(name: "address") String? address,@JsonKey(name: "minimum_shipping_charge") int? minimumShippingCharge,@JsonKey(name: "delivery_time") String? deliveryTime,@JsonKey(name: "avg_rating") int? avgRating,@JsonKey(name: "rating_count") int? ratingCount,@JsonKey(name: "logo_full_url") String? logoFullUrl,@JsonKey(name: "cover_photo_full_url") String? coverPhotoFullUrl
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'name') String? name,@JsonKey(name: 'address') String? address,@JsonKey(name: 'minimum_shipping_charge') int? minimumShippingCharge,@JsonKey(name: 'delivery_time') String? deliveryTime,@JsonKey(name: 'avg_rating') int? avgRating,@JsonKey(name: 'rating_count') int? ratingCount,@JsonKey(name: 'logo_full_url') String? logoFullUrl,@JsonKey(name: 'cover_photo_full_url') String? coverPhotoFullUrl
 });
 
 

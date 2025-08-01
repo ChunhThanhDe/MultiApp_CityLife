@@ -7,7 +7,7 @@ part '../../../generated/domain/models/response/get_product_detail_response.g.da
 
 @freezed
 abstract class ProductDetailResponse with _$ProductDetailResponse {
-  const factory ProductDetailResponse({@Default('') String type, required ProductDetail item, @Default([]) List<ProductRecommendation> recommendations}) = _ProductDetailResponse;
+  const factory ProductDetailResponse({required ProductDetail item, @Default('') String type, @Default([]) List<ProductRecommendation> recommendations}) = _ProductDetailResponse;
 
   factory ProductDetailResponse.fromJson(Map<String, dynamic> json) => _$ProductDetailResponseFromJson(json);
 }

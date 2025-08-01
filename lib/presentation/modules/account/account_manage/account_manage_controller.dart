@@ -22,8 +22,8 @@ class AccountManageController extends BaseController {
   var avatarPath = ''.obs;
 
   // Birthday selection observables
-  final selectedDay = "01".obs;
-  final selectedMonth = "01".obs;
+  final selectedDay = '01'.obs;
+  final selectedMonth = '01'.obs;
   final selectedYear = DateTime.now().year.toString().obs;
 
   @override

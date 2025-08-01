@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import 'add_fund_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/wallet/add_fund/add_fund_controller.dart';
 
 class AddFundBinding extends Bindings {
   @override

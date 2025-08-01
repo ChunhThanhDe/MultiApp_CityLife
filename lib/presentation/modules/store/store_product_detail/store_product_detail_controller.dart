@@ -6,19 +6,16 @@ import 'package:sixam_mart_user/domain/repositories/product_repository.dart';
 import 'package:sixam_mart_user/services/cart_service.dart';
 
 class StoreProductDetailController extends BaseController {
+  // add_on_id -> quantity
+
+  StoreProductDetailController(this.productId);
   final int productId;
   final ProductRepository _productRepository = Get.find<ProductRepository>();
-
-  // State
-  @override
-  final RxBool isLoading = true.obs;
 
   final Rx<ProductDetail?> product = Rx<ProductDetail?>(null);
   final RxList<ProductRecommendation> recommendations = <ProductRecommendation>[].obs;
   final RxMap<String, String> selectedOptions = <String, String>{}.obs; // group_name -> option
-  final RxMap<int, int> selectedAddOns = <int, int>{}.obs; // add_on_id -> quantity
-
-  StoreProductDetailController(this.productId);
+  final RxMap<int, int> selectedAddOns = <int, int>{}.obs;
 
   @override
   void onInit() {

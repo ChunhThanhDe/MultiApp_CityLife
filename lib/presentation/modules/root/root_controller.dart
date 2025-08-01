@@ -17,11 +17,11 @@ class RootController extends BaseController {
   var currentTab = RootTab.home.obs;
 
   final List<RootTabItem> tabs = [
-    (iconSelected: Assets.icons.icHomeFilled.path, iconUnselected: Assets.icons.icHomeOutlined.path, label: LocaleKeys.root_home, tab: RootTab.home, screen: HomeScreen()),
-    (iconSelected: Assets.icons.icServiceFilled.path, iconUnselected: Assets.icons.icServiceOutlined.path, label: LocaleKeys.root_service, tab: RootTab.service, screen: ServiceScreen()),
-    (iconSelected: Assets.icons.icCartFilled.path, iconUnselected: Assets.icons.icCartOutlined.path, label: LocaleKeys.root_cart, tab: RootTab.cart, screen: ViewCartScreen()),
-    (iconSelected: Assets.icons.icWalletFilled.path, iconUnselected: Assets.icons.icWalletOutlined.path, label: LocaleKeys.root_wallet, tab: RootTab.wallet, screen: WalletScreen()),
-    (iconSelected: Assets.icons.icPersonFilled.path, iconUnselected: Assets.icons.icPersonOutlined.path, label: LocaleKeys.root_account, tab: RootTab.account, screen: AccountScreen()),
+    (iconSelected: Assets.icons.icHomeFilled.path, iconUnselected: Assets.icons.icHomeOutlined.path, label: LocaleKeys.root_home, tab: RootTab.home, screen: const HomeScreen()),
+    (iconSelected: Assets.icons.icServiceFilled.path, iconUnselected: Assets.icons.icServiceOutlined.path, label: LocaleKeys.root_service, tab: RootTab.service, screen: const ServiceScreen()),
+    (iconSelected: Assets.icons.icCartFilled.path, iconUnselected: Assets.icons.icCartOutlined.path, label: LocaleKeys.root_cart, tab: RootTab.cart, screen: const ViewCartScreen()),
+    (iconSelected: Assets.icons.icWalletFilled.path, iconUnselected: Assets.icons.icWalletOutlined.path, label: LocaleKeys.root_wallet, tab: RootTab.wallet, screen: const WalletScreen()),
+    (iconSelected: Assets.icons.icPersonFilled.path, iconUnselected: Assets.icons.icPersonOutlined.path, label: LocaleKeys.root_account, tab: RootTab.account, screen: const AccountScreen()),
   ];
 
   void changeTab(RootTab tab) {

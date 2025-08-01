@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_controller.dart';
 
 class FavoritesTabBar extends StatelessWidget {
-  final FavoritesTab currentTab;
-  final Function(FavoritesTab) onTabChanged;
 
   const FavoritesTabBar({required this.currentTab, required this.onTabChanged, super.key});
+  final FavoritesTab currentTab;
+  final Function(FavoritesTab) onTabChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class FavoritesTabBar extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(32),
-                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 4, offset: Offset(0, 2))],
+                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 4, offset: const Offset(0, 2))],
                 border: Border.all(color: Colors.white, width: 2),
               ),
             ),
@@ -56,7 +56,7 @@ class FavoritesTabBar extends StatelessWidget {
           child: Center(
             child: Text(
               text,
-              style: TextStyle(color: Color(0xFF161A1D), fontSize: 15, fontWeight: FontWeight.w400),
+              style: const TextStyle(color: Color(0xFF161A1D), fontSize: 15, fontWeight: FontWeight.w400),
             ),
           ),
         ),

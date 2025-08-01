@@ -19,14 +19,8 @@ Future<T?> showAppDialog<T>({required Widget child, bool canDismiss = true, Func
 }
 
 Future<T?> showConfirmationDialog<T>({
-  bool canDismiss = true,
+  required Function() onCancel, required Function() onConfirm, required String title, required String message, required String cancelText, required String confirmText, bool canDismiss = true,
   Function(dynamic)? onDismiss,
-  required Function() onCancel,
-  required Function() onConfirm,
-  required String title,
-  required String message,
-  required String cancelText,
-  required String confirmText,
   TextStyle? titleStyle,
   TextStyle? messageStyle,
   TextStyle? cancelTextStyle,
@@ -39,9 +33,9 @@ Future<T?> showConfirmationDialog<T>({
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(title, style: titleStyle ?? AppTextStyles.typographyH10SemiBold),
-      SizedBox(height: 12),
+      const SizedBox(height: 12),
       Text(message, style: messageStyle ?? AppTextStyles.typographyH11Regular),
-      SizedBox(height: 24),
+      const SizedBox(height: 24),
       Row(
         children: [
           Expanded(
@@ -52,11 +46,11 @@ Future<T?> showConfirmationDialog<T>({
                 borderRadius: BorderRadius.circular(AppCorner.radius12),
                 side: BorderSide(color: AppColors.stateGreyLowest50, width: 1),
               ),
-              padding: EdgeInsets.symmetric(vertical: 12),
+              padding: const EdgeInsets.symmetric(vertical: 12),
               child: Text(cancelText, style: cancelTextStyle ?? AppTextStyles.typographyH10SemiBold),
             ),
           ),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           Expanded(
             child: AppButton(
               onTap: onConfirm,
@@ -65,7 +59,7 @@ Future<T?> showConfirmationDialog<T>({
                 borderRadius: BorderRadius.circular(AppCorner.radius12),
                 side: BorderSide(color: AppColors.stateGreyLowest50, width: 1),
               ),
-              padding: EdgeInsets.symmetric(vertical: 12),
+              padding: const EdgeInsets.symmetric(vertical: 12),
               child: Text(confirmText, style: confirmTextStyle ?? AppTextStyles.typographyH10SemiBold.copyWith(color: Colors.white)),
             ),
           ),
@@ -88,13 +82,13 @@ Future<T?> showConfirmationDialog<T>({
 }
 
 class AppDialog extends StatelessWidget {
+
+  const AppDialog({required this.child, super.key, this.canDismiss = true, this.onDismiss, this.padding, this.margin});
   final Widget child;
   final bool canDismiss;
   final Function(dynamic)? onDismiss;
   final EdgeInsets? padding;
   final EdgeInsets? margin;
-
-  const AppDialog({super.key, required this.child, this.canDismiss = true, this.onDismiss, this.padding, this.margin});
 
   @override
   Widget build(BuildContext context) {

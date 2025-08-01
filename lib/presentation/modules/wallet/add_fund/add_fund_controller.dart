@@ -6,12 +6,12 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 enum PaymentMethodType { applePay, visa, mastercard, evc }
 
 class PaymentMethod {
+
+  PaymentMethod({required this.name, required this.last4, required this.type, required this.iconAsset});
   final String name;
   final String last4;
   final PaymentMethodType type;
   final String iconAsset;
-
-  PaymentMethod({required this.name, required this.last4, required this.type, required this.iconAsset});
 }
 
 class AddFundController extends BaseController {

@@ -9,8 +9,8 @@ part of '../../../../domain/models/response/get_product_detail_response.dart';
 _ProductDetailResponse _$ProductDetailResponseFromJson(
   Map<String, dynamic> json,
 ) => _ProductDetailResponse(
-  type: json['type'] as String? ?? '',
   item: ProductDetail.fromJson(json['item'] as Map<String, dynamic>),
+  type: json['type'] as String? ?? '',
   recommendations:
       (json['recommendations'] as List<dynamic>?)
           ?.map(
@@ -23,8 +23,8 @@ _ProductDetailResponse _$ProductDetailResponseFromJson(
 Map<String, dynamic> _$ProductDetailResponseToJson(
   _ProductDetailResponse instance,
 ) => <String, dynamic>{
-  'type': instance.type,
   'item': instance.item,
+  'type': instance.type,
   'recommendations': instance.recommendations,
 };
 

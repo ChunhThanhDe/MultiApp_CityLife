@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 
 class AnimatedStepIndicator extends StatelessWidget {
+
+  const AnimatedStepIndicator({
+    required this.totalSteps, required this.currentStep, super.key,
+    this.dotWidth = 8.0,
+    this.dotHeight = 8.0,
+    this.activeDotWidth = 24.0,
+    this.spacing = 8.0,
+    this.activeColor,
+    this.inactiveColor,
+    this.animationDuration = const Duration(milliseconds: 300),
+  });
   final int totalSteps;
   final int currentStep;
   final double dotWidth;
@@ -10,19 +21,6 @@ class AnimatedStepIndicator extends StatelessWidget {
   final Color? activeColor;
   final Color? inactiveColor;
   final Duration animationDuration;
-
-  const AnimatedStepIndicator({
-    super.key,
-    required this.totalSteps,
-    required this.currentStep,
-    this.dotWidth = 8.0,
-    this.dotHeight = 8.0,
-    this.activeDotWidth = 24.0,
-    this.spacing = 8.0,
-    this.activeColor,
-    this.inactiveColor,
-    this.animationDuration = const Duration(milliseconds: 300),
-  });
 
   @override
   Widget build(BuildContext context) {

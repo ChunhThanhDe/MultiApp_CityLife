@@ -3,9 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sixam_mart_user/presentation/modules/service/delivery/box_delivery/box_delivery_controller.dart';
 
 class LocationBoxWidget extends StatelessWidget {
-  final BoxDeliveryController controller;
 
-  const LocationBoxWidget({super.key, required this.controller});
+  const LocationBoxWidget({required this.controller, super.key});
+  final BoxDeliveryController controller;
 
   @override
   Widget build(BuildContext context) {

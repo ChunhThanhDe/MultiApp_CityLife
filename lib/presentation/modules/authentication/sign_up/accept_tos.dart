@@ -12,7 +12,7 @@ import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
 import 'package:sixam_mart_user/services/user_service.dart';
 
-import 'sign_up_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/sign_up_controller.dart';
 
 class AcceptTos extends BaseScreen<SignUpController> {
   const AcceptTos({super.key});

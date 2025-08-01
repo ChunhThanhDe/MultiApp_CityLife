@@ -15,6 +15,12 @@ import 'package:get/get.dart';
 /// )
 /// ```
 class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
+
+  /// Creates a [BasicAppBar] with the specified [title] and optional [onBack] callback.
+  ///
+  /// The [title] parameter is required and will be displayed as the app bar title.
+  /// The [onBack] parameter is optional and defaults to Get.back() if not provided.
+  const BasicAppBar({required this.title, super.key, this.onBack, this.isShowBackButton = true});
   /// The title text to display in the app bar.
   final String title;
 
@@ -23,12 +29,6 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onBack;
 
   final bool isShowBackButton;
-
-  /// Creates a [BasicAppBar] with the specified [title] and optional [onBack] callback.
-  ///
-  /// The [title] parameter is required and will be displayed as the app bar title.
-  /// The [onBack] parameter is optional and defaults to Get.back() if not provided.
-  const BasicAppBar({super.key, required this.title, this.onBack, this.isShowBackButton = true});
 
   @override
   Widget build(BuildContext context) {

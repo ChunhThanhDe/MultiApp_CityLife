@@ -2,11 +2,11 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 
 class Transaction {
+
+  Transaction({required this.title, required this.date, required this.amount});
   final String title;
   final String date;
   final String amount;
-
-  Transaction({required this.title, required this.date, required this.amount});
 }
 
 class WalletController extends BaseController {
@@ -30,6 +30,6 @@ class WalletController extends BaseController {
   @override
   Future<void> refresh() async {
     // TODO: Replace with real refresh logic (e.g., fetch from server)
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
   }
 }

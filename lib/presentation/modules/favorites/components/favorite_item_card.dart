@@ -6,11 +6,11 @@ import 'package:sixam_mart_user/presentation/modules/favorites/favorites_control
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class FavoriteItemCard extends StatelessWidget {
+
+  const FavoriteItemCard({required this.item, super.key, this.isFavorited = true, this.onFavoriteTap});
   final WishlistItem item;
   final bool isFavorited;
   final VoidCallback? onFavoriteTap;
-
-  const FavoriteItemCard({super.key, required this.item, this.isFavorited = true, this.onFavoriteTap});
 
   String _buildPriceText() {
     final price = item.price;

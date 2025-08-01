@@ -13,6 +13,33 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 /// This widget is designed to be used across multiple screens in the app
 /// to maintain consistency and reduce code duplication.
 class AppListView<T> extends StatelessWidget {
+
+  const AppListView({
+    required this.items, required this.itemBuilder, super.key,
+    this.onRefresh,
+    this.onLoadMore,
+    this.isLoading = false,
+    this.isLoadingMore = false,
+    this.hasMore = true,
+    this.errorMessage,
+    this.onRetry,
+    this.emptyWidget,
+    this.errorWidget,
+    this.loadingWidget,
+    this.loadMoreWidget,
+    this.scrollController,
+    this.physics,
+    this.padding,
+    this.separatorBuilder,
+    this.showSeparator = false,
+    this.loadMoreThreshold = 200.0,
+    this.emptyTitle = 'No Data',
+    this.emptySubtitle = 'There are no items to display',
+    this.emptyIcon,
+    this.useCustomScrollView = false,
+    this.headerSlivers = const [],
+    this.footerSlivers = const [],
+  });
   /// List of items to display
   final List<T> items;
 
@@ -88,35 +115,6 @@ class AppListView<T> extends StatelessWidget {
   /// Additional slivers to add after the list items (only used when useCustomScrollView is true)
   final List<Widget> footerSlivers;
 
-  const AppListView({
-    super.key,
-    required this.items,
-    required this.itemBuilder,
-    this.onRefresh,
-    this.onLoadMore,
-    this.isLoading = false,
-    this.isLoadingMore = false,
-    this.hasMore = true,
-    this.errorMessage,
-    this.onRetry,
-    this.emptyWidget,
-    this.errorWidget,
-    this.loadingWidget,
-    this.loadMoreWidget,
-    this.scrollController,
-    this.physics,
-    this.padding,
-    this.separatorBuilder,
-    this.showSeparator = false,
-    this.loadMoreThreshold = 200.0,
-    this.emptyTitle = 'No Data',
-    this.emptySubtitle = 'There are no items to display',
-    this.emptyIcon,
-    this.useCustomScrollView = false,
-    this.headerSlivers = const [],
-    this.footerSlivers = const [],
-  });
-
   @override
   Widget build(BuildContext context) {
     // Show loading state for initial load
@@ -155,7 +153,7 @@ class AppListView<T> extends StatelessWidget {
       return errorWidget!;
     }
 
-    Widget errorContent = SizedBox(
+    final Widget errorContent = SizedBox(
       height: MediaQuery.of(context).size.height * 0.6,
       child: Center(
         child: Column(
@@ -189,7 +187,7 @@ class AppListView<T> extends StatelessWidget {
     );
 
     if (useCustomScrollView) {
-      List<Widget> slivers = [];
+      final List<Widget> slivers = [];
       slivers.addAll(headerSlivers);
       slivers.add(SliverToBoxAdapter(child: errorContent));
       slivers.addAll(footerSlivers);
@@ -240,7 +238,7 @@ class AppListView<T> extends StatelessWidget {
     }
 
     if (useCustomScrollView) {
-      List<Widget> slivers = [];
+      final List<Widget> slivers = [];
       slivers.addAll(headerSlivers);
       slivers.add(SliverToBoxAdapter(child: emptyContent));
       slivers.addAll(footerSlivers);
@@ -293,7 +291,7 @@ class AppListView<T> extends StatelessWidget {
   }
 
   Widget _buildCustomScrollView(BuildContext context) {
-    List<Widget> slivers = [];
+    final List<Widget> slivers = [];
 
     // Add header slivers
     slivers.addAll(headerSlivers);

@@ -35,10 +35,7 @@ _OrderNowOrder _$OrderNowOrderFromJson(Map<String, dynamic> json) =>
       orderAmount: (json['order_amount'] as num).toDouble(),
       paymentStatus: json['payment_status'] as String,
       orderStatus: json['order_status'] as String,
-      couponCode: json['coupon_code'] as String?,
       paymentMethod: json['payment_method'] as String,
-      orderNote: json['order_note'] as String?,
-      deliveryInstruction: json['delivery_instruction'] as String?,
       orderType: json['order_type'] as String,
       storeId: (json['store_id'] as num).toInt(),
       deliveryCharge: (json['delivery_charge'] as num).toDouble(),
@@ -70,6 +67,9 @@ _OrderNowOrder _$OrderNowOrderFromJson(Map<String, dynamic> json) =>
       extraPackagingAmount: (json['extra_packaging_amount'] as num).toDouble(),
       refBonusAmount: (json['ref_bonus_amount'] as num).toDouble(),
       moduleType: json['module_type'] as String,
+      couponCode: json['coupon_code'] as String?,
+      orderNote: json['order_note'] as String?,
+      deliveryInstruction: json['delivery_instruction'] as String?,
     );
 
 Map<String, dynamic> _$OrderNowOrderToJson(_OrderNowOrder instance) =>
@@ -79,10 +79,7 @@ Map<String, dynamic> _$OrderNowOrderToJson(_OrderNowOrder instance) =>
       'order_amount': instance.orderAmount,
       'payment_status': instance.paymentStatus,
       'order_status': instance.orderStatus,
-      'coupon_code': instance.couponCode,
       'payment_method': instance.paymentMethod,
-      'order_note': instance.orderNote,
-      'delivery_instruction': instance.deliveryInstruction,
       'order_type': instance.orderType,
       'store_id': instance.storeId,
       'delivery_charge': instance.deliveryCharge,
@@ -111,6 +108,9 @@ Map<String, dynamic> _$OrderNowOrderToJson(_OrderNowOrder instance) =>
       'extra_packaging_amount': instance.extraPackagingAmount,
       'ref_bonus_amount': instance.refBonusAmount,
       'module_type': instance.moduleType,
+      'coupon_code': instance.couponCode,
+      'order_note': instance.orderNote,
+      'delivery_instruction': instance.deliveryInstruction,
     };
 
 _OrderBreakdown _$OrderBreakdownFromJson(Map<String, dynamic> json) =>

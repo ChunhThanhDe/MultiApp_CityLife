@@ -1,8 +1,9 @@
+// ignore_for_file: comment_references
+
 import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_navigator.dart';
 import 'package:smooth_sheets/smooth_sheets.dart';
-
-import 'app_navigator.dart';
 
 /// Displays a modal bottom sheet with smooth animations and swipe-to-dismiss functionality.
 ///
@@ -78,6 +79,13 @@ Future<T?> showAppBottomSheet<T>({required Widget child, Function(dynamic)? onCl
 /// )
 /// ```
 class AppBottomSheet extends StatelessWidget {
+  /// Creates an [AppBottomSheet] with the specified content and behavior.
+  ///
+  /// The [child] parameter is required and represents the main content.
+  /// The [onClosed] callback is optional and will be called when dismissed.
+  /// The [isDismissible] parameter defaults to true.
+  const AppBottomSheet({required this.child, super.key, this.onClosed, this.isDismissible = true});
+
   /// The main content widget to display inside the bottom sheet.
   final Widget child;
 
@@ -88,13 +96,6 @@ class AppBottomSheet extends StatelessWidget {
   /// Whether the bottom sheet can be dismissed by user interaction.
   /// When false, prevents back gesture and system back button dismissal.
   final bool isDismissible;
-
-  /// Creates an [AppBottomSheet] with the specified content and behavior.
-  ///
-  /// The [child] parameter is required and represents the main content.
-  /// The [onClosed] callback is optional and will be called when dismissed.
-  /// The [isDismissible] parameter defaults to true.
-  const AppBottomSheet({super.key, required this.child, this.onClosed, this.isDismissible = true});
 
   @override
   Widget build(BuildContext context) {

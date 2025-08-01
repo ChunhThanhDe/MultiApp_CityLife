@@ -9,9 +9,9 @@ part of '../../../../../domain/models/request/authentication/sign_up_request.dar
 SignUpRequest _$SignUpRequestFromJson(Map<String, dynamic> json) =>
     SignUpRequest(
       name: json['name'] as String,
+      password: json['password'] as String,
       email: json['email'] as String?,
       phone: json['phone'] as String?,
-      password: json['password'] as String,
       birthday: json['birthday'] as String?,
     );
 

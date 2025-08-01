@@ -6,8 +6,8 @@ import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
-import '../../../shared/animation/animated_step_indicator.dart';
-import 'welcome_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/animation/animated_step_indicator.dart';
+import 'package:sixam_mart_user/presentation/modules/onboarding/welcome/welcome_controller.dart';
 
 class WelcomeScreen extends BaseScreen<WelcomeController> {
   const WelcomeScreen({super.key});

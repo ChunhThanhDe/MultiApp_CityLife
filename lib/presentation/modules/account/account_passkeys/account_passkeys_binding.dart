@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import 'account_passkeys_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account_passkeys/account_passkeys_controller.dart';
 
 class AccountPasskeysBinding extends Bindings {
   @override

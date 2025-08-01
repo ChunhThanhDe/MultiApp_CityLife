@@ -8,7 +8,7 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
 
-import 'wallet_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/wallet/wallet_controller.dart';
 
 class WalletScreen extends BaseScreen<WalletController> {
   const WalletScreen({super.key});

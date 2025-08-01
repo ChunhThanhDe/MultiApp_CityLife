@@ -38,9 +38,9 @@ class StoreServiceOptions extends StatelessWidget {
   }
 
   Widget _buildServiceTab(String iconPath, String label, StoreServiceType serviceType, StoreController controller) {
-    bool isSelected = controller.isServiceSelected(serviceType);
-    Color iconColor = isSelected ? AppColors.stateBrandDefault500 : AppColors.textGreyDefault500;
-    Color textColor = isSelected ? AppColors.stateBrandDefault500 : AppColors.textGreyDefault500;
+    final bool isSelected = controller.isServiceSelected(serviceType);
+    final Color iconColor = isSelected ? AppColors.stateBrandDefault500 : AppColors.textGreyDefault500;
+    final Color textColor = isSelected ? AppColors.stateBrandDefault500 : AppColors.textGreyDefault500;
 
     return Tab(
       child: Row(

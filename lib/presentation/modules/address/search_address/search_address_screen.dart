@@ -10,7 +10,7 @@ import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_text_field.dart';
 
-import 'search_address_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/address/search_address/search_address_controller.dart';
 
 class SearchAddressScreen extends BaseScreen<SearchAddressController> {
   const SearchAddressScreen({super.key});

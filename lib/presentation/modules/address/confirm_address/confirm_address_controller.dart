@@ -6,14 +6,14 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 
 class ConfirmAddressController extends BaseController {
-  final LatLng latLng;
-  final Completer<GoogleMapController> mapController = Completer<GoogleMapController>();
-  late final CameraPosition cameraPosition;
-  final mapStyle = RxnString();
 
   ConfirmAddressController({required this.latLng}) {
     cameraPosition = CameraPosition(target: latLng, zoom: 16);
   }
+  final LatLng latLng;
+  final Completer<GoogleMapController> mapController = Completer<GoogleMapController>();
+  late final CameraPosition cameraPosition;
+  final mapStyle = RxnString();
 
   @override
   void onInit() {

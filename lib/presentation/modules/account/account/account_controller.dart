@@ -108,9 +108,9 @@ class AccountController extends BaseController {
 }
 
 class _LanguageSelectionBottomSheet extends StatelessWidget {
-  final Function(Locale) onLanguageSelected;
 
   const _LanguageSelectionBottomSheet({required this.onLanguageSelected});
+  final Function(Locale) onLanguageSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -129,30 +129,30 @@ class _LanguageSelectionBottomSheet extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           ...languageOptions.map((option) {
             final isSelected = option.locale.languageCode == currentLocale.languageCode;
             return InkWell(
               onTap: () => onLanguageSelected(option.locale),
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 16),
+                padding: const EdgeInsets.symmetric(vertical: 16),
                 child: Row(
                   children: [
                     Expanded(
                       child: Text(
                         option.displayName,
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
                       ),
                     ),
-                    if (isSelected) Icon(Icons.check, color: Color(0xFF007AFF), size: 20),
+                    if (isSelected) const Icon(Icons.check, color: Color(0xFF007AFF), size: 20),
                   ],
                 ),
               ),
             );
           }),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
         ],
       ),
     );
@@ -160,9 +160,9 @@ class _LanguageSelectionBottomSheet extends StatelessWidget {
 }
 
 class _ThemeSelectionBottomSheet extends StatelessWidget {
-  final Function(ThemeTypes) onThemeSelected;
 
   const _ThemeSelectionBottomSheet({required this.onThemeSelected});
+  final Function(ThemeTypes) onThemeSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -174,11 +174,11 @@ class _ThemeSelectionBottomSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
+          const Text(
             'Select Theme',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           ...ThemeTypes.values.map((themeType) {
             final isSelected = themeType == currentTheme;
             final displayName = themeType == ThemeTypes.light ? 'Light' : 'Dark';
@@ -186,22 +186,22 @@ class _ThemeSelectionBottomSheet extends StatelessWidget {
             return InkWell(
               onTap: () => onThemeSelected(themeType),
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 16),
+                padding: const EdgeInsets.symmetric(vertical: 16),
                 child: Row(
                   children: [
                     Expanded(
                       child: Text(
                         displayName,
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
                       ),
                     ),
-                    if (isSelected) Icon(Icons.check, color: Color(0xFF007AFF), size: 20),
+                    if (isSelected) const Icon(Icons.check, color: Color(0xFF007AFF), size: 20),
                   ],
                 ),
               ),
             );
           }),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
         ],
       ),
     );
