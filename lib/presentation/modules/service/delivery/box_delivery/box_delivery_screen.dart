@@ -5,14 +5,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart'; // Add image_picker to pubspec!
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/box_delivery/box_delivery_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_box_label.dart';
 import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_location_box.dart';
 import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_select_box_row.dart';
 import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_show_product_image_dialog.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
-
-import 'package:sixam_mart_user/presentation/modules/delivery/box_delivery/box_delivery_controller.dart';
 
 class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
   const BoxDeliveryScreen({super.key});

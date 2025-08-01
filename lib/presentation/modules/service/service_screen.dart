@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/domain/enums/service_type.dart';
+import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/service/food/service_food_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/laundry/service_laundry_screen.dart';
-
-import 'service_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
 
 class ServiceScreen extends BaseScreen<ServiceController> {
   const ServiceScreen({super.key});
@@ -18,14 +17,14 @@ class ServiceScreen extends BaseScreen<ServiceController> {
     return Obx(() {
       // Switch UI based on current service type
       final currentServiceType = controller.currentServiceType.value;
-      
+
       switch (currentServiceType) {
         case ServiceType.food:
-          return ServiceFoodScreen();
+          return const ServiceFoodScreen();
         case ServiceType.laundry:
-          return ServiceLaundryScreen();
+          return const ServiceLaundryScreen();
         default:
-          return ServiceFoodScreen(); // Default to food UI
+          return const ServiceFoodScreen(); // Default to food UI
       }
     });
   }

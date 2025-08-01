@@ -27,7 +27,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime selectedDay = days[selectedDayIndex];
+    final DateTime selectedDay = days[selectedDayIndex];
 
     return Container(
       decoration: const BoxDecoration(
@@ -44,7 +44,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
               child: Container(
                 width: 48,
                 height: 4,
-                decoration: BoxDecoration(color: Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(99)),
+                decoration: BoxDecoration(color: const Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(99)),
               ),
             ),
           ),
@@ -61,7 +61,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
                   child: Center(
                     child: Text(
                       DateFormat.yMMMMd().format(selectedDay),
-                      style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 18, color: Color(0xFF161A1D)),
+                      style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 18, color: Color(0xFF161A1D)),
                     ),
                   ),
                 ),
@@ -72,7 +72,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
               ],
             ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           // List ngày
           SizedBox(
             height: 90,
@@ -89,18 +89,18 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
                     margin: const EdgeInsets.only(right: 12),
                     width: 60,
                     height: 81,
-                    decoration: BoxDecoration(color: selected ? Color(0xFF5856D7) : Color(0xFFF7F8F9), borderRadius: BorderRadius.circular(8)),
+                    decoration: BoxDecoration(color: selected ? const Color(0xFF5856D7) : const Color(0xFFF7F8F9), borderRadius: BorderRadius.circular(8)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           DateFormat.E().format(d), // Mon, Tue,...
-                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: selected ? Colors.white : (idx == 0 ? Color(0xFF5856D7) : Color(0xFF798A9A))),
+                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: selected ? Colors.white : (idx == 0 ? const Color(0xFF5856D7) : const Color(0xFF798A9A))),
                         ),
                         const SizedBox(height: 12),
                         Text(
                           DateFormat.d().format(d), // 20, 21,...
-                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 24, color: selected ? Colors.white : (idx == 0 ? Color(0xFF5856D7) : Color(0xFF161A1D))),
+                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 24, color: selected ? Colors.white : (idx == 0 ? const Color(0xFF5856D7) : const Color(0xFF161A1D))),
                         ),
                       ],
                     ),
@@ -167,15 +167,15 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
                 height: 48,
                 child: ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(Color(0xFF5856D7)),
+                    backgroundColor: WidgetStateProperty.all(const Color(0xFF5856D7)),
                     shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32))),
-                    padding: WidgetStateProperty.all(EdgeInsets.symmetric(vertical: 12)),
+                    padding: WidgetStateProperty.all(const EdgeInsets.symmetric(vertical: 12)),
                     elevation: WidgetStateProperty.all(0),
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text(
+                  child: const Text(
                     'Save',
                     style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white),
                   ),

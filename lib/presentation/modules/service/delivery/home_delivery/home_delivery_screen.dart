@@ -4,9 +4,8 @@ import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_item.dart';
 import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_service_card.dart';
 import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_status_card.dart';
+import 'package:sixam_mart_user/presentation/modules/service/delivery/home_delivery/home_delivery_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
-
-import 'package:sixam_mart_user/presentation/modules/delivery/home_delivery/home_delivery_controller.dart';
 
 class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
   const HomeDeliveryScreen({super.key});
