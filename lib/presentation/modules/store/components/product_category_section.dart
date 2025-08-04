@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
+import 'package:sixam_mart_user/domain/models/response/get_store_infomation_response.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_card.dart';
-import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_products/store_products_screen.dart';
 import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
 
 class ProductCategorySection extends StatelessWidget {
-
   const ProductCategorySection({required this.title, required this.items, super.key});
   final String title;
   final List<ProductItem> items;

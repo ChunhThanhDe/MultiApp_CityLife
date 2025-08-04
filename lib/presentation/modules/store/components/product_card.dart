@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
-import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
+import 'package:sixam_mart_user/domain/models/response/get_store_infomation_response.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class ProductCard extends StatelessWidget {
-
   const ProductCard({required this.item, super.key});
   final ProductItem item;
 
@@ -30,7 +29,7 @@ class ProductCard extends StatelessWidget {
                   decoration: BoxDecoration(color: AppColors.stateGreyLowest50, borderRadius: BorderRadius.circular(12.r)),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12.r),
-                    child: AppImage.network(item.imageUrl, width: 120.w, height: 120.h),
+                    child: AppImage.network(item.imageUrl ?? '', width: 120.w, height: 120.h),
                   ),
                 ),
               ),
@@ -58,13 +57,13 @@ class ProductCard extends StatelessWidget {
 
           SizedBox(height: 8.h),
           Text(
-            item.name,
+            item.name ?? '',
             style: AppTextStyles.typographyH11Medium.copyWith(color: AppColors.textGreyHighest950),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           SizedBox(height: 4.h),
-          Text('\$${item.price.toStringAsFixed(2)}', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
+          Text('\$${(item.price ?? 0).toStringAsFixed(2)}', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
         ],
       ),
     );

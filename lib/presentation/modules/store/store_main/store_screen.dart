@@ -17,7 +17,7 @@ class StoreScreen extends BaseScreen<StoreController> {
   @override
   Widget buildScreen(BuildContext context) {
     return GetX<StoreController>(
-      init: StoreController(storeId: storeId, storeType: storeType),
+      init: controller,
       builder: (controller) {
         if (controller.isLoading.value) {
           return const Center(child: CircularProgressIndicator());

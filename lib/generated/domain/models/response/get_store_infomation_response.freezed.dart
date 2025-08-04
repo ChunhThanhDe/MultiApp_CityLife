@@ -17,7 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$StoreInfomationResponse {
 
 // Store information (combined from both food and grocery)
- StoreDetail? get store; GroceryStore? get groceryStore;// Food-specific fields
+ StoreDetail? get store;// Food-specific fields
 @JsonKey(name: 'popular_items') List<ProductItem>? get popularItems; List<Section>? get sections;// Grocery-specific fields
  List<GroceryCategory>? get categories; List<GrocerySection>? get grocerySections;
 /// Create a copy of StoreInfomationResponse
@@ -32,16 +32,16 @@ $StoreInfomationResponseCopyWith<StoreInfomationResponse> get copyWith => _$Stor
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StoreInfomationResponse&&(identical(other.store, store) || other.store == store)&&(identical(other.groceryStore, groceryStore) || other.groceryStore == groceryStore)&&const DeepCollectionEquality().equals(other.popularItems, popularItems)&&const DeepCollectionEquality().equals(other.sections, sections)&&const DeepCollectionEquality().equals(other.categories, categories)&&const DeepCollectionEquality().equals(other.grocerySections, grocerySections));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StoreInfomationResponse&&(identical(other.store, store) || other.store == store)&&const DeepCollectionEquality().equals(other.popularItems, popularItems)&&const DeepCollectionEquality().equals(other.sections, sections)&&const DeepCollectionEquality().equals(other.categories, categories)&&const DeepCollectionEquality().equals(other.grocerySections, grocerySections));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,store,groceryStore,const DeepCollectionEquality().hash(popularItems),const DeepCollectionEquality().hash(sections),const DeepCollectionEquality().hash(categories),const DeepCollectionEquality().hash(grocerySections));
+int get hashCode => Object.hash(runtimeType,store,const DeepCollectionEquality().hash(popularItems),const DeepCollectionEquality().hash(sections),const DeepCollectionEquality().hash(categories),const DeepCollectionEquality().hash(grocerySections));
 
 @override
 String toString() {
-  return 'StoreInfomationResponse(store: $store, groceryStore: $groceryStore, popularItems: $popularItems, sections: $sections, categories: $categories, grocerySections: $grocerySections)';
+  return 'StoreInfomationResponse(store: $store, popularItems: $popularItems, sections: $sections, categories: $categories, grocerySections: $grocerySections)';
 }
 
 
@@ -52,11 +52,11 @@ abstract mixin class $StoreInfomationResponseCopyWith<$Res>  {
   factory $StoreInfomationResponseCopyWith(StoreInfomationResponse value, $Res Function(StoreInfomationResponse) _then) = _$StoreInfomationResponseCopyWithImpl;
 @useResult
 $Res call({
- StoreDetail? store, GroceryStore? groceryStore,@JsonKey(name: 'popular_items') List<ProductItem>? popularItems, List<Section>? sections, List<GroceryCategory>? categories, List<GrocerySection>? grocerySections
+ StoreDetail? store,@JsonKey(name: 'popular_items') List<ProductItem>? popularItems, List<Section>? sections, List<GroceryCategory>? categories, List<GrocerySection>? grocerySections
 });
 
 
-$StoreDetailCopyWith<$Res>? get store;$GroceryStoreCopyWith<$Res>? get groceryStore;
+$StoreDetailCopyWith<$Res>? get store;
 
 }
 /// @nodoc
@@ -69,11 +69,10 @@ class _$StoreInfomationResponseCopyWithImpl<$Res>
 
 /// Create a copy of StoreInfomationResponse
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? store = freezed,Object? groceryStore = freezed,Object? popularItems = freezed,Object? sections = freezed,Object? categories = freezed,Object? grocerySections = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? store = freezed,Object? popularItems = freezed,Object? sections = freezed,Object? categories = freezed,Object? grocerySections = freezed,}) {
   return _then(_self.copyWith(
 store: freezed == store ? _self.store : store // ignore: cast_nullable_to_non_nullable
-as StoreDetail?,groceryStore: freezed == groceryStore ? _self.groceryStore : groceryStore // ignore: cast_nullable_to_non_nullable
-as GroceryStore?,popularItems: freezed == popularItems ? _self.popularItems : popularItems // ignore: cast_nullable_to_non_nullable
+as StoreDetail?,popularItems: freezed == popularItems ? _self.popularItems : popularItems // ignore: cast_nullable_to_non_nullable
 as List<ProductItem>?,sections: freezed == sections ? _self.sections : sections // ignore: cast_nullable_to_non_nullable
 as List<Section>?,categories: freezed == categories ? _self.categories : categories // ignore: cast_nullable_to_non_nullable
 as List<GroceryCategory>?,grocerySections: freezed == grocerySections ? _self.grocerySections : grocerySections // ignore: cast_nullable_to_non_nullable
@@ -92,18 +91,6 @@ $StoreDetailCopyWith<$Res>? get store {
   return $StoreDetailCopyWith<$Res>(_self.store!, (value) {
     return _then(_self.copyWith(store: value));
   });
-}/// Create a copy of StoreInfomationResponse
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$GroceryStoreCopyWith<$Res>? get groceryStore {
-    if (_self.groceryStore == null) {
-    return null;
-  }
-
-  return $GroceryStoreCopyWith<$Res>(_self.groceryStore!, (value) {
-    return _then(_self.copyWith(groceryStore: value));
-  });
 }
 }
 
@@ -112,12 +99,11 @@ $GroceryStoreCopyWith<$Res>? get groceryStore {
 @JsonSerializable()
 
 class _StoreInfomationResponse implements StoreInfomationResponse {
-  const _StoreInfomationResponse({this.store, this.groceryStore, @JsonKey(name: 'popular_items') final  List<ProductItem>? popularItems, final  List<Section>? sections, final  List<GroceryCategory>? categories, final  List<GrocerySection>? grocerySections}): _popularItems = popularItems,_sections = sections,_categories = categories,_grocerySections = grocerySections;
+  const _StoreInfomationResponse({this.store, @JsonKey(name: 'popular_items') final  List<ProductItem>? popularItems, final  List<Section>? sections, final  List<GroceryCategory>? categories, final  List<GrocerySection>? grocerySections}): _popularItems = popularItems,_sections = sections,_categories = categories,_grocerySections = grocerySections;
   factory _StoreInfomationResponse.fromJson(Map<String, dynamic> json) => _$StoreInfomationResponseFromJson(json);
 
 // Store information (combined from both food and grocery)
 @override final  StoreDetail? store;
-@override final  GroceryStore? groceryStore;
 // Food-specific fields
  final  List<ProductItem>? _popularItems;
 // Food-specific fields
@@ -172,16 +158,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StoreInfomationResponse&&(identical(other.store, store) || other.store == store)&&(identical(other.groceryStore, groceryStore) || other.groceryStore == groceryStore)&&const DeepCollectionEquality().equals(other._popularItems, _popularItems)&&const DeepCollectionEquality().equals(other._sections, _sections)&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._grocerySections, _grocerySections));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StoreInfomationResponse&&(identical(other.store, store) || other.store == store)&&const DeepCollectionEquality().equals(other._popularItems, _popularItems)&&const DeepCollectionEquality().equals(other._sections, _sections)&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._grocerySections, _grocerySections));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,store,groceryStore,const DeepCollectionEquality().hash(_popularItems),const DeepCollectionEquality().hash(_sections),const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_grocerySections));
+int get hashCode => Object.hash(runtimeType,store,const DeepCollectionEquality().hash(_popularItems),const DeepCollectionEquality().hash(_sections),const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_grocerySections));
 
 @override
 String toString() {
-  return 'StoreInfomationResponse(store: $store, groceryStore: $groceryStore, popularItems: $popularItems, sections: $sections, categories: $categories, grocerySections: $grocerySections)';
+  return 'StoreInfomationResponse(store: $store, popularItems: $popularItems, sections: $sections, categories: $categories, grocerySections: $grocerySections)';
 }
 
 
@@ -192,11 +178,11 @@ abstract mixin class _$StoreInfomationResponseCopyWith<$Res> implements $StoreIn
   factory _$StoreInfomationResponseCopyWith(_StoreInfomationResponse value, $Res Function(_StoreInfomationResponse) _then) = __$StoreInfomationResponseCopyWithImpl;
 @override @useResult
 $Res call({
- StoreDetail? store, GroceryStore? groceryStore,@JsonKey(name: 'popular_items') List<ProductItem>? popularItems, List<Section>? sections, List<GroceryCategory>? categories, List<GrocerySection>? grocerySections
+ StoreDetail? store,@JsonKey(name: 'popular_items') List<ProductItem>? popularItems, List<Section>? sections, List<GroceryCategory>? categories, List<GrocerySection>? grocerySections
 });
 
 
-@override $StoreDetailCopyWith<$Res>? get store;@override $GroceryStoreCopyWith<$Res>? get groceryStore;
+@override $StoreDetailCopyWith<$Res>? get store;
 
 }
 /// @nodoc
@@ -209,11 +195,10 @@ class __$StoreInfomationResponseCopyWithImpl<$Res>
 
 /// Create a copy of StoreInfomationResponse
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? store = freezed,Object? groceryStore = freezed,Object? popularItems = freezed,Object? sections = freezed,Object? categories = freezed,Object? grocerySections = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? store = freezed,Object? popularItems = freezed,Object? sections = freezed,Object? categories = freezed,Object? grocerySections = freezed,}) {
   return _then(_StoreInfomationResponse(
 store: freezed == store ? _self.store : store // ignore: cast_nullable_to_non_nullable
-as StoreDetail?,groceryStore: freezed == groceryStore ? _self.groceryStore : groceryStore // ignore: cast_nullable_to_non_nullable
-as GroceryStore?,popularItems: freezed == popularItems ? _self._popularItems : popularItems // ignore: cast_nullable_to_non_nullable
+as StoreDetail?,popularItems: freezed == popularItems ? _self._popularItems : popularItems // ignore: cast_nullable_to_non_nullable
 as List<ProductItem>?,sections: freezed == sections ? _self._sections : sections // ignore: cast_nullable_to_non_nullable
 as List<Section>?,categories: freezed == categories ? _self._categories : categories // ignore: cast_nullable_to_non_nullable
 as List<GroceryCategory>?,grocerySections: freezed == grocerySections ? _self._grocerySections : grocerySections // ignore: cast_nullable_to_non_nullable
@@ -232,18 +217,6 @@ $StoreDetailCopyWith<$Res>? get store {
 
   return $StoreDetailCopyWith<$Res>(_self.store!, (value) {
     return _then(_self.copyWith(store: value));
-  });
-}/// Create a copy of StoreInfomationResponse
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$GroceryStoreCopyWith<$Res>? get groceryStore {
-    if (_self.groceryStore == null) {
-    return null;
-  }
-
-  return $GroceryStoreCopyWith<$Res>(_self.groceryStore!, (value) {
-    return _then(_self.copyWith(groceryStore: value));
   });
 }
 }

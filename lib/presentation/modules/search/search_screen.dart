@@ -2,10 +2,10 @@ import 'package:flutter/material.dart' hide SearchController;
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/domain/models/response/get_store_infomation_response.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/search/search_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_category_section.dart';
-import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_text_field.dart';
 
@@ -154,7 +154,7 @@ class SearchScreen extends BaseScreen<SearchController> {
       itemBuilder: (context, index) {
         final storeGroup = searchData.itemsByStore![index];
         final productItems = storeGroup.items
-            .map((item) => ProductItem(name: item.name, id: item.id, price: item.finalPrice, rating: item.avgRating, imageUrl: item.imageUrl, reviewCount: 0, categories: [], availableServices: []))
+            .map((item) => ProductItem(name: item.name, id: item.id, price: item.finalPrice, avgRating: item.avgRating, imageUrl: item.imageUrl, ratingCount: 0))
             .toList();
 
         return ProductCategorySection(title: storeGroup.storeName, items: productItems);

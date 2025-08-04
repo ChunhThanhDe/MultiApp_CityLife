@@ -10,8 +10,6 @@ abstract class StoreInfomationResponse with _$StoreInfomationResponse {
   const factory StoreInfomationResponse({
     // Store information (combined from both food and grocery)
     StoreDetail? store,
-    GroceryStore? groceryStore,
-
     // Food-specific fields
     @JsonKey(name: 'popular_items') List<ProductItem>? popularItems,
     List<Section>? sections,

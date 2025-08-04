@@ -12,9 +12,6 @@ _StoreInfomationResponse _$StoreInfomationResponseFromJson(
   store: json['store'] == null
       ? null
       : StoreDetail.fromJson(json['store'] as Map<String, dynamic>),
-  groceryStore: json['groceryStore'] == null
-      ? null
-      : GroceryStore.fromJson(json['groceryStore'] as Map<String, dynamic>),
   popularItems: (json['popular_items'] as List<dynamic>?)
       ?.map((e) => ProductItem.fromJson(e as Map<String, dynamic>))
       .toList(),
@@ -33,7 +30,6 @@ Map<String, dynamic> _$StoreInfomationResponseToJson(
   _StoreInfomationResponse instance,
 ) => <String, dynamic>{
   'store': instance.store,
-  'groceryStore': instance.groceryStore,
   'popular_items': instance.popularItems,
   'sections': instance.sections,
   'categories': instance.categories,

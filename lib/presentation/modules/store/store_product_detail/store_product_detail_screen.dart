@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/domain/models/response/get_store_infomation_response.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_card.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_detail_appbar.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_nutritiion_section.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_option_group_section.dart';
-import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
-import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
-
 import 'package:sixam_mart_user/presentation/modules/store/store_product_detail/store_product_detail_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> {
   const StoreProductDetailScreen({required this.productId, super.key});
@@ -233,14 +232,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                   itemBuilder: (_, i) {
                     final item = controller.recommendations[i];
 
-                    final productItem = ProductItem(
-                      id: item.id,
-                      name: item.name,
-                      price: item.price / 100.0,
-                      imageUrl: item.imageUrl,
-                      rating: 123.0, //
-                      reviewCount: 123, // Tương tự
-                    );
+                    final productItem = ProductItem(id: item.id, name: item.name, price: item.price / 100.0, imageUrl: item.imageUrl, avgRating: 4.5, ratingCount: 123);
 
                     return ProductCard(item: productItem);
                   },

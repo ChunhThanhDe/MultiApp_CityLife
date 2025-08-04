@@ -18,27 +18,6 @@ enum FilterType {
   final String? icon;
 }
 
-class ProductItem {
-  ProductItem({
-    required this.id,
-    required this.name,
-    required this.price,
-    required this.imageUrl,
-    required this.rating,
-    required this.reviewCount,
-    this.categories = const [FilterType.foods],
-    this.availableServices = const [StoreServiceType.inStore],
-  });
-  final int id;
-  final String name;
-  final double price;
-  final String imageUrl;
-  final List<FilterType> categories;
-  final List<StoreServiceType> availableServices;
-  final double rating;
-  final int reviewCount;
-}
-
 class StoreController extends BaseController with GetSingleTickerProviderStateMixin {
   StoreController({required this.storeType, required this.storeId});
   final StoreRepository _storeRepository = Get.find<StoreRepository>();
@@ -53,8 +32,6 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
   FilterType get selectedFilter => _selectedFilter;
   StoreServiceType get selectedService => _selectedService;
 
-  /// Responses
-  final Rx<StoreInfomationResponse?> storeResponse = Rx<StoreInfomationResponse?>(null);
   final Rx<StoreInfoResponse?> generalResponse = Rx<StoreInfoResponse?>(null);
   final Rx<StoreDetail?> storeInfo = Rx<StoreDetail?>(null);
 
@@ -92,112 +69,30 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
     try {
       switch (result) {
         case Success(:final response):
-          // Handle merged store information response
-          if (storeType == 'food' || storeType == 'grocery' || storeType == 'pharmacy') {
-            final data = StoreInfomationResponse.fromJson(response.data);
-            storeResponse.value = data;
+          final data = StoreInfomationResponse.fromJson(response.data);
+          storeInfo.value = data.store;
 
-            // Set store info based on available data
-            if (data.store != null) {
-              storeInfo.value = data.store;
-            } else if (data.groceryStore != null) {
-              // Convert GroceryStore to StoreDetail if needed
-              storeInfo.value = StoreDetail(
-                id: data.groceryStore?.id,
-                name: data.groceryStore?.name,
-                logoUrl: data.groceryStore?.logoUrl,
-                coverPhotoUrl: data.groceryStore?.coverPhotoUrl,
-                rating: 0.0, // Default rating for grocery stores
-                reviewCount: 0, // Default review count for grocery stores
-                services: null,
-              );
-            }
-
-            // Handle popular items (food stores)
-            if (data.popularItems != null) {
-              _popularItems.value = data.popularItems!
-                  .map(
-                    (e) => ProductItem(
-                      id: e.id ?? 0,
-                      name: e.name ?? '',
-                      price: e.price?.toDouble() ?? 0.0,
-                      imageUrl: e.imageUrl ?? '',
-                      rating: e.avgRating ?? 0.0,
-                      reviewCount: e.ratingCount ?? 0,
-                      categories: [FilterType.foods],
-                      availableServices: StoreServiceType.values,
-                    ),
-                  )
-                  .toList();
-            }
-
-            // Handle sections (food stores)
-            if (data.sections != null) {
-              _categories.value = {
-                for (final section in data.sections!)
-                  section.categoryName ?? 'Unknown': (section.items ?? [])
-                      .map(
-                        (e) => ProductItem(
-                          id: e.id ?? 0,
-                          name: e.name ?? '',
-                          price: e.price?.toDouble() ?? 0.0,
-                          imageUrl: e.imageUrl ?? '',
-                          rating: e.avgRating ?? 0.0,
-                          reviewCount: e.ratingCount ?? 0,
-                          categories: [FilterType.foods],
-                          availableServices: StoreServiceType.values,
-                        ),
-                      )
-                      .toList(),
-              };
-            }
-
-            // Handle grocery sections
-            if (data.grocerySections != null) {
-              _categories.value = {
-                for (final section in data.grocerySections!)
-                  section.categoryId?.toString() ?? 'Unknown': (section.items ?? [])
-                      .map(
-                        (e) => ProductItem(
-                          id: e.id ?? 0,
-                          name: e.name ?? '',
-                          price: e.price?.toDouble() ?? 0.0,
-                          imageUrl: e.imageUrl ?? '',
-                          rating: e.avgRating ?? 0.0,
-                          reviewCount: e.ratingCount ?? 0,
-                          categories: [FilterType.foods],
-                          availableServices: StoreServiceType.values,
-                        ),
-                      )
-                      .toList(),
-              };
-            }
-          } else if (storeType == 'general') {
-            final data = StoreInfoResponse.fromJson(response.data);
-            generalResponse.value = data;
-
-            _categories.value = {
-              for (final menu in data.menu)
-                menu.categoryName: menu.items
-                    .map(
-                      (e) => ProductItem(
-                        id: e.id,
-                        name: e.name,
-                        price: e.price.toDouble(), // Convert int to double
-                        imageUrl: e.imageUrl,
-                        rating: e.avgRating,
-                        reviewCount: e.ratingCount,
-                        categories: [FilterType.foods],
-                        availableServices: StoreServiceType.values,
-                      ),
-                    )
-                    .toList(),
-            };
-          } else if (storeType == 'reviews') {
+          if (data.store == null) {
             return;
           }
-          break;
 
+          _categories.clear();
+
+          // Load popular items
+          if (data.popularItems != null) {
+            _popularItems.clear();
+            _popularItems.addAll(data.popularItems!);
+          }
+
+          // Load menu categories
+          if (data.sections != null) {
+            for (final section in data.sections!) {
+              if (section.categoryName != null && section.items != null) {
+                _categories[section.categoryName!] = section.items!;
+              }
+            }
+          }
+          break;
         case Failure():
           Get.snackbar('Error', 'Load store detail failed');
           break;
@@ -224,9 +119,9 @@ class StoreController extends BaseController with GetSingleTickerProviderStateMi
 
   List<ProductItem> filterItems(List<ProductItem> items) {
     return items.where((item) {
-      final matchFilter = _selectedFilter == FilterType.all || item.categories.contains(_selectedFilter);
-      final matchService = item.availableServices.contains(_selectedService);
-      return matchFilter && matchService;
+      // For now, we'll show all items since the ProductItem from API doesn't have categories
+      // You can extend the ProductItem model to include categories if needed
+      return true;
     }).toList();
   }
 

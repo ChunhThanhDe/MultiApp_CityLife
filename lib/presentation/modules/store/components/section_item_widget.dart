@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/domain/models/response/get_store_infomation_response.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/section_item_card.dart';
-import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
 class SectionItemWidget extends StatelessWidget {
-
   const SectionItemWidget({required this.sectionTitle, required this.products, super.key});
   final String sectionTitle;
   final List<ProductItem> products;
