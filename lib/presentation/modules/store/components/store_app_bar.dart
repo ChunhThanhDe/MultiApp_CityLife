@@ -20,7 +20,7 @@ class StoreAppBar extends StatelessWidget {
     return GetBuilder<StoreController>(
       builder: (controller) {
         final store = controller.storeInfo.value;
-        if (store == null) return const SizedBox();
+        if (store == null) return const SliverToBoxAdapter(child: SizedBox());
 
         return SliverToBoxAdapter(
           child: Container(

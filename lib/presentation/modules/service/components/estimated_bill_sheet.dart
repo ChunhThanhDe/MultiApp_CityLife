@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
 class EstimatedBillSheet extends StatelessWidget {
@@ -126,7 +125,7 @@ class EstimatedBillSheet extends StatelessWidget {
                   elevation: WidgetStateProperty.all(0),
                 ),
                 onPressed: () {
-                  Get.toNamed(AppRoutes.cartCheckout, arguments: {'serviceCart': Service.getServiceByType(ServiceType.laundry)});
+                  Get.toNamed(AppRoutes.cartCheckout, arguments: {'serviceCart': 'laundry'});
                 },
                 child: const Text(
                   'Continue Order',
@@ -145,7 +144,6 @@ class EstimatedBillSheet extends StatelessWidget {
 // ====== Widget phụ ======
 
 class _SectionGroup extends StatelessWidget {
-
   const _SectionGroup({required this.icon, required this.iconColor, required this.title, required this.items});
   final IconData icon;
   final Color iconColor;
@@ -183,7 +181,6 @@ class _SectionGroup extends StatelessWidget {
 }
 
 class _SheetItem {
-
   _SheetItem({required this.name, required this.price, required this.quantity});
   final String name;
   final double price;
@@ -191,7 +188,6 @@ class _SheetItem {
 }
 
 class _SheetItemRow extends StatelessWidget {
-
   const _SheetItemRow({required this.item});
   final _SheetItem item;
 
@@ -225,7 +221,6 @@ class _SheetItemRow extends StatelessWidget {
 }
 
 class _QuantityBox extends StatelessWidget {
-
   const _QuantityBox({required this.quantity});
   final int quantity;
 
@@ -255,7 +250,6 @@ class _QuantityBox extends StatelessWidget {
 }
 
 class _BillInfoRow extends StatelessWidget {
-
   const _BillInfoRow({required this.label, required this.value});
   final String label;
   final String value;

@@ -15,21 +15,29 @@ class StoreProductCategories extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<StoreController>(
       builder: (controller) {
-        final List<Widget> categoryWidgets = [
-          ProductCategorySection(title: 'Popular Items', items: controller.popularItems),
-          SectionBreakDivider(color: AppColors.stateGreyLowestHover100, height: 1),
-          const StoreFilterSection(),
-        ];
+        final List<Widget> categoryWidgets = [];
 
+        // Only show popular items if not empty
+        if (controller.popularItems.isNotEmpty) {
+          categoryWidgets.add(ProductCategorySection(title: 'Popular Items', items: controller.popularItems));
+          categoryWidgets.add(SectionBreakDivider(color: AppColors.stateGreyLowestHover100, height: 1));
+        }
+
+        // Only show filter section if there are categories to filter
         final Map<String, List<ProductItem>> filteredCategories = controller.filteredCategories;
+        if (filteredCategories.isNotEmpty) {
+          categoryWidgets.add(const StoreFilterSection());
+        }
 
         // Add categories with filtered items
         filteredCategories.forEach((categoryTitle, items) {
-          categoryWidgets.add(ProductCategorySection(title: categoryTitle, items: items));
+          if (items.isNotEmpty) {
+            categoryWidgets.add(ProductCategorySection(title: categoryTitle, items: items));
+          }
         });
 
-        // Show message when no categories available for selected filter
-        if (filteredCategories.isEmpty) {
+        // Show message when no data available at all
+        if (controller.popularItems.isEmpty && filteredCategories.isEmpty) {
           categoryWidgets.add(
             Container(
               padding: EdgeInsets.all(24.w),
@@ -51,7 +59,10 @@ class StoreProductCategories extends StatelessWidget {
           );
         }
 
-        categoryWidgets.add(SizedBox(height: 100.h));
+        // Add bottom spacing only if there are widgets to show
+        if (categoryWidgets.isNotEmpty) {
+          categoryWidgets.add(SizedBox(height: 100.h));
+        }
 
         return SliverList(delegate: SliverChildListDelegate(categoryWidgets));
       },

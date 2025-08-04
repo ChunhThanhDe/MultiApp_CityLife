@@ -3,15 +3,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/response/get_checkout_summary_response.dart';
+import 'package:sixam_mart_user/domain/models/response/get_store_general_data.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/cart_checkout/cart_checkout_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/components/time_picker_sheet.dart';
-import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 
 class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   const CartCheckoutScreen({super.key, this.serviceCart});
-  final Service? serviceCart;
+  final ServiceEntity? serviceCart;
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
@@ -44,11 +44,11 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
             _buildDivider(),
 
             // Order Details Section
-            if (serviceCart != null && serviceCart!.serviceType != ServiceType.laundry) _buildOrderDetailsSection(checkoutData),
+            if (serviceCart != null && serviceCart!.moduleType != 'laundry') _buildOrderDetailsSection(checkoutData),
             _buildDivider(),
 
             // Promocode Section
-            if (serviceCart != null && serviceCart!.serviceType != ServiceType.laundry) ...[_buildPromocodeSection(checkoutData), _buildDivider()],
+            if (serviceCart != null && serviceCart!.moduleType != 'laundry') ...[_buildPromocodeSection(checkoutData), _buildDivider()],
 
             // Price Summary Section
             _buildPriceSummarySection(checkoutData),
@@ -583,7 +583,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                 onPressed: controller.isLoading.value
                     ? null
                     : () {
-                        if (serviceCart != null && serviceCart!.serviceType == ServiceType.laundry) {
+                        if (serviceCart != null && serviceCart!.moduleType == 'laundry') {
                           Get.toNamed(AppRoutes.cartSuccessful);
                         } else {
                           controller.orderNow();
@@ -626,12 +626,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
     Get.snackbar('Info', 'Address selection dialog would open here');
   }
 
-  void _showPromocodeDialog(List<AvailableCoupon> coupons) {
-    // TODO: Implement promocode dialog
-    Get.snackbar('Info', 'Promocode dialog would open here');
-  }
-
-  Widget _buildServiceHead(Service serviceCart) {
+  Widget _buildServiceHead(ServiceEntity serviceCart) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(24),
@@ -643,7 +638,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
             width: 70,
             height: 70,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: const Color(0xFFF7F8F9)),
-            child: Center(child: Image.asset(serviceCart.image, width: 50, height: 50, fit: BoxFit.contain)),
+            child: Center(child: Image.asset(serviceCart.thumbnail ?? '', width: 50, height: 50, fit: BoxFit.contain)),
           ),
           const SizedBox(height: 16),
 
@@ -653,7 +648,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
             children: [
               // Service Title
               Text(
-                serviceCart.title,
+                serviceCart.moduleName ?? '',
                 style: const TextStyle(
                   fontFamily: 'Inter',
                   fontStyle: FontStyle.normal,
@@ -667,7 +662,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
 
               // Service Description
               Text(
-                serviceCart.description,
+                serviceCart.moduleName ?? '',
                 style: const TextStyle(
                   fontFamily: 'Inter',
                   fontStyle: FontStyle.normal,
@@ -683,7 +678,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
               GestureDetector(
                 onTap: () {
                   // Navigate to service details or show more info
-                  Get.snackbar('Info', 'More details for ${serviceCart.title}');
+                  Get.snackbar('Info', 'More details for ${serviceCart.moduleName}');
                 },
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,
