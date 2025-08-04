@@ -10,8 +10,7 @@ import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 
 class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
-  const CartCheckoutScreen({super.key, this.serviceCart});
-  final ServiceEntity? serviceCart;
+  const CartCheckoutScreen({super.key});
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
@@ -33,7 +32,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
       return SingleChildScrollView(
         child: Column(
           children: [
-            if (serviceCart != null) _buildServiceHead(serviceCart!),
+            if (controller.serviceCart != null) _buildServiceHead(controller.serviceCart!),
 
             // Address Section
             _buildAddressSection(checkoutData),
@@ -44,11 +43,11 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
             _buildDivider(),
 
             // Order Details Section
-            if (serviceCart != null && serviceCart!.moduleType != 'laundry') _buildOrderDetailsSection(checkoutData),
+            if (controller.serviceCart != null && controller.serviceCart!.moduleType != 'laundry') _buildOrderDetailsSection(checkoutData),
             _buildDivider(),
 
             // Promocode Section
-            if (serviceCart != null && serviceCart!.moduleType != 'laundry') ...[_buildPromocodeSection(checkoutData), _buildDivider()],
+            if (controller.serviceCart != null && controller.serviceCart!.moduleType != 'laundry') ...[_buildPromocodeSection(checkoutData), _buildDivider()],
 
             // Price Summary Section
             _buildPriceSummarySection(checkoutData),
@@ -583,7 +582,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                 onPressed: controller.isLoading.value
                     ? null
                     : () {
-                        if (serviceCart != null && serviceCart!.moduleType == 'laundry') {
+                        if (controller.serviceCart != null && controller.serviceCart!.moduleType == 'laundry') {
                           Get.toNamed(AppRoutes.cartSuccessful);
                         } else {
                           controller.orderNow();

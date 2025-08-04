@@ -7,9 +7,7 @@ import 'package:sixam_mart_user/presentation/modules/store/components/store_serv
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
 
 class StoreScreen extends BaseScreen<StoreController> {
-  const StoreScreen({required this.storeId, required this.storeType, super.key});
-  final int storeId;
-  final String storeType;
+  const StoreScreen({super.key});
 
   @override
   bool get wrapWithSafeArea => false;

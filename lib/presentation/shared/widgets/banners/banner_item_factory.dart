@@ -13,7 +13,7 @@ class BannerItemFactory {
     final defaultOnTap =
         onTap ??
         () {
-          Get.toNamed(AppRoutes.store, arguments: {'storeId': item.id, 'storeType': serviceType ?? 'fast_food'});
+          Get.toNamed(AppRoutes.store, arguments: {'storeId': item.id, 'storeType': serviceType});
         };
 
     switch (bannerType) {

@@ -6,12 +6,15 @@ import 'package:sixam_mart_user/domain/models/request/cart/checkout_calculate_re
 import 'package:sixam_mart_user/domain/models/request/cart/order_now_request.dart';
 import 'package:sixam_mart_user/domain/models/response/checkout_calculate_response.dart';
 import 'package:sixam_mart_user/domain/models/response/get_checkout_summary_response.dart';
+import 'package:sixam_mart_user/domain/models/response/get_store_general_data.dart';
 import 'package:sixam_mart_user/domain/repositories/cart_repository.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 import 'package:sixam_mart_user/services/cart_service.dart';
 
 class CartCheckoutController extends BaseController {
+  CartCheckoutController(this.serviceCart);
+  final ServiceEntity? serviceCart;
   final CartRepository _cartRepository = Get.find<CartRepository>();
   final CartService _cartService = Get.find<CartService>();
 
@@ -22,7 +25,6 @@ class CartCheckoutController extends BaseController {
   final RxInt selectedAddressId = RxInt(0);
   final RxString promoCode = RxString('');
   final RxBool isApplyingPromoCode = RxBool(false);
-  
   // Inline message states for promo code section
   final RxString promoMessage = RxString('');
   final RxBool isPromoError = RxBool(false);
@@ -105,7 +107,7 @@ class CartCheckoutController extends BaseController {
 
   void applyPromoCode(String code) async {
     _clearPromoMessages();
-    
+
     if (code.trim().isEmpty) {
       _setPromoError('Please enter a promo code');
       return;

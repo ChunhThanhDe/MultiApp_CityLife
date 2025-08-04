@@ -33,7 +33,7 @@ class HomeController extends BaseController {
         // Process banner data if available
         if (responseData.data != null && responseData.data is Map<String, dynamic>) {
           dynamicSections.clear();
-          dynamicSections.addAll(BannerDataUtils.getBannerSections(responseData.data, serviceType: 'fast_food'));
+          dynamicSections.addAll(BannerDataUtils.getBannerSections(responseData.data));
         }
       case Failure():
     }

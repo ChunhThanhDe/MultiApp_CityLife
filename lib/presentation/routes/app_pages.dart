@@ -120,22 +120,10 @@ class AppPages {
     GetPage(name: AppRoutes.welcome, page: () => const WelcomeScreen(), binding: WelcomeBinding()),
     GetPage(name: AppRoutes.cart, page: () => const ViewCartScreen(), binding: ViewCartBinding()),
     GetPage(name: AppRoutes.cartOrder, page: () => const CartOrderScreen(), binding: CartOrderBinding()),
-    GetPage(
-      name: AppRoutes.cartCheckout,
-      page: () => CartCheckoutScreen(serviceCart: Get.arguments['serviceCart']),
-      binding: CartCheckoutBinding(),
-    ),
+    GetPage(name: AppRoutes.cartCheckout, page: () => const CartCheckoutScreen(), binding: CartCheckoutBinding()),
     GetPage(name: AppRoutes.cartConfirm, page: () => const CartOrderConfirmScreen(), binding: CartOrderConfirmBinding()),
-    GetPage(
-      name: AppRoutes.store,
-      page: () => StoreScreen(storeId: Get.arguments['storeId'], storeType: Get.arguments['storeType']),
-      binding: StoreBinding(),
-    ),
-    GetPage(
-      name: AppRoutes.storeProductDetail,
-      page: () => StoreProductDetailScreen(productId: Get.arguments['productId']),
-      binding: StoreProductDetailBinding(),
-    ),
+    GetPage(name: AppRoutes.store, page: () => const StoreScreen(), binding: StoreBinding()),
+    GetPage(name: AppRoutes.storeProductDetail, page: () => const StoreProductDetailScreen(), binding: StoreProductDetailBinding()),
     GetPage(name: AppRoutes.laundryMain, page: () => const ServiceLaundryScreen(), binding: ServiceLaundryBinding()),
     GetPage(name: AppRoutes.cartSuccessful, page: () => const CartSuccessfulScreen(), binding: CartSuccessfulBinding()),
   ];

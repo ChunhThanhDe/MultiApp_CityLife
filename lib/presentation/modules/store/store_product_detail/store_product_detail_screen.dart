@@ -11,8 +11,7 @@ import 'package:sixam_mart_user/presentation/modules/store/store_product_detail/
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> {
-  const StoreProductDetailScreen({required this.productId, super.key});
-  final int productId;
+  const StoreProductDetailScreen({super.key});
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
@@ -52,7 +51,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
   @override
   Widget buildScreen(BuildContext context) {
     return GetX<StoreProductDetailController>(
-      init: StoreProductDetailController(productId),
+      init: StoreProductDetailController(Get.arguments['productId']),
       builder: (controller) {
         final isLoading = controller.isLoading.value;
         final product = controller.product.value;
