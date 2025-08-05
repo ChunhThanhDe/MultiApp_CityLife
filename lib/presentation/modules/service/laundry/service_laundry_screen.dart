@@ -4,7 +4,6 @@ import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/category_expandable.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/estimated_bill_sheet.dart';
-
 import 'package:sixam_mart_user/presentation/modules/service/laundry/service_laundry_controller.dart';
 
 class ServiceLaundryScreen extends BaseScreen<ServiceLaundryController> {
@@ -130,7 +129,7 @@ class _LaundryCategoryTabs extends GetView<ServiceLaundryController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 130,
+      height: 150,
       child: Obx(() {
         // Access the reactive variable to make Obx detect changes
         final selectedIndex = controller.selectedCategoryIndex;
@@ -297,7 +296,6 @@ class _Divider extends StatelessWidget {
 }
 
 class _EstimatedBillWidget extends StatelessWidget {
-
   const _EstimatedBillWidget({required this.controller});
   final ServiceLaundryController controller;
 

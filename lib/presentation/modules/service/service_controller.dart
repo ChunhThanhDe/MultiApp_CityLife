@@ -21,10 +21,17 @@ class ServiceController extends BaseController {
   final RxList<Category> categories = RxList<Category>([]);
   final RxList<BannerSection> dynamicSections = RxList<BannerSection>([]);
   final RxString currentServiceType = RxString('food');
+  void loadCurrentServiceTypeData() {
+    loadServiceTypeData(currentServiceType.value);
+  }
 
   // Method to load data for specific service type
   void loadServiceTypeData(String serviceType) async {
     currentServiceType.value = serviceType;
+    // TODO: Remove this after laundry is implemented
+    if (serviceType == 'laundry') {
+      return;
+    }
     await showAppOverlayLoading(future: _loadServiceData(serviceType));
   }
 

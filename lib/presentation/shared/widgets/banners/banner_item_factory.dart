@@ -10,11 +10,7 @@ import 'package:sixam_mart_user/presentation/shared/widgets/banners/brand_logo_n
 
 class BannerItemFactory {
   static Widget createBannerItem({required BannerType bannerType, required BannerEntity item, required int index, required int totalItems, VoidCallback? onTap, String? serviceType}) {
-    final defaultOnTap =
-        onTap ??
-        () {
-          Get.toNamed(AppRoutes.store, arguments: {'storeId': item.id, 'storeType': serviceType});
-        };
+    final defaultOnTap = onTap ?? () => Get.toNamed(AppRoutes.store, arguments: {'storeId': item.id, 'storeType': serviceType});
 
     switch (bannerType) {
       case BannerType.bannerFloatingLogo:

@@ -4,6 +4,6 @@ class ServiceFoodController extends ServiceController {
   @override
   void onReady() {
     super.onReady();
-    loadServiceTypeData('food');
+    loadCurrentServiceTypeData();
   }
 }
