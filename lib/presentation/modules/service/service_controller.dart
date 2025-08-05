@@ -3,6 +3,7 @@ import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/base/error_response.dart';
 import 'package:sixam_mart_user/base/network_exceptions.dart';
+import 'package:sixam_mart_user/domain/models/response/get_store_general_data.dart';
 import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart';
 import 'package:sixam_mart_user/domain/repositories/store_repository.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_overlay.dart';
@@ -15,24 +16,24 @@ class ServiceController extends BaseController {
   @override
   void onReady() {
     super.onReady();
-    loadServiceTypeData(currentServiceType.value);
+    loadServiceTypeData(currentService.value);
   }
 
   final RxList<Category> categories = RxList<Category>([]);
   final RxList<BannerSection> dynamicSections = RxList<BannerSection>([]);
-  final RxString currentServiceType = RxString('food');
+  final Rx<ServiceEntity> currentService = Rx<ServiceEntity>(const ServiceEntity(id: 1, moduleName: 'food', thumbnail: '', moduleType: 'food', uiType: ServiceUIType.ui1));
+
   void loadCurrentServiceTypeData() {
-    loadServiceTypeData(currentServiceType.value);
+    loadServiceTypeData(currentService.value);
   }
 
   // Method to load data for specific service type
-  void loadServiceTypeData(String serviceType) async {
-    currentServiceType.value = serviceType;
+  void loadServiceTypeData(ServiceEntity serviceType) async {
     // TODO: Remove this after laundry is implemented
-    if (serviceType == 'laundry') {
+    if (serviceType.moduleType == 'laundry') {
       return;
     }
-    await showAppOverlayLoading(future: _loadServiceData(serviceType));
+    await showAppOverlayLoading(future: _loadServiceData(serviceType.moduleType ?? ''));
   }
 
   // Clean service data loading
@@ -60,7 +61,7 @@ class ServiceController extends BaseController {
   }
 
   Future<void> refreshData() async {
-    final serviceType = currentServiceType.value;
+    final serviceType = currentService.value;
     loadServiceTypeData(serviceType);
   }
 }

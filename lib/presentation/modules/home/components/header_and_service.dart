@@ -68,7 +68,7 @@ class HeaderAndService extends GetView<HomeController> {
     return Padding(
       padding: EdgeInsets.only(right: index == controller.serviceData.length - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
       child: GestureDetector(
-        onTap: () => controller.navigateToServiceWithType(service.moduleType ?? ''),
+        onTap: () => controller.navigateToServiceWithType(service),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

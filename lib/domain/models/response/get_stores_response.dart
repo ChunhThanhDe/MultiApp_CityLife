@@ -33,7 +33,9 @@ abstract class BannerEntity with _$BannerEntity {
     double? distanceKm,
     double? deliveryFee,
     @Default(1) int status,
+    String? moduleType,
     String? image,
+    String? type,
   }) = _BannerEntity;
 
   factory BannerEntity.fromJson(Map<String, dynamic> json) => _$BannerEntityFromJson(json);

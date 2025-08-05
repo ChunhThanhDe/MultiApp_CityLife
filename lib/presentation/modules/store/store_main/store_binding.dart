@@ -5,7 +5,10 @@ import 'package:sixam_mart_user/presentation/modules/store/store_main/store_cont
 class StoreBinding extends Bindings {
   @override
   void dependencies() {
+    if (Get.arguments['storeId'] == null || Get.arguments['storeType'] == null) {
+      throw Exception('storeId and storeType are required');
+    }
     Get.lazyPut<StoreRepository>(() => StoreRepository());
-    Get.lazyPut<StoreController>(() => StoreController(storeId: Get.arguments['storeId'], storeType: Get.arguments['storeType'] as String));
+    Get.lazyPut<StoreController>(() => StoreController(storeId: Get.arguments['storeId'], storeType: Get.arguments['storeType']));
   }
 }

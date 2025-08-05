@@ -3,6 +3,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part '../../../generated/domain/models/response/get_store_general_data.freezed.dart';
 part '../../../generated/domain/models/response/get_store_general_data.g.dart';
 
+@JsonEnum(valueField: 'value')
+enum ServiceUIType {
+  ui1('ui1'),
+  ui2('ui2');
+
+  const ServiceUIType(this.value);
+  final String value;
+}
+
 @freezed
 abstract class GetStoreGeneralData with _$GetStoreGeneralData {
   const factory GetStoreGeneralData({@JsonKey(name: 'success') bool? success, @JsonKey(name: 'services') Services? services, @JsonKey(name: 'data') dynamic data}) = _GetStoreGeneralData;
@@ -27,6 +36,7 @@ abstract class ServiceEntity with _$ServiceEntity {
     @JsonKey(name: 'module_type') String? moduleType,
     @JsonKey(name: 'icon_full_url') String? iconFullUrl,
     @JsonKey(name: 'thumbnail_full_url') String? thumbnailFullUrl,
+    @JsonKey(name: 'ui_type') ServiceUIType? uiType,
   }) = _ServiceEntity;
 
   factory ServiceEntity.fromJson(Map<String, dynamic> json) => _$ServiceEntityFromJson(json);

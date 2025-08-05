@@ -42,6 +42,7 @@ _ServiceEntity _$ServiceEntityFromJson(Map<String, dynamic> json) =>
       moduleType: json['module_type'] as String?,
       iconFullUrl: json['icon_full_url'] as String?,
       thumbnailFullUrl: json['thumbnail_full_url'] as String?,
+      uiType: $enumDecodeNullable(_$ServiceUITypeEnumMap, json['ui_type']),
     );
 
 Map<String, dynamic> _$ServiceEntityToJson(_ServiceEntity instance) =>
@@ -53,4 +54,10 @@ Map<String, dynamic> _$ServiceEntityToJson(_ServiceEntity instance) =>
       'module_type': instance.moduleType,
       'icon_full_url': instance.iconFullUrl,
       'thumbnail_full_url': instance.thumbnailFullUrl,
+      'ui_type': _$ServiceUITypeEnumMap[instance.uiType],
     };
+
+const _$ServiceUITypeEnumMap = {
+  ServiceUIType.ui1: 'ui1',
+  ServiceUIType.ui2: 'ui2',
+};

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/domain/models/response/get_store_general_data.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/category_expandable.dart';
 import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
@@ -133,7 +134,7 @@ class ServiceLaundryController extends ServiceController {
   void onReady() {
     super.onReady();
     // Load laundry service data specifically
-    loadServiceTypeData('laundry');
+    loadServiceTypeData(const ServiceEntity(id: 1, moduleName: 'laundry', thumbnail: '', moduleType: 'laundry', uiType: ServiceUIType.ui2));
   }
 
   /// Handle category selection

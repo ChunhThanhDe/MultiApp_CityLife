@@ -2,6 +2,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/domain/models/response/get_cart_list_response.dart';
+import 'package:sixam_mart_user/domain/models/response/get_store_general_data.dart';
+import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/services/cart_service.dart';
 
@@ -74,7 +76,17 @@ class ViewCartController extends BaseController {
 
   // Navigation methods
   void navigateToOrders() => Get.toNamed(AppRoutes.cartOrder);
-  void navigateToCheckout() => Get.toNamed(AppRoutes.cartCheckout);
+  void navigateToCheckout() {
+    // Get the current service type from ServiceController
+    final serviceController = Get.find<ServiceController>();
+    final currentServiceType = serviceController.currentService.value;
+
+    // Create a ServiceEntity with the current service type
+    final serviceCart = ServiceEntity(moduleType: currentServiceType.moduleType, moduleName: currentServiceType.moduleName);
+
+    Get.toNamed(AppRoutes.cartCheckout, arguments: {'serviceCart': serviceCart});
+  }
+
   void navigateBack() => Get.back();
 
   // Item quantity operations with validation

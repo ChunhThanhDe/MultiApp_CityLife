@@ -320,7 +320,7 @@ as List<ServiceEntity>?,
 /// @nodoc
 mixin _$ServiceEntity {
 
-@JsonKey(name: 'id') int? get id;@JsonKey(name: 'module_name') String? get moduleName;@JsonKey(name: 'thumbnail') String? get thumbnail;@JsonKey(name: 'icon') String? get icon;@JsonKey(name: 'module_type') String? get moduleType;@JsonKey(name: 'icon_full_url') String? get iconFullUrl;@JsonKey(name: 'thumbnail_full_url') String? get thumbnailFullUrl;
+@JsonKey(name: 'id') int? get id;@JsonKey(name: 'module_name') String? get moduleName;@JsonKey(name: 'thumbnail') String? get thumbnail;@JsonKey(name: 'icon') String? get icon;@JsonKey(name: 'module_type') String? get moduleType;@JsonKey(name: 'icon_full_url') String? get iconFullUrl;@JsonKey(name: 'thumbnail_full_url') String? get thumbnailFullUrl;@JsonKey(name: 'ui_type') ServiceUIType? get uiType;
 /// Create a copy of ServiceEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -333,16 +333,16 @@ $ServiceEntityCopyWith<ServiceEntity> get copyWith => _$ServiceEntityCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ServiceEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.moduleName, moduleName) || other.moduleName == moduleName)&&(identical(other.thumbnail, thumbnail) || other.thumbnail == thumbnail)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.moduleType, moduleType) || other.moduleType == moduleType)&&(identical(other.iconFullUrl, iconFullUrl) || other.iconFullUrl == iconFullUrl)&&(identical(other.thumbnailFullUrl, thumbnailFullUrl) || other.thumbnailFullUrl == thumbnailFullUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ServiceEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.moduleName, moduleName) || other.moduleName == moduleName)&&(identical(other.thumbnail, thumbnail) || other.thumbnail == thumbnail)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.moduleType, moduleType) || other.moduleType == moduleType)&&(identical(other.iconFullUrl, iconFullUrl) || other.iconFullUrl == iconFullUrl)&&(identical(other.thumbnailFullUrl, thumbnailFullUrl) || other.thumbnailFullUrl == thumbnailFullUrl)&&(identical(other.uiType, uiType) || other.uiType == uiType));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,moduleName,thumbnail,icon,moduleType,iconFullUrl,thumbnailFullUrl);
+int get hashCode => Object.hash(runtimeType,id,moduleName,thumbnail,icon,moduleType,iconFullUrl,thumbnailFullUrl,uiType);
 
 @override
 String toString() {
-  return 'ServiceEntity(id: $id, moduleName: $moduleName, thumbnail: $thumbnail, icon: $icon, moduleType: $moduleType, iconFullUrl: $iconFullUrl, thumbnailFullUrl: $thumbnailFullUrl)';
+  return 'ServiceEntity(id: $id, moduleName: $moduleName, thumbnail: $thumbnail, icon: $icon, moduleType: $moduleType, iconFullUrl: $iconFullUrl, thumbnailFullUrl: $thumbnailFullUrl, uiType: $uiType)';
 }
 
 
@@ -353,7 +353,7 @@ abstract mixin class $ServiceEntityCopyWith<$Res>  {
   factory $ServiceEntityCopyWith(ServiceEntity value, $Res Function(ServiceEntity) _then) = _$ServiceEntityCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'id') int? id,@JsonKey(name: 'module_name') String? moduleName,@JsonKey(name: 'thumbnail') String? thumbnail,@JsonKey(name: 'icon') String? icon,@JsonKey(name: 'module_type') String? moduleType,@JsonKey(name: 'icon_full_url') String? iconFullUrl,@JsonKey(name: 'thumbnail_full_url') String? thumbnailFullUrl
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'module_name') String? moduleName,@JsonKey(name: 'thumbnail') String? thumbnail,@JsonKey(name: 'icon') String? icon,@JsonKey(name: 'module_type') String? moduleType,@JsonKey(name: 'icon_full_url') String? iconFullUrl,@JsonKey(name: 'thumbnail_full_url') String? thumbnailFullUrl,@JsonKey(name: 'ui_type') ServiceUIType? uiType
 });
 
 
@@ -370,7 +370,7 @@ class _$ServiceEntityCopyWithImpl<$Res>
 
 /// Create a copy of ServiceEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? moduleName = freezed,Object? thumbnail = freezed,Object? icon = freezed,Object? moduleType = freezed,Object? iconFullUrl = freezed,Object? thumbnailFullUrl = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? moduleName = freezed,Object? thumbnail = freezed,Object? icon = freezed,Object? moduleType = freezed,Object? iconFullUrl = freezed,Object? thumbnailFullUrl = freezed,Object? uiType = freezed,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,moduleName: freezed == moduleName ? _self.moduleName : moduleName // ignore: cast_nullable_to_non_nullable
@@ -379,7 +379,8 @@ as String?,icon: freezed == icon ? _self.icon : icon // ignore: cast_nullable_to
 as String?,moduleType: freezed == moduleType ? _self.moduleType : moduleType // ignore: cast_nullable_to_non_nullable
 as String?,iconFullUrl: freezed == iconFullUrl ? _self.iconFullUrl : iconFullUrl // ignore: cast_nullable_to_non_nullable
 as String?,thumbnailFullUrl: freezed == thumbnailFullUrl ? _self.thumbnailFullUrl : thumbnailFullUrl // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,uiType: freezed == uiType ? _self.uiType : uiType // ignore: cast_nullable_to_non_nullable
+as ServiceUIType?,
   ));
 }
 
@@ -390,7 +391,7 @@ as String?,
 @JsonSerializable()
 
 class _ServiceEntity implements ServiceEntity {
-  const _ServiceEntity({@JsonKey(name: 'id') this.id, @JsonKey(name: 'module_name') this.moduleName, @JsonKey(name: 'thumbnail') this.thumbnail, @JsonKey(name: 'icon') this.icon, @JsonKey(name: 'module_type') this.moduleType, @JsonKey(name: 'icon_full_url') this.iconFullUrl, @JsonKey(name: 'thumbnail_full_url') this.thumbnailFullUrl});
+  const _ServiceEntity({@JsonKey(name: 'id') this.id, @JsonKey(name: 'module_name') this.moduleName, @JsonKey(name: 'thumbnail') this.thumbnail, @JsonKey(name: 'icon') this.icon, @JsonKey(name: 'module_type') this.moduleType, @JsonKey(name: 'icon_full_url') this.iconFullUrl, @JsonKey(name: 'thumbnail_full_url') this.thumbnailFullUrl, @JsonKey(name: 'ui_type') this.uiType});
   factory _ServiceEntity.fromJson(Map<String, dynamic> json) => _$ServiceEntityFromJson(json);
 
 @override@JsonKey(name: 'id') final  int? id;
@@ -400,6 +401,7 @@ class _ServiceEntity implements ServiceEntity {
 @override@JsonKey(name: 'module_type') final  String? moduleType;
 @override@JsonKey(name: 'icon_full_url') final  String? iconFullUrl;
 @override@JsonKey(name: 'thumbnail_full_url') final  String? thumbnailFullUrl;
+@override@JsonKey(name: 'ui_type') final  ServiceUIType? uiType;
 
 /// Create a copy of ServiceEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -414,16 +416,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ServiceEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.moduleName, moduleName) || other.moduleName == moduleName)&&(identical(other.thumbnail, thumbnail) || other.thumbnail == thumbnail)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.moduleType, moduleType) || other.moduleType == moduleType)&&(identical(other.iconFullUrl, iconFullUrl) || other.iconFullUrl == iconFullUrl)&&(identical(other.thumbnailFullUrl, thumbnailFullUrl) || other.thumbnailFullUrl == thumbnailFullUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ServiceEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.moduleName, moduleName) || other.moduleName == moduleName)&&(identical(other.thumbnail, thumbnail) || other.thumbnail == thumbnail)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.moduleType, moduleType) || other.moduleType == moduleType)&&(identical(other.iconFullUrl, iconFullUrl) || other.iconFullUrl == iconFullUrl)&&(identical(other.thumbnailFullUrl, thumbnailFullUrl) || other.thumbnailFullUrl == thumbnailFullUrl)&&(identical(other.uiType, uiType) || other.uiType == uiType));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,moduleName,thumbnail,icon,moduleType,iconFullUrl,thumbnailFullUrl);
+int get hashCode => Object.hash(runtimeType,id,moduleName,thumbnail,icon,moduleType,iconFullUrl,thumbnailFullUrl,uiType);
 
 @override
 String toString() {
-  return 'ServiceEntity(id: $id, moduleName: $moduleName, thumbnail: $thumbnail, icon: $icon, moduleType: $moduleType, iconFullUrl: $iconFullUrl, thumbnailFullUrl: $thumbnailFullUrl)';
+  return 'ServiceEntity(id: $id, moduleName: $moduleName, thumbnail: $thumbnail, icon: $icon, moduleType: $moduleType, iconFullUrl: $iconFullUrl, thumbnailFullUrl: $thumbnailFullUrl, uiType: $uiType)';
 }
 
 
@@ -434,7 +436,7 @@ abstract mixin class _$ServiceEntityCopyWith<$Res> implements $ServiceEntityCopy
   factory _$ServiceEntityCopyWith(_ServiceEntity value, $Res Function(_ServiceEntity) _then) = __$ServiceEntityCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'id') int? id,@JsonKey(name: 'module_name') String? moduleName,@JsonKey(name: 'thumbnail') String? thumbnail,@JsonKey(name: 'icon') String? icon,@JsonKey(name: 'module_type') String? moduleType,@JsonKey(name: 'icon_full_url') String? iconFullUrl,@JsonKey(name: 'thumbnail_full_url') String? thumbnailFullUrl
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'module_name') String? moduleName,@JsonKey(name: 'thumbnail') String? thumbnail,@JsonKey(name: 'icon') String? icon,@JsonKey(name: 'module_type') String? moduleType,@JsonKey(name: 'icon_full_url') String? iconFullUrl,@JsonKey(name: 'thumbnail_full_url') String? thumbnailFullUrl,@JsonKey(name: 'ui_type') ServiceUIType? uiType
 });
 
 
@@ -451,7 +453,7 @@ class __$ServiceEntityCopyWithImpl<$Res>
 
 /// Create a copy of ServiceEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? moduleName = freezed,Object? thumbnail = freezed,Object? icon = freezed,Object? moduleType = freezed,Object? iconFullUrl = freezed,Object? thumbnailFullUrl = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? moduleName = freezed,Object? thumbnail = freezed,Object? icon = freezed,Object? moduleType = freezed,Object? iconFullUrl = freezed,Object? thumbnailFullUrl = freezed,Object? uiType = freezed,}) {
   return _then(_ServiceEntity(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,moduleName: freezed == moduleName ? _self.moduleName : moduleName // ignore: cast_nullable_to_non_nullable
@@ -460,7 +462,8 @@ as String?,icon: freezed == icon ? _self.icon : icon // ignore: cast_nullable_to
 as String?,moduleType: freezed == moduleType ? _self.moduleType : moduleType // ignore: cast_nullable_to_non_nullable
 as String?,iconFullUrl: freezed == iconFullUrl ? _self.iconFullUrl : iconFullUrl // ignore: cast_nullable_to_non_nullable
 as String?,thumbnailFullUrl: freezed == thumbnailFullUrl ? _self.thumbnailFullUrl : thumbnailFullUrl // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,uiType: freezed == uiType ? _self.uiType : uiType // ignore: cast_nullable_to_non_nullable
+as ServiceUIType?,
   ));
 }
 

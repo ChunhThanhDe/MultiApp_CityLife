@@ -41,7 +41,9 @@ _BannerEntity _$BannerEntityFromJson(Map<String, dynamic> json) =>
       distanceKm: (json['distance_km'] as num?)?.toDouble(),
       deliveryFee: (json['delivery_fee'] as num?)?.toDouble(),
       status: (json['status'] as num?)?.toInt() ?? 1,
+      moduleType: json['module_type'] as String?,
       image: json['image'] as String?,
+      type: json['type'] as String?,
     );
 
 Map<String, dynamic> _$BannerEntityToJson(_BannerEntity instance) =>
@@ -56,5 +58,7 @@ Map<String, dynamic> _$BannerEntityToJson(_BannerEntity instance) =>
       'distance_km': instance.distanceKm,
       'delivery_fee': instance.deliveryFee,
       'status': instance.status,
+      'module_type': instance.moduleType,
       'image': instance.image,
+      'type': instance.type,
     };

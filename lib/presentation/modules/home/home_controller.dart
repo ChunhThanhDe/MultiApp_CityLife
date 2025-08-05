@@ -19,8 +19,9 @@ class HomeController extends BaseController {
   final RxList<ServiceEntity> serviceData = RxList<ServiceEntity>([]);
   final RxList<BannerSection> dynamicSections = RxList<BannerSection>([]);
 
+  ServiceEntity get initialService => serviceData.first;
+
   Future<void> getStoreData() async {
-    // await safeExecute(() async {
     final result = await _storeRepository.getHomeData(appProvider.userInfo.value.id);
     switch (result) {
       case Success(:final response):
@@ -33,11 +34,10 @@ class HomeController extends BaseController {
         // Process banner data if available
         if (responseData.data != null && responseData.data is Map<String, dynamic>) {
           dynamicSections.clear();
-          dynamicSections.addAll(BannerDataUtils.getBannerSections(responseData.data, serviceType: serviceData.first.moduleType));
+          dynamicSections.addAll(BannerDataUtils.getBannerSections(responseData.data));
         }
       case Failure():
     }
-    // });
   }
 
   String getGreetingByTime() {
@@ -60,7 +60,7 @@ class HomeController extends BaseController {
   }
 
   // Navigation method to handle service type tap
-  void navigateToServiceWithType(String serviceType) {
+  void navigateToServiceWithType(ServiceEntity serviceType) {
     // Special handling for laundry service type
 
     // Get RootController to change tabs

@@ -8,6 +8,7 @@ import 'package:sixam_mart_user/presentation/modules/cart/cart_checkout/cart_che
 import 'package:sixam_mart_user/presentation/modules/cart/components/time_picker_sheet.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   const CartCheckoutScreen({super.key});
@@ -637,7 +638,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
             width: 70,
             height: 70,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: const Color(0xFFF7F8F9)),
-            child: Center(child: Image.asset(serviceCart.thumbnail ?? '', width: 50, height: 50, fit: BoxFit.contain)),
+            child: Center(child: AppImage.network(serviceCart.thumbnail ?? '', width: 50, height: 50, fit: BoxFit.contain)),
           ),
           const SizedBox(height: 16),
 
