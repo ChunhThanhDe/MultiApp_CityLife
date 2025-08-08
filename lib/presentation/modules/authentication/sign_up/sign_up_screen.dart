@@ -253,8 +253,8 @@ class SignUpScreen extends BaseScreen<SignUpController> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const SizedBox(),
-        Text(tr(LocaleKeys.authentication_signUp_nextButton), style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white)),
-        SvgPicture.asset(Assets.icons.icRightArrow.path, width: 12.w, height: 12.w, colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn)),
+        Text(tr(LocaleKeys.authentication_signUp_nextButton), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite)),
+        SvgPicture.asset(Assets.icons.icRightArrow.path, width: 12.w, height: 12.w, colorFilter: ColorFilter.mode(AppColors.textBaseWhite, BlendMode.srcIn)),
       ],
     );
   }
@@ -276,7 +276,7 @@ class SignUpScreen extends BaseScreen<SignUpController> {
     return AppButton(
       onTap: vm.toggleMethod,
       width: double.infinity,
-      color: Colors.white,
+      color: AppColors.backgroundSurfacePrimaryWhite,
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
       child: Obx(() => _buildToggleMethodContent()),
     );

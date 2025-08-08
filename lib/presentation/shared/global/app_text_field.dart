@@ -93,7 +93,7 @@ class AppTextField extends StatelessWidget {
           ],
         ),
         Container(
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(effectiveRadius)),
+          decoration: BoxDecoration(color: AppColors.backgroundSurfacePrimaryWhite, borderRadius: BorderRadius.circular(effectiveRadius)),
           child: TextFormField(
             autofocus: autofocus,
             controller: controller,

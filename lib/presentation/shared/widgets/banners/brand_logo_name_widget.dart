@@ -45,8 +45,8 @@ class BrandLogoNameWidget extends StatelessWidget {
     return Container(
       width: 64,
       height: 64,
-      decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.6), shape: BoxShape.circle),
-      child: Icon(item.status == 0 ? Icons.nightlight_round : Icons.lock, color: Colors.white, size: 20),
+      decoration: BoxDecoration(color: AppColors.textGreyHighest950.withValues(alpha: 0.6), shape: BoxShape.circle),
+      child: Icon(item.status == 0 ? Icons.nightlight_round : Icons.lock, color: AppColors.backgroundSurfacePrimaryWhite, size: 20),
     );
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/response/get_cart_list_response.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
@@ -26,18 +27,18 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white.withValues(alpha: 0.9),
+      backgroundColor: AppTheme.theme.backgroundSurfacePrimaryWhite.withValues(alpha: 0.9),
       elevation: 0.5,
-      title: const Text(
+      title: Text(
         'View Cart',
-        style: TextStyle(color: Color(0xFF161A1D), fontWeight: FontWeight.w500, fontSize: 18),
+        style: TextStyle(color: AppTheme.theme.textGreyHighest950, fontWeight: FontWeight.w500, fontSize: 18),
       ),
       actions: [
         TextButton(
           onPressed: controller.navigateToOrders,
-          child: const Text(
+          child: Text(
             'Orders',
-            style: TextStyle(color: Color(0xFF161A1D), fontSize: 14, fontWeight: FontWeight.w400),
+            style: TextStyle(color: AppTheme.theme.textGreyHighest950, fontSize: 14, fontWeight: FontWeight.w400),
           ),
         ),
         IconButton(icon: SvgPicture.asset(Assets.icons.icOrder.path, width: 24, height: 24), onPressed: controller.navigateToOrders),
@@ -111,7 +112,7 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
           child: Column(
             children: [
               _CartProductItem(item: displayItem.item!, controller: controller),
-              if (isLastItemInStore && !isLastStore) const Divider(height: 0, color: Color(0xFFE8EBEE), indent: 24, endIndent: 24),
+              if (isLastItemInStore && !isLastStore) Divider(height: 0, color: AppTheme.theme.stateGreyLowestHover100, indent: 24, endIndent: 24),
             ],
           ),
         );
@@ -176,7 +177,7 @@ class _StoreHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      color: Colors.white,
+      color: AppTheme.theme.backgroundSurfacePrimaryWhite,
       child: Row(
         children: [
           if (store.storeLogo != null) ...[
@@ -193,20 +194,20 @@ class _StoreHeader extends StatelessWidget {
           Expanded(
             child: Text(
               store.storeName ?? 'Unknown Store',
-              style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 16, color: Color(0xFF161A1D)),
+              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
             ),
           ),
           TextButton(
             onPressed: onClearAll,
-            child: const Row(
+            child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   'Clear All',
-                  style: TextStyle(color: Color(0xFFE53E3E), fontSize: 14, fontWeight: FontWeight.w400),
+                  style: TextStyle(color: AppTheme.theme.stateDangerDefault500, fontSize: 14, fontWeight: FontWeight.w400),
                 ),
-                SizedBox(width: 4),
-                Icon(Icons.delete_outline, color: Color(0xFFE53E3E), size: 16),
+                const SizedBox(width: 4),
+                Icon(Icons.delete_outline, color: AppTheme.theme.stateDangerDefault500, size: 16),
               ],
             ),
           ),
@@ -229,7 +230,7 @@ class _CartProductItem extends StatelessWidget {
       duration: const Duration(milliseconds: 200),
       curve: Curves.easeInOut,
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      color: Colors.white,
+      color: AppTheme.theme.backgroundSurfacePrimaryWhite,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -285,12 +286,12 @@ class _ProductDetails extends StatelessWidget {
           item.itemName ?? 'Unknown Item',
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
         ),
         const SizedBox(height: 6),
         Text(
           '\$${(item.itemPrice ?? 0).toStringAsFixed(2)}',
-          style: const TextStyle(fontFamily: 'Inter', fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF4A5763)),
+          style: TextStyle(fontFamily: 'Inter', fontSize: 14, fontWeight: FontWeight.w400, color: AppTheme.theme.textGreyHigh700),
         ),
         const SizedBox(height: 12),
         Row(
@@ -317,7 +318,7 @@ class _QuantityControls extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 150),
       height: 28,
-      decoration: BoxDecoration(color: const Color(0xFFF7F8F9), borderRadius: BorderRadius.circular(32)),
+      decoration: BoxDecoration(color: AppTheme.theme.backgroundSurfaceTertiaryGrey50, borderRadius: BorderRadius.circular(32)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -330,7 +331,7 @@ class _QuantityControls extends StatelessWidget {
             child: Text(
               '${item.itemQuantity ?? 0}',
               key: ValueKey(item.itemQuantity),
-              style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xFF161A1D)),
+              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
             ),
           ),
           _QuantityButton(icon: Icons.add, onPressed: () => controller.incrementItemQuantity(item), enabled: true),
@@ -377,7 +378,7 @@ class _QuantityButtonState extends State<_QuantityButton> with SingleTickerProvi
         return Transform.scale(
           scale: _scaleAnimation.value,
           child: IconButton(
-            icon: Icon(widget.icon, size: 18, color: widget.enabled ? const Color(0xFF161A1D) : const Color(0xFFBBBBBB)),
+            icon: Icon(widget.icon, size: 18, color: widget.enabled ? AppTheme.theme.textGreyHighest950 : AppTheme.theme.textGreyLow300),
             onPressed: widget.enabled
                 ? () {
                     _animationController.forward().then((_) {
@@ -407,7 +408,7 @@ class _ActionButtons extends StatelessWidget {
       children: [
         _AnimatedActionButton(
           icon: Icons.favorite_border,
-          color: const Color(0xFF5856D7),
+          color: AppTheme.theme.stateBrandDefault500,
           onPressed: () {
             // Add to favorites functionality
           },
@@ -415,7 +416,7 @@ class _ActionButtons extends StatelessWidget {
         const SizedBox(width: 8),
         _AnimatedActionButton(
           icon: Icons.delete_outline,
-          color: const Color(0xFFE53E3E),
+          color: AppTheme.theme.stateDangerDefault500,
           onPressed: () {
             if (item.cartId != null) {
               controller.removeItem(item.cartId!);
@@ -474,9 +475,9 @@ class _AnimatedActionButtonState extends State<_AnimatedActionButton> with Singl
               width: 28,
               height: 28,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppTheme.theme.backgroundSurfacePrimaryWhite,
                 borderRadius: BorderRadius.circular(32),
-                border: Border.all(color: const Color(0xFFE8EBEE)),
+                border: Border.all(color: AppTheme.theme.stateGreyLowestHover100),
               ),
               child: Icon(widget.icon, color: widget.color, size: 20),
             ),
@@ -497,25 +498,25 @@ class _CartSummarySection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-      decoration: const BoxDecoration(
-        border: Border(top: BorderSide(color: Color(0x1A101214), width: 1)),
-        color: Colors.white,
+      decoration: BoxDecoration(
+        border: Border(top: BorderSide(color: AppTheme.theme.alphaGrey10, width: 1)),
+        color: AppTheme.theme.backgroundSurfacePrimaryWhite,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 child: Text(
                   'Subtotal',
-                  style: TextStyle(color: Color(0xFF4A5763), fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500),
+                  style: TextStyle(color: AppTheme.theme.textGreyHigh700, fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500),
                 ),
               ),
               Obx(
                 () => Text(
                   '\$${controller.totalPrice.toStringAsFixed(2)}',
-                  style: const TextStyle(color: Color(0xFF161A1D), fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w700),
+                  style: TextStyle(color: AppTheme.theme.textGreyHighest950, fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w700),
                 ),
               ),
             ],
@@ -527,13 +528,13 @@ class _CartSummarySection extends StatelessWidget {
             child: ElevatedButton(
               onPressed: controller.navigateToCheckout,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF5856D7),
+                backgroundColor: AppTheme.theme.stateBrandDefault500,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                 padding: const EdgeInsets.symmetric(vertical: 12),
               ),
-              child: const Text(
+              child: Text(
                 'Checkout Now',
-                style: TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
+                style: TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500, color: AppTheme.theme.textBaseWhite),
               ),
             ),
           ),
@@ -555,7 +556,7 @@ class _CartEmptyIllustration extends StatelessWidget {
         Container(
           width: 221,
           height: 222,
-          decoration: const BoxDecoration(color: Color(0xFFE8EBEE), shape: BoxShape.circle),
+          decoration: BoxDecoration(color: AppTheme.theme.stateGreyLowestHover100, shape: BoxShape.circle),
         ),
         AppImage.asset(Assets.images.imgBag.path, width: 195, height: 195, fit: BoxFit.contain),
       ],
@@ -581,25 +582,25 @@ class _EmptyStateContent extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
+            style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600, color: AppTheme.theme.textGreyHighest950),
           ),
           const SizedBox(height: 8),
           Text(
             subtitle,
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 16, color: Color(0xFF4A5763), fontWeight: FontWeight.w400),
+            style: TextStyle(fontSize: 16, color: AppTheme.theme.textGreyHigh700, fontWeight: FontWeight.w400),
           ),
           const SizedBox(height: 24),
           ElevatedButton(
             onPressed: onPressed ?? () {},
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF5856D7),
+              backgroundColor: AppTheme.theme.stateBrandDefault500,
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
             ),
             child: Text(
               buttonText,
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16),
+              style: TextStyle(color: AppTheme.theme.textBaseWhite, fontWeight: FontWeight.w500, fontSize: 16),
             ),
           ),
         ],

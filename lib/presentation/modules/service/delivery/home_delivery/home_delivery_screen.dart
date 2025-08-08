@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_item.dart';
 import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_service_card.dart';
@@ -7,12 +8,13 @@ import 'package:sixam_mart_user/presentation/modules/service/delivery/components
 import 'package:sixam_mart_user/presentation/modules/service/delivery/home_delivery/home_delivery_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
+
 class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
   const HomeDeliveryScreen({super.key});
 
   @override
   @protected
-  Color? get unSafeAreaColor => const Color(0xFF5856D7);
+  Color? get unSafeAreaColor => AppColors.stateBrandDefault500;
 
   @override
   Widget buildScreen(BuildContext context) {
@@ -21,7 +23,7 @@ class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
     return Stack(
       children: [
         // Purple Header
-        Container(width: double.infinity, height: 180, color: const Color(0xFF5856D7)),
+        Container(width: double.infinity, height: 180, color: AppColors.stateBrandDefault500),
         Column(
           children: [
             // Status bar & header
@@ -30,8 +32,8 @@ class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Delivery', style: inter(18, FontWeight.w500, Colors.white)),
-                  const Icon(Icons.notifications_none, color: Colors.white, size: 24),
+                  Text('Delivery', style: inter(18, FontWeight.w500, AppColors.textBaseWhite)),
+                  Icon(Icons.notifications_none, color: AppColors.textBaseWhite, size: 24),
                 ],
               ),
             ),
@@ -75,8 +77,8 @@ class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Recent Delivery', style: inter(18, FontWeight.w500, const Color(0xFF161A1D))),
-                  const Icon(Icons.arrow_forward_ios, size: 18, color: Colors.black),
+                  Text('Recent Delivery', style: inter(18, FontWeight.w500, AppColors.textGreyHighest950)),
+                  Icon(Icons.arrow_forward_ios, size: 18, color: AppColors.textGreyHighest950),
                 ],
               ),
             ),

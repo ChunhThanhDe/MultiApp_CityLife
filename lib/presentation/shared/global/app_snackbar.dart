@@ -19,7 +19,7 @@ void showAppSnackBar({required String title, String? message, SnackPosition posi
     GetSnackBar(
       messageText: _buildSnackbarContent(type, title, message),
       snackPosition: position,
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.backgroundSurfacePrimaryWhite.withValues(alpha: 0),
       barBlur: 1,
       borderRadius: 10,
       margin: const EdgeInsets.only(bottom: 30),
@@ -41,16 +41,16 @@ void showAppSnackBar({required String title, String? message, SnackPosition posi
 /// Returns a Widget representing the snackbar content.
 Widget _buildSnackbarContent(SnackBarType type, String title, String? message) {
   final isSuccess = type == SnackBarType.success;
-  final color = isSuccess ? const Color(0xFF0DAA0A) : const Color(0xFFF32F2F);
+  final color = isSuccess ? AppColors.stateSuccessDefault500 : AppColors.stateDangerDefault500;
   final icon = isSuccess ? Assets.icons.icSuccess.path : Assets.icons.icError.path;
 
   return Container(
     padding: const EdgeInsets.fromLTRB(8, 8, 16, 8),
     decoration: BoxDecoration(
-      color: Colors.white,
+      color: AppColors.backgroundSurfacePrimaryWhite,
       borderRadius: BorderRadius.circular(12),
       border: isSuccess ? Border(left: BorderSide(width: 5, color: color)) : null,
-      boxShadow: [BoxShadow(color: isSuccess ? const Color(0x1E0EAA0B) : const Color(0x19000000), blurRadius: isSuccess ? 12 : 20, offset: const Offset(0, 4), spreadRadius: 0)],
+      boxShadow: [BoxShadow(color: isSuccess ? AppColors.stateSuccessDefault500.withValues(alpha: 0.12) : AppColors.textGreyHighest950.withValues(alpha: 0.1), blurRadius: isSuccess ? 12 : 20, offset: const Offset(0, 4), spreadRadius: 0)],
     ),
     child: Row(
       mainAxisSize: MainAxisSize.min,

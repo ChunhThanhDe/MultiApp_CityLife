@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/domain/enums/wishlist_item_type.dart';
 import 'package:sixam_mart_user/domain/models/response/wishlist_response.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_controller.dart';
@@ -16,7 +17,7 @@ class FavoriteProductCard extends StatelessWidget {
     final FavoritesController controller = Get.find();
 
     return Container(
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(color: AppTheme.theme.backgroundSurfacePrimaryWhite, borderRadius: BorderRadius.circular(8)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,8 +34,8 @@ class FavoriteProductCard extends StatelessWidget {
                     width: double.infinity,
                     height: double.infinity,
                     errorWidget: Container(
-                      color: Colors.grey[300],
-                      child: const Icon(Icons.image_not_supported, color: Colors.grey),
+                      color: AppTheme.theme.stateGreyLow300,
+                      child: Icon(Icons.image_not_supported, color: AppTheme.theme.stateGreyDefault500),
                     ),
                   ),
                 ),
@@ -45,10 +46,10 @@ class FavoriteProductCard extends StatelessWidget {
                     width: 48,
                     height: 48,
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.white, width: 2),
+                      color: AppTheme.theme.backgroundSurfacePrimaryWhite,
+                      border: Border.all(color: AppTheme.theme.backgroundSurfacePrimaryWhite, width: 2),
                       shape: BoxShape.circle,
-                      boxShadow: const [BoxShadow(color: Color(0x14000000), blurRadius: 6, offset: Offset(0, 2))],
+                      boxShadow: [BoxShadow(color: AppTheme.theme.shadowSm5, blurRadius: 6, offset: Offset(0, 2))],
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(2),
@@ -61,8 +62,8 @@ class FavoriteProductCard extends StatelessWidget {
                             child: AppImage.network(
                               store.logoFullUrl ?? '',
                               errorWidget: Container(
-                                color: Colors.grey[300],
-                                child: const Icon(Icons.store, color: Colors.grey),
+                                color: AppTheme.theme.stateGreyLow300,
+                                child: Icon(Icons.store, color: AppTheme.theme.stateGreyDefault500),
                               ),
                             ),
                           ),
@@ -84,7 +85,7 @@ class FavoriteProductCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     store.name ?? 'Unknown Store',
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: AppTheme.theme.textGreyHighest950),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -103,7 +104,7 @@ class FavoriteProductCard extends StatelessWidget {
                   child: AnimatedSwitcher(
                     duration: const Duration(milliseconds: 250),
                     transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
-                    child: const Icon(Icons.favorite, key: ValueKey(true), color: Color(0xFF5856D7), size: 24),
+                    child: Icon(Icons.favorite, key: ValueKey(true), color: AppTheme.theme.stateBrandDefault500, size: 24),
                   ),
                 ),
               ],
@@ -118,7 +119,7 @@ class FavoriteProductCard extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   '\$${store.minimumShippingCharge ?? 0} Delivery fee',
-                  style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
+                  style: TextStyle(fontSize: 12, color: AppTheme.theme.textGreyDefault500),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -127,17 +128,17 @@ class FavoriteProductCard extends StatelessWidget {
                   children: [
                     Text(
                       '${store.avgRating ?? 0}★',
-                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF4A5763)),
+                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppTheme.theme.textGreyDefault500),
                     ),
                     const SizedBox(width: 2),
-                    Text('(${store.ratingCount ?? 0})', style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                    Text('(${store.ratingCount ?? 0})', style: TextStyle(fontSize: 12, color: AppTheme.theme.textGreyDefault500)),
                     const SizedBox(width: 2),
-                    const Text('•', style: TextStyle(fontSize: 12, color: Color(0xFF5856D7))),
+                    Text('•', style: TextStyle(fontSize: 12, color: AppTheme.theme.stateBrandDefault500)),
                     const SizedBox(width: 2),
                     Flexible(
                       child: Text(
                         "${store.deliveryTime ?? '10-20'} min",
-                        style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
+                        style: TextStyle(fontSize: 12, color: AppTheme.theme.textGreyDefault500),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),

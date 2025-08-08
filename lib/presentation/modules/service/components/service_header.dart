@@ -74,7 +74,7 @@ class ServiceHeader extends GetView<ServiceController> {
                     height: 48,
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: AppColors.backgroundSurfacePrimaryWhite,
                       borderRadius: BorderRadius.circular(24),
                       border: Border.all(color: AppColors.stateGreyLowestHover100, width: 1),
                     ),
@@ -97,7 +97,7 @@ class ServiceHeader extends GetView<ServiceController> {
               height: 48,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.backgroundSurfacePrimaryWhite,
                 borderRadius: BorderRadius.circular(24),
                 border: Border.all(color: AppColors.stateGreyLowestHover100, width: 1),
               ),

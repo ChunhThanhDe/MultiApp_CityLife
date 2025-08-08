@@ -11,7 +11,7 @@ Future<T?> showAppDialog<T>({required Widget child, bool canDismiss = true, Func
     transitionDuration: const Duration(milliseconds: 100),
     transitionCurve: Curves.easeInOut,
     barrierDismissible: canDismiss,
-    barrierColor: Colors.black.withValues(alpha: 0.5),
+    barrierColor: AppColors.textGreyHighest950.withValues(alpha: 0.5),
   ).then((result) {
     onDismiss?.call(result);
     return result;
@@ -41,7 +41,7 @@ Future<T?> showConfirmationDialog<T>({
           Expanded(
             child: AppButton(
               onTap: onCancel,
-              color: Colors.transparent,
+              color: AppColors.backgroundSurfacePrimaryWhite.withValues(alpha: 0),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppCorner.radius12),
                 side: BorderSide(color: AppColors.stateGreyLowest50, width: 1),
@@ -60,7 +60,7 @@ Future<T?> showConfirmationDialog<T>({
                 side: BorderSide(color: AppColors.stateGreyLowest50, width: 1),
               ),
               padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Text(confirmText, style: confirmTextStyle ?? AppTextStyles.typographyH10SemiBold.copyWith(color: Colors.white)),
+              child: Text(confirmText, style: confirmTextStyle ?? AppTextStyles.typographyH10SemiBold.copyWith(color: AppColors.backgroundSurfacePrimaryWhite)),
             ),
           ),
         ],
@@ -74,7 +74,7 @@ Future<T?> showConfirmationDialog<T>({
     transitionDuration: const Duration(milliseconds: 100),
     transitionCurve: Curves.easeInOut,
     barrierDismissible: canDismiss,
-    barrierColor: Colors.black.withValues(alpha: 0.5),
+    barrierColor: AppColors.textGreyHighest950.withValues(alpha: 0.5),
   ).then((result) {
     onDismiss?.call(result);
     return result;
@@ -93,14 +93,14 @@ class AppDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.transparent,
+      color: AppColors.backgroundSurfacePrimaryWhite.withValues(alpha: 0),
       child: Container(
         margin: margin ?? const EdgeInsets.symmetric(horizontal: 24),
         padding: padding ?? const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.backgroundSurfacePrimaryWhite,
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.15), blurRadius: 24, offset: const Offset(0, 8))],
+          boxShadow: [BoxShadow(color: AppColors.textGreyHighest950.withValues(alpha: 0.15), blurRadius: 24, offset: const Offset(0, 8))],
         ),
         child: child,
       ),

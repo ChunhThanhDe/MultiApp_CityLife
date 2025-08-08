@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/category_expandable.dart';
@@ -41,24 +42,24 @@ class ServiceLaundryScreen extends BaseScreen<ServiceLaundryController> {
                       const SizedBox(height: 6),
                       // Pricing Section
                       Container(
-                        color: Colors.white,
+                        color: AppTheme.theme.backgroundSurfacePrimaryWhite,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 24),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // Pricing title
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 24),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 24),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       'Pricing',
-                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
+                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.theme.textGreyHighest950),
                                     ),
-                                    SizedBox(height: 4),
-                                    Text('Each item is charged separately', style: TextStyle(fontSize: 14, color: Color(0xFF4A5763))),
+                                    const SizedBox(height: 4),
+                                    Text('Each item is charged separately', style: TextStyle(fontSize: 14, color: AppTheme.theme.textGreyDefault500)),
                                   ],
                                 ),
                               ),
@@ -108,16 +109,16 @@ class _LaundryAppBar extends StatelessWidget {
     return Container(
       height: 56,
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      color: Colors.transparent,
-      child: const Row(
+      color: AppTheme.theme.backgroundSurfacePrimaryWhite.withValues(alpha: 0),
+      child: Row(
         children: [
           Expanded(
             child: Text(
               'Laundry',
-              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 18, color: Colors.white),
+              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 18, color: AppTheme.theme.textBaseWhite),
             ),
           ),
-          Icon(Icons.notifications_none, color: Colors.white, size: 24),
+          Icon(Icons.notifications_none, color: AppTheme.theme.textBaseWhite, size: 24),
         ],
       ),
     );
@@ -188,22 +189,26 @@ class _CategoryTab extends StatelessWidget {
           Container(
             width: 80,
             height: 80,
-            decoration: BoxDecoration(color: const Color(0xFFF7F8F9), borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(color: AppTheme.theme.backgroundSurfaceTertiaryGrey50, borderRadius: BorderRadius.circular(8)),
             child: Center(
               child: Container(
                 width: 74,
                 height: 74,
                 decoration: BoxDecoration(
-                  color: active ? Colors.white : const Color(0xFFF7F8F9),
+                  color: active ? AppTheme.theme.backgroundSurfacePrimaryWhite : AppTheme.theme.backgroundSurfaceTertiaryGrey50,
                   borderRadius: BorderRadius.circular(6),
-                  boxShadow: const [
-                    BoxShadow(color: Color(0x1A101214), offset: Offset(0, 6), blurRadius: 8),
-                    BoxShadow(color: Color(0x1A101214), offset: Offset(0, 18), blurRadius: 24),
+                  boxShadow: [
+                    BoxShadow(color: AppTheme.theme.shadowMd10, offset: const Offset(0, 6), blurRadius: 8),
+                    BoxShadow(color: AppTheme.theme.shadowMd10, offset: const Offset(0, 18), blurRadius: 24),
                   ],
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: svgAsset!.svg(width: 28, height: 28, colorFilter: ColorFilter.mode(active ? (activeColor ?? const Color(0xFF5856D7)) : const Color(0xFF161A1D), BlendMode.srcIn)),
+                  child: svgAsset!.svg(
+                    width: 28,
+                    height: 28,
+                    colorFilter: ColorFilter.mode(active ? (activeColor ?? AppTheme.theme.stateBrandDefault500) : AppTheme.theme.textGreyHighest950, BlendMode.srcIn),
+                  ),
                 ),
               ),
             ),
@@ -212,7 +217,7 @@ class _CategoryTab extends StatelessWidget {
           Text(
             label,
             textAlign: TextAlign.center,
-            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: active ? (activeColor ?? const Color(0xFF5856D7)) : const Color(0xFF161A1D)),
+            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: active ? (activeColor ?? AppTheme.theme.stateBrandDefault500) : AppTheme.theme.textGreyHighest950),
           ),
         ],
       ),
@@ -260,10 +265,10 @@ class _LaundryBanner extends GetView<ServiceLaundryController> {
               children: [
                 Text(
                   currentBanner['title'] as String,
-                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppTheme.theme.textGreyHighest950),
                 ),
                 const SizedBox(height: 4),
-                Text(currentBanner['subtitle'] as String, style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                Text(currentBanner['subtitle'] as String, style: TextStyle(fontSize: 12, color: AppTheme.theme.textGreyDefault500)),
               ],
             ),
           );
@@ -282,7 +287,7 @@ class _Dot extends StatelessWidget {
       width: active ? 24 : 12,
       height: 4,
       margin: const EdgeInsets.symmetric(horizontal: 2),
-      decoration: BoxDecoration(color: active ? const Color(0xFF5856D7) : const Color(0x1A101214), borderRadius: BorderRadius.circular(24)),
+      decoration: BoxDecoration(color: active ? AppTheme.theme.stateBrandDefault500 : AppTheme.theme.shadowMd10, borderRadius: BorderRadius.circular(24)),
     );
   }
 }
@@ -291,7 +296,7 @@ class _Dot extends StatelessWidget {
 class _Divider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(margin: const EdgeInsets.only(left: 24), height: 1, color: const Color(0xFFE8EBEE));
+    return Container(margin: const EdgeInsets.only(left: 24), height: 1, color: AppTheme.theme.stateGreyLowestHover100);
   }
 }
 
@@ -305,8 +310,8 @@ class _EstimatedBillWidget extends StatelessWidget {
       width: double.infinity,
       height: 110,
       decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [BoxShadow(color: const Color(0xFF101214).withValues(alpha: 0.1), offset: const Offset(0, -5), blurRadius: 32, spreadRadius: 0)],
+        color: AppTheme.theme.backgroundSurfacePrimaryWhite,
+        boxShadow: [BoxShadow(color: AppTheme.theme.alphaGrey10, offset: const Offset(0, -5), blurRadius: 32, spreadRadius: 0)],
         borderRadius: const BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
       ),
       child: Column(
@@ -320,7 +325,7 @@ class _EstimatedBillWidget extends StatelessWidget {
               child: Container(
                 width: 48,
                 height: 4,
-                decoration: BoxDecoration(color: const Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(99)),
+                decoration: BoxDecoration(color: AppTheme.theme.stateGreyLowestHover100, borderRadius: BorderRadius.circular(99)),
               ),
             ),
           ),
@@ -341,14 +346,14 @@ class _EstimatedBillWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // Title
-                        const Text(
+                        Text(
                           'Estimated Bill',
-                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 20, height: 1.5, color: Color(0xFF161A1D)),
+                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 20, height: 1.5, color: AppTheme.theme.textGreyHighest950),
                         ),
                         // Subtitle
                         Text(
                           '\$${controller.totalCost.toStringAsFixed(2)}',
-                          style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, height: 1.5, color: Color(0xFF161A1D)),
+                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, height: 1.5, color: AppTheme.theme.textGreyHighest950),
                         ),
                       ],
                     ),
@@ -361,16 +366,16 @@ class _EstimatedBillWidget extends StatelessWidget {
                     showModalBottomSheet(
                       context: context,
                       isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: AppTheme.theme.backgroundSurfacePrimaryWhite.withValues(alpha: 0),
                       builder: (context) => const ClipRRect(
                         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
                         child: FractionallySizedBox(heightFactor: 0.85, child: EstimatedBillSheet()),
                       ),
                     );
                   },
-                  child: const Text(
+                  child: Text(
                     'More details',
-                    style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, height: 1.43, color: Color(0xFF161A1D)),
+                    style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, height: 1.43, color: AppTheme.theme.textGreyHighest950),
                   ),
                 ),
               ],

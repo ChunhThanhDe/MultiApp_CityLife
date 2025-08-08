@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account_password/account_password_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/account/components/password_input.dart';
@@ -26,14 +27,14 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 24),
-                  const Text(
+                  Text(
                     'Change My Password',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: AppColors.textGreyHighest950),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'In order to best protect your account, please select a password that is at least 8 characters long and contains a combination of uppercase and lowercase letters, numbers and/or symbols.',
-                    style: TextStyle(fontSize: 14, color: Color(0xFF4A5763), height: 1.42),
+                    style: TextStyle(fontSize: 14, color: AppColors.textGreyHigh700, height: 1.42),
                   ),
                   const SizedBox(height: 24),
 
@@ -72,9 +73,9 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  const Text(
+                  Text(
                     'We recommend choosing a password that:',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textGreyHighest950),
                   ),
                   const SizedBox(height: 8),
                   _recommendationText(),
@@ -88,9 +89,9 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
         Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            border: Border(top: BorderSide(color: Color(0x10101214))),
+          decoration: BoxDecoration(
+            color: AppColors.backgroundSurfacePrimaryWhite,
+            border: Border(top: BorderSide(color: AppColors.alphaGrey10)),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -101,27 +102,27 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
                   () => ElevatedButton(
                     onPressed: controller.isLoading.value ? null : controller.onChangePassword,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF5856D7),
+                      backgroundColor: AppColors.stateBrandDefault500,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       elevation: 0,
-                      disabledBackgroundColor: const Color(0xFF5856D7).withValues(alpha: 0.6),
+                      disabledBackgroundColor: AppColors.stateBrandDefault500.withValues(alpha: 0.6),
                     ),
                     child: controller.isLoading.value
-                        ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)))
-                        : const Text(
+                        ? SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(AppColors.backgroundSurfacePrimaryWhite)))
+                        : Text(
                             'Change password',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.backgroundSurfacePrimaryWhite),
                           ),
                   ),
                 ),
               ),
               const SizedBox(height: 16),
-              const Center(
+              Center(
                 child: Text(
                   "Don't use the same password on different services, especially if you are using the same Username.",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 14, color: Color(0xFF798A9A)),
+                  style: TextStyle(fontSize: 14, color: AppColors.textGreyDefault500),
                 ),
               ),
               const SizedBox(height: 8),
@@ -134,48 +135,48 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
 
   // Recommendations widget
   Widget _recommendationText() {
-    return const Text.rich(
+    return Text.rich(
       TextSpan(
         children: [
           WidgetSpan(
             child: Padding(
               padding: EdgeInsets.only(right: 6.0),
-              child: Icon(Icons.circle, size: 6, color: Color(0xFF4A5763)),
+              child: Icon(Icons.circle, size: 6, color: AppColors.textGreyHigh700),
             ),
           ),
           TextSpan(
             text: 'Is unique and not used for another service.\n',
-            style: TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
+            style: TextStyle(fontSize: 12, color: AppColors.textGreyHigh700),
           ),
           WidgetSpan(
             child: Padding(
               padding: EdgeInsets.only(right: 6.0),
-              child: Icon(Icons.circle, size: 6, color: Color(0xFF4A5763)),
+              child: Icon(Icons.circle, size: 6, color: AppColors.textGreyHigh700),
             ),
           ),
           TextSpan(
             text: 'Is at least 8 characters long.\n',
-            style: TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
+            style: TextStyle(fontSize: 12, color: AppColors.textGreyHigh700),
           ),
           WidgetSpan(
             child: Padding(
               padding: EdgeInsets.only(right: 6.0),
-              child: Icon(Icons.circle, size: 6, color: Color(0xFF4A5763)),
+              child: Icon(Icons.circle, size: 6, color: AppColors.textGreyHigh700),
             ),
           ),
           TextSpan(
             text: 'Includes uppercase/lowercase letters, numbers, and symbols.\n',
-            style: TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
+            style: TextStyle(fontSize: 12, color: AppColors.textGreyHigh700),
           ),
           WidgetSpan(
             child: Padding(
               padding: EdgeInsets.only(right: 6.0),
-              child: Icon(Icons.circle, size: 6, color: Color(0xFF4A5763)),
+              child: Icon(Icons.circle, size: 6, color: AppColors.textGreyHigh700),
             ),
           ),
           TextSpan(
             text: 'Is not your company ID or special character (q!@#\$...).',
-            style: TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
+            style: TextStyle(fontSize: 12, color: AppColors.textGreyHigh700),
           ),
         ],
       ),

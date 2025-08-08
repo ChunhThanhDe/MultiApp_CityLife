@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class AnimatedStepIndicator extends StatelessWidget {
 
@@ -24,8 +25,8 @@ class AnimatedStepIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color effectiveActiveColor = activeColor ?? const Color(0xFF5A67D8);
-    final Color effectiveInactiveColor = inactiveColor ?? const Color(0xFFE2E8F0);
+    final Color effectiveActiveColor = activeColor ?? AppColors.stateBrandDefault500;
+    final Color effectiveInactiveColor = inactiveColor ?? AppColors.stateGreyLowest50;
 
     return Row(
       mainAxisSize: MainAxisSize.min,

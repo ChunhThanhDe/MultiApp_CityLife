@@ -121,7 +121,7 @@ class AppBottomSheet extends StatelessWidget {
                     width: 48,
                     height: 4,
                     decoration: ShapeDecoration(
-                      color: AppColors.stateGreyLowestHover100,
+                      color: AppColors.stateGreyLowest50,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(99)),
                     ),
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/cart_successful/cart_successful_controller.dart';
@@ -20,26 +21,26 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
             alignment: Alignment.center,
             children: [
               Assets.images.imgVector.image(width: 120, height: 120),
-              const Icon(Icons.check, size: 40, color: Colors.white),
+              Icon(Icons.check, size: 40, color: AppTheme.theme.textBaseWhite),
             ],
           ),
         ),
 
         const SizedBox(height: 32),
         // Title + subtitle
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 32.0),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32.0),
           child: Column(
             children: [
               Text(
                 'Payment Successful',
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 28, height: 36 / 28, color: Color(0xFF161A1D)),
+                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 28, height: 36 / 28, color: AppTheme.theme.textGreyHighest950),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 'You might be receiving more than one package for your order. Please check under "My Orders" to see details.',
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, height: 24 / 16, color: Color(0xFF4A5763)),
+                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, height: 24 / 16, color: AppTheme.theme.textGreyHigh700),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -51,26 +52,26 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Container(
             width: double.infinity,
-            decoration: BoxDecoration(color: const Color(0xFFF7F8F9), borderRadius: BorderRadius.circular(8)),
-            child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 16),
+            decoration: BoxDecoration(color: AppTheme.theme.backgroundSurfaceTertiaryGrey50, borderRadius: BorderRadius.circular(8)),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
               child: Column(
                 children: [
-                  _ItemRow(label: 'Subtotal:', value: '\$23.94'),
-                  _ItemRow(label: 'Delivery Fee:', value: '\$0.00'),
-                  _ItemRow(label: 'Taxes & Estimated Fees:', value: '\$0.00'),
+                  const _ItemRow(label: 'Subtotal:', value: '\$23.94'),
+                  const _ItemRow(label: 'Delivery Fee:', value: '\$0.00'),
+                  const _ItemRow(label: 'Taxes & Estimated Fees:', value: '\$0.00'),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Total:',
-                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 20, color: Color(0xFF161A1D)),
+                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 20, color: AppTheme.theme.textGreyHighest950),
                         ),
                         Text(
                           '\$23.94',
-                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 20, color: Color(0xFF161A1D)),
+                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 20, color: AppTheme.theme.textGreyHighest950),
                         ),
                       ],
                     ),
@@ -89,16 +90,16 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
             height: 48,
             child: ElevatedButton(
               style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all(const Color(0xFF5856D7)),
+                backgroundColor: WidgetStateProperty.all(AppTheme.theme.stateBrandDefault500),
                 shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32))),
                 elevation: WidgetStateProperty.all(0),
               ),
               onPressed: () {
                 // TODO: Handle Done
               },
-              child: const Text(
+              child: Text(
                 'Done',
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white),
+                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textBaseWhite),
               ),
             ),
           ),
@@ -109,9 +110,9 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
           onPressed: () {
             // TODO: Handle View Order
           },
-          child: const Text(
+          child: Text(
             'View Order',
-            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF5856D7), decoration: TextDecoration.underline),
+            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.stateBrandDefault500, decoration: TextDecoration.underline),
           ),
         ),
         const SizedBox(height: 16),
@@ -134,11 +135,11 @@ class _ItemRow extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xFF4A5763)),
+            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppTheme.theme.textGreyHigh700),
           ),
           Text(
             value,
-            style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xFF4A5763)),
+            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppTheme.theme.textGreyHigh700),
           ),
         ],
       ),

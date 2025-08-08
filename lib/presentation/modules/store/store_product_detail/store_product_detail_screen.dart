@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_infomation_response.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_card.dart';
@@ -32,7 +33,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               elevation: 0,
-              backgroundColor: const Color(0xFF5856D7),
+              backgroundColor: AppColors.stateBrandDefault500,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
             ),
             onPressed: () {
@@ -40,7 +41,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
             },
             child: Text(
               'Add to cart${priceText.isNotEmpty ? " • $priceText" : ""}',
-              style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 15, color: Colors.white, fontFamily: 'Inter'),
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15, color: AppColors.backgroundSurfacePrimaryWhite, fontFamily: 'Inter'),
             ),
           ),
         ),
@@ -84,10 +85,10 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: AppColors.backgroundSurfacePrimaryWhite,
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: const Color(0xFFE8EBEE)),
-                          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.07), blurRadius: 6, offset: const Offset(0, 2))],
+                          border: Border.all(color: AppColors.backgroundSurfaceTertiaryGrey50),
+                          boxShadow: [BoxShadow(color: AppColors.textGreyHighest950.withValues(alpha: 0.07), blurRadius: 6, offset: const Offset(0, 2))],
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -97,7 +98,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                             Flexible(
                               child: Text(
                                 product.storeName,
-                                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: Color(0xFF161A1D)),
+                                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: AppColors.textGreyHighest950),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -118,12 +119,12 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                 children: [
                   Text(
                     product.name,
-                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: Color(0xFF161A1D)),
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: AppColors.textGreyHighest950),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     '${product.price} ${product.taxType}',
-                    style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF4A5763)),
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.textGreyDefault500),
                   ),
                 ],
               ),
@@ -139,18 +140,18 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFF7F8F9),
+                    color: AppColors.backgroundSurfaceTertiaryGrey50,
                     borderRadius: BorderRadius.circular(20), // pill shape
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
                         'Reset to standard recipe',
-                        style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 14, color: Color(0xFF161A1D)),
+                        style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 14, color: AppColors.textGreyHighest950),
                       ),
-                      Spacer(),
-                      Icon(Icons.refresh, size: 18, color: Color(0xFFB5B9C2)),
+                      const Spacer(),
+                      Icon(Icons.refresh, size: 18, color: AppColors.textGreyDefault500),
                     ],
                   ),
                 ),
@@ -190,9 +191,9 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 12),
-                    const Text(
+                    Text(
                       'Add-ons',
-                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: Color(0xFF161A1D)),
+                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: AppColors.textGreyHighest950),
                     ),
                     const SizedBox(height: 8),
                     ...product.addOns.map<Widget>((addOn) {
@@ -253,29 +254,29 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
   static Widget _sectionLabel(String text, {bool required = false, String? note}) {
     return Container(
       width: double.infinity,
-      color: const Color(0xFFF7F8F9),
+      color: AppColors.backgroundSurfaceTertiaryGrey50,
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
       child: Row(
         children: [
           Text(
             text,
-            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: AppColors.textGreyHighest950),
           ),
           if (required)
-            const Text(
+            Text(
               '  *',
-              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13, color: Color(0xFF5856D7)),
+              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13, color: AppColors.stateBrandDefault500),
             ),
           const Spacer(),
           if (note != null)
             Text(
               note,
-              style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xFF4A5763)),
+              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12, color: AppColors.textGreyDefault500),
             ),
         ],
       ),
     );
   }
 
-  static Widget _sectionDivider() => Container(height: 1, color: const Color(0xFFE8EBEE), margin: EdgeInsets.zero);
+  static Widget _sectionDivider() => Container(height: 1, color: AppColors.backgroundSurfaceTertiaryGrey50, margin: EdgeInsets.zero);
 }

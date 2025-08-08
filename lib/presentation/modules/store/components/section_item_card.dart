@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_infomation_response.dart';
 
 class ProductItemCard extends StatelessWidget {
@@ -21,7 +22,7 @@ class ProductItemCard extends StatelessWidget {
               children: [
                 Text(
                   item.name ?? '',
-                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: const Color(0xFF161A1D)),
+                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: AppColors.textGreyHighest950),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -30,24 +31,24 @@ class ProductItemCard extends StatelessWidget {
                   children: [
                     Text(
                       '\$${item.price ?? 0}',
-                      style: TextStyle(fontSize: 12.sp, color: const Color(0xFF4A5763)),
+                      style: TextStyle(fontSize: 12.sp, color: AppColors.textGreyDefault500),
                     ),
                     SizedBox(width: 4.w),
                     Text(
                       '•',
-                      style: TextStyle(fontSize: 12.sp, color: const Color(0xFF5856D7)),
+                      style: TextStyle(fontSize: 12.sp, color: AppColors.stateBrandDefault500),
                     ),
                     SizedBox(width: 4.w),
                     Text(
                       '',
-                      style: TextStyle(fontSize: 12.sp, color: const Color(0xFF4A5763)),
+                      style: TextStyle(fontSize: 12.sp, color: AppColors.textGreyDefault500),
                     ),
                   ],
                 ),
                 SizedBox(height: 4.h),
                 Text(
                   '${item.avgRating ?? 0} ★ (${item.ratingCount ?? 0}+)',
-                  style: TextStyle(fontSize: 12.sp, color: const Color(0xFF4A5763)),
+                  style: TextStyle(fontSize: 12.sp, color: AppColors.textGreyDefault500),
                 ),
               ],
             ),
@@ -71,12 +72,12 @@ class ProductItemCard extends StatelessWidget {
                     height: 36.w,
                     margin: EdgeInsets.all(8.w),
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: const Color(0xFFE8EBEE)),
+                      color: AppColors.backgroundSurfacePrimaryWhite,
+                      border: Border.all(color: AppColors.backgroundSurfaceTertiaryGrey50),
                       borderRadius: BorderRadius.circular(32),
-                      boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2))],
+                      boxShadow: [BoxShadow(color: AppColors.textGreyHighest950.withValues(alpha: 0.08), blurRadius: 4, offset: const Offset(0, 2))],
                     ),
-                    child: Icon(Icons.add, size: 24.w, color: const Color(0xFF21262C)),
+                    child: Icon(Icons.add, size: 24.w, color: AppColors.textGreyHighest950),
                   ),
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_general_data.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/category_expandable.dart';
@@ -7,12 +8,12 @@ import 'package:sixam_mart_user/presentation/modules/service/service_controller.
 
 class ServiceLaundryController extends ServiceController {
   // Category data structure with colors
-  static const List<Map<String, dynamic>> laundryCategories = [
-    {'icon': 'icClothHanger1', 'label': 'Clothes', 'color': Color(0xFF6366F1)}, // Purple
-    {'icon': 'icIron', 'label': 'Iron', 'color': Color(0xFFEF4444)}, // Red
-    {'icon': 'icSingleBed1', 'label': 'Home', 'color': Color(0xFF06B6D4)}, // Cyan
-    {'icon': 'icBackpackModern1', 'label': 'Bags', 'color': Color(0xFF3B82F6)}, // Blue
-    {'icon': 'icSneakers1', 'label': 'Shoes', 'color': Color(0xFF10B981)}, // Green
+  static final List<Map<String, dynamic>> laundryCategories = [
+    {'icon': 'icClothHanger1', 'label': 'Clothes', 'color': AppTheme.theme.stateBrandDefault500}, // Purple
+    {'icon': 'icIron', 'label': 'Iron', 'color': AppTheme.theme.stateDangerDefault500}, // Red
+    {'icon': 'icSingleBed1', 'label': 'Home', 'color': AppTheme.theme.stateInformationDefault500}, // Cyan
+    {'icon': 'icBackpackModern1', 'label': 'Bags', 'color': AppTheme.theme.stateBrandDefault500}, // Blue
+    {'icon': 'icSneakers1', 'label': 'Shoes', 'color': AppTheme.theme.stateSuccessDefault500}, // Green
   ];
 
   // Banner data structure

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account_manage/account_manage_controller.dart';
@@ -40,7 +41,7 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                           padding: const EdgeInsets.all(4.0),
                           child: CircleAvatar(
                             radius: 71.5,
-                            backgroundColor: const Color(0xFF5856D7),
+                            backgroundColor: AppColors.stateBrandDefault500,
                             backgroundImage: controller.avatarPath.value.isEmpty ? Assets.images.imgAvatarDefault.provider() : FileImage(File(controller.avatarPath.value)) as ImageProvider,
                           ),
                         ),
@@ -49,15 +50,15 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                           bottom: 8,
                           child: Container(
                             decoration: BoxDecoration(
-                              color: const Color(0xFFF7F8F9),
+                              color: AppColors.backgroundSurfaceTertiaryGrey50,
                               borderRadius: BorderRadius.circular(100),
                               boxShadow: [
-                                BoxShadow(color: const Color(0xFF101214).withValues(alpha: 0.1), blurRadius: 16, offset: const Offset(0, 6)),
-                                BoxShadow(color: const Color(0xFF101214).withValues(alpha: 0.05), blurRadius: 4, offset: const Offset(0, 2)),
+                                BoxShadow(color: AppColors.alphaGrey10, blurRadius: 16, offset: const Offset(0, 6)),
+                                BoxShadow(color: AppColors.alphaGrey5, blurRadius: 4, offset: const Offset(0, 2)),
                               ],
                             ),
                             padding: const EdgeInsets.all(6),
-                            child: const Icon(Icons.edit, size: 24, color: Color(0xFF161A1D)),
+                            child: Icon(Icons.edit, size: 24, color: AppColors.textGreyHighest950),
                           ),
                         ),
                       ],

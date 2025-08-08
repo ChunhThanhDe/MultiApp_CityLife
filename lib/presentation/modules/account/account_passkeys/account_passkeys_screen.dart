@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 
@@ -34,7 +35,7 @@ class AccountPasskeysScreen extends BaseScreen<AccountPasskeysController> {
           child: ListView.separated(
             padding: EdgeInsets.zero,
             itemCount: passkeys.length,
-            separatorBuilder: (_, _) => const Divider(color: Color(0xFFE8EBEE), indent: 24, endIndent: 24, height: 0, thickness: 1),
+            separatorBuilder: (_, _) => Divider(color: AppColors.stateGreyLow300, indent: 24, endIndent: 24, height: 0, thickness: 1),
             itemBuilder: (context, index) => _PasskeyListItem(
               item: passkeys[index],
               onDelete: () {
@@ -69,17 +70,17 @@ class _PasskeyListItem extends StatelessWidget {
               children: [
                 Text(
                   item.title,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.textGreyHighest950),
                 ),
                 const SizedBox(height: 2),
-                Text(item.subtitle, style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                Text(item.subtitle, style: TextStyle(fontSize: 12, color: AppColors.textGreyHigh700)),
               ],
             ),
           ),
           // Delete icon
           IconButton(
             onPressed: onDelete,
-            icon: const Icon(Icons.delete_outline, color: Color(0xFF4A5763)),
+            icon: Icon(Icons.delete_outline, color: AppColors.textGreyHigh700),
             tooltip: 'Delete',
           ),
         ],
@@ -93,20 +94,20 @@ class _BottomSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        border: Border(top: BorderSide(color: Color(0x10101214))),
+      decoration: BoxDecoration(
+        color: AppColors.backgroundSurfacePrimaryWhite,
+        border: Border(top: BorderSide(color: AppColors.alphaGrey10)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Title & desc
-          const Text(
+          Text(
             'Create a passkey on this device',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: AppColors.textGreyHighest950),
           ),
           const SizedBox(height: 4),
-          const Text('Speed up your sign in next time by creating a passkey on this device', style: TextStyle(fontSize: 14, color: Color(0xFF4A5763))),
+          Text('Speed up your sign in next time by creating a passkey on this device', style: TextStyle(fontSize: 14, color: AppColors.textGreyHigh700)),
           const SizedBox(height: 16),
           SizedBox(
             width: double.infinity,
@@ -114,15 +115,15 @@ class _BottomSection extends StatelessWidget {
               onPressed: () {
                 // Xử lý tạo passkey mới ở đây
               },
-              icon: const Icon(Icons.add, color: Color(0xFF161A1D)),
-              label: const Text(
+              icon: Icon(Icons.add, color: AppColors.textGreyHighest950),
+              label: Text(
                 'Create a passkey',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.textGreyHighest950),
               ),
               style: OutlinedButton.styleFrom(
-                backgroundColor: const Color(0xFFF7F8F9),
+                backgroundColor: AppColors.backgroundSurfaceTertiaryGrey50,
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                side: const BorderSide(color: Colors.transparent),
+                side: BorderSide(color: AppColors.backgroundSurfacePrimaryWhite.withValues(alpha: 0)),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
               ),
             ),

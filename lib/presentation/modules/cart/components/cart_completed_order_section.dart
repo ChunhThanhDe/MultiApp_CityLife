@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class CompletedOrderSection extends StatelessWidget {
 
@@ -12,7 +13,7 @@ class CompletedOrderSection extends StatelessWidget {
     return Column(
       children: [
         Container(
-          color: const Color(0xFFF7F8F9),
+          color: AppTheme.theme.backgroundSurfaceTertiaryGrey50,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
           child: Row(
             children: [
@@ -58,14 +59,14 @@ class OrderListItem extends StatelessWidget {
                 children: [
                   Text(
                     brandName,
-                    style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
                   ),
-                  Text(subtitle, style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                  Text(subtitle, style: TextStyle(fontSize: 12, color: AppTheme.theme.textGreyHigh700)),
                 ],
               ),
             ),
-            Text(price, style: const TextStyle(fontSize: 14, color: Color(0xFF4A5763))),
-            const Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
+            Text(price, style: TextStyle(fontSize: 14, color: AppTheme.theme.textGreyHigh700)),
+            Icon(Icons.chevron_right, color: AppTheme.theme.textGreyHigh700),
           ],
         ),
       ),

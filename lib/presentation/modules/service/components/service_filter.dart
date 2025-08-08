@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({super.key});
@@ -31,9 +32,9 @@ class _FilterScreenState extends State<FilterScreen> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      decoration: BoxDecoration(
+        color: AppColors.backgroundSurfacePrimaryWhite,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -43,7 +44,7 @@ class _FilterScreenState extends State<FilterScreen> {
           Container(
             width: 48,
             height: 4,
-            decoration: BoxDecoration(color: const Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(99)),
+            decoration: BoxDecoration(color: AppColors.backgroundSurfaceTertiaryGrey50, borderRadius: BorderRadius.circular(99)),
           ),
           const SizedBox(height: 16),
           // Header
@@ -51,9 +52,9 @@ class _FilterScreenState extends State<FilterScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Row(
               children: [
-                const Text(
+                Text(
                   'Short & Filter',
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 20, color: Color(0xFF161A1D)),
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 20, color: AppColors.textGreyHighest950),
                 ),
                 const Spacer(),
                 TextButton(
@@ -67,7 +68,7 @@ class _FilterScreenState extends State<FilterScreen> {
                       offers = false;
                     });
                   },
-                  style: TextButton.styleFrom(foregroundColor: const Color(0xFF798A9A), padding: EdgeInsets.zero, minimumSize: const Size(0, 0)),
+                  style: TextButton.styleFrom(foregroundColor: AppColors.textGreyDefault500, padding: EdgeInsets.zero, minimumSize: const Size(0, 0)),
                   child: const Text('Clear all', style: TextStyle(fontSize: 14)),
                 ),
               ],
@@ -200,14 +201,14 @@ class _FilterScreenState extends State<FilterScreen> {
               height: 48,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF5856D7),
+                  backgroundColor: AppColors.stateBrandDefault500,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                   elevation: 0,
                 ),
                 onPressed: () {},
-                child: const Text(
+                child: Text(
                   'View results',
-                  style: TextStyle(color: Colors.white, fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16),
+                  style: TextStyle(color: AppColors.textBaseWhite, fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16),
                 ),
               ),
             ),
@@ -217,7 +218,7 @@ class _FilterScreenState extends State<FilterScreen> {
           Container(
             width: 134,
             height: 5,
-            decoration: BoxDecoration(color: const Color(0xFF161A1D), borderRadius: BorderRadius.circular(100)),
+            decoration: BoxDecoration(color: AppColors.textGreyHighest950, borderRadius: BorderRadius.circular(100)),
           ),
           const SizedBox(height: 16),
         ],
@@ -228,7 +229,6 @@ class _FilterScreenState extends State<FilterScreen> {
 
 // Section expandable cell
 class _ExpandableSection extends StatelessWidget {
-
   const _ExpandableSection({required this.expanded, required this.onTap, required this.icon, required this.title, this.showClear = false, this.onClear, this.children = const []});
   final bool expanded;
   final VoidCallback onTap;
@@ -240,7 +240,7 @@ class _ExpandableSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget arrowIcon(bool expanded) => Icon(expanded ? Icons.keyboard_arrow_up_rounded : Icons.keyboard_arrow_down_rounded, color: const Color(0xFF798A9A));
+    Widget arrowIcon(bool expanded) => Icon(expanded ? Icons.keyboard_arrow_up_rounded : Icons.keyboard_arrow_down_rounded, color: AppColors.textGreyDefault500);
     return Column(
       children: [
         GestureDetector(
@@ -255,12 +255,12 @@ class _ExpandableSection extends StatelessWidget {
                 Expanded(
                   child: Text(
                     title,
-                    style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+                    style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppColors.textGreyHighest950),
                   ),
                 ),
                 if (showClear && onClear != null)
                   TextButton(
-                    style: TextButton.styleFrom(foregroundColor: const Color(0xFF798A9A), padding: EdgeInsets.zero, minimumSize: const Size(0, 0)),
+                    style: TextButton.styleFrom(foregroundColor: AppColors.textGreyDefault500, padding: EdgeInsets.zero, minimumSize: const Size(0, 0)),
                     onPressed: onClear,
                     child: const Text('Clear', style: TextStyle(fontSize: 14)),
                   ),
@@ -281,7 +281,7 @@ class _DividerLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(margin: const EdgeInsets.only(left: 56), height: 1, color: const Color(0xFFE8EBEE));
+    return Container(margin: const EdgeInsets.only(left: 56), height: 1, color: AppColors.backgroundSurfaceTertiaryGrey50);
   }
 }
 
@@ -313,10 +313,10 @@ class _SelectOption extends StatelessWidget {
               Expanded(
                 child: Text(
                   label,
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: selected ? const Color(0xFF161A1D) : const Color(0xFF798A9A)),
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: selected ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500),
                 ),
               ),
-              if (selected) const Icon(Icons.check, color: Color(0xFF161A1D), size: 22),
+              if (selected) Icon(Icons.check, color: AppColors.textGreyHighest950, size: 22),
             ],
           ),
         ),
@@ -327,7 +327,6 @@ class _SelectOption extends StatelessWidget {
 
 // --- Price: Custom Range Slider với các label đô la
 class _CustomRangeSlider extends StatelessWidget {
-
   const _CustomRangeSlider({required this.range, required this.min, required this.max, required this.divisions, required this.labels, required this.onChanged});
   final RangeValues range;
   final double min;
@@ -346,7 +345,7 @@ class _CustomRangeSlider extends StatelessWidget {
           children: List.generate(labels.length, (i) {
             return Text(
               labels[i],
-              style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xFF161A1D)),
+              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppColors.textGreyHighest950),
             );
           }),
         ),
@@ -355,10 +354,10 @@ class _CustomRangeSlider extends StatelessWidget {
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
             trackHeight: 8,
-            activeTrackColor: const Color(0xFF5856D7),
-            inactiveTrackColor: const Color(0xFFE8EBEE),
-            thumbColor: Colors.white,
-            overlayColor: const Color(0x205856D7),
+            activeTrackColor: AppColors.stateBrandDefault500,
+            inactiveTrackColor: AppColors.backgroundSurfaceTertiaryGrey50,
+            thumbColor: AppColors.backgroundSurfacePrimaryWhite,
+            overlayColor: AppColors.stateBrandDefault500.withValues(alpha: 0.12),
             // rangeThumbShape: _CustomRangeThumbShape(),
             // rangeTrackShape: const _CustomRangeTrackShape(),
             overlayShape: SliderComponentShape.noOverlay,
@@ -371,7 +370,6 @@ class _CustomRangeSlider extends StatelessWidget {
 }
 
 class _CustomMarkSlider extends StatelessWidget {
-
   const _CustomMarkSlider({required this.value, required this.marks, required this.onChanged});
   final double value;
   final List<double> marks;
@@ -383,7 +381,7 @@ class _CustomMarkSlider extends StatelessWidget {
         .map(
           (m) => Text(
             m == m.toInt() ? '${m.toInt()}+' : '${m.toStringAsFixed(1)}+',
-            style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xFF161A1D)),
+            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppColors.textGreyHighest950),
           ),
         )
         .toList();
@@ -395,10 +393,10 @@ class _CustomMarkSlider extends StatelessWidget {
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
             trackHeight: 8,
-            activeTrackColor: const Color(0xFF5856D7),
-            inactiveTrackColor: const Color(0xFFE8EBEE),
-            thumbColor: Colors.white,
-            overlayColor: const Color(0x205856D7),
+            activeTrackColor: AppColors.stateBrandDefault500,
+            inactiveTrackColor: AppColors.backgroundSurfaceTertiaryGrey50,
+            thumbColor: AppColors.backgroundSurfacePrimaryWhite,
+            overlayColor: AppColors.stateBrandDefault500.withValues(alpha: 0.12),
             // thumbShape: _CustomThumbShape(),
             // trackShape: const _CustomTrackShape(),
             overlayShape: SliderComponentShape.noOverlay,
@@ -411,7 +409,6 @@ class _CustomMarkSlider extends StatelessWidget {
 }
 
 class _CheckableCell extends StatelessWidget {
-
   const _CheckableCell({required this.icon, required this.title, required this.checked, required this.onChanged});
   final Widget icon;
   final String title;
@@ -432,10 +429,10 @@ class _CheckableCell extends StatelessWidget {
             Expanded(
               child: Text(
                 title,
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: checked ? const Color(0xFF161A1D) : const Color(0xFF4A5763)),
+                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: checked ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500),
               ),
             ),
-            if (checked) const Icon(Icons.check, color: Color(0xFF161A1D), size: 20),
+            if (checked) Icon(Icons.check, color: AppColors.textGreyHighest950, size: 20),
           ],
         ),
       ),

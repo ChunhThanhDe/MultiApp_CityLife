@@ -17,7 +17,7 @@ class StatusOverlayWidget extends StatelessWidget {
       height: height,
       width: width,
       margin: EdgeInsets.only(left: index == 0 ? 24 : 16, right: index == totalItems - 1 ? 24 : 0),
-      decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.6), borderRadius: BorderRadius.circular(AppCorner.radius8)),
+      decoration: BoxDecoration(color: AppColors.textGreyHighest950.withValues(alpha: 0.6), borderRadius: BorderRadius.circular(AppCorner.radius8)),
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [_buildStatusIcon(), const SizedBox(height: 8), _buildStatusText()]),
     );
   }
@@ -25,15 +25,15 @@ class StatusOverlayWidget extends StatelessWidget {
   Widget _buildStatusIcon() {
     return Container(
       padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), shape: BoxShape.circle),
-      child: Icon(item.status == 0 ? Icons.nightlight_round : Icons.lock, color: Colors.white, size: height > 180 ? 24 : 20),
+      decoration: BoxDecoration(color: AppColors.backgroundSurfacePrimaryWhite.withValues(alpha: 0.2), shape: BoxShape.circle),
+      child: Icon(item.status == 0 ? Icons.nightlight_round : Icons.lock, color: AppColors.backgroundSurfacePrimaryWhite, size: height > 180 ? 24 : 20),
     );
   }
 
   Widget _buildStatusText() {
     return Text(
       item.status == 0 ? 'Closed' : 'Currently Unavailable',
-      style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white),
+      style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.backgroundSurfacePrimaryWhite),
       textAlign: TextAlign.center,
     );
   }

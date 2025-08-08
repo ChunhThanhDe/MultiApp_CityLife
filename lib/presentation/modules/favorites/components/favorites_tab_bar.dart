@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_controller.dart';
 
 class FavoritesTabBar extends StatelessWidget {
@@ -16,7 +17,7 @@ class FavoritesTabBar extends StatelessWidget {
           // Background container
           Container(
             height: 44,
-            decoration: BoxDecoration(color: const Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(99)),
+            decoration: BoxDecoration(color: AppTheme.theme.stateGreyLowestHover100, borderRadius: BorderRadius.circular(99)),
           ),
           // Animated moving white background for active tab
           AnimatedAlign(
@@ -28,10 +29,10 @@ class FavoritesTabBar extends StatelessWidget {
               height: 36,
               margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppTheme.theme.backgroundSurfacePrimaryWhite,
                 borderRadius: BorderRadius.circular(32),
-                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 4, offset: const Offset(0, 2))],
-                border: Border.all(color: Colors.white, width: 2),
+                boxShadow: [BoxShadow(color: AppTheme.theme.alphaGrey5, blurRadius: 4, offset: const Offset(0, 2))],
+                border: Border.all(color: AppTheme.theme.backgroundSurfacePrimaryWhite, width: 2),
               ),
             ),
           ),
@@ -56,7 +57,7 @@ class FavoritesTabBar extends StatelessWidget {
           child: Center(
             child: Text(
               text,
-              style: const TextStyle(color: Color(0xFF161A1D), fontSize: 15, fontWeight: FontWeight.w400),
+              style: TextStyle(color: AppTheme.theme.textGreyHighest950, fontSize: 15, fontWeight: FontWeight.w400),
             ),
           ),
         ),

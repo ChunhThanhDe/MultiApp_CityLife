@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show ImmutableBuffer, rootBundle;
 import 'package:shimmer_animation/shimmer_animation.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 /// Defines the source type for image loading.
 ///
@@ -519,11 +520,11 @@ class AppImageProvider extends ImageProvider<AppImageProvider> {
 /// [borderRadius] The border radius for the skeleton shape.
 Widget _buildSkeletonPlaceholder({double? width, double? height, BorderRadius? borderRadius}) {
   return Shimmer(
-    color: Colors.grey[300]!,
+    color: AppColors.stateGreyLow300,
     child: Container(
       width: width,
       height: height,
-      decoration: BoxDecoration(color: Colors.grey[300], borderRadius: borderRadius ?? BorderRadius.circular(8)),
+      decoration: BoxDecoration(color: AppColors.stateGreyLow300, borderRadius: borderRadius ?? BorderRadius.circular(8)),
     ),
   );
 }
@@ -531,9 +532,9 @@ Widget _buildSkeletonPlaceholder({double? width, double? height, BorderRadius? b
 Widget _buildErrorImage(double? width, double? height) {
   return Container(
     width: width,
-    color: Colors.grey[300],
+    color: AppColors.stateGreyLow300,
     height: height,
-    child: const Icon(Icons.broken_image, size: 50, color: Colors.grey),
+    child: Icon(Icons.broken_image, size: 50, color: AppColors.stateGreyDefault500),
   );
 }
 
@@ -791,7 +792,7 @@ class AppImage extends StatefulWidget {
     Duration maxRetryDelay = _ImageConstants.maxRetryDelay,
     double backoffFactor = _ImageConstants.backoffFactor,
     Widget? placeholder,
-    Widget errorWidget = const Icon(Icons.broken_image, size: 50, color: Colors.grey),
+    Widget? errorWidget,
     BoxFit fit = BoxFit.cover,
     double? width,
     double? height,

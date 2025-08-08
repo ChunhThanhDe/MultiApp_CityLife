@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/cart_order_confirm/cart_order_confirm_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
-
-import 'package:sixam_mart_user/presentation/modules/cart/cart_order_confirm/cart_order_confirm_controller.dart';
 
 class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
   const CartOrderConfirmScreen({super.key});
@@ -20,9 +20,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
     return Obx(() {
       // Show loading state
       if (controller.isLoading.value) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
+        return const Center(child: CircularProgressIndicator());
       }
 
       // Show error state
@@ -33,14 +31,11 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
             children: [
               Text(
                 'Error: ${controller.error.value}',
-                style: const TextStyle(color: Colors.red),
+                style: TextStyle(color: AppTheme.theme.textDangerDefault500),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () => controller.onInit(),
-                child: const Text('Retry'),
-              ),
+              ElevatedButton(onPressed: () => controller.onInit(), child: const Text('Retry')),
             ],
           ),
         );
@@ -65,7 +60,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                             Container(
                               width: 136,
                               height: 136,
-                              decoration: const BoxDecoration(color: Color(0xFFF7F8F9), shape: BoxShape.circle),
+                              decoration: BoxDecoration(color: AppTheme.theme.backgroundSurfaceTertiaryGrey50, shape: BoxShape.circle),
                               child: Center(child: SvgPicture.asset(stepData.iconAsset)),
                             ),
                           ],
@@ -75,14 +70,14 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             stepData.title,
-                            style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 28, color: Color(0xFF161A1D), height: 36 / 28),
+                            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 28, color: AppTheme.theme.textGreyHighest950, height: 36 / 28),
                           ),
                         ),
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             stepData.subtitle,
-                            style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xFF4A5763), height: 24 / 16),
+                            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppTheme.theme.textGreyHigh700, height: 24 / 16),
                           ),
                         ),
                         const SizedBox(height: 24),
@@ -94,7 +89,10 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                                 child: Container(
                                   height: 5,
                                   margin: EdgeInsets.only(right: i == controller.stepsData.length - 1 ? 0 : 12),
-                                  decoration: BoxDecoration(color: i <= controller.step.value ? const Color(0xFF5856D7) : const Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(3)),
+                                  decoration: BoxDecoration(
+                                    color: i <= controller.step.value ? AppTheme.theme.stateBrandDefault500 : AppTheme.theme.stateGreyLowestHover100,
+                                    borderRadius: BorderRadius.circular(3),
+                                  ),
                                 ),
                               ),
                             ),
@@ -104,28 +102,20 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                     ),
                   ),
                   // Divider
-                  Container(height: 6, width: double.infinity, color: const Color(0xFFF7F8F9)),
+                  Container(height: 6, width: double.infinity, color: AppTheme.theme.backgroundSurfaceTertiaryGrey50),
 
                   // Address Section
                   Padding(padding: const EdgeInsets.symmetric(vertical: 8.0), child: sectionTitle('Address')),
-                  cellItem(
-                    iconAsset: 'assets/icons/ic_home.svg',
-                    title: controller.contactPersonName,
-                    subtitle: controller.deliveryAddress,
-                  ),
+                  cellItem(iconAsset: 'assets/icons/ic_home.svg', title: controller.contactPersonName, subtitle: controller.deliveryAddress),
                   dividerLine(),
-                  cellItem(
-                    iconAsset: 'assets/icons/ic_box_package_courier_hands.svg',
-                    title: controller.deliveryInstruction,
-                    subtitle: controller.orderNote,
-                  ),
+                  cellItem(iconAsset: 'assets/icons/ic_box_package_courier_hands.svg', title: controller.deliveryInstruction, subtitle: controller.orderNote),
 
                   // Divider
-                  Container(height: 6, width: double.infinity, color: const Color(0xFFF7F8F9)),
+                  Container(height: 6, width: double.infinity, color: AppTheme.theme.backgroundSurfaceTertiaryGrey50),
 
                   // Order Details Section
                   Padding(padding: const EdgeInsets.symmetric(vertical: 8.0), child: sectionTitle('Order Details')),
-                  
+
                   // Display store information
                   if (controller.orderData.value?.store != null)
                     orderDetailItem(
@@ -136,18 +126,14 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                     ),
 
                   // Display order items from controller
-                  ...controller.orderItems.map((item) => Column(
-                    children: [
-                      if (controller.orderItems.indexOf(item) > 0 || controller.orderData.value?.store != null) 
-                        dividerLine(),
-                      orderDetailItem(
-                        imageAsset: item.imageAsset,
-                        title: item.title,
-                        subtitle: item.subtitle,
-                        price: item.price,
-                      ),
-                    ],
-                  )),
+                  ...controller.orderItems.map(
+                    (item) => Column(
+                      children: [
+                        if (controller.orderItems.indexOf(item) > 0 || controller.orderData.value?.store != null) dividerLine(),
+                        orderDetailItem(imageAsset: item.imageAsset, title: item.title, subtitle: item.subtitle, price: item.price),
+                      ],
+                    ),
+                  ),
 
                   const SizedBox(height: 32),
                 ],
@@ -164,14 +150,14 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
     padding: const EdgeInsets.symmetric(horizontal: 24),
     child: Text(
       text,
-      style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xFF161A1D), height: 28 / 18),
+      style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 18, color: AppTheme.theme.textGreyHighest950, height: 28 / 18),
     ),
   );
 
   // Divider Line Widget
-  Widget dividerLine() => const Padding(
-    padding: EdgeInsets.only(left: 60), // aligns with icon
-    child: Divider(height: 0, thickness: 1, color: Color(0xFFE8EBEE)),
+  Widget dividerLine() => Padding(
+    padding: const EdgeInsets.only(left: 60), // aligns with icon
+    child: Divider(height: 0, thickness: 1, color: AppTheme.theme.stateGreyLowestHover100),
   );
 
   // Cell Item Widget (Address)
@@ -189,11 +175,11 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
             children: [
               Text(
                 title,
-                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
               ),
               Text(
                 subtitle,
-                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xFF4A5763)),
+                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: AppTheme.theme.textGreyHigh700),
               ),
             ],
           ),
@@ -211,7 +197,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
         Container(
           width: 32,
           height: 32,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(32), color: Colors.white),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(32), color: AppTheme.theme.backgroundSurfacePrimaryWhite),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(32),
             child: AppImage.asset(imageAsset, width: 32, height: 32, fit: BoxFit.cover),
@@ -225,20 +211,20 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
             children: [
               Text(
                 title,
-                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
               ),
               Text(
                 subtitle,
-                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xFF4A5763)),
+                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: AppTheme.theme.textGreyHigh700),
               ),
             ],
           ),
         ),
         Text(
           '\$${price.toStringAsFixed(2)}',
-          style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
         ),
-        const Icon(Icons.expand_more, color: Color(0xFF4A5763)),
+        Icon(Icons.expand_more, color: AppTheme.theme.textGreyHigh700),
       ],
     ),
   );

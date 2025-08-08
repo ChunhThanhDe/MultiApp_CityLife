@@ -12,9 +12,8 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/components/auth_header.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_in/components/term_of_service.dart';
 import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/accept_tos.dart';
-import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
-
 import 'package:sixam_mart_user/presentation/modules/authentication/verification/verification_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
 
 class VerificationScreen extends BaseScreen<VerificationController> {
   const VerificationScreen({super.key});
@@ -43,22 +42,22 @@ class VerificationScreen extends BaseScreen<VerificationController> {
             color: AppColors.stateBrandDefault500,
             disabledColor: AppColors.stateBrandDefault500.withValues(alpha: 0.5),
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
-            child: Text(tr(LocaleKeys.authentication_verification_verifyButton), style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.white)),
+            child: Text(tr(LocaleKeys.authentication_verification_verifyButton), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite)),
           ),
           SizedBox(height: 24.h),
           AppButton(
             onTap: Get.back,
             width: double.infinity,
-            color: Colors.white,
+            color: AppColors.backgroundSurfacePrimaryWhite,
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Assets.icons.icBackArrow.svg(width: 16.w, height: 16.w, colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn)),
+                Assets.icons.icBackArrow.svg(width: 16.w, height: 16.w, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
                 SizedBox(width: 8.w),
                 Text(
                   vm.param.type == VerificationType.signIn ? tr(LocaleKeys.authentication_verification_backToLogin) : tr(LocaleKeys.authentication_verification_backToSignUp),
-                  style: AppTextStyles.typographyH10Medium.copyWith(color: Colors.black),
+                  style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
                 ),
               ],
             ),
@@ -66,7 +65,7 @@ class VerificationScreen extends BaseScreen<VerificationController> {
           const Spacer(),
           const Center(child: TermOfService()),
           SizedBox(height: 16.h),
-          const Divider(color: Color(0xFFE8EBEE), thickness: 1),
+          Divider(color: AppColors.stateGreyLowestHover100, thickness: 1),
           SizedBox(height: 16.h),
           _buildGotoSignUp(),
           SizedBox(height: 56.h),
@@ -131,7 +130,7 @@ class VerificationScreen extends BaseScreen<VerificationController> {
         borderRadius: BorderRadius.circular(6),
         selectedColor: AppColors.textBrandDefault500,
         selectedFillColor: AppColors.stateBrandLowestHover100,
-        inactiveFillColor: Colors.white,
+        inactiveFillColor: AppColors.backgroundSurfacePrimaryWhite,
         inactiveColor: AppColors.stateBrandDefault500,
         activeColor: AppColors.stateBrandDefault500,
         activeFillColor: AppColors.stateBrandLowestHover100,

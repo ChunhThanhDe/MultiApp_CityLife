@@ -154,7 +154,7 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
     final ShapeBorder effectiveShape = widget.shape ?? RoundedRectangleBorder(borderRadius: effectiveRadius);
     final double effectiveElevation = widget.elevation ?? 0;
 
-    final Widget content = widget.loading ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white), strokeWidth: 2.5)) : widget.child;
+    final Widget content = widget.loading ? SizedBox(width: 24, height: 24, child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(AppColors.backgroundSurfacePrimaryWhite), strokeWidth: 2.5)) : widget.child;
 
     // Combine explicit width/height with user-provided constraints
     BoxConstraints effectiveConstraints = widget.constraints ?? const BoxConstraints();

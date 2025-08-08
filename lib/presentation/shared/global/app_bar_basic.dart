@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 /// A basic app bar widget that provides a simple title and back navigation.
 ///
@@ -15,12 +16,12 @@ import 'package:get/get.dart';
 /// )
 /// ```
 class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
-
   /// Creates a [BasicAppBar] with the specified [title] and optional [onBack] callback.
   ///
   /// The [title] parameter is required and will be displayed as the app bar title.
   /// The [onBack] parameter is optional and defaults to Get.back() if not provided.
   const BasicAppBar({required this.title, super.key, this.onBack, this.isShowBackButton = true});
+
   /// The title text to display in the app bar.
   final String title;
 
@@ -34,20 +35,21 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      shadowColor: Colors.transparent,
+      shadowColor: AppColors.backgroundSurfacePrimaryWhite.withValues(alpha: 0),
+      surfaceTintColor: AppColors.backgroundSurfacePrimaryWhite,
       scrolledUnderElevation: 0,
-      backgroundColor: Colors.white,
-      iconTheme: const IconThemeData(color: Color(0xFF161A1D)),
+      backgroundColor: AppColors.backgroundSurfacePrimaryWhite,
+      iconTheme: IconThemeData(color: AppColors.textGreyHighest950),
       title: Text(
         title,
-        style: const TextStyle(color: Color(0xFF161A1D), fontWeight: FontWeight.w500, fontSize: 18),
+        style: TextStyle(color: AppColors.textGreyHighest950, fontWeight: FontWeight.w500, fontSize: 18),
       ),
       centerTitle: false,
       toolbarHeight: 56,
       leading: isShowBackButton
           ? IconButton(
               onPressed: onBack ?? () => Get.back(),
-              icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF161A1D)),
+              icon: Icon(Icons.arrow_back_ios_new, color: AppColors.textGreyHighest950),
             )
           : null,
     );

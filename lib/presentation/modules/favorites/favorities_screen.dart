@@ -74,7 +74,7 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
   Widget _buildStoreCard(WishlistStore store) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppTheme.theme.backgroundSurfacePrimaryWhite,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [BoxShadow(color: AppColors.shadowSm5, blurRadius: 4, offset: const Offset(0, 2))],
       ),
@@ -106,8 +106,8 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
                     width: 48,
                     height: 48,
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.white, width: 2),
+                      color: AppTheme.theme.backgroundSurfacePrimaryWhite,
+          border: Border.all(color: AppTheme.theme.backgroundSurfacePrimaryWhite, width: 2),
                       shape: BoxShape.circle,
                       boxShadow: [BoxShadow(color: AppColors.shadowSm5, blurRadius: 6, offset: const Offset(0, 2))],
                     ),
@@ -211,7 +211,7 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
   Widget _buildItemCard(WishlistItem item) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppTheme.theme.backgroundSurfacePrimaryWhite,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [BoxShadow(color: AppColors.shadowSm5, blurRadius: 4, offset: const Offset(0, 2))],
       ),
@@ -244,7 +244,7 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
                     width: 36,
                     height: 36,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: AppTheme.theme.backgroundSurfacePrimaryWhite,
                       border: Border.all(color: AppColors.stateGreyLowest50, width: 1),
                       boxShadow: [BoxShadow(color: AppColors.shadowMd10, blurRadius: 8, offset: const Offset(0, 4))],
                       borderRadius: BorderRadius.circular(32),

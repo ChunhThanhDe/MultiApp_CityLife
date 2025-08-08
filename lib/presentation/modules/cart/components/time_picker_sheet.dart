@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class TimePickerSheet extends StatefulWidget {
   const TimePickerSheet({super.key});
@@ -30,9 +31,9 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
     final DateTime selectedDay = days[selectedDayIndex];
 
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      decoration: BoxDecoration(
+        color: AppTheme.theme.backgroundSurfacePrimaryWhite,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -44,7 +45,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
               child: Container(
                 width: 48,
                 height: 4,
-                decoration: BoxDecoration(color: const Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(99)),
+                decoration: BoxDecoration(color: AppTheme.theme.stateGreyLowestHover100, borderRadius: BorderRadius.circular(99)),
               ),
             ),
           ),
@@ -54,19 +55,19 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
             child: Row(
               children: [
                 IconButton(
-                  icon: Icon(Icons.arrow_back_ios_new, size: 22, color: Colors.grey[700]),
+                  icon: Icon(Icons.arrow_back_ios_new, size: 22, color: AppTheme.theme.textGreyHigh700),
                   onPressed: selectedDayIndex > 0 ? () => setState(() => selectedDayIndex--) : null,
                 ),
                 Expanded(
                   child: Center(
                     child: Text(
                       DateFormat.yMMMMd().format(selectedDay),
-                      style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 18, color: Color(0xFF161A1D)),
+                      style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 18, color: AppTheme.theme.textGreyHighest950),
                     ),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.arrow_forward_ios, size: 22, color: Colors.grey[700]),
+                  icon: Icon(Icons.arrow_forward_ios, size: 22, color: AppTheme.theme.textGreyHigh700),
                   onPressed: selectedDayIndex < days.length - 1 ? () => setState(() => selectedDayIndex++) : null,
                 ),
               ],
@@ -89,18 +90,28 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
                     margin: const EdgeInsets.only(right: 12),
                     width: 60,
                     height: 81,
-                    decoration: BoxDecoration(color: selected ? const Color(0xFF5856D7) : const Color(0xFFF7F8F9), borderRadius: BorderRadius.circular(8)),
+                    decoration: BoxDecoration(color: selected ? AppTheme.theme.stateBrandDefault500 : AppTheme.theme.backgroundSurfaceTertiaryGrey50, borderRadius: BorderRadius.circular(8)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           DateFormat.E().format(d), // Mon, Tue,...
-                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: selected ? Colors.white : (idx == 0 ? const Color(0xFF5856D7) : const Color(0xFF798A9A))),
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                            color: selected ? AppTheme.theme.textBaseWhite : (idx == 0 ? AppTheme.theme.stateBrandDefault500 : AppTheme.theme.textGreyDefault500),
+                          ),
                         ),
                         const SizedBox(height: 12),
                         Text(
                           DateFormat.d().format(d), // 20, 21,...
-                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 24, color: selected ? Colors.white : (idx == 0 ? const Color(0xFF5856D7) : const Color(0xFF161A1D))),
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 24,
+                            color: selected ? AppTheme.theme.textBaseWhite : (idx == 0 ? AppTheme.theme.stateBrandDefault500 : AppTheme.theme.textGreyHighest950),
+                          ),
                         ),
                       ],
                     ),
@@ -112,7 +123,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
 
           const SizedBox(height: 16),
           // Divider
-          const Divider(height: 1, thickness: 1, color: Color(0xFFE8EBEE)),
+          Divider(height: 1, thickness: 1, color: AppTheme.theme.stateGreyLowestHover100),
           const SizedBox(height: 12),
           // Slot giờ
           Expanded(
@@ -123,7 +134,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
                 child: ListView.separated(
                   shrinkWrap: true,
                   itemCount: timeSlots.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: 8),
+                  separatorBuilder: (context, index) => const SizedBox(height: 8),
                   itemBuilder: (context, idx) {
                     final selected = idx == selectedTimeSlot;
                     return InkWell(
@@ -132,7 +143,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
                       child: Container(
                         height: 48,
                         padding: const EdgeInsets.symmetric(horizontal: 18),
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(32), color: selected ? const Color(0x119998E7) : Colors.transparent),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(32), color: selected ? AppTheme.theme.stateBrandLowest50 : AppTheme.theme.backgroundSurfacePrimaryWhite),
                         child: Row(
                           children: [
                             Expanded(
@@ -142,11 +153,11 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
                                   fontFamily: 'Inter',
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
-                                  color: selected ? const Color(0xFF9998E7) : (idx == 0 ? const Color(0xFF798A9A) : const Color(0xFF4A5763)),
+                                  color: selected ? AppTheme.theme.stateBrandLow200 : (idx == 0 ? AppTheme.theme.textGreyDefault500 : AppTheme.theme.textGreyHigh700),
                                 ),
                               ),
                             ),
-                            if (selected) const Icon(Icons.check, color: Color(0xFF5856D7), size: 20),
+                            if (selected) Icon(Icons.check, color: AppTheme.theme.stateBrandDefault500, size: 20),
                           ],
                         ),
                       ),
@@ -167,7 +178,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
                 height: 48,
                 child: ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(const Color(0xFF5856D7)),
+                    backgroundColor: WidgetStateProperty.all(AppTheme.theme.stateBrandDefault500),
                     shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32))),
                     padding: WidgetStateProperty.all(const EdgeInsets.symmetric(vertical: 12)),
                     elevation: WidgetStateProperty.all(0),
@@ -175,9 +186,9 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text(
+                  child: Text(
                     'Save',
-                    style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white),
+                    style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textBaseWhite),
                   ),
                 ),
               ),

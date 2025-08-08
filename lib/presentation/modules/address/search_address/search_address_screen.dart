@@ -27,8 +27,8 @@ class SearchAddressScreen extends BaseScreen<SearchAddressController> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return AppBar(
-      surfaceTintColor: Colors.white,
-      backgroundColor: Colors.white,
+      surfaceTintColor: AppColors.backgroundSurfacePrimaryWhite,
+      backgroundColor: AppColors.backgroundSurfacePrimaryWhite,
       title: Text(tr(LocaleKeys.address_title), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
       centerTitle: false,
       leading: IconButton(onPressed: () => Get.back(), icon: Assets.icons.icBackArrow.svg()),

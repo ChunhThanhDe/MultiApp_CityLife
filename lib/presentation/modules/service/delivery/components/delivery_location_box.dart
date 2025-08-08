@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/presentation/modules/service/delivery/box_delivery/box_delivery_controller.dart';
 
 class LocationBoxWidget extends StatelessWidget {
@@ -11,20 +12,20 @@ class LocationBoxWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: const Color(0xFFE8EBEE)),
+        color: AppColors.backgroundSurfacePrimaryWhite,
+        border: Border.all(color: AppColors.stateGreyLowestHover100),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
         children: [
           ListTile(
             leading: SvgPicture.asset('assets/icons/ic_box_package_hand_bottom.svg', width: 24, height: 24),
-            title: Text(controller.pickupLocation.value, style: const TextStyle(fontSize: 14, color: Color(0xFF161A1D))),
+            title: Text(controller.pickupLocation.value, style: TextStyle(fontSize: 14, color: AppColors.textGreyHighest950)),
           ),
           const Divider(height: 1),
           ListTile(
             leading: SvgPicture.asset('assets/icons/ic_box_package_courier_hands.svg', width: 24, height: 24),
-            title: Text(controller.dropoffLocation.value, style: const TextStyle(fontSize: 14, color: Color(0xFF161A1D))),
+            title: Text(controller.dropoffLocation.value, style: TextStyle(fontSize: 14, color: AppColors.textGreyHighest950)),
           ),
         ],
       ),

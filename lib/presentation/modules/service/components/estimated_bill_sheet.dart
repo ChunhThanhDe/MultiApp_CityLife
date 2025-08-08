@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
 class EstimatedBillSheet extends StatelessWidget {
@@ -8,9 +9,9 @@ class EstimatedBillSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      decoration: BoxDecoration(
+        color: AppColors.backgroundSurfacePrimaryWhite,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -22,7 +23,7 @@ class EstimatedBillSheet extends StatelessWidget {
               child: Container(
                 width: 48,
                 height: 4,
-                decoration: BoxDecoration(color: const Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(99)),
+                decoration: BoxDecoration(color: AppColors.stateGreyLowestHover100, borderRadius: BorderRadius.circular(99)),
               ),
             ),
           ),
@@ -31,10 +32,10 @@ class EstimatedBillSheet extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: Text(
                     'Estimated Bill',
-                    style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 20, color: Color(0xFF161A1D)),
+                    style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 20, color: AppColors.textGreyHighest950),
                   ),
                 ),
                 GestureDetector(onTap: () => Navigator.of(context).pop(), child: const Text('close')),
@@ -42,7 +43,7 @@ class EstimatedBillSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          const Divider(height: 1, thickness: 1, color: Color(0xFFE8EBEE)),
+          Divider(height: 1, thickness: 1, color: AppColors.stateGreyLowestHover100),
           // Scroll content
           Expanded(
             child: SingleChildScrollView(
@@ -53,7 +54,7 @@ class EstimatedBillSheet extends StatelessWidget {
                   // Nhóm Clothes
                   _SectionGroup(
                     icon: Icons.checkroom_rounded,
-                    iconColor: const Color(0xFF5856D7),
+                    iconColor: AppColors.stateBrandDefault500,
                     title: 'Clothes',
                     items: [
                       _SheetItem(name: 'Pajama Top', price: 5.99, quantity: 4),
@@ -62,11 +63,11 @@ class EstimatedBillSheet extends StatelessWidget {
                       _SheetItem(name: 'Tunics', price: 5.99, quantity: 4),
                     ],
                   ),
-                  const Divider(height: 32, thickness: 1, color: Color(0xFFE8EBEE)),
+                  Divider(height: 32, thickness: 1, color: AppColors.stateGreyLowestHover100),
                   // Nhóm Home
                   _SectionGroup(
                     icon: Icons.bed_rounded,
-                    iconColor: const Color(0xFF2898BD),
+                    iconColor: AppColors.stateInformationDefault500,
                     title: 'Home',
                     items: [
                       _SheetItem(name: 'Pajama Top', price: 5.99, quantity: 4),
@@ -75,7 +76,7 @@ class EstimatedBillSheet extends StatelessWidget {
                       _SheetItem(name: 'Tunics', price: 5.99, quantity: 4),
                     ],
                   ),
-                  const Divider(height: 32, thickness: 1, color: Color(0xFFE8EBEE)),
+                  Divider(height: 32, thickness: 1, color: AppColors.stateGreyLowestHover100),
                   // Tổng bill
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24, vertical: 6),
@@ -94,18 +95,18 @@ class EstimatedBillSheet extends StatelessWidget {
           ),
 
           const SizedBox(height: 8),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 6),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Total:',
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 20, color: Color(0xFF161A1D)),
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 20, color: AppColors.textGreyHighest950),
                 ),
                 Text(
                   '\$23.94',
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 20, color: Color(0xFF161A1D)),
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 20, color: AppColors.textGreyHighest950),
                 ),
               ],
             ),
@@ -119,7 +120,7 @@ class EstimatedBillSheet extends StatelessWidget {
               height: 48,
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all(const Color(0xFF5856D7)),
+                  backgroundColor: WidgetStateProperty.all(AppColors.stateBrandDefault500),
                   shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32))),
                   padding: WidgetStateProperty.all(const EdgeInsets.symmetric(vertical: 12)),
                   elevation: WidgetStateProperty.all(0),
@@ -127,9 +128,9 @@ class EstimatedBillSheet extends StatelessWidget {
                 onPressed: () {
                   Get.toNamed(AppRoutes.cartCheckout, arguments: {'serviceCart': 'laundry'});
                 },
-                child: const Text(
+                child: Text(
                   'Continue Order',
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 18, color: Colors.white),
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 18, color: AppColors.textBaseWhite),
                 ),
               ),
             ),
@@ -203,12 +204,12 @@ class _SheetItemRow extends StatelessWidget {
               children: [
                 Text(
                   item.name,
-                  style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xFF161A1D)),
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppColors.textGreyHighest950),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   '\$ ${item.price.toStringAsFixed(2)}',
-                  style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF4A5763)),
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.textGreyHigh700),
                 ),
               ],
             ),
@@ -229,20 +230,20 @@ class _QuantityBox extends StatelessWidget {
     return Container(
       width: 80,
       height: 28,
-      decoration: BoxDecoration(color: const Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(32)),
+      decoration: BoxDecoration(color: AppColors.stateGreyLowestHover100, borderRadius: BorderRadius.circular(32)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.remove, size: 20, color: Color(0xFF161A1D)),
+          Icon(Icons.remove, size: 20, color: AppColors.textGreyHighest950),
           Container(
             width: 27,
             alignment: Alignment.center,
             child: Text(
               '$quantity',
-              style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF161A1D)),
+              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.textGreyHighest950),
             ),
           ),
-          const Icon(Icons.add, size: 20, color: Color(0xFF161A1D)),
+          Icon(Icons.add, size: 20, color: AppColors.textGreyHighest950),
         ],
       ),
     );
@@ -263,11 +264,11 @@ class _BillInfoRow extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xFF4A5763)),
+            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppColors.textGreyHigh700),
           ),
           Text(
             value,
-            style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xFF4A5763)),
+            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppColors.textGreyHigh700),
           ),
         ],
       ),

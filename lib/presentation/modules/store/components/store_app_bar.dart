@@ -92,7 +92,7 @@ class StoreAppBar extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(6.w),
         decoration: ShapeDecoration(
-          color: Colors.white,
+          color: AppColors.backgroundSurfacePrimaryWhite,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
         ),
         child: icon,
@@ -128,7 +128,7 @@ class StoreAppBar extends StatelessWidget {
                         SizedBox(height: 4.h),
                         Row(
                           children: [
-                            Icon(Icons.star, size: 16.w, color: Colors.black),
+                            Icon(Icons.star, size: 16.w, color: AppColors.textGreyHighest950),
                             SizedBox(width: 4.w),
                             Text.rich(
                               TextSpan(
@@ -163,7 +163,7 @@ class StoreAppBar extends StatelessWidget {
               Expanded(
                 child: _actionButton(
                   text: 'Add to favorites',
-                  icon: Assets.icons.icHeartOutlined.svg(width: 24.w, height: 24.w, colorFilter: const ColorFilter.mode(Colors.red, BlendMode.srcIn)),
+                  icon: Assets.icons.icHeartOutlined.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.stateDangerDefault500, BlendMode.srcIn)),
                   backgroundColor: AppColors.stateDangerLowest50,
                   borderColor: AppColors.stateDangerLowestHover100,
                   textColor: AppColors.stateDangerHigh700,
@@ -174,7 +174,7 @@ class StoreAppBar extends StatelessWidget {
               Expanded(
                 child: _actionButton(
                   text: 'Search the store',
-                  icon: Assets.icons.icSearch.svg(width: 24.w, height: 24.w, colorFilter: const ColorFilter.mode(Colors.blue, BlendMode.srcIn)),
+                  icon: Assets.icons.icSearch.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.stateBrandDefault500, BlendMode.srcIn)),
                   backgroundColor: AppColors.stateBrandLowest50,
                   borderColor: AppColors.stateBrandLowestHover100,
                   textColor: AppColors.stateBrandHigh700,
@@ -189,7 +189,7 @@ class StoreAppBar extends StatelessWidget {
               Expanded(
                 child: _actionButton(
                   text: 'Share a friend',
-                  icon: Assets.icons.icSync.svg(width: 24.w, height: 24.w, colorFilter: const ColorFilter.mode(Colors.green, BlendMode.srcIn)),
+                  icon: Assets.icons.icSync.svg(width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.stateSuccessDefault500, BlendMode.srcIn)),
                   backgroundColor: AppColors.stateSuccessLowest50,
                   borderColor: AppColors.stateSuccessLowestHover100,
                   textColor: AppColors.stateSuccessHigh700,
@@ -200,7 +200,7 @@ class StoreAppBar extends StatelessWidget {
               Expanded(
                 child: _actionButton(
                   text: 'Contact',
-                  icon: Icon(Icons.phone, size: 24.w, color: Colors.blue),
+                  icon: Icon(Icons.phone, size: 24.w, color: AppColors.stateInformationHigh700),
                   backgroundColor: AppColors.stateInformationLowest50,
                   borderColor: AppColors.stateInformationLowestHover100,
                   textColor: AppColors.stateInformationHigh700,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/components/cart_order_progress_stepper.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class InProgressOrderCard extends StatelessWidget {
 
@@ -23,17 +24,17 @@ class InProgressOrderCard extends StatelessWidget {
       children: [
         // Label bar
         Container(
-          color: const Color(0xFF5856D7),
+          color: AppTheme.theme.stateBrandDefault500,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
           child: Row(
             children: [
               Expanded(
                 child: Text(
                   label,
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16),
+                  style: TextStyle(color: AppTheme.theme.textBaseWhite, fontWeight: FontWeight.w500, fontSize: 16),
                 ),
               ),
-              Text(time, style: const TextStyle(color: Colors.white, fontSize: 14)),
+              Text(time, style: TextStyle(color: AppTheme.theme.textBaseWhite, fontSize: 14)),
             ],
           ),
         ),
@@ -52,14 +53,14 @@ class InProgressOrderCard extends StatelessWidget {
                     children: [
                       Text(
                         brandName,
-                        style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
                       ),
-                      Text(subtitle, style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                      Text(subtitle, style: TextStyle(fontSize: 12, color: AppTheme.theme.textGreyHigh700)),
                     ],
                   ),
                 ),
-                Text(price, style: const TextStyle(fontSize: 14, color: Color(0xFF4A5763))),
-                const Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
+                Text(price, style: TextStyle(fontSize: 14, color: AppTheme.theme.textGreyHigh700)),
+                Icon(Icons.chevron_right, color: AppTheme.theme.textGreyHigh700),
               ],
             ),
           ),

@@ -111,7 +111,7 @@ class AddFundScreen extends BaseScreen<AddFundController> {
                   ),
                   prefixIconConstraints: const BoxConstraints(minWidth: 16),
                   filled: !isFilled,
-                  fillColor: !isFilled ? Colors.transparent : null,
+                  fillColor: !isFilled ? AppColors.backgroundSurfacePrimaryWhite.withValues(alpha: 0) : null,
                   border: isFilled
                       ? InputBorder.none
                       : OutlineInputBorder(

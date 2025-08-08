@@ -18,9 +18,9 @@ class BrandNameChipWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: ShapeDecoration(
-        color: Colors.white.withValues(alpha: 0.8),
+        color: AppColors.backgroundSurfacePrimaryWhite.withValues(alpha: 0.8),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-        shadows: const [BoxShadow(color: Color(0x3D000000), blurRadius: 32, offset: Offset(0, 0), spreadRadius: 0)],
+        shadows: [BoxShadow(color: AppColors.textGreyHighest950.withValues(alpha: 0.24), blurRadius: 32, offset: const Offset(0, 0), spreadRadius: 0)],
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

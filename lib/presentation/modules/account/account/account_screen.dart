@@ -4,15 +4,13 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account/account_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_dialog.dart';
 import 'package:sixam_mart_user/services/auth_service.dart';
 
-import 'package:sixam_mart_user/presentation/modules/account/account/account_controller.dart';
-
 class AccountMenuItem {
-
   const AccountMenuItem({required this.icon, required this.title, this.trailing, this.onClick});
   final String icon;
   final String title;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/response/get_checkout_summary_response.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_general_data.dart';
@@ -70,10 +71,10 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
 
   Widget divider([double leftPad = 0]) => Padding(
     padding: EdgeInsets.only(left: leftPad),
-    child: const Divider(height: 1, color: Color(0xFFE8EBEE)),
+    child: Divider(height: 1, color: AppTheme.theme.stateGreyLowestHover100),
   );
 
-  Widget dividerSpace() => Container(width: double.infinity, height: 6, color: const Color(0xFFF7F8F9));
+  Widget dividerSpace() => Container(width: double.infinity, height: 6, color: AppTheme.theme.backgroundSurfaceTertiaryGrey50);
 
   Widget sectionLabel(String label) => Padding(
     padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
@@ -81,7 +82,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
       children: [
         Text(
           label,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Color(0xFF161A1D), fontFamily: 'Inter'),
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: AppTheme.theme.textGreyHighest950, fontFamily: 'Inter'),
         ),
       ],
     ),
@@ -108,16 +109,16 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
                 ),
                 Text(
                   subtitle,
-                  style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xFF4A5763)),
+                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: AppTheme.theme.textGreyHigh700),
                 ),
               ],
             ),
           ),
-          const Icon(Icons.arrow_forward_ios_rounded, size: 20, color: Color(0xFF4A5763)),
+          Icon(Icons.arrow_forward_ios_rounded, size: 20, color: AppTheme.theme.textGreyHigh700),
         ],
       ),
     ),
@@ -132,8 +133,8 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
     Widget? trailing,
   }) => Container(
     decoration: BoxDecoration(
-      color: selected ? const Color(0xFFEFEFFB) : Colors.white,
-      border: Border.all(color: selected ? const Color(0xFFBEBDEF) : const Color(0x1A101214), width: 1),
+      color: selected ? AppTheme.theme.stateBrandLowest50 : AppTheme.theme.backgroundSurfacePrimaryWhite,
+      border: Border.all(color: selected ? AppTheme.theme.stateBrandLow200 : AppTheme.theme.alphaGrey10, width: 1),
       borderRadius: BorderRadius.circular(6),
     ),
     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
@@ -147,11 +148,11 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
             children: [
               Text(
                 title,
-                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
               ),
               Text(
                 subtitle,
-                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xFF4A5763)),
+                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: AppTheme.theme.textGreyHigh700),
               ),
             ],
           ),
@@ -159,10 +160,10 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
         if (label != null)
           Text(
             label,
-            style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF4A5763)),
+            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: AppTheme.theme.textGreyHigh700),
           ),
         if (trailing != null) trailing,
-        if (selected) const Icon(Icons.check_circle, color: Color(0xFF242290), size: 24),
+        if (selected) Icon(Icons.check_circle, color: AppTheme.theme.stateBrandHigh700, size: 24),
       ],
     ),
   );
@@ -191,20 +192,20 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
             children: [
               Text(
                 name,
-                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
               ),
               Text(
                 detail,
-                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xFF4A5763)),
+                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: AppTheme.theme.textGreyHigh700),
               ),
             ],
           ),
         ),
         Text(
           amount,
-          style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF4A5763)),
+          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: AppTheme.theme.textGreyHigh700),
         ),
-        const Icon(Icons.keyboard_arrow_down_rounded, color: Color(0xFF4A5763)),
+        Icon(Icons.keyboard_arrow_down_rounded, color: AppTheme.theme.textGreyHigh700),
       ],
     ),
   );
@@ -215,11 +216,11 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
       children: [
         Text(
           left,
-          style: const TextStyle(color: Color(0xFF4A5763), fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w400),
+          style: TextStyle(color: AppTheme.theme.textGreyHigh700, fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w400),
         ),
         Text(
           right,
-          style: const TextStyle(color: Color(0xFF4A5763), fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w400),
+          style: TextStyle(color: AppTheme.theme.textGreyHigh700, fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w400),
         ),
       ],
     ),
@@ -232,20 +233,20 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
         Container(
           width: 42,
           height: 28,
-          decoration: BoxDecoration(color: const Color(0xFF1434CB), borderRadius: BorderRadius.circular(4)),
+          decoration: BoxDecoration(color: AppTheme.theme.stateBrandHigh700, borderRadius: BorderRadius.circular(4)),
           alignment: Alignment.center,
-          child: const Text(
+          child: Text(
             'VISA',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15, letterSpacing: 1.2, fontFamily: 'Inter'),
+            style: TextStyle(color: AppTheme.theme.textBaseWhite, fontWeight: FontWeight.bold, fontSize: 15, letterSpacing: 1.2, fontFamily: 'Inter'),
           ),
         ),
         const SizedBox(width: 12),
-        const Text(
+        Text(
           'Visa ••••5290',
-          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
         ),
         const Spacer(),
-        const Icon(Icons.arrow_forward_ios_rounded, size: 20, color: Color(0xFF4A5763)),
+        Icon(Icons.arrow_forward_ios_rounded, size: 20, color: AppTheme.theme.textGreyHigh700),
       ],
     ),
   );
@@ -284,7 +285,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                     onTap: () => controller.selectDeliveryOption('Priority'),
                     child: deliveryOption(
                       selected: controller.selectedDeliveryOption.value == 'Priority',
-                      icon: const Icon(Icons.flash_on, size: 24, color: Color(0xFF4A5763)),
+                      icon: Icon(Icons.flash_on, size: 24, color: AppTheme.theme.textGreyHigh700),
                       title: 'Priority',
                       subtitle: '5-10 min(s) Delivered directly to you',
                       label: '\$5.99',
@@ -312,10 +313,10 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                     },
                     child: deliveryOption(
                       selected: controller.selectedDeliveryOption.value == 'Schedule',
-                      icon: const Icon(Icons.schedule, size: 24, color: Color(0xFF4A5763)),
+                      icon: Icon(Icons.schedule, size: 24, color: AppTheme.theme.textGreyHigh700),
                       title: 'Schedule',
                       subtitle: 'Select a time',
-                      trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Color(0xFF4A5763)),
+                      trailing: Icon(Icons.arrow_forward_ios, size: 16, color: AppTheme.theme.textGreyHigh700),
                     ),
                   ),
                 ),
@@ -328,7 +329,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                     onTap: () => controller.selectDeliveryOption('Standard'),
                     child: deliveryOption(
                       selected: controller.selectedDeliveryOption.value == 'Standard',
-                      icon: const Icon(Icons.access_time, size: 24, color: Color(0xFF4A5763)),
+                      icon: Icon(Icons.access_time, size: 24, color: AppTheme.theme.textGreyHigh700),
                       title: 'Standard',
                       subtitle: '10-25 min(s) Delivered',
                     ),
@@ -385,21 +386,21 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
 
             return Row(
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 12),
-                  child: Icon(Icons.sell_outlined, color: Color(0xFF798A9A), size: 18),
+                Padding(
+                  padding: const EdgeInsets.only(left: 12),
+                  child: Icon(Icons.sell_outlined, color: AppTheme.theme.textGreyDefault500, size: 18),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: TextField(
                     controller: promoController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       hintText: 'Enter promo code',
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(vertical: 12),
-                      hintStyle: TextStyle(fontFamily: 'Inter', color: Color(0xFF798A9A), fontWeight: FontWeight.w400, fontSize: 16),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 12),
+                      hintStyle: TextStyle(fontFamily: 'Inter', color: AppTheme.theme.textGreyDefault500, fontWeight: FontWeight.w400, fontSize: 16),
                     ),
-                    style: const TextStyle(fontFamily: 'Inter', color: Color(0xFF161A1D), fontWeight: FontWeight.w400, fontSize: 16),
+                    style: TextStyle(fontFamily: 'Inter', color: AppTheme.theme.textGreyHighest950, fontWeight: FontWeight.w400, fontSize: 16),
                     enabled: !controller.isApplyingPromoCode.value,
                   ),
                 ),
@@ -411,14 +412,14 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                             promoController.clear();
                             controller.clearPromoCode();
                           },
-                    icon: const Icon(Icons.close, color: Color(0xFF798A9A), size: 20),
+                    icon: Icon(Icons.close, color: AppTheme.theme.textGreyDefault500, size: 20),
                   ),
                 Container(
                   margin: const EdgeInsets.all(4),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF5856D7),
-                      foregroundColor: Colors.white,
+                      backgroundColor: AppTheme.theme.stateBrandDefault500,
+                      foregroundColor: AppTheme.theme.textBaseWhite,
                       minimumSize: const Size(0, 40),
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       textStyle: const TextStyle(fontFamily: 'Inter', fontSize: 14, fontWeight: FontWeight.w500),
@@ -426,7 +427,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                     ),
                     onPressed: controller.isApplyingPromoCode.value ? null : () => controller.applyPromoCode(promoController.text),
                     child: controller.isApplyingPromoCode.value
-                        ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)))
+                        ? SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(AppTheme.theme.textBaseWhite)))
                         : const Text('Apply'),
                   ),
                 ),
@@ -442,18 +443,18 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
               child: Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFEF2F2),
+                  color: AppTheme.theme.stateDangerLowest50,
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: const Color(0xFFFECACA)),
+                  border: Border.all(color: AppTheme.theme.stateDangerLow200),
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.error_outline, color: Color(0xFFDC2626), size: 20),
+                    Icon(Icons.error_outline, color: AppTheme.theme.stateDangerDefault500, size: 20),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         controller.promoMessage.value,
-                        style: const TextStyle(fontFamily: 'Inter', color: Color(0xFFDC2626), fontWeight: FontWeight.w500, fontSize: 14),
+                        style: TextStyle(fontFamily: 'Inter', color: AppTheme.theme.stateDangerDefault500, fontWeight: FontWeight.w500, fontSize: 14),
                       ),
                     ),
                   ],
@@ -471,24 +472,24 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
               child: Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFEFEFFB),
+                  color: AppTheme.theme.stateBrandLowest50,
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: const Color(0xFFBEBDEF)),
+                  border: Border.all(color: AppTheme.theme.stateBrandLow200),
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.check_circle, color: Color(0xFF5856D7), size: 20),
+                    Icon(Icons.check_circle, color: AppTheme.theme.stateBrandDefault500, size: 20),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'Promo code "${controller.promoCode.value}" applied',
-                        style: const TextStyle(fontFamily: 'Inter', color: Color(0xFF5856D7), fontWeight: FontWeight.w500, fontSize: 14),
+                        style: TextStyle(fontFamily: 'Inter', color: AppTheme.theme.stateBrandDefault500, fontWeight: FontWeight.w500, fontSize: 14),
                       ),
                     ),
                     if (controller.currentDiscount > 0)
                       Text(
                         '-\$${controller.currentDiscount.toStringAsFixed(2)}',
-                        style: const TextStyle(fontFamily: 'Inter', color: Color(0xFF5856D7), fontWeight: FontWeight.w600, fontSize: 14),
+                        style: TextStyle(fontFamily: 'Inter', color: AppTheme.theme.stateBrandDefault500, fontWeight: FontWeight.w600, fontSize: 14),
                       ),
                   ],
                 ),
@@ -515,13 +516,13 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   'Total:',
-                  style: TextStyle(color: Color(0xFF161A1D), fontWeight: FontWeight.w500, fontSize: 20, fontFamily: 'Inter'),
+                  style: TextStyle(color: AppTheme.theme.textGreyHighest950, fontWeight: FontWeight.w500, fontSize: 20, fontFamily: 'Inter'),
                 ),
                 Text(
                   '\$${controller.calculatedTotal.toStringAsFixed(2)}',
-                  style: const TextStyle(color: Color(0xFF161A1D), fontWeight: FontWeight.w500, fontSize: 20, fontFamily: 'Inter'),
+                  style: TextStyle(color: AppTheme.theme.textGreyHighest950, fontWeight: FontWeight.w500, fontSize: 20, fontFamily: 'Inter'),
                 ),
               ],
             ),
@@ -546,20 +547,20 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                     margin: const EdgeInsets.only(bottom: 12),
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      border: Border.all(color: controller.selectedPaymentMethod.value == method.key ? const Color(0xFF5856D7) : const Color(0xFFE5E7EB)),
+                      border: Border.all(color: controller.selectedPaymentMethod.value == method.key ? AppTheme.theme.stateBrandDefault500 : AppTheme.theme.stateGreyLowestHover100),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
                       children: [
-                        Icon(_getPaymentIcon(method.key ?? ''), color: controller.selectedPaymentMethod.value == method.key ? const Color(0xFF5856D7) : const Color(0xFF798A9A)),
+                        Icon(_getPaymentIcon(method.key ?? ''), color: controller.selectedPaymentMethod.value == method.key ? AppTheme.theme.stateBrandDefault500 : AppTheme.theme.textGreyDefault500),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
                             method.label ?? '',
-                            style: const TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
+                            style: TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500, color: AppTheme.theme.textGreyHighest950),
                           ),
                         ),
-                        if (controller.selectedPaymentMethod.value == method.key) const Icon(Icons.check_circle, color: Color(0xFF5856D7)),
+                        if (controller.selectedPaymentMethod.value == method.key) Icon(Icons.check_circle, color: AppTheme.theme.stateBrandDefault500),
                       ],
                     ),
                   ),
@@ -577,7 +578,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
             child: Obx(
               () => ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF5856D7),
+                  backgroundColor: AppTheme.theme.stateBrandDefault500,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                 ),
                 onPressed: controller.isLoading.value
@@ -590,10 +591,10 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                         }
                       },
                 child: controller.isLoading.value
-                    ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)))
-                    : const Text(
+                    ? SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(AppTheme.theme.textBaseWhite)))
+                    : Text(
                         'Order Now',
-                        style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Inter', fontWeight: FontWeight.w500),
+                        style: TextStyle(color: AppTheme.theme.textBaseWhite, fontSize: 16, fontFamily: 'Inter', fontWeight: FontWeight.w500),
                       ),
               ),
             ),
@@ -637,7 +638,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
           Container(
             width: 70,
             height: 70,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: const Color(0xFFF7F8F9)),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: AppTheme.theme.backgroundSurfaceTertiaryGrey50),
             child: Center(child: AppImage.network(serviceCart.thumbnail ?? '', width: 50, height: 50, fit: BoxFit.contain)),
           ),
           const SizedBox(height: 16),
@@ -649,13 +650,13 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
               // Service Title
               Text(
                 serviceCart.moduleName ?? '',
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: 'Inter',
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w600,
                   fontSize: 20,
                   height: 1.5, // line-height: 30px / font-size: 20px = 1.5
-                  color: Color(0xFF161A1D),
+                  color: AppTheme.theme.textGreyHighest950,
                 ),
               ),
               const SizedBox(height: 16),
@@ -663,13 +664,13 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
               // Service Description
               Text(
                 serviceCart.moduleName ?? '',
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: 'Inter',
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w400,
                   fontSize: 12,
                   height: 1.5, // line-height: 18px / font-size: 12px = 1.5
-                  color: Color(0xFF4A5763),
+                  color: AppTheme.theme.textGreyHigh700,
                 ),
               ),
               const SizedBox(height: 16),
@@ -680,7 +681,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                   // Navigate to service details or show more info
                   Get.snackbar('Info', 'More details for ${serviceCart.moduleName}');
                 },
-                child: const Row(
+                child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
@@ -691,11 +692,11 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                         fontWeight: FontWeight.w400,
                         fontSize: 14,
                         height: 1.43, // line-height: 20px / font-size: 14px ≈ 1.43
-                        color: Color(0xFF5856D7),
+                        color: AppTheme.theme.stateBrandDefault500,
                       ),
                     ),
-                    SizedBox(width: 8),
-                    SizedBox(width: 20, height: 20, child: Icon(Icons.arrow_forward_ios, size: 12, color: Color(0xFF5856D7))),
+                    const SizedBox(width: 8),
+                    SizedBox(width: 20, height: 20, child: Icon(Icons.arrow_forward_ios, size: 12, color: AppTheme.theme.stateBrandDefault500)),
                   ],
                 ),
               ),

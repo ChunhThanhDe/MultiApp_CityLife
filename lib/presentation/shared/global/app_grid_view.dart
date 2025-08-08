@@ -191,7 +191,7 @@ class AppGridView<T> extends StatelessWidget {
                 onPressed: onRetry,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.stateBrandDefault500,
-                  foregroundColor: Colors.white,
+                  foregroundColor: AppColors.backgroundSurfacePrimaryWhite,
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 ),

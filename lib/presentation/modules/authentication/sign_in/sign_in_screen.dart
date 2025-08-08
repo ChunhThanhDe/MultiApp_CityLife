@@ -64,7 +64,7 @@ class SignInScreen extends BaseScreen<SignInController> {
     return AppButton(
       onTap: vm.toggleLoginMethod,
       width: double.infinity,
-      color: const Color(0xFFF7F8F9),
+      color: AppColors.backgroundSurfaceTertiaryGrey50,
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -95,7 +95,7 @@ class SignInScreen extends BaseScreen<SignInController> {
   Row _buildOrDivider() {
     return Row(
       children: [
-        const Expanded(child: Divider(color: Color(0xFFE8EBEE), thickness: 1)),
+        Expanded(child: Divider(color: AppColors.backgroundSurfaceTertiaryGrey50, thickness: 1)),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(tr(LocaleKeys.authentication_signIn_or), style: AppTextStyles.typographyH12Medium.copyWith(color: AppColors.textGreyHigh700)),

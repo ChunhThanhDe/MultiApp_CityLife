@@ -46,9 +46,9 @@ class PhonePicker extends StatelessWidget {
               Container(
                 height: 49,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.backgroundSurfacePrimaryWhite,
                   borderRadius: BorderRadius.circular(6),
-                  border: Border.all(color: const Color(0xFFE8EBEE)),
+                  border: Border.all(color: AppColors.stateGreyLowestHover100),
                 ),
                 child: CountryCodePicker(
                   onChanged: (CountryCode countryCode) {

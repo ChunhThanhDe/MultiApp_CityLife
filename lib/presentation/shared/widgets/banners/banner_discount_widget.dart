@@ -46,19 +46,19 @@ class BannerDiscountWidget extends StatelessWidget {
   Widget _buildStatusOverlay() {
     return Positioned.fill(
       child: Container(
-        decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.6), borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(color: AppColors.textGreyHighest950.withValues(alpha: 0.6), borderRadius: BorderRadius.circular(8)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), shape: BoxShape.circle),
-              child: Icon(item.status == 0 ? Icons.nightlight_round : Icons.lock, color: Colors.white, size: 20),
+              decoration: BoxDecoration(color: AppColors.backgroundSurfacePrimaryWhite.withValues(alpha: 0.2), shape: BoxShape.circle),
+              child: Icon(item.status == 0 ? Icons.nightlight_round : Icons.lock, color: AppColors.backgroundSurfacePrimaryWhite, size: 20),
             ),
             const SizedBox(height: 8),
             Text(
               item.status == 0 ? 'Closed' : 'Currently Unavailable',
-              style: AppTextStyles.typographyH11Medium.copyWith(color: Colors.white),
+              style: AppTextStyles.typographyH11Medium.copyWith(color: AppColors.backgroundSurfacePrimaryWhite),
               textAlign: TextAlign.center,
             ),
           ],
@@ -76,9 +76,9 @@ class BannerDiscountWidget extends StatelessWidget {
         decoration: ShapeDecoration(
           color: AppColors.stateSuccessHigh700,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-          shadows: const [
-            BoxShadow(color: Color(0x19101214), blurRadius: 16, offset: Offset(0, 12), spreadRadius: -6),
-            BoxShadow(color: Color(0x0C101214), blurRadius: 4, offset: Offset(0, 2), spreadRadius: -2),
+          shadows: [
+            BoxShadow(color: AppColors.textGreyHighest950.withValues(alpha: 0.1), blurRadius: 16, offset: const Offset(0, 12), spreadRadius: -6),
+            BoxShadow(color: AppColors.textGreyHighest950.withValues(alpha: 0.05), blurRadius: 4, offset: const Offset(0, 2), spreadRadius: -2),
           ],
         ),
         child: Text(

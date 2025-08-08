@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ml_card_scanner/ml_card_scanner.dart';
 import 'package:sixam_mart_user/app/data/app_storage.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 
 class ScanCardController extends BaseController {
@@ -40,7 +40,14 @@ class ScanCardController extends BaseController {
   void _onError(ScannerException exception) {
     scanError.value = exception.message;
     isScanning.value = false;
-    Get.snackbar('Error', scanError.value, snackPosition: SnackPosition.TOP, backgroundColor: Colors.red, colorText: Colors.white, duration: const Duration(seconds: 2));
+    Get.snackbar(
+      'Error',
+      scanError.value,
+      snackPosition: SnackPosition.TOP,
+      backgroundColor: AppColors.stateDangerDefault500,
+      colorText: AppColors.textBaseWhite,
+      duration: const Duration(seconds: 2),
+    );
   }
 
   void restartScan() {

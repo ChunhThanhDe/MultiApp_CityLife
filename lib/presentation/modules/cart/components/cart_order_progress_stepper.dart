@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class OrderProgressStepper extends StatelessWidget {
   const OrderProgressStepper({required this.currentStep, required this.totalSteps, super.key});
@@ -16,7 +17,7 @@ class OrderProgressStepper extends StatelessWidget {
             return _StepCircle(number: step, isActive: step <= currentStep);
           } else {
             // divider between steps
-            return Expanded(child: Container(height: 4, color: index ~/ 2 < currentStep - 1 ? const Color(0xFF5856D7) : const Color(0xFFE8EBEE)));
+            return Expanded(child: Container(height: 4, color: index ~/ 2 < currentStep - 1 ? AppTheme.theme.stateBrandDefault500 : AppTheme.theme.stateGreyLowestHover100));
           }
         }),
       ),
@@ -36,13 +37,13 @@ class _StepCircle extends StatelessWidget {
       height: 32,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: isActive ? const Color(0xFF5856D7) : Colors.white,
-        border: Border.all(color: isActive ? const Color(0xFF5856D7) : const Color(0xFF798A9A), width: 2),
+        color: isActive ? AppTheme.theme.stateBrandDefault500 : AppTheme.theme.backgroundSurfacePrimaryWhite,
+        border: Border.all(color: isActive ? AppTheme.theme.stateBrandDefault500 : AppTheme.theme.textGreyDefault500, width: 2),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Text(
         number.toString(),
-        style: TextStyle(color: isActive ? Colors.white : const Color(0xFF798A9A), fontWeight: FontWeight.w500),
+        style: TextStyle(color: isActive ? AppTheme.theme.textBaseWhite : AppTheme.theme.textGreyDefault500, fontWeight: FontWeight.w500),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_navigator.dart';
 
 /// Displays a loading overlay while executing an asynchronous operation.
@@ -110,15 +111,15 @@ class AppLoadingOverlay {
           duration: Duration.zero,
           child: GestureDetector(
             child: Container(
-              color: Colors.transparent,
+              color: AppColors.backgroundSurfacePrimaryWhite.withValues(alpha: 0),
               child: Center(
                 child:
                     child ??
                     Container(
                       width: 64,
                       height: 64,
-                      decoration: BoxDecoration(color: Colors.black54, borderRadius: BorderRadius.circular(12)),
-                      child: const CupertinoActivityIndicator(color: Colors.white),
+                      decoration: BoxDecoration(color: AppColors.textGreyHighest950.withValues(alpha: 0.54), borderRadius: BorderRadius.circular(12)),
+                      child: CupertinoActivityIndicator(color: AppColors.backgroundSurfacePrimaryWhite),
                     ),
               ),
             ),

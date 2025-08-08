@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart'; // Add image_picker to pubspec!
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/delivery/box_delivery/box_delivery_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_box_label.dart';
@@ -105,7 +106,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
             child: SafeArea(
               top: false,
               child: Container(
-                color: Colors.white,
+                color: AppColors.backgroundSurfacePrimaryWhite,
                 padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -118,14 +119,14 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
                           Get.toNamed(AppRoutes.checkoutDelivery);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF5856D7),
+                          backgroundColor: AppColors.stateBrandDefault500,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                           elevation: 0,
                           padding: EdgeInsets.zero,
                         ),
-                        child: const Text(
+                        child: Text(
                           'Continue to Checkout',
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.textBaseWhite),
                         ),
                       ),
                     ),
@@ -144,13 +145,13 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
+        Text(
           'Add Product image',
-          style: TextStyle(fontSize: 16, color: Color(0xFF161A1D), fontWeight: FontWeight.w500),
+          style: TextStyle(fontSize: 16, color: AppColors.textGreyHighest950, fontWeight: FontWeight.w500),
         ),
         Text(
           '${c.productImages.length} (3)',
-          style: const TextStyle(fontSize: 14, color: Color(0xFF161A1D), fontWeight: FontWeight.w400),
+          style: TextStyle(fontSize: 14, color: AppColors.textGreyHighest950, fontWeight: FontWeight.w400),
         ),
       ],
     );
@@ -161,8 +162,8 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
       onTap: isEnabled ? onTap : null,
       child: Container(
         decoration: BoxDecoration(
-          color: isEnabled ? Colors.white : const Color(0xFFF4F4F4),
-          border: Border.all(color: isSelected ? const Color(0xFF5856D7) : const Color(0xFFE8EBEE), width: isSelected ? 1.5 : 1),
+          color: isEnabled ? AppColors.backgroundSurfacePrimaryWhite : AppColors.backgroundSurfaceTertiaryGrey50,
+          border: Border.all(color: isSelected ? AppColors.stateBrandDefault500 : AppColors.stateGreyLowestHover100, width: isSelected ? 1.5 : 1),
           borderRadius: const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8), bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
@@ -176,10 +177,10 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
               style: TextStyle(
                 fontSize: 14,
                 color: isSelected
-                    ? const Color(0xFF161A1D)
+                    ? AppColors.textGreyHighest950
                     : isEnabled
-                    ? const Color(0xFF798A9A)
-                    : const Color(0xFFB0B3B8),
+                    ? AppColors.textGreyDefault500
+                    : AppColors.textGreyLow300,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -204,11 +205,11 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
               width: 96,
               height: 96,
               decoration: BoxDecoration(
-                color: const Color(0xFFF7F8F9),
-                border: Border.all(color: const Color(0xFFE8EBEE), width: 1),
+                color: AppColors.backgroundSurfaceTertiaryGrey50,
+                border: Border.all(color: AppColors.stateGreyLowestHover100, width: 1),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Icon(Icons.add, size: 36, color: Color(0xFF161A1D)),
+              child: Icon(Icons.add, size: 36, color: AppColors.textGreyHighest950),
             ),
           ),
         if (images.length < 3) const SizedBox(width: 8),
@@ -237,8 +238,8 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
                   onTap: () => c.removeImage(i),
                   child: CircleAvatar(
                     radius: 12,
-                    backgroundColor: Colors.white.withValues(alpha: 0.7),
-                    child: const Icon(Icons.close, color: Colors.black, size: 16),
+                    backgroundColor: AppColors.backgroundSurfacePrimaryWhite.withValues(alpha: 0.7),
+                    child: Icon(Icons.close, color: AppColors.textGreyHighest950, size: 16),
                   ),
                 ),
               ),
@@ -252,9 +253,9 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
   Widget _instructionBox(BoxDeliveryController c) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: const Color(0xFFF0F0F1)),
+        border: Border.all(color: AppColors.stateGreyLowestHover100),
         borderRadius: BorderRadius.circular(8),
-        color: Colors.white,
+        color: AppColors.backgroundSurfacePrimaryWhite,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: TextField(
@@ -276,12 +277,12 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
           (i) => Padding(
             padding: const EdgeInsets.only(right: 8),
             child: ChoiceChip(
-              label: Text(options[i], style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+              label: Text(options[i], style: TextStyle(fontSize: 12, color: AppColors.textGreyHigh700)),
               selected: c.instruction.value == options[i],
               onSelected: (_) => c.setInstruction(options[i]),
-              backgroundColor: Colors.white,
-              selectedColor: const Color(0xFFF0F0F1),
-              shape: const StadiumBorder(side: BorderSide(color: Color(0xFFE8EBEE))),
+              backgroundColor: AppColors.backgroundSurfacePrimaryWhite,
+              selectedColor: AppColors.backgroundSurfaceTertiaryGrey50,
+              shape: StadiumBorder(side: BorderSide(color: AppColors.stateGreyLowestHover100)),
             ),
           ),
         ),
@@ -313,7 +314,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
                     width: 36,
                     height: 4,
                     margin: const EdgeInsets.only(bottom: 16),
-                    decoration: BoxDecoration(color: const Color(0xFFEBEBF5), borderRadius: BorderRadius.circular(2)),
+                    decoration: BoxDecoration(color: AppColors.backgroundSurfaceTertiaryGrey50, borderRadius: BorderRadius.circular(2)),
                   ),
                   Text(title, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
                   const SizedBox(height: 16),
@@ -329,22 +330,22 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
                       hintText: 'Search for an address',
                       prefixIcon: const Icon(Icons.search, size: 20),
                       filled: true,
-                      fillColor: const Color(0xFFF7F8F9),
+                      fillColor: AppColors.backgroundSurfaceTertiaryGrey50,
                       contentPadding: const EdgeInsets.symmetric(vertical: 8),
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(100), borderSide: BorderSide.none),
                     ),
                   ),
                   const SizedBox(height: 16),
                   // Saved addresses
-                  const Align(
+                  Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('Saved addresses', style: TextStyle(fontSize: 14, color: Color(0xFF798A9A))),
+                    child: Text('Saved addresses', style: TextStyle(fontSize: 14, color: AppColors.textGreyDefault500)),
                   ),
                   ...filteredAddresses.map(
                     (a) => ListTile(
                       title: Text(a['label'] ?? ''),
                       subtitle: Text(a['address'] ?? ''),
-                      trailing: selectedAddress == a['address'] ? const Icon(Icons.check, color: Color(0xFF5856D7)) : null,
+                      trailing: selectedAddress == a['address'] ? Icon(Icons.check, color: AppColors.stateBrandDefault500) : null,
                       onTap: () {
                         onSelect(a['address']!);
                         Get.back();
@@ -368,7 +369,7 @@ class BoxDeliveryScreen extends BaseScreen<BoxDeliveryController> {
         ),
       ),
       isScrollControlled: true,
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundSurfacePrimaryWhite,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
     );
   }

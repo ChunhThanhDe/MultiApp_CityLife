@@ -67,7 +67,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      decoration: const BoxDecoration(color: Color(0xFF006241)),
+      decoration: BoxDecoration(color: AppColors.stateSuccessHigh700),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -197,7 +197,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
     const subtotal = 35.87;
     const deliveryFee = 3.99;
     const taxes = 2.00;
-    const discontent = 6.00;
+    const discount = 6.00;
     const tip = 8.50;
     const total = 35.87;
     const cardType = 'Visa';
@@ -230,7 +230,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
                   _buildTransactionRow('Subtotal:', subtotal),
                   _buildTransactionRow('Delivery Fee:', deliveryFee),
                   _buildTransactionRow('Taxes & Estimated Fees:', taxes),
-                  _buildTransactionRow('Discontent:', discontent),
+                  _buildTransactionRow('Discount:', discount),
                   _buildTransactionRow('Delivery  Tip:', tip),
                   const SizedBox(height: 8),
                   Row(
