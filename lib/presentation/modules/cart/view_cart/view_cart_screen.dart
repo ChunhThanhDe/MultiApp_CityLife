@@ -31,14 +31,14 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
       elevation: 0.5,
       title: Text(
         'View Cart',
-        style: TextStyle(color: AppTheme.theme.textGreyHighest950, fontWeight: FontWeight.w500, fontSize: 18),
+        style: AppTextStyles.typographyH4Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
       ),
       actions: [
         TextButton(
           onPressed: controller.navigateToOrders,
           child: Text(
             'Orders',
-            style: TextStyle(color: AppTheme.theme.textGreyHighest950, fontSize: 14, fontWeight: FontWeight.w400),
+            style: AppTextStyles.typographyH8Regular.copyWith(color: AppTheme.theme.textGreyHighest950),
           ),
         ),
         IconButton(icon: SvgPicture.asset(Assets.icons.icOrder.path, width: 24, height: 24), onPressed: controller.navigateToOrders),
@@ -194,7 +194,7 @@ class _StoreHeader extends StatelessWidget {
           Expanded(
             child: Text(
               store.storeName ?? 'Unknown Store',
-              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
+              style: AppTextStyles.typographyH6SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950),
             ),
           ),
           TextButton(
@@ -204,7 +204,7 @@ class _StoreHeader extends StatelessWidget {
               children: [
                 Text(
                   'Clear All',
-                  style: TextStyle(color: AppTheme.theme.stateDangerDefault500, fontSize: 14, fontWeight: FontWeight.w400),
+                  style: AppTextStyles.typographyH8Regular.copyWith(color: AppTheme.theme.stateDangerDefault500),
                 ),
                 const SizedBox(width: 4),
                 Icon(Icons.delete_outline, color: AppTheme.theme.stateDangerDefault500, size: 16),
@@ -286,12 +286,12 @@ class _ProductDetails extends StatelessWidget {
           item.itemName ?? 'Unknown Item',
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
+          style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
         ),
         const SizedBox(height: 6),
         Text(
           '\$${(item.itemPrice ?? 0).toStringAsFixed(2)}',
-          style: TextStyle(fontFamily: 'Inter', fontSize: 14, fontWeight: FontWeight.w400, color: AppTheme.theme.textGreyHigh700),
+          style: AppTextStyles.typographyH8Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
         ),
         const SizedBox(height: 12),
         Row(
@@ -331,7 +331,7 @@ class _QuantityControls extends StatelessWidget {
             child: Text(
               '${item.itemQuantity ?? 0}',
               key: ValueKey(item.itemQuantity),
-              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
+              style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHighest950),
             ),
           ),
           _QuantityButton(icon: Icons.add, onPressed: () => controller.incrementItemQuantity(item), enabled: true),
@@ -510,13 +510,13 @@ class _CartSummarySection extends StatelessWidget {
               Expanded(
                 child: Text(
                   'Subtotal',
-                  style: TextStyle(color: AppTheme.theme.textGreyHigh700, fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500),
+                  style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textGreyHigh700),
                 ),
               ),
               Obx(
                 () => Text(
                   '\$${controller.totalPrice.toStringAsFixed(2)}',
-                  style: TextStyle(color: AppTheme.theme.textGreyHighest950, fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w700),
+                  style: AppTextStyles.typographyH6Bold.copyWith(color: AppTheme.theme.textGreyHighest950),
                 ),
               ),
             ],
@@ -534,7 +534,7 @@ class _CartSummarySection extends StatelessWidget {
               ),
               child: Text(
                 'Checkout Now',
-                style: TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500, color: AppTheme.theme.textBaseWhite),
+                style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textBaseWhite),
               ),
             ),
           ),
@@ -582,13 +582,13 @@ class _EmptyStateContent extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600, color: AppTheme.theme.textGreyHighest950),
+            style: AppTextStyles.typographyH1SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950),
           ),
           const SizedBox(height: 8),
           Text(
             subtitle,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16, color: AppTheme.theme.textGreyHigh700, fontWeight: FontWeight.w400),
+            style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
           ),
           const SizedBox(height: 24),
           ElevatedButton(
@@ -600,7 +600,7 @@ class _EmptyStateContent extends StatelessWidget {
             ),
             child: Text(
               buttonText,
-              style: TextStyle(color: AppTheme.theme.textBaseWhite, fontWeight: FontWeight.w500, fontSize: 16),
+              style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textBaseWhite),
             ),
           ),
         ],

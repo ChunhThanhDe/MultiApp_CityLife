@@ -82,7 +82,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
       children: [
         Text(
           label,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: AppTheme.theme.textGreyHighest950, fontFamily: 'Inter'),
+          style: AppTextStyles.typographyH4Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
         ),
       ],
     ),
@@ -109,11 +109,11 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
+                  style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
                 ),
                 Text(
                   subtitle,
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: AppTheme.theme.textGreyHigh700),
+                  style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
                 ),
               ],
             ),
@@ -148,11 +148,11 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
             children: [
               Text(
                 title,
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
+                style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
               ),
               Text(
                 subtitle,
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: AppTheme.theme.textGreyHigh700),
+                style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
               ),
             ],
           ),
@@ -160,7 +160,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
         if (label != null)
           Text(
             label,
-            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: AppTheme.theme.textGreyHigh700),
+            style: AppTextStyles.typographyH8Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
           ),
         if (trailing != null) trailing,
         if (selected) Icon(Icons.check_circle, color: AppTheme.theme.stateBrandHigh700, size: 24),
@@ -192,18 +192,18 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
             children: [
               Text(
                 name,
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
+                style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
               ),
               Text(
                 detail,
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: AppTheme.theme.textGreyHigh700),
+                style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
               ),
             ],
           ),
         ),
         Text(
           amount,
-          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: AppTheme.theme.textGreyHigh700),
+          style: AppTextStyles.typographyH8Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
         ),
         Icon(Icons.keyboard_arrow_down_rounded, color: AppTheme.theme.textGreyHigh700),
       ],
@@ -216,11 +216,11 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
       children: [
         Text(
           left,
-          style: TextStyle(color: AppTheme.theme.textGreyHigh700, fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w400),
+          style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
         ),
         Text(
           right,
-          style: TextStyle(color: AppTheme.theme.textGreyHigh700, fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w400),
+          style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
         ),
       ],
     ),
@@ -237,13 +237,13 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
           alignment: Alignment.center,
           child: Text(
             'VISA',
-            style: TextStyle(color: AppTheme.theme.textBaseWhite, fontWeight: FontWeight.bold, fontSize: 15, letterSpacing: 1.2, fontFamily: 'Inter'),
+            style: AppTextStyles.typographyH7Bold.copyWith(color: AppTheme.theme.textBaseWhite, letterSpacing: 1.2),
           ),
         ),
         const SizedBox(width: 12),
         Text(
           'Visa ••••5290',
-          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
+          style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
         ),
         const Spacer(),
         Icon(Icons.arrow_forward_ios_rounded, size: 20, color: AppTheme.theme.textGreyHigh700),
@@ -398,9 +398,9 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                       hintText: 'Enter promo code',
                       border: InputBorder.none,
                       contentPadding: const EdgeInsets.symmetric(vertical: 12),
-                      hintStyle: TextStyle(fontFamily: 'Inter', color: AppTheme.theme.textGreyDefault500, fontWeight: FontWeight.w400, fontSize: 16),
+                      hintStyle: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyDefault500),
                     ),
-                    style: TextStyle(fontFamily: 'Inter', color: AppTheme.theme.textGreyHighest950, fontWeight: FontWeight.w400, fontSize: 16),
+                    style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHighest950),
                     enabled: !controller.isApplyingPromoCode.value,
                   ),
                 ),
@@ -454,7 +454,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                     Expanded(
                       child: Text(
                         controller.promoMessage.value,
-                        style: TextStyle(fontFamily: 'Inter', color: AppTheme.theme.stateDangerDefault500, fontWeight: FontWeight.w500, fontSize: 14),
+                        style: AppTextStyles.typographyH8Medium.copyWith(color: AppTheme.theme.stateDangerDefault500),
                       ),
                     ),
                   ],
@@ -483,13 +483,13 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                     Expanded(
                       child: Text(
                         'Promo code "${controller.promoCode.value}" applied',
-                        style: TextStyle(fontFamily: 'Inter', color: AppTheme.theme.stateBrandDefault500, fontWeight: FontWeight.w500, fontSize: 14),
+                        style: AppTextStyles.typographyH8Medium.copyWith(color: AppTheme.theme.stateBrandDefault500),
                       ),
                     ),
                     if (controller.currentDiscount > 0)
                       Text(
                         '-\$${controller.currentDiscount.toStringAsFixed(2)}',
-                        style: TextStyle(fontFamily: 'Inter', color: AppTheme.theme.stateBrandDefault500, fontWeight: FontWeight.w600, fontSize: 14),
+                        style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppTheme.theme.stateBrandDefault500),
                       ),
                   ],
                 ),
@@ -518,11 +518,11 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
               children: [
                 Text(
                   'Total:',
-                  style: TextStyle(color: AppTheme.theme.textGreyHighest950, fontWeight: FontWeight.w500, fontSize: 20, fontFamily: 'Inter'),
+                  style: AppTextStyles.typographyH5Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
                 ),
                 Text(
                   '\$${controller.calculatedTotal.toStringAsFixed(2)}',
-                  style: TextStyle(color: AppTheme.theme.textGreyHighest950, fontWeight: FontWeight.w500, fontSize: 20, fontFamily: 'Inter'),
+                  style: AppTextStyles.typographyH5Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
                 ),
               ],
             ),
@@ -557,7 +557,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                         Expanded(
                           child: Text(
                             method.label ?? '',
-                            style: TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w500, color: AppTheme.theme.textGreyHighest950),
+                            style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
                           ),
                         ),
                         if (controller.selectedPaymentMethod.value == method.key) Icon(Icons.check_circle, color: AppTheme.theme.stateBrandDefault500),
@@ -594,7 +594,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                     ? SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(AppTheme.theme.textBaseWhite)))
                     : Text(
                         'Order Now',
-                        style: TextStyle(color: AppTheme.theme.textBaseWhite, fontSize: 16, fontFamily: 'Inter', fontWeight: FontWeight.w500),
+                        style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textBaseWhite),
                       ),
               ),
             ),

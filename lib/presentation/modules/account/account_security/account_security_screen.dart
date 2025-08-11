@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account_security/account_security_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
-
-import 'package:sixam_mart_user/presentation/modules/account/account_security/account_security_controller.dart';
 
 class AccountSecurityScreen extends BaseScreen<AccountSecurityController> {
   const AccountSecurityScreen({super.key});
@@ -79,7 +79,6 @@ class _SectionCard extends StatelessWidget {
 
 /// Security setting row with subtitle and optional trailing widget (arrow)
 class _SecurityCell extends StatelessWidget {
-
   const _SecurityCell({required this.title, this.subtitle, this.obfuscated = false, this.trailing, this.onTap});
   final String title;
   final String? subtitle;
@@ -105,12 +104,9 @@ class _SecurityCell extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(
-                          title,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
-                        ),
+                        Text(title, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                         const Spacer(),
-                        if (obfuscated) ...[const SizedBox(width: 8), const Text('••••••••', style: TextStyle(letterSpacing: 2, fontSize: 18, color: Color(0xFF4A5763)))],
+                        if (obfuscated) ...[const SizedBox(width: 8), Text('••••••••', style: AppTextStyles.typographyH9Regular.copyWith(letterSpacing: 2, color: AppColors.textGreyHigh700))],
                       ],
                     ),
                     if (subtitle != null)
@@ -118,7 +114,7 @@ class _SecurityCell extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 2),
                         child: Text(
                           subtitle!,
-                          style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763)),
+                          style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -145,7 +141,6 @@ class _DividerLine extends StatelessWidget {
 
 /// Social app connect/disconnect cell
 class SocialConnectCell extends StatelessWidget {
-
   const SocialConnectCell({required this.icon, required this.label, super.key, this.onDisconnect});
   final Widget icon;
   final String label;
@@ -161,17 +156,11 @@ class SocialConnectCell extends StatelessWidget {
           icon,
           const SizedBox(width: 12),
           Expanded(
-            child: Text(
-              label,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
-            ),
+            child: Text(label, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
           ),
           InkWell(
             onTap: onDisconnect,
-            child: const Text(
-              'Disconnect',
-              style: TextStyle(color: Color(0xFFFF3B30), fontSize: 14, fontWeight: FontWeight.w400),
-            ),
+            child: Text('Disconnect', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textDangerDefault500)),
           ),
         ],
       ),

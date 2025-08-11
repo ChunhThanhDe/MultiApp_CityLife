@@ -70,10 +70,10 @@ class _PasskeyListItem extends StatelessWidget {
               children: [
                 Text(
                   item.title,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.textGreyHighest950),
+                  style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
                 ),
                 const SizedBox(height: 2),
-                Text(item.subtitle, style: TextStyle(fontSize: 12, color: AppColors.textGreyHigh700)),
+                Text(item.subtitle, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
               ],
             ),
           ),
@@ -104,10 +104,10 @@ class _BottomSection extends StatelessWidget {
           // Title & desc
           Text(
             'Create a passkey on this device',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: AppColors.textGreyHighest950),
+            style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950),
           ),
           const SizedBox(height: 4),
-          Text('Speed up your sign in next time by creating a passkey on this device', style: TextStyle(fontSize: 14, color: AppColors.textGreyHigh700)),
+          Text('Speed up your sign in next time by creating a passkey on this device', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
           const SizedBox(height: 16),
           SizedBox(
             width: double.infinity,
@@ -118,7 +118,7 @@ class _BottomSection extends StatelessWidget {
               icon: Icon(Icons.add, color: AppColors.textGreyHighest950),
               label: Text(
                 'Create a passkey',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.textGreyHighest950),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
               ),
               style: OutlinedButton.styleFrom(
                 backgroundColor: AppColors.backgroundSurfaceTertiaryGrey50,

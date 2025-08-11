@@ -48,7 +48,7 @@ class TrackingDeliveryScreen extends BaseScreen<TrackingDeliveryController> {
                           Expanded(
                             child: TextField(
                               controller: controller.textController,
-                              style: TextStyle(fontSize: 14, color: AppColors.textGreyHighest950),
+                              style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
                               decoration: const InputDecoration(hintText: 'Tracking by Receipt', border: InputBorder.none, isDense: true),
                               onChanged: controller.onTextChanged,
                             ),
@@ -119,7 +119,7 @@ class TrackingDeliveryScreen extends BaseScreen<TrackingDeliveryController> {
                       ),
                       child: Text(
                         'Track',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.textBaseWhite),
+                        style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite),
                       ),
                     ),
                   ),

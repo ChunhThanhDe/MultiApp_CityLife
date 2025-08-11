@@ -31,10 +31,10 @@ class InProgressOrderCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   label,
-                  style: TextStyle(color: AppTheme.theme.textBaseWhite, fontWeight: FontWeight.w500, fontSize: 16),
+                  style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textBaseWhite),
                 ),
               ),
-              Text(time, style: TextStyle(color: AppTheme.theme.textBaseWhite, fontSize: 14)),
+              Text(time, style: AppTextStyles.typographyH8Regular.copyWith(color: AppTheme.theme.textBaseWhite)),
             ],
           ),
         ),
@@ -53,13 +53,13 @@ class InProgressOrderCard extends StatelessWidget {
                     children: [
                       Text(
                         brandName,
-                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
+                        style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
                       ),
-                      Text(subtitle, style: TextStyle(fontSize: 12, color: AppTheme.theme.textGreyHigh700)),
+                      Text(subtitle, style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyHigh700)),
                     ],
                   ),
                 ),
-                Text(price, style: TextStyle(fontSize: 14, color: AppTheme.theme.textGreyHigh700)),
+                Text(price, style: AppTextStyles.typographyH8Regular.copyWith(color: AppTheme.theme.textGreyHigh700)),
                 Icon(Icons.chevron_right, color: AppTheme.theme.textGreyHigh700),
               ],
             ),

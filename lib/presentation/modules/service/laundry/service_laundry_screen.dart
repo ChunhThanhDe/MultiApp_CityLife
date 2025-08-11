@@ -55,11 +55,11 @@ class ServiceLaundryScreen extends BaseScreen<ServiceLaundryController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Pricing',
-                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.theme.textGreyHighest950),
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text('Each item is charged separately', style: TextStyle(fontSize: 14, color: AppTheme.theme.textGreyDefault500)),
+                      'Pricing',
+                      style: AppTextStyles.typographyH10SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950),
+                    ),
+                    const SizedBox(height: 4),
+                    Text('Each item is charged separately', style: AppTextStyles.typographyH11Regular.copyWith(color: AppTheme.theme.textGreyDefault500)),
                                   ],
                                 ),
                               ),
@@ -115,7 +115,7 @@ class _LaundryAppBar extends StatelessWidget {
           Expanded(
             child: Text(
               'Laundry',
-              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 18, color: AppTheme.theme.textBaseWhite),
+              style: AppTextStyles.typographyH9Medium.copyWith(color: AppTheme.theme.textBaseWhite),
             ),
           ),
           Icon(Icons.notifications_none, color: AppTheme.theme.textBaseWhite, size: 24),
@@ -217,7 +217,7 @@ class _CategoryTab extends StatelessWidget {
           Text(
             label,
             textAlign: TextAlign.center,
-            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: active ? (activeColor ?? AppTheme.theme.stateBrandDefault500) : AppTheme.theme.textGreyHighest950),
+            style: AppTextStyles.typographyH10Medium.copyWith(color: active ? (activeColor ?? AppTheme.theme.stateBrandDefault500) : AppTheme.theme.textGreyHighest950),
           ),
         ],
       ),
@@ -265,10 +265,10 @@ class _LaundryBanner extends GetView<ServiceLaundryController> {
               children: [
                 Text(
                   currentBanner['title'] as String,
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppTheme.theme.textGreyHighest950),
+                  style: AppTextStyles.typographyH11SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950),
                 ),
                 const SizedBox(height: 4),
-                Text(currentBanner['subtitle'] as String, style: TextStyle(fontSize: 12, color: AppTheme.theme.textGreyDefault500)),
+                Text(currentBanner['subtitle'] as String, style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyDefault500)),
               ],
             ),
           );
@@ -348,12 +348,12 @@ class _EstimatedBillWidget extends StatelessWidget {
                         // Title
                         Text(
                           'Estimated Bill',
-                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 20, height: 1.5, color: AppTheme.theme.textGreyHighest950),
+                          style: AppTextStyles.typographyH8SemiBold.copyWith(height: 1.5, color: AppTheme.theme.textGreyHighest950),
                         ),
                         // Subtitle
                         Text(
                           '\$${controller.totalCost.toStringAsFixed(2)}',
-                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, height: 1.5, color: AppTheme.theme.textGreyHighest950),
+                          style: AppTextStyles.typographyH10Regular.copyWith(height: 1.5, color: AppTheme.theme.textGreyHighest950),
                         ),
                       ],
                     ),
@@ -375,7 +375,7 @@ class _EstimatedBillWidget extends StatelessWidget {
                   },
                   child: Text(
                     'More details',
-                    style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, height: 1.43, color: AppTheme.theme.textGreyHighest950),
+                    style: AppTextStyles.typographyH11Regular.copyWith(height: 1.43, color: AppTheme.theme.textGreyHighest950),
                   ),
                 ),
               ],

@@ -31,7 +31,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
             children: [
               Text(
                 'Error: ${controller.error.value}',
-                style: TextStyle(color: AppTheme.theme.textDangerDefault500),
+                style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textDangerDefault500),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
@@ -70,14 +70,14 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             stepData.title,
-                            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 28, color: AppTheme.theme.textGreyHighest950, height: 36 / 28),
+                            style: AppTextStyles.typographyH1SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950, height: 36 / 28),
                           ),
                         ),
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             stepData.subtitle,
-                            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppTheme.theme.textGreyHigh700, height: 24 / 16),
+                            style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHigh700, height: 24 / 16),
                           ),
                         ),
                         const SizedBox(height: 24),
@@ -150,7 +150,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
     padding: const EdgeInsets.symmetric(horizontal: 24),
     child: Text(
       text,
-      style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 18, color: AppTheme.theme.textGreyHighest950, height: 28 / 18),
+      style: AppTextStyles.typographyH4Medium.copyWith(color: AppTheme.theme.textGreyHighest950, height: 28 / 18),
     ),
   );
 
@@ -175,11 +175,11 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
             children: [
               Text(
                 title,
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
+                style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
               ),
               Text(
                 subtitle,
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: AppTheme.theme.textGreyHigh700),
+                style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
               ),
             ],
           ),
@@ -211,18 +211,18 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
             children: [
               Text(
                 title,
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
+                style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
               ),
               Text(
                 subtitle,
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: AppTheme.theme.textGreyHigh700),
+                style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
               ),
             ],
           ),
         ),
         Text(
           '\$${price.toStringAsFixed(2)}',
-          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textGreyHighest950),
+          style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
         ),
         Icon(Icons.expand_more, color: AppTheme.theme.textGreyHigh700),
       ],

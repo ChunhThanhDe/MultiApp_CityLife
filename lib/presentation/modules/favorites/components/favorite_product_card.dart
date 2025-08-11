@@ -85,7 +85,7 @@ class FavoriteProductCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     store.name ?? 'Unknown Store',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: AppTheme.theme.textGreyHighest950),
+                    style: AppTextStyles.typographyH10Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -119,7 +119,7 @@ class FavoriteProductCard extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   '\$${store.minimumShippingCharge ?? 0} Delivery fee',
-                  style: TextStyle(fontSize: 12, color: AppTheme.theme.textGreyDefault500),
+                  style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyDefault500),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -128,17 +128,17 @@ class FavoriteProductCard extends StatelessWidget {
                   children: [
                     Text(
                       '${store.avgRating ?? 0}★',
-                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppTheme.theme.textGreyDefault500),
+                      style: AppTextStyles.typographyH12SemiBold.copyWith(color: AppTheme.theme.textGreyDefault500),
                     ),
                     const SizedBox(width: 2),
-                    Text('(${store.ratingCount ?? 0})', style: TextStyle(fontSize: 12, color: AppTheme.theme.textGreyDefault500)),
+                    Text('(${store.ratingCount ?? 0})', style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyDefault500)),
                     const SizedBox(width: 2),
-                    Text('•', style: TextStyle(fontSize: 12, color: AppTheme.theme.stateBrandDefault500)),
+                    Text('•', style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.stateBrandDefault500)),
                     const SizedBox(width: 2),
                     Flexible(
                       child: Text(
                         "${store.deliveryTime ?? '10-20'} min",
-                        style: TextStyle(fontSize: 12, color: AppTheme.theme.textGreyDefault500),
+                        style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyDefault500),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),

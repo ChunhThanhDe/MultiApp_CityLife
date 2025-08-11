@@ -27,14 +27,11 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 24),
-                  Text(
-                    'Change My Password',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: AppColors.textGreyHighest950),
-                  ),
+                  Text('Change My Password', style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950)),
                   const SizedBox(height: 8),
                   Text(
                     'In order to best protect your account, please select a password that is at least 8 characters long and contains a combination of uppercase and lowercase letters, numbers and/or symbols.',
-                    style: TextStyle(fontSize: 14, color: AppColors.textGreyHigh700, height: 1.42),
+                    style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700, height: 1.42),
                   ),
                   const SizedBox(height: 24),
 
@@ -73,10 +70,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  Text(
-                    'We recommend choosing a password that:',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textGreyHighest950),
-                  ),
+                  Text('We recommend choosing a password that:', style: AppTextStyles.typographyH10SemiBold.copyWith(color: AppColors.textGreyHighest950)),
                   const SizedBox(height: 8),
                   _recommendationText(),
                   const SizedBox(height: 32),
@@ -110,10 +104,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
                     ),
                     child: controller.isLoading.value
                         ? SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(AppColors.backgroundSurfacePrimaryWhite)))
-                        : Text(
-                            'Change password',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.backgroundSurfacePrimaryWhite),
-                          ),
+                        : Text('Change password', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.backgroundSurfacePrimaryWhite)),
                   ),
                 ),
               ),
@@ -122,7 +113,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
                 child: Text(
                   "Don't use the same password on different services, especially if you are using the same Username.",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 14, color: AppColors.textGreyDefault500),
+                  style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
                 ),
               ),
               const SizedBox(height: 8),
@@ -140,43 +131,43 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
         children: [
           WidgetSpan(
             child: Padding(
-              padding: EdgeInsets.only(right: 6.0),
+              padding: const EdgeInsets.only(right: 6.0),
               child: Icon(Icons.circle, size: 6, color: AppColors.textGreyHigh700),
             ),
           ),
           TextSpan(
             text: 'Is unique and not used for another service.\n',
-            style: TextStyle(fontSize: 12, color: AppColors.textGreyHigh700),
+            style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700),
           ),
           WidgetSpan(
             child: Padding(
-              padding: EdgeInsets.only(right: 6.0),
+              padding: const EdgeInsets.only(right: 6.0),
               child: Icon(Icons.circle, size: 6, color: AppColors.textGreyHigh700),
             ),
           ),
           TextSpan(
             text: 'Is at least 8 characters long.\n',
-            style: TextStyle(fontSize: 12, color: AppColors.textGreyHigh700),
+            style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700),
           ),
           WidgetSpan(
             child: Padding(
-              padding: EdgeInsets.only(right: 6.0),
+              padding: const EdgeInsets.only(right: 6.0),
               child: Icon(Icons.circle, size: 6, color: AppColors.textGreyHigh700),
             ),
           ),
           TextSpan(
             text: 'Includes uppercase/lowercase letters, numbers, and symbols.\n',
-            style: TextStyle(fontSize: 12, color: AppColors.textGreyHigh700),
+            style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700),
           ),
           WidgetSpan(
             child: Padding(
-              padding: EdgeInsets.only(right: 6.0),
+              padding: const EdgeInsets.only(right: 6.0),
               child: Icon(Icons.circle, size: 6, color: AppColors.textGreyHigh700),
             ),
           ),
           TextSpan(
             text: 'Is not your company ID or special character (q!@#\$...).',
-            style: TextStyle(fontSize: 12, color: AppColors.textGreyHigh700),
+            style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700),
           ),
         ],
       ),

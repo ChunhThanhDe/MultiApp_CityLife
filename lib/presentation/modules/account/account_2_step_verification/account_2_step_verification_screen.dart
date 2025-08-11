@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/account/account_2_step_verification/account_2_step_verification_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/account/components/account_divider.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
-
-import 'package:sixam_mart_user/presentation/modules/account/account_2_step_verification/account_2_step_verification_controller.dart';
 
 class Account2StepVerificationScreen extends BaseScreen<Account2StepVerificationController> {
   const Account2StepVerificationScreen({super.key});
@@ -23,21 +23,18 @@ class Account2StepVerificationScreen extends BaseScreen<Account2StepVerification
             padding: EdgeInsets.zero,
             children: [
               const SizedBox(height: 24),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Second steps',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
-                    ),
-                    SizedBox(height: 8),
+                    Text('Second steps', style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950)),
+                    const SizedBox(height: 8),
                     Text(
                       'Make sure you can access your SpeedEats Account by keeping this information up to date and adding more sign-in options',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF4A5763), height: 1.42),
+                      style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700, height: 1.42),
                     ),
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
                   ],
                 ),
               ),
@@ -57,7 +54,6 @@ class Account2StepVerificationScreen extends BaseScreen<Account2StepVerification
 }
 
 class _CellItem extends StatelessWidget {
-
   const _CellItem({required this.icon, required this.title, required this.subtitle, this.checked = false, this.showArrow = false, this.onTap});
   final IconData icon;
   final String title;
@@ -82,11 +78,8 @@ class _CellItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      title,
-                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
-                    ),
-                    Text(subtitle, style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                    Text(title, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
+                    Text(subtitle, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
                   ],
                 ),
               ),

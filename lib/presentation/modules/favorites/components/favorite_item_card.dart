@@ -80,14 +80,14 @@ class FavoriteItemCard extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             item.name ?? 'Unknown Item',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: AppTheme.theme.textGreyHighest950),
+            style: AppTextStyles.typographyH10Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(height: 2),
           Text(
             _buildPriceText(),
-            style: TextStyle(fontSize: 12, color: AppTheme.theme.textGreyDefault500),
+            style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyDefault500),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),

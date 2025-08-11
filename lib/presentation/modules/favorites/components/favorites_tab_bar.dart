@@ -57,7 +57,7 @@ class FavoritesTabBar extends StatelessWidget {
           child: Center(
             child: Text(
               text,
-              style: TextStyle(color: AppTheme.theme.textGreyHighest950, fontSize: 15, fontWeight: FontWeight.w400),
+              style: AppTextStyles.typographyH7Regular.copyWith(color: AppTheme.theme.textGreyHighest950),
             ),
           ),
         ),

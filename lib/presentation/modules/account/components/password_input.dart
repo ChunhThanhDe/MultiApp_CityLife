@@ -14,10 +14,7 @@ class PasswordInput extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.textGreyHighest950),
-        ),
+        Text(label, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
         const SizedBox(height: 8),
         TextFormField(
           controller: controller,
@@ -26,9 +23,9 @@ class PasswordInput extends StatelessWidget {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             hintText: 'Enter $label'.replaceFirst('password', 'password'),
-            hintStyle: TextStyle(color: AppColors.textGreyDefault500),
+            hintStyle: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-            errorStyle: TextStyle(color: AppColors.stateDangerDefault500, fontSize: 12),
+            errorStyle: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.stateDangerDefault500),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
               borderSide: BorderSide(color: AppColors.stateGreyLowestHover100),

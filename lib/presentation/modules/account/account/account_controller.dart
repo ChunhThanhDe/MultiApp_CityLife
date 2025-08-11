@@ -108,7 +108,6 @@ class AccountController extends BaseController {
 }
 
 class _LanguageSelectionBottomSheet extends StatelessWidget {
-
   const _LanguageSelectionBottomSheet({required this.onLanguageSelected});
   final Function(Locale) onLanguageSelected;
 
@@ -127,10 +126,7 @@ class _LanguageSelectionBottomSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            title,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
-          ),
+          Text(title, style: AppTextStyles.typographyH9SemiBold.copyWith(color: AppColors.textGreyHighest950)),
           const SizedBox(height: 16),
           ...languageOptions.map((option) {
             final isSelected = option.locale.languageCode == currentLocale.languageCode;
@@ -141,10 +137,7 @@ class _LanguageSelectionBottomSheet extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Text(
-                        option.displayName,
-                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
-                      ),
+                      child: Text(option.displayName, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                     ),
                     if (isSelected) const Icon(Icons.check, color: Color(0xFF007AFF), size: 20),
                   ],
@@ -160,7 +153,6 @@ class _LanguageSelectionBottomSheet extends StatelessWidget {
 }
 
 class _ThemeSelectionBottomSheet extends StatelessWidget {
-
   const _ThemeSelectionBottomSheet({required this.onThemeSelected});
   final Function(ThemeTypes) onThemeSelected;
 
@@ -174,10 +166,7 @@ class _ThemeSelectionBottomSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
-            'Select Theme',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
-          ),
+          Text('Select Theme', style: AppTextStyles.typographyH9SemiBold.copyWith(color: AppColors.textGreyHighest950)),
           const SizedBox(height: 16),
           ...ThemeTypes.values.map((themeType) {
             final isSelected = themeType == currentTheme;
@@ -190,10 +179,7 @@ class _ThemeSelectionBottomSheet extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Text(
-                        displayName,
-                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
-                      ),
+                      child: Text(displayName, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                     ),
                     if (isSelected) const Icon(Icons.check, color: Color(0xFF007AFF), size: 20),
                   ],

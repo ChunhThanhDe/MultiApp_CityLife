@@ -54,7 +54,7 @@ class _FilterScreenState extends State<FilterScreen> {
               children: [
                 Text(
                   'Short & Filter',
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 20, color: AppColors.textGreyHighest950),
+                  style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950),
                 ),
                 const Spacer(),
                 TextButton(
@@ -69,7 +69,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     });
                   },
                   style: TextButton.styleFrom(foregroundColor: AppColors.textGreyDefault500, padding: EdgeInsets.zero, minimumSize: const Size(0, 0)),
-                  child: const Text('Clear all', style: TextStyle(fontSize: 14)),
+                  child: Text('Clear all', style: AppTextStyles.typographyH11Regular),
                 ),
               ],
             ),
@@ -208,7 +208,7 @@ class _FilterScreenState extends State<FilterScreen> {
                 onPressed: () {},
                 child: Text(
                   'View results',
-                  style: TextStyle(color: AppColors.textBaseWhite, fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16),
+                  style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite),
                 ),
               ),
             ),
@@ -255,14 +255,14 @@ class _ExpandableSection extends StatelessWidget {
                 Expanded(
                   child: Text(
                     title,
-                    style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppColors.textGreyHighest950),
+                    style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
                   ),
                 ),
                 if (showClear && onClear != null)
                   TextButton(
                     style: TextButton.styleFrom(foregroundColor: AppColors.textGreyDefault500, padding: EdgeInsets.zero, minimumSize: const Size(0, 0)),
                     onPressed: onClear,
-                    child: const Text('Clear', style: TextStyle(fontSize: 14)),
+                    child: Text('Clear', style: AppTextStyles.typographyH11Regular),
                   ),
                 arrowIcon(expanded),
               ],
@@ -313,7 +313,7 @@ class _SelectOption extends StatelessWidget {
               Expanded(
                 child: Text(
                   label,
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: selected ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500),
+                  style: AppTextStyles.typographyH10Regular.copyWith(color: selected ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500),
                 ),
               ),
               if (selected) Icon(Icons.check, color: AppColors.textGreyHighest950, size: 22),
@@ -345,7 +345,7 @@ class _CustomRangeSlider extends StatelessWidget {
           children: List.generate(labels.length, (i) {
             return Text(
               labels[i],
-              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppColors.textGreyHighest950),
+              style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHighest950),
             );
           }),
         ),
@@ -381,7 +381,7 @@ class _CustomMarkSlider extends StatelessWidget {
         .map(
           (m) => Text(
             m == m.toInt() ? '${m.toInt()}+' : '${m.toStringAsFixed(1)}+',
-            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppColors.textGreyHighest950),
+            style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHighest950),
           ),
         )
         .toList();
@@ -429,7 +429,7 @@ class _CheckableCell extends StatelessWidget {
             Expanded(
               child: Text(
                 title,
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: checked ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: checked ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500),
               ),
             ),
             if (checked) Icon(Icons.check, color: AppColors.textGreyHighest950, size: 20),

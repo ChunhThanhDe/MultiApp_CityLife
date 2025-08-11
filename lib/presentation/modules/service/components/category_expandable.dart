@@ -49,12 +49,12 @@ class _CategoryExpandableState extends State<CategoryExpandable> {
                 Expanded(
                   child: Text(
                     widget.title,
-                    style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppColors.textGreyHighest950),
+                    style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
                   ),
                 ),
                 Text(
                   '${widget.parts} Parts',
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.textGreyHigh700),
+                  style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700),
                 ),
                 Icon(_expanded ? Icons.keyboard_arrow_down_rounded : Icons.keyboard_arrow_right_rounded, color: AppColors.textGreyHigh700),
               ],
@@ -85,12 +85,12 @@ class ItemOptionRow extends StatelessWidget {
               children: [
                 Text(
                   item.name,
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.textGreyHighest950),
+                  style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   '\$ ${item.price.toStringAsFixed(2)}',
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 12, color: AppColors.textGreyHigh700),
+                  style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700),
                 ),
               ],
             ),
@@ -144,7 +144,7 @@ class _ItemCounter extends StatelessWidget {
               height: 24,
               child: Text(
                 item.quantity > 0 ? '${item.quantity}' : 'Add',
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.textGreyHighest950),
+                style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
               ),
             ),
           ),

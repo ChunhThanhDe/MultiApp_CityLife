@@ -57,7 +57,7 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
               children: [
                 Text(
                   'Delivery Options',
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: AppColors.textGreyHighest950),
+                  style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
                 ),
                 const SizedBox(height: 16),
                 DeliveryOptionTile(svgIcon: 'assets/icons/ic_priority.svg', title: 'Priority', subtitle: '5-10 min(s) Delivered directly to you', price: '\$5.99', isSelected: false, onTap: () {}),
@@ -77,7 +77,7 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
               children: [
                 Text(
                   'Promocode',
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: AppColors.textGreyHighest950),
+                  style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
                 ),
                 const SizedBox(width: 8),
                 Row(
@@ -111,11 +111,11 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
                   children: [
                     Text(
                       'Total:',
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: AppColors.textGreyHighest950),
+                      style: AppTextStyles.typographyH8Medium.copyWith(color: AppColors.textGreyHighest950),
                     ),
                     Text(
                       '\$43.87',
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: AppColors.textGreyHighest950),
+                      style: AppTextStyles.typographyH8Medium.copyWith(color: AppColors.textGreyHighest950),
                     ),
                   ],
                 ),
@@ -124,7 +124,7 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
                 const SizedBox(height: 16),
                 Text(
                   'Payment',
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: AppColors.textGreyHighest950),
+                  style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
                 ),
                 const SizedBox(height: 8),
                 Row(
@@ -140,7 +140,7 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
                       ),
                     ),
                     const SizedBox(width: 12),
-                    Text('Visa ••••5290', style: TextStyle(fontSize: 16, color: AppColors.textGreyHighest950)),
+                    Text('Visa ••••5290', style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHighest950)),
                     const Spacer(),
                     Icon(Icons.arrow_forward_ios_rounded, size: 20, color: AppColors.textGreyDefault500),
                   ],
@@ -218,9 +218,9 @@ class _LocationTile extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: AppColors.textGreyHighest950),
+              style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
             ),
-            Text(subtitle, style: TextStyle(fontSize: 12, color: AppColors.textGreyDefault500)),
+            Text(subtitle, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
           ],
         ),
         const Spacer(),
@@ -241,8 +241,8 @@ class _PriceItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(fontSize: 16, color: AppColors.textGreyDefault500)),
-          Text(value, style: TextStyle(fontSize: 16, color: AppColors.textGreyDefault500)),
+          Text(label, style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyDefault500)),
+          Text(value, style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyDefault500)),
         ],
       ),
     );
@@ -270,7 +270,7 @@ class _Actions extends StatelessWidget {
           ),
           child: Text(
             'Order Now',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.textBaseWhite),
+            style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite),
           ),
         ),
       ),

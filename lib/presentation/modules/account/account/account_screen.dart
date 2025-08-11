@@ -68,7 +68,7 @@ class AccountScreen extends BaseScreen<AccountController> {
         icon: Assets.icons.icMoon.path,
         title: 'Dark Mode',
         trailing: GetBuilder<AccountController>(
-          builder: (controller) => Text(controller.currentThemeDisplayName, style: const TextStyle(color: Color(0xFF4A5763))),
+          builder: (controller) => Text(controller.currentThemeDisplayName, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
         ),
         onClick: () => controller.showThemeSelection(),
       ),
@@ -76,7 +76,7 @@ class AccountScreen extends BaseScreen<AccountController> {
         icon: Assets.icons.icLanguage.path,
         title: 'Language',
         trailing: GetBuilder<AccountController>(
-          builder: (controller) => Text(controller.currentLanguageDisplayName, style: const TextStyle(color: Color(0xFF4A5763))),
+          builder: (controller) => Text(controller.currentLanguageDisplayName, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
         ),
         onClick: () => controller.showLanguageSelection(),
       ),
@@ -107,7 +107,7 @@ class AccountScreen extends BaseScreen<AccountController> {
                   leading: SvgPicture.asset(item.icon, colorFilter: const ColorFilter.mode(Color(0xFF4A5763), BlendMode.srcIn)),
                   title: Text(
                     item.title,
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
+                    style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
                   ),
                   trailing: item.trailing ?? const Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
                   onTap: item.onClick,
@@ -131,13 +131,13 @@ class AccountScreen extends BaseScreen<AccountController> {
                       foregroundColor: const Color(0xFFB80900),
                     ),
                     onPressed: _showLogoutConfirmation,
-                    child: const Text(
+                    child: Text(
                       'Sign out',
-                      style: TextStyle(color: Color(0xFFB80900), fontSize: 16, fontWeight: FontWeight.w500),
+                      style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textDangerDefault500),
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text('v2.380', style: TextStyle(color: Color(0xFF161A1D), fontSize: 12)),
+                  Text('v2.380', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHighest950)),
                   const SizedBox(height: 8),
                 ],
               ),
@@ -177,10 +177,10 @@ class _ProfileCard extends StatelessWidget {
                   children: [
                     Text(
                       userName,
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Color(0xFF161A1D)),
+                      style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950),
                     ),
                     const SizedBox(height: 4),
-                    Text(userRefId, style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                    Text(userRefId, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
                   ],
                 ),
               ),

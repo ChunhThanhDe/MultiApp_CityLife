@@ -32,7 +32,7 @@ class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Delivery', style: inter(18, FontWeight.w500, AppColors.textBaseWhite)),
+                  Text('Delivery', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textBaseWhite)),
                   Icon(Icons.notifications_none, color: AppColors.textBaseWhite, size: 24),
                 ],
               ),
@@ -77,7 +77,7 @@ class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Recent Delivery', style: inter(18, FontWeight.w500, AppColors.textGreyHighest950)),
+                  Text('Recent Delivery', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
                   Icon(Icons.arrow_forward_ios, size: 18, color: AppColors.textGreyHighest950),
                 ],
               ),

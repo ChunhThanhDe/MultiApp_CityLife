@@ -34,13 +34,13 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
             children: [
               Text(
                 'Payment Successful',
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 28, height: 36 / 28, color: AppTheme.theme.textGreyHighest950),
+                style: AppTextStyles.typographyH1SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950, height: 36 / 28),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8),
               Text(
                 'You might be receiving more than one package for your order. Please check under "My Orders" to see details.',
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, height: 24 / 16, color: AppTheme.theme.textGreyHigh700),
+                style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHigh700, height: 24 / 16),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -67,11 +67,11 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
                       children: [
                         Text(
                           'Total:',
-                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 20, color: AppTheme.theme.textGreyHighest950),
+                          style: AppTextStyles.typographyH5Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
                         ),
                         Text(
                           '\$23.94',
-                          style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 20, color: AppTheme.theme.textGreyHighest950),
+                          style: AppTextStyles.typographyH5Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
                         ),
                       ],
                     ),
@@ -99,7 +99,7 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
               },
               child: Text(
                 'Done',
-                style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.textBaseWhite),
+                style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textBaseWhite),
               ),
             ),
           ),
@@ -112,7 +112,7 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
           },
           child: Text(
             'View Order',
-            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 16, color: AppTheme.theme.stateBrandDefault500, decoration: TextDecoration.underline),
+            style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.stateBrandDefault500, decoration: TextDecoration.underline),
           ),
         ),
         const SizedBox(height: 16),
@@ -135,11 +135,11 @@ class _ItemRow extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppTheme.theme.textGreyHigh700),
+            style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
           ),
           Text(
             value,
-            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppTheme.theme.textGreyHigh700),
+            style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
           ),
         ],
       ),

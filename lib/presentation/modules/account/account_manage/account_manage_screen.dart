@@ -96,14 +96,14 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                       suffix: const Icon(Icons.check, color: Color(0xFF4A5763)),
                     ),
                     // Birthday
-                    const Align(
+                    Align(
                       alignment: Alignment.centerLeft,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("When's your birthday?", style: TextStyle(fontSize: 14, color: Color(0xFF161A1D))),
-                          SizedBox(width: 4),
-                          Text('(optional)', style: TextStyle(fontSize: 14, color: Color(0xFF798A9A))),
+                          Text("When's your birthday?", style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+                          const SizedBox(width: 4),
+                          Text('(optional)', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
                         ],
                       ),
                     ),
@@ -183,10 +183,7 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                           ),
                           child: controller.isLoading.value
                               ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)))
-                              : const Text(
-                                  'Update',
-                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16),
-                                ),
+                              : Text('Update', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.backgroundSurfacePrimaryWhite)),
                         ),
                       ),
                     ),
@@ -219,14 +216,14 @@ class _InputTextField extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(label, style: const TextStyle(fontSize: 14, color: Color(0xFF161A1D))),
-              if (required) const Text(' *', style: TextStyle(fontSize: 14, color: Color(0xFFFF3B30))),
+              Text(label, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+              if (required) Text(' *', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textDangerDefault500)),
             ],
           ),
           const SizedBox(height: 8),
           TextFormField(
             controller: controller,
-            style: const TextStyle(fontSize: 14, color: Color(0xFF161A1D)),
+            style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
             decoration: InputDecoration(
               filled: true,
               fillColor: const Color(0xFFF7F8F9),
@@ -262,13 +259,13 @@ class _BirthdayDropdown extends StatelessWidget {
               isExpanded: true,
               value: value,
               onChanged: onChanged,
-              style: const TextStyle(fontSize: 14, color: Color(0xFF161A1D)),
+              style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
               items: items.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
             ),
           ),
         ),
         const SizedBox(height: 8),
-        Text(hint, style: const TextStyle(fontSize: 12, color: Color(0xFF798A9A))),
+        Text(hint, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
       ],
     );
   }
