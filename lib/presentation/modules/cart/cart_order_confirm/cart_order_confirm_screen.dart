@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
@@ -52,7 +53,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                 children: [
                   // Top
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
                     child: Column(
                       children: [
                         Row(
@@ -65,7 +66,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 24),
+                        SizedBox(height: 24.h),
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -80,7 +81,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                             style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHigh700, height: 24 / 16),
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        SizedBox(height: 24.h),
                         Row(
                           children: [
                             ...List.generate(
@@ -105,7 +106,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                   Container(height: 6, width: double.infinity, color: AppTheme.theme.backgroundSurfaceTertiaryGrey50),
 
                   // Address Section
-                  Padding(padding: const EdgeInsets.symmetric(vertical: 8.0), child: sectionTitle('Address')),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 8.h), child: sectionTitle('Address')),
                   cellItem(iconAsset: 'assets/icons/ic_home.svg', title: controller.contactPersonName, subtitle: controller.deliveryAddress),
                   dividerLine(),
                   cellItem(iconAsset: 'assets/icons/ic_box_package_courier_hands.svg', title: controller.deliveryInstruction, subtitle: controller.orderNote),
@@ -114,7 +115,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                   Container(height: 6, width: double.infinity, color: AppTheme.theme.backgroundSurfaceTertiaryGrey50),
 
                   // Order Details Section
-                  Padding(padding: const EdgeInsets.symmetric(vertical: 8.0), child: sectionTitle('Order Details')),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 8.h), child: sectionTitle('Order Details')),
 
                   // Display store information
                   if (controller.orderData.value?.store != null)
@@ -135,7 +136,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                     ),
                   ),
 
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32.h),
                 ],
               ),
             ),
@@ -147,7 +148,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
 
   // Section Title Widget
   Widget sectionTitle(String text) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 24),
+    padding: EdgeInsets.symmetric(horizontal: 24.w),
     child: Text(
       text,
       style: AppTextStyles.typographyH4Medium.copyWith(color: AppTheme.theme.textGreyHighest950, height: 28 / 18),
@@ -156,18 +157,18 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
 
   // Divider Line Widget
   Widget dividerLine() => Padding(
-    padding: const EdgeInsets.only(left: 60), // aligns with icon
+    padding: EdgeInsets.only(left: 60.w), // aligns with icon
     child: Divider(height: 0, thickness: 1, color: AppTheme.theme.stateGreyLowestHover100),
   );
 
   // Cell Item Widget (Address)
   Widget cellItem({required String iconAsset, required String title, required String subtitle}) => Container(
     height: 50,
-    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
+    padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 4.h),
     child: Row(
       children: [
         SvgPicture.asset(iconAsset, width: 24, height: 24),
-        const SizedBox(width: 12),
+        SizedBox(width: 12.w),
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -191,7 +192,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
   // Order Detail Item Widget
   Widget orderDetailItem({required String imageAsset, required String title, required String subtitle, required double price}) => Container(
     height: 66,
-    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+    padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
     child: Row(
       children: [
         Container(
@@ -203,7 +204,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
             child: AppImage.asset(imageAsset, width: 32, height: 32, fit: BoxFit.cover),
           ),
         ),
-        const SizedBox(width: 12),
+        SizedBox(width: 12.w),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

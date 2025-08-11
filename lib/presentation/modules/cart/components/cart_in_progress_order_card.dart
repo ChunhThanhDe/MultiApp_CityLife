@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/components/cart_order_progress_stepper.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 
@@ -25,7 +26,7 @@ class InProgressOrderCard extends StatelessWidget {
         // Label bar
         Container(
           color: AppTheme.theme.stateBrandDefault500,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
           child: Row(
             children: [
               Expanded(
@@ -42,7 +43,7 @@ class InProgressOrderCard extends StatelessWidget {
         GestureDetector(
           onTap: onTap,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
             child: Row(
               children: [
                 CircleAvatar(backgroundImage: brandLogo, radius: 16),

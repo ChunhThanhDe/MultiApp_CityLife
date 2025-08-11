@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
@@ -24,7 +25,7 @@ class Account2StepVerificationScreen extends BaseScreen<Account2StepVerification
             children: [
               const SizedBox(height: 24),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -65,14 +66,14 @@ class _CellItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.transparent,
+      color: AppColors.backgroundSurfacePrimaryWhite.withValues(alpha: 0),
       child: InkWell(
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 4.h),
           child: Row(
             children: [
-              Icon(icon, color: const Color(0xFF4A5763)),
+              Icon(icon, color: AppColors.textGreyHigh700),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
@@ -83,7 +84,7 @@ class _CellItem extends StatelessWidget {
                   ],
                 ),
               ),
-              if (checked) const Icon(Icons.check, color: Color(0xFF4A5763)) else if (showArrow) const Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
+              if (checked) Icon(Icons.check, color: AppColors.textGreyHigh700) else if (showArrow) Icon(Icons.chevron_right, color: AppColors.textGreyHigh700),
             ],
           ),
         ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class TravelHistory {
-
   TravelHistory({required this.title, required this.desc, required this.date, required this.time, required this.color});
   final String title;
   final String desc;
@@ -11,7 +12,6 @@ class TravelHistory {
 }
 
 class TravelHistorySection extends StatelessWidget {
-
   const TravelHistorySection({required this.travelData, super.key});
   final List<TravelHistory> travelData;
 
@@ -19,46 +19,46 @@ class TravelHistorySection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.only(top: 16),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        boxShadow: [BoxShadow(color: Color(0x1A101214), blurRadius: 24, offset: Offset(0, 2))],
+      margin: EdgeInsets.only(top: 16.h),
+      decoration: BoxDecoration(
+        color: AppColors.stateBaseWhite,
+        boxShadow: [BoxShadow(color: AppColors.alphaGrey10, blurRadius: 24, offset: Offset(0, 2))],
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: Column(
         children: [
           // Grabber
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12),
+            padding: EdgeInsets.symmetric(vertical: 12.h),
             child: Container(
               width: 48,
               height: 4,
-              decoration: BoxDecoration(color: const Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(99)),
+              decoration: BoxDecoration(color: AppColors.stateGreyLow300, borderRadius: BorderRadius.circular(99)),
             ),
           ),
           // Label
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
             child: Row(
               children: [
                 Expanded(
                   child: Text(
                     'Travel history',
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xFF161A1D)),
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: AppColors.textBaseGrey950),
                   ),
                 ),
-                Icon(Icons.keyboard_arrow_up_rounded, color: Color(0xFF161A1D)),
+                Icon(Icons.keyboard_arrow_up_rounded, color: AppColors.textBaseGrey950),
               ],
             ),
           ),
           // History List
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Column(
               children: List.generate(travelData.length, (i) {
                 final entry = travelData[i];
                 return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  padding: EdgeInsets.symmetric(vertical: 8.h),
                   child: Row(
                     children: [
                       // Left
@@ -70,7 +70,7 @@ class TravelHistorySection extends StatelessWidget {
                               entry.title,
                               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14, color: entry.color),
                             ),
-                            Text(entry.desc, style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                            Text(entry.desc, style: TextStyle(fontSize: 12, color: AppColors.textGreyDefault500)),
                           ],
                         ),
                       ),
@@ -82,9 +82,9 @@ class TravelHistorySection extends StatelessWidget {
                           children: [
                             Text(
                               entry.date,
-                              style: TextStyle(fontWeight: i == 0 ? FontWeight.w500 : FontWeight.w400, fontSize: 14, color: i == 0 ? const Color(0xFF5856D7) : const Color(0xFF161A1D)),
+                              style: TextStyle(fontWeight: i == 0 ? FontWeight.w500 : FontWeight.w400, fontSize: 14, color: i == 0 ? AppColors.stateBrandDefault500 : AppColors.textBaseGrey950),
                             ),
-                            Text(entry.time, style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                            Text(entry.time, style: TextStyle(fontSize: 12, color: AppColors.textGreyDefault500)),
                           ],
                         ),
                       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_infomation_response.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/section_item_card.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
@@ -17,12 +18,9 @@ class SectionItemWidget extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          color: const Color(0xFFF7F8F9),
+          color: AppColors.stateGreyLowest50,
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
-          child: Text(
-            sectionTitle,
-            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: const Color(0xFF161A1D)),
-          ),
+          child: Text(sectionTitle, style: AppTextStyles.typographyH10Medium.tint(AppColors.textGreyHighest950)),
         ),
         ...products.map(
           (item) => ProductItemCard(

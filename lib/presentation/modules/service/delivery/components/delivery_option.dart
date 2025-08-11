@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class DeliveryOptionTile extends StatelessWidget {
 
@@ -17,16 +19,16 @@ class DeliveryOptionTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFFEFEFFB) : Colors.white,
-          border: Border.all(color: isSelected ? const Color(0xFFBEBDEF) : const Color(0x11001012)),
+          color: isSelected ? AppColors.stateBrandLowest50 : AppColors.stateBaseWhite,
+          border: Border.all(color: isSelected ? AppColors.stateBrandLow200 : AppColors.alphaGrey10),
           borderRadius: BorderRadius.circular(6),
         ),
         child: Row(
           children: [
             // Svg icon
-            SvgPicture.asset(svgIcon, width: 24, height: 24, colorFilter: const ColorFilter.mode(Color(0xFF4A5763), BlendMode.srcIn)),
+            SvgPicture.asset(svgIcon, width: 24, height: 24, colorFilter: ColorFilter.mode(AppColors.textGreyDefault500, BlendMode.srcIn)),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -34,15 +36,15 @@ class DeliveryOptionTile extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: AppColors.textBaseGrey950),
                   ),
-                  Text(subtitle, style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                  Text(subtitle, style: TextStyle(fontSize: 12, color: AppColors.textGreyDefault500)),
                 ],
               ),
             ),
-            if (price.isNotEmpty) Text(price, style: const TextStyle(fontSize: 16, color: Color(0xFF161A1D))),
-            if (showArrow) const Icon(Icons.arrow_forward_ios_rounded, size: 20, color: Color(0xFF4A5763)),
-            if (isSelected) const Icon(Icons.check_circle, color: Color(0xFF5856D7), size: 24),
+            if (price.isNotEmpty) Text(price, style: TextStyle(fontSize: 16, color: AppColors.textBaseGrey950)),
+            if (showArrow) Icon(Icons.arrow_forward_ios_rounded, size: 20, color: AppColors.textGreyDefault500),
+            if (isSelected) Icon(Icons.check_circle, color: AppColors.stateBrandDefault500, size: 24),
           ],
         ),
       ),

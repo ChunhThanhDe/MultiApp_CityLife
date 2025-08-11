@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/domain/models/response/get_product_detail_response.dart';
 
@@ -11,25 +12,25 @@ class ProductNutritionSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Details
           Text(
             'Details',
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: AppColors.textGreyHighest950),
+            style: AppTextStyles.typographyH10SemiBold.tint(AppColors.textGreyHighest950),
           ),
           const SizedBox(height: 8),
-          Text(details, style: TextStyle(fontSize: 14, color: AppColors.textGreyHighest950, height: 1.6)),
+          Text(details, style: AppTextStyles.typographyH11Regular.tint(AppColors.textGreyHighest950).copyWith(height: 1.6)),
           const SizedBox(height: 16),
           // Ingredients
           Text(
             'Ingredients',
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: AppColors.textGreyHighest950),
+            style: AppTextStyles.typographyH10SemiBold.tint(AppColors.textGreyHighest950),
           ),
           const SizedBox(height: 8),
-          Text(ingredients, style: TextStyle(fontSize: 14, color: AppColors.textGreyHighest950, height: 1.6)),
+          Text(ingredients, style: AppTextStyles.typographyH11Regular.tint(AppColors.textGreyHighest950).copyWith(height: 1.6)),
           if (nutritions != null && nutritions!.isNotEmpty) ...[
             const SizedBox(height: 20),
             // Nutrition Facts box
@@ -45,10 +46,10 @@ class ProductNutritionSection extends StatelessWidget {
                 children: [
                   // Label Nutrition Facts
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
                     child: Text(
                       'Nutrition Facts',
-                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: AppColors.textGreyHighest950),
+                      style: AppTextStyles.typographyH10SemiBold.tint(AppColors.textGreyHighest950),
                     ),
                   ),
                   // List nutrition rows
@@ -58,18 +59,18 @@ class ProductNutritionSection extends StatelessWidget {
                     final value = splits.length > 1 ? splits[1].trim() : '';
                     return Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
+                      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 4.h),
                       child: Row(
                         children: [
                           Expanded(
                             child: Text(
                               name[0].toUpperCase() + name.substring(1), // Capitalize
-                              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15, color: AppColors.textGreyHighest950),
+                              style: AppTextStyles.typographyH11Medium.tint(AppColors.textGreyHighest950),
                             ),
                           ),
                           Text(
                             value,
-                            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15, color: AppColors.textGreyHigh700),
+                            style: AppTextStyles.typographyH11Regular.tint(AppColors.textGreyHigh700),
                           ),
                         ],
                       ),

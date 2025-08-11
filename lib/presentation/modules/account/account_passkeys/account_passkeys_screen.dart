@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
@@ -59,7 +60,7 @@ class _PasskeyListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 4.h),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -93,7 +94,7 @@ class _BottomSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
+      padding: EdgeInsets.only(left: 24.w, top: 24.h, right: 24.w, bottom: 24.h),
       decoration: BoxDecoration(
         color: AppColors.backgroundSurfacePrimaryWhite,
         border: Border(top: BorderSide(color: AppColors.alphaGrey10)),
@@ -122,7 +123,7 @@ class _BottomSection extends StatelessWidget {
               ),
               style: OutlinedButton.styleFrom(
                 backgroundColor: AppColors.backgroundSurfaceTertiaryGrey50,
-                padding: const EdgeInsets.symmetric(vertical: 12),
+                padding: EdgeInsets.symmetric(vertical: 12.h),
                 side: BorderSide(color: AppColors.backgroundSurfacePrimaryWhite.withValues(alpha: 0)),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
               ),

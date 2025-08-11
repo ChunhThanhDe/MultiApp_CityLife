@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class PickupLocationBottomSheet extends StatelessWidget {
   const PickupLocationBottomSheet({super.key});
@@ -9,15 +11,15 @@ class PickupLocationBottomSheet extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
                 width: 36,
                 height: 4,
-                margin: const EdgeInsets.only(bottom: 16),
-                decoration: BoxDecoration(color: const Color(0xFFEBEBF5), borderRadius: BorderRadius.circular(2)),
+                margin: EdgeInsets.only(bottom: 16.h),
+                decoration: BoxDecoration(color: AppColors.stateBrandLowest50, borderRadius: BorderRadius.circular(2)),
               ),
               const Text('Pickup Location', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
               const SizedBox(height: 16),
@@ -27,16 +29,16 @@ class PickupLocationBottomSheet extends StatelessWidget {
                   hintText: 'Search for an address',
                   prefixIcon: const Icon(Icons.search, size: 20),
                   filled: true,
-                  fillColor: const Color(0xFFF7F8F9),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 8),
+                  fillColor: AppColors.stateGreyLowestHover100,
+                  contentPadding: EdgeInsets.symmetric(vertical: 8.h),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(100), borderSide: BorderSide.none),
                 ),
               ),
               const SizedBox(height: 16),
               // Saved addresses
-              const Align(
+              Align(
                 alignment: Alignment.centerLeft,
-                child: Text('Saved addresses', style: TextStyle(fontSize: 14, color: Color(0xFF798A9A))),
+                child: Text('Saved addresses', style: TextStyle(fontSize: 14, color: AppColors.textGreyDefault500)),
               ),
               ListTile(
                 title: const Text('My Work'),
@@ -46,7 +48,7 @@ class PickupLocationBottomSheet extends StatelessWidget {
               ListTile(
                 title: const Text('My Home'),
                 subtitle: const Text('2216 N 10th St, Apt 0, El Centro, CA 92243'),
-                trailing: const Icon(Icons.check, color: Color(0xFF5856D7)),
+                trailing: Icon(Icons.check, color: AppColors.stateBrandDefault500),
                 onTap: () {}, // handle select
               ),
               ListTile(

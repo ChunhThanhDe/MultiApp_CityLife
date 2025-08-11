@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 
@@ -40,7 +41,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
         children: [
           // Grabber
           Padding(
-            padding: const EdgeInsets.only(top: 10, bottom: 6),
+            padding: EdgeInsets.only(top: 10.h, bottom: 6.h),
             child: Center(
               child: Container(
                 width: 48,
@@ -51,7 +52,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
           ),
           // Title + arrows
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 2.h),
             child: Row(
               children: [
                 IconButton(
@@ -79,7 +80,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
             height: 90,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 4.h),
               itemCount: days.length,
               itemBuilder: (context, idx) {
                 final d = days[idx];
@@ -87,7 +88,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
                 return GestureDetector(
                   onTap: () => setState(() => selectedDayIndex = idx),
                   child: Container(
-                    margin: const EdgeInsets.only(right: 12),
+                    margin: EdgeInsets.only(right: 12.w),
                     width: 60,
                     height: 81,
                     decoration: BoxDecoration(color: selected ? AppTheme.theme.stateBrandDefault500 : AppTheme.theme.backgroundSurfaceTertiaryGrey50, borderRadius: BorderRadius.circular(8)),
@@ -130,7 +131,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
             child: Container(
               constraints: const BoxConstraints(maxHeight: 300),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18),
+                padding: EdgeInsets.symmetric(horizontal: 18.w),
                 child: ListView.separated(
                   shrinkWrap: true,
                   itemCount: timeSlots.length,
@@ -142,7 +143,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
                       onTap: () => setState(() => selectedTimeSlot = idx),
                       child: Container(
                         height: 48,
-                        padding: const EdgeInsets.symmetric(horizontal: 18),
+                        padding: EdgeInsets.symmetric(horizontal: 18.w),
                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(32), color: selected ? AppTheme.theme.stateBrandLowest50 : AppTheme.theme.backgroundSurfacePrimaryWhite),
                         child: Row(
                           children: [
@@ -172,7 +173,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 14.h),
               child: SizedBox(
                 width: double.infinity,
                 height: 48,
@@ -180,7 +181,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
                   style: ButtonStyle(
                     backgroundColor: WidgetStateProperty.all(AppTheme.theme.stateBrandDefault500),
                     shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32))),
-                    padding: WidgetStateProperty.all(const EdgeInsets.symmetric(vertical: 12)),
+                    padding: WidgetStateProperty.all(EdgeInsets.symmetric(vertical: 12.h)),
                     elevation: WidgetStateProperty.all(0),
                   ),
                   onPressed: () {

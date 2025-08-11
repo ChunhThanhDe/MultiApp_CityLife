@@ -8,7 +8,6 @@ import 'package:sixam_mart_user/presentation/modules/service/delivery/components
 import 'package:sixam_mart_user/presentation/modules/service/delivery/home_delivery/home_delivery_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
-
 class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
   const HomeDeliveryScreen({super.key});
 
@@ -18,8 +17,6 @@ class HomeDeliveryScreen extends BaseScreen<HomeDeliveryController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    TextStyle inter(double size, [FontWeight? w, Color? c]) => TextStyle(fontSize: size, fontWeight: w, color: c);
-
     return Stack(
       children: [
         // Purple Header

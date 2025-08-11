@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
@@ -70,14 +71,14 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   }
 
   Widget divider([double leftPad = 0]) => Padding(
-    padding: EdgeInsets.only(left: leftPad),
+    padding: EdgeInsets.only(left: leftPad.w),
     child: Divider(height: 1, color: AppTheme.theme.stateGreyLowestHover100),
   );
 
   Widget dividerSpace() => Container(width: double.infinity, height: 6, color: AppTheme.theme.backgroundSurfaceTertiaryGrey50);
 
   Widget sectionLabel(String label) => Padding(
-    padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
+    padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 8.h),
     child: Row(
       children: [
         Text(
@@ -96,8 +97,8 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   }) => InkWell(
     onTap: onTap,
     child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
-      height: 50,
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 4.h),
+      height: 50.h,
       child: Row(
         children: [
           SizedBox(width: 24, height: 24, child: icon),
@@ -137,7 +138,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
       border: Border.all(color: selected ? AppTheme.theme.stateBrandLow200 : AppTheme.theme.alphaGrey10, width: 1),
       borderRadius: BorderRadius.circular(6),
     ),
-    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+    padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
     child: Row(
       children: [
         SizedBox(width: 24, height: 24, child: icon),
@@ -170,14 +171,14 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
 
   Widget orderGroupItem({required String logo, required String name, required String detail, required String amount}) => Container(
     height: 66,
-    margin: const EdgeInsets.only(bottom: 8),
+    margin: EdgeInsets.only(bottom: 8.h),
     padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
     child: Row(
       children: [
         // Sử dụng CircleAvatar với child là SvgPicture.asset
         CircleAvatar(
           radius: 16,
-          backgroundColor: Colors.transparent, // Nếu muốn không viền
+          backgroundColor: AppColors.backgroundSurfacePrimaryWhite.withValues(alpha: 0), // Nếu muốn không viền
           child: SvgPicture.asset(
             logo,
             width: 32, // hoặc 30 để vừa vòng tròn
@@ -210,7 +211,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
     ),
   );
   Widget priceRow(String left, String right) => Padding(
-    padding: const EdgeInsets.symmetric(vertical: 2),
+    padding: EdgeInsets.symmetric(vertical: 2.h),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -227,7 +228,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   );
 
   Widget paymentItem() => Container(
-    padding: const EdgeInsets.symmetric(vertical: 4),
+    padding: EdgeInsets.symmetric(vertical: 4.h),
     child: Row(
       children: [
         Container(
@@ -274,12 +275,12 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
       children: [
         sectionLabel('Delivery Options'),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: Column(
             children: [
               // Priority Option
               Padding(
-                padding: const EdgeInsets.only(bottom: 16),
+                padding: EdgeInsets.only(bottom: 16.h),
                 child: Obx(
                   () => GestureDetector(
                     onTap: () => controller.selectDeliveryOption('Priority'),
@@ -295,7 +296,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
               ),
               // Schedule Option
               Padding(
-                padding: const EdgeInsets.only(bottom: 16),
+                padding: EdgeInsets.only(bottom: 16.h),
                 child: Obx(
                   () => GestureDetector(
                     onTap: () {
@@ -304,7 +305,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                       showModalBottomSheet(
                         context: context,
                         isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
+                        backgroundColor: AppColors.backgroundSurfacePrimaryWhite.withValues(alpha: 0),
                         builder: (context) => const ClipRRect(
                           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
                           child: FractionallySizedBox(heightFactor: 0.82, child: TimePickerSheet()),
@@ -323,7 +324,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
               ),
               // Standard Option
               Padding(
-                padding: const EdgeInsets.only(bottom: 16),
+                  padding: EdgeInsets.only(bottom: 16.h),
                 child: Obx(
                   () => GestureDetector(
                     onTap: () => controller.selectDeliveryOption('Standard'),
@@ -348,14 +349,14 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
       children: [
         sectionLabel('Order Details'),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: Column(
             children: (checkoutData.cart ?? []).map((store) {
               final itemCount = store.items?.length ?? 0;
               final storeTotal = store.items?.fold<double>(0.0, (sum, item) => sum + ((item.itemPrice ?? 0.0) * (item.itemQuantity ?? 1))) ?? 0.0;
 
               return Padding(
-                padding: const EdgeInsets.only(bottom: 8),
+                padding: EdgeInsets.only(bottom: 8.h),
                 child: orderGroupItem(
                   logo: store.storeLogo ?? 'assets/images/default_store.png',
                   name: store.storeName ?? 'Store',
@@ -377,7 +378,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
       children: [
         sectionLabel('Promocode'),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: Obx(() {
             // Update text field when promo code is applied
             if (controller.promoCode.value.isNotEmpty && promoController.text != controller.promoCode.value) {
@@ -387,7 +388,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
             return Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 12),
+                  padding: EdgeInsets.only(left: 12.w),
                   child: Icon(Icons.sell_outlined, color: AppTheme.theme.textGreyDefault500, size: 18),
                 ),
                 const SizedBox(width: 8),
@@ -397,7 +398,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                     decoration: InputDecoration(
                       hintText: 'Enter promo code',
                       border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 12),
+                      contentPadding: EdgeInsets.symmetric(vertical: 12.h),
                       hintStyle: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyDefault500),
                     ),
                     style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHighest950),
@@ -415,13 +416,13 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                     icon: Icon(Icons.close, color: AppTheme.theme.textGreyDefault500, size: 20),
                   ),
                 Container(
-                  margin: const EdgeInsets.all(4),
+                  margin: EdgeInsets.all(4.w),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppTheme.theme.stateBrandDefault500,
                       foregroundColor: AppTheme.theme.textBaseWhite,
                       minimumSize: const Size(0, 40),
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
                       textStyle: const TextStyle(fontFamily: 'Inter', fontSize: 14, fontWeight: FontWeight.w500),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
                     ),
@@ -439,9 +440,9 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
         Obx(() {
           if (controller.promoMessage.value.isNotEmpty && controller.isPromoError.value) {
             return Padding(
-              padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+              padding: EdgeInsets.fromLTRB(24.w, 8.h, 24.w, 0),
               child: Container(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(12.w),
                 decoration: BoxDecoration(
                   color: AppTheme.theme.stateDangerLowest50,
                   borderRadius: BorderRadius.circular(8),
@@ -468,9 +469,9 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
         Obx(() {
           if (controller.promoCode.value.isNotEmpty) {
             return Padding(
-              padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
+              padding: EdgeInsets.fromLTRB(24.w, 8.h, 24.w, 0),
               child: Container(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(12.w),
                 decoration: BoxDecoration(
                   color: AppTheme.theme.stateBrandLowest50,
                   borderRadius: BorderRadius.circular(8),
@@ -504,7 +505,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
 
   Widget _buildPriceSummarySection(GetCheckoutSummaryResponse checkoutData) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.h),
       child: Obx(
         () => Column(
           children: [
@@ -537,15 +538,15 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
       children: [
         sectionLabel('Payment'),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: Column(
             children: (checkoutData.paymentMethods ?? []).map((method) {
               return Obx(
                 () => GestureDetector(
                   onTap: () => controller.selectPaymentMethod(method.key ?? ''),
                   child: Container(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    padding: const EdgeInsets.all(16),
+                    margin: EdgeInsets.only(bottom: 12.h),
+                    padding: EdgeInsets.all(16.w),
                     decoration: BoxDecoration(
                       border: Border.all(color: controller.selectedPaymentMethod.value == method.key ? AppTheme.theme.stateBrandDefault500 : AppTheme.theme.stateGreyLowestHover100),
                       borderRadius: BorderRadius.circular(12),
@@ -571,7 +572,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
         ),
         // Order Button
         Padding(
-          padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
+          padding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 16.h),
           child: SizedBox(
             width: double.infinity,
             height: 48,
@@ -630,7 +631,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   Widget _buildServiceHead(ServiceEntity serviceCart) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(24.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

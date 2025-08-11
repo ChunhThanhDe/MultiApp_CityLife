@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class LabelWidget extends StatelessWidget {
@@ -25,7 +26,7 @@ class LabelWidget extends StatelessWidget {
           ),
         if (optional)
           Padding(
-            padding: const EdgeInsets.only(left: 6),
+            padding: EdgeInsets.only(left: 6.w),
             child: Text(
               '(optional)',
               style: TextStyle(fontSize: isLarge ? 16 : 14, color: AppColors.textGreyHigh700, fontWeight: FontWeight.w400),

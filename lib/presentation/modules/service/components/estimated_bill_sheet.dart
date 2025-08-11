@@ -35,7 +35,7 @@ class EstimatedBillSheet extends StatelessWidget {
                 Expanded(
                   child: Text(
                     'Estimated Bill',
-                    style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 20, color: AppColors.textGreyHighest950),
+                    style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950),
                   ),
                 ),
                 GestureDetector(onTap: () => Navigator.of(context).pop(), child: const Text('close')),
@@ -102,11 +102,11 @@ class EstimatedBillSheet extends StatelessWidget {
               children: [
                 Text(
                   'Total:',
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 20, color: AppColors.textGreyHighest950),
+                  style: AppTextStyles.typographyH8Medium.copyWith(color: AppColors.textGreyHighest950),
                 ),
                 Text(
                   '\$23.94',
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 20, color: AppColors.textGreyHighest950),
+                  style: AppTextStyles.typographyH8Medium.copyWith(color: AppColors.textGreyHighest950),
                 ),
               ],
             ),
@@ -130,7 +130,7 @@ class EstimatedBillSheet extends StatelessWidget {
                 },
                 child: Text(
                   'Continue Order',
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 18, color: AppColors.textBaseWhite),
+                  style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textBaseWhite),
                 ),
               ),
             ),
@@ -167,7 +167,7 @@ class _SectionGroup extends StatelessWidget {
                 const SizedBox(width: 12),
                 Text(
                   title,
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 18, color: iconColor),
+                  style: AppTextStyles.typographyH9Medium.copyWith(color: iconColor),
                 ),
               ],
             ),
@@ -204,12 +204,12 @@ class _SheetItemRow extends StatelessWidget {
               children: [
                 Text(
                   item.name,
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppColors.textGreyHighest950),
+                  style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHighest950),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   '\$ ${item.price.toStringAsFixed(2)}',
-                  style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.textGreyHigh700),
+                  style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700),
                 ),
               ],
             ),
@@ -240,7 +240,7 @@ class _QuantityBox extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               '$quantity',
-              style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.textGreyHighest950),
+              style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
             ),
           ),
           Icon(Icons.add, size: 20, color: AppColors.textGreyHighest950),
@@ -264,11 +264,11 @@ class _BillInfoRow extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppColors.textGreyHigh700),
+            style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHigh700),
           ),
           Text(
             value,
-            style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w400, fontSize: 16, color: AppColors.textGreyHigh700),
+            style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHigh700),
           ),
         ],
       ),

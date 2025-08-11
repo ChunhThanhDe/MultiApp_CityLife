@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
@@ -28,7 +29,7 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24),
+              padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
               child: SizedBox(
                 height: 143,
                 width: 143,
@@ -38,7 +39,7 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                     child: Stack(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(4.0),
+                          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
                           child: CircleAvatar(
                             radius: 71.5,
                             backgroundColor: AppColors.stateBrandDefault500,
@@ -57,7 +58,7 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                                 BoxShadow(color: AppColors.alphaGrey5, blurRadius: 4, offset: const Offset(0, 2)),
                               ],
                             ),
-                            padding: const EdgeInsets.all(6),
+                            padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 6.h),
                             child: Icon(Icons.edit, size: 24, color: AppColors.textGreyHighest950),
                           ),
                         ),
@@ -73,7 +74,7 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
         Expanded(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Form(
                 key: controller.formKey,
                 child: Column(
@@ -85,7 +86,7 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                       controller: controller.firstNameController,
                       required: true,
                       validator: (v) => (v == null || v.isEmpty) ? 'Please enter your first name' : null,
-                      suffix: const Icon(Icons.check, color: Color(0xFF4A5763)),
+                      suffix: Icon(Icons.check, color: AppColors.textGreyHigh700),
                     ),
                     // Last name
                     _InputTextField(
@@ -93,7 +94,7 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                       controller: controller.lastNameController,
                       required: true,
                       validator: (v) => (v == null || v.isEmpty) ? 'Please enter your last name' : null,
-                      suffix: const Icon(Icons.check, color: Color(0xFF4A5763)),
+                      suffix: Icon(Icons.check, color: AppColors.textGreyHigh700),
                     ),
                     // Birthday
                     Align(
@@ -141,7 +142,7 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    const Divider(color: Color(0xFFE8EBEE), thickness: 1),
+                    Divider(color: AppColors.stateGreyLowestHover100, thickness: 1),
                     const SizedBox(height: 16),
 
                     // Email
@@ -154,7 +155,7 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                         if (!GetUtils.isEmail(v)) return 'Please enter a valid email address';
                         return null;
                       },
-                      suffix: const Icon(Icons.check, color: Color(0xFF4A5763)),
+                      suffix: Icon(Icons.check, color: AppColors.textGreyHigh700),
                     ),
                     // Phone
                     _InputTextField(
@@ -176,13 +177,13 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                         () => ElevatedButton(
                           onPressed: controller.isLoading.value ? null : controller.updateInfo,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF5856D7),
+                            backgroundColor: AppColors.stateBrandDefault500,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                             elevation: 0,
-                            disabledBackgroundColor: const Color(0xFF5856D7).withValues(alpha: 0.6),
+                            disabledBackgroundColor: AppColors.stateBrandDefault500.withValues(alpha: 0.6),
                           ),
                           child: controller.isLoading.value
-                              ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)))
+                              ? SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(AppColors.stateBaseWhite)))
                               : Text('Update', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.backgroundSurfacePrimaryWhite)),
                         ),
                       ),
@@ -210,7 +211,7 @@ class _InputTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: EdgeInsets.only(bottom: 8.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -226,9 +227,9 @@ class _InputTextField extends StatelessWidget {
             style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
             decoration: InputDecoration(
               filled: true,
-              fillColor: const Color(0xFFF7F8F9),
+              fillColor: AppColors.stateGreyLowest50,
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide.none),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+              contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
               suffixIcon: suffix,
             ),
             validator: validator,
@@ -252,8 +253,8 @@ class _BirthdayDropdown extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          decoration: BoxDecoration(color: const Color(0xFFF7F8F9), borderRadius: BorderRadius.circular(6)),
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+          decoration: BoxDecoration(color: AppColors.stateGreyLowest50, borderRadius: BorderRadius.circular(6)),
+          padding: EdgeInsets.symmetric(horizontal: 12.w),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
               isExpanded: true,

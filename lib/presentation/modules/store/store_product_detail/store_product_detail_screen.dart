@@ -26,7 +26,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
       final priceText = price != null ? '\$${price.toStringAsFixed(2)}' : '';
 
       return Padding(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+        padding: EdgeInsets.only(left: 16.w, top: 8.h, right: 16.w, bottom: 24.h),
         child: SizedBox(
           height: 48,
           width: double.infinity,
@@ -41,7 +41,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
             },
             child: Text(
               'Add to cart${priceText.isNotEmpty ? " • $priceText" : ""}',
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15, color: AppColors.backgroundSurfacePrimaryWhite, fontFamily: 'Inter'),
+              style: AppTextStyles.typographyH11Medium.tint(AppColors.backgroundSurfacePrimaryWhite),
             ),
           ),
         ),
@@ -68,7 +68,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
           children: [
             // Ảnh sản phẩm
             Padding(
-              padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+              padding: EdgeInsets.only(left: 24.w, top: 0, right: 24.w, bottom: 24.h),
               child: Stack(
                 children: [
                   Container(
@@ -81,9 +81,9 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 180),
+                      padding: EdgeInsets.only(top: 180.h),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
                         decoration: BoxDecoration(
                           color: AppColors.backgroundSurfacePrimaryWhite,
                           borderRadius: BorderRadius.circular(20),
@@ -98,7 +98,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                             Flexible(
                               child: Text(
                                 product.storeName,
-                                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: AppColors.textGreyHighest950),
+                                style: AppTextStyles.typographyH11SemiBold.tint(AppColors.textGreyHighest950),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -113,18 +113,18 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
 
             // Tên sp + giá
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     product.name,
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: AppColors.textGreyHighest950),
+                    style: AppTextStyles.typographyH9SemiBold.tint(AppColors.textGreyHighest950),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     '${product.price} ${product.taxType}',
-                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.textGreyDefault500),
+                    style: AppTextStyles.typographyH11Regular.tint(AppColors.textGreyDefault500),
                   ),
                 ],
               ),
@@ -132,13 +132,13 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
             const SizedBox(height: 16),
 
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: GestureDetector(
                 onTap: () {
                   // TODO: handle reset
                 },
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+                  padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 8.h),
                   decoration: BoxDecoration(
                     color: AppColors.backgroundSurfaceTertiaryGrey50,
                     borderRadius: BorderRadius.circular(20), // pill shape
@@ -148,7 +148,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                     children: [
                       Text(
                         'Reset to standard recipe',
-                        style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 14, color: AppColors.textGreyHighest950),
+                        style: AppTextStyles.typographyH11Medium.tint(AppColors.textGreyHighest950),
                       ),
                       const Spacer(),
                       Icon(Icons.refresh, size: 18, color: AppColors.textGreyDefault500),
@@ -186,14 +186,14 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
             // Add-on selection
             if (product.addOns.isNotEmpty) ...[
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 12),
                     Text(
                       'Add-ons',
-                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: AppColors.textGreyHighest950),
+                      style: AppTextStyles.typographyH10SemiBold.tint(AppColors.textGreyHighest950),
                     ),
                     const SizedBox(height: 8),
                     ...product.addOns.map<Widget>((addOn) {
@@ -206,10 +206,10 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                       return Row(
                         children: [
                           Checkbox(value: isSelected, onChanged: (_) => controller.toggleAddOn(addOnId)),
-                          Expanded(child: Text('$addOnName (+$addOnPrice)', style: const TextStyle(fontSize: 15))),
+                          Expanded(child: Text('$addOnName (+$addOnPrice)', style: AppTextStyles.typographyH11Regular)),
                           if (isSelected) ...[
                             IconButton(icon: const Icon(Icons.remove, size: 18), onPressed: () => controller.changeAddOnQty(addOnId, qty - 1)),
-                            Text('$qty', style: const TextStyle(fontSize: 15)),
+                            Text('$qty', style: AppTextStyles.typographyH11Regular),
                             IconButton(icon: const Icon(Icons.add, size: 18), onPressed: () => controller.changeAddOnQty(addOnId, qty + 1)),
                           ],
                         ],
@@ -255,23 +255,23 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
     return Container(
       width: double.infinity,
       color: AppColors.backgroundSurfaceTertiaryGrey50,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.h),
       child: Row(
         children: [
           Text(
             text,
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: AppColors.textGreyHighest950),
+            style: AppTextStyles.typographyH10Medium.tint(AppColors.textGreyHighest950),
           ),
           if (required)
             Text(
               '  *',
-              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13, color: AppColors.stateBrandDefault500),
+              style: AppTextStyles.typographyH11Regular.tint(AppColors.stateBrandDefault500),
             ),
           const Spacer(),
           if (note != null)
             Text(
               note,
-              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12, color: AppColors.textGreyDefault500),
+              style: AppTextStyles.typographyH12Regular.tint(AppColors.textGreyDefault500),
             ),
         ],
       ),

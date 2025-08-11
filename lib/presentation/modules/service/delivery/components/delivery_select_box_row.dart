@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/presentation/modules/service/delivery/box_delivery/box_delivery_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
@@ -29,9 +30,9 @@ class SelectBoxRowWidget extends StatelessWidget {
                 width: 223,
                 height: 104,
                 decoration: BoxDecoration(
-                  color: isSelected ? Colors.white : const Color(0xFFF7F8F9),
-                  border: Border.all(color: isSelected ? const Color(0xFF5856D7) : Colors.transparent, width: 1.5),
-                  boxShadow: isSelected ? [const BoxShadow(color: Color(0x335856D7), blurRadius: 4)] : [],
+                  color: isSelected ? AppColors.stateBaseWhite : AppColors.stateGreyLowestHover100,
+                  border: Border.all(color: isSelected ? AppColors.stateBrandDefault500 : Colors.transparent, width: 1.5),
+                  boxShadow: isSelected ? [BoxShadow(color: AppColors.stateBrandDefault500.withValues(alpha: 0.2), blurRadius: 4)] : [],
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -46,10 +47,10 @@ class SelectBoxRowWidget extends StatelessWidget {
                           children: [
                             Text(
                               controller.boxData[i]['label']!,
-                              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: Color(0xFF161A1D)),
+                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: AppColors.textBaseGrey950),
                             ),
                             const SizedBox(height: 4),
-                            Text(controller.boxData[i]['desc']!, style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763), height: 1.4)),
+                            Text(controller.boxData[i]['desc']!, style: TextStyle(fontSize: 12, color: AppColors.textGreyDefault500, height: 1.4)),
                           ],
                         ),
                       ),

@@ -22,7 +22,7 @@ class ProductItemCard extends StatelessWidget {
               children: [
                 Text(
                   item.name ?? '',
-                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: AppColors.textGreyHighest950),
+                  style: AppTextStyles.typographyH10Medium.tint(AppColors.textGreyHighest950),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -31,24 +31,24 @@ class ProductItemCard extends StatelessWidget {
                   children: [
                     Text(
                       '\$${item.price ?? 0}',
-                      style: TextStyle(fontSize: 12.sp, color: AppColors.textGreyDefault500),
+                      style: AppTextStyles.typographyH12Regular.tint(AppColors.textGreyDefault500),
                     ),
                     SizedBox(width: 4.w),
                     Text(
                       '•',
-                      style: TextStyle(fontSize: 12.sp, color: AppColors.stateBrandDefault500),
+                      style: AppTextStyles.typographyH12Regular.tint(AppColors.stateBrandDefault500),
                     ),
                     SizedBox(width: 4.w),
                     Text(
                       '',
-                      style: TextStyle(fontSize: 12.sp, color: AppColors.textGreyDefault500),
+                      style: AppTextStyles.typographyH12Regular.tint(AppColors.textGreyDefault500),
                     ),
                   ],
                 ),
                 SizedBox(height: 4.h),
                 Text(
                   '${item.avgRating ?? 0} ★ (${item.ratingCount ?? 0}+)',
-                  style: TextStyle(fontSize: 12.sp, color: AppColors.textGreyDefault500),
+                  style: AppTextStyles.typographyH12Regular.tint(AppColors.textGreyDefault500),
                 ),
               ],
             ),

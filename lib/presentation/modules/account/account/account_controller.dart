@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/data/app_storage.dart';
 import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
@@ -121,7 +122,7 @@ class _LanguageSelectionBottomSheet extends StatelessWidget {
     final title = currentLocale.languageCode == 'vi' ? 'Chọn ngôn ngữ' : 'Select Language';
 
     return Padding(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -133,13 +134,13 @@ class _LanguageSelectionBottomSheet extends StatelessWidget {
             return InkWell(
               onTap: () => onLanguageSelected(option.locale),
               child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 16),
+                padding: EdgeInsets.symmetric(vertical: 16.h),
                 child: Row(
                   children: [
                     Expanded(
                       child: Text(option.displayName, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                     ),
-                    if (isSelected) const Icon(Icons.check, color: Color(0xFF007AFF), size: 20),
+                    if (isSelected) Icon(Icons.check, color: AppColors.textInformationDefault500, size: 20),
                   ],
                 ),
               ),
@@ -161,7 +162,7 @@ class _ThemeSelectionBottomSheet extends StatelessWidget {
     final currentTheme = SixMartTheme.themetypes;
 
     return Padding(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -175,13 +176,13 @@ class _ThemeSelectionBottomSheet extends StatelessWidget {
             return InkWell(
               onTap: () => onThemeSelected(themeType),
               child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 16),
+                padding: EdgeInsets.symmetric(vertical: 16.h),
                 child: Row(
                   children: [
                     Expanded(
                       child: Text(displayName, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                     ),
-                    if (isSelected) const Icon(Icons.check, color: Color(0xFF007AFF), size: 20),
+                    if (isSelected) Icon(Icons.check, color: AppColors.textInformationDefault500, size: 20),
                   ],
                 ),
               ),

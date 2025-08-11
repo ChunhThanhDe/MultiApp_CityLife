@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
@@ -42,7 +43,7 @@ class ServiceHeader extends GetView<ServiceController> {
 
   Widget _buildTopBar() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
       child: Obx(
         () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,7 +58,7 @@ class ServiceHeader extends GetView<ServiceController> {
 
   Widget _buildSearchBar(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: GestureDetector(
         onTap: () {
           Get.toNamed(AppRoutes.search);
@@ -72,7 +73,7 @@ class ServiceHeader extends GetView<ServiceController> {
                   color: Colors.transparent,
                   child: Container(
                     height: 48,
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
                     decoration: BoxDecoration(
                       color: AppColors.backgroundSurfacePrimaryWhite,
                       borderRadius: BorderRadius.circular(24),
@@ -80,7 +81,7 @@ class ServiceHeader extends GetView<ServiceController> {
                     ),
                     child: Row(
                       children: [
-                        Padding(padding: const EdgeInsets.only(right: 12), child: Assets.icons.icSearch.svg()),
+                        Padding(padding: EdgeInsets.only(right: 12.w), child: Assets.icons.icSearch.svg()),
                         Expanded(
                           child: Text('Search food and stores', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
                         ),
@@ -95,7 +96,7 @@ class ServiceHeader extends GetView<ServiceController> {
             color: Colors.transparent,
             child: Container(
               height: 48,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
               decoration: BoxDecoration(
                 color: AppColors.backgroundSurfacePrimaryWhite,
                 borderRadius: BorderRadius.circular(24),
@@ -103,7 +104,7 @@ class ServiceHeader extends GetView<ServiceController> {
               ),
               child: Row(
                 children: [
-                  Padding(padding: const EdgeInsets.only(right: 12), child: Assets.icons.icSearch.svg()),
+                  Padding(padding: EdgeInsets.only(right: 12.w), child: Assets.icons.icSearch.svg()),
                   Expanded(
                     child: Text('Search food and stores', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
                   ),
@@ -121,7 +122,7 @@ class ServiceHeader extends GetView<ServiceController> {
                         },
                       );
                     },
-                    child: Padding(padding: const EdgeInsets.only(left: 12), child: Assets.icons.icFilter.svg()),
+                    child: Padding(padding: EdgeInsets.only(left: 12.w), child: Assets.icons.icFilter.svg()),
                   ),
                 ],
               ),
@@ -134,7 +135,7 @@ class ServiceHeader extends GetView<ServiceController> {
 
   Widget _buildDeliveryAddress() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Row(
         children: [
           Assets.icons.icCar.svg(width: 16, height: 16, colorFilter: ColorFilter.mode(AppColors.textBaseWhite, BlendMode.srcIn)),
@@ -172,11 +173,11 @@ class ServiceHeader extends GetView<ServiceController> {
           itemBuilder: (context, index) {
             final category = categories[index];
             return Padding(
-              padding: EdgeInsets.only(right: index == categories.length - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
+              padding: EdgeInsets.only(right: index == categories.length - 1 ? 24.w : 16.w, left: index == 0 ? 24.w : 0),
               child: GestureDetector(
                 onTap: () {},
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
                   child: Column(
                     children: [
                       AppImage.network(category.image, width: 40, height: 40, fit: BoxFit.cover),

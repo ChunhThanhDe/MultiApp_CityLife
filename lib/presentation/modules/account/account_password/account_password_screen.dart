@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
@@ -20,7 +21,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
       children: [
         Expanded(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Form(
               key: controller.formKey,
               child: Column(
@@ -82,7 +83,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
         // Bottom actions
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
           decoration: BoxDecoration(
             color: AppColors.backgroundSurfacePrimaryWhite,
             border: Border(top: BorderSide(color: AppColors.alphaGrey10)),
@@ -98,7 +99,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.stateBrandDefault500,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
                       elevation: 0,
                       disabledBackgroundColor: AppColors.stateBrandDefault500.withValues(alpha: 0.6),
                     ),
@@ -131,7 +132,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
         children: [
           WidgetSpan(
             child: Padding(
-              padding: const EdgeInsets.only(right: 6.0),
+              padding: EdgeInsets.only(right: 6.w),
               child: Icon(Icons.circle, size: 6, color: AppColors.textGreyHigh700),
             ),
           ),
@@ -141,7 +142,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
           ),
           WidgetSpan(
             child: Padding(
-              padding: const EdgeInsets.only(right: 6.0),
+              padding: EdgeInsets.only(right: 6.w),
               child: Icon(Icons.circle, size: 6, color: AppColors.textGreyHigh700),
             ),
           ),
@@ -151,7 +152,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
           ),
           WidgetSpan(
             child: Padding(
-              padding: const EdgeInsets.only(right: 6.0),
+              padding: EdgeInsets.only(right: 6.w),
               child: Icon(Icons.circle, size: 6, color: AppColors.textGreyHigh700),
             ),
           ),
@@ -161,7 +162,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
           ),
           WidgetSpan(
             child: Padding(
-              padding: const EdgeInsets.only(right: 6.0),
+              padding: EdgeInsets.only(right: 6.w),
               child: Icon(Icons.circle, size: 6, color: AppColors.textGreyHigh700),
             ),
           ),

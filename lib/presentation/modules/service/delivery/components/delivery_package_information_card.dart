@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class PackageInfo {
 
@@ -22,19 +23,19 @@ class PackageInformationCard extends StatelessWidget {
       child: Column(
         children: [
           // Header
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
             child: Row(
               children: [
                 Expanded(
                   child: Text(
                     'Package Information',
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xFF161A1D)),
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: AppColors.textBaseGrey950),
                   ),
                 ),
                 Text(
                   'Save',
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xFF5856D7)),
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.textBrandDefault500),
                 ),
               ],
             ),
@@ -90,11 +91,11 @@ class _InfoField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+        Text(label, style: TextStyle(fontSize: 12, color: AppColors.textGreyDefault500)),
         const SizedBox(height: 2),
         Text(
           value,
-          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14, color: Color(0xFF161A1D)),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14, color: AppColors.textBaseGrey950),
         ),
       ],
     );

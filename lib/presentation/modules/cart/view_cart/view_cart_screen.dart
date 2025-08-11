@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
@@ -176,7 +177,7 @@ class _StoreHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
       color: AppTheme.theme.backgroundSurfacePrimaryWhite,
       child: Row(
         children: [
@@ -229,7 +230,7 @@ class _CartProductItem extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       curve: Curves.easeInOut,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
       color: AppTheme.theme.backgroundSurfacePrimaryWhite,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -497,7 +498,7 @@ class _CartSummarySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
       decoration: BoxDecoration(
         border: Border(top: BorderSide(color: AppTheme.theme.alphaGrey10, width: 1)),
         color: AppTheme.theme.backgroundSurfacePrimaryWhite,
@@ -530,7 +531,7 @@ class _CartSummarySection extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppTheme.theme.stateBrandDefault500,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-                padding: const EdgeInsets.symmetric(vertical: 12),
+                padding: EdgeInsets.symmetric(vertical: 12.h),
               ),
               child: Text(
                 'Checkout Now',
@@ -576,7 +577,7 @@ class _EmptyStateContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Column(
         children: [
           Text(
@@ -595,7 +596,7 @@ class _EmptyStateContent extends StatelessWidget {
             onPressed: onPressed ?? () {},
             style: ElevatedButton.styleFrom(
               backgroundColor: AppTheme.theme.stateBrandDefault500,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
             ),
             child: Text(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class TrackingStep {
 
@@ -22,7 +24,7 @@ class TrackingProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
+      padding: EdgeInsets.only(left: 24.w, top: 32.h, right: 24.w, bottom: 16.h),
       child: Column(
         children: [
           LayoutBuilder(
@@ -46,7 +48,7 @@ class TrackingProgress extends StatelessWidget {
                       top: 13,
                       child: Container(
                         height: 8,
-                        decoration: BoxDecoration(color: const Color(0xFFE8EBEE), borderRadius: BorderRadius.circular(6)),
+                        decoration: BoxDecoration(color: AppColors.stateGreyLow300, borderRadius: BorderRadius.circular(6)),
                       ),
                     ),
                     // Line progress (phần đã đi qua)
@@ -56,7 +58,7 @@ class TrackingProgress extends StatelessWidget {
                       top: 13,
                       child: Container(
                         height: 8,
-                        decoration: BoxDecoration(color: const Color(0xFF5856D7), borderRadius: BorderRadius.circular(6)),
+                        decoration: BoxDecoration(color: AppColors.stateBrandDefault500, borderRadius: BorderRadius.circular(6)),
                       ),
                     ),
                     // Steps
@@ -79,10 +81,10 @@ class TrackingProgress extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(leftDate, style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                    Text(leftDate, style: TextStyle(fontSize: 12, color: AppColors.textGreyDefault500)),
                     Text(
                       leftPlace,
-                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.textBaseGrey950),
                     ),
                   ],
                 ),
@@ -91,10 +93,10 @@ class TrackingProgress extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(rightDate, style: const TextStyle(fontSize: 12, color: Color(0xFF4A5763))),
+                    Text(rightDate, style: TextStyle(fontSize: 12, color: AppColors.textGreyDefault500)),
                     Text(
                       rightPlace,
-                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xFF161A1D)),
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.textBaseGrey950),
                     ),
                   ],
                 ),
@@ -125,9 +127,9 @@ class TrackingProgress extends StatelessWidget {
         width: 22.7,
         height: 22.7,
         decoration: BoxDecoration(
-          color: isFilled ? (isCurrent ? Colors.white : const Color(0xFF5856D7)) : Colors.white,
-          border: Border.all(color: isFilled ? const Color(0xFF5856D7) : const Color(0xFF93A1AE), width: 1.4),
-          boxShadow: isCurrent ? [const BoxShadow(color: Color(0x145856D7), blurRadius: 4, spreadRadius: 1)] : null,
+          color: isFilled ? (isCurrent ? AppColors.stateBaseWhite : AppColors.stateBrandDefault500) : AppColors.stateBaseWhite,
+          border: Border.all(color: isFilled ? AppColors.stateBrandDefault500 : AppColors.stateGreyDefault500, width: 1.4),
+          boxShadow: isCurrent ? [BoxShadow(color: AppColors.stateBrandDefault500.withValues(alpha: 0.08), blurRadius: 4, spreadRadius: 1)] : null,
           borderRadius: BorderRadius.circular(11.3),
         ),
         child: isTick
@@ -137,7 +139,7 @@ class TrackingProgress extends StatelessWidget {
                 child: Container(
                   width: 8.5,
                   height: 8.5,
-                  decoration: BoxDecoration(color: const Color(0xFF5856D7), borderRadius: BorderRadius.circular(8.5)),
+                  decoration: BoxDecoration(color: AppColors.stateBrandDefault500, borderRadius: BorderRadius.circular(8.5)),
                 ),
               )
             : const SizedBox.shrink(),

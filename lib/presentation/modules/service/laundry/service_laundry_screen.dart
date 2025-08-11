@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
@@ -38,19 +39,19 @@ class ServiceLaundryScreen extends BaseScreen<ServiceLaundryController> {
                       // Category Tabs
                       _LaundryCategoryTabs(),
                       // Banner + Dots + Text
-                      Padding(padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12), child: _LaundryBanner()),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h), child: _LaundryBanner()),
                       const SizedBox(height: 6),
                       // Pricing Section
                       Container(
                         color: AppTheme.theme.backgroundSurfacePrimaryWhite,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 24),
+                          padding: EdgeInsets.symmetric(vertical: 24.h),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // Pricing title
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 24),
+                                padding: EdgeInsets.symmetric(horizontal: 24.w),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -108,7 +109,7 @@ class _LaundryAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 56,
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
       color: AppTheme.theme.backgroundSurfacePrimaryWhite.withValues(alpha: 0),
       child: Row(
         children: [
@@ -136,7 +137,7 @@ class _LaundryCategoryTabs extends GetView<ServiceLaundryController> {
         final selectedIndex = controller.selectedCategoryIndex;
         return ListView.separated(
           scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.only(left: 24, right: 24, top: 12, bottom: 8),
+          padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 12.h, bottom: 8.h),
           itemCount: ServiceLaundryController.laundryCategories.length,
           separatorBuilder: (context, index) => const SizedBox(width: 16),
           itemBuilder: (context, index) {
@@ -203,7 +204,7 @@ class _CategoryTab extends StatelessWidget {
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 16.0.h),
                   child: svgAsset!.svg(
                     width: 28,
                     height: 28,
@@ -286,7 +287,7 @@ class _Dot extends StatelessWidget {
     return Container(
       width: active ? 24 : 12,
       height: 4,
-      margin: const EdgeInsets.symmetric(horizontal: 2),
+      margin: EdgeInsets.symmetric(horizontal: 2.w),
       decoration: BoxDecoration(color: active ? AppTheme.theme.stateBrandDefault500 : AppTheme.theme.shadowMd10, borderRadius: BorderRadius.circular(24)),
     );
   }
@@ -296,7 +297,7 @@ class _Dot extends StatelessWidget {
 class _Divider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(margin: const EdgeInsets.only(left: 24), height: 1, color: AppTheme.theme.stateGreyLowestHover100);
+    return Container(margin: EdgeInsets.only(left: 24.w), height: 1, color: AppTheme.theme.stateGreyLowestHover100);
   }
 }
 
@@ -320,7 +321,7 @@ class _EstimatedBillWidget extends StatelessWidget {
           Container(
             width: double.infinity,
             height: 12,
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Center(
               child: Container(
                 width: 48,
@@ -333,8 +334,8 @@ class _EstimatedBillWidget extends StatelessWidget {
           Container(
             width: double.infinity,
             height: 62,
-            margin: const EdgeInsets.only(top: 10),
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
+            margin: EdgeInsets.only(top: 10.h),
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 4.h),
             child: Row(
               children: [
                 // Title and subtitle section

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
@@ -26,10 +27,10 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
           ),
         ),
 
-        const SizedBox(height: 32),
+        SizedBox(height: 32.h),
         // Title + subtitle
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32.0),
+          padding: EdgeInsets.symmetric(horizontal: 32.0.w),
           child: Column(
             children: [
               Text(
@@ -37,7 +38,7 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
                 style: AppTextStyles.typographyH1SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950, height: 36 / 28),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8.h),
               Text(
                 'You might be receiving more than one package for your order. Please check under "My Orders" to see details.',
                 style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHigh700, height: 24 / 16),
@@ -46,22 +47,22 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
             ],
           ),
         ),
-        const SizedBox(height: 100),
+        SizedBox(height: 100.h),
         // Box total bill
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: Container(
             width: double.infinity,
             decoration: BoxDecoration(color: AppTheme.theme.backgroundSurfaceTertiaryGrey50, borderRadius: BorderRadius.circular(8)),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
+              padding: EdgeInsets.symmetric(vertical: 16.h),
               child: Column(
                 children: [
                   const _ItemRow(label: 'Subtotal:', value: '\$23.94'),
                   const _ItemRow(label: 'Delivery Fee:', value: '\$0.00'),
                   const _ItemRow(label: 'Taxes & Estimated Fees:', value: '\$0.00'),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                    padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -81,13 +82,13 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
             ),
           ),
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: 20.h),
         // Done button
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: SizedBox(
             width: double.infinity,
-            height: 48,
+            height: 48.h,
             child: ElevatedButton(
               style: ButtonStyle(
                 backgroundColor: WidgetStateProperty.all(AppTheme.theme.stateBrandDefault500),
@@ -104,7 +105,7 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
             ),
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8.h),
         // View Order link
         TextButton(
           onPressed: () {
@@ -115,7 +116,7 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
             style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.stateBrandDefault500, decoration: TextDecoration.underline),
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16.h),
       ],
     );
   }
@@ -129,7 +130,7 @@ class _ItemRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 2),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 2.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

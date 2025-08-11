@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_product_detail/store_product_detail_controller.dart';
 
 class StoreDetailAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -14,7 +15,7 @@ class StoreDetailAppBar extends StatelessWidget implements PreferredSizeWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
         shadowColor: Colors.transparent,
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.backgroundSurfacePrimaryWhite,
         automaticallyImplyLeading: false,
         toolbarHeight: 56,
         titleSpacing: 0,
@@ -22,20 +23,16 @@ class StoreDetailAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             const SizedBox(width: 8),
             IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF161A1D), size: 20),
+              icon: Icon(Icons.arrow_back_ios_new, color: AppColors.textGreyHighest950, size: 20),
               onPressed: () => Get.back(),
               splashRadius: 24,
             ),
             const SizedBox(width: 4),
             Expanded(
-              child: Text(
-                product?.storeName ?? '',
-                style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w700, fontSize: 18, color: Color(0xFF161A1D)),
-                overflow: TextOverflow.ellipsis,
-              ),
+              child: Text(product?.storeName ?? '', style: AppTextStyles.typographyH9Bold.tint(AppColors.textGreyHighest950), overflow: TextOverflow.ellipsis),
             ),
             IconButton(
-              icon: Icon(product?.isFavorite == true ? Icons.favorite : Icons.favorite_border, color: product?.isFavorite == true ? const Color(0xFF5856D7) : const Color(0xFFB7B7B7), size: 22),
+              icon: Icon(product?.isFavorite == true ? Icons.favorite : Icons.favorite_border, color: product?.isFavorite == true ? AppColors.stateBrandDefault500 : AppColors.stateGreyDefault500, size: 22),
               onPressed: () {
                 // You can add your toggle logic here if needed.
               },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class DeliveryItem extends StatelessWidget {
   const DeliveryItem({required this.code, required this.date, required this.status, super.key, this.statusColor});
@@ -20,18 +21,18 @@ class DeliveryItem extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(code, style: inter(16, FontWeight.w500, const Color(0xFF161A1D))),
-                      Text(date, style: inter(12, FontWeight.w400, const Color(0xFF4A5763))),
+                      Text(code, style: inter(16, FontWeight.w500, AppColors.textBaseGrey950)),
+                      Text(date, style: inter(12, FontWeight.w400, AppColors.textGreyDefault500)),
                     ],
                   ),
                 ),
                 // Status
-                Text(status, style: inter(14, FontWeight.w400, statusColor ?? const Color(0xFF4A5763))),
+                Text(status, style: inter(14, FontWeight.w400, statusColor ?? AppColors.textGreyDefault500)),
               ],
             ),
           ),
           const SizedBox(height: 10),
-          const Divider(color: Color(0xFFE8EBEE), height: 1, indent: 24, endIndent: 24),
+          Divider(color: AppColors.stateGreyLow300, height: 1, indent: 24, endIndent: 24),
         ],
       ),
     );

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class OptionGroupSection extends StatelessWidget {
-
-  const OptionGroupSection({
-    required this.title, required this.options, required this.selectedValue, required this.onSelected, super.key,
-    this.requiredField = false,
-  });
+  const OptionGroupSection({required this.title, required this.options, required this.selectedValue, required this.onSelected, super.key, this.requiredField = false});
   final String title;
   final bool requiredField;
   final List<OptionItem> options;
@@ -15,7 +13,7 @@ class OptionGroupSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 24),
+      margin: EdgeInsets.only(bottom: 24.h),
       decoration: BoxDecoration(
         // border: Border.all(
         //   color: Color(0xFFB3C6FF),
@@ -28,58 +26,34 @@ class OptionGroupSection extends StatelessWidget {
           // Group label
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            color: const Color(0xFFF7F8F9),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+            color: AppColors.stateGreyLowest50,
             child: Row(
               children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    color: Color(0xFF161A1D),
-                  ),
-                ),
-                if (requiredField)
-                  const Text(
-                    '  *',
-                    style: TextStyle(
-                      color: Color(0xFF5856D7),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
+                Text(title, style: AppTextStyles.typographyH10Medium.tint(AppColors.textGreyHighest950)),
+                if (requiredField) Text('  *', style: AppTextStyles.typographyH11Regular.tint(AppColors.stateBrandDefault500)),
                 const Spacer(),
-                const Text(
-                  'Required',
-                  style: TextStyle(
-                    color: Color(0xFF4A5763),
-                    fontSize: 13,
-                  ),
-                ),
+                Text('Required', style: AppTextStyles.typographyH11Regular.tint(AppColors.textGreyHigh700)),
               ],
             ),
           ),
           const SizedBox(height: 6),
           // Danh sách options
-          ...options.asMap().entries.map(
-            (entry) {
-              final opt = entry.value;
-              final isLast = entry.key == options.length - 1;
-              return Column(
-                children: [
-                  _OptionItemCheckboxTile(
-                    label: opt.label,
-                    subLabel: opt.subLabel,
-                    checked: selectedValue == opt.value, // chỉ 1 lựa chọn
-                    onTap: () => onSelected(opt.value),
-                  ),
-                  if (!isLast) const SizedBox(height: 6),
-                ],
-              );
-            },
-          ),
+          ...options.asMap().entries.map((entry) {
+            final opt = entry.value;
+            final isLast = entry.key == options.length - 1;
+            return Column(
+              children: [
+                _OptionItemCheckboxTile(
+                  label: opt.label,
+                  subLabel: opt.subLabel,
+                  checked: selectedValue == opt.value, // chỉ 1 lựa chọn
+                  onTap: () => onSelected(opt.value),
+                ),
+                if (!isLast) const SizedBox(height: 6),
+              ],
+            );
+          }),
         ],
       ),
     );
@@ -87,7 +61,6 @@ class OptionGroupSection extends StatelessWidget {
 }
 
 class OptionItem {
-
   OptionItem({required this.label, required this.value, this.subLabel});
   final String label;
   final String value;
@@ -95,11 +68,7 @@ class OptionItem {
 }
 
 class _OptionItemCheckboxTile extends StatelessWidget {
-
-  const _OptionItemCheckboxTile({
-    required this.label,
-    required this.checked, required this.onTap, this.subLabel,
-  });
+  const _OptionItemCheckboxTile({required this.label, required this.checked, required this.onTap, this.subLabel});
   final String label;
   final String? subLabel;
   final bool checked;
@@ -113,32 +82,15 @@ class _OptionItemCheckboxTile extends StatelessWidget {
       child: Container(
         height: 36,
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
         alignment: Alignment.centerLeft,
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                label,
-                style: const TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14,
-                  color: Color(0xFF161A1D),
-                ),
-              ),
-            ),
+            Expanded(child: Text(label, style: AppTextStyles.typographyH11Regular.tint(AppColors.textGreyHighest950))),
             if (subLabel != null && subLabel!.isNotEmpty)
               Padding(
-                padding: const EdgeInsets.only(right: 12.0),
-                child: Text(
-                  subLabel!,
-                  style: const TextStyle(
-                    fontFamily: 'Inter',
-                    fontSize: 14,
-                    color: Color(0xFF4A5763),
-                  ),
-                ),
+                padding: EdgeInsets.only(right: 12.0.w),
+                child: Text(subLabel!, style: AppTextStyles.typographyH11Regular.tint(AppColors.textGreyHigh700)),
               ),
             _CustomCheckbox(checked: checked),
           ],
@@ -149,7 +101,6 @@ class _OptionItemCheckboxTile extends StatelessWidget {
 }
 
 class _CustomCheckbox extends StatelessWidget {
-
   const _CustomCheckbox({required this.checked});
   final bool checked;
 
@@ -159,12 +110,9 @@ class _CustomCheckbox extends StatelessWidget {
       width: 24,
       height: 24,
       decoration: BoxDecoration(
-        border: Border.all(
-          color: checked ? const Color(0xFF5856D7) : const Color(0xFF798A9A),
-          width: 1.5,
-        ),
+        border: Border.all(color: checked ? AppColors.stateBrandDefault500 : AppColors.stateGreyDefault500, width: 1.5),
         borderRadius: BorderRadius.circular(4),
-        color: checked ? const Color(0xFF5856D7) : Colors.transparent,
+        color: checked ? AppColors.stateBrandDefault500 : Colors.transparent,
       ),
       child: checked ? const Icon(Icons.check, color: Colors.white, size: 18) : null,
     );

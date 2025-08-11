@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class PasswordInput extends StatelessWidget {
@@ -24,7 +25,7 @@ class PasswordInput extends StatelessWidget {
           decoration: InputDecoration(
             hintText: 'Enter $label'.replaceFirst('password', 'password'),
             hintStyle: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
             errorStyle: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.stateDangerDefault500),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),

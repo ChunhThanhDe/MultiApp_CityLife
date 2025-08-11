@@ -1,35 +1,37 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 void showProductImageDialog(BuildContext context, String imagePath) {
   showDialog(
     context: context,
     barrierDismissible: true,
     builder: (_) => Dialog(
-      backgroundColor: Colors.white,
-      insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+      backgroundColor: AppColors.stateBaseWhite,
+      insetPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16),
+        padding: EdgeInsets.symmetric(vertical: 24.0.h, horizontal: 16.w),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             // Close
             Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: Text(
                     'Add Product image',
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xFF161A1D)),
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: AppColors.textBaseGrey950),
                   ),
                 ),
                 InkWell(
                   onTap: () => Navigator.of(context).pop(),
                   borderRadius: BorderRadius.circular(99),
-                  child: const Padding(
-                    padding: EdgeInsets.all(4.0),
-                    child: Icon(Icons.close, size: 24, color: Color(0xFF161A1D)),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4.0.w, vertical: 4.0.h),
+                    child: Icon(Icons.close, size: 24, color: AppColors.textBaseGrey950),
                   ),
                 ),
               ],
@@ -40,9 +42,9 @@ void showProductImageDialog(BuildContext context, String imagePath) {
               child: Image.file(File(imagePath), width: 240, height: 320, fit: BoxFit.cover),
             ),
             const SizedBox(height: 12),
-            const Align(
+            Align(
               alignment: Alignment.centerRight,
-              child: Text('Date image', style: TextStyle(color: Color(0xFFFF3B30), fontSize: 14)),
+              child: Text('Date image', style: TextStyle(color: AppColors.stateDangerDefault500, fontSize: 14)),
             ),
           ],
         ),

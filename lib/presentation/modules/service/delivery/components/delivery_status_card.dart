@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class DeliveryStatusCard extends StatelessWidget {
 
@@ -13,8 +15,8 @@ class DeliveryStatusCard extends StatelessWidget {
     final stepStatus = List<bool>.from(delivery?['stepStatus'] ?? [true, true, false, false]);
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(color: const Color(0xFFEFEFFB), borderRadius: BorderRadius.circular(8)),
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+      decoration: BoxDecoration(color: AppColors.stateBrandLowest50, borderRadius: BorderRadius.circular(8)),
+      padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -24,11 +26,11 @@ class DeliveryStatusCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('ID Number', style: inter(12, FontWeight.w400, const Color(0xFF4A5763))),
-                  Text(delivery?['code'] ?? '', style: inter(20, FontWeight.w500, const Color(0xFF161A1D))),
+                  Text('ID Number', style: inter(12, FontWeight.w400, AppColors.textGreyDefault500)),
+                  Text(delivery?['code'] ?? '', style: inter(20, FontWeight.w500, AppColors.textBaseGrey950)),
                 ],
               ),
-              Text(delivery?['status'] ?? '', style: inter(12, FontWeight.w500, const Color(0xFF5856D7))),
+              Text(delivery?['status'] ?? '', style: inter(12, FontWeight.w500, AppColors.stateBrandDefault500)),
             ],
           ),
           const SizedBox(height: 12),
@@ -40,15 +42,15 @@ class DeliveryStatusCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(delivery?['date'] ?? '', style: inter(12, FontWeight.w400, const Color(0xFF4A5763))),
-                  Text('Mississauga, ON CA', style: inter(14, FontWeight.w500, const Color(0xFF161A1D))),
+                  Text(delivery?['date'] ?? '', style: inter(12, FontWeight.w400, AppColors.textGreyDefault500)),
+                  Text('Mississauga, ON CA', style: inter(14, FontWeight.w500, AppColors.textBaseGrey950)),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text('Jan 28, 2025', style: inter(12, FontWeight.w400, const Color(0xFF4A5763))),
-                  Text('WINNIPEG, MB CA', style: inter(14, FontWeight.w500, const Color(0xFF161A1D))),
+                  Text('Jan 28, 2025', style: inter(12, FontWeight.w400, AppColors.textGreyDefault500)),
+                  Text('WINNIPEG, MB CA', style: inter(14, FontWeight.w500, AppColors.textBaseGrey950)),
                 ],
               ),
             ],
@@ -77,7 +79,7 @@ class _ProgressSteps extends StatelessWidget {
               alignment: Alignment.center,
               child: Container(
                 height: 8,
-                decoration: BoxDecoration(color: const Color(0xFFDEDEF7), borderRadius: BorderRadius.circular(6)),
+                decoration: BoxDecoration(color: AppColors.stateBrandLow200, borderRadius: BorderRadius.circular(6)),
               ),
             ),
           ),
@@ -87,7 +89,7 @@ class _ProgressSteps extends StatelessWidget {
             right: MediaQuery.of(context).size.width * (1 - (stepStatus.where((s) => s).length / stepStatus.length)),
             child: Container(
               height: 8,
-              decoration: BoxDecoration(color: const Color(0xFF5856D7), borderRadius: BorderRadius.circular(6)),
+              decoration: BoxDecoration(color: AppColors.stateBrandDefault500, borderRadius: BorderRadius.circular(6)),
             ),
           ),
           // Step Circles
@@ -102,11 +104,11 @@ class _ProgressSteps extends StatelessWidget {
       width: 22,
       height: 22,
       decoration: BoxDecoration(
-        color: checked ? const Color(0xFF5856D7) : Colors.white,
-        border: Border.all(color: const Color(0xFF5856D7), width: 2.5),
+        color: checked ? AppColors.stateBrandDefault500 : AppColors.stateBaseWhite,
+        border: Border.all(color: AppColors.stateBrandDefault500, width: 2.5),
         shape: BoxShape.circle,
       ),
-      child: checked ? const Icon(Icons.check, color: Colors.white, size: 14) : null,
+      child: checked ? Icon(Icons.check, color: AppColors.stateBaseWhite, size: 14) : null,
     );
   }
 }

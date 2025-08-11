@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/presentation/modules/service/laundry/service_laundry_controller.dart';
@@ -43,7 +44,7 @@ class _CategoryExpandableState extends State<CategoryExpandable> {
           borderRadius: BorderRadius.circular(8),
           onTap: () => setState(() => _expanded = !_expanded),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
+            padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 24.w),
             child: Row(
               children: [
                 Expanded(
@@ -76,7 +77,7 @@ class ItemOptionRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
+      padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 24.w),
       child: Row(
         children: [
           Expanded(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
@@ -40,7 +41,7 @@ class AccountScreen extends BaseScreen<AccountController> {
       cancelColor: AppColors.textGreyDefault500,
       confirmColor: AppColors.textDangerDefault500,
       cancelTextStyle: AppTextStyles.typographyH10SemiBold,
-      confirmTextStyle: AppTextStyles.typographyH10SemiBold.copyWith(color: Colors.white),
+      confirmTextStyle: AppTextStyles.typographyH10SemiBold.copyWith(color: AppColors.stateBaseWhite),
       titleStyle: AppTextStyles.typographyH10SemiBold,
     );
   }
@@ -103,32 +104,32 @@ class AccountScreen extends BaseScreen<AccountController> {
             return Column(
               children: [
                 ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-                  leading: SvgPicture.asset(item.icon, colorFilter: const ColorFilter.mode(Color(0xFF4A5763), BlendMode.srcIn)),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 24.w),
+                  leading: SvgPicture.asset(item.icon, colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
                   title: Text(
                     item.title,
                     style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
                   ),
-                  trailing: item.trailing ?? const Icon(Icons.chevron_right, color: Color(0xFF4A5763)),
+                  trailing: item.trailing ?? Icon(Icons.chevron_right, color: AppColors.textGreyHigh700),
                   onTap: item.onClick,
                 ),
-                if (menuIndex < menuItems.length - 1) const Divider(color: Color(0xFFE8EBEE), indent: 60, height: 0, thickness: 1),
+                if (menuIndex < menuItems.length - 1) Divider(color: AppColors.stateGreyLowestHover100, indent: 60, height: 0, thickness: 1),
               ],
             );
           }
           // Sign out section at the last index
           else {
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
               child: Column(
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFFFECEB),
+                      backgroundColor: AppColors.stateDangerLowest50,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                       minimumSize: const Size(double.infinity, 48),
                       elevation: 0,
-                      foregroundColor: const Color(0xFFB80900),
+                      foregroundColor: AppColors.stateDangerHigh700,
                     ),
                     onPressed: _showLogoutConfirmation,
                     child: Text(
@@ -161,14 +162,14 @@ class _ProfileCard extends StatelessWidget {
         final userImage = controller.hasUserInfo && controller.currentUserInfo.imageFullUrl.isNotEmpty ? controller.currentUserInfo.imageFullUrl : 'assets/images/img_avatar_default.png';
 
         return Container(
-          color: const Color(0xFFF7F8F9),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          color: AppColors.stateGreyLowest50,
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
           child: Row(
             children: [
               CircleAvatar(
                 radius: 24,
                 backgroundImage: controller.hasUserInfo && controller.currentUserInfo.imageFullUrl.isNotEmpty ? NetworkImage(userImage) : AssetImage(userImage) as ImageProvider,
-                backgroundColor: const Color(0xFF5856D7),
+                backgroundColor: AppColors.stateBrandDefault500,
               ),
               const SizedBox(width: 12),
               Expanded(
