@@ -3,7 +3,6 @@ import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_controller.dart';
 
 class FavoritesTabBar extends StatelessWidget {
-
   const FavoritesTabBar({required this.currentTab, required this.onTabChanged, super.key});
   final FavoritesTab currentTab;
   final Function(FavoritesTab) onTabChanged;
@@ -55,10 +54,7 @@ class FavoritesTabBar extends StatelessWidget {
         child: SizedBox(
           height: 44,
           child: Center(
-            child: Text(
-              text,
-              style: AppTextStyles.typographyH7Regular.copyWith(color: AppTheme.theme.textGreyHighest950),
-            ),
+            child: Text(text, style: AppTextStyles.typographyH10Regular.copyWith(color: AppTheme.theme.textGreyHighest950)),
           ),
         ),
       ),

@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sixam_mart_user/presentation/modules/cart/components/cart_order_progress_stepper.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/components/cart_order_progress_stepper.dart';
 
 class InProgressOrderCard extends StatelessWidget {
-
   const InProgressOrderCard({
-    required this.label, required this.time, required this.brandLogo, required this.brandName, required this.subtitle, required this.price, required this.progressStep, required this.totalStep, super.key,
+    required this.label,
+    required this.time,
+    required this.brandLogo,
+    required this.brandName,
+    required this.subtitle,
+    required this.price,
+    required this.progressStep,
+    required this.totalStep,
+    super.key,
     this.onTap,
   });
   final String label;
@@ -30,12 +37,9 @@ class InProgressOrderCard extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: Text(
-                  label,
-                  style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textBaseWhite),
-                ),
+                child: Text(label, style: AppTextStyles.typographyH10Medium.copyWith(color: AppTheme.theme.textBaseWhite)),
               ),
-              Text(time, style: AppTextStyles.typographyH8Regular.copyWith(color: AppTheme.theme.textBaseWhite)),
+              Text(time, style: AppTextStyles.typographyH11Regular.copyWith(color: AppTheme.theme.textBaseWhite)),
             ],
           ),
         ),
@@ -52,15 +56,12 @@ class InProgressOrderCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        brandName,
-                        style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
-                      ),
+                      Text(brandName, style: AppTextStyles.typographyH10Medium.copyWith(color: AppTheme.theme.textGreyHighest950)),
                       Text(subtitle, style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyHigh700)),
                     ],
                   ),
                 ),
-                Text(price, style: AppTextStyles.typographyH8Regular.copyWith(color: AppTheme.theme.textGreyHigh700)),
+                Text(price, style: AppTextStyles.typographyH11Regular.copyWith(color: AppTheme.theme.textGreyHigh700)),
                 Icon(Icons.chevron_right, color: AppTheme.theme.textGreyHigh700),
               ],
             ),

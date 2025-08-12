@@ -52,10 +52,7 @@ class _FilterScreenState extends State<FilterScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Row(
               children: [
-                Text(
-                  'Short & Filter',
-                  style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950),
-                ),
+                Text('Short & Filter', style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950)),
                 const Spacer(),
                 TextButton(
                   onPressed: () {
@@ -206,10 +203,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   elevation: 0,
                 ),
                 onPressed: () {},
-                child: Text(
-                  'View results',
-                  style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite),
-                ),
+                child: Text('View results', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite)),
               ),
             ),
           ),
@@ -253,10 +247,7 @@ class _ExpandableSection extends StatelessWidget {
                 icon,
                 const SizedBox(width: 12),
                 Expanded(
-                  child: Text(
-                    title,
-                    style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
-                  ),
+                  child: Text(title, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                 ),
                 if (showClear && onClear != null)
                   TextButton(
@@ -311,10 +302,7 @@ class _SelectOption extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: Text(
-                  label,
-                  style: AppTextStyles.typographyH10Regular.copyWith(color: selected ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500),
-                ),
+                child: Text(label, style: AppTextStyles.typographyH10Regular.copyWith(color: selected ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500)),
               ),
               if (selected) Icon(Icons.check, color: AppColors.textGreyHighest950, size: 22),
             ],
@@ -343,10 +331,7 @@ class _CustomRangeSlider extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(labels.length, (i) {
-            return Text(
-              labels[i],
-              style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHighest950),
-            );
+            return Text(labels[i], style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHighest950));
           }),
         ),
         const SizedBox(height: 12),
@@ -378,12 +363,7 @@ class _CustomMarkSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final labelWidgets = marks
-        .map(
-          (m) => Text(
-            m == m.toInt() ? '${m.toInt()}+' : '${m.toStringAsFixed(1)}+',
-            style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHighest950),
-          ),
-        )
+        .map((m) => Text(m == m.toInt() ? '${m.toInt()}+' : '${m.toStringAsFixed(1)}+', style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHighest950)))
         .toList();
 
     return Column(
@@ -427,10 +407,7 @@ class _CheckableCell extends StatelessWidget {
             icon,
             const SizedBox(width: 12),
             Expanded(
-              child: Text(
-                title,
-                style: AppTextStyles.typographyH10Medium.copyWith(color: checked ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500),
-              ),
+              child: Text(title, style: AppTextStyles.typographyH10Medium.copyWith(color: checked ? AppColors.textGreyHighest950 : AppColors.textGreyDefault500)),
             ),
             if (checked) Icon(Icons.check, color: AppColors.textGreyHighest950, size: 20),
           ],

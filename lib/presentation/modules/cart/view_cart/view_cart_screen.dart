@@ -6,14 +6,12 @@ import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/response/get_cart_list_response.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/cart/view_cart/view_cart_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_list_view.dart';
 
-import 'package:sixam_mart_user/presentation/modules/cart/view_cart/view_cart_controller.dart';
-
 // Data model for organizing cart items by type
 class CartDisplayItem {
-
   CartDisplayItem({required this.type, this.store, this.item});
   final GetCartListStore? store;
   final GetCartListItem? item;
@@ -30,17 +28,11 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
     return AppBar(
       backgroundColor: AppTheme.theme.backgroundSurfacePrimaryWhite.withValues(alpha: 0.9),
       elevation: 0.5,
-      title: Text(
-        'View Cart',
-        style: AppTextStyles.typographyH4Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
-      ),
+      title: Text('View Cart', style: AppTextStyles.typographyH9Medium.copyWith(color: AppTheme.theme.textGreyHighest950)),
       actions: [
         TextButton(
           onPressed: controller.navigateToOrders,
-          child: Text(
-            'Orders',
-            style: AppTextStyles.typographyH8Regular.copyWith(color: AppTheme.theme.textGreyHighest950),
-          ),
+          child: Text('Orders', style: AppTextStyles.typographyH11Regular.copyWith(color: AppTheme.theme.textGreyHighest950)),
         ),
         IconButton(icon: SvgPicture.asset(Assets.icons.icOrder.path, width: 24, height: 24), onPressed: controller.navigateToOrders),
       ],
@@ -148,7 +140,6 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
 
 // Empty cart state widget
 class _EmptyCartState extends StatelessWidget {
-
   const _EmptyCartState({required this.onStartShopping});
   final VoidCallback onStartShopping;
 
@@ -169,7 +160,6 @@ class _EmptyCartState extends StatelessWidget {
 
 // Store header widget
 class _StoreHeader extends StatelessWidget {
-
   const _StoreHeader({required this.store, required this.onClearAll});
   final GetCartListStore store;
   final VoidCallback onClearAll;
@@ -193,20 +183,14 @@ class _StoreHeader extends StatelessWidget {
             const SizedBox(width: 12),
           ],
           Expanded(
-            child: Text(
-              store.storeName ?? 'Unknown Store',
-              style: AppTextStyles.typographyH6SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950),
-            ),
+            child: Text(store.storeName ?? 'Unknown Store', style: AppTextStyles.typographyH10SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950)),
           ),
           TextButton(
             onPressed: onClearAll,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  'Clear All',
-                  style: AppTextStyles.typographyH8Regular.copyWith(color: AppTheme.theme.stateDangerDefault500),
-                ),
+                Text('Clear All', style: AppTextStyles.typographyH11Regular.copyWith(color: AppTheme.theme.stateDangerDefault500)),
                 const SizedBox(width: 4),
                 Icon(Icons.delete_outline, color: AppTheme.theme.stateDangerDefault500, size: 16),
               ],
@@ -220,7 +204,6 @@ class _StoreHeader extends StatelessWidget {
 
 // Cart product item widget with animation
 class _CartProductItem extends StatelessWidget {
-
   const _CartProductItem({required this.item, required this.controller});
   final GetCartListItem item;
   final ViewCartController controller;
@@ -248,7 +231,6 @@ class _CartProductItem extends StatelessWidget {
 
 // Product image widget
 class _ProductImage extends StatelessWidget {
-
   const _ProductImage({this.imageUrl});
   final String? imageUrl;
 
@@ -273,7 +255,6 @@ class _ProductImage extends StatelessWidget {
 
 // Product details widget
 class _ProductDetails extends StatelessWidget {
-
   const _ProductDetails({required this.item, required this.controller});
   final GetCartListItem item;
   final ViewCartController controller;
@@ -287,13 +268,10 @@ class _ProductDetails extends StatelessWidget {
           item.itemName ?? 'Unknown Item',
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
+          style: AppTextStyles.typographyH10Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
         ),
         const SizedBox(height: 6),
-        Text(
-          '\$${(item.itemPrice ?? 0).toStringAsFixed(2)}',
-          style: AppTextStyles.typographyH8Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
-        ),
+        Text('\$${(item.itemPrice ?? 0).toStringAsFixed(2)}', style: AppTextStyles.typographyH11Regular.copyWith(color: AppTheme.theme.textGreyHigh700)),
         const SizedBox(height: 12),
         Row(
           children: [
@@ -309,7 +287,6 @@ class _ProductDetails extends StatelessWidget {
 
 // Quantity controls widget with animation and loading state
 class _QuantityControls extends StatelessWidget {
-
   const _QuantityControls({required this.item, required this.controller});
   final GetCartListItem item;
   final ViewCartController controller;
@@ -332,7 +309,7 @@ class _QuantityControls extends StatelessWidget {
             child: Text(
               '${item.itemQuantity ?? 0}',
               key: ValueKey(item.itemQuantity),
-              style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHighest950),
+              style: AppTextStyles.typographyH10Regular.copyWith(color: AppTheme.theme.textGreyHighest950),
             ),
           ),
           _QuantityButton(icon: Icons.add, onPressed: () => controller.incrementItemQuantity(item), enabled: true),
@@ -344,7 +321,6 @@ class _QuantityControls extends StatelessWidget {
 
 // Individual quantity button with animation
 class _QuantityButton extends StatefulWidget {
-
   const _QuantityButton({required this.icon, required this.onPressed, this.enabled = true});
   final IconData icon;
   final VoidCallback? onPressed;
@@ -398,7 +374,6 @@ class _QuantityButtonState extends State<_QuantityButton> with SingleTickerProvi
 
 // Action buttons (favorite and delete) with animation
 class _ActionButtons extends StatelessWidget {
-
   const _ActionButtons({required this.item, required this.controller});
   final GetCartListItem item;
   final ViewCartController controller;
@@ -431,7 +406,6 @@ class _ActionButtons extends StatelessWidget {
 
 // Animated action button for delete with visual feedback
 class _AnimatedActionButton extends StatefulWidget {
-
   const _AnimatedActionButton({required this.icon, required this.color, this.onPressed});
   final IconData icon;
   final Color color;
@@ -491,7 +465,6 @@ class _AnimatedActionButtonState extends State<_AnimatedActionButton> with Singl
 
 // Cart summary section
 class _CartSummarySection extends StatelessWidget {
-
   const _CartSummarySection({required this.controller});
   final ViewCartController controller;
 
@@ -509,17 +482,9 @@ class _CartSummarySection extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Text(
-                  'Subtotal',
-                  style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textGreyHigh700),
-                ),
+                child: Text('Subtotal', style: AppTextStyles.typographyH10Medium.copyWith(color: AppTheme.theme.textGreyHigh700)),
               ),
-              Obx(
-                () => Text(
-                  '\$${controller.totalPrice.toStringAsFixed(2)}',
-                  style: AppTextStyles.typographyH6Bold.copyWith(color: AppTheme.theme.textGreyHighest950),
-                ),
-              ),
+              Obx(() => Text('\$${controller.totalPrice.toStringAsFixed(2)}', style: AppTextStyles.typographyH10Bold.copyWith(color: AppTheme.theme.textGreyHighest950))),
             ],
           ),
           const SizedBox(height: 16),
@@ -533,10 +498,7 @@ class _CartSummarySection extends StatelessWidget {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                 padding: EdgeInsets.symmetric(vertical: 12.h),
               ),
-              child: Text(
-                'Checkout Now',
-                style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textBaseWhite),
-              ),
+              child: Text('Checkout Now', style: AppTextStyles.typographyH10Medium.copyWith(color: AppTheme.theme.textBaseWhite)),
             ),
           ),
         ],
@@ -567,7 +529,6 @@ class _CartEmptyIllustration extends StatelessWidget {
 
 // Empty state content
 class _EmptyStateContent extends StatelessWidget {
-
   const _EmptyStateContent({required this.title, required this.subtitle, required this.buttonText, this.onPressed});
   final String title;
   final String subtitle;
@@ -583,13 +544,13 @@ class _EmptyStateContent extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: AppTextStyles.typographyH1SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950),
+            style: AppTextStyles.typographyH6SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950),
           ),
           const SizedBox(height: 8),
           Text(
             subtitle,
             textAlign: TextAlign.center,
-            style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
+            style: AppTextStyles.typographyH10Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
           ),
           const SizedBox(height: 24),
           ElevatedButton(
@@ -599,10 +560,7 @@ class _EmptyStateContent extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
             ),
-            child: Text(
-              buttonText,
-              style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textBaseWhite),
-            ),
+            child: Text(buttonText, style: AppTextStyles.typographyH10Medium.copyWith(color: AppTheme.theme.textBaseWhite)),
           ),
         ],
       ),

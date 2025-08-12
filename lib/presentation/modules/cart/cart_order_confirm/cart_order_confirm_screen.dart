@@ -71,14 +71,14 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             stepData.title,
-                            style: AppTextStyles.typographyH1SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950, height: 36 / 28),
+                            style: AppTextStyles.typographyH6SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950, height: 36 / 28),
                           ),
                         ),
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             stepData.subtitle,
-                            style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHigh700, height: 24 / 16),
+                            style: AppTextStyles.typographyH10Regular.copyWith(color: AppTheme.theme.textGreyHigh700, height: 24 / 16),
                           ),
                         ),
                         SizedBox(height: 24.h),
@@ -106,7 +106,10 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                   Container(height: 6, width: double.infinity, color: AppTheme.theme.backgroundSurfaceTertiaryGrey50),
 
                   // Address Section
-                  Padding(padding: EdgeInsets.symmetric(vertical: 8.h), child: sectionTitle('Address')),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.h),
+                    child: sectionTitle('Address'),
+                  ),
                   cellItem(iconAsset: 'assets/icons/ic_home.svg', title: controller.contactPersonName, subtitle: controller.deliveryAddress),
                   dividerLine(),
                   cellItem(iconAsset: 'assets/icons/ic_box_package_courier_hands.svg', title: controller.deliveryInstruction, subtitle: controller.orderNote),
@@ -115,7 +118,10 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                   Container(height: 6, width: double.infinity, color: AppTheme.theme.backgroundSurfaceTertiaryGrey50),
 
                   // Order Details Section
-                  Padding(padding: EdgeInsets.symmetric(vertical: 8.h), child: sectionTitle('Order Details')),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.h),
+                    child: sectionTitle('Order Details'),
+                  ),
 
                   // Display store information
                   if (controller.orderData.value?.store != null)
@@ -151,7 +157,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
     padding: EdgeInsets.symmetric(horizontal: 24.w),
     child: Text(
       text,
-      style: AppTextStyles.typographyH4Medium.copyWith(color: AppTheme.theme.textGreyHighest950, height: 28 / 18),
+      style: AppTextStyles.typographyH9Medium.copyWith(color: AppTheme.theme.textGreyHighest950, height: 28 / 18),
     ),
   );
 
@@ -174,14 +180,8 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
-              ),
-              Text(
-                subtitle,
-                style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
-              ),
+              Text(title, style: AppTextStyles.typographyH10Medium.copyWith(color: AppTheme.theme.textGreyHighest950)),
+              Text(subtitle, style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyHigh700)),
             ],
           ),
         ),
@@ -210,21 +210,12 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                title,
-                style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
-              ),
-              Text(
-                subtitle,
-                style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
-              ),
+              Text(title, style: AppTextStyles.typographyH10Medium.copyWith(color: AppTheme.theme.textGreyHighest950)),
+              Text(subtitle, style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyHigh700)),
             ],
           ),
         ),
-        Text(
-          '\$${price.toStringAsFixed(2)}',
-          style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
-        ),
+        Text('\$${price.toStringAsFixed(2)}', style: AppTextStyles.typographyH10Medium.copyWith(color: AppTheme.theme.textGreyHighest950)),
         Icon(Icons.expand_more, color: AppTheme.theme.textGreyHigh700),
       ],
     ),

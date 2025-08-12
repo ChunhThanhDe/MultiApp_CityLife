@@ -35,13 +35,13 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
             children: [
               Text(
                 'Payment Successful',
-                style: AppTextStyles.typographyH1SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950, height: 36 / 28),
+                style: AppTextStyles.typographyH6SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950, height: 36 / 28),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 8.h),
               Text(
                 'You might be receiving more than one package for your order. Please check under "My Orders" to see details.',
-                style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHigh700, height: 24 / 16),
+                style: AppTextStyles.typographyH10Regular.copyWith(color: AppTheme.theme.textGreyHigh700, height: 24 / 16),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -66,14 +66,8 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Total:',
-                          style: AppTextStyles.typographyH5Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
-                        ),
-                        Text(
-                          '\$23.94',
-                          style: AppTextStyles.typographyH5Medium.copyWith(color: AppTheme.theme.textGreyHighest950),
-                        ),
+                        Text('Total:', style: AppTextStyles.typographyH8Medium.copyWith(color: AppTheme.theme.textGreyHighest950)),
+                        Text('\$23.94', style: AppTextStyles.typographyH8Medium.copyWith(color: AppTheme.theme.textGreyHighest950)),
                       ],
                     ),
                   ),
@@ -98,10 +92,7 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
               onPressed: () {
                 // TODO: Handle Done
               },
-              child: Text(
-                'Done',
-                style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.textBaseWhite),
-              ),
+              child: Text('Done', style: AppTextStyles.typographyH10Medium.copyWith(color: AppTheme.theme.textBaseWhite)),
             ),
           ),
         ),
@@ -113,7 +104,7 @@ class CartSuccessfulScreen extends BaseScreen<CartSuccessfulController> {
           },
           child: Text(
             'View Order',
-            style: AppTextStyles.typographyH6Medium.copyWith(color: AppTheme.theme.stateBrandDefault500, decoration: TextDecoration.underline),
+            style: AppTextStyles.typographyH10Medium.copyWith(color: AppTheme.theme.stateBrandDefault500, decoration: TextDecoration.underline),
           ),
         ),
         SizedBox(height: 16.h),
@@ -134,14 +125,8 @@ class _ItemRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label,
-            style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
-          ),
-          Text(
-            value,
-            style: AppTextStyles.typographyH6Regular.copyWith(color: AppTheme.theme.textGreyHigh700),
-          ),
+          Text(label, style: AppTextStyles.typographyH10Regular.copyWith(color: AppTheme.theme.textGreyHigh700)),
+          Text(value, style: AppTextStyles.typographyH10Regular.copyWith(color: AppTheme.theme.textGreyHigh700)),
         ],
       ),
     );
