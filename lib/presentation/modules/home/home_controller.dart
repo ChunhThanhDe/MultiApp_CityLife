@@ -71,6 +71,7 @@ class HomeController extends BaseController {
 
     // Get ServiceController and load data for specific service type
     final serviceController = Get.find<ServiceController>();
+    serviceController.updateCurrentService(serviceType);
     serviceController.loadServiceTypeData(serviceType);
   }
 }

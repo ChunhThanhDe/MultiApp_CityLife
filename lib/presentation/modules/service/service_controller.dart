@@ -27,10 +27,16 @@ class ServiceController extends BaseController {
     loadServiceTypeData(currentService.value);
   }
 
+  // Method to update current service
+  void updateCurrentService(ServiceEntity service) {
+    currentService.value = service;
+  }
+
   // Method to load data for specific service type
   void loadServiceTypeData(ServiceEntity serviceType) async {
-    // TODO: Remove this after laundry is implemented
+    // For laundry service, we don't need to load store data as it uses static data
     if (serviceType.moduleType == 'laundry') {
+      // Laundry service uses static data, no need to load from API
       return;
     }
     await showAppOverlayLoading(future: _loadServiceData(serviceType.moduleType ?? ''));
