@@ -169,11 +169,11 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
 
   // Cell Item Widget (Address)
   Widget cellItem({required String iconAsset, required String title, required String subtitle}) => Container(
-    height: 50,
+    height: 60.h,
     padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 4.h),
     child: Row(
       children: [
-        SvgPicture.asset(iconAsset, width: 24, height: 24),
+        SvgPicture.asset(iconAsset, width: 24.w, height: 24.h),
         SizedBox(width: 12.w),
         Expanded(
           child: Column(
@@ -191,13 +191,13 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
 
   // Order Detail Item Widget
   Widget orderDetailItem({required String imageAsset, required String title, required String subtitle, required double price}) => Container(
-    height: 66,
+    height: 70.h,
     padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
     child: Row(
       children: [
         Container(
-          width: 32,
-          height: 32,
+          width: 32.h,
+          height: 32.w,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(32), color: AppTheme.theme.backgroundSurfacePrimaryWhite),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(32),

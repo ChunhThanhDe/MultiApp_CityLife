@@ -149,7 +149,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
   );
 
   Widget orderGroupItem({required String logo, required String name, required String detail, required String amount}) => Container(
-    height: 66,
+    height: 66.h,
     margin: EdgeInsets.only(bottom: 8.h),
     padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
     child: Row(
