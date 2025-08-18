@@ -28,6 +28,42 @@ Map<String, dynamic> _$ProductDetailResponseToJson(
   'recommendations': instance.recommendations,
 };
 
+_VariationModel _$VariationModelFromJson(Map<String, dynamic> json) =>
+    _VariationModel(
+      name: json['name'] as String? ?? '',
+      type: json['type'] as String? ?? '',
+      min: (json['min'] as num?)?.toInt() ?? 0,
+      max: (json['max'] as num?)?.toInt() ?? 0,
+      required: json['required'] as String? ?? '',
+      values:
+          (json['values'] as List<dynamic>?)
+              ?.map((e) => VariationValue.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$VariationModelToJson(_VariationModel instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'type': instance.type,
+      'min': instance.min,
+      'max': instance.max,
+      'required': instance.required,
+      'values': instance.values,
+    };
+
+_VariationValue _$VariationValueFromJson(Map<String, dynamic> json) =>
+    _VariationValue(
+      label: json['label'] as String? ?? '',
+      optionPrice: json['option_price'] as String? ?? '0',
+    );
+
+Map<String, dynamic> _$VariationValueToJson(_VariationValue instance) =>
+    <String, dynamic>{
+      'label': instance.label,
+      'option_price': instance.optionPrice,
+    };
+
 _ProductDetail _$ProductDetailFromJson(Map<String, dynamic> json) =>
     _ProductDetail(
       id: (json['id'] as num?)?.toInt() ?? 0,
@@ -64,7 +100,7 @@ _ProductDetail _$ProductDetailFromJson(Map<String, dynamic> json) =>
       addOns: json['add_ons'] as List<dynamic>? ?? const [],
       variations:
           (json['variations'] as List<dynamic>?)
-              ?.map((e) => Variation.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => VariationModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       choiceOptions:

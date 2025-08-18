@@ -13,6 +13,27 @@ abstract class ProductDetailResponse with _$ProductDetailResponse {
 }
 
 @freezed
+abstract class VariationModel with _$VariationModel {
+  const factory VariationModel({
+    @JsonKey(name: 'name') @Default('') String name,
+    @Default('') String type,
+    @Default(0) int min,
+    @Default(0) int max,
+    @Default('') String required,
+    @Default([]) List<VariationValue> values,
+  }) = _VariationModel;
+
+  factory VariationModel.fromJson(Map<String, dynamic> json) => _$VariationModelFromJson(json);
+}
+
+@freezed
+abstract class VariationValue with _$VariationValue {
+  const factory VariationValue({@JsonKey(name: 'label') @Default('') String label, @JsonKey(name: 'option_price') @Default('0') String optionPrice}) = _VariationValue;
+
+  factory VariationValue.fromJson(Map<String, dynamic> json) => _$VariationValueFromJson(json);
+}
+
+@freezed
 abstract class ProductDetail with _$ProductDetail {
   const factory ProductDetail({
     @Default(0) int id,
@@ -21,7 +42,6 @@ abstract class ProductDetail with _$ProductDetail {
     @JsonKey(name: 'store_image_url') @Default('') String storeImageUrl,
     @Default('') String name,
     @Default('') String description,
-    // Chuẩn hóa image_url (nếu bạn vẫn nhận được List<ImageUrl>)
     @JsonKey(name: 'image_url') @Default([]) List<ImageUrl> imageUrls,
     @Default([]) List<String> gallery,
     @Default(0) int price,
@@ -40,7 +60,7 @@ abstract class ProductDetail with _$ProductDetail {
     @Default(false) bool organic,
     @JsonKey(name: 'maximum_cart_quantity') int? maximumCartQuantity,
     @JsonKey(name: 'add_ons') @Default([]) List<dynamic> addOns,
-    @Default([]) List<Variation> variations,
+    @JsonKey(name: 'variations') @Default([]) List<VariationModel> variations,
     @JsonKey(name: 'choice_options') @Default([]) List<ChoiceOption> choiceOptions,
     @Default([]) List<String> attributes,
     @JsonKey(name: 'food_variations') @Default([]) List<dynamic> foodVariations,

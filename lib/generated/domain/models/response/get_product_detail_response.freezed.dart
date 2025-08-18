@@ -177,10 +177,300 @@ $ProductDetailCopyWith<$Res> get item {
 
 
 /// @nodoc
+mixin _$VariationModel {
+
+@JsonKey(name: 'name') String get name; String get type; int get min; int get max; String get required; List<VariationValue> get values;
+/// Create a copy of VariationModel
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$VariationModelCopyWith<VariationModel> get copyWith => _$VariationModelCopyWithImpl<VariationModel>(this as VariationModel, _$identity);
+
+  /// Serializes this VariationModel to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is VariationModel&&(identical(other.name, name) || other.name == name)&&(identical(other.type, type) || other.type == type)&&(identical(other.min, min) || other.min == min)&&(identical(other.max, max) || other.max == max)&&(identical(other.required, required) || other.required == required)&&const DeepCollectionEquality().equals(other.values, values));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,name,type,min,max,required,const DeepCollectionEquality().hash(values));
+
+@override
+String toString() {
+  return 'VariationModel(name: $name, type: $type, min: $min, max: $max, required: $required, values: $values)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $VariationModelCopyWith<$Res>  {
+  factory $VariationModelCopyWith(VariationModel value, $Res Function(VariationModel) _then) = _$VariationModelCopyWithImpl;
+@useResult
+$Res call({
+@JsonKey(name: 'name') String name, String type, int min, int max, String required, List<VariationValue> values
+});
+
+
+
+
+}
+/// @nodoc
+class _$VariationModelCopyWithImpl<$Res>
+    implements $VariationModelCopyWith<$Res> {
+  _$VariationModelCopyWithImpl(this._self, this._then);
+
+  final VariationModel _self;
+  final $Res Function(VariationModel) _then;
+
+/// Create a copy of VariationModel
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? type = null,Object? min = null,Object? max = null,Object? required = null,Object? values = null,}) {
+  return _then(_self.copyWith(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,min: null == min ? _self.min : min // ignore: cast_nullable_to_non_nullable
+as int,max: null == max ? _self.max : max // ignore: cast_nullable_to_non_nullable
+as int,required: null == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as String,values: null == values ? _self.values : values // ignore: cast_nullable_to_non_nullable
+as List<VariationValue>,
+  ));
+}
+
+}
+
+
+/// @nodoc
+@JsonSerializable()
+
+class _VariationModel implements VariationModel {
+  const _VariationModel({@JsonKey(name: 'name') this.name = '', this.type = '', this.min = 0, this.max = 0, this.required = '', final  List<VariationValue> values = const []}): _values = values;
+  factory _VariationModel.fromJson(Map<String, dynamic> json) => _$VariationModelFromJson(json);
+
+@override@JsonKey(name: 'name') final  String name;
+@override@JsonKey() final  String type;
+@override@JsonKey() final  int min;
+@override@JsonKey() final  int max;
+@override@JsonKey() final  String required;
+ final  List<VariationValue> _values;
+@override@JsonKey() List<VariationValue> get values {
+  if (_values is EqualUnmodifiableListView) return _values;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_values);
+}
+
+
+/// Create a copy of VariationModel
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$VariationModelCopyWith<_VariationModel> get copyWith => __$VariationModelCopyWithImpl<_VariationModel>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$VariationModelToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _VariationModel&&(identical(other.name, name) || other.name == name)&&(identical(other.type, type) || other.type == type)&&(identical(other.min, min) || other.min == min)&&(identical(other.max, max) || other.max == max)&&(identical(other.required, required) || other.required == required)&&const DeepCollectionEquality().equals(other._values, _values));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,name,type,min,max,required,const DeepCollectionEquality().hash(_values));
+
+@override
+String toString() {
+  return 'VariationModel(name: $name, type: $type, min: $min, max: $max, required: $required, values: $values)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$VariationModelCopyWith<$Res> implements $VariationModelCopyWith<$Res> {
+  factory _$VariationModelCopyWith(_VariationModel value, $Res Function(_VariationModel) _then) = __$VariationModelCopyWithImpl;
+@override @useResult
+$Res call({
+@JsonKey(name: 'name') String name, String type, int min, int max, String required, List<VariationValue> values
+});
+
+
+
+
+}
+/// @nodoc
+class __$VariationModelCopyWithImpl<$Res>
+    implements _$VariationModelCopyWith<$Res> {
+  __$VariationModelCopyWithImpl(this._self, this._then);
+
+  final _VariationModel _self;
+  final $Res Function(_VariationModel) _then;
+
+/// Create a copy of VariationModel
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? type = null,Object? min = null,Object? max = null,Object? required = null,Object? values = null,}) {
+  return _then(_VariationModel(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,min: null == min ? _self.min : min // ignore: cast_nullable_to_non_nullable
+as int,max: null == max ? _self.max : max // ignore: cast_nullable_to_non_nullable
+as int,required: null == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as String,values: null == values ? _self._values : values // ignore: cast_nullable_to_non_nullable
+as List<VariationValue>,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$VariationValue {
+
+@JsonKey(name: 'label') String get label;@JsonKey(name: 'option_price') String get optionPrice;
+/// Create a copy of VariationValue
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$VariationValueCopyWith<VariationValue> get copyWith => _$VariationValueCopyWithImpl<VariationValue>(this as VariationValue, _$identity);
+
+  /// Serializes this VariationValue to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is VariationValue&&(identical(other.label, label) || other.label == label)&&(identical(other.optionPrice, optionPrice) || other.optionPrice == optionPrice));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,label,optionPrice);
+
+@override
+String toString() {
+  return 'VariationValue(label: $label, optionPrice: $optionPrice)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $VariationValueCopyWith<$Res>  {
+  factory $VariationValueCopyWith(VariationValue value, $Res Function(VariationValue) _then) = _$VariationValueCopyWithImpl;
+@useResult
+$Res call({
+@JsonKey(name: 'label') String label,@JsonKey(name: 'option_price') String optionPrice
+});
+
+
+
+
+}
+/// @nodoc
+class _$VariationValueCopyWithImpl<$Res>
+    implements $VariationValueCopyWith<$Res> {
+  _$VariationValueCopyWithImpl(this._self, this._then);
+
+  final VariationValue _self;
+  final $Res Function(VariationValue) _then;
+
+/// Create a copy of VariationValue
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? label = null,Object? optionPrice = null,}) {
+  return _then(_self.copyWith(
+label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as String,optionPrice: null == optionPrice ? _self.optionPrice : optionPrice // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// @nodoc
+@JsonSerializable()
+
+class _VariationValue implements VariationValue {
+  const _VariationValue({@JsonKey(name: 'label') this.label = '', @JsonKey(name: 'option_price') this.optionPrice = '0'});
+  factory _VariationValue.fromJson(Map<String, dynamic> json) => _$VariationValueFromJson(json);
+
+@override@JsonKey(name: 'label') final  String label;
+@override@JsonKey(name: 'option_price') final  String optionPrice;
+
+/// Create a copy of VariationValue
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$VariationValueCopyWith<_VariationValue> get copyWith => __$VariationValueCopyWithImpl<_VariationValue>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$VariationValueToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _VariationValue&&(identical(other.label, label) || other.label == label)&&(identical(other.optionPrice, optionPrice) || other.optionPrice == optionPrice));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,label,optionPrice);
+
+@override
+String toString() {
+  return 'VariationValue(label: $label, optionPrice: $optionPrice)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$VariationValueCopyWith<$Res> implements $VariationValueCopyWith<$Res> {
+  factory _$VariationValueCopyWith(_VariationValue value, $Res Function(_VariationValue) _then) = __$VariationValueCopyWithImpl;
+@override @useResult
+$Res call({
+@JsonKey(name: 'label') String label,@JsonKey(name: 'option_price') String optionPrice
+});
+
+
+
+
+}
+/// @nodoc
+class __$VariationValueCopyWithImpl<$Res>
+    implements _$VariationValueCopyWith<$Res> {
+  __$VariationValueCopyWithImpl(this._self, this._then);
+
+  final _VariationValue _self;
+  final $Res Function(_VariationValue) _then;
+
+/// Create a copy of VariationValue
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? label = null,Object? optionPrice = null,}) {
+  return _then(_VariationValue(
+label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as String,optionPrice: null == optionPrice ? _self.optionPrice : optionPrice // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
 mixin _$ProductDetail {
 
  int get id;@JsonKey(name: 'store_id') int get storeId;@JsonKey(name: 'store_name') String get storeName;@JsonKey(name: 'store_image_url') String get storeImageUrl; String get name; String get description;// Chuẩn hóa image_url (nếu bạn vẫn nhận được List<ImageUrl>)
-@JsonKey(name: 'image_url') List<ImageUrl> get imageUrls; List<String> get gallery; int get price; int get tax;@JsonKey(name: 'tax_type') String get taxType; int get discount;@JsonKey(name: 'discount_type') String get discountType; bool get veg; int get stock;@JsonKey(name: 'unit_id') int get unitId;@JsonKey(name: 'order_count') int get orderCount;@JsonKey(name: 'avg_rating') double get avgRating;@JsonKey(name: 'rating_count') int get ratingCount; String get slug; bool get recommended; bool get organic;@JsonKey(name: 'maximum_cart_quantity') int? get maximumCartQuantity;@JsonKey(name: 'add_ons') List<dynamic> get addOns; List<Variation> get variations;@JsonKey(name: 'choice_options') List<ChoiceOption> get choiceOptions; List<String> get attributes;@JsonKey(name: 'food_variations') List<dynamic> get foodVariations; List<Nutrition> get nutritions;@JsonKey(name: 'is_favorite') bool get isFavorite;
+@JsonKey(name: 'image_url') List<ImageUrl> get imageUrls; List<String> get gallery; int get price; int get tax;@JsonKey(name: 'tax_type') String get taxType; int get discount;@JsonKey(name: 'discount_type') String get discountType; bool get veg; int get stock;@JsonKey(name: 'unit_id') int get unitId;@JsonKey(name: 'order_count') int get orderCount;@JsonKey(name: 'avg_rating') double get avgRating;@JsonKey(name: 'rating_count') int get ratingCount; String get slug; bool get recommended; bool get organic;@JsonKey(name: 'maximum_cart_quantity') int? get maximumCartQuantity;@JsonKey(name: 'add_ons') List<dynamic> get addOns;@JsonKey(name: 'variations') List<VariationModel> get variations;@JsonKey(name: 'choice_options') List<ChoiceOption> get choiceOptions; List<String> get attributes;@JsonKey(name: 'food_variations') List<dynamic> get foodVariations; List<Nutrition> get nutritions;@JsonKey(name: 'is_favorite') bool get isFavorite;
 /// Create a copy of ProductDetail
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -213,7 +503,7 @@ abstract mixin class $ProductDetailCopyWith<$Res>  {
   factory $ProductDetailCopyWith(ProductDetail value, $Res Function(ProductDetail) _then) = _$ProductDetailCopyWithImpl;
 @useResult
 $Res call({
- int id,@JsonKey(name: 'store_id') int storeId,@JsonKey(name: 'store_name') String storeName,@JsonKey(name: 'store_image_url') String storeImageUrl, String name, String description,@JsonKey(name: 'image_url') List<ImageUrl> imageUrls, List<String> gallery, int price, int tax,@JsonKey(name: 'tax_type') String taxType, int discount,@JsonKey(name: 'discount_type') String discountType, bool veg, int stock,@JsonKey(name: 'unit_id') int unitId,@JsonKey(name: 'order_count') int orderCount,@JsonKey(name: 'avg_rating') double avgRating,@JsonKey(name: 'rating_count') int ratingCount, String slug, bool recommended, bool organic,@JsonKey(name: 'maximum_cart_quantity') int? maximumCartQuantity,@JsonKey(name: 'add_ons') List<dynamic> addOns, List<Variation> variations,@JsonKey(name: 'choice_options') List<ChoiceOption> choiceOptions, List<String> attributes,@JsonKey(name: 'food_variations') List<dynamic> foodVariations, List<Nutrition> nutritions,@JsonKey(name: 'is_favorite') bool isFavorite
+ int id,@JsonKey(name: 'store_id') int storeId,@JsonKey(name: 'store_name') String storeName,@JsonKey(name: 'store_image_url') String storeImageUrl, String name, String description,@JsonKey(name: 'image_url') List<ImageUrl> imageUrls, List<String> gallery, int price, int tax,@JsonKey(name: 'tax_type') String taxType, int discount,@JsonKey(name: 'discount_type') String discountType, bool veg, int stock,@JsonKey(name: 'unit_id') int unitId,@JsonKey(name: 'order_count') int orderCount,@JsonKey(name: 'avg_rating') double avgRating,@JsonKey(name: 'rating_count') int ratingCount, String slug, bool recommended, bool organic,@JsonKey(name: 'maximum_cart_quantity') int? maximumCartQuantity,@JsonKey(name: 'add_ons') List<dynamic> addOns,@JsonKey(name: 'variations') List<VariationModel> variations,@JsonKey(name: 'choice_options') List<ChoiceOption> choiceOptions, List<String> attributes,@JsonKey(name: 'food_variations') List<dynamic> foodVariations, List<Nutrition> nutritions,@JsonKey(name: 'is_favorite') bool isFavorite
 });
 
 
@@ -257,7 +547,7 @@ as bool,organic: null == organic ? _self.organic : organic // ignore: cast_nulla
 as bool,maximumCartQuantity: freezed == maximumCartQuantity ? _self.maximumCartQuantity : maximumCartQuantity // ignore: cast_nullable_to_non_nullable
 as int?,addOns: null == addOns ? _self.addOns : addOns // ignore: cast_nullable_to_non_nullable
 as List<dynamic>,variations: null == variations ? _self.variations : variations // ignore: cast_nullable_to_non_nullable
-as List<Variation>,choiceOptions: null == choiceOptions ? _self.choiceOptions : choiceOptions // ignore: cast_nullable_to_non_nullable
+as List<VariationModel>,choiceOptions: null == choiceOptions ? _self.choiceOptions : choiceOptions // ignore: cast_nullable_to_non_nullable
 as List<ChoiceOption>,attributes: null == attributes ? _self.attributes : attributes // ignore: cast_nullable_to_non_nullable
 as List<String>,foodVariations: null == foodVariations ? _self.foodVariations : foodVariations // ignore: cast_nullable_to_non_nullable
 as List<dynamic>,nutritions: null == nutritions ? _self.nutritions : nutritions // ignore: cast_nullable_to_non_nullable
@@ -273,7 +563,7 @@ as bool,
 @JsonSerializable()
 
 class _ProductDetail implements ProductDetail {
-  const _ProductDetail({this.id = 0, @JsonKey(name: 'store_id') this.storeId = 0, @JsonKey(name: 'store_name') this.storeName = '', @JsonKey(name: 'store_image_url') this.storeImageUrl = '', this.name = '', this.description = '', @JsonKey(name: 'image_url') final  List<ImageUrl> imageUrls = const [], final  List<String> gallery = const [], this.price = 0, this.tax = 0, @JsonKey(name: 'tax_type') this.taxType = '', this.discount = 0, @JsonKey(name: 'discount_type') this.discountType = '', this.veg = false, this.stock = 0, @JsonKey(name: 'unit_id') this.unitId = 0, @JsonKey(name: 'order_count') this.orderCount = 0, @JsonKey(name: 'avg_rating') this.avgRating = 0.0, @JsonKey(name: 'rating_count') this.ratingCount = 0, this.slug = '', this.recommended = false, this.organic = false, @JsonKey(name: 'maximum_cart_quantity') this.maximumCartQuantity, @JsonKey(name: 'add_ons') final  List<dynamic> addOns = const [], final  List<Variation> variations = const [], @JsonKey(name: 'choice_options') final  List<ChoiceOption> choiceOptions = const [], final  List<String> attributes = const [], @JsonKey(name: 'food_variations') final  List<dynamic> foodVariations = const [], final  List<Nutrition> nutritions = const [], @JsonKey(name: 'is_favorite') this.isFavorite = false}): _imageUrls = imageUrls,_gallery = gallery,_addOns = addOns,_variations = variations,_choiceOptions = choiceOptions,_attributes = attributes,_foodVariations = foodVariations,_nutritions = nutritions;
+  const _ProductDetail({this.id = 0, @JsonKey(name: 'store_id') this.storeId = 0, @JsonKey(name: 'store_name') this.storeName = '', @JsonKey(name: 'store_image_url') this.storeImageUrl = '', this.name = '', this.description = '', @JsonKey(name: 'image_url') final  List<ImageUrl> imageUrls = const [], final  List<String> gallery = const [], this.price = 0, this.tax = 0, @JsonKey(name: 'tax_type') this.taxType = '', this.discount = 0, @JsonKey(name: 'discount_type') this.discountType = '', this.veg = false, this.stock = 0, @JsonKey(name: 'unit_id') this.unitId = 0, @JsonKey(name: 'order_count') this.orderCount = 0, @JsonKey(name: 'avg_rating') this.avgRating = 0.0, @JsonKey(name: 'rating_count') this.ratingCount = 0, this.slug = '', this.recommended = false, this.organic = false, @JsonKey(name: 'maximum_cart_quantity') this.maximumCartQuantity, @JsonKey(name: 'add_ons') final  List<dynamic> addOns = const [], @JsonKey(name: 'variations') final  List<VariationModel> variations = const [], @JsonKey(name: 'choice_options') final  List<ChoiceOption> choiceOptions = const [], final  List<String> attributes = const [], @JsonKey(name: 'food_variations') final  List<dynamic> foodVariations = const [], final  List<Nutrition> nutritions = const [], @JsonKey(name: 'is_favorite') this.isFavorite = false}): _imageUrls = imageUrls,_gallery = gallery,_addOns = addOns,_variations = variations,_choiceOptions = choiceOptions,_attributes = attributes,_foodVariations = foodVariations,_nutritions = nutritions;
   factory _ProductDetail.fromJson(Map<String, dynamic> json) => _$ProductDetailFromJson(json);
 
 @override@JsonKey() final  int id;
@@ -320,8 +610,8 @@ class _ProductDetail implements ProductDetail {
   return EqualUnmodifiableListView(_addOns);
 }
 
- final  List<Variation> _variations;
-@override@JsonKey() List<Variation> get variations {
+ final  List<VariationModel> _variations;
+@override@JsonKey(name: 'variations') List<VariationModel> get variations {
   if (_variations is EqualUnmodifiableListView) return _variations;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_variations);
@@ -390,7 +680,7 @@ abstract mixin class _$ProductDetailCopyWith<$Res> implements $ProductDetailCopy
   factory _$ProductDetailCopyWith(_ProductDetail value, $Res Function(_ProductDetail) _then) = __$ProductDetailCopyWithImpl;
 @override @useResult
 $Res call({
- int id,@JsonKey(name: 'store_id') int storeId,@JsonKey(name: 'store_name') String storeName,@JsonKey(name: 'store_image_url') String storeImageUrl, String name, String description,@JsonKey(name: 'image_url') List<ImageUrl> imageUrls, List<String> gallery, int price, int tax,@JsonKey(name: 'tax_type') String taxType, int discount,@JsonKey(name: 'discount_type') String discountType, bool veg, int stock,@JsonKey(name: 'unit_id') int unitId,@JsonKey(name: 'order_count') int orderCount,@JsonKey(name: 'avg_rating') double avgRating,@JsonKey(name: 'rating_count') int ratingCount, String slug, bool recommended, bool organic,@JsonKey(name: 'maximum_cart_quantity') int? maximumCartQuantity,@JsonKey(name: 'add_ons') List<dynamic> addOns, List<Variation> variations,@JsonKey(name: 'choice_options') List<ChoiceOption> choiceOptions, List<String> attributes,@JsonKey(name: 'food_variations') List<dynamic> foodVariations, List<Nutrition> nutritions,@JsonKey(name: 'is_favorite') bool isFavorite
+ int id,@JsonKey(name: 'store_id') int storeId,@JsonKey(name: 'store_name') String storeName,@JsonKey(name: 'store_image_url') String storeImageUrl, String name, String description,@JsonKey(name: 'image_url') List<ImageUrl> imageUrls, List<String> gallery, int price, int tax,@JsonKey(name: 'tax_type') String taxType, int discount,@JsonKey(name: 'discount_type') String discountType, bool veg, int stock,@JsonKey(name: 'unit_id') int unitId,@JsonKey(name: 'order_count') int orderCount,@JsonKey(name: 'avg_rating') double avgRating,@JsonKey(name: 'rating_count') int ratingCount, String slug, bool recommended, bool organic,@JsonKey(name: 'maximum_cart_quantity') int? maximumCartQuantity,@JsonKey(name: 'add_ons') List<dynamic> addOns,@JsonKey(name: 'variations') List<VariationModel> variations,@JsonKey(name: 'choice_options') List<ChoiceOption> choiceOptions, List<String> attributes,@JsonKey(name: 'food_variations') List<dynamic> foodVariations, List<Nutrition> nutritions,@JsonKey(name: 'is_favorite') bool isFavorite
 });
 
 
@@ -434,7 +724,7 @@ as bool,organic: null == organic ? _self.organic : organic // ignore: cast_nulla
 as bool,maximumCartQuantity: freezed == maximumCartQuantity ? _self.maximumCartQuantity : maximumCartQuantity // ignore: cast_nullable_to_non_nullable
 as int?,addOns: null == addOns ? _self._addOns : addOns // ignore: cast_nullable_to_non_nullable
 as List<dynamic>,variations: null == variations ? _self._variations : variations // ignore: cast_nullable_to_non_nullable
-as List<Variation>,choiceOptions: null == choiceOptions ? _self._choiceOptions : choiceOptions // ignore: cast_nullable_to_non_nullable
+as List<VariationModel>,choiceOptions: null == choiceOptions ? _self._choiceOptions : choiceOptions // ignore: cast_nullable_to_non_nullable
 as List<ChoiceOption>,attributes: null == attributes ? _self._attributes : attributes // ignore: cast_nullable_to_non_nullable
 as List<String>,foodVariations: null == foodVariations ? _self._foodVariations : foodVariations // ignore: cast_nullable_to_non_nullable
 as List<dynamic>,nutritions: null == nutritions ? _self._nutritions : nutritions // ignore: cast_nullable_to_non_nullable

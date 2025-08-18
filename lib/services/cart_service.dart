@@ -224,13 +224,32 @@ class CartService extends GetxService {
     // Build variations from selectedOptions
     final variations = <CartVariation>[];
 
-    if (product.variations.isNotEmpty && selectedOptions['variation'] != null) {
-      final selected = selectedOptions['variation'];
-      final v = product.variations.firstWhereOrNull((e) => e.type == selected);
-      if (v != null) {
-        variations.add(CartVariation(name: 'size', values: {'label': v.type}));
+    // Handle variations structure
+    // Check if variations field contains the new API structure (with name, type, values)
+    if (product.variations.isNotEmpty) {
+      // New API structure - variations contains VariationModel objects
+      for (final variation in product.variations) {
+        final variationName = variation.name;
+        final selected = selectedOptions[variationName];
+        if (selected != null) {
+          variations.add(CartVariation(name: variationName, values: {'label': selected}));
+        }
       }
     }
+    // Check if foodVariations has data (fallback for new API structure)
+    else if (product.foodVariations.isNotEmpty) {
+      for (final variation in product.foodVariations) {
+        if (variation is Map<String, dynamic>) {
+          final variationName = variation['name'];
+          final selected = selectedOptions[variationName];
+          if (selected != null) {
+            variations.add(CartVariation(name: variationName, values: {'label': selected}));
+          }
+        }
+      }
+    }
+    // Fallback to old API structure (Size only) - handled by foodVariations now
+    // The variations field now only contains VariationModel objects
 
     if (product.choiceOptions.isNotEmpty) {
       for (final choice in product.choiceOptions) {
@@ -245,13 +264,48 @@ class CartService extends GetxService {
     final addOnIds = selectedAddOns.keys.toList();
     final addOnQtys = selectedAddOns.values.toList();
 
-    // Use product.price as default, or selected variation price if available
+    // Calculate price including variations
     double price = product.price.toDouble();
-    if (product.variations.isNotEmpty && selectedOptions['variation'] != null) {
-      final selected = selectedOptions['variation'];
-      final v = product.variations.firstWhereOrNull((e) => e.type == selected);
-      if (v != null) price = v.price.toDouble();
+    
+    // Handle price calculation for variations
+    // Check if variations field contains the new API structure (with name, type, values)
+    if (product.variations.isNotEmpty) {
+      // New API structure - variations contains VariationModel objects
+      for (final variation in product.variations) {
+        final variationName = variation.name;
+        final selected = selectedOptions[variationName];
+        if (selected != null) {
+          for (final value in variation.values) {
+            if (value.label == selected) {
+              final optionPrice = int.tryParse(value.optionPrice) ?? 0;
+              price += optionPrice.toDouble();
+              break;
+            }
+          }
+        }
+      }
     }
+    // Check if foodVariations has data (fallback for new API structure)
+    else if (product.foodVariations.isNotEmpty) {
+      for (final variation in product.foodVariations) {
+        if (variation is Map<String, dynamic>) {
+          final variationName = variation['name'];
+          final selected = selectedOptions[variationName];
+          if (selected != null && variation['values'] is List) {
+            final values = variation['values'] as List;
+            for (final value in values) {
+              if (value is Map<String, dynamic> && value['label'].toString() == selected) {
+                final optionPrice = value['optionPrice'] ?? 0;
+                price += (optionPrice is num ? optionPrice.toDouble() : 0.0);
+                break;
+              }
+            }
+          }
+        }
+      }
+    }
+    // Fallback to old API structure (Size only) - handled by foodVariations now
+    // The variations field now only contains VariationModel objects
 
     final request = AddToCartRequest(itemId: product.id, model: 'Item', price: price, quantity: quantity, variation: variations, addOnIds: addOnIds, addOnQtys: addOnQtys);
 
