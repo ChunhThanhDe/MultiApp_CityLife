@@ -36,13 +36,8 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
               backgroundColor: AppColors.stateBrandDefault500,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
             ),
-            onPressed: () {
-              controller.addToCart();
-            },
-            child: Text(
-              'Add to cart${priceText.isNotEmpty ? " • $priceText" : ""}',
-              style: AppTextStyles.typographyH11Medium.tint(AppColors.backgroundSurfacePrimaryWhite),
-            ),
+            onPressed: controller.addToCart,
+            child: Text('Add to cart${priceText.isNotEmpty ? " • $priceText" : ""}', style: AppTextStyles.typographyH11Medium.tint(AppColors.backgroundSurfacePrimaryWhite)),
           ),
         ),
       );
@@ -96,11 +91,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                             AppImage.network(product.storeImageUrl, width: 24, height: 24),
                             const SizedBox(width: 8),
                             Flexible(
-                              child: Text(
-                                product.storeName,
-                                style: AppTextStyles.typographyH11SemiBold.tint(AppColors.textGreyHighest950),
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                              child: Text(product.storeName, style: AppTextStyles.typographyH11SemiBold.tint(AppColors.textGreyHighest950), overflow: TextOverflow.ellipsis),
                             ),
                           ],
                         ),
@@ -117,15 +108,9 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    product.name,
-                    style: AppTextStyles.typographyH9SemiBold.tint(AppColors.textGreyHighest950),
-                  ),
+                  Text(product.name, style: AppTextStyles.typographyH9SemiBold.tint(AppColors.textGreyHighest950)),
                   const SizedBox(height: 4),
-                  Text(
-                    '${product.price} ${product.taxType}',
-                    style: AppTextStyles.typographyH11Regular.tint(AppColors.textGreyDefault500),
-                  ),
+                  Text('${product.price} ${product.taxType}', style: AppTextStyles.typographyH11Regular.tint(AppColors.textGreyDefault500)),
                 ],
               ),
             ),
@@ -146,10 +131,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        'Reset to standard recipe',
-                        style: AppTextStyles.typographyH11Medium.tint(AppColors.textGreyHighest950),
-                      ),
+                      Text('Reset to standard recipe', style: AppTextStyles.typographyH11Medium.tint(AppColors.textGreyHighest950)),
                       const Spacer(),
                       Icon(Icons.refresh, size: 18, color: AppColors.textGreyDefault500),
                     ],
@@ -191,10 +173,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 12),
-                    Text(
-                      'Add-ons',
-                      style: AppTextStyles.typographyH10SemiBold.tint(AppColors.textGreyHighest950),
-                    ),
+                    Text('Add-ons', style: AppTextStyles.typographyH10SemiBold.tint(AppColors.textGreyHighest950)),
                     const SizedBox(height: 8),
                     ...product.addOns.map<Widget>((addOn) {
                       // Assume addOn is a Map with id, name, price
@@ -258,21 +237,10 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.h),
       child: Row(
         children: [
-          Text(
-            text,
-            style: AppTextStyles.typographyH10Medium.tint(AppColors.textGreyHighest950),
-          ),
-          if (required)
-            Text(
-              '  *',
-              style: AppTextStyles.typographyH11Regular.tint(AppColors.stateBrandDefault500),
-            ),
+          Text(text, style: AppTextStyles.typographyH10Medium.tint(AppColors.textGreyHighest950)),
+          if (required) Text('  *', style: AppTextStyles.typographyH11Regular.tint(AppColors.stateBrandDefault500)),
           const Spacer(),
-          if (note != null)
-            Text(
-              note,
-              style: AppTextStyles.typographyH12Regular.tint(AppColors.textGreyDefault500),
-            ),
+          if (note != null) Text(note, style: AppTextStyles.typographyH12Regular.tint(AppColors.textGreyDefault500)),
         ],
       ),
     );

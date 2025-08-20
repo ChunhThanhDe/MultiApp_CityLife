@@ -37,42 +37,36 @@ class CartCheckoutController extends BaseController {
   }
 
   Future<void> getCheckoutSummary() async {
-    await safeExecute(() async {
-      isLoading.value = true;
+    final ApiResult result = await _cartRepository.getCheckoutSummary();
 
-      final ApiResult result = await _cartRepository.getCheckoutSummary();
+    switch (result) {
+      case Success(response: final response):
+        if (response.statusCode != 200) {
+          showAppSnackBar(title: 'Failed to load checkout summary', type: SnackBarType.error);
+          return;
+        }
 
-      switch (result) {
-        case Success(response: final response):
-          if (response.statusCode != 200) {
-            showAppSnackBar(title: 'Failed to load checkout summary', type: SnackBarType.error);
-            return;
+        checkoutSummary.value = GetCheckoutSummaryResponse.fromJson(response.data);
+
+        // Set default values
+        if (checkoutSummary.value?.defaultAddress?.id != null) {
+          selectedAddressId.value = checkoutSummary.value!.defaultAddress!.id!;
+        }
+
+        // Set default delivery option to standard
+        if (checkoutSummary.value?.deliveryOptions?.isNotEmpty == true) {
+          final standardOption = checkoutSummary.value!.deliveryOptions!.firstWhereOrNull((option) => option.key == 1);
+          if (standardOption != null) {
+            selectedDeliveryOption.value = standardOption.label ?? 'Standard';
+          } else {
+            // If standard option not found, use the first available option
+            selectedDeliveryOption.value = checkoutSummary.value!.deliveryOptions!.first.label ?? 'Standard';
           }
+        }
 
-          checkoutSummary.value = GetCheckoutSummaryResponse.fromJson(response.data);
-
-          // Set default values
-          if (checkoutSummary.value?.defaultAddress?.id != null) {
-            selectedAddressId.value = checkoutSummary.value!.defaultAddress!.id!;
-          }
-
-          // Set default delivery option to standard
-          if (checkoutSummary.value?.deliveryOptions?.isNotEmpty == true) {
-            final standardOption = checkoutSummary.value!.deliveryOptions!.firstWhereOrNull((option) => option.key == 1);
-            if (standardOption != null) {
-              selectedDeliveryOption.value = standardOption.label ?? 'Standard';
-            } else {
-              // If standard option not found, use the first available option
-              selectedDeliveryOption.value = checkoutSummary.value!.deliveryOptions!.first.label ?? 'Standard';
-            }
-          }
-
-        case Failure(error: final error):
-          showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
-      }
-
-      isLoading.value = false;
-    });
+      case Failure(error: final error):
+        showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
+    }
   }
 
   void selectDeliveryOption(String optionLabel) {
