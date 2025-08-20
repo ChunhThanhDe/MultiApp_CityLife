@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_general_data.dart';
+import 'package:sixam_mart_user/presentation/modules/service/core/service_update_ids.dart';
 import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/service/ui1/service_ui1_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/ui2/service_ui2_screen.dart';
@@ -16,16 +17,18 @@ class ServiceScreen extends BaseScreen<ServiceController> {
 
   @override
   Widget buildScreen(BuildContext context) {
-    return Obx(() {
-      // Switch UI based on current service UI type
-      final currentUIType = controller.currentUIType;
+    return GetBuilder<ServiceController>(
+      id: ServiceUpdateIds.uiType.id,
+      builder: (controller) {
+        final currentUIType = controller.currentUIType;
 
-      switch (currentUIType) {
-        case ServiceUIType.ui1:
-          return const ServiceUI1Screen();
-        case ServiceUIType.ui2:
-          return const ServiceUI2Screen();
-      }
-    });
+        switch (currentUIType) {
+          case ServiceUIType.ui1:
+            return const ServiceUI1Screen();
+          case ServiceUIType.ui2:
+            return const ServiceUI2Screen();
+        }
+      },
+    );
   }
 }

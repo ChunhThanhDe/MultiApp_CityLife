@@ -7,9 +7,10 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/category_expandable.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/estimated_bill_sheet.dart';
 import 'package:sixam_mart_user/presentation/modules/service/core/base_service_ui_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/service/core/service_update_ids.dart';
 import 'package:sixam_mart_user/presentation/modules/service/ui2/service_ui2_controller.dart';
 
-/// Screen for UI2 type services (Laundry-like interface)
+/// Screen for UI2 type services
 /// Features category tabs, banners, and expandable pricing sections
 class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
   const ServiceUI2Screen({super.key});
@@ -22,8 +23,9 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
     return Stack(
       children: [
         // Top dynamic background
-        Obx(
-          () => Container(
+        GetBuilder<ServiceUI2Controller>(
+          id: ServiceUpdateIds.background.id,
+          builder: (controller) => Container(
             width: double.infinity,
             height: 150,
             decoration: BoxDecoration(color: controller.currentBackgroundColor),
@@ -33,18 +35,18 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
           child: Column(
             children: [
               // Custom AppBar
-              _LaundryAppBar(),
+              _buildAppBar(),
               // Scrollable content
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       // Category Tabs
-                      _LaundryCategoryTabs(),
+                      _buildCategoryTabs(),
                       // Banner + Dots + Text
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
-                        child: _LaundryBanner(),
+                        child: _buildBanner(),
                       ),
                       const SizedBox(height: 6),
                       // Pricing Section
@@ -76,8 +78,17 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
                                   itemCount: controller.categoryExpandableData.length,
                                   itemBuilder: (context, i) => Column(
                                     children: [
-                                      CategoryExpandable(title: controller.categoryExpandableData[i].name, parts: controller.categoryExpandableData[i].items.length, items: controller.categoryExpandableData[i].items),
-                                      if (i < controller.categoryExpandableData.length - 1) _Divider(),
+                                      CategoryExpandable(
+                                        title: controller.categoryExpandableData[i].name,
+                                        parts: controller.categoryExpandableData[i].items.length,
+                                        items: controller.categoryExpandableData[i].items,
+                                      ),
+                                      if (i < controller.categoryExpandableData.length - 1)
+                                        Container(
+                                          margin: EdgeInsets.only(left: 24.w),
+                                          height: 1,
+                                          color: AppTheme.theme.stateGreyLowestHover100,
+                                        ),
                                     ],
                                   ),
                                 ),
@@ -92,7 +103,7 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
                 ),
               ),
               GetBuilder<ServiceUI2Controller>(
-                builder: (controller) => controller.hasSelectedItems ? _EstimatedBillWidget(controller: controller) : const SizedBox(height: 10), // Space for bottom nav when no items selected
+                builder: (controller) => controller.hasSelectedItems ? _buildEstimatedBillWidget(controller: controller) : const SizedBox(height: 10), // Space for bottom nav when no items selected
               ),
             ],
           ),
@@ -103,7 +114,7 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
   }
 
   /// Build app bar
-  Widget _LaundryAppBar() {
+  Widget _buildAppBar() {
     return Container(
       height: 56,
       padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -120,30 +131,27 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
   }
 
   /// Build category tabs
-  Widget _LaundryCategoryTabs() {
+  Widget _buildCategoryTabs() {
     return GetBuilder<ServiceUI2Controller>(
+      id: 'categoryTabs',
       builder: (controller) => SizedBox(
         height: 150,
-        child: Obx(() {
-          // Access the reactive variable to make Obx detect changes
-          final selectedIndex = controller.selectedCategoryIndex;
-          return ListView.separated(
-            scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 12.h, bottom: 8.h),
-            itemCount: ServiceUI2Controller.categories.length,
-            separatorBuilder: (context, index) => const SizedBox(width: 16),
-            itemBuilder: (context, index) {
-              final category = ServiceUI2Controller.categories[index];
-              return _CategoryTab(
-                svgAsset: _getIconAsset(category['icon']),
-                label: category['label'],
-                active: selectedIndex == index,
-                activeColor: category['color'] as Color,
-                onTap: () => controller.selectCategory(index),
-              );
-            },
-          );
-        }),
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 12.h, bottom: 8.h),
+          itemCount: ServiceUI2Controller.categories.length,
+          separatorBuilder: (context, index) => const SizedBox(width: 16),
+          itemBuilder: (context, index) {
+            final category = ServiceUI2Controller.categories[index];
+            return _CategoryTab(
+              svgAsset: _getIconAsset(category['icon']),
+              label: category['label'],
+              active: controller.selectedCategoryIndex == index,
+              activeColor: category['color'] as Color,
+              onTap: () => controller.selectCategory(index),
+            );
+          },
+        ),
       ),
     );
   }
@@ -167,7 +175,7 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
   }
 
   /// Build banner + dots + text
-  Widget _LaundryBanner() {
+  Widget _buildBanner() {
     return GetBuilder<ServiceUI2Controller>(
       builder: (controller) => Column(
         children: [
@@ -188,44 +196,39 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
           ),
           const SizedBox(height: 8),
           // Dynamic Dots
-          Obx(
-            () => Row(
+          GetBuilder<ServiceUI2Controller>(
+            id: 'bannerDots',
+            builder: (controller) => Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(ServiceUI2Controller.bannerList.length, (index) => _Dot(active: controller.selectedBannerIndex == index)),
             ),
           ),
           const SizedBox(height: 8),
           // Dynamic Text based on current banner
-          Obx(() {
-            final currentBanner = ServiceUI2Controller.bannerList[controller.selectedBannerIndex];
-            return Align(
-              alignment: Alignment.centerLeft,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(currentBanner['title'] as String, style: AppTextStyles.typographyH11SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950)),
-                  const SizedBox(height: 4),
-                  Text(currentBanner['subtitle'] as String, style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyDefault500)),
-                ],
-              ),
-            );
-          }),
+          GetBuilder<ServiceUI2Controller>(
+            id: 'bannerText',
+            builder: (controller) {
+              final currentBanner = ServiceUI2Controller.bannerList[controller.selectedBannerIndex];
+              return Align(
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(currentBanner['title'] as String, style: AppTextStyles.typographyH11SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950)),
+                    const SizedBox(height: 4),
+                    Text(currentBanner['subtitle'] as String, style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyDefault500)),
+                  ],
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
   }
 
-  /// Build divider
-  Widget _Divider() {
-    return Container(
-      margin: EdgeInsets.only(left: 24.w),
-      height: 1,
-      color: AppTheme.theme.stateGreyLowestHover100,
-    );
-  }
-
   /// Build estimated bill widget
-  Widget _EstimatedBillWidget({required ServiceUI2Controller controller}) {
+  Widget _buildEstimatedBillWidget({required ServiceUI2Controller controller}) {
     return Container(
       width: double.infinity,
       height: 110,

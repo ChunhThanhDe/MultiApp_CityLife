@@ -30,13 +30,13 @@ class ServiceUI2Controller extends BaseServiceUIController {
   ];
 
   // Selected category index (0: Clothes, 1: Iron, 2: Home, 3: Bags, 4: Shoes)
-  final RxInt _selectedCategoryIndex = 0.obs;
-  int get selectedCategoryIndex => _selectedCategoryIndex.value;
+  int _selectedCategoryIndex = 0;
+  int get selectedCategoryIndex => _selectedCategoryIndex;
 
   // Current banner index for auto-scroll
-  final RxInt _currentBannerIndex = 0.obs;
-  int get currentBannerIndex => _currentBannerIndex.value;
-  int get selectedBannerIndex => _currentBannerIndex.value;
+  int _currentBannerIndex = 0;
+  int get currentBannerIndex => _currentBannerIndex;
+  int get selectedBannerIndex => _currentBannerIndex;
 
   // Current background color based on selected category
   Color get currentBackgroundColor => categories[selectedCategoryIndex]['color'] as Color;
@@ -44,9 +44,7 @@ class ServiceUI2Controller extends BaseServiceUIController {
   // Cart-related getters
   bool get hasSelectedItems {
     // Check if any items are selected in the category expandable data
-    return categoryExpandableData.any((category) => 
-      category.items.any((item) => item.quantity > 0)
-    );
+    return categoryExpandableData.any((category) => category.items.any((item) => item.quantity > 0));
   }
 
   double get totalCost {
@@ -93,19 +91,24 @@ class ServiceUI2Controller extends BaseServiceUIController {
   @override
   void initializeUI() {
     // UI2 uses static data, no need to load from API
-    // Initialize any UI-specific state here
+    // Initialize default state
+    _selectedCategoryIndex = 0;
+    _currentBannerIndex = 0;
+    update(['background', 'categoryTabs', 'bannerDots', 'bannerText']);
   }
 
   /// Select category by index
   void selectCategory(int index) {
     if (index >= 0 && index < categories.length) {
-      _selectedCategoryIndex.value = index;
+      _selectedCategoryIndex = index;
+      update(['background', 'categoryTabs']);
     }
   }
 
   /// Update banner index
   void updateBannerIndex(int index) {
-    _currentBannerIndex.value = index;
+    _currentBannerIndex = index;
+    update(['bannerDots', 'bannerText']);
   }
 
   /// Get category data by index
@@ -117,10 +120,33 @@ class ServiceUI2Controller extends BaseServiceUIController {
   }
 
   @override
+  void onServiceChanged(ServiceEntity service) {
+    super.onServiceChanged(service);
+    // Reset to first category when service changes
+    _selectedCategoryIndex = 0;
+    _currentBannerIndex = 0;
+    update(['background', 'categoryTabs', 'bannerDots', 'bannerText']);
+  }
+
+  @override
   void onServiceTypeChanged(ServiceEntity newService) {
     super.onServiceTypeChanged(newService);
     // Reset to first category when service changes
-    _selectedCategoryIndex.value = 0;
-    _currentBannerIndex.value = 0;
+    _selectedCategoryIndex = 0;
+    _currentBannerIndex = 0;
+    update(['background', 'categoryTabs', 'bannerDots', 'bannerText']);
+  }
+
+  @override
+  Future<void> refreshData() async {
+    // UI2 uses static data, no refresh needed
+    // Just reset state if needed
+    initializeUI();
+  }
+
+  @override
+  void onClose() {
+    // Clean up any resources if needed
+    super.onClose();
   }
 }

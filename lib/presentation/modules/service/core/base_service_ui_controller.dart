@@ -10,7 +10,7 @@ abstract class BaseServiceUIController extends BaseController {
   ServiceController get serviceController => Get.find<ServiceController>();
 
   /// Current service entity
-  ServiceEntity get currentService => serviceController.currentService.value;
+  ServiceEntity get currentService => serviceController.currentService;
 
   /// UI Type that this controller handles
   ServiceUIType get uiType;

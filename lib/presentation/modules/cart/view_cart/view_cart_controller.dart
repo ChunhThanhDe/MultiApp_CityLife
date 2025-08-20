@@ -79,7 +79,7 @@ class ViewCartController extends BaseController {
   void navigateToCheckout() {
     // Get the current service type from ServiceController
     final serviceController = Get.find<ServiceController>();
-    final currentServiceType = serviceController.currentService.value;
+    final currentServiceType = serviceController.currentService;
 
     // Create a ServiceEntity with the current service type
     final serviceCart = ServiceEntity(moduleType: currentServiceType.moduleType, moduleName: currentServiceType.moduleName);
