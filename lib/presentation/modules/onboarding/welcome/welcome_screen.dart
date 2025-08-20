@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/onboarding/welcome/welcome_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/animation/animated_step_indicator.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
-
-import 'package:sixam_mart_user/presentation/shared/animation/animated_step_indicator.dart';
-import 'package:sixam_mart_user/presentation/modules/onboarding/welcome/welcome_controller.dart';
 
 class WelcomeScreen extends BaseScreen<WelcomeController> {
   const WelcomeScreen({super.key});
@@ -68,6 +67,14 @@ class WelcomeScreen extends BaseScreen<WelcomeController> {
                   Text(controller.currentPageIndex == controller.welcomeModels.length - 1 ? 'Get Started' : 'Next', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite)),
             ),
           ),
+        ),
+        const SizedBox(height: 16),
+        AppButton(
+          onTap: controller.skip,
+          width: double.infinity,
+          color: AppColors.stateGreyLowest50,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          child: Text('Skip', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
         ),
         const SizedBox(height: 24),
       ],
