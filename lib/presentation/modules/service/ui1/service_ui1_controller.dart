@@ -6,13 +6,12 @@ import 'package:sixam_mart_user/domain/models/response/get_store_general_data.da
 import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart';
 import 'package:sixam_mart_user/domain/repositories/store_repository.dart';
 import 'package:sixam_mart_user/presentation/modules/service/core/base_service_ui_controller.dart';
-import 'package:sixam_mart_user/presentation/modules/service/core/service_update_ids.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_overlay.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 import 'package:sixam_mart_user/presentation/shared/utils/banner_data_utils.dart';
 
-/// Controller for UI1 type services (Food-like interface)
-/// Handles dynamic data loading and banner sections
+enum ServiceUI1Category { dynamicSections }
+
 class ServiceUI1Controller extends BaseServiceUIController {
   final StoreRepository _storeRepository = Get.find<StoreRepository>();
 
@@ -61,7 +60,7 @@ class ServiceUI1Controller extends BaseServiceUIController {
         if (responseData.data?.isNotEmpty == true) {
           _dynamicSections = BannerDataUtils.getBannerSections(responseData.data, serviceType: serviceType);
         }
-        update([ServiceUpdateIds.dynamicSections.id]);
+        update([ServiceUI1Category.dynamicSections]);
       case Failure(:final error):
         showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
     }
@@ -80,7 +79,7 @@ class ServiceUI1Controller extends BaseServiceUIController {
     // Clear current data when service changes
     _categories = [];
     _dynamicSections = [];
-    update([ServiceUpdateIds.dynamicSections.id]);
+    update([ServiceUI1Category.dynamicSections]);
     // Load data for new service
     loadServiceData(newService);
   }

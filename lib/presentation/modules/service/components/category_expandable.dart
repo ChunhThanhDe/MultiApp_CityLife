@@ -1,8 +1,7 @@
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
-import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
 
 class ItemOption {
   ItemOption({required this.name, required this.price, this.quantity = 0});
@@ -17,46 +16,44 @@ class CategoryOption {
   final List<ItemOption> items;
 }
 
-class CategoryExpandable extends StatefulWidget {
-  const CategoryExpandable({required this.title, required this.parts, required this.items, super.key});
+class CategoryExpandable extends StatelessWidget {
+  const CategoryExpandable({required this.title, required this.parts, required this.items, required this.onChanged, super.key});
   final String title;
   final int parts;
   final List<ItemOption> items;
-
-  @override
-  State<CategoryExpandable> createState() => _CategoryExpandableState();
-}
-
-class _CategoryExpandableState extends State<CategoryExpandable> {
-  bool _expanded = false;
-
-  void _onItemChanged() {
-    setState(() {});
-    // Update the controller to refresh the bottom summary
-    Get.find<ServiceController>().update();
-  }
+  final VoidCallback onChanged;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        InkWell(
-          borderRadius: BorderRadius.circular(8),
-          onTap: () => setState(() => _expanded = !_expanded),
-          child: Padding(
+        ExpandablePanel(
+          header: Padding(
             padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 24.w),
             child: Row(
               children: [
                 Expanded(
-                  child: Text(widget.title, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
+                  child: Text(title, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                 ),
-                Text('${widget.parts} Parts', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
-                Icon(_expanded ? Icons.keyboard_arrow_down_rounded : Icons.keyboard_arrow_right_rounded, color: AppColors.textGreyHigh700),
+                Text('$parts Parts', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
               ],
             ),
           ),
+          collapsed: const SizedBox.shrink(),
+          expanded: Column(
+            children: items.map((item) => ItemOptionRow(item: item, onChanged: onChanged)).toList(),
+          ),
+          theme: ExpandableThemeData(
+            headerAlignment: ExpandablePanelHeaderAlignment.center,
+            tapHeaderToExpand: true,
+            tapBodyToExpand: false,
+            tapBodyToCollapse: false,
+            hasIcon: true,
+            iconColor: AppColors.textGreyHigh700,
+            expandIcon: Icons.keyboard_arrow_right_rounded,
+            collapseIcon: Icons.keyboard_arrow_down_rounded,
+          ),
         ),
-        if (_expanded) ...widget.items.map((item) => ItemOptionRow(item: item, onChanged: _onItemChanged)),
         Divider(height: 1, color: AppColors.stateGreyLowestHover100),
       ],
     );

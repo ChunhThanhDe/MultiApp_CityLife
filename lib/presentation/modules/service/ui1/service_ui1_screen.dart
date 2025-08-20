@@ -5,7 +5,6 @@ import 'package:sixam_mart_user/domain/models/response/get_store_general_data.da
 import 'package:sixam_mart_user/presentation/modules/home/components/sliver_box.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/service_header.dart';
 import 'package:sixam_mart_user/presentation/modules/service/core/base_service_ui_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/service/core/service_update_ids.dart';
 import 'package:sixam_mart_user/presentation/modules/service/ui1/service_ui1_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
 import 'package:sixam_mart_user/presentation/shared/unified_banner_widget.dart';
@@ -21,7 +20,7 @@ class ServiceUI1Screen extends BaseServiceUIScreen<ServiceUI1Controller> {
   @override
   Widget buildUIContent(BuildContext context) {
     return GetBuilder<ServiceUI1Controller>(
-      id: ServiceUpdateIds.dynamicSections.id,
+      id: ServiceUI1Category.dynamicSections,
       builder: (controller) {
         // Get dynamic sections from controller
         final sections = controller.dynamicSections;

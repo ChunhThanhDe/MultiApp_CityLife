@@ -7,7 +7,6 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/category_expandable.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/estimated_bill_sheet.dart';
 import 'package:sixam_mart_user/presentation/modules/service/core/base_service_ui_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/service/core/service_update_ids.dart';
 import 'package:sixam_mart_user/presentation/modules/service/ui2/service_ui2_controller.dart';
 
 /// Screen for UI2 type services
@@ -24,7 +23,7 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
       children: [
         // Top dynamic background
         GetBuilder<ServiceUI2Controller>(
-          id: ServiceUpdateIds.background.id,
+          id: ServiceUI2Category.background,
           builder: (controller) => Container(
             width: double.infinity,
             height: 150,
@@ -72,6 +71,7 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
                               const SizedBox(height: 16),
                               // List of pricing items
                               GetBuilder<ServiceUI2Controller>(
+                                id: ServiceUI2Category.categoryExpandable,
                                 builder: (controller) => ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
@@ -82,6 +82,9 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
                                         title: controller.categoryExpandableData[i].name,
                                         parts: controller.categoryExpandableData[i].items.length,
                                         items: controller.categoryExpandableData[i].items,
+                                        onChanged: () {
+                                          controller.update([ServiceUI2Category.estimatedBill.name]);
+                                        },
                                       ),
                                       if (i < controller.categoryExpandableData.length - 1)
                                         Container(
@@ -103,6 +106,7 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
                 ),
               ),
               GetBuilder<ServiceUI2Controller>(
+                id: ServiceUI2Category.estimatedBill,
                 builder: (controller) => controller.hasSelectedItems ? _buildEstimatedBillWidget(controller: controller) : const SizedBox(height: 10), // Space for bottom nav when no items selected
               ),
             ],
@@ -133,7 +137,7 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
   /// Build category tabs
   Widget _buildCategoryTabs() {
     return GetBuilder<ServiceUI2Controller>(
-      id: 'categoryTabs',
+      id: ServiceUI2Category.categoryTabs,
       builder: (controller) => SizedBox(
         height: 150,
         child: ListView.separated(
@@ -197,7 +201,7 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
           const SizedBox(height: 8),
           // Dynamic Dots
           GetBuilder<ServiceUI2Controller>(
-            id: 'bannerDots',
+            id: ServiceUI2Category.bannerDots,
             builder: (controller) => Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(ServiceUI2Controller.bannerList.length, (index) => _Dot(active: controller.selectedBannerIndex == index)),
@@ -206,7 +210,7 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
           const SizedBox(height: 8),
           // Dynamic Text based on current banner
           GetBuilder<ServiceUI2Controller>(
-            id: 'bannerText',
+            id: ServiceUI2Category.bannerText,
             builder: (controller) {
               final currentBanner = ServiceUI2Controller.bannerList[controller.selectedBannerIndex];
               return Align(
@@ -229,73 +233,76 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
 
   /// Build estimated bill widget
   Widget _buildEstimatedBillWidget({required ServiceUI2Controller controller}) {
-    return Container(
-      width: double.infinity,
-      height: 110,
-      decoration: BoxDecoration(
-        color: AppTheme.theme.backgroundSurfacePrimaryWhite,
-        boxShadow: [BoxShadow(color: AppTheme.theme.alphaGrey10, offset: const Offset(0, -5), blurRadius: 32, spreadRadius: 0)],
-        borderRadius: const BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
-      ),
-      child: Column(
-        children: [
-          // Divider with grabber
-          Container(
-            width: double.infinity,
-            height: 12,
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: Center(
-              child: Container(
-                width: 48,
-                height: 4,
-                decoration: BoxDecoration(color: AppTheme.theme.stateGreyLowestHover100, borderRadius: BorderRadius.circular(99)),
+    return GetBuilder<ServiceUI2Controller>(
+      id: ServiceUI2Category.estimatedBill,
+      builder: (controller) => Container(
+        width: double.infinity,
+        height: 110,
+        decoration: BoxDecoration(
+          color: AppTheme.theme.backgroundSurfacePrimaryWhite,
+          boxShadow: [BoxShadow(color: AppTheme.theme.alphaGrey10, offset: const Offset(0, -5), blurRadius: 32, spreadRadius: 0)],
+          borderRadius: const BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
+        ),
+        child: Column(
+          children: [
+            // Divider with grabber
+            Container(
+              width: double.infinity,
+              height: 12,
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Center(
+                child: Container(
+                  width: 48,
+                  height: 4,
+                  decoration: BoxDecoration(color: AppTheme.theme.stateGreyLowestHover100, borderRadius: BorderRadius.circular(99)),
+                ),
               ),
             ),
-          ),
-          // Cell item with top padding
-          Container(
-            width: double.infinity,
-            height: 62,
-            margin: EdgeInsets.only(top: 10.h),
-            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 4.h),
-            child: Row(
-              children: [
-                // Title and subtitle section
-                Expanded(
-                  child: SizedBox(
-                    height: 54,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Title
-                        Text('Estimated Bill', style: AppTextStyles.typographyH8SemiBold.copyWith(height: 1.5, color: AppTheme.theme.textGreyHighest950)),
-                        // Subtitle
-                        Text('\$${controller.totalCost.toStringAsFixed(2)}', style: AppTextStyles.typographyH10Regular.copyWith(height: 1.5, color: AppTheme.theme.textGreyHighest950)),
-                      ],
+            // Cell item with top padding
+            Container(
+              width: double.infinity,
+              height: 62,
+              margin: EdgeInsets.only(top: 10.h),
+              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 4.h),
+              child: Row(
+                children: [
+                  // Title and subtitle section
+                  Expanded(
+                    child: SizedBox(
+                      height: 54,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Title
+                          Text('Estimated Bill', style: AppTextStyles.typographyH8SemiBold.copyWith(height: 1.5, color: AppTheme.theme.textGreyHighest950)),
+                          // Subtitle
+                          Text('\$${controller.totalCost.toStringAsFixed(2)}', style: AppTextStyles.typographyH10Regular.copyWith(height: 1.5, color: AppTheme.theme.textGreyHighest950)),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                // Label
-                TextButton(
-                  onPressed: () {
-                    // Show estimated bill sheet
-                    showModalBottomSheet(
-                      context: Get.context!,
-                      isScrollControlled: true,
-                      backgroundColor: AppTheme.theme.backgroundSurfacePrimaryWhite.withValues(alpha: 0),
-                      builder: (context) => const ClipRRect(
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-                        child: FractionallySizedBox(heightFactor: 0.85, child: EstimatedBillSheet()),
-                      ),
-                    );
-                  },
-                  child: Text('More details', style: AppTextStyles.typographyH11Regular.copyWith(height: 1.43, color: AppTheme.theme.textGreyHighest950)),
-                ),
-              ],
+                  // Label
+                  TextButton(
+                    onPressed: () {
+                      // Show estimated bill sheet
+                      showModalBottomSheet(
+                        context: Get.context!,
+                        isScrollControlled: true,
+                        backgroundColor: AppTheme.theme.backgroundSurfacePrimaryWhite.withValues(alpha: 0),
+                        builder: (context) => const ClipRRect(
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                          child: FractionallySizedBox(heightFactor: 0.85, child: EstimatedBillSheet()),
+                        ),
+                      );
+                    },
+                    child: Text('More details', style: AppTextStyles.typographyH11Regular.copyWith(height: 1.43, color: AppTheme.theme.textGreyHighest950)),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -6,6 +6,8 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/category_expandable.dart';
 import 'package:sixam_mart_user/presentation/modules/service/core/base_service_ui_controller.dart';
 
+enum ServiceUI2Category { background, categoryTabs, bannerDots, bannerText, categoryExpandable, estimatedBill }
+
 /// Controller for UI2 type services (Laundry-like interface)
 /// Handles static data and category-based interface
 class ServiceUI2Controller extends BaseServiceUIController {
@@ -57,6 +59,9 @@ class ServiceUI2Controller extends BaseServiceUIController {
     return total;
   }
 
+  // Expanded categories tracking
+  final RxSet<String> expandedCategories = <String>{}.obs;
+
   // Category expandable data
   final RxList<CategoryOption> categoryExpandableData = <CategoryOption>[
     CategoryOption(
@@ -94,21 +99,21 @@ class ServiceUI2Controller extends BaseServiceUIController {
     // Initialize default state
     _selectedCategoryIndex = 0;
     _currentBannerIndex = 0;
-    update(['background', 'categoryTabs', 'bannerDots', 'bannerText']);
+    update([ServiceUI2Category.background.name, ServiceUI2Category.categoryTabs.name, ServiceUI2Category.bannerDots.name, ServiceUI2Category.bannerText.name]);
   }
 
   /// Select category by index
   void selectCategory(int index) {
     if (index >= 0 && index < categories.length) {
       _selectedCategoryIndex = index;
-      update(['background', 'categoryTabs']);
+      update([ServiceUI2Category.background.name, ServiceUI2Category.categoryTabs.name]);
     }
   }
 
   /// Update banner index
   void updateBannerIndex(int index) {
     _currentBannerIndex = index;
-    update(['bannerDots', 'bannerText']);
+    update([ServiceUI2Category.bannerDots.name, ServiceUI2Category.bannerText.name]);
   }
 
   /// Get category data by index
@@ -125,7 +130,7 @@ class ServiceUI2Controller extends BaseServiceUIController {
     // Reset to first category when service changes
     _selectedCategoryIndex = 0;
     _currentBannerIndex = 0;
-    update(['background', 'categoryTabs', 'bannerDots', 'bannerText']);
+    update([ServiceUI2Category.background.name, ServiceUI2Category.categoryTabs.name, ServiceUI2Category.bannerDots.name, ServiceUI2Category.bannerText.name]);
   }
 
   @override
@@ -134,7 +139,7 @@ class ServiceUI2Controller extends BaseServiceUIController {
     // Reset to first category when service changes
     _selectedCategoryIndex = 0;
     _currentBannerIndex = 0;
-    update(['background', 'categoryTabs', 'bannerDots', 'bannerText']);
+    update([ServiceUI2Category.background.name, ServiceUI2Category.categoryTabs.name, ServiceUI2Category.bannerDots.name, ServiceUI2Category.bannerText.name]);
   }
 
   @override
@@ -142,6 +147,16 @@ class ServiceUI2Controller extends BaseServiceUIController {
     // UI2 uses static data, no refresh needed
     // Just reset state if needed
     initializeUI();
+  }
+
+  /// Toggle category expansion state
+  void toggleCategoryExpansion(String categoryName) {
+    if (expandedCategories.contains(categoryName)) {
+      expandedCategories.remove(categoryName);
+    } else {
+      expandedCategories.add(categoryName);
+    }
+    update([ServiceUI2Category.categoryExpandable.name]);
   }
 
   @override

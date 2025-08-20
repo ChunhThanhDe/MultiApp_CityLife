@@ -4,10 +4,9 @@ import 'package:sixam_mart_user/domain/models/response/get_store_general_data.da
 import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart';
 import 'package:sixam_mart_user/presentation/modules/service/ui1/service_ui1_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/service/ui2/service_ui2_controller.dart';
-import 'package:sixam_mart_user/presentation/modules/service/core/service_update_ids.dart';
 
-/// Main service controller that manages service routing and UI type coordination
-/// Acts as a coordinator between different UI type controllers
+enum ServiceControllerCategory { uiType, currentService, categories }
+
 class ServiceController extends BaseController {
   @override
   void onReady() {
@@ -42,7 +41,7 @@ class ServiceController extends BaseController {
   void updateCurrentService(ServiceEntity service) {
     final previousUIType = _currentService.uiType;
     _currentService = service;
-    update([ServiceUpdateIds.uiType.id, ServiceUpdateIds.currentService.id, ServiceUpdateIds.categories.id]);
+    update([ServiceControllerCategory.uiType.name, ServiceControllerCategory.currentService.name, ServiceControllerCategory.categories.name]);
 
     // Notify appropriate UI controller about service change
     if (previousUIType != service.uiType) {
