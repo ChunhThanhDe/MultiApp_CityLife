@@ -83,7 +83,7 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
                                         parts: controller.categoryExpandableData[i].items.length,
                                         items: controller.categoryExpandableData[i].items,
                                         onChanged: () {
-                                          controller.update([ServiceUI2Category.estimatedBill.name]);
+                                          controller.update([ServiceUI2Category.estimatedBill, ServiceUI2Category.categoryExpandable]);
                                         },
                                       ),
                                       if (i < controller.categoryExpandableData.length - 1)
@@ -148,10 +148,10 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
           itemBuilder: (context, index) {
             final category = ServiceUI2Controller.categories[index];
             return _CategoryTab(
-              svgAsset: _getIconAsset(category['icon']),
-              label: category['label'],
+              svgAsset: _getIconAsset(category.icon),
+              label: category.label,
               active: controller.selectedCategoryIndex == index,
-              activeColor: category['color'] as Color,
+              activeColor: category.color,
               onTap: () => controller.selectCategory(index),
             );
           },
@@ -193,7 +193,7 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
                 final banner = ServiceUI2Controller.bannerList[index];
                 return ClipRRect(
                   borderRadius: BorderRadius.circular(6),
-                  child: Image.asset(banner['image'] as String, width: 382, height: 180, fit: BoxFit.cover),
+                  child: Image.asset(banner.image, width: 382, height: 180, fit: BoxFit.cover),
                 );
               },
             ),
@@ -218,9 +218,9 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(currentBanner['title'] as String, style: AppTextStyles.typographyH11SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950)),
+                    Text(currentBanner.title, style: AppTextStyles.typographyH11SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950)),
                     const SizedBox(height: 4),
-                    Text(currentBanner['subtitle'] as String, style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyDefault500)),
+                    Text(currentBanner.subtitle, style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyDefault500)),
                   ],
                 ),
               );
@@ -261,31 +261,22 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
             // Cell item with top padding
             Container(
               width: double.infinity,
-              height: 62,
               margin: EdgeInsets.only(top: 10.h),
               padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 4.h),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Title and subtitle section
-                  Expanded(
-                    child: SizedBox(
-                      height: 54,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // Title
-                          Text('Estimated Bill', style: AppTextStyles.typographyH8SemiBold.copyWith(height: 1.5, color: AppTheme.theme.textGreyHighest950)),
-                          // Subtitle
-                          Text('\$${controller.totalCost.toStringAsFixed(2)}', style: AppTextStyles.typographyH10Regular.copyWith(height: 1.5, color: AppTheme.theme.textGreyHighest950)),
-                        ],
-                      ),
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Estimated Bill', style: AppTextStyles.typographyH8SemiBold.copyWith(height: 1.5, color: AppTheme.theme.textGreyHighest950)),
+                      Text('\$${controller.totalCost.toStringAsFixed(2)}', style: AppTextStyles.typographyH10Regular.copyWith(height: 1.5, color: AppTheme.theme.textGreyHighest950)),
+                    ],
                   ),
                   // Label
                   TextButton(
                     onPressed: () {
-                      // Show estimated bill sheet
                       showModalBottomSheet(
                         context: Get.context!,
                         isScrollControlled: true,

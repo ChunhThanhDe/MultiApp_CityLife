@@ -89,57 +89,68 @@ class ItemOptionRow extends StatelessWidget {
   }
 }
 
-class _ItemCounter extends StatelessWidget {
+class _ItemCounter extends StatefulWidget {
   const _ItemCounter({required this.item, required this.onChanged});
   final ItemOption item;
   final VoidCallback onChanged;
+
+  @override
+  State<_ItemCounter> createState() => _ItemCounterState();
+}
+
+class _ItemCounterState extends State<_ItemCounter> {
+  void _updateQuantity(int newQuantity) {
+    setState(() {
+      widget.item.quantity = newQuantity;
+    });
+    widget.onChanged();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 28,
       decoration: BoxDecoration(
-        color: item.quantity > 0 ? AppColors.stateGreyLowestHover100 : AppColors.backgroundSurfaceTertiaryGrey50,
+        color: widget.item.quantity > 0 ? AppColors.stateGreyLowestHover100 : AppColors.backgroundSurfaceTertiaryGrey50,
         border: Border.all(color: AppColors.stateGreyLowestHover100),
         borderRadius: BorderRadius.circular(32),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (item.quantity > 0)
+          if (widget.item.quantity > 0)
             IconButton(
               icon: Icon(Icons.remove, size: 20, color: AppColors.textGreyHighest950),
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
               visualDensity: VisualDensity.compact,
               onPressed: () {
-                item.quantity--;
-                onChanged();
+                if (widget.item.quantity > 0) {
+                  _updateQuantity(widget.item.quantity - 1);
+                }
               },
             ),
           GestureDetector(
             onTap: () {
-              if (!(item.quantity > 0)) {
-                item.quantity = 1;
-                onChanged();
+              if (widget.item.quantity == 0) {
+                _updateQuantity(1);
               }
             },
             child: Container(
               alignment: Alignment.center,
-              width: item.quantity > 0 ? 27 : 75, // chỉnh width nhỏ cho vừa text
+              width: widget.item.quantity > 0 ? 27 : 75,
               height: 24,
-              child: Text(item.quantity > 0 ? '${item.quantity}' : 'Add', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+              child: Text(widget.item.quantity > 0 ? '${widget.item.quantity}' : 'Add', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
             ),
           ),
-          if (item.quantity > 0)
+          if (widget.item.quantity > 0)
             IconButton(
               icon: Icon(Icons.add, size: 20, color: AppColors.textGreyHighest950),
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
               visualDensity: VisualDensity.compact,
               onPressed: () {
-                item.quantity++;
-                onChanged();
+                _updateQuantity(widget.item.quantity + 1);
               },
             ),
         ],

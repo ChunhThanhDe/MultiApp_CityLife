@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_general_data.dart';
-import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/domain/models/service_ui2_models.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/category_expandable.dart';
 import 'package:sixam_mart_user/presentation/modules/service/core/base_service_ui_controller.dart';
 
@@ -15,21 +14,10 @@ class ServiceUI2Controller extends BaseServiceUIController {
   ServiceUIType get uiType => ServiceUIType.ui2;
 
   // Category data structure with colors
-  static final List<Map<String, dynamic>> categories = [
-    {'icon': 'icClothHanger1', 'label': 'Clothes', 'color': AppTheme.theme.stateBrandDefault500}, // Purple
-    {'icon': 'icIron', 'label': 'Iron', 'color': AppTheme.theme.stateDangerDefault500}, // Red
-    {'icon': 'icSingleBed1', 'label': 'Home', 'color': AppTheme.theme.stateInformationDefault500}, // Cyan
-    {'icon': 'icBackpackModern1', 'label': 'Bags', 'color': AppTheme.theme.stateBrandDefault500}, // Blue
-    {'icon': 'icSneakers1', 'label': 'Shoes', 'color': AppTheme.theme.stateSuccessDefault500}, // Green
-  ];
+  static final List<CategoryData> categories = CategoryData.defaultCategories;
 
   // Banner data structure
-  static final List<Map<String, dynamic>> bannerList = [
-    {'image': Assets.images.imgSingleBed1.path, 'title': 'Professional Service', 'subtitle': 'Fast & Reliable'},
-    {'image': Assets.images.imgSingleBed1.path, 'title': 'Premium Care', 'subtitle': 'Expert Care for Your Items'},
-    {'image': Assets.images.imgSingleBed1.path, 'title': 'Express Service', 'subtitle': 'Same Day Delivery'},
-    {'image': Assets.images.imgSingleBed1.path, 'title': 'Eco-Friendly', 'subtitle': 'Safe for You & Environment'},
-  ];
+  static final List<BannerData> bannerList = BannerData.defaultBanners;
 
   // Selected category index (0: Clothes, 1: Iron, 2: Home, 3: Bags, 4: Shoes)
   int _selectedCategoryIndex = 0;
@@ -41,7 +29,7 @@ class ServiceUI2Controller extends BaseServiceUIController {
   int get selectedBannerIndex => _currentBannerIndex;
 
   // Current background color based on selected category
-  Color get currentBackgroundColor => categories[selectedCategoryIndex]['color'] as Color;
+  Color get currentBackgroundColor => categories[selectedCategoryIndex].color;
 
   // Cart-related getters
   bool get hasSelectedItems {
@@ -99,25 +87,25 @@ class ServiceUI2Controller extends BaseServiceUIController {
     // Initialize default state
     _selectedCategoryIndex = 0;
     _currentBannerIndex = 0;
-    update([ServiceUI2Category.background.name, ServiceUI2Category.categoryTabs.name, ServiceUI2Category.bannerDots.name, ServiceUI2Category.bannerText.name]);
+    update([ServiceUI2Category.background, ServiceUI2Category.categoryTabs, ServiceUI2Category.bannerDots, ServiceUI2Category.bannerText]);
   }
 
   /// Select category by index
   void selectCategory(int index) {
     if (index >= 0 && index < categories.length) {
       _selectedCategoryIndex = index;
-      update([ServiceUI2Category.background.name, ServiceUI2Category.categoryTabs.name]);
+      update([ServiceUI2Category.background, ServiceUI2Category.categoryTabs]);
     }
   }
 
   /// Update banner index
   void updateBannerIndex(int index) {
     _currentBannerIndex = index;
-    update([ServiceUI2Category.bannerDots.name, ServiceUI2Category.bannerText.name]);
+    update([ServiceUI2Category.bannerDots, ServiceUI2Category.bannerText]);
   }
 
   /// Get category data by index
-  Map<String, dynamic> getCategoryData(int index) {
+  CategoryData getCategoryData(int index) {
     if (index >= 0 && index < categories.length) {
       return categories[index];
     }
@@ -130,7 +118,7 @@ class ServiceUI2Controller extends BaseServiceUIController {
     // Reset to first category when service changes
     _selectedCategoryIndex = 0;
     _currentBannerIndex = 0;
-    update([ServiceUI2Category.background.name, ServiceUI2Category.categoryTabs.name, ServiceUI2Category.bannerDots.name, ServiceUI2Category.bannerText.name]);
+    update([ServiceUI2Category.background, ServiceUI2Category.categoryTabs, ServiceUI2Category.bannerDots, ServiceUI2Category.bannerText]);
   }
 
   @override
@@ -139,7 +127,7 @@ class ServiceUI2Controller extends BaseServiceUIController {
     // Reset to first category when service changes
     _selectedCategoryIndex = 0;
     _currentBannerIndex = 0;
-    update([ServiceUI2Category.background.name, ServiceUI2Category.categoryTabs.name, ServiceUI2Category.bannerDots.name, ServiceUI2Category.bannerText.name]);
+    update([ServiceUI2Category.background, ServiceUI2Category.categoryTabs, ServiceUI2Category.bannerDots, ServiceUI2Category.bannerText]);
   }
 
   @override
@@ -156,7 +144,7 @@ class ServiceUI2Controller extends BaseServiceUIController {
     } else {
       expandedCategories.add(categoryName);
     }
-    update([ServiceUI2Category.categoryExpandable.name]);
+    update([ServiceUI2Category.categoryExpandable]);
   }
 
   @override

@@ -125,7 +125,7 @@ class ServiceController extends BaseController {
         return _ui1Controller?.categories ?? [];
       case ServiceUIType.ui2:
         // Convert UI2 static categories to Category objects
-        return ServiceUI2Controller.categories.map((cat) => Category(id: 0, name: cat['label'] ?? '', image: '')).toList();
+        return ServiceUI2Controller.categories.map((cat) => Category(id: 0, name: cat.label, image: cat.icon)).toList();
       case null:
         return _ui1Controller?.categories ?? [];
     }

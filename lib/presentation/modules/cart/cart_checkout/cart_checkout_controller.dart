@@ -55,7 +55,7 @@ class CartCheckoutController extends BaseController {
 
         // Set default delivery option to standard
         if (checkoutSummary.value?.deliveryOptions?.isNotEmpty == true) {
-          final standardOption = checkoutSummary.value!.deliveryOptions!.firstWhereOrNull((option) => option.key == 1);
+          final standardOption = checkoutSummary.value!.deliveryOptions!.firstWhereOrNull((option) => option.key?.toUpperCase() == 'PRIORITY');
           if (standardOption != null) {
             selectedDeliveryOption.value = standardOption.label ?? 'Standard';
           } else {
