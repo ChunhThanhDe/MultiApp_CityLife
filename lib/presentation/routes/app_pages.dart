@@ -59,8 +59,8 @@ import 'package:sixam_mart_user/presentation/modules/service/delivery/track_deli
 import 'package:sixam_mart_user/presentation/modules/service/delivery/track_delivery/track_delivery_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/delivery/tracking_delivery/tracking_delivery_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/service/delivery/tracking_delivery/tracking_delivery_screen.dart';
-import 'package:sixam_mart_user/presentation/modules/service/laundry/service_laundry_binding.dart';
-import 'package:sixam_mart_user/presentation/modules/service/laundry/service_laundry_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/service/ui2/service_ui2_binding.dart';
+import 'package:sixam_mart_user/presentation/modules/service/ui2/service_ui2_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_binding.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_product_detail/store_product_detail_binding.dart';
@@ -124,7 +124,7 @@ class AppPages {
     GetPage(name: AppRoutes.cartConfirm, page: () => const CartOrderConfirmScreen(), binding: CartOrderConfirmBinding()),
     GetPage(name: AppRoutes.store, page: () => const StoreScreen(), binding: StoreBinding()),
     GetPage(name: AppRoutes.storeProductDetail, page: () => const StoreProductDetailScreen(), binding: StoreProductDetailBinding()),
-    GetPage(name: AppRoutes.laundryMain, page: () => const ServiceLaundryScreen(), binding: ServiceLaundryBinding()),
+    GetPage(name: AppRoutes.laundryMain, page: () => const ServiceUI2Screen(), binding: ServiceUI2Binding()),
     GetPage(name: AppRoutes.cartSuccessful, page: () => const CartSuccessfulScreen(), binding: CartSuccessfulBinding()),
   ];
 }

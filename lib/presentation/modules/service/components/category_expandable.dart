@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
-import 'package:sixam_mart_user/presentation/modules/service/laundry/service_laundry_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
 
 class ItemOption {
   ItemOption({required this.name, required this.price, this.quantity = 0});
@@ -33,7 +33,7 @@ class _CategoryExpandableState extends State<CategoryExpandable> {
   void _onItemChanged() {
     setState(() {});
     // Update the controller to refresh the bottom summary
-    Get.find<ServiceLaundryController>().update();
+    Get.find<ServiceController>().update();
   }
 
   @override
@@ -48,15 +48,9 @@ class _CategoryExpandableState extends State<CategoryExpandable> {
             child: Row(
               children: [
                 Expanded(
-                  child: Text(
-                    widget.title,
-                    style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
-                  ),
+                  child: Text(widget.title, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                 ),
-                Text(
-                  '${widget.parts} Parts',
-                  style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700),
-                ),
+                Text('${widget.parts} Parts', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
                 Icon(_expanded ? Icons.keyboard_arrow_down_rounded : Icons.keyboard_arrow_right_rounded, color: AppColors.textGreyHigh700),
               ],
             ),
@@ -84,15 +78,9 @@ class ItemOptionRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  item.name,
-                  style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
-                ),
+                Text(item.name, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
                 const SizedBox(height: 2),
-                Text(
-                  '\$ ${item.price.toStringAsFixed(2)}',
-                  style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700),
-                ),
+                Text('\$ ${item.price.toStringAsFixed(2)}', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
               ],
             ),
           ),
@@ -143,10 +131,7 @@ class _ItemCounter extends StatelessWidget {
               alignment: Alignment.center,
               width: item.quantity > 0 ? 27 : 75, // chỉnh width nhỏ cho vừa text
               height: 24,
-              child: Text(
-                item.quantity > 0 ? '${item.quantity}' : 'Add',
-                style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950),
-              ),
+              child: Text(item.quantity > 0 ? '${item.quantity}' : 'Add', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
             ),
           ),
           if (item.quantity > 0)

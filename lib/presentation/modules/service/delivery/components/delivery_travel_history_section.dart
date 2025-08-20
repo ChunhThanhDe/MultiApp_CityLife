@@ -22,8 +22,8 @@ class TravelHistorySection extends StatelessWidget {
       margin: EdgeInsets.only(top: 16.h),
       decoration: BoxDecoration(
         color: AppColors.stateBaseWhite,
-        boxShadow: [BoxShadow(color: AppColors.alphaGrey10, blurRadius: 24, offset: Offset(0, 2))],
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        boxShadow: [BoxShadow(color: AppColors.alphaGrey10, blurRadius: 24, offset: const Offset(0, 2))],
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: Column(
         children: [
