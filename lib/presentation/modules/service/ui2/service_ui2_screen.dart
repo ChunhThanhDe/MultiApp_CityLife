@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_general_data.dart';
-import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/category_expandable.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/estimated_bill_sheet.dart';
 import 'package:sixam_mart_user/presentation/modules/service/core/base_service_ui_screen.dart';
@@ -148,7 +148,7 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
           itemBuilder: (context, index) {
             final category = ServiceUI2Controller.categories[index];
             return _CategoryTab(
-              svgAsset: _getIconAsset(category.icon),
+              svgAsset: category.icon,
               label: category.label,
               active: controller.selectedCategoryIndex == index,
               activeColor: category.color,
@@ -158,24 +158,6 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
         ),
       ),
     );
-  }
-
-  /// Get icon asset for category
-  SvgGenImage _getIconAsset(String iconName) {
-    switch (iconName) {
-      case 'icClothHanger1':
-        return Assets.icons.icClothHanger1;
-      case 'icIron':
-        return Assets.icons.icIron;
-      case 'icSingleBed1':
-        return Assets.icons.icSingleBed1;
-      case 'icBackpackModern1':
-        return Assets.icons.icBackpackModern1;
-      case 'icSneakers1':
-        return Assets.icons.icSneakers1;
-      default:
-        return Assets.icons.icClothHanger1;
-    }
   }
 
   /// Build banner + dots + text
@@ -303,8 +285,8 @@ class ServiceUI2Screen extends BaseServiceUIScreen<ServiceUI2Controller> {
 
 // Category Tab
 class _CategoryTab extends StatelessWidget {
-  const _CategoryTab({required this.label, this.svgAsset, this.active = false, this.activeColor, this.onTap});
-  final SvgGenImage? svgAsset;
+  const _CategoryTab({required this.label, required this.svgAsset, this.active = false, this.activeColor, this.onTap});
+  final String svgAsset;
   final String label;
   final bool active;
   final Color? activeColor;
@@ -334,7 +316,8 @@ class _CategoryTab extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 16.0.h),
-                  child: svgAsset!.svg(
+                  child: SvgPicture.asset(
+                    svgAsset,
                     width: 28,
                     height: 28,
                     colorFilter: ColorFilter.mode(active ? (activeColor ?? AppTheme.theme.stateBrandDefault500) : AppTheme.theme.textGreyHighest950, BlendMode.srcIn),
