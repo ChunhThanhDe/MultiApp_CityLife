@@ -7,7 +7,6 @@ import 'package:sixam_mart_user/presentation/modules/favorites/favorites_control
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class FavoriteItemCard extends StatelessWidget {
-
   const FavoriteItemCard({required this.item, super.key, this.isFavorited = true, this.onFavoriteTap});
   final WishlistItem item;
   final bool isFavorited;
@@ -64,7 +63,7 @@ class FavoriteItemCard extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: AppTheme.theme.backgroundSurfacePrimaryWhite,
                       border: Border.all(color: AppTheme.theme.stateGreyLowestHover100, width: 1),
-                      boxShadow: [BoxShadow(color: AppTheme.theme.shadowMd10, blurRadius: 8, offset: Offset(0, 4))],
+                      boxShadow: [BoxShadow(color: AppTheme.theme.shadowMd10, blurRadius: 8, offset: const Offset(0, 4))],
                       borderRadius: BorderRadius.circular(32),
                     ),
                     child: AnimatedSwitcher(

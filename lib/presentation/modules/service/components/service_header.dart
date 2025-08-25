@@ -44,11 +44,12 @@ class ServiceHeader extends GetView<ServiceController> {
   Widget _buildTopBar() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
-      child: Obx(
-        () => Row(
+      child: GetBuilder<ServiceController>(
+        id: 'currentService',
+        builder: (controller) => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(controller.currentService.value.moduleName ?? '', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textBaseWhite)),
+            Text(controller.currentService.moduleName ?? '', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textBaseWhite)),
             Assets.icons.icBell.svg(width: 24, height: 24, colorFilter: ColorFilter.mode(AppColors.textBaseWhite, BlendMode.srcIn)),
           ],
         ),
@@ -158,39 +159,42 @@ class ServiceHeader extends GetView<ServiceController> {
   }
 
   Widget _buildCategories() {
-    return Obx(() {
-      final categories = controller.categories;
-      if (categories.isEmpty) {
-        return const SizedBox.shrink();
-      }
+    return GetBuilder<ServiceController>(
+      id: 'categories',
+      builder: (controller) {
+        final categories = controller.categories;
+        if (categories.isEmpty) {
+          return const SizedBox.shrink();
+        }
 
-      return SizedBox(
-        height: 86,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: categories.length,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            final category = categories[index];
-            return Padding(
-              padding: EdgeInsets.only(right: index == categories.length - 1 ? 24.w : 16.w, left: index == 0 ? 24.w : 0),
-              child: GestureDetector(
-                onTap: () {},
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Column(
-                    children: [
-                      AppImage.network(category.image, width: 40, height: 40, fit: BoxFit.cover),
-                      const SizedBox(height: 8),
-                      Text(category.name, style: AppTextStyles.typographyH12Regular, textAlign: TextAlign.center),
-                    ],
+        return SizedBox(
+          height: 86,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: categories.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              final category = categories[index];
+              return Padding(
+                padding: EdgeInsets.only(right: index == categories.length - 1 ? 24.w : 16.w, left: index == 0 ? 24.w : 0),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.w),
+                    child: Column(
+                      children: [
+                        AppImage.network(category.image, width: 40, height: 40, fit: BoxFit.cover),
+                        const SizedBox(height: 8),
+                        Text(category.name, style: AppTextStyles.typographyH12Regular, textAlign: TextAlign.center),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
-        ),
-      );
-    });
+              );
+            },
+          ),
+        );
+      },
+    );
   }
 }

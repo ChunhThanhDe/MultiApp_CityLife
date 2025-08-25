@@ -8,7 +8,6 @@ import 'package:sixam_mart_user/domain/models/response/get_product_detail_respon
 import 'package:sixam_mart_user/domain/repositories/cart_repository.dart';
 
 class CartService extends GetxService {
-
   CartService(this._cartRepository);
   final CartRepository _cartRepository;
 
@@ -48,14 +47,17 @@ class CartService extends GetxService {
   }
 
   /// Adds an item to the cart
-  Future<void> addItemToCart(AddToCartRequest request) async {
+  Future<bool> addItemToCart(AddToCartRequest request) async {
     try {
       final result = await _cartRepository.addToCart(request);
       if (result is Success && result.response.statusCode == 200) {
         fetchCartList();
+        return true;
       }
+      return false;
     } catch (e) {
       // Silent failure
+      return false;
     }
   }
 
@@ -220,7 +222,7 @@ class CartService extends GetxService {
   }
 
   /// Adds a product to cart with variations and add-ons
-  Future<void> addProductToCart({required ProductDetail product, required Map<String, String> selectedOptions, required Map<int, int> selectedAddOns, int quantity = 1}) async {
+  Future<bool> addProductToCart({required ProductDetail product, required Map<String, String> selectedOptions, required Map<int, int> selectedAddOns, int quantity = 1}) async {
     // Build variations from selectedOptions
     final variations = <CartVariation>[];
 
@@ -309,7 +311,7 @@ class CartService extends GetxService {
 
     final request = AddToCartRequest(itemId: product.id, model: 'Item', price: price, quantity: quantity, variation: variations, addOnIds: addOnIds, addOnQtys: addOnQtys);
 
-    await addItemToCart(request);
+    return await addItemToCart(request);
   }
 
   // Convenience getters

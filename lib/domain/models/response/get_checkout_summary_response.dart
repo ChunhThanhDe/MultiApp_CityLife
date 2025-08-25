@@ -50,7 +50,7 @@ abstract class CheckoutAddress with _$CheckoutAddress {
 
 @freezed
 abstract class DeliveryOption with _$DeliveryOption {
-  const factory DeliveryOption({@JsonKey(name: 'key') int? key, @JsonKey(name: 'label') String? label, @JsonKey(name: 'fee') double? fee, @JsonKey(name: 'desc') String? desc}) = _DeliveryOption;
+  const factory DeliveryOption({@JsonKey(name: 'key') String? key, @JsonKey(name: 'label') String? label, @JsonKey(name: 'fee') double? fee, @JsonKey(name: 'desc') String? desc}) = _DeliveryOption;
 
   factory DeliveryOption.fromJson(Map<String, dynamic> json) => _$DeliveryOptionFromJson(json);
 }

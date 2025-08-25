@@ -8,7 +8,6 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 
 class WelcomeModel {
-
   WelcomeModel({required this.title, required this.description, required this.image});
   final String title;
   final String description;
@@ -38,9 +37,13 @@ class WelcomeController extends BaseController {
       update();
       pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
     } else {
-      AppStorage.setBool(SharedPreferencesKeys.hasSeenWelcome, true);
-      Get.offAllNamed(AppRoutes.signIn);
+      skip();
     }
+  }
+
+  void skip() {
+    AppStorage.setBool(SharedPreferencesKeys.hasSeenWelcome, true);
+    Get.offAllNamed(AppRoutes.signIn);
   }
 
   @override

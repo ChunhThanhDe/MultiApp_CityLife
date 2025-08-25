@@ -7,7 +7,6 @@ import 'package:sixam_mart_user/presentation/modules/favorites/favorites_control
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class FavoriteProductCard extends StatelessWidget {
-
   const FavoriteProductCard({required this.store, super.key, this.onFavoriteTap});
   final WishlistStore store;
   final VoidCallback? onFavoriteTap;
@@ -49,7 +48,7 @@ class FavoriteProductCard extends StatelessWidget {
                       color: AppTheme.theme.backgroundSurfacePrimaryWhite,
                       border: Border.all(color: AppTheme.theme.backgroundSurfacePrimaryWhite, width: 2),
                       shape: BoxShape.circle,
-                      boxShadow: [BoxShadow(color: AppTheme.theme.shadowSm5, blurRadius: 6, offset: Offset(0, 2))],
+                      boxShadow: [BoxShadow(color: AppTheme.theme.shadowSm5, blurRadius: 6, offset: const Offset(0, 2))],
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(2),
@@ -104,7 +103,7 @@ class FavoriteProductCard extends StatelessWidget {
                   child: AnimatedSwitcher(
                     duration: const Duration(milliseconds: 250),
                     transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
-                    child: Icon(Icons.favorite, key: ValueKey(true), color: AppTheme.theme.stateBrandDefault500, size: 24),
+                    child: Icon(Icons.favorite, key: const ValueKey(true), color: AppTheme.theme.stateBrandDefault500, size: 24),
                   ),
                 ),
               ],
@@ -126,10 +125,7 @@ class FavoriteProductCard extends StatelessWidget {
                 const SizedBox(height: 2),
                 Row(
                   children: [
-                    Text(
-                      '${store.avgRating ?? 0}★',
-                      style: AppTextStyles.typographyH12SemiBold.copyWith(color: AppTheme.theme.textGreyDefault500),
-                    ),
+                    Text('${store.avgRating ?? 0}★', style: AppTextStyles.typographyH12SemiBold.copyWith(color: AppTheme.theme.textGreyDefault500)),
                     const SizedBox(width: 2),
                     Text('(${store.ratingCount ?? 0})', style: AppTextStyles.typographyH12Regular.copyWith(color: AppTheme.theme.textGreyDefault500)),
                     const SizedBox(width: 2),

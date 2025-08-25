@@ -3,6 +3,8 @@ import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/domain/models/response/get_product_detail_response.dart';
 import 'package:sixam_mart_user/domain/repositories/product_repository.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_overlay.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 import 'package:sixam_mart_user/services/cart_service.dart';
 
 class StoreProductDetailController extends BaseController {
@@ -74,6 +76,15 @@ class StoreProductDetailController extends BaseController {
     final productDetail = product.value;
     if (productDetail == null) return;
     final cartService = Get.find<CartService>();
-    await cartService.addProductToCart(product: productDetail, selectedOptions: Map<String, String>.from(selectedOptions), selectedAddOns: Map<int, int>.from(selectedAddOns), quantity: quantity);
+
+    final result = await showAppOverlayLoading(
+      future: cartService.addProductToCart(product: productDetail, selectedOptions: Map<String, String>.from(selectedOptions), selectedAddOns: Map<int, int>.from(selectedAddOns), quantity: quantity),
+    );
+
+    if (result) {
+      showAppSnackBar(title: 'Added to cart');
+    } else {
+      showAppSnackBar(title: 'Failed to add to cart', type: SnackBarType.error);
+    }
   }
 }

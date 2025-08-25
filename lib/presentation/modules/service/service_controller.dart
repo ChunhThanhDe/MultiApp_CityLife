@@ -1,73 +1,145 @@
 import 'package:get/get.dart';
-import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
-import 'package:sixam_mart_user/base/error_response.dart';
-import 'package:sixam_mart_user/base/network_exceptions.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_general_data.dart';
 import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart';
-import 'package:sixam_mart_user/domain/repositories/store_repository.dart';
-import 'package:sixam_mart_user/presentation/shared/global/app_overlay.dart';
-import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
-import 'package:sixam_mart_user/presentation/shared/utils/banner_data_utils.dart';
+import 'package:sixam_mart_user/presentation/modules/service/ui1/service_ui1_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/service/ui2/service_ui2_controller.dart';
+
+enum ServiceControllerCategory { uiType, currentService, categories }
 
 class ServiceController extends BaseController {
-  final StoreRepository _storeRepository = Get.find<StoreRepository>();
-
   @override
   void onReady() {
     super.onReady();
-    loadServiceTypeData(currentService.value);
+    _initializeUIControllers();
+    _notifyCurrentUIController();
   }
 
-  final RxList<Category> categories = RxList<Category>([]);
-  final RxList<BannerSection> dynamicSections = RxList<BannerSection>([]);
-  final Rx<ServiceEntity> currentService = Rx<ServiceEntity>(const ServiceEntity(id: 1, moduleName: 'food', thumbnail: '', moduleType: 'food', uiType: ServiceUIType.ui1));
+  // Core service data - only current service info
+  ServiceEntity _currentService = const ServiceEntity(id: 1, moduleName: 'food', thumbnail: '', moduleType: 'food', uiType: ServiceUIType.ui1);
 
-  void loadCurrentServiceTypeData() {
-    loadServiceTypeData(currentService.value);
+  // UI Controllers for different UI types
+  ServiceUI1Controller? _ui1Controller;
+  ServiceUI2Controller? _ui2Controller;
+
+  /// Initialize UI controllers based on available UI types
+  void _initializeUIControllers() {
+    try {
+      _ui1Controller = Get.find<ServiceUI1Controller>();
+    } catch (e) {
+      // UI1 controller not registered yet
+    }
+
+    try {
+      _ui2Controller = Get.find<ServiceUI2Controller>();
+    } catch (e) {
+      // UI2 controller not registered yet
+    }
   }
 
-  // Method to update current service
+  /// Update current service and notify UI controllers
   void updateCurrentService(ServiceEntity service) {
-    currentService.value = service;
-  }
+    final previousUIType = _currentService.uiType;
+    _currentService = service;
+    update([ServiceControllerCategory.uiType.name, ServiceControllerCategory.currentService.name, ServiceControllerCategory.categories.name]);
 
-  // Method to load data for specific service type
-  void loadServiceTypeData(ServiceEntity serviceType) async {
-    // For laundry service, we don't need to load store data as it uses static data
-    if (serviceType.moduleType == 'laundry') {
-      // Laundry service uses static data, no need to load from API
-      return;
-    }
-    await showAppOverlayLoading(future: _loadServiceData(serviceType.moduleType ?? ''));
-  }
-
-  // Clean service data loading
-  Future<void> _loadServiceData(String serviceType) async {
-    final result = await _storeRepository.getStoreData(serviceType);
-    switch (result) {
-      case Success(:final response):
-        if (response.statusCode != 200) {
-          final errorResponse = ErrorResponse.fromJson(response.data);
-          showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
-          return;
-        }
-        final responseData = GetStoresResponse.fromJson(response.data);
-        if (responseData.categories?.isNotEmpty == true) {
-          categories.clear();
-          categories.addAll(responseData.categories ?? []);
-        }
-        if (responseData.data?.isNotEmpty == true) {
-          dynamicSections.clear();
-          dynamicSections.addAll(BannerDataUtils.getBannerSections(responseData.data, serviceType: serviceType));
-        }
-      case Failure(:final error):
-        showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
+    // Notify appropriate UI controller about service change
+    if (previousUIType != service.uiType) {
+      // Service type changed - notify both old and new controllers
+      _notifyUIControllerServiceTypeChanged(service);
+    } else {
+      // Same service type - just notify service changed
+      _notifyUIControllerServiceChanged(service);
     }
   }
 
+  /// Notify current UI controller on initialization
+  void _notifyCurrentUIController() {
+    _notifyUIControllerServiceChanged(_currentService);
+  }
+
+  /// Notify UI controller about service changes
+  void _notifyUIControllerServiceChanged(ServiceEntity service) {
+    switch (service.uiType) {
+      case ServiceUIType.ui1:
+        _ui1Controller?.onServiceChanged(service);
+        break;
+      case ServiceUIType.ui2:
+        _ui2Controller?.onServiceChanged(service);
+        break;
+      case null:
+        // Handle null case - default to UI1
+        _ui1Controller?.onServiceChanged(service);
+        break;
+    }
+  }
+
+  /// Notify UI controller about service type changes
+  void _notifyUIControllerServiceTypeChanged(ServiceEntity service) {
+    switch (service.uiType) {
+      case ServiceUIType.ui1:
+        _ui1Controller?.onServiceTypeChanged(service);
+        break;
+      case ServiceUIType.ui2:
+        _ui2Controller?.onServiceTypeChanged(service);
+        break;
+      case null:
+        // Handle null case - default to UI1
+        _ui1Controller?.onServiceTypeChanged(service);
+        break;
+    }
+  }
+
+  /// Refresh data for current service - delegate to UI controller
   Future<void> refreshData() async {
-    final serviceType = currentService.value;
-    loadServiceTypeData(serviceType);
+    switch (_currentService.uiType) {
+      case ServiceUIType.ui1:
+        await _ui1Controller?.refreshData();
+        break;
+      case ServiceUIType.ui2:
+        await _ui2Controller?.refreshData();
+        break;
+      case null:
+        // Handle null case - default to UI1
+        await _ui1Controller?.refreshData();
+        break;
+    }
+  }
+
+  /// Get current service
+  ServiceEntity get currentService => _currentService;
+
+  /// Get current UI type
+  ServiceUIType get currentUIType => _currentService.uiType ?? ServiceUIType.ui1;
+
+  /// Check if current service is UI1 type
+  bool get isUI1Type => currentUIType == ServiceUIType.ui1;
+
+  /// Check if current service is UI2 type
+  bool get isUI2Type => currentUIType == ServiceUIType.ui2;
+
+  /// Get categories from current UI controller
+  List<Category> get categories {
+    switch (_currentService.uiType) {
+      case ServiceUIType.ui1:
+        return _ui1Controller?.categories ?? [];
+      case ServiceUIType.ui2:
+        // Convert UI2 static categories to Category objects
+        return ServiceUI2Controller.categories.map((cat) => Category(id: 0, name: cat.label, image: cat.icon)).toList();
+      case null:
+        return _ui1Controller?.categories ?? [];
+    }
+  }
+
+  /// Load service type data - delegate to UI controller
+  Future<void> loadServiceTypeData(ServiceEntity serviceType) async {
+    updateCurrentService(serviceType);
+    await refreshData();
+  }
+
+  @override
+  void onClose() {
+    // Clean up resources - UI controllers handle their own cleanup
+    super.onClose();
   }
 }
