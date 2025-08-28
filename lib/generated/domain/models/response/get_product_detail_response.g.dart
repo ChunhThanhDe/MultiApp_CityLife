@@ -32,8 +32,8 @@ _VariationModel _$VariationModelFromJson(Map<String, dynamic> json) =>
     _VariationModel(
       name: json['name'] as String? ?? '',
       type: json['type'] as String? ?? '',
-      min: (json['min'] as num?)?.toInt() ?? 0,
-      max: (json['max'] as num?)?.toInt() ?? 0,
+      min: json['min'] == null ? '0' : _parseToString(json['min']),
+      max: json['max'] == null ? '0' : _parseToString(json['max']),
       required: json['required'] as String? ?? '',
       values:
           (json['values'] as List<dynamic>?)
@@ -55,13 +55,13 @@ Map<String, dynamic> _$VariationModelToJson(_VariationModel instance) =>
 _VariationValue _$VariationValueFromJson(Map<String, dynamic> json) =>
     _VariationValue(
       label: json['label'] as String? ?? '',
-      optionPrice: json['option_price'] as String? ?? '0',
+      optionPrice: json['optionPrice'] as String? ?? '0',
     );
 
 Map<String, dynamic> _$VariationValueToJson(_VariationValue instance) =>
     <String, dynamic>{
       'label': instance.label,
-      'option_price': instance.optionPrice,
+      'optionPrice': instance.optionPrice,
     };
 
 _ProductDetail _$ProductDetailFromJson(Map<String, dynamic> json) =>
@@ -72,11 +72,7 @@ _ProductDetail _$ProductDetailFromJson(Map<String, dynamic> json) =>
       storeImageUrl: json['store_image_url'] as String? ?? '',
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
-      imageUrls:
-          (json['image_url'] as List<dynamic>?)
-              ?.map((e) => ImageUrl.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
+      imageUrl: json['image_url'] as String? ?? '',
       gallery:
           (json['gallery'] as List<dynamic>?)
               ?.map((e) => e as String)
@@ -130,7 +126,7 @@ Map<String, dynamic> _$ProductDetailToJson(_ProductDetail instance) =>
       'store_image_url': instance.storeImageUrl,
       'name': instance.name,
       'description': instance.description,
-      'image_url': instance.imageUrls,
+      'image_url': instance.imageUrl,
       'gallery': instance.gallery,
       'price': instance.price,
       'tax': instance.tax,

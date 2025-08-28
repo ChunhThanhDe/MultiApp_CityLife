@@ -17,8 +17,8 @@ abstract class VariationModel with _$VariationModel {
   const factory VariationModel({
     @JsonKey(name: 'name') @Default('') String name,
     @Default('') String type,
-    @Default(0) int min,
-    @Default(0) int max,
+    @JsonKey(fromJson: _parseToString) @Default('0') String min,
+    @JsonKey(fromJson: _parseToString) @Default('0') String max,
     @Default('') String required,
     @Default([]) List<VariationValue> values,
   }) = _VariationModel;
@@ -26,9 +26,14 @@ abstract class VariationModel with _$VariationModel {
   factory VariationModel.fromJson(Map<String, dynamic> json) => _$VariationModelFromJson(json);
 }
 
+String _parseToString(dynamic value) {
+  if (value == null) return '0';
+  return value.toString();
+}
+
 @freezed
 abstract class VariationValue with _$VariationValue {
-  const factory VariationValue({@JsonKey(name: 'label') @Default('') String label, @JsonKey(name: 'option_price') @Default('0') String optionPrice}) = _VariationValue;
+  const factory VariationValue({@JsonKey(name: 'label') @Default('') String label, @JsonKey(name: 'optionPrice') @Default('0') String optionPrice}) = _VariationValue;
 
   factory VariationValue.fromJson(Map<String, dynamic> json) => _$VariationValueFromJson(json);
 }
@@ -42,7 +47,7 @@ abstract class ProductDetail with _$ProductDetail {
     @JsonKey(name: 'store_image_url') @Default('') String storeImageUrl,
     @Default('') String name,
     @Default('') String description,
-    @JsonKey(name: 'image_url') @Default([]) List<ImageUrl> imageUrls,
+    @JsonKey(name: 'image_url') @Default('') String imageUrl,
     @Default([]) List<String> gallery,
     @Default(0) int price,
     @Default(0) int tax,
