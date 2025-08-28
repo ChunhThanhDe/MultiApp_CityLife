@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_infomation_response.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_category_section.dart';
-import 'package:sixam_mart_user/presentation/modules/store/components/store_filter_section.dart';
+// import 'package:sixam_mart_user/presentation/modules/store/components/store_filter_section.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
 
@@ -25,9 +25,11 @@ class StoreProductCategories extends StatelessWidget {
 
         // Only show filter section if there are categories to filter
         final Map<String, List<ProductItem>> filteredCategories = controller.filteredCategories;
-        if (filteredCategories.isNotEmpty) {
-          categoryWidgets.add(const StoreFilterSection());
-        }
+
+        // NOTE: None API info
+        // if (filteredCategories.isNotEmpty) {
+        //   categoryWidgets.add(const StoreFilterSection());
+        // }
 
         // Add categories with filtered items
         filteredCategories.forEach((categoryTitle, items) {

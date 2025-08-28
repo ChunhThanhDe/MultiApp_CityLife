@@ -119,9 +119,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: GestureDetector(
-                onTap: () {
-                  // TODO: handle reset
-                },
+                onTap: () => controller.resetAllOptions(),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 8.h),
                   decoration: BoxDecoration(
@@ -141,18 +139,53 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
             ),
 
             const SizedBox(height: 20),
-            // ========== Render variations (Size)
+            // ========== Render variations from API
+            // Check if variations field contains the new API structure (with name, type, values)
             if (product.variations.isNotEmpty) ...[
-              OptionGroupSection(
-                title: 'Size',
-                requiredField: true,
-                options: product.variations.map((v) => OptionItem(label: v.type, value: v.type, subLabel: '${v.price / 100.0} ${product.taxType}')).toList(),
-                selectedValue: controller.selectedOptions['variation'], // chỉ lấy String
-                onSelected: (val) => controller.selectOption('variation', val),
-              ),
+              // New API structure - variations contains VariationModel objects
+              for (final variation in product.variations) ...[
+                OptionGroupSection(
+                  singleChoice: variation.type == 'single',
+                  min: int.tryParse(variation.min) ?? 0,
+                  max: int.tryParse(variation.max) ?? 0,
+                  title: variation.name.isNotEmpty ? variation.name : 'Option',
+                  requiredField: variation.required == 'on',
+                  options: variation.values.map((value) {
+                    final label = value.label;
+                    final optionPrice = int.tryParse(value.optionPrice) ?? 0;
+                    return OptionItem(label: label, value: label, subLabel: optionPrice.toString());
+                  }).toList(),
+                  selectedValue: controller.selectedOptions[variation.name],
+                  onSelected: (val, {bool singleChoice = true, int min = 0, int max = 0}) => controller.selectOption(variation.name, val, singleChoice: singleChoice, min: min, max: max),
+                ),
+                _sectionDivider(),
+              ],
+            ]
+            // Check if foodVariations has data (fallback for new API structure)
+            else if (product.foodVariations.isNotEmpty) ...[
+              for (final variation in product.foodVariations)
+                if (variation is Map<String, dynamic> && variation['values'] is List) ...[
+                  OptionGroupSection(
+                    title: variation['name'] ?? 'Option',
+                    requiredField: variation['required'] == 'on',
+                    options: (variation['values'] as List).map((value) {
+                      if (value is Map<String, dynamic>) {
+                        final label = value['label']?.toString() ?? '';
+                        final optionPrice = value['optionPrice'] ?? 0;
+                        final priceNum = optionPrice is num ? optionPrice : 0;
+                        return OptionItem(label: label, value: label, subLabel: priceNum > 0 ? '+${priceNum / 100.0} ${product.taxType}' : null);
+                      }
+                      return OptionItem(label: value.toString(), value: value.toString());
+                    }).toList(),
+                    selectedValue: controller.selectedOptions[variation['name']],
+                    onSelected: (val, {bool singleChoice = true, int min = 0, int max = 0}) => controller.selectOption(variation['name'], val, singleChoice: singleChoice, min: min, max: max),
+                  ),
+                  _sectionDivider(),
+                ],
             ],
 
-            _sectionDivider(),
+            // Old API structure fallback is now handled by foodVariations
+            // The variations field now only contains VariationModel objects
             if (product.choiceOptions.isNotEmpty) ...[
               // Render choice_options
               for (final choice in product.choiceOptions)
@@ -161,7 +194,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                   requiredField: true,
                   options: choice.options.map((opt) => OptionItem(label: opt, value: opt)).toList(),
                   selectedValue: controller.selectedOptions[choice.name], // chỉ lấy String
-                  onSelected: (val) => controller.selectOption(choice.name, val),
+                  onSelected: (val, {bool singleChoice = true, int min = 0, int max = 0}) => controller.selectOption(choice.name, val, singleChoice: singleChoice, min: min, max: max),
                 ),
             ],
 

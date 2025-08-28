@@ -16,7 +16,7 @@ class StoreProductDetailController extends BaseController {
 
   final Rx<ProductDetail?> product = Rx<ProductDetail?>(null);
   final RxList<ProductRecommendation> recommendations = <ProductRecommendation>[].obs;
-  final RxMap<String, String> selectedOptions = <String, String>{}.obs; // group_name -> option
+  final RxMap<String, dynamic> selectedOptions = <String, dynamic>{}.obs; // group_name -> option (String for single, List<String> for multi)
   final RxMap<int, int> selectedAddOns = <int, int>{}.obs;
 
   @override
@@ -33,24 +33,68 @@ class StoreProductDetailController extends BaseController {
     try {
       switch (result) {
         case Success(:final response):
+          // print('Raw response.data type: ${response.data.runtimeType}');
+          // print('Raw response.data: ${response.data}');
+
+          // print('Starting ProductDetailResponse.fromJson...');
           final detailResponse = ProductDetailResponse.fromJson(response.data);
+          // print('ProductDetailResponse created successfully');
+
+          // print('Accessing detailResponse.item...');
           product.value = detailResponse.item;
+          // print('product.value assigned: ${product.value}');
+
+          // print('Accessing detailResponse.recommendations...');
           recommendations.value = detailResponse.recommendations;
+          // print('recommendations.value assigned successfully');
           break;
 
         case Failure():
           Get.snackbar('Error', 'Failed to load product detail');
           break;
       }
+    } catch (e) {
+      // print('Error occurred: $e');
+      // print('Stack trace: $stackTrace');
+      Get.snackbar('Error', 'Failed to parse product data: $e');
     } finally {
       isLoading.value = false;
     }
   }
 
-  bool isOptionSelected(String group, String value) => selectedOptions[group] == value;
+  bool isOptionSelected(String group, String value) {
+    final selected = selectedOptions[group];
+    if (selected is String) {
+      return selected == value;
+    } else if (selected is List<String>) {
+      return selected.contains(value);
+    }
+    return false;
+  }
 
-  void selectOption(String group, String value) {
-    selectedOptions[group] = value;
+  void selectOption(String group, String value, {bool singleChoice = true, int min = 0, int max = 0}) {
+    if (singleChoice) {
+      // Single choice: replace the current selection
+      selectedOptions[group] = value;
+    } else {
+      // Multi choice: toggle the selection with min/max validation
+      final currentSelections = selectedOptions[group] as List<String>? ?? <String>[];
+      final newSelections = List<String>.from(currentSelections);
+
+      if (newSelections.contains(value)) {
+        // Remove if already selected, but check min constraint
+        if (newSelections.length > min) {
+          newSelections.remove(value);
+        }
+      } else {
+        // Add if not selected, but check max constraint
+        if (max == 0 || newSelections.length < max) {
+          newSelections.add(value);
+        }
+      }
+
+      selectedOptions[group] = newSelections;
+    }
     update();
   }
 
@@ -72,17 +116,33 @@ class StoreProductDetailController extends BaseController {
     update();
   }
 
+  void resetAllOptions() {
+    selectedOptions.clear();
+    selectedAddOns.clear();
+  }
+
   Future<void> addToCart({int quantity = 1}) async {
     final productDetail = product.value;
     if (productDetail == null) return;
     final cartService = Get.find<CartService>();
 
+    // Convert selectedOptions to the expected format for cart service
+    final Map<String, String> formattedOptions = {};
+    selectedOptions.forEach((key, value) {
+      if (value is String) {
+        formattedOptions[key] = value;
+      } else if (value is List<String>) {
+        formattedOptions[key] = value.join(', '); // Join multiple selections with comma
+      }
+    });
+
     final result = await showAppOverlayLoading(
-      future: cartService.addProductToCart(product: productDetail, selectedOptions: Map<String, String>.from(selectedOptions), selectedAddOns: Map<int, int>.from(selectedAddOns), quantity: quantity),
+      future: cartService.addProductToCart(product: productDetail, selectedOptions: formattedOptions, selectedAddOns: Map<int, int>.from(selectedAddOns), quantity: quantity),
     );
 
     if (result) {
       showAppSnackBar(title: 'Added to cart');
+      // Get.back(); // Navigate back to store main screen
     } else {
       showAppSnackBar(title: 'Failed to add to cart', type: SnackBarType.error);
     }

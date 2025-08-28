@@ -13,6 +13,32 @@ abstract class ProductDetailResponse with _$ProductDetailResponse {
 }
 
 @freezed
+abstract class VariationModel with _$VariationModel {
+  const factory VariationModel({
+    @JsonKey(name: 'name') @Default('') String name,
+    @Default('') String type,
+    @JsonKey(fromJson: _parseToString) @Default('0') String min,
+    @JsonKey(fromJson: _parseToString) @Default('0') String max,
+    @Default('') String required,
+    @Default([]) List<VariationValue> values,
+  }) = _VariationModel;
+
+  factory VariationModel.fromJson(Map<String, dynamic> json) => _$VariationModelFromJson(json);
+}
+
+String _parseToString(dynamic value) {
+  if (value == null) return '0';
+  return value.toString();
+}
+
+@freezed
+abstract class VariationValue with _$VariationValue {
+  const factory VariationValue({@JsonKey(name: 'label') @Default('') String label, @JsonKey(name: 'optionPrice') @Default('0') String optionPrice}) = _VariationValue;
+
+  factory VariationValue.fromJson(Map<String, dynamic> json) => _$VariationValueFromJson(json);
+}
+
+@freezed
 abstract class ProductDetail with _$ProductDetail {
   const factory ProductDetail({
     @Default(0) int id,
@@ -21,8 +47,7 @@ abstract class ProductDetail with _$ProductDetail {
     @JsonKey(name: 'store_image_url') @Default('') String storeImageUrl,
     @Default('') String name,
     @Default('') String description,
-    // Chuẩn hóa image_url (nếu bạn vẫn nhận được List<ImageUrl>)
-    @JsonKey(name: 'image_url') @Default([]) List<ImageUrl> imageUrls,
+    @JsonKey(name: 'image_url') @Default('') String imageUrl,
     @Default([]) List<String> gallery,
     @Default(0) int price,
     @Default(0) int tax,
@@ -40,7 +65,7 @@ abstract class ProductDetail with _$ProductDetail {
     @Default(false) bool organic,
     @JsonKey(name: 'maximum_cart_quantity') int? maximumCartQuantity,
     @JsonKey(name: 'add_ons') @Default([]) List<dynamic> addOns,
-    @Default([]) List<Variation> variations,
+    @JsonKey(name: 'variations') @Default([]) List<VariationModel> variations,
     @JsonKey(name: 'choice_options') @Default([]) List<ChoiceOption> choiceOptions,
     @Default([]) List<String> attributes,
     @JsonKey(name: 'food_variations') @Default([]) List<dynamic> foodVariations,

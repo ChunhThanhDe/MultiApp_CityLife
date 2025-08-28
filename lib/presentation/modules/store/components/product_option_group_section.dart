@@ -3,12 +3,33 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class OptionGroupSection extends StatelessWidget {
-  const OptionGroupSection({required this.title, required this.options, required this.selectedValue, required this.onSelected, super.key, this.requiredField = false});
+  const OptionGroupSection({
+    required this.title,
+    required this.options,
+    required this.selectedValue,
+    required this.onSelected,
+    super.key,
+    this.requiredField = false,
+    this.singleChoice = true,
+    this.min = 0,
+    this.max = 0,
+  });
   final String title;
   final bool requiredField;
+  final bool singleChoice;
+  final int min;
+  final int max;
   final List<OptionItem> options;
-  final String? selectedValue;
-  final ValueChanged<String> onSelected;
+  final dynamic selectedValue; // String for single choice, List<String> for multi choice
+  final Function(String, {bool singleChoice, int min, int max}) onSelected;
+
+  bool _isOptionChecked(String value) {
+    if (singleChoice) {
+      return selectedValue == value;
+    } else {
+      return selectedValue is List<String> && (selectedValue as List<String>).contains(value);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +68,8 @@ class OptionGroupSection extends StatelessWidget {
                 _OptionItemCheckboxTile(
                   label: opt.label,
                   subLabel: opt.subLabel,
-                  checked: selectedValue == opt.value, // chỉ 1 lựa chọn
-                  onTap: () => onSelected(opt.value),
+                  checked: _isOptionChecked(opt.value),
+                  onTap: () => onSelected(opt.value, singleChoice: singleChoice, min: min, max: max),
                 ),
                 if (!isLast) const SizedBox(height: 6),
               ],
