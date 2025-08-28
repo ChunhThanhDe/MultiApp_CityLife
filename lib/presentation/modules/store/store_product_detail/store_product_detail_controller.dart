@@ -80,7 +80,7 @@ class StoreProductDetailController extends BaseController {
       // Multi choice: toggle the selection with min/max validation
       final currentSelections = selectedOptions[group] as List<String>? ?? <String>[];
       final newSelections = List<String>.from(currentSelections);
-      
+
       if (newSelections.contains(value)) {
         // Remove if already selected, but check min constraint
         if (newSelections.length > min) {
@@ -92,7 +92,7 @@ class StoreProductDetailController extends BaseController {
           newSelections.add(value);
         }
       }
-      
+
       selectedOptions[group] = newSelections;
     }
     update();
@@ -116,6 +116,11 @@ class StoreProductDetailController extends BaseController {
     update();
   }
 
+  void resetAllOptions() {
+    selectedOptions.clear();
+    selectedAddOns.clear();
+  }
+
   Future<void> addToCart({int quantity = 1}) async {
     final productDetail = product.value;
     if (productDetail == null) return;
@@ -137,6 +142,7 @@ class StoreProductDetailController extends BaseController {
 
     if (result) {
       showAppSnackBar(title: 'Added to cart');
+      // Get.back(); // Navigate back to store main screen
     } else {
       showAppSnackBar(title: 'Failed to add to cart', type: SnackBarType.error);
     }

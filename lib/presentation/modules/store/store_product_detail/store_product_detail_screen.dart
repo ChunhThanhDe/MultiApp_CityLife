@@ -119,9 +119,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: GestureDetector(
-                onTap: () {
-                  // TODO: handle reset
-                },
+                onTap: () => controller.resetAllOptions(),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 8.h),
                   decoration: BoxDecoration(
