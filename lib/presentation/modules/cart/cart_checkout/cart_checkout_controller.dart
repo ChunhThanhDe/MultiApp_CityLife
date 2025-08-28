@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
@@ -11,12 +12,15 @@ import 'package:sixam_mart_user/domain/repositories/cart_repository.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
 import 'package:sixam_mart_user/services/cart_service.dart';
+import 'package:sixam_mart_user/services/biti_payment_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CartCheckoutController extends BaseController {
   CartCheckoutController(this.serviceCart);
   final ServiceEntity? serviceCart;
   final CartRepository _cartRepository = Get.find<CartRepository>();
   final CartService _cartService = Get.find<CartService>();
+  final BitiPaymentService _bitiPaymentService = Get.find<BitiPaymentService>();
 
   final Rx<GetCheckoutSummaryResponse?> checkoutSummary = Rx<GetCheckoutSummaryResponse?>(null);
   final Rx<CheckoutCalculateResponse?> calculatedSummary = Rx<CheckoutCalculateResponse?>(null);
@@ -47,6 +51,9 @@ class CartCheckoutController extends BaseController {
         }
 
         checkoutSummary.value = GetCheckoutSummaryResponse.fromJson(response.data);
+        
+        // Add Biti payment method to the existing payment methods
+        _addBitiPaymentMethod();
 
         // Set default values
         if (checkoutSummary.value?.defaultAddress?.id != null) {
@@ -66,6 +73,25 @@ class CartCheckoutController extends BaseController {
 
       case Failure(error: final error):
         showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
+    }
+  }
+
+  /// Adds Biti payment method to the existing payment methods list
+  void _addBitiPaymentMethod() {
+    if (checkoutSummary.value?.paymentMethods != null) {
+      // Check if Biti payment method already exists
+      final bitiExists = checkoutSummary.value!.paymentMethods!.any((method) => method.key == 'biti_payment');
+      
+      if (!bitiExists) {
+        // Create Biti payment method
+        const bitiPaymentMethod = PaymentMethod(
+          key: 'biti_payment',
+          label: 'Biti Payment',
+        );
+        
+        // Add to the list
+        checkoutSummary.value!.paymentMethods!.add(bitiPaymentMethod);
+      }
     }
   }
 
@@ -251,6 +277,12 @@ class CartCheckoutController extends BaseController {
       return;
     }
 
+    // Handle Biti payment method
+    if (selectedPaymentMethod.value == 'biti_payment') {
+      await _processBitiPayment();
+      return;
+    }
+
     await safeExecute(() async {
       isLoading.value = true;
 
@@ -290,5 +322,143 @@ class CartCheckoutController extends BaseController {
 
       isLoading.value = false;
     });
+  }
+
+  /// Processes Biti payment flow
+  Future<void> _processBitiPayment() async {
+    await safeExecute(() async {
+      isLoading.value = true;
+
+      // Calculate total amount from cart
+      final totalAmount = _cartService.totalPrice;
+      if (totalAmount <= 0) {
+        showAppSnackBar(title: 'Invalid cart total amount', type: SnackBarType.error);
+        return;
+      }
+
+      // Generate unique client reference ID
+      final clientReferenceId = 'ORDER_${DateTime.now().millisecondsSinceEpoch}';
+      
+      // Get customer phone from selected address if available
+      final customerPhone = selectedAddress?.contactPersonNumber;
+      final customerEmail = null; // Email not available in CheckoutAddress model
+
+      // Initiate Biti payment
+      final paymentResponse = await _bitiPaymentService.initiatePayment(
+        cancelUrl: 'https://yourapp.com/payment/cancel',
+        successUrl: 'https://yourapp.com/payment/success',
+        clientReferenceId: clientReferenceId,
+        paymentAmount: totalAmount,
+        currencyCode: 'USD', // Change to your app's currency
+        description: 'Order payment for cart items',
+        customerEmail: customerEmail,
+        customerPhone: customerPhone,
+      );
+
+      if (paymentResponse != null && paymentResponse.payload?.paymentUrl != null) {
+        // Launch Biti payment URL
+        final paymentUrl = paymentResponse.payload!.paymentUrl;
+        if (await canLaunchUrl(Uri.parse(paymentUrl))) {
+          await launchUrl(
+            Uri.parse(paymentUrl),
+            mode: LaunchMode.externalApplication,
+          );
+          
+          // Show payment processing message
+          showAppSnackBar(
+            title: 'Payment initiated successfully',
+            message: 'Please complete the payment in the opened browser',
+            type: SnackBarType.success,
+          );
+          
+          // Start monitoring payment status
+          _monitorPaymentStatus(paymentResponse.payload!.transactionId);
+        } else {
+          showAppSnackBar(
+            title: 'Failed to open payment URL',
+            type: SnackBarType.error,
+          );
+        }
+      }
+
+      isLoading.value = false;
+    });
+  }
+
+  /// Monitors Biti payment status
+  void _monitorPaymentStatus(String transactionId) {
+    // Simple polling mechanism - in production, consider using webhooks
+    Timer.periodic(const Duration(seconds: 5), (timer) async {
+      final verifyResponse = await _bitiPaymentService.verifyPayment(transactionId);
+      
+      if (verifyResponse != null) {
+        if (_bitiPaymentService.isPaymentCompleted(verifyResponse)) {
+          timer.cancel();
+          await _completeBitiOrder(transactionId);
+        } else if (verifyResponse.payload?.status == 'failed' || 
+                   verifyResponse.payload?.status == 'cancelled') {
+          timer.cancel();
+          showAppSnackBar(
+            title: 'Payment was cancelled or failed',
+            type: SnackBarType.error,
+          );
+        }
+      }
+      
+      // Stop monitoring after 10 minutes
+      if (timer.tick > 120) { // 120 * 5 seconds = 10 minutes
+        timer.cancel();
+        showAppSnackBar(
+          title: 'Payment verification timeout',
+          message: 'Please check your payment status manually',
+          type: SnackBarType.error,
+        );
+      }
+    });
+  }
+
+  /// Completes order after successful Biti payment
+  Future<void> _completeBitiOrder(String transactionId) async {
+    final request = OrderNowRequest(
+      selectedDeliveryOption: selectedDeliveryOption.value,
+      selectedAddressId: selectedAddressId.value,
+      appliedCoupon: promoCode.value,
+      paymentMethod: 'biti_payment',
+    );
+
+    final ApiResult result = await _cartRepository.orderNow(request);
+
+    switch (result) {
+      case Success(response: final response):
+        if (response.statusCode != 200) {
+          showAppSnackBar(title: 'Failed to complete order', type: SnackBarType.error);
+          return;
+        }
+
+        final responseData = response.data;
+        if (responseData != null && responseData['orders'] != null && responseData['orders'].isNotEmpty) {
+          final orderId = responseData['orders'][0]['id'];
+          final contactNumber = selectedAddress?.contactPersonNumber ?? '';
+
+          // Refresh cart list to update UI
+          await _cartService.fetchCartList();
+
+          showAppSnackBar(
+            title: 'Payment completed successfully!',
+            type: SnackBarType.success,
+          );
+
+          // Navigate to order confirmation screen
+          Get.offAndToNamed(AppRoutes.cartConfirm, arguments: {
+            'orderId': orderId, 
+            'contactNumber': contactNumber,
+            'paymentMethod': 'biti_payment',
+            'transactionId': transactionId,
+          });
+        }
+
+      case Failure(error: final error):
+        showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
+    }
   }
 }

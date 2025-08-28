@@ -554,6 +554,8 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
         return Icons.credit_card;
       case 'digital_wallet':
         return Icons.account_balance_wallet;
+      case 'biti_payment':
+        return Icons.payment;
       case 'cash_on_delivery':
       default:
         return Icons.money;
