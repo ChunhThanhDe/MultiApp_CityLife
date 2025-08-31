@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_dialog.dart';
 
@@ -41,10 +43,10 @@ Future<void> _showModalNotifyPermissionRestricted(String? titleRestricted) async
   showAppDialog(
     child: Column(
       children: [
-        const Text('Permission Restricted'),
-        Text(titleRestricted ?? 'This permission is restricted by the system and cannot be changed.'),
+        Text(tr(LocaleKeys.permissions_permissionRestricted)),
+        Text(titleRestricted ?? tr(LocaleKeys.permissions_permissionRestrictedMessage)),
         AppButton(
-          child: const Text('OK'),
+          child: Text(tr(LocaleKeys.permissions_ok)),
           onTap: () {
             Get.back();
           },
@@ -58,17 +60,17 @@ Future<void> _showGoToAppSettingsModal(String? titlePermanentlyDenied) async {
   showAppDialog(
     child: Column(
       children: [
-        const Text('Permission Required'),
-        Text(titlePermanentlyDenied ?? 'This permission is required for the app to function properly. Please enable it in settings.'),
+        Text(tr(LocaleKeys.permissions_permissionRequired)),
+        Text(titlePermanentlyDenied ?? tr(LocaleKeys.permissions_permissionRequiredMessage)),
         AppButton(
-          child: const Text('Open Settings'),
+          child: Text(tr(LocaleKeys.permissions_openSettings)),
           onTap: () {
             openAppSettings();
             Get.back();
           },
         ),
         AppButton(
-          child: const Text('Cancel'),
+          child: Text(tr(LocaleKeys.permissions_cancel)),
           onTap: () {
             Get.back();
           },

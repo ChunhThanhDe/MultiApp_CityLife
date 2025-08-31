@@ -6,6 +6,8 @@ import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account_security/account_security_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AccountSecurityScreen extends BaseScreen<AccountSecurityController> {
   const AccountSecurityScreen({super.key});
@@ -166,7 +168,7 @@ class SocialConnectCell extends StatelessWidget {
           ),
           InkWell(
             onTap: onDisconnect,
-            child: Text('Disconnect', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textDangerDefault500)),
+            child: Text(tr(LocaleKeys.account_disconnect), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textDangerDefault500)),
           ),
         ],
       ),

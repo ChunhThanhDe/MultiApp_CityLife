@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart' hide SearchController;
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_infomation_response.dart';
@@ -38,7 +40,7 @@ class SearchScreen extends BaseScreen<SearchController> {
                     children: [
                       Padding(padding: const EdgeInsets.only(right: 12), child: Assets.icons.icSearch.svg()),
                       Expanded(
-                        child: Text('Search food and stores', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
+                        child: Text(tr(LocaleKeys.search_searchPlaceholder), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
                       ),
                     ],
                   ),
@@ -80,9 +82,9 @@ class SearchScreen extends BaseScreen<SearchController> {
               children: [
                 Icon(Icons.search_outlined, size: 64, color: AppColors.textGreyDefault500),
                 const SizedBox(height: 16),
-                Text('No data available', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyDefault500)),
+                Text(tr(LocaleKeys.search_noDataAvailable), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyDefault500)),
                 const SizedBox(height: 8),
-                Text('Please try again later', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
+                Text(tr(LocaleKeys.search_tryAgainLater), style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
               ],
             ),
           );
@@ -107,7 +109,7 @@ class SearchScreen extends BaseScreen<SearchController> {
 
         // Top Searches Section
         if (searchData.topSearches != null && searchData.topSearches!.isNotEmpty) ...[
-          Text('Top searches', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
+          Text(tr(LocaleKeys.search_topSearches), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
           const SizedBox(height: 16),
           ...searchData.topSearches!.map((item) => _buildSearchItemString(item, Assets.icons.icSearch.svg())),
           const SizedBox(height: 32),
@@ -115,7 +117,7 @@ class SearchScreen extends BaseScreen<SearchController> {
 
         // Recent Stores Section
         if (searchData.recentSearches != null && searchData.recentSearches!.isNotEmpty) ...[
-          Text('Recent', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
+          Text(tr(LocaleKeys.search_recent), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
           const SizedBox(height: 16),
           ...searchData.recentSearches!.map((store) => _buildSearchItemString(store, Assets.icons.icClock.svg())),
           const SizedBox(height: 32),
@@ -123,7 +125,7 @@ class SearchScreen extends BaseScreen<SearchController> {
 
         // Top Categories Section
         if (searchData.topCategories != null && searchData.topCategories!.isNotEmpty) ...[
-          Text('Top categories', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
+          Text(tr(LocaleKeys.search_topCategories), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
           const SizedBox(height: 16),
           ...searchData.topCategories!.map((item) => _buildSearchItemString(item.name, AppImage.network(item.imageUrl, width: 20, height: 20))),
         ],
@@ -141,9 +143,9 @@ class SearchScreen extends BaseScreen<SearchController> {
           children: [
             Icon(Icons.search_off_outlined, size: 64, color: AppColors.textGreyDefault500),
             const SizedBox(height: 16),
-            Text('No results found', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyDefault500)),
+            Text(tr(LocaleKeys.search_noResultsFound), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyDefault500)),
             const SizedBox(height: 8),
-            Text('Try searching with different keywords', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
+            Text(tr(LocaleKeys.search_tryDifferentKeywords), style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
           ],
         ),
       );

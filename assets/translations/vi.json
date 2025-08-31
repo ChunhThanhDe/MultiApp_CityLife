@@ -121,6 +121,10 @@
         "searchHint": "Tìm kiếm địa chỉ",
         "exploreNearby": "Khám phá gần đây",
         "addNewAddress": "Thêm địa chỉ mới",
+        "confirmDeliveryAddress": "Xác nhận địa chỉ giao hàng",
+        "confirmLocation": "Xác nhận vị trí",
+        "addressDetails": "Chi tiết địa chỉ",
+        "editPin": "Chỉnh sửa pin",
         "details": {
             "buildingType": "Loại tòa nhà",
             "selectBuildingType": "Chọn loại tòa nhà",
@@ -179,7 +183,11 @@
                 "title": "Chào mừng đến với SpeedEats",
                 "description": "Chúc mừng! Bây giờ bạn đã sẵn sàng bắt đầu cuộc phiêu lưu ẩm thực với Ứng dụng Giao hàng Thức ăn. Khám phá những hương vị mới, thỏa mãn cơn thèm và tận hưởng sự tiện lợi của thức ăn được giao tận nhà."
             }
-        }
+        },
+        "getStarted": "Bắt đầu",
+        "next": "Tiếp theo",
+        "skip": "Bỏ qua",
+        "preparingExperience": "Đang chuẩn bị trải nghiệm..."
     },
     "wallet": {
         "title": "Ví",
@@ -203,9 +211,132 @@
             "downloadPdf": "Tải PDF",
             "resendEmail": "Gửi lại email",
             "share": "Chia sẻ"
-        }
+        },
+        "receiptNumber": "#203358",
+        "brandName": "Starbucks®",
+        "status": "Hoàn thành • 7:25 PM",
+        "driverName": "Abdulkadir Ali",
+        "vehicleInfo": "Toyota Camry • 84D23B63",
+        "rating": "84%",
+        "cardDisplay": "VISA ••••5290"
+    },
+    "home": {
+        "noDataAvailable": "Không có dữ liệu",
+        "tryAgainLater": "Vui lòng thử lại sau"
+    },
+    "store": {
+        "filterMenu": "Lọc menu",
+        "dismiss": "Đóng",
+        "noItemsAvailable": "Không có món nào",
+        "required": "Bắt buộc",
+        "addOns": "Món thêm",
+        "resetRecipe": "Đặt lại công thức chuẩn",
+        "addToCart": "Thêm vào giỏ",
+        "productNotFound": "Không tìm thấy sản phẩm",
+        "editPin": "Chỉnh sửa pin"
+    },
+    "payment": {
+        "country": "Quốc gia",
+        "unitedStates": "Hoa Kỳ",
+        "vietnam": "Việt Nam",
+        "optional": "Tùy chọn"
+    },
+    "cardScanner": {
+        "scanCard": "Quét thẻ của bạn",
+        "positionCard": "Đặt thẻ trong khung hình",
+        "scanFailed": "Quét thẻ thất bại",
+        "tryAgain": "Thử lại"
+    },
+    "permissions": {
+        "permissionRestricted": "Quyền bị hạn chế",
+        "permissionRestrictedMessage": "Quyền này bị hệ thống hạn chế và không thể thay đổi",
+        "ok": "OK",
+        "permissionRequired": "Quyền cần thiết",
+        "permissionRequiredMessage": "Quyền này cần thiết để ứng dụng hoạt động bình thường. Vui lòng bật trong cài đặt",
+        "openSettings": "Mở cài đặt",
+        "cancel": "Hủy"
+    },
+    "service": {
+        "noServicesAvailable": "Không có dịch vụ nào",
+        "tryAgainLater": "Vui lòng thử lại sau",
+        "searchPlaceholder": "Tìm kiếm thức ăn và cửa hàng",
+        "deliver": "Giao hàng",
+        "deliveryAddress": "2216 N 10th Street, CA 92243",
+        "addProductImage": "Thêm hình ảnh sản phẩm",
+        "dateImage": "Hình ảnh ngày",
+        "pickupLocation": "Địa điểm nhận hàng",
+        "searchAddressHint": "Tìm kiếm địa chỉ",
+        "savedAddresses": "Địa chỉ đã lưu",
+        "addNewAddress": "Thêm địa chỉ mới"
+    },
+    "order": {
+        "retry": "Thử lại",
+        "order": "Đơn hàng",
+        "address": "Địa chỉ",
+        "orderDetails": "Chi tiết đơn hàng"
+    },
+    "favorites": {
+        "unknownStore": "Cửa hàng không xác định",
+        "deliveryFee": "Phí giao hàng $0",
+        "deliveryTimeFallback": "30-60 phút",
+        "unknownItem": "Món không xác định"
+    },
+    "search": {
+        "searchPlaceholder": "Tìm kiếm thức ăn và cửa hàng",
+        "noDataAvailable": "Không có dữ liệu",
+        "tryAgainLater": "Vui lòng thử lại sau",
+        "topSearches": "Tìm kiếm hàng đầu",
+        "recent": "Gần đây",
+        "topCategories": "Danh mục hàng đầu",
+        "noResultsFound": "Không tìm thấy kết quả",
+        "tryDifferentKeywords": "Thử tìm kiếm với từ khóa khác"
     },
     "account": {
-        "selectLanguage": "Chọn ngôn ngữ"
+        "title": "Tài khoản",
+        "selectLanguage": "Chọn ngôn ngữ",
+        "manageAccount": "Quản lý tài khoản",
+        "favorites": "Yêu thích",
+        "security": "Bảo mật",
+        "paymentMethods": "Phương thức thanh toán",
+        "address": "Địa chỉ",
+        "giftCards": "Thẻ quà tặng",
+        "inviteFriends": "Mời bạn bè",
+        "promotions": "Khuyến mãi",
+        "notification": "Thông báo",
+        "helpCenter": "Trung tâm trợ giúp",
+        "darkMode": "Chế độ tối",
+        "language": "Ngôn ngữ",
+        "aboutApp": "Về ứng dụng",
+        "signOut": "Đăng xuất",
+        "signOutTitle": "Đăng xuất",
+        "signOutMessage": "Bạn có chắc chắn muốn đăng xuất khỏi tài khoản?",
+        "cancel": "Hủy",
+        "changePassword": "Thay đổi mật khẩu của tôi",
+        "passwordRecommendation": "Chúng tôi khuyên bạn nên chọn mật khẩu:",
+        "changePasswordButton": "Thay đổi mật khẩu",
+        "birthdayQuestion": "Sinh nhật của bạn là khi nào?",
+        "optional": "(tùy chọn)",
+        "update": "Cập nhật",
+        "disconnect": "Ngắt kết nối",
+        "secondSteps": "Bước thứ hai",
+        "selectTheme": "Chọn giao diện",
+        "passkeyDescription": "Tăng tốc đăng nhập lần sau bằng cách tạo khóa truy cập trên thiết bị này",
+        "version": "v2.380"
+    },
+    "shared": {
+        "somethingWentWrong": "Đã xảy ra lỗi",
+        "tryAgain": "Thử lại"
+    },
+    "cart": {
+        "viewCart": "Xem giỏ hàng",
+        "orders": "Đơn hàng",
+        "clearAll": "Xóa tất cả",
+        "subtotal": "Tổng phụ",
+        "unknownStore": "Cửa hàng không xác định",
+        "checkoutNow": "Thanh toán ngay",
+        "failedToLoadCheckout": "Không thể tải dữ liệu thanh toán",
+        "apply": "Áp dụng",
+        "orderNow": "Đặt hàng ngay",
+        "done": "Xong"
     }
 }

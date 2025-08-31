@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/service_filter.dart';
@@ -82,9 +84,12 @@ class ServiceHeader extends GetView<ServiceController> {
                     ),
                     child: Row(
                       children: [
-                        Padding(padding: EdgeInsets.only(right: 12.w), child: Assets.icons.icSearch.svg()),
+                        Padding(
+                          padding: EdgeInsets.only(right: 12.w),
+                          child: Assets.icons.icSearch.svg(),
+                        ),
                         Expanded(
-                          child: Text('Search food and stores', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
+                          child: Text(tr(LocaleKeys.service_searchPlaceholder), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
                         ),
                       ],
                     ),
@@ -105,9 +110,12 @@ class ServiceHeader extends GetView<ServiceController> {
               ),
               child: Row(
                 children: [
-                  Padding(padding: EdgeInsets.only(right: 12.w), child: Assets.icons.icSearch.svg()),
+                  Padding(
+                    padding: EdgeInsets.only(right: 12.w),
+                    child: Assets.icons.icSearch.svg(),
+                  ),
                   Expanded(
-                    child: Text('Search food and stores', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
+                    child: Text(tr(LocaleKeys.service_searchPlaceholder), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -123,7 +131,10 @@ class ServiceHeader extends GetView<ServiceController> {
                         },
                       );
                     },
-                    child: Padding(padding: EdgeInsets.only(left: 12.w), child: Assets.icons.icFilter.svg()),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 12.w),
+                      child: Assets.icons.icFilter.svg(),
+                    ),
                   ),
                 ],
               ),
@@ -141,7 +152,7 @@ class ServiceHeader extends GetView<ServiceController> {
         children: [
           Assets.icons.icCar.svg(width: 16, height: 16, colorFilter: ColorFilter.mode(AppColors.textBaseWhite, BlendMode.srcIn)),
           const SizedBox(width: 8),
-          Text('Deliver', style: AppTextStyles.typographyH11Medium.copyWith(color: AppColors.textBaseWhite)),
+          Text(tr(LocaleKeys.service_deliver), style: AppTextStyles.typographyH11Medium.copyWith(color: AppColors.textBaseWhite)),
           const SizedBox(width: 8),
           Container(
             width: 4,
@@ -150,7 +161,7 @@ class ServiceHeader extends GetView<ServiceController> {
           ),
           const SizedBox(width: 8),
           Expanded(
-            child: Text('2216 N 10th Street, CA 92243', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBaseWhite)),
+            child: Text(tr(LocaleKeys.service_deliveryAddress), style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBaseWhite)),
           ),
           Icon(Icons.keyboard_arrow_down, color: AppColors.textBaseWhite, size: 20),
         ],

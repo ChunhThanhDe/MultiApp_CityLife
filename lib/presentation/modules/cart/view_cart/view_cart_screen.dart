@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/response/get_cart_list_response.dart';
@@ -28,11 +30,11 @@ class ViewCartScreen extends BaseScreen<ViewCartController> {
     return AppBar(
       backgroundColor: AppTheme.theme.backgroundSurfacePrimaryWhite.withValues(alpha: 0.9),
       elevation: 0.5,
-      title: Text('View Cart', style: AppTextStyles.typographyH9Medium.copyWith(color: AppTheme.theme.textGreyHighest950)),
+      title: Text(tr(LocaleKeys.cart_viewCart), style: AppTextStyles.typographyH9Medium.copyWith(color: AppTheme.theme.textGreyHighest950)),
       actions: [
         TextButton(
           onPressed: controller.navigateToOrders,
-          child: Text('Orders', style: AppTextStyles.typographyH11Regular.copyWith(color: AppTheme.theme.textGreyHighest950)),
+          child: Text(tr(LocaleKeys.cart_orders), style: AppTextStyles.typographyH11Regular.copyWith(color: AppTheme.theme.textGreyHighest950)),
         ),
         IconButton(icon: SvgPicture.asset(Assets.icons.icOrder.path, width: 24, height: 24), onPressed: controller.navigateToOrders),
       ],
@@ -183,14 +185,14 @@ class _StoreHeader extends StatelessWidget {
             const SizedBox(width: 12),
           ],
           Expanded(
-            child: Text(store.storeName ?? 'Unknown Store', style: AppTextStyles.typographyH10SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950)),
+            child: Text(store.storeName ?? tr(LocaleKeys.cart_unknownStore), style: AppTextStyles.typographyH10SemiBold.copyWith(color: AppTheme.theme.textGreyHighest950)),
           ),
           TextButton(
             onPressed: onClearAll,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Clear All', style: AppTextStyles.typographyH11Regular.copyWith(color: AppTheme.theme.stateDangerDefault500)),
+                Text(tr(LocaleKeys.cart_clearAll), style: AppTextStyles.typographyH11Regular.copyWith(color: AppTheme.theme.stateDangerDefault500)),
                 const SizedBox(width: 4),
                 Icon(Icons.delete_outline, color: AppTheme.theme.stateDangerDefault500, size: 16),
               ],
@@ -482,7 +484,7 @@ class _CartSummarySection extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Text('Subtotal', style: AppTextStyles.typographyH10Medium.copyWith(color: AppTheme.theme.textGreyHigh700)),
+                child: Text(tr(LocaleKeys.cart_subtotal), style: AppTextStyles.typographyH10Medium.copyWith(color: AppTheme.theme.textGreyHigh700)),
               ),
               Obx(() => Text('\$${controller.totalPrice.toStringAsFixed(2)}', style: AppTextStyles.typographyH10Bold.copyWith(color: AppTheme.theme.textGreyHighest950))),
             ],

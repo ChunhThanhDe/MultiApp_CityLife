@@ -1,13 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/address/confirm_address/confirm_address_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
-
-import 'package:sixam_mart_user/presentation/modules/address/confirm_address/confirm_address_controller.dart';
 
 class ConfirmAddressScreen extends BaseScreen<ConfirmAddressController> {
   const ConfirmAddressScreen({super.key});
@@ -26,13 +27,13 @@ class ConfirmAddressScreen extends BaseScreen<ConfirmAddressController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 16,
           children: [
-            Text('Confirm delivery address', style: AppTextStyles.typographyH6SemiBold.copyWith(color: AppColors.textGreyHighest950)),
+            Text(tr(LocaleKeys.address_confirmDeliveryAddress), style: AppTextStyles.typographyH6SemiBold.copyWith(color: AppColors.textGreyHighest950)),
             Text('Lorem Ipsum is simply dummy text of the printing and typesetting industry.', style: AppTextStyles.typographyH10Regular.copyWith(color: AppColors.textGreyHigh700)),
             AppButton(
               onTap: () => Get.until((route) => Get.currentRoute == AppRoutes.root),
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: Text('Confirm location', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite)),
+              child: Text(tr(LocaleKeys.address_confirmLocation), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite)),
             ),
           ],
         ),

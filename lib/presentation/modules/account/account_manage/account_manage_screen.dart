@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
@@ -14,7 +16,7 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(title: 'Manage account', onBack: () => Get.back());
+    return BasicAppBar(title: tr(LocaleKeys.account_manageAccount), onBack: () => Get.back());
   }
 
   @override
@@ -26,9 +28,7 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
   @override
   Widget buildScreen(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-      ),
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Column(
         children: [
           // Avatar
@@ -107,9 +107,9 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("When's your birthday?", style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+                        Text(tr(LocaleKeys.account_birthdayQuestion), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
                         const SizedBox(width: 4),
-                        Text('(optional)', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
+                        Text(tr(LocaleKeys.account_optional), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
                       ],
                     ),
                   ),
@@ -189,7 +189,7 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                         ),
                         child: controller.isLoading.value
                             ? SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(AppColors.stateBaseWhite)))
-                            : Text('Update', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.backgroundSurfacePrimaryWhite)),
+                            : Text(tr(LocaleKeys.account_update), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.backgroundSurfacePrimaryWhite)),
                       ),
                     ),
                   ),

@@ -8,6 +8,8 @@ import 'package:sixam_mart_user/presentation/modules/service/core/base_service_u
 import 'package:sixam_mart_user/presentation/modules/service/ui1/service_ui1_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
 import 'package:sixam_mart_user/presentation/shared/unified_banner_widget.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 /// Screen for UI1 type services (Food-like interface)
 /// Displays dynamic sections with banners and categories
@@ -67,9 +69,9 @@ class ServiceUI1Screen extends BaseServiceUIScreen<ServiceUI1Controller> {
         children: [
           Icon(Icons.restaurant, size: 64, color: AppColors.textGreyDefault500),
           const SizedBox(height: 16),
-          Text('No services available', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyDefault500)),
+          Text(tr(LocaleKeys.service_noServicesAvailable), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyDefault500)),
           const SizedBox(height: 8),
-          Text('Please try again later', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
+          Text(tr(LocaleKeys.service_tryAgainLater), style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
         ],
       ),
     );

@@ -23,7 +23,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
     return AppBar(
       surfaceTintColor: AppColors.stateBaseWhite,
       backgroundColor: AppColors.stateBaseWhite,
-      title: Text('Address details', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
+      title: Text(tr(LocaleKeys.address_addressDetails), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
       centerTitle: false,
       leading: IconButton(onPressed: () => Get.back(), icon: Assets.icons.icBackArrow.svg()),
     );
@@ -114,7 +114,7 @@ class AddressDetailsScreen extends BaseScreen<AddressDetailsController> {
                     onTap: () {},
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                      child: Text('Edit pin', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+                      child: Text(tr(LocaleKeys.address_editPin), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
                     ),
                   ),
                 ),

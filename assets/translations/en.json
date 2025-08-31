@@ -121,6 +121,10 @@
         "searchHint": "Search for an address",
         "exploreNearby": "Explore nearby",
         "addNewAddress": "Add new address",
+        "confirmDeliveryAddress": "Confirm delivery address",
+        "confirmLocation": "Confirm location",
+        "addressDetails": "Address details",
+        "editPin": "Edit pin",
         "details": {
             "buildingType": "Building type",
             "selectBuildingType": "Select building type",
@@ -179,7 +183,11 @@
                 "title": "Welcome to SpeedEats",
                 "description": "Congratulations! You're now ready to embark on a culinary adventure with Food Delivery App. Discover new flavors, indulge in your cravings, and enjoy the convenience of food delivered to your doorstep."
             }
-        }
+        },
+        "getStarted": "Get Started",
+        "next": "Next",
+        "skip": "Skip",
+        "preparingExperience": "Preparing your experience..."
     },
     "wallet": {
         "title": "Wallet",
@@ -203,9 +211,132 @@
             "downloadPdf": "Download PDF",
             "resendEmail": "Resend Email",
             "share": "Share"
-        }
+        },
+        "receiptNumber": "#203358",
+        "brandName": "Starbucks®",
+        "status": "Completed • 7:25 PM",
+        "driverName": "Abdulkadir Ali",
+        "vehicleInfo": "Toyota Camry • 84D23B63",
+        "rating": "84%",
+        "cardDisplay": "VISA ••••5290"
+    },
+    "home": {
+        "noDataAvailable": "No data available",
+        "tryAgainLater": "Please try again later"
+    },
+    "store": {
+        "filterMenu": "Filter menu",
+        "dismiss": "Dismiss",
+        "noItemsAvailable": "No items available",
+        "required": "Required",
+        "addOns": "Add-ons",
+        "resetRecipe": "Reset to standard recipe",
+        "addToCart": "Add to cart",
+        "productNotFound": "Product not found",
+        "editPin": "Edit pin"
+    },
+    "payment": {
+        "country": "Country",
+        "unitedStates": "United States",
+        "vietnam": "Vietnam",
+        "optional": "Optional"
+    },
+    "cardScanner": {
+        "scanCard": "Scan your card",
+        "positionCard": "Position your card within the frame",
+        "scanFailed": "Card scanning failed",
+        "tryAgain": "Try again"
+    },
+    "permissions": {
+        "permissionRestricted": "Permission Restricted",
+        "permissionRestrictedMessage": "This permission is restricted by the system and cannot be changed",
+        "ok": "OK",
+        "permissionRequired": "Permission Required",
+        "permissionRequiredMessage": "This permission is required for the app to function properly. Please enable it in settings",
+        "openSettings": "Open Settings",
+        "cancel": "Cancel"
+    },
+    "service": {
+        "noServicesAvailable": "No services available",
+        "tryAgainLater": "Please try again later",
+        "searchPlaceholder": "Search food and stores",
+        "deliver": "Deliver",
+        "deliveryAddress": "2216 N 10th Street, CA 92243",
+        "addProductImage": "Add Product image",
+        "dateImage": "Date image",
+        "pickupLocation": "Pickup Location",
+        "searchAddressHint": "Search for an address",
+        "savedAddresses": "Saved addresses",
+        "addNewAddress": "Add new address"
+    },
+    "order": {
+        "retry": "Retry",
+        "order": "Order",
+        "address": "Address",
+        "orderDetails": "Order Details"
+    },
+    "favorites": {
+        "unknownStore": "Unknown Store",
+        "deliveryFee": "$0 Delivery fee",
+        "deliveryTimeFallback": "30-60 min",
+        "unknownItem": "Unknown Item"
+    },
+    "search": {
+        "searchPlaceholder": "Search food and stores",
+        "noDataAvailable": "No data available",
+        "tryAgainLater": "Please try again later",
+        "topSearches": "Top searches",
+        "recent": "Recent",
+        "topCategories": "Top categories",
+        "noResultsFound": "No results found",
+        "tryDifferentKeywords": "Try searching with different keywords"
     },
     "account": {
-        "selectLanguage": "Select Language"
+        "title": "Account",
+        "selectLanguage": "Select Language",
+        "manageAccount": "Manage account",
+        "favorites": "Favorites",
+        "security": "Security",
+        "paymentMethods": "Payment methods",
+        "address": "Address",
+        "giftCards": "Gift Cards",
+        "inviteFriends": "Invite friends",
+        "promotions": "Promotions",
+        "notification": "Notification",
+        "helpCenter": "Help Center",
+        "darkMode": "Dark Mode",
+        "language": "Language",
+        "aboutApp": "About App",
+        "signOut": "Sign out",
+        "signOutTitle": "Sign Out",
+        "signOutMessage": "Are you sure you want to sign out of your account?",
+        "cancel": "Cancel",
+        "changePassword": "Change My Password",
+        "passwordRecommendation": "We recommend choosing a password that:",
+        "changePasswordButton": "Change password",
+        "birthdayQuestion": "When's your birthday?",
+        "optional": "(optional)",
+        "update": "Update",
+        "disconnect": "Disconnect",
+        "secondSteps": "Second steps",
+        "selectTheme": "Select Theme",
+        "passkeyDescription": "Speed up your sign in next time by creating a passkey on this device",
+        "version": "v2.380"
+    },
+    "shared": {
+        "somethingWentWrong": "Something went wrong",
+        "tryAgain": "Try Again"
+    },
+    "cart": {
+        "viewCart": "View Cart",
+        "orders": "Orders",
+        "clearAll": "Clear All",
+        "subtotal": "Subtotal",
+        "unknownStore": "Unknown Store",
+        "checkoutNow": "Checkout Now",
+        "failedToLoadCheckout": "Failed to load checkout data",
+        "apply": "Apply",
+        "orderNow": "Order Now",
+        "done": "Done"
     }
 }

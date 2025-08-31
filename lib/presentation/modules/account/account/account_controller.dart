@@ -167,7 +167,7 @@ class _ThemeSelectionBottomSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('Select Theme', style: AppTextStyles.typographyH9SemiBold.copyWith(color: AppColors.textGreyHighest950)),
+          Text(tr(LocaleKeys.account_selectTheme), style: AppTextStyles.typographyH9SemiBold.copyWith(color: AppColors.textGreyHighest950)),
           const SizedBox(height: 16),
           ...ThemeTypes.values.map((themeType) {
             final isSelected = themeType == currentTheme;

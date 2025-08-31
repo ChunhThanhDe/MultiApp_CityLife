@@ -10,6 +10,8 @@ import 'package:sixam_mart_user/presentation/modules/store/components/product_nu
 import 'package:sixam_mart_user/presentation/modules/store/components/product_option_group_section.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_product_detail/store_product_detail_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> {
   const StoreProductDetailScreen({super.key});
@@ -37,7 +39,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
             ),
             onPressed: controller.addToCart,
-            child: Text('Add to cart${priceText.isNotEmpty ? " • $priceText" : ""}', style: AppTextStyles.typographyH11Medium.tint(AppColors.backgroundSurfacePrimaryWhite)),
+            child: Text('${tr(LocaleKeys.store_addToCart)}${priceText.isNotEmpty ? " • $priceText" : ""}', style: AppTextStyles.typographyH11Medium.tint(AppColors.backgroundSurfacePrimaryWhite)),
           ),
         ),
       );
@@ -56,7 +58,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
           return const Scaffold(body: Center(child: CircularProgressIndicator()));
         }
         if (product == null) {
-          return const Scaffold(body: Center(child: Text('Product not found')));
+          return Scaffold(body: Center(child: Text(tr(LocaleKeys.store_productNotFound))));
         }
 
         return ListView(
@@ -129,7 +131,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('Reset to standard recipe', style: AppTextStyles.typographyH11Medium.tint(AppColors.textGreyHighest950)),
+                      Text(tr(LocaleKeys.store_resetRecipe), style: AppTextStyles.typographyH11Medium.tint(AppColors.textGreyHighest950)),
                       const Spacer(),
                       Icon(Icons.refresh, size: 18, color: AppColors.textGreyDefault500),
                     ],
@@ -206,7 +208,7 @@ class StoreProductDetailScreen extends BaseScreen<StoreProductDetailController> 
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 12),
-                    Text('Add-ons', style: AppTextStyles.typographyH10SemiBold.tint(AppColors.textGreyHighest950)),
+                    Text(tr(LocaleKeys.store_addOns), style: AppTextStyles.typographyH10SemiBold.tint(AppColors.textGreyHighest950)),
                     const SizedBox(height: 8),
                     ...product.addOns.map<Widget>((addOn) {
                       // Assume addOn is a Map with id, name, price

@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/cart_order_confirm/cart_order_confirm_controller.dart';
@@ -13,7 +15,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return const BasicAppBar(title: 'Order');
+    return BasicAppBar(title: tr(LocaleKeys.order_order));
   }
 
   @override
@@ -36,7 +38,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
-              ElevatedButton(onPressed: () => controller.onInit(), child: const Text('Retry')),
+              ElevatedButton(onPressed: () => controller.onInit(), child: Text(tr(LocaleKeys.order_retry))),
             ],
           ),
         );
@@ -108,7 +110,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                   // Address Section
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.h),
-                    child: sectionTitle('Address'),
+                    child: sectionTitle(tr(LocaleKeys.order_address)),
                   ),
                   cellItem(iconAsset: 'assets/icons/ic_home.svg', title: controller.contactPersonName, subtitle: controller.deliveryAddress),
                   dividerLine(),
@@ -120,7 +122,7 @@ class CartOrderConfirmScreen extends BaseScreen<CartOrderConfirmController> {
                   // Order Details Section
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.h),
-                    child: sectionTitle('Order Details'),
+                    child: sectionTitle(tr(LocaleKeys.order_orderDetails)),
                   ),
 
                   // Display store information

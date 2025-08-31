@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/delivery/components/delivery_option.dart';
@@ -55,10 +57,7 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Delivery Options',
-                  style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
-                ),
+                Text('Delivery Options', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
                 const SizedBox(height: 16),
                 DeliveryOptionTile(svgIcon: 'assets/icons/ic_priority.svg', title: 'Priority', subtitle: '5-10 min(s) Delivered directly to you', price: '\$5.99', isSelected: false, onTap: () {}),
                 const SizedBox(height: 8),
@@ -75,10 +74,7 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Promocode',
-                  style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
-                ),
+                Text('Promocode', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
                 const SizedBox(width: 8),
                 Row(
                   children: [
@@ -109,23 +105,14 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Total:',
-                      style: AppTextStyles.typographyH8Medium.copyWith(color: AppColors.textGreyHighest950),
-                    ),
-                    Text(
-                      '\$43.87',
-                      style: AppTextStyles.typographyH8Medium.copyWith(color: AppColors.textGreyHighest950),
-                    ),
+                    Text('Total:', style: AppTextStyles.typographyH8Medium.copyWith(color: AppColors.textGreyHighest950)),
+                    Text('\$43.87', style: AppTextStyles.typographyH8Medium.copyWith(color: AppColors.textGreyHighest950)),
                   ],
                 ),
                 const SizedBox(height: 16),
                 Divider(thickness: 3, color: AppColors.backgroundSurfaceTertiaryGrey50),
                 const SizedBox(height: 16),
-                Text(
-                  'Payment',
-                  style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
-                ),
+                Text('Payment', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
                 const SizedBox(height: 8),
                 Row(
                   children: [
@@ -188,7 +175,7 @@ class DeliveryCheckoutScreen extends BaseScreen<DeliveryCheckoutController> {
                     onTap: () {},
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                      child: Text('Edit pin', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+                      child: Text(tr(LocaleKeys.address_editPin), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
                     ),
                   ),
                 ),
@@ -216,10 +203,7 @@ class _LocationTile extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              title,
-              style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
-            ),
+            Text(title, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
             Text(subtitle, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
           ],
         ),
@@ -268,10 +252,7 @@ class _Actions extends StatelessWidget {
             backgroundColor: AppColors.stateBrandDefault500,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
           ),
-          child: Text(
-            'Order Now',
-            style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite),
-          ),
+          child: Text('Order Now', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite)),
         ),
       ),
     );
