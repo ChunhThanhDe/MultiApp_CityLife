@@ -112,36 +112,53 @@
             "confirmReadPrivacyPolicy": "and confirm that you have read Diyaar Privacy Policy"
         }
     },
-    "address": {
-        "title": "Address",
-        "enterTitle": "Enter your address",
-        "enterSubtitle": "We need your address to show Food, Groceries and more near you",
-        "addButton": "Add your address",
-        "skipButton": "Skip for now",
-        "searchHint": "Search for an address",
-        "exploreNearby": "Explore nearby",
-        "addNewAddress": "Add new address",
-        "confirmDeliveryAddress": "Confirm delivery address",
-        "confirmLocation": "Confirm location",
-        "addressDetails": "Address details",
-        "editPin": "Edit pin",
-        "details": {
-            "buildingType": "Building type",
-            "selectBuildingType": "Select building type",
-            "buildingNumber": "Apt, Unit or Floor",
-            "buildingNumberHint": "E.g. 2030",
-            "buildingName": "Building name",
-            "buildingNameHint": "E.g. Center Villa",
-            "addressLabel": "Address label",
-            "addressLabelOptional": " (optional)",
-            "addressLabelHint": "Add a label (ex. my home)",
-            "deliveryInstructions": "Delivery instructions",
-            "saveAddress": "Save address",
-            "selectBuildingTypeTitle": "Select building type",
-            "selectBuildingTypeSubtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-        }
-    },
     "onboarding": {
+        "title": "Welcome to Six Mart",
+        "getStarted": "Get Started",
+        "skip": "Skip",
+        "next": "Next",
+        "done": "Done",
+        "slide1": {
+            "title": "Welcome to Six Mart",
+            "subtitle": "Your one-stop destination for all your shopping needs"
+        },
+        "slide2": {
+            "title": "Fast Delivery",
+            "subtitle": "Get your orders delivered to your doorstep in minutes"
+        },
+        "slide3": {
+            "title": "Best Prices",
+            "subtitle": "Find the best deals and discounts on thousands of products"
+        },
+        "slide4": {
+            "title": "Quality Products",
+            "subtitle": "Shop from trusted brands and verified sellers"
+        },
+        "slide5": {
+            "title": "Easy Payment",
+            "subtitle": "Multiple payment options for your convenience"
+        },
+        "slide6": {
+            "title": "24/7 Support",
+            "subtitle": "Our customer support team is always here to help you"
+        },
+        "slide7": {
+            "title": "Track Orders",
+            "subtitle": "Real-time tracking for all your orders"
+        },
+        "slide8": {
+            "title": "Save Money",
+            "subtitle": "Earn rewards and save money with every purchase"
+        },
+        "slide9": {
+            "title": "Share & Earn",
+            "subtitle": "Share with friends and earn rewards together"
+        },
+        "slide10": {
+            "title": "Ready to Start?",
+            "subtitle": "Join millions of happy customers today"
+        },
+        "preparingExperience": "Preparing your experience...",
         "welcome": {
             "step1": {
                 "title": "Welcome to SpeedEats",
@@ -183,11 +200,57 @@
                 "title": "Welcome to SpeedEats",
                 "description": "Congratulations! You're now ready to embark on a culinary adventure with Food Delivery App. Discover new flavors, indulge in your cravings, and enjoy the convenience of food delivered to your doorstep."
             }
-        },
-        "getStarted": "Get Started",
-        "next": "Next",
-        "skip": "Skip",
-        "preparingExperience": "Preparing your experience..."
+        }
+    },
+    "home": {
+        "noDataAvailable": "No data available",
+        "tryAgainLater": "Please try again later"
+    },
+    "store": {
+        "filterMenu": "Filter menu",
+        "dismiss": "Dismiss",
+        "noItemsAvailable": "No items available",
+        "required": "Required",
+        "addOns": "Add-ons",
+        "resetRecipe": "Reset to standard recipe",
+        "addToCart": "Add to cart",
+        "productNotFound": "Product not found",
+        "editPin": "Edit pin",
+        "contact": "Contact",
+        "delivery": "Delivery",
+        "tracking": "Tracking",
+        "error": "Error",
+        "failedToLoadProduct": "Failed to load product detail",
+        "failedToParseProduct": "Failed to parse product data",
+        "loadStoreDetailFailed": "Load store detail failed",
+        "details": "Details",
+        "ingredients": "Ingredients",
+        "option": "Option"
+    },
+    "service": {
+        "noServicesAvailable": "No services available",
+        "tryAgainLater": "Please try again later",
+        "searchPlaceholder": "Search food and stores",
+        "deliver": "Deliver",
+        "deliveryAddress": "2216 N 10th Street, CA 92243",
+        "addProductImage": "Add Product image",
+        "dateImage": "Date image",
+        "pickupLocation": "Pickup Location",
+        "searchAddressHint": "Search for an address",
+        "savedAddresses": "Saved addresses",
+        "addNewAddress": "Add new address",
+        "delivery": "Delivery",
+        "tracking": "Tracking"
+    },
+    "payment": {
+        "country": "Country",
+        "unitedStates": "United States",
+        "vietnam": "Vietnam",
+        "optional": "Optional",
+        "apple": "Apple",
+        "visa": "Visa",
+        "mastercard": "Mastercard",
+        "evc": "EVC"
     },
     "wallet": {
         "title": "Wallet",
@@ -218,61 +281,38 @@
         "driverName": "Abdulkadir Ali",
         "vehicleInfo": "Toyota Camry • 84D23B63",
         "rating": "84%",
-        "cardDisplay": "VISA ••••5290"
+        "cardDisplay": "VISA ••••5290",
+        "laundry": "Laundry",
+        "walmart": "Walmart",
+        "target": "Target",
+        "walgreen": "Walgreen"
     },
-    "home": {
-        "noDataAvailable": "No data available",
-        "tryAgainLater": "Please try again later"
+    "delivery": {
+        "inDelivered": "In Delivered",
+        "inProgress": "In Progress",
+        "inReview": "In Review",
+        "completed": "Completed",
+        "onHold": "On Hold",
+        "cancelled": "Cancelled"
     },
-    "store": {
-        "filterMenu": "Filter menu",
-        "dismiss": "Dismiss",
-        "noItemsAvailable": "No items available",
-        "required": "Required",
-        "addOns": "Add-ons",
-        "resetRecipe": "Reset to standard recipe",
-        "addToCart": "Add to cart",
-        "productNotFound": "Product not found",
-        "editPin": "Edit pin"
-    },
-    "payment": {
-        "country": "Country",
-        "unitedStates": "United States",
-        "vietnam": "Vietnam",
-        "optional": "Optional"
-    },
-    "cardScanner": {
-        "scanCard": "Scan your card",
-        "positionCard": "Position your card within the frame",
-        "scanFailed": "Card scanning failed",
-        "tryAgain": "Try again"
-    },
-    "permissions": {
-        "permissionRestricted": "Permission Restricted",
-        "permissionRestrictedMessage": "This permission is restricted by the system and cannot be changed",
-        "ok": "OK",
-        "permissionRequired": "Permission Required",
-        "permissionRequiredMessage": "This permission is required for the app to function properly. Please enable it in settings",
-        "openSettings": "Open Settings",
-        "cancel": "Cancel"
-    },
-    "service": {
-        "noServicesAvailable": "No services available",
-        "tryAgainLater": "Please try again later",
-        "searchPlaceholder": "Search food and stores",
-        "deliver": "Deliver",
-        "deliveryAddress": "2216 N 10th Street, CA 92243",
-        "addProductImage": "Add Product image",
-        "dateImage": "Date image",
-        "pickupLocation": "Pickup Location",
-        "searchAddressHint": "Search for an address",
-        "savedAddresses": "Saved addresses",
-        "addNewAddress": "Add new address"
+    "cart": {
+        "viewCart": "View Cart",
+        "orders": "Orders",
+        "clearAll": "Clear All",
+        "subtotal": "Subtotal",
+        "unknownStore": "Unknown Store",
+        "checkoutNow": "Checkout Now",
+        "failedToLoadCheckout": "Failed to load checkout data",
+        "apply": "Apply",
+        "orderNow": "Order Now",
+        "done": "Done",
+        "checkout": "Checkout"
     },
     "order": {
         "retry": "Retry",
         "order": "Order",
         "address": "Address",
+        "addressDetails": "Address details",
         "orderDetails": "Order Details"
     },
     "favorites": {
@@ -299,6 +339,7 @@
         "security": "Security",
         "paymentMethods": "Payment methods",
         "address": "Address",
+        "addressDetails": "Address details",
         "giftCards": "Gift Cards",
         "inviteFriends": "Invite friends",
         "promotions": "Promotions",
@@ -327,16 +368,52 @@
         "somethingWentWrong": "Something went wrong",
         "tryAgain": "Try Again"
     },
-    "cart": {
-        "viewCart": "View Cart",
-        "orders": "Orders",
-        "clearAll": "Clear All",
-        "subtotal": "Subtotal",
-        "unknownStore": "Unknown Store",
-        "checkoutNow": "Checkout Now",
-        "failedToLoadCheckout": "Failed to load checkout data",
-        "apply": "Apply",
-        "orderNow": "Order Now",
-        "done": "Done"
+    "banner": {
+        "closed": "Closed",
+        "currentlyUnavailable": "Currently Unavailable"
+    },
+    "cardScanner": {
+        "scanCard": "Scan your card",
+        "positionCard": "Position your card within the frame",
+        "scanFailed": "Card scanning failed",
+        "tryAgain": "Try again"
+    },
+    "permissions": {
+        "permissionRestricted": "Permission Restricted",
+        "permissionRestrictedMessage": "This permission is restricted by the system and cannot be changed",
+        "ok": "OK",
+        "permissionRequired": "Permission Required",
+        "permissionRequiredMessage": "This permission is required for the app to function properly. Please enable it in settings",
+        "openSettings": "Open Settings",
+        "cancel": "Cancel"
+    },
+    "address": {
+        "title": "Address",
+        "enterTitle": "Enter your address",
+        "enterSubtitle": "We need your address to show Food, Groceries and more near you",
+        "addButton": "Add your address",
+        "skipButton": "Skip for now",
+        "searchHint": "Search for an address",
+        "exploreNearby": "Explore nearby",
+        "addNewAddress": "Add new address",
+        "confirmDeliveryAddress": "Confirm delivery address",
+        "confirmLocation": "Confirm location",
+        "addressDetails": "Address details",
+        "editPin": "Edit pin",
+        "details": {
+            "buildingType": "Building type",
+            "selectBuildingType": "Select building type",
+            "buildingNumber": "Apt, Unit or Floor",
+            "buildingNumberHint": "E.g. 2030",
+            "buildingName": "Building name",
+            "buildingNameHint": "E.g. Center Villa",
+            "addressLabel": "Address label",
+            "addressLabelOptional": " (optional)",
+            "addressLabelHint": "Add a label (ex. my home)",
+            "deliveryInstructions": "Delivery instructions",
+            "saveAddress": "Save address",
+            "selectBuildingTypeTitle": "Select building type",
+            "selectBuildingTypeSubtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        }
     }
 }

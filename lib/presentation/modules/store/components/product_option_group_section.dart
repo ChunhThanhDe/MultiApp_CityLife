@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class OptionGroupSection extends StatelessWidget {
@@ -52,9 +54,9 @@ class OptionGroupSection extends StatelessWidget {
             child: Row(
               children: [
                 Text(title, style: AppTextStyles.typographyH10Medium.tint(AppColors.textGreyHighest950)),
-                if (requiredField) Text('  *', style: AppTextStyles.typographyH11Regular.tint(AppColors.stateBrandDefault500)),
+                if (requiredField) Text('  ${tr(LocaleKeys.store_required)}', style: AppTextStyles.typographyH11Regular.tint(AppColors.stateBrandDefault500)),
                 const Spacer(),
-                Text('Required', style: AppTextStyles.typographyH11Regular.tint(AppColors.textGreyHigh700)),
+                Text(tr(LocaleKeys.store_required), style: AppTextStyles.typographyH11Regular.tint(AppColors.textGreyHigh700)),
               ],
             ),
           ),

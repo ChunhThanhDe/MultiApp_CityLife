@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
@@ -6,7 +8,6 @@ import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/presentation/shared/widgets/banners/delivery_info_widget.dart';
 
 class BannerDiscountWidget extends StatelessWidget {
-
   const BannerDiscountWidget({required this.item, required this.index, required this.totalItems, super.key, this.onTap});
   final BannerEntity item;
   final int index;
@@ -57,7 +58,7 @@ class BannerDiscountWidget extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              item.status == 0 ? 'Closed' : 'Currently Unavailable',
+              item.status == 0 ? tr(LocaleKeys.banner_closed) : tr(LocaleKeys.banner_currentlyUnavailable),
               style: AppTextStyles.typographyH11Medium.copyWith(color: AppColors.backgroundSurfacePrimaryWhite),
               textAlign: TextAlign.center,
             ),

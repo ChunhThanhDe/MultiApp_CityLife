@@ -1,12 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/wallet/view_receipt/view_receipt_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
-
-import 'package:sixam_mart_user/presentation/modules/wallet/view_receipt/view_receipt_controller.dart';
 
 typedef ReceiptAction = ({SvgGenImage icon, String label, VoidCallback onTap});
 
@@ -20,7 +21,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
       surfaceTintColor: AppColors.stateBaseWhite,
       backgroundColor: AppColors.stateBaseWhite,
       leadingWidth: 48,
-      title: Text('Receipt ', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
+      title: Text(tr(LocaleKeys.wallet_receipt_title), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
       leading: IconButton(
         onPressed: () => Get.back(),
         icon: Assets.icons.icLeftArrowChervon.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn), width: 28, height: 28),
@@ -28,7 +29,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
       actions: [
         Row(
           children: [
-            Text('#203358', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+            Text(tr(LocaleKeys.wallet_receiptNumber), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
             const SizedBox(width: 8),
             Assets.icons.icInvoice.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
             const SizedBox(width: 24),
@@ -87,8 +88,8 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Starbucks®', style: AppTextStyles.typographyH7SemiBold.copyWith(color: AppColors.textBaseWhite)),
-              Text('Completed • 7:25 PM', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBaseWhite)),
+              Text(tr(LocaleKeys.wallet_brandName), style: AppTextStyles.typographyH7SemiBold.copyWith(color: AppColors.textBaseWhite)),
+              Text(tr(LocaleKeys.wallet_status), style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textBaseWhite)),
             ],
           ),
           const Spacer(),
@@ -124,16 +125,16 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
               children: [
                 SizedBox(
                   width: 261,
-                  child: Text('Abdulkadir Ali', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
+                  child: Text(tr(LocaleKeys.wallet_driverName), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                 ),
                 SizedBox(
                   width: 261,
-                  child: Text('Toyota Camry • 84D23B63', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
+                  child: Text(tr(LocaleKeys.wallet_vehicleInfo), style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
                 ),
               ],
             ),
           ),
-          Text('84%', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
+          Text(tr(LocaleKeys.wallet_rating), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
           Assets.icons.icLikeFilled.svg(),
         ],
       ),
@@ -146,7 +147,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Items', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
+          Text(tr(LocaleKeys.wallet_receipt_items), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
           const SizedBox(height: 16),
           ListView.separated(
             shrinkWrap: true,
@@ -200,8 +201,6 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
     const discount = 6.00;
     const tip = 8.50;
     const total = 35.87;
-    const cardType = 'Visa';
-    const cardNumber = '5290';
     const cardAmount = 35.87;
 
     return Padding(
@@ -213,7 +212,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Row(
               children: [
-                Text('Payment', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
+                Text(tr(LocaleKeys.wallet_receipt_payment), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
                 const Spacer(),
                 Text(date, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
               ],
@@ -235,7 +234,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      Text('Total:', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHigh700)),
+                      Text(tr(LocaleKeys.wallet_receipt_total), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHigh700)),
                       const Spacer(),
                       Text('\$${total.toStringAsFixed(2)}', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
                     ],
@@ -256,7 +255,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
                 children: [
                   Assets.icons.icVisa.svg(),
                   const SizedBox(width: 12),
-                  Text('$cardType ••••$cardNumber', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
+                  Text(tr(LocaleKeys.wallet_cardDisplay), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                   const Spacer(),
                   Text('\$${cardAmount.toStringAsFixed(2)}', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
                 ],
@@ -284,9 +283,9 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
   Padding _buildReceiptActions() {
     const fileSize = '12 KB';
     final List<ReceiptAction> actions = [
-      (icon: Assets.icons.icInvoice, label: 'Download PDF', onTap: () {}),
-      (icon: Assets.icons.icEmailIcon, label: 'Resend Email', onTap: () {}),
-      (icon: Assets.icons.icShare, label: 'Share', onTap: () {}),
+      (icon: Assets.icons.icInvoice, label: tr(LocaleKeys.wallet_receipt_downloadPdf), onTap: () {}),
+      (icon: Assets.icons.icEmailIcon, label: tr(LocaleKeys.wallet_receipt_resendEmail), onTap: () {}),
+      (icon: Assets.icons.icShare, label: tr(LocaleKeys.wallet_receipt_share), onTap: () {}),
     ];
 
     return Padding(
@@ -294,7 +293,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Receipt', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
+          Text(tr(LocaleKeys.wallet_receipt_title), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
           const SizedBox(height: 16),
           ...List.generate(actions.length, (index) {
             final action = actions[index];

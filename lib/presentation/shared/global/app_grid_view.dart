@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 
@@ -14,9 +16,10 @@ import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 /// This widget is designed to be used across multiple screens in the app
 /// to maintain consistency and reduce code duplication.
 class AppGridView<T> extends StatelessWidget {
-
   const AppGridView({
-    required this.items, required this.itemBuilder, super.key,
+    required this.items,
+    required this.itemBuilder,
+    super.key,
     this.onRefresh,
     this.onLoadMore,
     this.isLoading = false,
@@ -45,6 +48,7 @@ class AppGridView<T> extends StatelessWidget {
     this.shrinkWrap = false,
     this.disableScrolling = false,
   });
+
   /// List of items to display
   final List<T> items;
 
@@ -178,7 +182,7 @@ class AppGridView<T> extends StatelessWidget {
           children: [
             Assets.icons.icError.svg(width: 64, height: 64, colorFilter: ColorFilter.mode(AppColors.stateGreyDefault500, BlendMode.srcIn)),
             const SizedBox(height: 16),
-            Text('Something went wrong', style: AppTextStyles.typographyH7Medium, textAlign: TextAlign.center),
+            Text(tr(LocaleKeys.shared_somethingWentWrong), style: AppTextStyles.typographyH7Medium, textAlign: TextAlign.center),
             const SizedBox(height: 8),
             Text(
               errorMessage ?? 'An error occurred',
@@ -195,7 +199,7 @@ class AppGridView<T> extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 ),
-                child: const Text('Try Again'),
+                child: Text(tr(LocaleKeys.shared_tryAgain)),
               ),
             ],
           ],
