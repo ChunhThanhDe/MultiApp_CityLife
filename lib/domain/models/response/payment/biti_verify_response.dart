@@ -8,8 +8,8 @@ part '../../../../generated/domain/models/response/payment/biti_verify_response.
 @freezed
 abstract class BitiVerifyResponse with _$BitiVerifyResponse {
   const factory BitiVerifyResponse({
-    @JsonKey(name: 'status') required String status,
-    @JsonKey(name: 'code') required int code,
+    @JsonKey(name: 'status') required bool status,
+    @JsonKey(name: 'code') required String code,
     @JsonKey(name: 'payload') BitiVerifyPayload? payload,
     @JsonKey(name: 'message') String? message,
   }) = _BitiVerifyResponse;
@@ -20,15 +20,19 @@ abstract class BitiVerifyResponse with _$BitiVerifyResponse {
 @freezed
 abstract class BitiVerifyPayload with _$BitiVerifyPayload {
   const factory BitiVerifyPayload({
-    @JsonKey(name: 'transaction_id') required String transactionId,
-    @JsonKey(name: 'amount') required double amount,
-    @JsonKey(name: 'currency') required String currency,
-    @JsonKey(name: 'status') required String status,
-    @JsonKey(name: 'customer_data') BitiCustomerData? customerData,
-    @JsonKey(name: 'created_at') required String createdAt,
-    @JsonKey(name: 'updated_at') required String updatedAt,
+    @JsonKey(name: 'status') String? status,
+    @JsonKey(name: 'trx_id') String? trxId,
+    @JsonKey(name: 'client_reference_id') String? clientReferenceId,
+    @JsonKey(name: 'merchant') String? merchant,
+    @JsonKey(name: 'currency') String? currency,
+    @JsonKey(name: 'amount') double? amount,
     @JsonKey(name: 'fee') double? fee,
     @JsonKey(name: 'net_amount') double? netAmount,
+    @JsonKey(name: 'customer') BitiCustomerData? customer,
+    @JsonKey(name: 'description') String? description,
+    @JsonKey(name: 'created_at') String? createdAt,
+    @JsonKey(name: 'updated_at') String? updatedAt,
+    @JsonKey(name: 'message') String? message,
   }) = _BitiVerifyPayload;
 
   factory BitiVerifyPayload.fromJson(Map<String, dynamic> json) => _$BitiVerifyPayloadFromJson(json);
@@ -36,11 +40,8 @@ abstract class BitiVerifyPayload with _$BitiVerifyPayload {
 
 @freezed
 abstract class BitiCustomerData with _$BitiCustomerData {
-  const factory BitiCustomerData({
-    @JsonKey(name: 'email') String? email,
-    @JsonKey(name: 'phone') String? phone,
-    @JsonKey(name: 'name') String? name,
-  }) = _BitiCustomerData;
+  const factory BitiCustomerData({@JsonKey(name: 'biti_upi') String? bitiUpi, @JsonKey(name: 'id') String? id, @JsonKey(name: 'email') String? email, @JsonKey(name: 'phone') String? phone}) =
+      _BitiCustomerData;
 
   factory BitiCustomerData.fromJson(Map<String, dynamic> json) => _$BitiCustomerDataFromJson(json);
 }

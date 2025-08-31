@@ -10,11 +10,11 @@ abstract class BitiPaymentRequest with _$BitiPaymentRequest {
   const factory BitiPaymentRequest({
     @JsonKey(name: 'cancel_url') required String cancelUrl,
     @JsonKey(name: 'success_url') required String successUrl,
-    @JsonKey(name: 'ipn_url') String? ipnUrl,
     @JsonKey(name: 'client_reference_id') required String clientReferenceId,
     @JsonKey(name: 'payment_amount') required double paymentAmount,
-    @JsonKey(name: 'description') String? description,
     @JsonKey(name: 'currency_code') required String currencyCode,
+    @JsonKey(name: 'ipn_url') String? ipnUrl,
+    @JsonKey(name: 'description') String? description,
     @JsonKey(name: 'customer_email') String? customerEmail,
     @JsonKey(name: 'customer_phone') String? customerPhone,
   }) = _BitiPaymentRequest;

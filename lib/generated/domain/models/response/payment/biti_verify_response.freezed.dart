@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$BitiVerifyResponse {
 
-@JsonKey(name: 'status') String get status;@JsonKey(name: 'code') int get code;@JsonKey(name: 'payload') BitiVerifyPayload? get payload;@JsonKey(name: 'message') String? get message;
+@JsonKey(name: 'status') bool get status;@JsonKey(name: 'code') String get code;@JsonKey(name: 'payload') BitiVerifyPayload? get payload;@JsonKey(name: 'message') String? get message;
 /// Create a copy of BitiVerifyResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $BitiVerifyResponseCopyWith<$Res>  {
   factory $BitiVerifyResponseCopyWith(BitiVerifyResponse value, $Res Function(BitiVerifyResponse) _then) = _$BitiVerifyResponseCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'status') String status,@JsonKey(name: 'code') int code,@JsonKey(name: 'payload') BitiVerifyPayload? payload,@JsonKey(name: 'message') String? message
+@JsonKey(name: 'status') bool status,@JsonKey(name: 'code') String code,@JsonKey(name: 'payload') BitiVerifyPayload? payload,@JsonKey(name: 'message') String? message
 });
 
 
@@ -69,8 +69,8 @@ class _$BitiVerifyResponseCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? code = null,Object? payload = freezed,Object? message = freezed,}) {
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as String,code: null == code ? _self.code : code // ignore: cast_nullable_to_non_nullable
-as int,payload: freezed == payload ? _self.payload : payload // ignore: cast_nullable_to_non_nullable
+as bool,code: null == code ? _self.code : code // ignore: cast_nullable_to_non_nullable
+as String,payload: freezed == payload ? _self.payload : payload // ignore: cast_nullable_to_non_nullable
 as BitiVerifyPayload?,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -98,8 +98,8 @@ class _BitiVerifyResponse implements BitiVerifyResponse {
   const _BitiVerifyResponse({@JsonKey(name: 'status') required this.status, @JsonKey(name: 'code') required this.code, @JsonKey(name: 'payload') this.payload, @JsonKey(name: 'message') this.message});
   factory _BitiVerifyResponse.fromJson(Map<String, dynamic> json) => _$BitiVerifyResponseFromJson(json);
 
-@override@JsonKey(name: 'status') final  String status;
-@override@JsonKey(name: 'code') final  int code;
+@override@JsonKey(name: 'status') final  bool status;
+@override@JsonKey(name: 'code') final  String code;
 @override@JsonKey(name: 'payload') final  BitiVerifyPayload? payload;
 @override@JsonKey(name: 'message') final  String? message;
 
@@ -136,7 +136,7 @@ abstract mixin class _$BitiVerifyResponseCopyWith<$Res> implements $BitiVerifyRe
   factory _$BitiVerifyResponseCopyWith(_BitiVerifyResponse value, $Res Function(_BitiVerifyResponse) _then) = __$BitiVerifyResponseCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'status') String status,@JsonKey(name: 'code') int code,@JsonKey(name: 'payload') BitiVerifyPayload? payload,@JsonKey(name: 'message') String? message
+@JsonKey(name: 'status') bool status,@JsonKey(name: 'code') String code,@JsonKey(name: 'payload') BitiVerifyPayload? payload,@JsonKey(name: 'message') String? message
 });
 
 
@@ -156,8 +156,8 @@ class __$BitiVerifyResponseCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? code = null,Object? payload = freezed,Object? message = freezed,}) {
   return _then(_BitiVerifyResponse(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as String,code: null == code ? _self.code : code // ignore: cast_nullable_to_non_nullable
-as int,payload: freezed == payload ? _self.payload : payload // ignore: cast_nullable_to_non_nullable
+as bool,code: null == code ? _self.code : code // ignore: cast_nullable_to_non_nullable
+as String,payload: freezed == payload ? _self.payload : payload // ignore: cast_nullable_to_non_nullable
 as BitiVerifyPayload?,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -182,7 +182,7 @@ $BitiVerifyPayloadCopyWith<$Res>? get payload {
 /// @nodoc
 mixin _$BitiVerifyPayload {
 
-@JsonKey(name: 'transaction_id') String get transactionId;@JsonKey(name: 'amount') double get amount;@JsonKey(name: 'currency') String get currency;@JsonKey(name: 'status') String get status;@JsonKey(name: 'customer_data') BitiCustomerData? get customerData;@JsonKey(name: 'created_at') String get createdAt;@JsonKey(name: 'updated_at') String get updatedAt;@JsonKey(name: 'fee') double? get fee;@JsonKey(name: 'net_amount') double? get netAmount;
+@JsonKey(name: 'status') String? get status;@JsonKey(name: 'trx_id') String? get trxId;@JsonKey(name: 'client_reference_id') String? get clientReferenceId;@JsonKey(name: 'merchant') String? get merchant;@JsonKey(name: 'currency') String? get currency;@JsonKey(name: 'amount') double? get amount;@JsonKey(name: 'fee') double? get fee;@JsonKey(name: 'net_amount') double? get netAmount;@JsonKey(name: 'customer') BitiCustomerData? get customer;@JsonKey(name: 'description') String? get description;@JsonKey(name: 'created_at') String? get createdAt;@JsonKey(name: 'updated_at') String? get updatedAt;@JsonKey(name: 'message') String? get message;
 /// Create a copy of BitiVerifyPayload
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -195,16 +195,16 @@ $BitiVerifyPayloadCopyWith<BitiVerifyPayload> get copyWith => _$BitiVerifyPayloa
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BitiVerifyPayload&&(identical(other.transactionId, transactionId) || other.transactionId == transactionId)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.currency, currency) || other.currency == currency)&&(identical(other.status, status) || other.status == status)&&(identical(other.customerData, customerData) || other.customerData == customerData)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.fee, fee) || other.fee == fee)&&(identical(other.netAmount, netAmount) || other.netAmount == netAmount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BitiVerifyPayload&&(identical(other.status, status) || other.status == status)&&(identical(other.trxId, trxId) || other.trxId == trxId)&&(identical(other.clientReferenceId, clientReferenceId) || other.clientReferenceId == clientReferenceId)&&(identical(other.merchant, merchant) || other.merchant == merchant)&&(identical(other.currency, currency) || other.currency == currency)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.fee, fee) || other.fee == fee)&&(identical(other.netAmount, netAmount) || other.netAmount == netAmount)&&(identical(other.customer, customer) || other.customer == customer)&&(identical(other.description, description) || other.description == description)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.message, message) || other.message == message));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,transactionId,amount,currency,status,customerData,createdAt,updatedAt,fee,netAmount);
+int get hashCode => Object.hash(runtimeType,status,trxId,clientReferenceId,merchant,currency,amount,fee,netAmount,customer,description,createdAt,updatedAt,message);
 
 @override
 String toString() {
-  return 'BitiVerifyPayload(transactionId: $transactionId, amount: $amount, currency: $currency, status: $status, customerData: $customerData, createdAt: $createdAt, updatedAt: $updatedAt, fee: $fee, netAmount: $netAmount)';
+  return 'BitiVerifyPayload(status: $status, trxId: $trxId, clientReferenceId: $clientReferenceId, merchant: $merchant, currency: $currency, amount: $amount, fee: $fee, netAmount: $netAmount, customer: $customer, description: $description, createdAt: $createdAt, updatedAt: $updatedAt, message: $message)';
 }
 
 
@@ -215,11 +215,11 @@ abstract mixin class $BitiVerifyPayloadCopyWith<$Res>  {
   factory $BitiVerifyPayloadCopyWith(BitiVerifyPayload value, $Res Function(BitiVerifyPayload) _then) = _$BitiVerifyPayloadCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'transaction_id') String transactionId,@JsonKey(name: 'amount') double amount,@JsonKey(name: 'currency') String currency,@JsonKey(name: 'status') String status,@JsonKey(name: 'customer_data') BitiCustomerData? customerData,@JsonKey(name: 'created_at') String createdAt,@JsonKey(name: 'updated_at') String updatedAt,@JsonKey(name: 'fee') double? fee,@JsonKey(name: 'net_amount') double? netAmount
+@JsonKey(name: 'status') String? status,@JsonKey(name: 'trx_id') String? trxId,@JsonKey(name: 'client_reference_id') String? clientReferenceId,@JsonKey(name: 'merchant') String? merchant,@JsonKey(name: 'currency') String? currency,@JsonKey(name: 'amount') double? amount,@JsonKey(name: 'fee') double? fee,@JsonKey(name: 'net_amount') double? netAmount,@JsonKey(name: 'customer') BitiCustomerData? customer,@JsonKey(name: 'description') String? description,@JsonKey(name: 'created_at') String? createdAt,@JsonKey(name: 'updated_at') String? updatedAt,@JsonKey(name: 'message') String? message
 });
 
 
-$BitiCustomerDataCopyWith<$Res>? get customerData;
+$BitiCustomerDataCopyWith<$Res>? get customer;
 
 }
 /// @nodoc
@@ -232,31 +232,35 @@ class _$BitiVerifyPayloadCopyWithImpl<$Res>
 
 /// Create a copy of BitiVerifyPayload
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? transactionId = null,Object? amount = null,Object? currency = null,Object? status = null,Object? customerData = freezed,Object? createdAt = null,Object? updatedAt = null,Object? fee = freezed,Object? netAmount = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? status = freezed,Object? trxId = freezed,Object? clientReferenceId = freezed,Object? merchant = freezed,Object? currency = freezed,Object? amount = freezed,Object? fee = freezed,Object? netAmount = freezed,Object? customer = freezed,Object? description = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,Object? message = freezed,}) {
   return _then(_self.copyWith(
-transactionId: null == transactionId ? _self.transactionId : transactionId // ignore: cast_nullable_to_non_nullable
-as String,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
-as double,currency: null == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
-as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as String,customerData: freezed == customerData ? _self.customerData : customerData // ignore: cast_nullable_to_non_nullable
-as BitiCustomerData?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as String,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as String,fee: freezed == fee ? _self.fee : fee // ignore: cast_nullable_to_non_nullable
+status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String?,trxId: freezed == trxId ? _self.trxId : trxId // ignore: cast_nullable_to_non_nullable
+as String?,clientReferenceId: freezed == clientReferenceId ? _self.clientReferenceId : clientReferenceId // ignore: cast_nullable_to_non_nullable
+as String?,merchant: freezed == merchant ? _self.merchant : merchant // ignore: cast_nullable_to_non_nullable
+as String?,currency: freezed == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
+as String?,amount: freezed == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as double?,fee: freezed == fee ? _self.fee : fee // ignore: cast_nullable_to_non_nullable
 as double?,netAmount: freezed == netAmount ? _self.netAmount : netAmount // ignore: cast_nullable_to_non_nullable
-as double?,
+as double?,customer: freezed == customer ? _self.customer : customer // ignore: cast_nullable_to_non_nullable
+as BitiCustomerData?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as String?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as String?,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 /// Create a copy of BitiVerifyPayload
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$BitiCustomerDataCopyWith<$Res>? get customerData {
-    if (_self.customerData == null) {
+$BitiCustomerDataCopyWith<$Res>? get customer {
+    if (_self.customer == null) {
     return null;
   }
 
-  return $BitiCustomerDataCopyWith<$Res>(_self.customerData!, (value) {
-    return _then(_self.copyWith(customerData: value));
+  return $BitiCustomerDataCopyWith<$Res>(_self.customer!, (value) {
+    return _then(_self.copyWith(customer: value));
   });
 }
 }
@@ -266,18 +270,22 @@ $BitiCustomerDataCopyWith<$Res>? get customerData {
 @JsonSerializable()
 
 class _BitiVerifyPayload implements BitiVerifyPayload {
-  const _BitiVerifyPayload({@JsonKey(name: 'transaction_id') required this.transactionId, @JsonKey(name: 'amount') required this.amount, @JsonKey(name: 'currency') required this.currency, @JsonKey(name: 'status') required this.status, @JsonKey(name: 'customer_data') this.customerData, @JsonKey(name: 'created_at') required this.createdAt, @JsonKey(name: 'updated_at') required this.updatedAt, @JsonKey(name: 'fee') this.fee, @JsonKey(name: 'net_amount') this.netAmount});
+  const _BitiVerifyPayload({@JsonKey(name: 'status') this.status, @JsonKey(name: 'trx_id') this.trxId, @JsonKey(name: 'client_reference_id') this.clientReferenceId, @JsonKey(name: 'merchant') this.merchant, @JsonKey(name: 'currency') this.currency, @JsonKey(name: 'amount') this.amount, @JsonKey(name: 'fee') this.fee, @JsonKey(name: 'net_amount') this.netAmount, @JsonKey(name: 'customer') this.customer, @JsonKey(name: 'description') this.description, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'updated_at') this.updatedAt, @JsonKey(name: 'message') this.message});
   factory _BitiVerifyPayload.fromJson(Map<String, dynamic> json) => _$BitiVerifyPayloadFromJson(json);
 
-@override@JsonKey(name: 'transaction_id') final  String transactionId;
-@override@JsonKey(name: 'amount') final  double amount;
-@override@JsonKey(name: 'currency') final  String currency;
-@override@JsonKey(name: 'status') final  String status;
-@override@JsonKey(name: 'customer_data') final  BitiCustomerData? customerData;
-@override@JsonKey(name: 'created_at') final  String createdAt;
-@override@JsonKey(name: 'updated_at') final  String updatedAt;
+@override@JsonKey(name: 'status') final  String? status;
+@override@JsonKey(name: 'trx_id') final  String? trxId;
+@override@JsonKey(name: 'client_reference_id') final  String? clientReferenceId;
+@override@JsonKey(name: 'merchant') final  String? merchant;
+@override@JsonKey(name: 'currency') final  String? currency;
+@override@JsonKey(name: 'amount') final  double? amount;
 @override@JsonKey(name: 'fee') final  double? fee;
 @override@JsonKey(name: 'net_amount') final  double? netAmount;
+@override@JsonKey(name: 'customer') final  BitiCustomerData? customer;
+@override@JsonKey(name: 'description') final  String? description;
+@override@JsonKey(name: 'created_at') final  String? createdAt;
+@override@JsonKey(name: 'updated_at') final  String? updatedAt;
+@override@JsonKey(name: 'message') final  String? message;
 
 /// Create a copy of BitiVerifyPayload
 /// with the given fields replaced by the non-null parameter values.
@@ -292,16 +300,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BitiVerifyPayload&&(identical(other.transactionId, transactionId) || other.transactionId == transactionId)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.currency, currency) || other.currency == currency)&&(identical(other.status, status) || other.status == status)&&(identical(other.customerData, customerData) || other.customerData == customerData)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.fee, fee) || other.fee == fee)&&(identical(other.netAmount, netAmount) || other.netAmount == netAmount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BitiVerifyPayload&&(identical(other.status, status) || other.status == status)&&(identical(other.trxId, trxId) || other.trxId == trxId)&&(identical(other.clientReferenceId, clientReferenceId) || other.clientReferenceId == clientReferenceId)&&(identical(other.merchant, merchant) || other.merchant == merchant)&&(identical(other.currency, currency) || other.currency == currency)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.fee, fee) || other.fee == fee)&&(identical(other.netAmount, netAmount) || other.netAmount == netAmount)&&(identical(other.customer, customer) || other.customer == customer)&&(identical(other.description, description) || other.description == description)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.message, message) || other.message == message));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,transactionId,amount,currency,status,customerData,createdAt,updatedAt,fee,netAmount);
+int get hashCode => Object.hash(runtimeType,status,trxId,clientReferenceId,merchant,currency,amount,fee,netAmount,customer,description,createdAt,updatedAt,message);
 
 @override
 String toString() {
-  return 'BitiVerifyPayload(transactionId: $transactionId, amount: $amount, currency: $currency, status: $status, customerData: $customerData, createdAt: $createdAt, updatedAt: $updatedAt, fee: $fee, netAmount: $netAmount)';
+  return 'BitiVerifyPayload(status: $status, trxId: $trxId, clientReferenceId: $clientReferenceId, merchant: $merchant, currency: $currency, amount: $amount, fee: $fee, netAmount: $netAmount, customer: $customer, description: $description, createdAt: $createdAt, updatedAt: $updatedAt, message: $message)';
 }
 
 
@@ -312,11 +320,11 @@ abstract mixin class _$BitiVerifyPayloadCopyWith<$Res> implements $BitiVerifyPay
   factory _$BitiVerifyPayloadCopyWith(_BitiVerifyPayload value, $Res Function(_BitiVerifyPayload) _then) = __$BitiVerifyPayloadCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'transaction_id') String transactionId,@JsonKey(name: 'amount') double amount,@JsonKey(name: 'currency') String currency,@JsonKey(name: 'status') String status,@JsonKey(name: 'customer_data') BitiCustomerData? customerData,@JsonKey(name: 'created_at') String createdAt,@JsonKey(name: 'updated_at') String updatedAt,@JsonKey(name: 'fee') double? fee,@JsonKey(name: 'net_amount') double? netAmount
+@JsonKey(name: 'status') String? status,@JsonKey(name: 'trx_id') String? trxId,@JsonKey(name: 'client_reference_id') String? clientReferenceId,@JsonKey(name: 'merchant') String? merchant,@JsonKey(name: 'currency') String? currency,@JsonKey(name: 'amount') double? amount,@JsonKey(name: 'fee') double? fee,@JsonKey(name: 'net_amount') double? netAmount,@JsonKey(name: 'customer') BitiCustomerData? customer,@JsonKey(name: 'description') String? description,@JsonKey(name: 'created_at') String? createdAt,@JsonKey(name: 'updated_at') String? updatedAt,@JsonKey(name: 'message') String? message
 });
 
 
-@override $BitiCustomerDataCopyWith<$Res>? get customerData;
+@override $BitiCustomerDataCopyWith<$Res>? get customer;
 
 }
 /// @nodoc
@@ -329,18 +337,22 @@ class __$BitiVerifyPayloadCopyWithImpl<$Res>
 
 /// Create a copy of BitiVerifyPayload
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? transactionId = null,Object? amount = null,Object? currency = null,Object? status = null,Object? customerData = freezed,Object? createdAt = null,Object? updatedAt = null,Object? fee = freezed,Object? netAmount = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? status = freezed,Object? trxId = freezed,Object? clientReferenceId = freezed,Object? merchant = freezed,Object? currency = freezed,Object? amount = freezed,Object? fee = freezed,Object? netAmount = freezed,Object? customer = freezed,Object? description = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,Object? message = freezed,}) {
   return _then(_BitiVerifyPayload(
-transactionId: null == transactionId ? _self.transactionId : transactionId // ignore: cast_nullable_to_non_nullable
-as String,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
-as double,currency: null == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
-as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as String,customerData: freezed == customerData ? _self.customerData : customerData // ignore: cast_nullable_to_non_nullable
-as BitiCustomerData?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as String,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as String,fee: freezed == fee ? _self.fee : fee // ignore: cast_nullable_to_non_nullable
+status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String?,trxId: freezed == trxId ? _self.trxId : trxId // ignore: cast_nullable_to_non_nullable
+as String?,clientReferenceId: freezed == clientReferenceId ? _self.clientReferenceId : clientReferenceId // ignore: cast_nullable_to_non_nullable
+as String?,merchant: freezed == merchant ? _self.merchant : merchant // ignore: cast_nullable_to_non_nullable
+as String?,currency: freezed == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
+as String?,amount: freezed == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as double?,fee: freezed == fee ? _self.fee : fee // ignore: cast_nullable_to_non_nullable
 as double?,netAmount: freezed == netAmount ? _self.netAmount : netAmount // ignore: cast_nullable_to_non_nullable
-as double?,
+as double?,customer: freezed == customer ? _self.customer : customer // ignore: cast_nullable_to_non_nullable
+as BitiCustomerData?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as String?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as String?,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -348,13 +360,13 @@ as double?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$BitiCustomerDataCopyWith<$Res>? get customerData {
-    if (_self.customerData == null) {
+$BitiCustomerDataCopyWith<$Res>? get customer {
+    if (_self.customer == null) {
     return null;
   }
 
-  return $BitiCustomerDataCopyWith<$Res>(_self.customerData!, (value) {
-    return _then(_self.copyWith(customerData: value));
+  return $BitiCustomerDataCopyWith<$Res>(_self.customer!, (value) {
+    return _then(_self.copyWith(customer: value));
   });
 }
 }
@@ -363,7 +375,7 @@ $BitiCustomerDataCopyWith<$Res>? get customerData {
 /// @nodoc
 mixin _$BitiCustomerData {
 
-@JsonKey(name: 'email') String? get email;@JsonKey(name: 'phone') String? get phone;@JsonKey(name: 'name') String? get name;
+@JsonKey(name: 'biti_upi') String? get bitiUpi;@JsonKey(name: 'id') String? get id;@JsonKey(name: 'email') String? get email;@JsonKey(name: 'phone') String? get phone;
 /// Create a copy of BitiCustomerData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -376,16 +388,16 @@ $BitiCustomerDataCopyWith<BitiCustomerData> get copyWith => _$BitiCustomerDataCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BitiCustomerData&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.name, name) || other.name == name));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BitiCustomerData&&(identical(other.bitiUpi, bitiUpi) || other.bitiUpi == bitiUpi)&&(identical(other.id, id) || other.id == id)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,phone,name);
+int get hashCode => Object.hash(runtimeType,bitiUpi,id,email,phone);
 
 @override
 String toString() {
-  return 'BitiCustomerData(email: $email, phone: $phone, name: $name)';
+  return 'BitiCustomerData(bitiUpi: $bitiUpi, id: $id, email: $email, phone: $phone)';
 }
 
 
@@ -396,7 +408,7 @@ abstract mixin class $BitiCustomerDataCopyWith<$Res>  {
   factory $BitiCustomerDataCopyWith(BitiCustomerData value, $Res Function(BitiCustomerData) _then) = _$BitiCustomerDataCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'email') String? email,@JsonKey(name: 'phone') String? phone,@JsonKey(name: 'name') String? name
+@JsonKey(name: 'biti_upi') String? bitiUpi,@JsonKey(name: 'id') String? id,@JsonKey(name: 'email') String? email,@JsonKey(name: 'phone') String? phone
 });
 
 
@@ -413,11 +425,12 @@ class _$BitiCustomerDataCopyWithImpl<$Res>
 
 /// Create a copy of BitiCustomerData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = freezed,Object? phone = freezed,Object? name = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? bitiUpi = freezed,Object? id = freezed,Object? email = freezed,Object? phone = freezed,}) {
   return _then(_self.copyWith(
-email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+bitiUpi: freezed == bitiUpi ? _self.bitiUpi : bitiUpi // ignore: cast_nullable_to_non_nullable
+as String?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
-as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -429,12 +442,13 @@ as String?,
 @JsonSerializable()
 
 class _BitiCustomerData implements BitiCustomerData {
-  const _BitiCustomerData({@JsonKey(name: 'email') this.email, @JsonKey(name: 'phone') this.phone, @JsonKey(name: 'name') this.name});
+  const _BitiCustomerData({@JsonKey(name: 'biti_upi') this.bitiUpi, @JsonKey(name: 'id') this.id, @JsonKey(name: 'email') this.email, @JsonKey(name: 'phone') this.phone});
   factory _BitiCustomerData.fromJson(Map<String, dynamic> json) => _$BitiCustomerDataFromJson(json);
 
+@override@JsonKey(name: 'biti_upi') final  String? bitiUpi;
+@override@JsonKey(name: 'id') final  String? id;
 @override@JsonKey(name: 'email') final  String? email;
 @override@JsonKey(name: 'phone') final  String? phone;
-@override@JsonKey(name: 'name') final  String? name;
 
 /// Create a copy of BitiCustomerData
 /// with the given fields replaced by the non-null parameter values.
@@ -449,16 +463,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BitiCustomerData&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.name, name) || other.name == name));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BitiCustomerData&&(identical(other.bitiUpi, bitiUpi) || other.bitiUpi == bitiUpi)&&(identical(other.id, id) || other.id == id)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,phone,name);
+int get hashCode => Object.hash(runtimeType,bitiUpi,id,email,phone);
 
 @override
 String toString() {
-  return 'BitiCustomerData(email: $email, phone: $phone, name: $name)';
+  return 'BitiCustomerData(bitiUpi: $bitiUpi, id: $id, email: $email, phone: $phone)';
 }
 
 
@@ -469,7 +483,7 @@ abstract mixin class _$BitiCustomerDataCopyWith<$Res> implements $BitiCustomerDa
   factory _$BitiCustomerDataCopyWith(_BitiCustomerData value, $Res Function(_BitiCustomerData) _then) = __$BitiCustomerDataCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'email') String? email,@JsonKey(name: 'phone') String? phone,@JsonKey(name: 'name') String? name
+@JsonKey(name: 'biti_upi') String? bitiUpi,@JsonKey(name: 'id') String? id,@JsonKey(name: 'email') String? email,@JsonKey(name: 'phone') String? phone
 });
 
 
@@ -486,11 +500,12 @@ class __$BitiCustomerDataCopyWithImpl<$Res>
 
 /// Create a copy of BitiCustomerData
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = freezed,Object? phone = freezed,Object? name = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? bitiUpi = freezed,Object? id = freezed,Object? email = freezed,Object? phone = freezed,}) {
   return _then(_BitiCustomerData(
-email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+bitiUpi: freezed == bitiUpi ? _self.bitiUpi : bitiUpi // ignore: cast_nullable_to_non_nullable
+as String?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
-as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

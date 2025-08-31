@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/biti_payment_config.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/base/network_exceptions.dart';
@@ -55,9 +56,7 @@ class CartCheckoutController extends BaseController {
         checkoutSummary.value = GetCheckoutSummaryResponse.fromJson(response.data);
 
         // Add Biti payment method to the existing payment methods
-        print('start add biti payment method');
-        _addBitiPaymentMethod();
-        print('end add biti payment method');
+        _mapDigitalPaymentToBiti();
 
         // Set default values
         if (checkoutSummary.value?.defaultAddress?.id != null) {
@@ -79,36 +78,29 @@ class CartCheckoutController extends BaseController {
         showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
     }
 
-    print('checkoutSummary.value?.paymentMethods: ${checkoutSummary.value?.paymentMethods}');
     isLoading.value = false;
   }
 
-  /// Adds Biti payment method to the existing payment methods list
-  void _addBitiPaymentMethod() {
-    print('DEBUG: Adding Biti payment method to payment methods list');
+  /// Maps digital_payment to Biti payment internally
+  void _mapDigitalPaymentToBiti() {
     try {
       if (checkoutSummary.value?.paymentMethods != null) {
-        // Check if Biti payment method already exists
-        final bitiExists = checkoutSummary.value!.paymentMethods!.any((method) => method.key == 'biti_payment');
-        print('DEBUG: Biti payment method already exists: $bitiExists');
+        // Find digital_payment method and update its label to show it uses Biti
+        final digitalPaymentMethod = checkoutSummary.value!.paymentMethods!.firstWhereOrNull((method) => method.key == 'digital_payment');
 
-        if (!bitiExists) {
-          // Create Biti payment method
-          const bitiPaymentMethod = PaymentMethod(key: 'biti_payment', label: 'Biti Payment');
-          print('DEBUG: Biti payment method created: ${bitiPaymentMethod.toString()}');
+        if (digitalPaymentMethod != null) {
+          // Update the label to indicate it uses Biti
+          final updatedMethod = PaymentMethod(key: digitalPaymentMethod.key, label: '${digitalPaymentMethod.label} (Biti)');
 
-          // Add to the list
-          checkoutSummary.value!.paymentMethods!.add(bitiPaymentMethod);
-          print('DEBUG: Biti payment method added to list. Total payment methods: ${checkoutSummary.value!.paymentMethods!.length}');
-        } else {
-          print('DEBUG: Biti payment method already exists in the list');
+          // Replace the old method with updated one
+          final index = checkoutSummary.value!.paymentMethods!.indexOf(digitalPaymentMethod);
+          if (index != -1) {
+            checkoutSummary.value!.paymentMethods![index] = updatedMethod;
+          }
         }
-      } else {
-        print('ERROR: checkoutSummary.value?.paymentMethods is null');
       }
-    } catch (e, stackTrace) {
-      print('ERROR: Exception in _addBitiPaymentMethod: $e');
-      print('ERROR: Stack trace: $stackTrace');
+    } catch (e) {
+      // Silent error handling
     }
   }
 
@@ -294,8 +286,8 @@ class CartCheckoutController extends BaseController {
       return;
     }
 
-    // Handle Biti payment method
-    if (selectedPaymentMethod.value == 'biti_payment') {
+    // Handle digital payment method (Biti)
+    if (selectedPaymentMethod.value == 'digital_payment') {
       await _processBitiPayment();
       return;
     }
@@ -341,195 +333,140 @@ class CartCheckoutController extends BaseController {
     });
   }
 
-  /// Initiates Biti payment process
-  Future<void> _initiateBitiPayment() async {
-    print('DEBUG: Initiating Biti payment process');
-    try {
-      print('DEBUG: Setting loading to false before processing payment');
-      isLoading.value = false;
-      print('DEBUG: Calling _processBitiPayment');
-      await _processBitiPayment();
-      print('DEBUG: _processBitiPayment completed');
-    } catch (e, stackTrace) {
-      print('ERROR: Exception in _initiateBitiPayment: $e');
-      print('ERROR: Stack trace: $stackTrace');
-      showAppSnackBar(title: 'Failed to initiate Biti payment: ${e.toString()}', type: SnackBarType.error);
-    }
-  }
-
-  /// Processes Biti payment flow
+  /// Processes digital payment flow (Biti)
   Future<void> _processBitiPayment() async {
-    print('DEBUG: Starting Biti payment process');
     await safeExecute(() async {
       try {
         isLoading.value = true;
-        print('DEBUG: Set loading to true');
 
-        // Calculate total amount from cart
-        final totalAmount = _cartService.totalPrice;
-        print('DEBUG: Total amount calculated: \$totalAmount');
+        // Calculate total amount including delivery fees, taxes, and discounts
+        final totalAmount = calculatedTotal;
+
         if (totalAmount <= 0) {
-          print('ERROR: Invalid cart total amount: \$totalAmount');
-          showAppSnackBar(title: 'Invalid cart total amount', type: SnackBarType.error);
+          showAppSnackBar(title: 'Invalid total amount', type: SnackBarType.error);
           return;
         }
 
         // Generate unique client reference ID
         final clientReferenceId = 'ORDER_${DateTime.now().millisecondsSinceEpoch}';
-        print('DEBUG: Generated client reference ID: \$clientReferenceId');
 
         // Get customer phone from selected address if available
         final customerPhone = selectedAddress?.contactPersonNumber;
         const customerEmail = null; // Email not available in CheckoutAddress model
-        print('DEBUG: Customer phone: \$customerPhone, email: \$customerEmail');
 
         // Initiate Biti payment
-        print('DEBUG: Calling BitiPaymentService.initiatePayment');
         final paymentResponse = await _bitiPaymentService.initiatePayment(
-          cancelUrl: 'https://yourapp.com/payment/cancel',
-          successUrl: 'https://yourapp.com/payment/success',
+          cancelUrl: BitiPaymentConfig.cancelUrl,
+          successUrl: BitiPaymentConfig.successUrl,
           clientReferenceId: clientReferenceId,
           paymentAmount: totalAmount,
-          currencyCode: 'USD', // Change to your app's currency
-          description: 'Order payment for cart items',
+          currencyCode: BitiPaymentConfig.defaultCurrency,
+          description: BitiPaymentConfig.defaultDescription,
           customerEmail: customerEmail,
           customerPhone: customerPhone,
+          ipnUrl: BitiPaymentConfig.ipnUrl,
         );
-        print('DEBUG: Payment response received: \${paymentResponse?.toString()}');
 
         if (paymentResponse != null && paymentResponse.payload?.paymentUrl != null) {
           // Launch Biti payment URL
           final paymentUrl = paymentResponse.payload!.paymentUrl;
-          print('DEBUG: Payment URL: \$paymentUrl');
-          
+
           if (await canLaunchUrl(Uri.parse(paymentUrl))) {
-            print('DEBUG: Launching payment URL');
             await launchUrl(Uri.parse(paymentUrl), mode: LaunchMode.externalApplication);
 
             // Show payment processing message
             showAppSnackBar(title: 'Payment initiated successfully', message: 'Please complete the payment in the opened browser', type: SnackBarType.success);
 
             // Start monitoring payment status
-            print('DEBUG: Starting payment monitoring for transaction: \${paymentResponse.payload!.transactionId}');
-            _monitorPaymentStatus(paymentResponse.payload!.transactionId);
+            _monitorPaymentStatus(paymentResponse.payload!.info!.transactionId);
           } else {
-            print('ERROR: Cannot launch payment URL: \$paymentUrl');
             showAppSnackBar(title: 'Failed to open payment URL', type: SnackBarType.error);
           }
         } else {
-          print('ERROR: Invalid payment response - paymentResponse: \$paymentResponse, paymentUrl: \${paymentResponse?.payload?.paymentUrl}');
           showAppSnackBar(title: 'Failed to initiate payment', type: SnackBarType.error);
         }
-      } catch (e, stackTrace) {
-        print('ERROR: Exception in _processBitiPayment: \$e');
-        print('ERROR: Stack trace: \$stackTrace');
+      } catch (e) {
         showAppSnackBar(title: 'Payment processing error: \${e.toString()}', type: SnackBarType.error);
       } finally {
         isLoading.value = false;
-        print('DEBUG: Set loading to false');
       }
     });
   }
 
   /// Monitors Biti payment status
   void _monitorPaymentStatus(String transactionId) {
-    print('DEBUG: Starting payment monitoring for transaction: $transactionId');
     // Simple polling mechanism - in production, consider using webhooks
     Timer.periodic(const Duration(seconds: 5), (timer) async {
       try {
-        print('DEBUG: Checking payment status for transaction: $transactionId');
         final verifyResponse = await _bitiPaymentService.verifyPayment(transactionId);
-        print('DEBUG: Verify response: ${verifyResponse?.toString()}');
-        print('DEBUG: Payment status: ${verifyResponse?.payload?.status}');
 
         if (verifyResponse != null) {
           if (_bitiPaymentService.isPaymentCompleted(verifyResponse)) {
-            print('DEBUG: Payment completed, canceling timer and completing order');
             timer.cancel();
-            await _completeBitiOrder(transactionId);
+            await _completeDigitalPaymentOrder(transactionId);
           } else if (verifyResponse.payload?.status == 'failed' || verifyResponse.payload?.status == 'cancelled') {
-            print('ERROR: Payment ${verifyResponse.payload?.status} for transaction: $transactionId');
             timer.cancel();
             showAppSnackBar(title: 'Payment was cancelled or failed', type: SnackBarType.error);
-          } else {
-            print('DEBUG: Payment still pending, continuing monitoring...');
           }
         }
 
         // Stop monitoring after 10 minutes
         if (timer.tick > 120) {
           // 120 * 5 seconds = 10 minutes
-          print('DEBUG: Payment monitoring timeout for transaction: $transactionId');
           timer.cancel();
           showAppSnackBar(title: 'Payment verification timeout', message: 'Please check your payment status manually', type: SnackBarType.error);
         }
-      } catch (e, stackTrace) {
-        print('ERROR: Exception in _monitorPaymentStatus: $e');
-        print('ERROR: Stack trace: $stackTrace');
+      } catch (e) {
         // Continue monitoring on error
       }
     });
   }
 
-  /// Completes order after successful Biti payment
-  Future<void> _completeBitiOrder(String transactionId) async {
-    print('DEBUG: Starting order completion for transaction: $transactionId');
+  /// Completes order after successful digital payment (Biti)
+  Future<void> _completeDigitalPaymentOrder(String transactionId) async {
     await safeExecute(() async {
       try {
         isLoading.value = true;
-        print('DEBUG: Set loading to true for order completion');
 
-        print('DEBUG: Creating order request with addressId: ${selectedAddressId.value}, transactionId: $transactionId');
-        final request = OrderNowRequest(selectedDeliveryOption: selectedDeliveryOption.value, selectedAddressId: selectedAddressId.value, appliedCoupon: promoCode.value, paymentMethod: 'biti_payment');
-        print('DEBUG: Order request created: ${request.toString()}');
+        final request = OrderNowRequest(
+          selectedDeliveryOption: selectedDeliveryOption.value,
+          selectedAddressId: selectedAddressId.value,
+          appliedCoupon: promoCode.value,
+          paymentMethod: 'digital_payment',
+        );
 
-        print('DEBUG: Calling cart repository to create order');
         final ApiResult result = await _cartRepository.orderNow(request);
-        print('DEBUG: Order response received');
 
         switch (result) {
           case Success(response: final response):
-            print('DEBUG: Order API call successful with status: ${response.statusCode}');
             if (response.statusCode != 200) {
-              print('ERROR: Order API returned non-200 status: ${response.statusCode}');
               showAppSnackBar(title: 'Failed to complete order', type: SnackBarType.error);
               return;
             }
 
             final responseData = response.data;
-            print('DEBUG: Order response data: $responseData');
             if (responseData != null && responseData['orders'] != null && responseData['orders'].isNotEmpty) {
               final orderId = responseData['orders'][0]['id'];
               final contactNumber = selectedAddress?.contactPersonNumber ?? '';
-              print('DEBUG: Order created successfully with ID: $orderId');
 
               // Refresh cart list to update UI
-              print('DEBUG: Refreshing cart list');
               await _cartService.fetchCartList();
-              print('DEBUG: Cart list refreshed');
 
               showAppSnackBar(title: 'Payment completed successfully!', type: SnackBarType.success);
 
               // Navigate to order confirmation screen
-              print('DEBUG: Navigating to order confirmation screen');
-              Get.offAndToNamed(AppRoutes.cartConfirm, arguments: {'orderId': orderId, 'contactNumber': contactNumber, 'paymentMethod': 'biti_payment', 'transactionId': transactionId});
-              print('DEBUG: Order completion process finished successfully');
+              Get.offAndToNamed(AppRoutes.cartConfirm, arguments: {'orderId': orderId, 'contactNumber': contactNumber, 'paymentMethod': 'digital_payment', 'transactionId': transactionId});
             } else {
-              print('ERROR: Invalid order response data - no orders found');
               showAppSnackBar(title: 'Order created but no order ID received', type: SnackBarType.error);
             }
 
           case Failure(error: final error):
-            print('ERROR: Order API call failed: ${NetworkExceptions.getErrorMessage(error)}');
             showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
         }
-      } catch (e, stackTrace) {
-        print('ERROR: Exception in _completeBitiOrder: $e');
-        print('ERROR: Stack trace: $stackTrace');
-        showAppSnackBar(title: 'Order completion error: ${e.toString()}', type: SnackBarType.error);
+      } catch (e) {
+        showAppSnackBar(title: 'Order completion error: \${e.toString()}', type: SnackBarType.error);
       } finally {
         isLoading.value = false;
-        print('DEBUG: Set loading to false for order completion');
       }
     });
   }

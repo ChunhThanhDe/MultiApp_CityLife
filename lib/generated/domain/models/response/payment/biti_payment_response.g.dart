@@ -8,15 +8,15 @@ part of '../../../../../domain/models/response/payment/biti_payment_response.dar
 
 _BitiPaymentResponse _$BitiPaymentResponseFromJson(Map<String, dynamic> json) =>
     _BitiPaymentResponse(
-      status: json['status'] as String,
-      code: (json['code'] as num).toInt(),
+      status: json['status'] as bool,
+      code: json['code'] as String,
       payload: json['payload'] == null
           ? null
           : BitiPaymentPayload.fromJson(
               json['payload'] as Map<String, dynamic>,
             ),
       message: json['message'] as String?,
-      detailedError: json['detailed_error'] as String?,
+      detailError: json['detail_error'] as String?,
     );
 
 Map<String, dynamic> _$BitiPaymentResponseToJson(
@@ -26,23 +26,35 @@ Map<String, dynamic> _$BitiPaymentResponseToJson(
   'code': instance.code,
   'payload': instance.payload,
   'message': instance.message,
-  'detailed_error': instance.detailedError,
+  'detail_error': instance.detailError,
 };
 
 _BitiPaymentPayload _$BitiPaymentPayloadFromJson(Map<String, dynamic> json) =>
     _BitiPaymentPayload(
       paymentUrl: json['payment_url'] as String,
-      transactionId: json['transaction_id'] as String,
-      amount: (json['amount'] as num).toDouble(),
-      currency: json['currency'] as String,
-      expiration: json['expiration'] as String,
+      info: json['info'] == null
+          ? null
+          : BitiPaymentInfo.fromJson(json['info'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$BitiPaymentPayloadToJson(_BitiPaymentPayload instance) =>
     <String, dynamic>{
       'payment_url': instance.paymentUrl,
+      'info': instance.info,
+    };
+
+_BitiPaymentInfo _$BitiPaymentInfoFromJson(Map<String, dynamic> json) =>
+    _BitiPaymentInfo(
+      transactionId: json['transaction_id'] as String,
+      amount: (json['amount'] as num).toDouble(),
+      currency: json['currency'] as String,
+      expiresAt: json['expires_at'] as String,
+    );
+
+Map<String, dynamic> _$BitiPaymentInfoToJson(_BitiPaymentInfo instance) =>
+    <String, dynamic>{
       'transaction_id': instance.transactionId,
       'amount': instance.amount,
       'currency': instance.currency,
-      'expiration': instance.expiration,
+      'expires_at': instance.expiresAt,
     };

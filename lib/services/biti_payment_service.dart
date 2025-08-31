@@ -40,7 +40,7 @@ class BitiPaymentService extends GetxService {
       );
 
       final result = await _bitiPaymentRepository.initiatePayment(request);
-      
+
       switch (result) {
         case Success(response: final response):
           if (response.statusCode == 200 && response.data != null) {
@@ -61,7 +61,7 @@ class BitiPaymentService extends GetxService {
   Future<BitiVerifyResponse?> verifyPayment(String transactionId) async {
     try {
       final result = await _bitiPaymentRepository.verifyPayment(transactionId);
-      
+
       switch (result) {
         case Success(response: final response):
           if (response.statusCode == 200 && response.data != null) {
@@ -80,12 +80,17 @@ class BitiPaymentService extends GetxService {
 
   /// Checks if payment is completed successfully
   bool isPaymentCompleted(BitiVerifyResponse? verifyResponse) {
-    return verifyResponse?.status == 'success' && verifyResponse?.payload?.status == 'completed';
+    return verifyResponse?.status == true && verifyResponse?.payload?.status == 'success';
   }
 
   /// Checks if payment is still pending
   bool isPaymentPending(BitiVerifyResponse? verifyResponse) {
-    return verifyResponse?.status == 'success' && verifyResponse?.payload?.status == 'pending';
+    return verifyResponse?.status == true && verifyResponse?.payload?.status == 'Initiated';
+  }
+
+  /// Checks if payment failed or was cancelled
+  bool isPaymentFailed(BitiVerifyResponse? verifyResponse) {
+    return verifyResponse?.status == true && (verifyResponse?.payload?.status == 'failed' || verifyResponse?.payload?.status == 'cancelled');
   }
 
   String? getPaymentUrl(BitiPaymentResponse? paymentResponse) {
@@ -93,27 +98,37 @@ class BitiPaymentService extends GetxService {
   }
 
   String? getTransactionId(BitiPaymentResponse? paymentResponse) {
-    return paymentResponse?.payload?.transactionId;
+    return paymentResponse?.payload?.info?.transactionId;
   }
 
+  /// Gets payment amount from response
   double? getPaymentAmount(BitiPaymentResponse? paymentResponse) {
-    return paymentResponse?.payload?.amount;
+    return paymentResponse?.payload?.info?.amount;
   }
 
+  /// Gets payment currency from response
   String? getPaymentCurrency(BitiPaymentResponse? paymentResponse) {
-    return paymentResponse?.payload?.currency;
+    return paymentResponse?.payload?.info?.currency;
   }
 
+  /// Gets payment expiration from response
   String? getPaymentExpiration(BitiPaymentResponse? paymentResponse) {
-    return paymentResponse?.payload?.expiration;
+    return paymentResponse?.payload?.info?.expiresAt;
   }
 
-  String? getVerificationTransactionId(BitiVerifyResponse? verifyResponse) {
-    return verifyResponse?.payload?.transactionId;
+  /// Gets transaction ID from verify response
+  String? getVerifyTransactionId(BitiVerifyResponse? verifyResponse) {
+    return verifyResponse?.payload?.trxId;
   }
 
-  String? getVerificationStatus(BitiVerifyResponse? verifyResponse) {
-    return verifyResponse?.payload?.status;
+  /// Gets payment amount from verify response
+  double? getVerifyAmount(BitiVerifyResponse? verifyResponse) {
+    return verifyResponse?.payload?.amount;
+  }
+
+  /// Gets payment currency from verify response
+  String? getVerifyCurrency(BitiVerifyResponse? verifyResponse) {
+    return verifyResponse?.payload?.currency;
   }
 
   /// Resets the service state
@@ -126,11 +141,11 @@ class BitiPaymentService extends GetxService {
 
   /// Gets the current transaction amount
   double? getCurrentAmount() {
-    return lastPaymentResponse.value?.payload?.amount;
+    return lastPaymentResponse.value?.payload?.info?.amount;
   }
 
   /// Gets the current currency
   String? getCurrentCurrency() {
-    return lastPaymentResponse.value?.payload?.currency;
+    return lastPaymentResponse.value?.payload?.info?.currency;
   }
 }
