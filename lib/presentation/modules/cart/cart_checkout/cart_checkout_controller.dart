@@ -287,50 +287,11 @@ class CartCheckoutController extends BaseController {
     }
 
     // Handle digital payment method (Biti)
-    if (selectedPaymentMethod.value == 'digital_payment') {
-      await _processBitiPayment();
+    if (selectedPaymentMethod.value == 'cash_on_delivery') {
+      showAppSnackBar(title: 'This payment method is not supported, please try again with a different payment method', type: SnackBarType.error);
       return;
     }
-
-    await safeExecute(() async {
-      isLoading.value = true;
-
-      final request = OrderNowRequest(
-        selectedDeliveryOption: selectedDeliveryOption.value,
-        selectedAddressId: selectedAddressId.value,
-        appliedCoupon: promoCode.value,
-        paymentMethod: selectedPaymentMethod.value,
-      );
-
-      final ApiResult result = await _cartRepository.orderNow(request);
-
-      switch (result) {
-        case Success(response: final response):
-          if (response.statusCode != 200) {
-            showAppSnackBar(title: 'Failed to place order', type: SnackBarType.error);
-            return;
-          }
-
-          final responseData = response.data;
-          if (responseData != null && responseData['orders'] != null && responseData['orders'].isNotEmpty) {
-            final orderId = responseData['orders'][0]['id'];
-            final contactNumber = selectedAddress?.contactPersonNumber ?? '';
-
-            // Refresh cart list to update UI (cart should be empty after successful order)
-            await _cartService.fetchCartList();
-
-            // Navigate to order confirmation screen
-            Get.offAndToNamed(AppRoutes.cartConfirm, arguments: {'orderId': orderId, 'contactNumber': contactNumber});
-          } else {
-            showAppSnackBar(title: 'Order created but no order ID received', type: SnackBarType.error);
-          }
-
-        case Failure(error: final error):
-          showAppSnackBar(title: NetworkExceptions.getErrorMessage(error), type: SnackBarType.error);
-      }
-
-      isLoading.value = false;
-    });
+    await _processBitiPayment();
   }
 
   /// Processes digital payment flow (Biti)

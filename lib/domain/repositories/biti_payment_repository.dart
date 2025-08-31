@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:sixam_mart_user/app/biti_payment_config.dart';
 import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_repository.dart';
@@ -26,6 +28,21 @@ class BitiPaymentRepository extends BaseRepository {
       return status != null && status >= 200 && status < 500;
     };
     dio.options.followRedirects = false;
+    dio.interceptors.add(
+      PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
+        compact: true,
+        maxWidth: 120,
+        enabled: kDebugMode,
+        filter: (options, args) {
+          return !args.isResponse || !args.hasUint8ListData;
+        },
+      ),
+    );
 
     return dio;
   }
@@ -58,7 +75,7 @@ class BitiPaymentRepository extends BaseRepository {
     try {
       final response = await bitiDio.get(
         BitiPaymentApiPath.verifyPayment,
-        queryParameters: {'trx_id': transactionId},
+        queryParameters: {'trx_id': transactionId, 'txn_id': transactionId},
         options: Options(headers: headers),
       );
       return ApiResult.success(response);
