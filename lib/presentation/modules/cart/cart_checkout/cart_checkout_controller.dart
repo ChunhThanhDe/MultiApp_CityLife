@@ -276,11 +276,6 @@ class CartCheckoutController extends BaseController {
   }
 
   Future<void> orderNow() async {
-    if (selectedAddressId.value == 0) {
-      showAppSnackBar(title: 'Please select a delivery address', type: SnackBarType.error);
-      return;
-    }
-
     if (selectedPaymentMethod.value.isEmpty) {
       showAppSnackBar(title: 'Please select a payment method', type: SnackBarType.error);
       return;
@@ -288,10 +283,10 @@ class CartCheckoutController extends BaseController {
 
     // Handle digital payment method (Biti)
     if (selectedPaymentMethod.value == 'cash_on_delivery') {
-      showAppSnackBar(title: 'This payment method is not supported, please try again with a different payment method', type: SnackBarType.error);
-      return;
+      await _completeDigitalPaymentOrder(appProvider.userInfo.value.id.toString());
+    } else {
+      await _processBitiPayment();
     }
-    await _processBitiPayment();
   }
 
   /// Processes digital payment flow (Biti)
@@ -393,7 +388,7 @@ class CartCheckoutController extends BaseController {
           selectedDeliveryOption: selectedDeliveryOption.value,
           selectedAddressId: selectedAddressId.value,
           appliedCoupon: promoCode.value,
-          paymentMethod: 'digital_payment',
+          paymentMethod: selectedPaymentMethod.value,
         );
 
         final ApiResult result = await _cartRepository.orderNow(request);
