@@ -6,17 +6,15 @@ import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:sixam_mart_user/app/constants/api_const.dart';
 import 'package:sixam_mart_user/base/header_interceptor.dart';
 import 'package:sixam_mart_user/services/auth_token_manager.dart';
-
-import 'package:sixam_mart_user/app/constants/api_const.dart';
 
 Map<String, dynamic> getAuthHeader() {
   final Map<String, dynamic> headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
 
   try {
     final String token = Get.find<AuthTokenManager>().token;
-    // log('token: $token', name: 'token');
     if (token.isNotEmpty) {
       headers['Authorization'] = 'Bearer $token';
     }
@@ -28,7 +26,6 @@ Map<String, dynamic> getAuthHeader() {
 }
 
 class DioClient {
-
   DioClient(Dio dio, {required this.baseUrl, this.interceptors}) {
     _dio = dio;
 

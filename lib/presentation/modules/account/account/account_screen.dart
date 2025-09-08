@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
@@ -24,7 +26,7 @@ class AccountScreen extends BaseScreen<AccountController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return const BasicAppBar(title: 'Account', isShowBackButton: false);
+    return BasicAppBar(title: tr(LocaleKeys.account_title), isShowBackButton: false);
   }
 
   void _showLogoutConfirmation() {
@@ -34,10 +36,10 @@ class AccountScreen extends BaseScreen<AccountController> {
         Get.back();
         AuthService.logout();
       },
-      title: 'Sign Out',
-      message: 'Are you sure you want to sign out of your account?',
-      cancelText: 'Cancel',
-      confirmText: 'Sign Out',
+      title: tr(LocaleKeys.account_signOutTitle),
+      message: tr(LocaleKeys.account_signOutMessage),
+      cancelText: tr(LocaleKeys.account_cancel),
+      confirmText: tr(LocaleKeys.account_signOutTitle),
       cancelColor: AppColors.textGreyDefault500,
       confirmColor: AppColors.textDangerDefault500,
       cancelTextStyle: AppTextStyles.typographyH10SemiBold,
@@ -49,25 +51,25 @@ class AccountScreen extends BaseScreen<AccountController> {
   @override
   Widget buildScreen(BuildContext context) {
     final List<AccountMenuItem> menuItems = [
-      AccountMenuItem(icon: Assets.icons.icPersonOutlined.path, title: 'Manage account', onClick: () => Get.toNamed(AppRoutes.accountManage)),
-      AccountMenuItem(icon: Assets.icons.icHeartOutlined.path, title: 'Favorites', onClick: () => Get.toNamed(AppRoutes.favorites)),
-      AccountMenuItem(icon: Assets.icons.icLockRounded.path, title: 'Security', onClick: () => Get.toNamed(AppRoutes.accountSecurity)),
-      AccountMenuItem(icon: Assets.icons.icWalletOutlined.path, title: 'Payment methods', onClick: () {}),
+      AccountMenuItem(icon: Assets.icons.icPersonOutlined.path, title: tr(LocaleKeys.account_manageAccount), onClick: () => Get.toNamed(AppRoutes.accountManage)),
+      AccountMenuItem(icon: Assets.icons.icHeartOutlined.path, title: tr(LocaleKeys.account_favorites), onClick: () => Get.toNamed(AppRoutes.favorites)),
+      AccountMenuItem(icon: Assets.icons.icLockRounded.path, title: tr(LocaleKeys.account_security), onClick: () => Get.toNamed(AppRoutes.accountSecurity)),
+      AccountMenuItem(icon: Assets.icons.icWalletOutlined.path, title: tr(LocaleKeys.account_paymentMethods), onClick: () {}),
       AccountMenuItem(
         icon: Assets.icons.icLocation.path,
-        title: 'Address',
+        title: tr(LocaleKeys.account_address),
         onClick: () {
           Get.toNamed(AppRoutes.address);
         },
       ),
-      AccountMenuItem(icon: Assets.icons.icGift.path, title: 'Gift Cards', onClick: () {}),
-      AccountMenuItem(icon: Assets.icons.icGroup.path, title: 'Invite friends', onClick: () {}),
-      AccountMenuItem(icon: Assets.icons.icPromotion.path, title: 'Promotions', onClick: () {}),
-      AccountMenuItem(icon: Assets.icons.icBell.path, title: 'Notification', onClick: () {}),
-      AccountMenuItem(icon: Assets.icons.icHeadphone.path, title: 'Help Center', onClick: () {}),
+      AccountMenuItem(icon: Assets.icons.icGift.path, title: tr(LocaleKeys.account_giftCards), onClick: () {}),
+      AccountMenuItem(icon: Assets.icons.icGroup.path, title: tr(LocaleKeys.account_inviteFriends), onClick: () {}),
+      AccountMenuItem(icon: Assets.icons.icPromotion.path, title: tr(LocaleKeys.account_promotions), onClick: () {}),
+      AccountMenuItem(icon: Assets.icons.icBell.path, title: tr(LocaleKeys.account_notification), onClick: () {}),
+      AccountMenuItem(icon: Assets.icons.icHeadphone.path, title: tr(LocaleKeys.account_helpCenter), onClick: () {}),
       AccountMenuItem(
         icon: Assets.icons.icMoon.path,
-        title: 'Dark Mode',
+        title: tr(LocaleKeys.account_darkMode),
         trailing: GetBuilder<AccountController>(
           builder: (controller) => Text(controller.currentThemeDisplayName, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
         ),
@@ -75,13 +77,13 @@ class AccountScreen extends BaseScreen<AccountController> {
       ),
       AccountMenuItem(
         icon: Assets.icons.icLanguage.path,
-        title: 'Language',
+        title: tr(LocaleKeys.account_language),
         trailing: GetBuilder<AccountController>(
           builder: (controller) => Text(controller.currentLanguageDisplayName, style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
         ),
         onClick: () => controller.showLanguageSelection(),
       ),
-      AccountMenuItem(icon: Assets.icons.icInfo.path, title: 'About App', onClick: () {}),
+      AccountMenuItem(icon: Assets.icons.icInfo.path, title: tr(LocaleKeys.account_aboutApp), onClick: () {}),
     ];
 
     // Total items: 1 profile card + menu items + 1 sign out section
@@ -106,10 +108,7 @@ class AccountScreen extends BaseScreen<AccountController> {
                 ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 24.w),
                   leading: SvgPicture.asset(item.icon, colorFilter: ColorFilter.mode(AppColors.textGreyHigh700, BlendMode.srcIn)),
-                  title: Text(
-                    item.title,
-                    style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
-                  ),
+                  title: Text(item.title, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                   trailing: item.trailing ?? Icon(Icons.chevron_right, color: AppColors.textGreyHigh700),
                   onTap: item.onClick,
                 ),
@@ -132,13 +131,10 @@ class AccountScreen extends BaseScreen<AccountController> {
                       foregroundColor: AppColors.stateDangerHigh700,
                     ),
                     onPressed: _showLogoutConfirmation,
-                    child: Text(
-                      'Sign out',
-                      style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textDangerDefault500),
-                    ),
+                    child: Text(tr(LocaleKeys.account_signOut), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textDangerDefault500)),
                   ),
                   const SizedBox(height: 8),
-                  Text('v2.380', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHighest950)),
+                  Text('v1.0.0', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHighest950)),
                   const SizedBox(height: 8),
                 ],
               ),
@@ -176,10 +172,7 @@ class _ProfileCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      userName,
-                      style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950),
-                    ),
+                    Text(userName, style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950)),
                     const SizedBox(height: 4),
                     Text(userRefId, style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyHigh700)),
                   ],

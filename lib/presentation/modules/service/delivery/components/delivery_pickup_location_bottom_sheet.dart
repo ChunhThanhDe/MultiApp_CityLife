@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class PickupLocationBottomSheet extends StatelessWidget {
@@ -21,12 +23,12 @@ class PickupLocationBottomSheet extends StatelessWidget {
                 margin: EdgeInsets.only(bottom: 16.h),
                 decoration: BoxDecoration(color: AppColors.stateBrandLowest50, borderRadius: BorderRadius.circular(2)),
               ),
-              const Text('Pickup Location', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
+              Text(tr(LocaleKeys.service_pickupLocation), style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
               const SizedBox(height: 16),
               // Search Field
               TextField(
                 decoration: InputDecoration(
-                  hintText: 'Search for an address',
+                  hintText: tr(LocaleKeys.service_searchAddressHint),
                   prefixIcon: const Icon(Icons.search, size: 20),
                   filled: true,
                   fillColor: AppColors.stateGreyLowestHover100,
@@ -38,7 +40,7 @@ class PickupLocationBottomSheet extends StatelessWidget {
               // Saved addresses
               Align(
                 alignment: Alignment.centerLeft,
-                child: Text('Saved addresses', style: TextStyle(fontSize: 14, color: AppColors.textGreyDefault500)),
+                child: Text(tr(LocaleKeys.service_savedAddresses), style: TextStyle(fontSize: 14, color: AppColors.textGreyDefault500)),
               ),
               ListTile(
                 title: const Text('My Work'),
@@ -63,7 +65,7 @@ class PickupLocationBottomSheet extends StatelessWidget {
                   minimumSize: const Size.fromHeight(48),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ), // handle add new address
-                child: const Text('Add new address'),
+                child: Text(tr(LocaleKeys.service_addNewAddress)),
               ),
               const SizedBox(height: 12),
             ],

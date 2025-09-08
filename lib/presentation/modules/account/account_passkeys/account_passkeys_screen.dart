@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:sixam_mart_user/presentation/modules/account/account_passkeys/account_passkeys_controller.dart';
 
@@ -108,7 +110,7 @@ class _BottomSection extends StatelessWidget {
             style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950),
           ),
           const SizedBox(height: 4),
-          Text('Speed up your sign in next time by creating a passkey on this device', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
+          Text(tr(LocaleKeys.account_passkeyDescription), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
           const SizedBox(height: 16),
           SizedBox(
             width: double.infinity,

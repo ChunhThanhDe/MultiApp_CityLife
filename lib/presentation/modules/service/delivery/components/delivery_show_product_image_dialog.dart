@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 
 void showProductImageDialog(BuildContext context, String imagePath) {
@@ -22,7 +24,7 @@ void showProductImageDialog(BuildContext context, String imagePath) {
               children: [
                 Expanded(
                   child: Text(
-                    'Add Product image',
+                    tr(LocaleKeys.service_addProductImage),
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: AppColors.textBaseGrey950),
                   ),
                 ),
@@ -44,7 +46,7 @@ void showProductImageDialog(BuildContext context, String imagePath) {
             const SizedBox(height: 12),
             Align(
               alignment: Alignment.centerRight,
-              child: Text('Date image', style: TextStyle(color: AppColors.stateDangerDefault500, fontSize: 14)),
+              child: Text(tr(LocaleKeys.service_dateImage), style: TextStyle(color: AppColors.stateDangerDefault500, fontSize: 14)),
             ),
           ],
         ),

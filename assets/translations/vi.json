@@ -1,6 +1,6 @@
 {
     "root": {
-        "title": "Six Mart Xin chào",
+        "title": "Six Mart Hello",
         "home": "Trang chủ",
         "service": "Dịch vụ",
         "cart": "Giỏ hàng",
@@ -11,19 +11,19 @@
         "error": {
             "default": "Đã xảy ra lỗi",
             "noInternet": "Không có kết nối internet",
-            "timeout": "Hết thời gian chờ"
+            "timeout": "Hết thời gian yêu cầu"
         }
     },
     "authentication": {
         "signIn": {
-            "title": "Đăng nhập vào tài khoản của bạn",
+            "title": "Đăng nhập vào tài khoản",
             "subtitle": "Chào mừng trở lại! Vui lòng đăng nhập bằng thông tin đăng nhập của bạn",
             "loginButton": "Đăng nhập",
-            "loginWithPhone": "Đăng nhập bằng số điện thoại",
+            "loginWithPhone": "Đăng nhập bằng điện thoại",
             "loginWithEmail": "Đăng nhập bằng email",
             "or": "HOẶC",
             "emailLabel": "Địa chỉ email",
-            "emailHint": "ten@example.com",
+            "emailHint": "name@example.com",
             "passwordLabel": "Mật khẩu",
             "passwordHint": "Nhập mật khẩu của bạn",
             "emailRequired": "Email là bắt buộc",
@@ -43,21 +43,21 @@
             "title": "Tạo tài khoản",
             "subtitle": "Nhập thông tin tài khoản của bạn",
             "nextButton": "Tiếp theo",
-            "signUpWithPhone": "Đăng ký bằng số điện thoại",
+            "signUpWithPhone": "Đăng ký bằng điện thoại",
             "signUpWithEmail": "Đăng ký bằng email",
             "nameLabel": "Tên của bạn",
             "nameHint": "Nhập tên của bạn",
-            "nameRequired": "Họ và tên là bắt buộc",
+            "nameRequired": "Họ tên đầy đủ là bắt buộc",
             "phoneRequired": "Số điện thoại là bắt buộc",
             "phoneInvalid": "Vui lòng nhập số điện thoại hợp lệ",
             "birthdayQuestion": "Sinh nhật của bạn là khi nào?",
             "birthdayOptional": " (tùy chọn)",
             "monthHint": "Tháng",
-            "monthHelper": "TT",
+            "monthHelper": "MM",
             "dayHint": "Ngày",
-            "dayHelper": "NN",
+            "dayHelper": "DD",
             "yearHint": "Năm",
-            "yearHelper": "NNNN",
+            "yearHelper": "YYYY",
             "alreadyHaveAccount": "Đã có tài khoản? ",
             "logIn": "Đăng nhập",
             "or": "HOẶC",
@@ -82,21 +82,21 @@
         "verification": {
             "checkEmailTitle": "Kiểm tra email của bạn",
             "verifyPhoneTitle": "Xác minh số điện thoại của bạn",
-            "emailSubtitle": "Vui lòng nhập mã xác minh bạn đã nhận trong email để tiếp tục.",
+            "emailSubtitle": "Vui lòng nhập mã xác minh bạn nhận được trong email để tiếp tục.",
             "phoneSubtitle": "Vui lòng nhập mã 5 chữ số chúng tôi đã gửi đến {verificationId}",
             "verifyButton": "Xác minh mã",
             "backToLogin": "Quay lại đăng nhập",
             "backToSignUp": "Quay lại đăng ký",
             "dontHaveAccount": "Chưa có tài khoản? ",
-            "createAccount": "Tạo ngay!",
-            "codeExpires": "Mã này hết hạn sau ",
+            "createAccount": "Tạo ngay bây giờ!",
+            "codeExpires": "Mã này hết hạn trong ",
             "thirtyMins": "30 phút."
         },
         "acceptTos": {
-            "title": "Chấp nhận Điều khoản SpeedEats & Xem lại Thông báo về Quyền riêng tư",
-            "subtitle": "Bằng cách chọn \"Tôi đồng ý\" bên dưới, tôi đã xem xét và đồng ý với Điều khoản sử dụng và thừa nhận Thông báo về Quyền riêng tư. Tôi ít nhất 18 tuổi.",
+            "title": "Chấp nhận Điều khoản Six Mart & Xem xét Thông báo Bảo mật",
+            "subtitle": "Bằng cách chọn \"Tôi đồng ý\" bên dưới, tôi đã xem xét và đồng ý với Điều khoản Sử dụng và xác nhận Thông báo Bảo mật. Tôi ít nhất 18 tuổi.",
             "nextButton": "Tiếp theo",
-            "didntReceiveEmail": "Không nhận được email? ",
+            "didntReceiveEmail": "Không nhận được email?  ",
             "clickResend": "Nhấp để gửi lại"
         },
         "phonePicker": {
@@ -112,32 +112,53 @@
             "confirmReadPrivacyPolicy": "và xác nhận rằng bạn đã đọc Chính sách Bảo mật của Diyaar"
         }
     },
-    "address": {
-        "title": "Địa chỉ",
-        "enterTitle": "Nhập địa chỉ của bạn",
-        "enterSubtitle": "Chúng tôi cần địa chỉ của bạn để hiển thị Thực phẩm, Cửa hàng tạp hóa và hơn thế nữa gần bạn",
-        "addButton": "Thêm địa chỉ của bạn",
-        "skipButton": "Bỏ qua bây giờ",
-        "searchHint": "Tìm kiếm địa chỉ",
-        "exploreNearby": "Khám phá gần đây",
-        "addNewAddress": "Thêm địa chỉ mới",
-        "details": {
-            "buildingType": "Loại tòa nhà",
-            "selectBuildingType": "Chọn loại tòa nhà",
-            "buildingNumber": "Căn hộ, Đơn vị hoặc Tầng",
-            "buildingNumberHint": "Ví dụ: 2030",
-            "buildingName": "Tên tòa nhà",
-            "buildingNameHint": "Ví dụ: Center Villa",
-            "addressLabel": "Nhãn địa chỉ",
-            "addressLabelOptional": " (tùy chọn)",
-            "addressLabelHint": "Thêm nhãn (ví dụ: nhà tôi)",
-            "deliveryInstructions": "Hướng dẫn giao hàng",
-            "saveAddress": "Lưu địa chỉ",
-            "selectBuildingTypeTitle": "Chọn loại tòa nhà",
-            "selectBuildingTypeSubtitle": "Lorem Ipsum đơn giản chỉ là văn bản giả của ngành in ấn và sắp chữ."
-        }
-    },
     "onboarding": {
+        "title": "Chào mừng đến với Six Mart",
+        "getStarted": "Bắt đầu",
+        "skip": "Bỏ qua",
+        "next": "Tiếp theo",
+        "done": "Xong",
+        "slide1": {
+            "title": "Chào mừng đến với Six Mart",
+            "subtitle": "Điểm đến một cửa cho tất cả nhu cầu mua sắm của bạn"
+        },
+        "slide2": {
+            "title": "Giao hàng nhanh",
+            "subtitle": "Nhận đơn hàng giao đến cửa nhà trong vài phút"
+        },
+        "slide3": {
+            "title": "Giá tốt nhất",
+            "subtitle": "Tìm những ưu đãi và giảm giá tốt nhất trên hàng nghìn sản phẩm"
+        },
+        "slide4": {
+            "title": "Sản phẩm chất lượng",
+            "subtitle": "Mua sắm từ các thương hiệu đáng tin cậy và người bán đã xác minh"
+        },
+        "slide5": {
+            "title": "Thanh toán dễ dàng",
+            "subtitle": "Nhiều tùy chọn thanh toán cho sự thuận tiện của bạn"
+        },
+        "slide6": {
+            "title": "Hỗ trợ 24/7",
+            "subtitle": "Đội ngũ hỗ trợ khách hàng của chúng tôi luôn sẵn sàng giúp bạn"
+        },
+        "slide7": {
+            "title": "Theo dõi đơn hàng",
+            "subtitle": "Theo dõi thời gian thực cho tất cả đơn hàng của bạn"
+        },
+        "slide8": {
+            "title": "Tiết kiệm tiền",
+            "subtitle": "Kiếm phần thưởng và tiết kiệm tiền với mỗi lần mua sắm"
+        },
+        "slide9": {
+            "title": "Chia sẻ & Kiếm tiền",
+            "subtitle": "Chia sẻ với bạn bè và kiếm phần thưởng cùng nhau"
+        },
+        "slide10": {
+            "title": "Sẵn sàng bắt đầu?",
+            "subtitle": "Tham gia cùng hàng triệu khách hàng hài lòng ngay hôm nay"
+        },
+        "preparingExperience": "Đang chuẩn bị trải nghiệm...",
         "welcome": {
             "step1": {
                 "title": "Chào mừng đến với SpeedEats",
@@ -181,6 +202,56 @@
             }
         }
     },
+    "home": {
+        "noDataAvailable": "Không có dữ liệu",
+        "tryAgainLater": "Vui lòng thử lại sau"
+    },
+    "store": {
+        "filterMenu": "Lọc menu",
+        "dismiss": "Bỏ qua",
+        "noItemsAvailable": "Không có sản phẩm nào",
+        "required": "Bắt buộc",
+        "addOns": "Thêm vào",
+        "resetRecipe": "Đặt lại công thức chuẩn",
+        "addToCart": "Thêm vào giỏ hàng",
+        "productNotFound": "Không tìm thấy sản phẩm",
+        "editPin": "Chỉnh sửa pin",
+        "contact": "Liên hệ",
+        "delivery": "Giao hàng",
+        "tracking": "Theo dõi",
+        "error": "Lỗi",
+        "failedToLoadProduct": "Không thể tải chi tiết sản phẩm",
+        "failedToParseProduct": "Không thể phân tích dữ liệu sản phẩm",
+        "loadStoreDetailFailed": "Không thể tải chi tiết cửa hàng",
+        "details": "Chi tiết",
+        "ingredients": "Thành phần",
+        "option": "Tùy chọn"
+    },
+    "service": {
+        "noServicesAvailable": "Không có dịch vụ nào",
+        "tryAgainLater": "Vui lòng thử lại sau",
+        "searchPlaceholder": "Tìm kiếm thức ăn và cửa hàng",
+        "deliver": "Giao hàng",
+        "deliveryAddress": "2216 N 10th Street, CA 92243",
+        "addProductImage": "Thêm hình ảnh sản phẩm",
+        "dateImage": "Hình ảnh ngày",
+        "pickupLocation": "Địa điểm nhận hàng",
+        "searchAddressHint": "Tìm kiếm địa chỉ",
+        "savedAddresses": "Địa chỉ đã lưu",
+        "addNewAddress": "Thêm địa chỉ mới",
+        "delivery": "Giao hàng",
+        "tracking": "Theo dõi"
+    },
+    "payment": {
+        "country": "Quốc gia",
+        "unitedStates": "Hoa Kỳ",
+        "vietnam": "Việt Nam",
+        "optional": "Tùy chọn",
+        "apple": "Apple",
+        "visa": "Visa",
+        "mastercard": "Mastercard",
+        "evc": "EVC"
+    },
     "wallet": {
         "title": "Ví",
         "mayGift": "Có thể tặng",
@@ -188,24 +259,161 @@
         "diyaarCash": "Tiền mặt Diyaar",
         "addFunds": "Thêm tiền",
         "addFundsTitle": "Thêm tiền",
-        "loadAmount": "Nạp số tiền này",
-        "loadAmountSubtitle": "Bạn muốn thêm bao nhiều vào số dư của mình?",
+        "loadAmount": "Tải số tiền này",
+        "loadAmountSubtitle": "Bạn muốn thêm bao nhiêu vào số dư?",
         "amountHint": "0.00",
         "amountRange": "Nhập số tiền từ $15 đến $900",
         "paymentMethod": "Phương thức thanh toán",
         "addPaymentCard": "Thêm thẻ thanh toán",
         "receipt": {
-            "title": "Hóa đơn",
+            "title": "Biên lai",
             "completed": "Hoàn thành",
-            "items": "Mặt hàng",
+            "items": "Mục",
             "payment": "Thanh toán",
-            "total": "Tổng cộng:",
+            "total": "Tổng:",
             "downloadPdf": "Tải PDF",
             "resendEmail": "Gửi lại email",
             "share": "Chia sẻ"
-        }
+        },
+        "receiptNumber": "#203358",
+        "brandName": "Starbucks®",
+        "status": "Hoàn thành • 7:25 PM",
+        "driverName": "Abdulkadir Ali",
+        "vehicleInfo": "Toyota Camry • 84D23B63",
+        "rating": "84%",
+        "cardDisplay": "VISA ••••5290",
+        "laundry": "Giặt ủi",
+        "walmart": "Walmart",
+        "target": "Target",
+        "walgreen": "Walgreen"
+    },
+    "delivery": {
+        "inDelivered": "Đang giao",
+        "inProgress": "Đang xử lý",
+        "inReview": "Đang xem xét",
+        "completed": "Hoàn thành",
+        "onHold": "Tạm dừng",
+        "cancelled": "Đã hủy"
+    },
+    "cart": {
+        "viewCart": "Xem giỏ hàng",
+        "orders": "Đơn hàng",
+        "clearAll": "Xóa tất cả",
+        "subtotal": "Tổng phụ",
+        "unknownStore": "Cửa hàng không xác định",
+        "checkoutNow": "Thanh toán ngay",
+        "failedToLoadCheckout": "Không thể tải dữ liệu thanh toán",
+        "apply": "Áp dụng",
+        "orderNow": "Đặt hàng ngay",
+        "done": "Xong",
+        "checkout": "Thanh toán"
+    },
+    "order": {
+        "retry": "Thử lại",
+        "order": "Đơn hàng",
+        "address": "Địa chỉ",
+        "addressDetails": "Chi tiết địa chỉ",
+        "orderDetails": "Chi tiết đơn hàng"
+    },
+    "favorites": {
+        "unknownStore": "Cửa hàng không xác định",
+        "deliveryFee": "$0 Phí giao hàng",
+        "deliveryTimeFallback": "30-60 phút",
+        "unknownItem": "Mục không xác định"
+    },
+    "search": {
+        "searchPlaceholder": "Tìm kiếm thức ăn và cửa hàng",
+        "noDataAvailable": "Không có dữ liệu",
+        "tryAgainLater": "Vui lòng thử lại sau",
+        "topSearches": "Tìm kiếm hàng đầu",
+        "recent": "Gần đây",
+        "topCategories": "Danh mục hàng đầu",
+        "noResultsFound": "Không tìm thấy kết quả",
+        "tryDifferentKeywords": "Thử tìm kiếm với từ khóa khác"
     },
     "account": {
-        "selectLanguage": "Chọn ngôn ngữ"
+        "title": "Tài khoản",
+        "selectLanguage": "Chọn ngôn ngữ",
+        "manageAccount": "Quản lý tài khoản",
+        "favorites": "Yêu thích",
+        "security": "Bảo mật",
+        "paymentMethods": "Phương thức thanh toán",
+        "address": "Địa chỉ",
+        "addressDetails": "Chi tiết địa chỉ",
+        "giftCards": "Thẻ quà tặng",
+        "inviteFriends": "Mời bạn bè",
+        "promotions": "Khuyến mãi",
+        "notification": "Thông báo",
+        "helpCenter": "Trung tâm trợ giúp",
+        "darkMode": "Chế độ tối",
+        "language": "Ngôn ngữ",
+        "aboutApp": "Về ứng dụng",
+        "signOut": "Đăng xuất",
+        "signOutTitle": "Đăng xuất",
+        "signOutMessage": "Bạn có chắc chắn muốn đăng xuất khỏi tài khoản?",
+        "cancel": "Hủy",
+        "changePassword": "Thay đổi mật khẩu của tôi",
+        "passwordRecommendation": "Chúng tôi khuyên bạn nên chọn mật khẩu:",
+        "changePasswordButton": "Thay đổi mật khẩu",
+        "birthdayQuestion": "Sinh nhật của bạn là khi nào?",
+        "optional": "(tùy chọn)",
+        "update": "Cập nhật",
+        "disconnect": "Ngắt kết nối",
+        "secondSteps": "Bước thứ hai",
+        "selectTheme": "Chọn giao diện",
+        "passkeyDescription": "Tăng tốc đăng nhập lần sau bằng cách tạo khóa truy cập trên thiết bị này",
+        "version": "v2.380"
+    },
+    "shared": {
+        "somethingWentWrong": "Đã xảy ra lỗi",
+        "tryAgain": "Thử lại"
+    },
+    "banner": {
+        "closed": "Đóng cửa",
+        "currentlyUnavailable": "Hiện không khả dụng"
+    },
+    "cardScanner": {
+        "scanCard": "Quét thẻ của bạn",
+        "positionCard": "Đặt thẻ của bạn trong khung",
+        "scanFailed": "Quét thẻ thất bại",
+        "tryAgain": "Thử lại"
+    },
+    "permissions": {
+        "permissionRestricted": "Quyền bị hạn chế",
+        "permissionRestrictedMessage": "Quyền này bị hạn chế bởi hệ thống và không thể thay đổi",
+        "ok": "OK",
+        "permissionRequired": "Quyền cần thiết",
+        "permissionRequiredMessage": "Quyền này cần thiết để ứng dụng hoạt động bình thường. Vui lòng bật nó trong cài đặt",
+        "openSettings": "Mở Cài đặt",
+        "cancel": "Hủy"
+    },
+    "address": {
+        "title": "Địa chỉ",
+        "enterTitle": "Nhập địa chỉ của bạn",
+        "enterSubtitle": "Chúng tôi cần địa chỉ của bạn để hiển thị Thực phẩm, Cửa hàng tạp hóa và hơn thế nữa gần bạn",
+        "addButton": "Thêm địa chỉ của bạn",
+        "skipButton": "Bỏ qua bây giờ",
+        "searchHint": "Tìm kiếm địa chỉ",
+        "exploreNearby": "Khám phá gần đây",
+        "addNewAddress": "Thêm địa chỉ mới",
+        "confirmDeliveryAddress": "Xác nhận địa chỉ giao hàng",
+        "confirmLocation": "Xác nhận vị trí",
+        "addressDetails": "Chi tiết địa chỉ",
+        "editPin": "Chỉnh sửa pin",
+        "details": {
+            "buildingType": "Loại tòa nhà",
+            "selectBuildingType": "Chọn loại tòa nhà",
+            "buildingNumber": "Căn hộ, Đơn vị hoặc Tầng",
+            "buildingNumberHint": "Ví dụ: 2030",
+            "buildingName": "Tên tòa nhà",
+            "buildingNameHint": "Ví dụ: Center Villa",
+            "addressLabel": "Nhãn địa chỉ",
+            "addressLabelOptional": " (tùy chọn)",
+            "addressLabelHint": "Thêm nhãn (ví dụ: nhà tôi)",
+            "deliveryInstructions": "Hướng dẫn giao hàng",
+            "saveAddress": "Lưu địa chỉ",
+            "selectBuildingTypeTitle": "Chọn loại tòa nhà",
+            "selectBuildingTypeSubtitle": "Lorem Ipsum đơn giản chỉ là văn bản giả của ngành in ấn và sắp chữ."
+        }
     }
 }

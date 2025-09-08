@@ -6,6 +6,8 @@ import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account_2_step_verification/account_2_step_verification_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/account/components/account_divider.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Account2StepVerificationScreen extends BaseScreen<Account2StepVerificationController> {
   const Account2StepVerificationScreen({super.key});
@@ -29,7 +31,7 @@ class Account2StepVerificationScreen extends BaseScreen<Account2StepVerification
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Second steps', style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950)),
+                    Text(tr(LocaleKeys.account_secondSteps), style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950)),
                     const SizedBox(height: 8),
                     Text(
                       'Make sure you can access your SpeedEats Account by keeping this information up to date and adding more sign-in options',

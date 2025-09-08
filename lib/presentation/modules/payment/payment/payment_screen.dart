@@ -1,10 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/presentation/modules/payment/payment/payment_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
-
-import 'package:sixam_mart_user/presentation/modules/payment/payment/payment_controller.dart';
 
 class PaymentScreen extends BaseScreen<PaymentController> {
   const PaymentScreen({super.key});
@@ -135,17 +136,17 @@ class PaymentScreen extends BaseScreen<PaymentController> {
                                   () => DropdownButtonFormField<String>(
                                     value: controller.selectedCountry.value,
                                     isExpanded: true,
-                                    hint: const Text('Country', style: TextStyle(fontSize: 14, color: Color(0xFF798A9A))),
+                                    hint: Text(tr(LocaleKeys.payment_country), style: const TextStyle(fontSize: 14, color: Color(0xFF798A9A))),
                                     decoration: const InputDecoration(border: InputBorder.none, isDense: true, contentPadding: EdgeInsets.zero),
                                     icon: const Icon(Icons.keyboard_arrow_down),
-                                    items: const [
+                                    items: [
                                       DropdownMenuItem(
                                         value: 'US',
-                                        child: Row(children: [Icon(Icons.flag, size: 16), SizedBox(width: 8), Text('United States')]),
+                                        child: Row(children: [const Icon(Icons.flag, size: 16), const SizedBox(width: 8), Text(tr(LocaleKeys.payment_unitedStates))]),
                                       ),
                                       DropdownMenuItem(
                                         value: 'VN',
-                                        child: Row(children: [Icon(Icons.flag, size: 16), SizedBox(width: 8), Text('Vietnam')]),
+                                        child: Row(children: [const Icon(Icons.flag, size: 16), const SizedBox(width: 8), Text(tr(LocaleKeys.payment_vietnam))]),
                                       ),
                                     ],
                                     onChanged: (value) {
@@ -290,7 +291,7 @@ class _LabelRow extends StatelessWidget {
           style: const TextStyle(fontSize: 14, color: Color(0xFF161A1D), fontWeight: FontWeight.w400),
         ),
         if (required) const Text(' *', style: TextStyle(fontSize: 14, color: Color(0xFFFF3B30))),
-        if (optional) const Text(' (optional)', style: TextStyle(fontSize: 14, color: Color(0xFF798A9A))),
+        if (optional) Text(' (${tr(LocaleKeys.payment_optional)})', style: const TextStyle(fontSize: 14, color: Color(0xFF798A9A))),
       ],
     );
   }

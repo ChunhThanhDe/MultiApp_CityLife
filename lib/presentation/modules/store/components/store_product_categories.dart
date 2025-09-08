@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_infomation_response.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_category_section.dart';
@@ -48,10 +50,10 @@ class StoreProductCategories extends StatelessWidget {
                   SizedBox(height: 50.h),
                   Icon(Icons.inbox_outlined, size: 64.w, color: AppColors.textGreyDefault500),
                   SizedBox(height: 16.h),
-                  Text('No items available', style: AppTextStyles.typographyH7SemiBold.copyWith(color: AppColors.textGreyDefault500)),
+                  Text(tr(LocaleKeys.store_noItemsAvailable), style: AppTextStyles.typographyH7SemiBold.copyWith(color: AppColors.textGreyDefault500)),
                   SizedBox(height: 8.h),
                   Text(
-                    'We\'ll add more items to this category soon.',
+                    tr(LocaleKeys.store_noItemsAvailable),
                     style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500),
                     textAlign: TextAlign.center,
                   ),

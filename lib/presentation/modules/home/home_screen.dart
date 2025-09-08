@@ -1,13 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/home/components/header_and_service.dart';
 import 'package:sixam_mart_user/presentation/modules/home/components/sliver_box.dart';
+import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
 import 'package:sixam_mart_user/presentation/shared/unified_banner_widget.dart';
-
-import 'package:sixam_mart_user/presentation/modules/home/home_controller.dart';
 
 class HomeScreen extends BaseScreen<HomeController> {
   const HomeScreen({super.key});
@@ -36,9 +37,9 @@ class HomeScreen extends BaseScreen<HomeController> {
                   children: [
                     Icon(Icons.store_outlined, size: 64, color: AppColors.textGreyDefault500),
                     const SizedBox(height: 16),
-                    Text('No data available', style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyDefault500)),
+                    Text(tr(LocaleKeys.home_noDataAvailable), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyDefault500)),
                     const SizedBox(height: 8),
-                    Text('Please try again later', style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
+                    Text(tr(LocaleKeys.home_tryAgainLater), style: AppTextStyles.typographyH12Regular.copyWith(color: AppColors.textGreyDefault500)),
                   ],
                 ),
               ),

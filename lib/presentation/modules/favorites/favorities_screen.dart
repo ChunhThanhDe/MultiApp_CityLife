@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/response/wishlist_response.dart';
@@ -107,7 +109,7 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
                     height: 48,
                     decoration: BoxDecoration(
                       color: AppTheme.theme.backgroundSurfacePrimaryWhite,
-          border: Border.all(color: AppTheme.theme.backgroundSurfacePrimaryWhite, width: 2),
+                      border: Border.all(color: AppTheme.theme.backgroundSurfacePrimaryWhite, width: 2),
                       shape: BoxShape.circle,
                       boxShadow: [BoxShadow(color: AppColors.shadowSm5, blurRadius: 6, offset: const Offset(0, 2))],
                     ),
@@ -143,7 +145,7 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
               children: [
                 Expanded(
                   child: Text(
-                    store.name ?? 'Unknown Store',
+                    store.name ?? tr(LocaleKeys.favorites_unknownStore),
                     style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -175,7 +177,7 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
               children: [
                 const SizedBox(height: 2),
                 Text(
-                  '\$0 Delivery fee',
+                  tr(LocaleKeys.favorites_deliveryFee),
                   style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -191,7 +193,7 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
                     const SizedBox(width: 2),
                     Flexible(
                       child: Text(
-                        store.deliveryTime ?? '30-60 min',
+                        store.deliveryTime ?? tr(LocaleKeys.favorites_deliveryTimeFallback),
                         style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -270,7 +272,7 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  item.name ?? 'Unknown Item',
+                  item.name ?? tr(LocaleKeys.favorites_unknownItem),
                   style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

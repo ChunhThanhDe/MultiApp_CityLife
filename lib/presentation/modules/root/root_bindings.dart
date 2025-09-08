@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
+import 'package:sixam_mart_user/domain/repositories/biti_payment_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/cart_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/setting_repository.dart';
 import 'package:sixam_mart_user/domain/repositories/store_repository.dart';
@@ -13,6 +14,7 @@ import 'package:sixam_mart_user/presentation/modules/service/service_controller.
 import 'package:sixam_mart_user/presentation/modules/service/ui1/service_ui1_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/service/ui2/service_ui2_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/wallet/wallet_controller.dart';
+import 'package:sixam_mart_user/services/biti_payment_service.dart';
 import 'package:sixam_mart_user/services/cart_service.dart';
 
 class RootBindings extends Bindings {
@@ -25,9 +27,11 @@ class RootBindings extends Bindings {
     Get.lazyPut(() => WishlistRepository());
     Get.lazyPut(() => CartRepository());
     Get.lazyPut(() => StoreRepository());
+    Get.lazyPut(() => BitiPaymentRepository());
 
-    // Initialize CartService with permanent persistence for cart functionality
+    // Initialize services with permanent persistence
     Get.put(CartService(Get.find()), permanent: true);
+    Get.put(BitiPaymentService(Get.find()), permanent: true);
 
     // Initialize controllers
     Get.lazyPut(() => HomeController());

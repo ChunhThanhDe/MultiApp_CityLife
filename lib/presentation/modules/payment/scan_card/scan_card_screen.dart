@@ -1,19 +1,20 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ml_card_scanner/ml_card_scanner.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
-import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
-
 import 'package:sixam_mart_user/presentation/modules/payment/scan_card/scan_card_controller.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 
 class ScanCardScreen extends BaseScreen<ScanCardController> {
   const ScanCardScreen({super.key});
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return const BasicAppBar(title: 'Scan your card');
+    return BasicAppBar(title: tr(LocaleKeys.cardScanner_scanCard));
   }
 
   @override
@@ -51,15 +52,15 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
                     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                     child: Column(
                       children: [
-                        const Text(
-                          'Scan your card',
-                          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Color(0xFF161A1D)),
+                        Text(
+                          tr(LocaleKeys.cardScanner_scanCard),
+                          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Color(0xFF161A1D)),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 4),
-                        const Text(
-                          'please make sure the card number is visible.',
-                          style: TextStyle(fontSize: 14, color: Color(0xFF4A5763), fontWeight: FontWeight.w400),
+                        Text(
+                          tr(LocaleKeys.cardScanner_positionCard),
+                          style: const TextStyle(fontSize: 14, color: Color(0xFF4A5763), fontWeight: FontWeight.w400),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 8),
@@ -86,9 +87,9 @@ class ScanCardScreen extends BaseScreen<ScanCardController> {
                         padding: const EdgeInsets.only(bottom: 10),
                         child: GestureDetector(
                           onTap: controller.restartScan,
-                          child: const Text(
-                            'Scan again',
-                            style: TextStyle(color: Color(0xFF5856D7), fontWeight: FontWeight.w500, fontSize: 16, decoration: TextDecoration.underline),
+                          child: Text(
+                            tr(LocaleKeys.cardScanner_tryAgain),
+                            style: const TextStyle(color: Color(0xFF5856D7), fontWeight: FontWeight.w500, fontSize: 16, decoration: TextDecoration.underline),
                           ),
                         ),
                       );

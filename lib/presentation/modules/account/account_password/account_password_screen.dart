@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account_password/account_password_controller.dart';
@@ -12,7 +14,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BasicAppBar(title: 'Password', onBack: () => Get.back());
+    return BasicAppBar(title: tr(LocaleKeys.account_changePassword), onBack: () => Get.back());
   }
 
   @override
@@ -28,7 +30,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 24),
-                  Text('Change My Password', style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950)),
+                  Text(tr(LocaleKeys.account_changePassword), style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950)),
                   const SizedBox(height: 8),
                   Text(
                     'In order to best protect your account, please select a password that is at least 8 characters long and contains a combination of uppercase and lowercase letters, numbers and/or symbols.',
@@ -71,7 +73,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  Text('We recommend choosing a password that:', style: AppTextStyles.typographyH10SemiBold.copyWith(color: AppColors.textGreyHighest950)),
+                  Text(tr(LocaleKeys.account_passwordRecommendation), style: AppTextStyles.typographyH10SemiBold.copyWith(color: AppColors.textGreyHighest950)),
                   const SizedBox(height: 8),
                   _recommendationText(),
                   const SizedBox(height: 32),
@@ -105,7 +107,7 @@ class AccountPasswordScreen extends BaseScreen<AccountPasswordController> {
                     ),
                     child: controller.isLoading.value
                         ? SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(AppColors.backgroundSurfacePrimaryWhite)))
-                        : Text('Change password', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.backgroundSurfacePrimaryWhite)),
+                        : Text(tr(LocaleKeys.account_changePasswordButton), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.backgroundSurfacePrimaryWhite)),
                   ),
                 ),
               ),

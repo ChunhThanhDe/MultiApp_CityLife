@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/presentation/modules/onboarding/welcome/welcome_controller.dart';
@@ -63,8 +65,10 @@ class WelcomeScreen extends BaseScreen<WelcomeController> {
               controller.nextPage();
             },
             child: GetBuilder<WelcomeController>(
-              builder: (controller) =>
-                  Text(controller.currentPageIndex == controller.welcomeModels.length - 1 ? 'Get Started' : 'Next', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite)),
+              builder: (controller) => Text(
+                controller.currentPageIndex == controller.welcomeModels.length - 1 ? tr(LocaleKeys.onboarding_getStarted) : tr(LocaleKeys.onboarding_next),
+                style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite),
+              ),
             ),
           ),
         ),
@@ -74,7 +78,7 @@ class WelcomeScreen extends BaseScreen<WelcomeController> {
           width: double.infinity,
           color: AppColors.stateGreyLowest50,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Text('Skip', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
+          child: Text(tr(LocaleKeys.onboarding_skip), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
         ),
         const SizedBox(height: 24),
       ],

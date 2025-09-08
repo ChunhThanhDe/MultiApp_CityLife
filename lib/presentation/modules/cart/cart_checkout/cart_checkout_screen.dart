@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/response/get_checkout_summary_response.dart';
@@ -17,7 +19,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return const BasicAppBar(title: 'Checkout');
+    return BasicAppBar(title: tr(LocaleKeys.cart_checkoutNow));
   }
 
   @override
@@ -29,7 +31,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
 
       final checkoutData = controller.checkoutSummary.value;
       if (checkoutData == null) {
-        return const Center(child: Text('Failed to load checkout data'));
+        return Center(child: Text(tr(LocaleKeys.cart_failedToLoadCheckout)));
       }
 
       return SingleChildScrollView(
@@ -387,7 +389,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                     onPressed: controller.isApplyingPromoCode.value ? null : () => controller.applyPromoCode(promoController.text),
                     child: controller.isApplyingPromoCode.value
                         ? SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(AppTheme.theme.textBaseWhite)))
-                        : const Text('Apply'),
+                        : Text(tr(LocaleKeys.cart_apply)),
                   ),
                 ),
               ],
@@ -533,7 +535,7 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
                       },
                 child: controller.isLoading.value
                     ? SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(AppTheme.theme.textBaseWhite)))
-                    : Text('Order Now', style: AppTextStyles.typographyH10Medium.copyWith(color: AppTheme.theme.textBaseWhite)),
+                    : Text(tr(LocaleKeys.cart_orderNow), style: AppTextStyles.typographyH10Medium.copyWith(color: AppTheme.theme.textBaseWhite)),
               ),
             ),
           ),
@@ -554,6 +556,8 @@ class CartCheckoutScreen extends BaseScreen<CartCheckoutController> {
         return Icons.credit_card;
       case 'digital_wallet':
         return Icons.account_balance_wallet;
+      case 'biti_payment':
+        return Icons.payment;
       case 'cash_on_delivery':
       default:
         return Icons.money;
