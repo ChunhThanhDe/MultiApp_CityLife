@@ -7,11 +7,14 @@ import 'package:sixam_mart_user/base/api_result.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/base/error_response.dart';
 import 'package:sixam_mart_user/base/network_exceptions.dart';
+import 'package:sixam_mart_user/domain/entities/user_auth_info.dart';
 import 'package:sixam_mart_user/domain/models/request/authentication/sign_up_request.dart';
 import 'package:sixam_mart_user/domain/repositories/auth_repository.dart';
-import 'package:sixam_mart_user/presentation/modules/authentication/sign_up/accept_tos.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_overlay.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
+import 'package:sixam_mart_user/services/auth_token_manager.dart';
+import 'package:sixam_mart_user/services/user_service.dart';
 
 enum SignUpMethod { email, phone }
 
@@ -124,12 +127,19 @@ class SignUpController extends BaseController {
           if (response.statusCode != 200) {
             final errorResponse = ErrorResponse.fromJson(response.data);
             showAppSnackBar(title: errorResponse.errors.first.message, type: SnackBarType.error);
+            isLoading.value = false;
             return;
           }
 
-          // Successfully signed up, but don't save tokens yet
-          // User must accept TOS first before being fully authenticated
-          Get.offAll(() => const AcceptTos());
+          final userAuthInfo = UserAuthInfo.fromJson(response.data);
+
+          // Save tokens to AuthTokenManager
+          await Get.find<AuthTokenManager>().saveTokens(token: userAuthInfo.token, refreshToken: userAuthInfo.refreshToken);
+
+          // Fetch user info after successful signup
+          await UserService.fetchAndUpdateUserInfo();
+
+          Get.offAllNamed(AppRoutes.root);
           isLoading.value = false;
 
         case Failure(:final error):
