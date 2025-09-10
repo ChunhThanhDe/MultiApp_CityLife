@@ -31,7 +31,7 @@ class DioClient {
 
     _dio
       ..options.baseUrl = baseUrl
-      ..options.headers = getAuthHeader()
+      ..options.headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
       ..options.connectTimeout = const Duration(seconds: 10)
       ..options.receiveTimeout = const Duration(seconds: 10)
       ..options.receiveDataWhenStatusError = true

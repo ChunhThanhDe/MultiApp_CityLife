@@ -304,7 +304,7 @@ class CartCheckoutController extends BaseController {
         }
 
         // Generate unique client reference ID
-        final clientReferenceId = 'ORDER_${DateTime.now().millisecondsSinceEpoch}';
+        final clientReferenceId = appProvider.userInfo.value.id.toString();
 
         // Get customer phone from selected address if available
         final customerPhone = selectedAddress?.contactPersonNumber;
@@ -327,17 +327,13 @@ class CartCheckoutController extends BaseController {
           // Launch Biti payment URL
           final paymentUrl = paymentResponse.payload!.paymentUrl;
 
-          if (await canLaunchUrl(Uri.parse(paymentUrl))) {
-            await launchUrl(Uri.parse(paymentUrl), mode: LaunchMode.externalApplication);
+          await launchUrl(Uri.parse(paymentUrl), mode: LaunchMode.externalApplication);
 
-            // Show payment processing message
-            showAppSnackBar(title: 'Payment initiated successfully', message: 'Please complete the payment in the opened browser', type: SnackBarType.success);
+          // Show payment processing message
+          showAppSnackBar(title: 'Payment initiated successfully', message: 'Please complete the payment in the opened browser', type: SnackBarType.success);
 
-            // Start monitoring payment status
-            _monitorPaymentStatus(paymentResponse.payload!.info!.transactionId);
-          } else {
-            showAppSnackBar(title: 'Failed to open payment URL', type: SnackBarType.error);
-          }
+          // Start monitoring payment status
+          _monitorPaymentStatus(paymentResponse.payload!.info!.transactionId);
         } else {
           showAppSnackBar(title: 'Failed to initiate payment', type: SnackBarType.error);
         }
