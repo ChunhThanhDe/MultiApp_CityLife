@@ -2,7 +2,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class  LocaleKeys {
+abstract class LocaleKeys {
   static const root_title = 'root.title';
   static const root_home = 'root.home';
   static const root_service = 'root.service';
@@ -321,6 +321,9 @@ abstract class  LocaleKeys {
   static const account_secondSteps = 'account.secondSteps';
   static const account_selectTheme = 'account.selectTheme';
   static const account_passkeyDescription = 'account.passkeyDescription';
+  static const account_deleteAccount = 'account.deleteAccount';
+  static const account_deleteAccountTitle = 'account.deleteAccountTitle';
+  static const account_deleteAccountMessage = 'account.deleteAccountMessage';
   static const account_version = 'account.version';
   static const account = 'account';
   static const shared_somethingWentWrong = 'shared.somethingWentWrong';
@@ -369,5 +372,4 @@ abstract class  LocaleKeys {
   static const address_details_selectBuildingTypeSubtitle = 'address.details.selectBuildingTypeSubtitle';
   static const address_details = 'address.details';
   static const address = 'address';
-
 }

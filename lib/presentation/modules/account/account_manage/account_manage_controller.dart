@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/domain/models/request/update_profile_request.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_snackbar.dart';
+import 'package:sixam_mart_user/services/auth_service.dart';
 import 'package:sixam_mart_user/services/user_service.dart';
 
 class AccountManageController extends BaseController {
@@ -143,6 +144,18 @@ class AccountManageController extends BaseController {
       }
     } catch (e) {
       _showErrorMessage('Failed to pick image. Please try again.');
+    }
+  }
+
+  /// Delete account (temporarily calls logout until API is available)
+  Future<void> deleteAccount() async {
+    try {
+      isLoading.value = true;
+      await AuthService.logout();
+    } catch (e) {
+      _showErrorMessage('Failed to delete account. Please try again.');
+    } finally {
+      isLoading.value = false;
     }
   }
 }

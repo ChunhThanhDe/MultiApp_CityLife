@@ -362,6 +362,9 @@
         "secondSteps": "Second steps",
         "selectTheme": "Select Theme",
         "passkeyDescription": "Speed up your sign in next time by creating a passkey on this device",
+        "deleteAccount": "Delete Account",
+        "deleteAccountTitle": "Delete Account",
+        "deleteAccountMessage": "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed.",
         "version": "v2.380"
     },
     "shared": {

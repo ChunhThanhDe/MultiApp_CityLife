@@ -10,6 +10,7 @@ import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/account/account_manage/account_manage_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
+import 'package:sixam_mart_user/presentation/shared/global/app_dialog.dart';
 
 class AccountManageScreen extends BaseScreen<AccountManageController> {
   const AccountManageScreen({super.key});
@@ -24,6 +25,25 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
 
   @override
   bool get resizeToAvoidBottomInset => true;
+
+  void _showDeleteAccountConfirmation() {
+    showConfirmationDialog(
+      onCancel: () => Get.back(),
+      onConfirm: () {
+        Get.back();
+        controller.deleteAccount();
+      },
+      title: tr(LocaleKeys.account_deleteAccountTitle),
+      message: tr(LocaleKeys.account_deleteAccountMessage),
+      cancelText: tr(LocaleKeys.account_cancel),
+      confirmText: tr(LocaleKeys.account_deleteAccount),
+      cancelColor: AppColors.textGreyDefault500,
+      confirmColor: AppColors.textDangerDefault500,
+      cancelTextStyle: AppTextStyles.typographyH10SemiBold,
+      confirmTextStyle: AppTextStyles.typographyH10SemiBold.copyWith(color: AppColors.stateBaseWhite),
+      titleStyle: AppTextStyles.typographyH10SemiBold,
+    );
+  }
 
   @override
   Widget buildScreen(BuildContext context) {
@@ -190,6 +210,28 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                         child: controller.isLoading.value
                             ? SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(AppColors.stateBaseWhite)))
                             : Text(tr(LocaleKeys.account_update), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.backgroundSurfacePrimaryWhite)),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // Delete Account Button
+                  SizedBox(
+                    width: double.infinity,
+                    height: 48,
+                    child: Obx(
+                      () => ElevatedButton(
+                        onPressed: controller.isLoading.value ? null : _showDeleteAccountConfirmation,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.stateDangerLowest50,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                          elevation: 0,
+                          disabledBackgroundColor: AppColors.stateDangerLowest50.withValues(alpha: 0.6),
+                          foregroundColor: AppColors.stateDangerHigh700,
+                        ),
+                        child: controller.isLoading.value
+                            ? SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(AppColors.stateDangerHigh700)))
+                            : Text(tr(LocaleKeys.account_deleteAccount), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textDangerDefault500)),
                       ),
                     ),
                   ),

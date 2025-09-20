@@ -362,6 +362,9 @@
         "secondSteps": "Bước thứ hai",
         "selectTheme": "Chọn giao diện",
         "passkeyDescription": "Tăng tốc đăng nhập lần sau bằng cách tạo khóa truy cập trên thiết bị này",
+        "deleteAccount": "Xóa tài khoản",
+        "deleteAccountTitle": "Xóa tài khoản",
+        "deleteAccountMessage": "Bạn có chắc chắn muốn xóa tài khoản? Hành động này không thể hoàn tác và tất cả dữ liệu của bạn sẽ bị xóa vĩnh viễn.",
         "version": "v2.380"
     },
     "shared": {
