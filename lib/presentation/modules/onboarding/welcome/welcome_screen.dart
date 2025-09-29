@@ -55,7 +55,6 @@ class WelcomeScreen extends BaseScreen<WelcomeController> {
           ),
         ),
         const SizedBox(height: 32),
-        // Next Button
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: AppButton(
@@ -73,12 +72,15 @@ class WelcomeScreen extends BaseScreen<WelcomeController> {
           ),
         ),
         const SizedBox(height: 16),
-        AppButton(
-          onTap: controller.skip,
-          width: double.infinity,
-          color: AppColors.stateGreyLowest50,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Text(tr(LocaleKeys.onboarding_skip), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: AppButton(
+            onTap: controller.skip,
+            width: double.infinity,
+            color: AppColors.stateGreyLowest50,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Text(tr(LocaleKeys.onboarding_skip), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
+          ),
         ),
         const SizedBox(height: 24),
       ],
