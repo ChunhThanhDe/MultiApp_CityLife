@@ -4,7 +4,6 @@ import 'package:sixam_mart_user/domain/models/response/get_stores_response.dart'
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
 class BrandLogoNameWidget extends StatelessWidget {
-
   const BrandLogoNameWidget({required this.item, required this.index, required this.totalItems, super.key, this.onTap});
   final BannerEntity item;
   final int index;
@@ -13,7 +12,6 @@ class BrandLogoNameWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Don't show item if no logo, coverPhoto and name
     if (!_hasValidLogo() && !_hasValidCoverPhoto() && !_hasValidName()) {
       return const SizedBox.shrink();
     }
@@ -24,6 +22,8 @@ class BrandLogoNameWidget extends StatelessWidget {
         width: 80,
         margin: EdgeInsets.only(right: index == totalItems - 1 ? 24 : 16, left: index == 0 ? 24 : 0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildImageWithOverlay(),
             if (_hasValidName()) ...[const SizedBox(height: 4), _buildName()],
@@ -38,7 +38,7 @@ class BrandLogoNameWidget extends StatelessWidget {
   }
 
   Widget _buildImage() {
-    return ClipOval(child: AppImage.network(item.logo ?? item.coverPhoto ?? '', width: 64, height: 64));
+    return ClipOval(child: AppImage.network(item.image ?? item.coverPhoto ?? '', width: 64, height: 64));
   }
 
   Widget _buildStatusOverlay() {

@@ -34,6 +34,8 @@ class UnifiedBannerWidget extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: List.generate(
           section.items.length,
           (index) => BannerItemFactory.createBannerItem(
