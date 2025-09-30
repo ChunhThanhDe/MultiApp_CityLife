@@ -6,9 +6,11 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
+import 'package:sixam_mart_user/domain/enums/wishlist_item_type.dart';
 import 'package:sixam_mart_user/domain/models/response/get_cart_list_response.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/cart/view_cart/view_cart_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/favorites/favorites_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_list_view.dart';
 
@@ -375,34 +377,73 @@ class _QuantityButtonState extends State<_QuantityButton> with SingleTickerProvi
 }
 
 // Action buttons (favorite and delete) with animation
-class _ActionButtons extends StatelessWidget {
+class _ActionButtons extends StatefulWidget {
   const _ActionButtons({required this.item, required this.controller});
   final GetCartListItem item;
   final ViewCartController controller;
 
   @override
+  State<_ActionButtons> createState() => _ActionButtonsState();
+}
+
+class _ActionButtonsState extends State<_ActionButtons> {
+  FavoritesController? _favoritesController;
+
+  @override
+  void initState() {
+    super.initState();
+    // Try to get FavoritesController, create if not exists
+    try {
+      _favoritesController = Get.find<FavoritesController>();
+    } catch (e) {
+      _favoritesController = Get.put(FavoritesController());
+    }
+  }
+
+  bool _isItemFavorite() {
+    if (_favoritesController == null || widget.item.itemId == null) return false;
+    return _favoritesController!.wishlistItems.any((item) => item.id == widget.item.itemId);
+  }
+
+  void _toggleFavorite() async {
+    if (widget.item.itemId == null || _favoritesController == null) return;
+
+    final itemId = widget.item.itemId!;
+    final isCurrentlyFavorite = _isItemFavorite();
+
+    // Call API to add/remove from favorites
+    if (isCurrentlyFavorite) {
+      await _favoritesController!.removeFromWishlist(WishlistItemType.item, itemId);
+    } else {
+      await _favoritesController!.addToWishlist(WishlistItemType.item, itemId);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        _AnimatedActionButton(
-          icon: Icons.favorite_border,
-          color: AppTheme.theme.stateBrandDefault500,
-          onPressed: () {
-            // Add to favorites functionality
-          },
-        ),
-        const SizedBox(width: 8),
-        _AnimatedActionButton(
-          icon: Icons.delete_outline,
-          color: AppTheme.theme.stateDangerDefault500,
-          onPressed: () {
-            if (item.cartId != null) {
-              controller.removeItem(item.cartId!);
-            }
-          },
-        ),
-      ],
-    );
+    return Obx(() {
+      final isFavorite = _isItemFavorite();
+      
+      return Row(
+        children: [
+          _AnimatedActionButton(
+            icon: isFavorite ? Icons.favorite : Icons.favorite_border,
+            color: AppTheme.theme.stateBrandDefault500,
+            onPressed: _toggleFavorite,
+          ),
+          const SizedBox(width: 8),
+          _AnimatedActionButton(
+            icon: Icons.delete_outline,
+            color: AppTheme.theme.stateDangerDefault500,
+            onPressed: () {
+              if (widget.item.cartId != null) {
+                widget.controller.removeItem(widget.item.cartId!);
+              }
+            },
+          ),
+        ],
+      );
+    });
   }
 }
 
