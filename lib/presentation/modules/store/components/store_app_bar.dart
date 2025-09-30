@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
+import 'package:sixam_mart_user/domain/enums/wishlist_item_type.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_info_response.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/favorites/favorites_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/store_filter_bottom_sheet.dart';
 import 'package:sixam_mart_user/presentation/modules/store/store_main/store_controller.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bottom_sheet.dart';
@@ -315,16 +317,22 @@ class _AnimatedHeartButton extends StatefulWidget {
 }
 
 class _AnimatedHeartButtonState extends State<_AnimatedHeartButton> with SingleTickerProviderStateMixin {
-  bool isFavorite = false;
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
+  FavoritesController? _favoritesController;
 
   @override
   void initState() {
     super.initState();
     _animationController = AnimationController(duration: const Duration(milliseconds: 400), vsync: this);
-
     _scaleAnimation = Tween<double>(begin: 1.0, end: 1.15).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOutBack));
+    
+    // Try to get FavoritesController, create if not exists
+    try {
+      _favoritesController = Get.find<FavoritesController>();
+    } catch (e) {
+      _favoritesController = Get.put(FavoritesController());
+    }
   }
 
   @override
@@ -333,39 +341,67 @@ class _AnimatedHeartButtonState extends State<_AnimatedHeartButton> with SingleT
     super.dispose();
   }
 
-  void _toggleFavorite() {
-    setState(() {
-      isFavorite = !isFavorite;
-    });
+  void _toggleFavorite() async {
+    final storeController = Get.find<StoreController>();
+    final store = storeController.storeInfo.value;
+    
+    if (store?.id == null || _favoritesController == null) return;
 
+    final storeId = store!.id!;
+    final isCurrentlyFavorite = _isStoreFavorite(storeId);
+
+    // Animate the button
     _animationController.forward().then((_) {
       Future.delayed(const Duration(milliseconds: 100), () {
         _animationController.reverse();
       });
     });
+
+    // Call API to add/remove from favorites
+    if (isCurrentlyFavorite) {
+      await _favoritesController!.removeFromWishlist(WishlistItemType.store, storeId);
+    } else {
+      await _favoritesController!.addToWishlist(WishlistItemType.store, storeId);
+    }
+  }
+
+  bool _isStoreFavorite(int storeId) {
+    if (_favoritesController == null) return false;
+    return _favoritesController!.storeList.any((store) => store.id == storeId);
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: _toggleFavorite,
-      child: AnimatedBuilder(
-        animation: _scaleAnimation,
-        builder: (context, child) {
-          return Transform.scale(
-            scale: _scaleAnimation.value,
-            child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 200),
-              transitionBuilder: (Widget child, Animation<double> animation) {
-                return ScaleTransition(scale: animation, child: child);
+    return GetBuilder<StoreController>(
+      builder: (storeController) {
+        final store = storeController.storeInfo.value;
+        if (store?.id == null) return const SizedBox();
+
+        return Obx(() {
+          final isFavorite = _isStoreFavorite(store!.id!);
+          
+          return GestureDetector(
+            onTap: _toggleFavorite,
+            child: AnimatedBuilder(
+              animation: _scaleAnimation,
+              builder: (context, child) {
+                return Transform.scale(
+                  scale: _scaleAnimation.value,
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 200),
+                    transitionBuilder: (Widget child, Animation<double> animation) {
+                      return ScaleTransition(scale: animation, child: child);
+                    },
+                    child: isFavorite
+                        ? Assets.icons.icHeartFilled.svg(key: const ValueKey('filled'), width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.stateBrandDefault500, BlendMode.srcIn))
+                        : Assets.icons.icHeartOutlined.svg(key: const ValueKey('outlined'), width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
+                  ),
+                );
               },
-              child: isFavorite
-                  ? Assets.icons.icHeartFilled.svg(key: const ValueKey('filled'), width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.stateBrandDefault500, BlendMode.srcIn))
-                  : Assets.icons.icHeartOutlined.svg(key: const ValueKey('outlined'), width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
             ),
           );
-        },
-      ),
+        });
+      },
     );
   }
 }
