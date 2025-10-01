@@ -125,15 +125,6 @@ class _FilterScreenState extends State<FilterScreen> {
                                 });
                               },
                             ),
-                            _SelectOption(
-                              label: 'Drive thru',
-                              selected: selectedDelivery == 'Drive thru',
-                              onTap: () {
-                                setState(() {
-                                  selectedDelivery = 'Drive thru';
-                                });
-                              },
-                            ),
                           ]
                         : [],
                   ),
