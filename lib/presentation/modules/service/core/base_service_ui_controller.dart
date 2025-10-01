@@ -41,4 +41,15 @@ abstract class BaseServiceUIController extends BaseController {
   void onServiceTypeChanged(ServiceEntity newService) {
     // Default implementation - can be overridden
   }
+
+  /// Update filters coming from header filter sheet
+  /// Default no-op; concrete controllers can override to implement
+  void updateFilters(Map<String, dynamic> filters) {
+    // No-op by default
+  }
+
+  /// Get current filters for this UI to prefill filter sheet
+  Map<String, dynamic> getCurrentFilters() {
+    return const {};
+  }
 }

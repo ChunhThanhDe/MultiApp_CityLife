@@ -3,7 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 
 class FilterScreen extends StatefulWidget {
-  const FilterScreen({super.key});
+  const FilterScreen({super.key, this.initialFilters = const {}});
+
+  final Map<String, dynamic> initialFilters;
 
   @override
   State<FilterScreen> createState() => _FilterScreenState();
@@ -27,6 +29,26 @@ class _FilterScreenState extends State<FilterScreen> {
 
   bool under30Min = false;
   bool offers = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize from incoming filters if provided
+    final f = widget.initialFilters;
+    if (f.isNotEmpty) {
+      selectedDelivery = (f['delivery'] as String?) ?? selectedDelivery;
+      final minP = (f['min_price'] as int?) ?? priceRange.start.toInt();
+      final maxP = (f['max_price'] as int?) ?? priceRange.end.toInt();
+      priceRange = RangeValues(minP.toDouble(), maxP.toDouble());
+      ratingValue = ((f['rating'] as int?) ?? ratingValue.toInt()).toDouble();
+      final under = f['under_30'];
+      if (under is int) under30Min = under == 1;
+      if (under is bool) under30Min = under;
+      final off = f['offers'];
+      if (off is int) offers = off == 1;
+      if (off is bool) offers = off;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -202,7 +224,17 @@ class _FilterScreenState extends State<FilterScreen> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                   elevation: 0,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  final result = {
+                    'delivery': selectedDelivery,
+                    'min_price': priceRange.start.toInt(),
+                    'max_price': priceRange.end.toInt(),
+                    'rating': ratingValue.toInt(),
+                    'under_30': under30Min ? 1 : 0,
+                    'offers': offers ? 1 : 0,
+                  };
+                  Navigator.of(context).pop(result);
+                },
                 child: Text('View results', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textBaseWhite)),
               ),
             ),

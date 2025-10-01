@@ -137,6 +137,21 @@ class ServiceController extends BaseController {
     await refreshData();
   }
 
+  /// Apply filters and forward to current UI controller
+  void applyFilters(Map<String, dynamic> filters) {
+    switch (_currentService.uiType) {
+      case ServiceUIType.ui1:
+        _ui1Controller?.updateFilters(filters);
+        break;
+      case ServiceUIType.ui2:
+        _ui2Controller?.updateFilters(filters);
+        break;
+      case null:
+        _ui1Controller?.updateFilters(filters);
+        break;
+    }
+  }
+
   @override
   void onClose() {
     // Clean up resources - UI controllers handle their own cleanup

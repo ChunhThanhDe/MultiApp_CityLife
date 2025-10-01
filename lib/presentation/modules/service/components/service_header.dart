@@ -7,6 +7,8 @@ import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/service/components/service_filter.dart';
 import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/service/ui1/service_ui1_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/service/ui2/service_ui2_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_image.dart';
 
@@ -118,18 +120,24 @@ class ServiceHeader extends GetView<ServiceController> {
                     child: Text(tr(LocaleKeys.service_searchPlaceholder), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500)),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      showModalBottomSheet(
+                    onTap: () async {
+                      // Fetch current filters from the active UI controller
+                      final uiFilters = controller.isUI1Type ? Get.find<ServiceUI1Controller>().getCurrentFilters() : Get.find<ServiceUI2Controller>().getCurrentFilters();
+
+                      final result = await showModalBottomSheet<Map<String, dynamic>>(
                         context: context,
                         isScrollControlled: true,
                         backgroundColor: Colors.transparent,
                         builder: (context) {
-                          return const ClipRRect(
-                            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-                            child: FractionallySizedBox(heightFactor: 0.75, child: FilterScreen()),
+                          return ClipRRect(
+                            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+                            child: FractionallySizedBox(heightFactor: 0.75, child: FilterScreen(initialFilters: uiFilters)),
                           );
                         },
                       );
+                      if (result != null) {
+                        controller.applyFilters(result);
+                      }
                     },
                     child: Padding(
                       padding: EdgeInsets.only(left: 12.w),

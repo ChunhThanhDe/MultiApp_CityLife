@@ -30,6 +30,15 @@ class ServiceUI1Controller extends BaseServiceUIController {
   /// Getter for dynamic sections
   List<BannerSection> get dynamicSections => _dynamicSections;
 
+  /// Filters state for this UI
+  Map<String, dynamic> _filters = const {};
+  Map<String, dynamic> get filters => _filters;
+
+  @override
+  Map<String, dynamic> getCurrentFilters() {
+    return Map<String, dynamic>.from(_filters);
+  }
+
   @override
   void initializeUI() {
     // Load data for current service
@@ -45,7 +54,20 @@ class ServiceUI1Controller extends BaseServiceUIController {
 
   /// Load service data from API
   Future<void> _loadServiceData(String serviceType) async {
-    final result = await _storeRepository.getStoreData(serviceType);
+    // Build query parameters from filters if available
+    StoreQueryParameters? params;
+    if (_filters.isNotEmpty) {
+      params = StoreQueryParameters(
+        delivery: _filters['delivery'] as String?,
+        minPrice: _filters['min_price'] as int?,
+        maxPrice: _filters['max_price'] as int?,
+        rating: _filters['rating'] as int?,
+        under30: _filters['under_30'] as int?,
+        offers: _filters['offers'] as int?,
+      );
+    }
+
+    final result = await _storeRepository.getStoreData(serviceType, queryParameters: params);
     switch (result) {
       case Success(:final response):
         if (response.statusCode != 200) {
@@ -87,6 +109,14 @@ class ServiceUI1Controller extends BaseServiceUIController {
   @override
   Future<void> refreshData() async {
     await loadServiceData(currentService);
+  }
+
+  /// Update filters and reload data
+  @override
+  void updateFilters(Map<String, dynamic> newFilters) {
+    _filters = Map<String, dynamic>.from(newFilters);
+    update([ServiceUI1Category.dynamicSections]);
+    loadServiceData(currentService);
   }
 
   @override
