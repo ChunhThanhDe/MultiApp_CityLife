@@ -17,9 +17,9 @@ class _FilterScreenState extends State<FilterScreen> {
   bool priceExpanded = false;
   bool ratingExpanded = false;
 
-  // Price values (0: $, 1: $$, 2: $$$, 3: $$$$, 4: $$$$$)
   RangeValues priceRange = const RangeValues(0, 2);
-  static const priceLabels = ['\$', '\$\$', '\$\$\$', '\$\$\$\$', '\$\$\$\$\$'];
+  static const List<int> priceValues = [1, 10, 100, 1000, 10000];
+  static const List<String> priceLabels = ['\$', '\$\$', '\$\$\$', '\$\$\$\$', '\$\$\$\$\$'];
 
   // Rating values (0: 2+, 1: 2.5+, 2: 4+, 3: 4.5+, 4: 5)
   double ratingValue = 2;
@@ -37,9 +37,20 @@ class _FilterScreenState extends State<FilterScreen> {
     final f = widget.initialFilters;
     if (f.isNotEmpty) {
       selectedDelivery = (f['delivery'] as String?) ?? selectedDelivery;
-      final minP = (f['min_price'] as int?) ?? priceRange.start.toInt();
-      final maxP = (f['max_price'] as int?) ?? priceRange.end.toInt();
-      priceRange = RangeValues(minP.toDouble(), maxP.toDouble());
+      final minAmount = (f['min_price'] as int?) ?? priceValues[priceRange.start.toInt()];
+      final maxAmount = (f['max_price'] as int?) ?? priceValues[priceRange.end.toInt()];
+      // Map back to closest indices in priceValues
+      int minIndex = priceValues.indexOf(minAmount);
+      if (minIndex == -1) {
+        minIndex = priceValues.indexWhere((v) => v >= minAmount);
+        if (minIndex == -1) minIndex = priceValues.length - 1;
+      }
+      int maxIndex = priceValues.indexOf(maxAmount);
+      if (maxIndex == -1) {
+        maxIndex = priceValues.lastIndexWhere((v) => v <= maxAmount);
+        if (maxIndex == -1) maxIndex = 0;
+      }
+      priceRange = RangeValues(minIndex.toDouble(), maxIndex.toDouble());
       ratingValue = ((f['rating'] as int?) ?? ratingValue.toInt()).toDouble();
       final under = f['under_30'];
       if (under is int) under30Min = under == 1;
@@ -74,7 +85,7 @@ class _FilterScreenState extends State<FilterScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Row(
               children: [
-                Text('Short & Filter', style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950)),
+                Text('Sort & Filter', style: AppTextStyles.typographyH8SemiBold.copyWith(color: AppColors.textGreyHighest950)),
                 const Spacer(),
                 TextButton(
                   onPressed: () {
@@ -216,10 +227,12 @@ class _FilterScreenState extends State<FilterScreen> {
                   elevation: 0,
                 ),
                 onPressed: () {
+                  final minIndex = priceRange.start.round().clamp(0, priceValues.length - 1);
+                  final maxIndex = priceRange.end.round().clamp(0, priceValues.length - 1);
                   final result = {
                     'delivery': selectedDelivery,
-                    'min_price': priceRange.start.toInt(),
-                    'max_price': priceRange.end.toInt(),
+                    'min_price': priceValues[minIndex],
+                    'max_price': priceValues[maxIndex],
                     'rating': ratingValue.toInt(),
                     'under_30': under30Min ? 1 : 0,
                     'offers': offers ? 1 : 0,
