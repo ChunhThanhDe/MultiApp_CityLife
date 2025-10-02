@@ -19,7 +19,7 @@ class _FilterScreenState extends State<FilterScreen> {
 
   RangeValues priceRange = const RangeValues(0, 2);
   static const List<int> priceValues = [1, 10, 100, 1000, 10000];
-  static const List<String> priceLabels = ['\$', '\$\$', '\$\$\$', '\$\$\$\$', '\$\$\$\$\$'];
+  static const List<String> priceLabels = ['1', '10', '100', '1000', '10000'];
 
   // Rating values (0: 2+, 1: 2.5+, 2: 4+, 3: 4.5+, 4: 5)
   double ratingValue = 2;
@@ -104,7 +104,10 @@ class _FilterScreenState extends State<FilterScreen> {
               ],
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 3),
+          // Divider line after header
+          Container(height: 1, color: AppColors.backgroundSurfaceTertiaryGrey50, margin: const EdgeInsets.symmetric(horizontal: 24)),
+          const SizedBox(height: 20),
           // Nội dung filter
           Expanded(
             child: SingleChildScrollView(
@@ -116,6 +119,12 @@ class _FilterScreenState extends State<FilterScreen> {
                     onTap: () => setState(() => deliveryExpanded = !deliveryExpanded),
                     icon: SvgPicture.asset('assets/icons/ic_car_black.svg', width: 24, height: 24),
                     title: 'Delivery',
+                    showClear: deliveryExpanded,
+                    onClear: () {
+                      setState(() {
+                        selectedDelivery = '';
+                      });
+                    },
                     children: deliveryExpanded
                         ? [
                             _SelectOption(
@@ -417,7 +426,7 @@ class _CustomMarkSlider extends StatelessWidget {
             // trackShape: const _CustomTrackShape(),
             overlayShape: SliderComponentShape.noOverlay,
           ),
-          child: Slider(value: value, min: marks.first, max: marks.last, divisions: marks.length - 1, label: value.toString(), onChanged: onChanged),
+          child: Slider(value: value, min: marks.first, max: marks.last, divisions: marks.length - 1, onChanged: onChanged),
         ),
       ],
     );
