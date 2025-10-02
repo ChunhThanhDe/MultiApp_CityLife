@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/domain/models/response/get_cart_list_response.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_general_data.dart';
+import 'package:sixam_mart_user/presentation/modules/favorites/favorites_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/services/cart_service.dart';
@@ -36,6 +37,14 @@ class ViewCartController extends BaseController {
     try {
       error.value = '';
       await _cartService.fetchCartList();
+
+      // Refresh favorites data to ensure synchronization with server
+      try {
+        final favoritesController = Get.find<FavoritesController>();
+        await favoritesController.fetchWishlistData();
+      } catch (e) {
+        // FavoritesController might not be initialized, ignore error
+      }
     } catch (e) {
       error.value = 'Failed to load cart. Please try again.';
       // Don't rethrow to prevent additional error handling

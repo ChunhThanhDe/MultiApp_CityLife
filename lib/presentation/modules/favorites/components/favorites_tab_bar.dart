@@ -51,8 +51,10 @@ class FavoritesTabBar extends StatelessWidget {
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
-        child: SizedBox(
+        behavior: HitTestBehavior.opaque, // Ensures the entire area is clickable
+        child: Container(
           height: 44,
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), // Added padding for better touch area
           child: Center(
             child: Text(text, style: AppTextStyles.typographyH10Regular.copyWith(color: AppTheme.theme.textGreyHighest950)),
           ),

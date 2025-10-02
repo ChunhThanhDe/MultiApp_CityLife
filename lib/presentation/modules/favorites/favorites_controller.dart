@@ -43,20 +43,38 @@ class FavoritesController extends BaseController {
             final wishlistResponse = WishlistResponse.fromJson(data);
             if (wishlistResponse.item != null) {
               wishlistItems.value = wishlistResponse.item!;
+              // Populate favoriteItemTitles with actual data
+              favoriteItemTitles.clear();
+              for (final item in wishlistResponse.item!) {
+                if (item.name != null) {
+                  favoriteItemTitles.add(item.name!);
+                }
+              }
             }
             if (wishlistResponse.store != null) {
               storeList.value = wishlistResponse.store!;
+              // Populate favoriteStoreTitles with actual data
+              favoriteStoreTitles.clear();
+              for (final store in wishlistResponse.store!) {
+                if (store.name != null) {
+                  favoriteStoreTitles.add(store.name!);
+                }
+              }
             }
           }
         case Failure(:final error):
           log('Error fetching wishlist: $error', name: 'FavoritesController');
           wishlistItems.clear();
           storeList.clear();
+          favoriteItemTitles.clear();
+          favoriteStoreTitles.clear();
       }
     } catch (e) {
       log('Exception fetching wishlist: $e', name: 'FavoritesController');
       wishlistItems.clear();
       storeList.clear();
+      favoriteItemTitles.clear();
+      favoriteStoreTitles.clear();
     } finally {
       isLoadingWishlist.value = false;
     }
@@ -98,23 +116,71 @@ class FavoritesController extends BaseController {
     }
   }
 
-  // --- STORE ---
-  void toggleFavoriteStore(String title) {
-    if (favoriteStoreTitles.contains(title)) {
+  void toggleFavoriteStore(String title) async {
+    final store = storeList.firstWhereOrNull((s) => s.name == title);
+    if (store == null) {
+      return;
+    }
+    final isCurrentlyFavorited = favoriteStoreTitles.contains(title);
+
+    if (isCurrentlyFavorited) {
+      // Remove from favorites
       favoriteStoreTitles.remove(title);
+      // Also remove from the main store list immediately for UI update
+      try {
+        storeList.removeWhere((s) => s.name == title);
+      } catch (e) {
+        log('Error removing from local store list: $e', name: 'FavoritesController');
+      }
+      // Call API to remove from wishlist
+      try {
+        await removeFromWishlist(WishlistItemType.store, store.id ?? 0);
+      } catch (e) {
+        log('Error in removeFromWishlist API call for store: $e', name: 'FavoritesController');
+      }
     } else {
+      // Add to favorites
       favoriteStoreTitles.add(title);
+      try {
+        await addToWishlist(WishlistItemType.store, store.id ?? 0);
+      } catch (e) {
+        log('Error in addToWishlist API call for store: $e', name: 'FavoritesController');
+      }
     }
   }
 
   bool isStoreFavorited(String title) => favoriteStoreTitles.contains(title);
 
   // --- ITEM ---
-  void toggleFavoriteItem(String title) {
-    if (favoriteItemTitles.contains(title)) {
+  void toggleFavoriteItem(String title) async {
+    final item = wishlistItems.firstWhereOrNull((i) => i.name == title);
+    if (item == null) {
+      return;
+    }
+
+    final isCurrentlyFavorited = favoriteItemTitles.contains(title);
+
+    if (isCurrentlyFavorited) {
+      // Remove from favorites
       favoriteItemTitles.remove(title);
+      // Also remove from the main wishlist immediately for UI update
+      try {
+        // Create a new list without the removed item instead of modifying the existing list
+        final updatedItems = wishlistItems.where((i) => i.name != title).toList();
+        wishlistItems.value = updatedItems;
+      } catch (e) {
+        print('Error removing from local wishlist: $e');
+      }
+      // Call API to remove from wishlist
+      try {
+        await removeFromWishlist(WishlistItemType.item, item.id ?? 0);
+      } catch (e) {
+        print('Error in removeFromWishlist API call: $e');
+      }
     } else {
+      // Add to favorites
       favoriteItemTitles.add(title);
+      await addToWishlist(WishlistItemType.item, item.id ?? 0);
     }
   }
 

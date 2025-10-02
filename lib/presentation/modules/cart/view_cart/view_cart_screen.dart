@@ -401,8 +401,7 @@ class _ActionButtonsState extends State<_ActionButtons> {
   }
 
   bool _isItemFavorite() {
-    if (_favoritesController == null || widget.item.itemId == null) return false;
-    return _favoritesController!.wishlistItems.any((item) => item.id == widget.item.itemId);
+    return widget.item.isFavorite ?? false;
   }
 
   void _toggleFavorite() async {
@@ -417,20 +416,49 @@ class _ActionButtonsState extends State<_ActionButtons> {
     } else {
       await _favoritesController!.addToWishlist(WishlistItemType.item, itemId);
     }
+
+    // Update the local item's favorite status to reflect the change immediately
+    _updateItemFavoriteStatus(!isCurrentlyFavorite);
+  }
+
+  void _updateItemFavoriteStatus(bool isFavorite) {
+    // Find the item in the cart and update its favorite status
+    final storeIndex = widget.controller.storesInCart.indexWhere((store) => 
+      store.items?.any((item) => item.cartId == widget.item.cartId) ?? false);
+    
+    if (storeIndex != -1) {
+      final store = widget.controller.storesInCart[storeIndex];
+      final itemIndex = store.items?.indexWhere((item) => item.cartId == widget.item.cartId) ?? -1;
+      
+      if (itemIndex != -1 && store.items != null) {
+        // Create a new item with updated favorite status
+        final updatedItem = widget.item.copyWith(isFavorite: isFavorite);
+        
+        // Update the item in the store's items list
+        final updatedItems = List<GetCartListItem>.from(store.items!);
+        updatedItems[itemIndex] = updatedItem;
+        
+        // Create a new store with updated items
+        final updatedStore = store.copyWith(items: updatedItems);
+        
+        // Update the store in the cart
+        final updatedStores = List<GetCartListStore>.from(widget.controller.storesInCart);
+        updatedStores[storeIndex] = updatedStore;
+        
+        // Update the cart controller's stores list
+        widget.controller.storesInCart.value = updatedStores;
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
       final isFavorite = _isItemFavorite();
-      
+
       return Row(
         children: [
-          _AnimatedActionButton(
-            icon: isFavorite ? Icons.favorite : Icons.favorite_border,
-            color: AppTheme.theme.stateBrandDefault500,
-            onPressed: _toggleFavorite,
-          ),
+          _AnimatedActionButton(icon: isFavorite ? Icons.favorite : Icons.favorite_border, color: AppTheme.theme.stateBrandDefault500, onPressed: _toggleFavorite),
           const SizedBox(width: 8),
           _AnimatedActionButton(
             icon: Icons.delete_outline,
