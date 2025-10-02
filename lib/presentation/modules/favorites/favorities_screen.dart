@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/domain/models/response/wishlist_response.dart';
+import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/components/favorites_tab_bar.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
@@ -159,12 +161,9 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
                     child: AnimatedSwitcher(
                       duration: const Duration(milliseconds: 250),
                       transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
-                      child: Icon(
-                        controller.isStoreFavorited(store.name ?? '') ? Icons.favorite : Icons.favorite_border,
-                        key: ValueKey(controller.isStoreFavorited(store.name ?? '')),
-                        color: AppColors.stateBrandDefault500,
-                        size: 24,
-                      ),
+                      child: controller.isStoreFavorited(store.name ?? '')
+                          ? Assets.icons.icHeartFilled.svg(key: const ValueKey('filled'), width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.stateBrandDefault500, BlendMode.srcIn))
+                          : Assets.icons.icHeartOutlined.svg(key: const ValueKey('outlined'), width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
                     ),
                   ),
                 ),
@@ -262,12 +261,14 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
                       child: AnimatedSwitcher(
                         duration: const Duration(milliseconds: 250),
                         transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
-                        child: Icon(
-                          controller.isItemFavorited(item.name ?? '') ? Icons.favorite : Icons.favorite_border,
-                          key: ValueKey(controller.isItemFavorited(item.name ?? '')),
-                          color: AppColors.stateBrandDefault500,
-                          size: 24,
-                        ),
+                        child: controller.isItemFavorited(item.name ?? '')
+                            ? Assets.icons.icHeartFilled.svg(key: const ValueKey('filled'), width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.stateBrandDefault500, BlendMode.srcIn))
+                            : Assets.icons.icHeartOutlined.svg(
+                                key: const ValueKey('outlined'),
+                                width: 24.w,
+                                height: 24.w,
+                                colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn),
+                              ),
                       ),
                     ),
                   ),

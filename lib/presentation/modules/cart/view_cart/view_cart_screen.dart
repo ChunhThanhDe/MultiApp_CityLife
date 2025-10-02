@@ -419,32 +419,34 @@ class _ActionButtonsState extends State<_ActionButtons> {
 
     // Update the local item's favorite status to reflect the change immediately
     _updateItemFavoriteStatus(!isCurrentlyFavorite);
+
+    // Trigger UI rebuild to reflect the favorite status change
+    setState(() {});
   }
 
   void _updateItemFavoriteStatus(bool isFavorite) {
     // Find the item in the cart and update its favorite status
-    final storeIndex = widget.controller.storesInCart.indexWhere((store) => 
-      store.items?.any((item) => item.cartId == widget.item.cartId) ?? false);
-    
+    final storeIndex = widget.controller.storesInCart.indexWhere((store) => store.items?.any((item) => item.cartId == widget.item.cartId) ?? false);
+
     if (storeIndex != -1) {
       final store = widget.controller.storesInCart[storeIndex];
       final itemIndex = store.items?.indexWhere((item) => item.cartId == widget.item.cartId) ?? -1;
-      
+
       if (itemIndex != -1 && store.items != null) {
         // Create a new item with updated favorite status
         final updatedItem = widget.item.copyWith(isFavorite: isFavorite);
-        
+
         // Update the item in the store's items list
         final updatedItems = List<GetCartListItem>.from(store.items!);
         updatedItems[itemIndex] = updatedItem;
-        
+
         // Create a new store with updated items
         final updatedStore = store.copyWith(items: updatedItems);
-        
+
         // Update the store in the cart
         final updatedStores = List<GetCartListStore>.from(widget.controller.storesInCart);
         updatedStores[storeIndex] = updatedStore;
-        
+
         // Update the cart controller's stores list
         widget.controller.storesInCart.value = updatedStores;
       }
@@ -453,25 +455,28 @@ class _ActionButtonsState extends State<_ActionButtons> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      final isFavorite = _isItemFavorite();
+    final isFavorite = _isItemFavorite();
 
-      return Row(
-        children: [
-          _AnimatedActionButton(icon: isFavorite ? Icons.favorite : Icons.favorite_border, color: AppTheme.theme.stateBrandDefault500, onPressed: _toggleFavorite),
-          const SizedBox(width: 8),
-          _AnimatedActionButton(
-            icon: Icons.delete_outline,
-            color: AppTheme.theme.stateDangerDefault500,
-            onPressed: () {
-              if (widget.item.cartId != null) {
-                widget.controller.removeItem(widget.item.cartId!);
-              }
-            },
-          ),
-        ],
-      );
-    });
+    return Row(
+      children: [
+        GestureDetector(
+          onTap: _toggleFavorite,
+          child: isFavorite
+              ? Assets.icons.icHeartFilled.svg(key: const ValueKey('filled'), width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.stateBrandDefault500, BlendMode.srcIn))
+              : Assets.icons.icHeartOutlined.svg(key: const ValueKey('outlined'), width: 24.w, height: 24.w, colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
+        ),
+        const SizedBox(width: 8),
+        _AnimatedActionButton(
+          icon: Icons.delete_outline,
+          color: AppTheme.theme.stateDangerDefault500,
+          onPressed: () {
+            if (widget.item.cartId != null) {
+              widget.controller.removeItem(widget.item.cartId!);
+            }
+          },
+        ),
+      ],
+    );
   }
 }
 
