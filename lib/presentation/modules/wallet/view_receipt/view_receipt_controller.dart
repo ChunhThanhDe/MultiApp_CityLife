@@ -1,8 +1,8 @@
+import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 import 'package:sixam_mart_user/presentation/modules/wallet/wallet_controller.dart';
 
 class ItemInfo {
-
   ItemInfo({required this.name, required this.price, required this.image});
   final String name;
   final double price;
@@ -12,22 +12,24 @@ class ItemInfo {
 class ViewReceiptController extends BaseController {
   ViewReceiptController({required this.transaction});
   final Transaction transaction;
-  final items = [
-    ItemInfo(
-      name: 'Summer-Berry Starbucks Refreshers® Beverage',
-      price: 6.59,
-      image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190617_CaramelMacchiato.jpg?impolicy=1by1_wide_topcrop_630',
-    ),
-    ItemInfo(
-      name: 'White Chocolate Macadamia Cream Cold Brew',
-      price: 6.59,
-      image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190617_CaramelMacchiato.jpg?impolicy=1by1_wide_topcrop_630',
-    ),
-    ItemInfo(name: 'Caramel Macchiato', price: 6.59, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190617_CaramelMacchiato.jpg?impolicy=1by1_wide_topcrop_630'),
-    ItemInfo(
-      name: 'Caramel Ribbon Crunch Frappuccino® Blended Beverage',
-      price: 6.59,
-      image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190617_CaramelMacchiato.jpg?impolicy=1by1_wide_topcrop_630',
-    ),
-  ];
+  final items = <ItemInfo>[].obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    _loadReceiptItems();
+  }
+
+  /// Load receipt items from API
+  Future<void> _loadReceiptItems() async {
+    try {
+      isLoading.value = true;
+      // TODO: Implement API call to get receipt items based on transaction
+      // items.value = await ReceiptService.getReceiptItems(transaction.id);
+    } catch (e) {
+      // Handle error
+    } finally {
+      isLoading.value = false;
+    }
+  }
 }

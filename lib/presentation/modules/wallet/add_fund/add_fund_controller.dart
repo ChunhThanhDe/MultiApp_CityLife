@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
-import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 
 enum PaymentMethodType { applePay, visa, mastercard, evc }
 
 class PaymentMethod {
-
   PaymentMethod({required this.name, required this.last4, required this.type, required this.iconAsset});
   final String name;
   final String last4;
@@ -22,25 +20,37 @@ class AddFundController extends BaseController {
 
   final recommendedAmounts = [15, 50, 200, 500];
 
-  final RxList<PaymentMethod> paymentMethods = <PaymentMethod>[
-    PaymentMethod(name: 'Apple', last4: '5290', type: PaymentMethodType.applePay, iconAsset: Assets.icons.icApplePay.path),
-    PaymentMethod(name: 'Visa', last4: '5290', type: PaymentMethodType.visa, iconAsset: Assets.icons.icVisa.path),
-    PaymentMethod(name: 'Mastercard', last4: '9270', type: PaymentMethodType.mastercard, iconAsset: Assets.icons.icMastercard.path),
-    PaymentMethod(name: 'EVC', last4: '9270', type: PaymentMethodType.evc, iconAsset: Assets.icons.icEvcPlus.path),
-  ].obs;
+  final RxList<PaymentMethod> paymentMethods = <PaymentMethod>[].obs;
 
   late final Rx<PaymentMethod?> selectedPaymentMethod;
 
   @override
   void onInit() {
     super.onInit();
-    selectedPaymentMethod = Rx<PaymentMethod?>(paymentMethods.first);
+    selectedPaymentMethod = Rx<PaymentMethod?>(null);
     amountFocusNode.addListener(() {
       isAmountFocused.value = amountFocusNode.hasFocus;
     });
     amountController.addListener(() {
       amountText.value = amountController.text;
     });
+    _loadPaymentMethods();
+  }
+
+  /// Load payment methods from API
+  Future<void> _loadPaymentMethods() async {
+    try {
+      isLoading.value = true;
+      // TODO: Implement API call to get user's payment methods
+      // paymentMethods.value = await PaymentService.getPaymentMethods();
+      // if (paymentMethods.isNotEmpty) {
+      //   selectedPaymentMethod.value = paymentMethods.first;
+      // }
+    } catch (e) {
+      // Handle error
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   void onAmountChanged(String value) {

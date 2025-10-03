@@ -6,11 +6,10 @@ import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/wallet/add_fund/add_fund_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bottom_sheet.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
-
-import 'package:sixam_mart_user/presentation/modules/wallet/add_fund/add_fund_controller.dart';
 
 class AddFundScreen extends BaseScreen<AddFundController> {
   const AddFundScreen({super.key});
@@ -179,6 +178,9 @@ class AddFundScreen extends BaseScreen<AddFundController> {
           Text(tr(LocaleKeys.wallet_paymentMethod), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
           const SizedBox(height: 12),
           Obx(() {
+            if (controller.paymentMethods.isEmpty) {
+              return _buildEmptyPaymentMethodsState(context);
+            }
             final method = controller.selectedPaymentMethod.value ?? controller.paymentMethods.first;
             return GestureDetector(
               behavior: HitTestBehavior.opaque,
@@ -194,6 +196,47 @@ class AddFundScreen extends BaseScreen<AddFundController> {
               ),
             );
           }),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEmptyPaymentMethodsState(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+      decoration: BoxDecoration(
+        color: AppColors.stateGreyLowest50,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.textGreyLow300),
+      ),
+      child: Column(
+        children: [
+          Assets.icons.icVisa.svg(width: 48, height: 48, colorFilter: ColorFilter.mode(AppColors.textGreyDefault500, BlendMode.srcIn)),
+          const SizedBox(height: 12),
+          Text(
+            'No Payment Methods',
+            style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Add a payment method to start adding funds to your wallet.',
+            style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 16),
+          AppButton(
+            onTap: () => Get.toNamed(AppRoutes.payment),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Assets.icons.icPlusAdd.svg(width: 16, height: 16, colorFilter: ColorFilter.mode(AppColors.stateBaseWhite, BlendMode.srcIn)),
+                const SizedBox(width: 8),
+                Text(tr(LocaleKeys.wallet_addPaymentCard), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.stateBaseWhite)),
+              ],
+            ),
+          ),
         ],
       ),
     );

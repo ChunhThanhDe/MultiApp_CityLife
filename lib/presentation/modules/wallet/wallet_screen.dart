@@ -5,10 +5,9 @@ import 'package:sixam_mart_user/app/localization/locale_keys.g.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/base/base_screen.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
+import 'package:sixam_mart_user/presentation/modules/wallet/wallet_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_button.dart';
-
-import 'package:sixam_mart_user/presentation/modules/wallet/wallet_controller.dart';
 
 class WalletScreen extends BaseScreen<WalletController> {
   const WalletScreen({super.key});
@@ -63,12 +62,62 @@ class WalletScreen extends BaseScreen<WalletController> {
             ],
           ),
           const SizedBox(height: 16),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: vm.transactions.length,
-            separatorBuilder: (_, _) => Divider(color: AppColors.textGreyLow300, height: 1),
-            itemBuilder: (context, index) => _buildTransactionItem(vm.transactions[index]),
+          Obx(() {
+            if (vm.isLoading.value) {
+              return _buildLoadingState();
+            }
+            if (vm.transactions.isEmpty) {
+              return _buildEmptyTransactionsState();
+            }
+            return ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: vm.transactions.length,
+              separatorBuilder: (_, _) => Divider(color: AppColors.textGreyLow300, height: 1),
+              itemBuilder: (context, index) => _buildTransactionItem(vm.transactions[index]),
+            );
+          }),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLoadingState() {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 32),
+      child: Column(
+        children: [
+          CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(AppColors.stateBrandDefault500)),
+          const SizedBox(height: 16),
+          Text('Loading...', style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyDefault500)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEmptyTransactionsState() {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 24),
+      child: Column(
+        children: [
+          Assets.icons.icInvoice.svg(width: 64, height: 64, colorFilter: ColorFilter.mode(AppColors.textGreyDefault500, BlendMode.srcIn)),
+          const SizedBox(height: 16),
+          Text(
+            'No Transactions Yet',
+            style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Your transaction history will appear here once you start using the wallet.',
+            style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 24),
+          AppButton(
+            onTap: () => Get.toNamed(AppRoutes.addFund),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            child: Text(tr(LocaleKeys.wallet_addFunds), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.stateBaseWhite)),
           ),
         ],
       ),
@@ -136,7 +185,12 @@ class WalletScreen extends BaseScreen<WalletController> {
                   spacing: 4,
                   children: [
                     Text(tr(LocaleKeys.wallet_diyaarCash), style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
-                    Obx(() => Text(vm.showBalance.value ? '\$843.25' : '****', style: AppTextStyles.typographyH6SemiBold.copyWith(color: AppColors.textGreyHighest950))),
+                    Obx(
+                      () => Text(
+                        vm.showBalance.value ? '\$${vm.walletBalance.value.toStringAsFixed(2)}' : '****',
+                        style: AppTextStyles.typographyH6SemiBold.copyWith(color: AppColors.textGreyHighest950),
+                      ),
+                    ),
                   ],
                 ),
               ),

@@ -45,6 +45,27 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
     );
   }
 
+  /// Get the appropriate image provider for avatar display
+  ImageProvider _getAvatarImageProvider() {
+    if (controller.avatarPath.value.isEmpty) {
+      return Assets.images.imgAvatarDefault.provider();
+    }
+
+    // Check if it's a network URL
+    if (controller.avatarPath.value.startsWith('http')) {
+      return NetworkImage(controller.avatarPath.value);
+    }
+
+    // Check if it's a local file and exists
+    final file = File(controller.avatarPath.value);
+    if (file.existsSync()) {
+      return FileImage(file);
+    }
+
+    // Fallback to default avatar
+    return Assets.images.imgAvatarDefault.provider();
+  }
+
   @override
   Widget buildScreen(BuildContext context) {
     return SingleChildScrollView(
@@ -67,11 +88,7 @@ class AccountManageScreen extends BaseScreen<AccountManageController> {
                         children: [
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
-                            child: CircleAvatar(
-                              radius: 71.5,
-                              backgroundColor: AppColors.stateBrandDefault500,
-                              backgroundImage: controller.avatarPath.value.isEmpty ? Assets.images.imgAvatarDefault.provider() : FileImage(File(controller.avatarPath.value)) as ImageProvider,
-                            ),
+                            child: CircleAvatar(radius: 71.5, backgroundColor: AppColors.stateBrandDefault500, backgroundImage: _getAvatarImageProvider()),
                           ),
                           Positioned(
                             right: 8,

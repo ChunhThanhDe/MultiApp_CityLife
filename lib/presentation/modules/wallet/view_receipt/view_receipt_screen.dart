@@ -77,10 +77,11 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
         children: [
           ClipOval(
             child: AppImage.network(
-              'https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/150px-Starbucks_Corporation_Logo_2011.svg.png',
+              vm.transaction.imageUrl ?? '', // Use transaction image or default
               width: 64,
               height: 64,
               fit: BoxFit.cover,
+              placeholder: Image(image: Assets.images.imgAvatarDefault.provider()),
             ),
           ),
           Column(
@@ -111,10 +112,11 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
         children: [
           ClipOval(
             child: AppImage.network(
-              'https://yt3.googleusercontent.com/c-Z7mIlntSpG6VyQ5ZqaPggqkZRhaySr-H5ZEazFN2iR1pP4eD1UGekwu0y--c4CSVhJJ1A4QT8=s900-c-k-c0x00ffffff-no-rj',
+              vm.transaction.driverImageUrl ?? '', // Use driver image or default
               width: 32,
               height: 32,
               fit: BoxFit.cover,
+              placeholder: Image(image: Assets.images.imgAvatarDefault.provider()),
             ),
           ),
           Expanded(
@@ -149,44 +151,72 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
         children: [
           Text(tr(LocaleKeys.wallet_receipt_items), style: AppTextStyles.typographyH9Medium.copyWith(color: AppColors.textGreyHighest950)),
           const SizedBox(height: 16),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: vm.items.length,
-            separatorBuilder: (context, index) => Column(
-              children: [
-                const SizedBox(height: 16),
-                Divider(height: 1, color: AppColors.stateGreyLowestHover100),
-                const SizedBox(height: 16),
-              ],
-            ),
-            itemBuilder: (context, index) {
-              final item = vm.items[index];
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+          Obx(() {
+            if (vm.items.isEmpty) {
+              return _buildEmptyReceiptItemsState();
+            }
+            return ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: vm.items.length,
+              separatorBuilder: (context, index) => Column(
                 children: [
-                  ClipOval(child: AppImage.network(item.image, width: 56, height: 56, fit: BoxFit.cover)),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(item.name, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
-                        const SizedBox(height: 4),
-                        Text('\$${item.price}', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: 40,
-                    height: 40,
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(color: AppColors.stateGreyLowest50, shape: BoxShape.circle),
-                    child: Assets.icons.icPlusAdd.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
-                  ),
+                  const SizedBox(height: 16),
+                  Divider(height: 1, color: AppColors.stateGreyLowestHover100),
+                  const SizedBox(height: 16),
                 ],
-              );
-            },
+              ),
+              itemBuilder: (context, index) {
+                final item = vm.items[index];
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ClipOval(child: AppImage.network(item.image, width: 56, height: 56, fit: BoxFit.cover)),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(item.name, style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
+                          const SizedBox(height: 4),
+                          Text('\$${item.price}', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: 40,
+                      height: 40,
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(color: AppColors.stateGreyLowest50, shape: BoxShape.circle),
+                      child: Assets.icons.icPlusAdd.svg(colorFilter: ColorFilter.mode(AppColors.textGreyHighest950, BlendMode.srcIn)),
+                    ),
+                  ],
+                );
+              },
+            );
+          }),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEmptyReceiptItemsState() {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+      child: Column(
+        children: [
+          Assets.icons.icInvoice.svg(width: 48, height: 48, colorFilter: ColorFilter.mode(AppColors.textGreyDefault500, BlendMode.srcIn)),
+          const SizedBox(height: 12),
+          Text(
+            'No Items Found',
+            style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Receipt items are not available for this transaction.',
+            style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyDefault500),
+            textAlign: TextAlign.center,
           ),
         ],
       ),
@@ -194,14 +224,15 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
   }
 
   Padding _buildTransactionInfo() {
-    const date = 'Sep 18, 2023  7:30 AM';
-    const subtotal = 35.87;
-    const deliveryFee = 3.99;
-    const taxes = 2.00;
-    const discount = 6.00;
-    const tip = 8.50;
-    const total = 35.87;
-    const cardAmount = 35.87;
+    // Use transaction data instead of hardcoded values
+    final date = vm.transaction.date;
+    final subtotal = vm.transaction.subtotal ?? 0.0;
+    final deliveryFee = vm.transaction.deliveryFee ?? 0.0;
+    final taxes = vm.transaction.taxes ?? 0.0;
+    final discount = vm.transaction.discount ?? 0.0;
+    final tip = vm.transaction.tip ?? 0.0;
+    final total = vm.transaction.amount.replaceAll('\$', '').replaceAll(',', '');
+    final cardAmount = vm.transaction.amount.replaceAll('\$', '').replaceAll(',', '');
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
@@ -236,7 +267,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
                     children: [
                       Text(tr(LocaleKeys.wallet_receipt_total), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHigh700)),
                       const Spacer(),
-                      Text('\$${total.toStringAsFixed(2)}', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
+                      Text('\$${double.tryParse(total)?.toStringAsFixed(2) ?? '0.00'}', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHighest950)),
                     ],
                   ),
                 ],
@@ -257,7 +288,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
                   const SizedBox(width: 12),
                   Text(tr(LocaleKeys.wallet_cardDisplay), style: AppTextStyles.typographyH10Medium.copyWith(color: AppColors.textGreyHighest950)),
                   const Spacer(),
-                  Text('\$${cardAmount.toStringAsFixed(2)}', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
+                  Text('\$${double.tryParse(cardAmount)?.toStringAsFixed(2) ?? '0.00'}', style: AppTextStyles.typographyH11Regular.copyWith(color: AppColors.textGreyHigh700)),
                 ],
               ),
             ),
@@ -281,7 +312,7 @@ class ViewReceiptScreen extends BaseScreen<ViewReceiptController> {
   }
 
   Padding _buildReceiptActions() {
-    const fileSize = '12 KB';
+    final fileSize = vm.transaction.fileSize ?? 'N/A';
     final List<ReceiptAction> actions = [
       (icon: Assets.icons.icInvoice, label: tr(LocaleKeys.wallet_receipt_downloadPdf), onTap: () {}),
       (icon: Assets.icons.icEmailIcon, label: tr(LocaleKeys.wallet_receipt_resendEmail), onTap: () {}),

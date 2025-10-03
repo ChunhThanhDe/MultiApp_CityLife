@@ -2,26 +2,24 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/base/base_controller.dart';
 
 class Transaction {
-
-  Transaction({required this.title, required this.date, required this.amount});
+  Transaction({required this.title, required this.date, required this.amount, this.imageUrl, this.driverImageUrl, this.subtotal, this.deliveryFee, this.taxes, this.discount, this.tip, this.fileSize});
   final String title;
   final String date;
   final String amount;
+  final String? imageUrl;
+  final String? driverImageUrl;
+  final double? subtotal;
+  final double? deliveryFee;
+  final double? taxes;
+  final double? discount;
+  final double? tip;
+  final String? fileSize;
 }
 
 class WalletController extends BaseController {
-  final List<Transaction> transactions = [
-    Transaction(title: 'Starbucks®', date: 'Jan 18, 2025  7:30 AM', amount: '\$20.94'),
-    Transaction(title: 'Laundry', date: 'Jan 18, 2025  7:30 AM', amount: '\$20.94'),
-    Transaction(title: 'Walmart', date: 'Jan 18, 2025  7:30 AM', amount: '\$44.45'),
-    Transaction(title: 'In-N-Out', date: 'Jan 18, 2025  7:30 AM', amount: '\$18'),
-    Transaction(title: 'Box Delivery', date: 'Jan 18, 2025  7:30 AM', amount: '\$32.40'),
-    Transaction(title: 'Add Funds', date: 'Jan 18, 2025  7:30 AM', amount: '\$200'),
-    Transaction(title: 'Targer', date: 'Jan 18, 2025  7:30 AM', amount: '\$364.05'),
-    Transaction(title: 'Welgreen', date: 'Jan 18, 2025  7:30 AM', amount: '\$128.95'),
-    Transaction(title: 'McDonald\'s', date: 'Jan 18, 2025  7:30 AM', amount: '\$20.50'),
-  ];
+  final List<Transaction> transactions = <Transaction>[].obs;
   final showBalance = true.obs;
+  final walletBalance = 0.0.obs;
 
   void toggleBalanceVisibility() {
     showBalance.value = !showBalance.value;
@@ -29,7 +27,18 @@ class WalletController extends BaseController {
 
   @override
   Future<void> refresh() async {
-    // TODO: Replace with real refresh logic (e.g., fetch from server)
-    await Future.delayed(const Duration(seconds: 1));
+    try {
+      isLoading.value = true;
+      // TODO: Implement real API calls to fetch wallet balance and transactions
+      // await _fetchWalletBalance();
+      // await _fetchTransactions();
+
+      // Simulate loading for demo purposes
+      await Future.delayed(const Duration(seconds: 1));
+    } catch (e) {
+      // Handle error
+    } finally {
+      isLoading.value = false;
+    }
   }
 }
