@@ -21,13 +21,13 @@ class RootBindings extends Bindings {
   @override
   void dependencies() {
     // Initialize repositories needed for root screen and its children
-    Get.lazyPut(() => AuthRepository());
-    Get.lazyPut(() => SettingRepository());
-    Get.lazyPut(() => UserRepository());
-    Get.lazyPut(() => WishlistRepository());
-    Get.lazyPut(() => CartRepository());
-    Get.lazyPut(() => StoreRepository());
-    Get.lazyPut(() => BitiPaymentRepository());
+    Get.lazyPut(() => AuthRepository(), fenix: true);
+    Get.lazyPut(() => SettingRepository(), fenix: true);
+    Get.lazyPut(() => UserRepository(), fenix: true);
+    Get.lazyPut(() => WishlistRepository(), fenix: true);
+    Get.lazyPut(() => CartRepository(), fenix: true);
+    Get.lazyPut(() => StoreRepository(), fenix: true);
+    Get.lazyPut(() => BitiPaymentRepository(), fenix: true);
 
     // Initialize services with permanent persistence
     Get.put(CartService(Get.find()), permanent: true);
