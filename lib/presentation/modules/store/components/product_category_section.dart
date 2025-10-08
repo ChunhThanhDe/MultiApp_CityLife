@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:sixam_mart_user/app/theme/theme.dart';
 import 'package:sixam_mart_user/domain/models/response/get_store_infomation_response.dart';
 import 'package:sixam_mart_user/presentation/modules/store/components/product_card.dart';
-import 'package:sixam_mart_user/presentation/modules/store/store_products/store_products_screen.dart';
+import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/section_break_divider.dart';
 
 class ProductCategorySection extends StatelessWidget {
@@ -29,7 +29,10 @@ class ProductCategorySection extends StatelessWidget {
                 Text(title, style: AppTextStyles.typographyH9SemiBold.copyWith(color: AppColors.textGreyHighest950)),
                 GestureDetector(
                   onTap: () {
-                    Get.to(() => StoreProductsScreen(products: items, storename: title));
+                    Get.toNamed(AppRoutes.storeProducts, arguments: {
+                      'products': items,
+                      'storename': title,
+                    });
                   },
                   child: Icon(Icons.arrow_forward_ios, size: 16.w, color: AppColors.textGreyDefault500),
                 ),
