@@ -9,6 +9,7 @@ import 'package:sixam_mart_user/domain/models/response/wishlist_response.dart';
 import 'package:sixam_mart_user/generated/assets/assets.gen.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/components/favorites_tab_bar.dart';
 import 'package:sixam_mart_user/presentation/modules/favorites/favorites_controller.dart';
+import 'package:sixam_mart_user/presentation/modules/service/service_controller.dart';
 import 'package:sixam_mart_user/presentation/routes/app_pages.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_bar_basic.dart';
 import 'package:sixam_mart_user/presentation/shared/global/app_grid_view.dart';
@@ -77,13 +78,25 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
   }
 
   Widget _buildStoreCard(WishlistStore store) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppTheme.theme.backgroundSurfacePrimaryWhite,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [BoxShadow(color: AppColors.shadowSm5, blurRadius: 4, offset: const Offset(0, 2))],
-      ),
-      child: Column(
+    return GestureDetector(
+      onTap: () {
+        // Get the current service type from ServiceController
+        final serviceController = Get.find<ServiceController>();
+        final currentServiceType = serviceController.currentService.moduleType ?? 'food';
+        
+        // Navigate to store screen with required arguments
+        Get.toNamed(AppRoutes.store, arguments: {
+          'storeId': store.id,
+          'storeType': currentServiceType,
+        });
+      },
+      child: Container(
+          decoration: BoxDecoration(
+            color: AppTheme.theme.backgroundSurfacePrimaryWhite,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [BoxShadow(color: AppColors.shadowSm5, blurRadius: 4, offset: const Offset(0, 2))],
+          ),
+          child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -207,6 +220,7 @@ class FavoritesScreen extends BaseScreen<FavoritesController> {
           const SizedBox(height: 8),
         ],
       ),
+    ),
     );
   }
 
